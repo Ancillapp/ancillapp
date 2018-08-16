@@ -14,7 +14,7 @@ export default function template({ appTitle, page, _drawerOpened, _offline, _sub
     ${styles}
   
     <!-- Header -->
-    <app-header condenses reveals effects="waterfall">
+    <app-header condenses reveals effects="waterfall" id="header">
       <app-toolbar class="toolbar-top">
         <button class="menu-btn" title="Menu" on-click="${() => this._updateDrawerState(true)}">${menuIcon}</button>
         <div main-title>${tau} ${appTitle} - ${_pageTitle}</div>

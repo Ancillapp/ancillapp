@@ -35,6 +35,7 @@ class AncillappShell extends LitElement {
 
   _firstRendered() {
     installRouter((location) => this._locationChanged(location));
+    this._root.querySelector('#header').scrollTarget = this;
   }
 
   _didRender(properties, changeList) {
