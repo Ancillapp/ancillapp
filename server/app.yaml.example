@@ -3,6 +3,7 @@ env_variables:
   PORT: 8080
   MONGO_URI: 'mongodb://user:pass@server:port'
   MONGO_DB: 'db'
+  CORS_WHITELIST: '["https://my-domain.example.com"]'
 handlers:
   - url: /.*
     secure: always

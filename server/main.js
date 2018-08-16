@@ -1,7 +1,7 @@
 const express = require('express');
 const history = require('connect-history-api-fallback');
 const path = require('path');
-const api = require('./api');
+const api = require('./controllers/api');
 const app = express();
 
 app.use('/api', api);
