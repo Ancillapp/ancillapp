@@ -1,0 +1,6 @@
+{
+  "tag-bans": false,
+  "attr-name-style": false,
+  "indent-width": 2,
+  "raw-ignore-regex": "/(\\<script.*?\\>\\<\/script\\>|\\<script.*?\\>[\\w\\W]+?\\<\/script\\>)/"
+}

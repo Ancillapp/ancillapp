@@ -1,0 +1,55 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "eslint-config-google"
+  ],
+  "plugins": [
+    "eslint-plugin-sort-class-members"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "impliedStrict": true
+    }
+  },
+  "rules": {
+    "max-len": [
+      "error",
+      120
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "no-invalid-this": "off",
+    "sort-imports": "error",
+    "sort-class-members/sort-class-members": [
+      "error",
+      {
+        "order": [
+          "[static-properties]",
+          "[static-methods]",
+          "[properties]",
+          "[conventional-private-properties]",
+          "constructor",
+          "[methods]",
+          "[conventional-private-methods]",
+          "[everything-else]"
+        ],
+        "accessorPairPositioning": "getThenSet"
+      }
+    ],
+    "require-await": "error",
+    "require-yield": "error",
+    "require-jsdoc": "off",
+    "no-unused-expressions": "error",
+    "no-unused-vars": "error"
+  }
+}

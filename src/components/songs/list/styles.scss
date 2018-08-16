@@ -1,0 +1,33 @@
+.songs-container {
+  display: flex;
+  justify-content: center;
+}
+
+.song {
+  width: 10rem;
+  height: 15rem;
+  background: var(--card-color);
+  border-radius: .5rem;
+  box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14), 0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12), 0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
+  text-align: center;
+
+  &:hover, &:active {
+    text-decoration: none;
+  }
+
+  .number {
+    height: 10rem;
+    line-height: 10rem;
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: 'Humana Serif', 'Times New Roman', serif;
+    color: var(--primary-text-color);
+  }
+
+  .title {
+    height: 5rem;
+    font-style: italic;
+    font-family: 'Humana Serif', 'Times New Roman', serif;
+    color: var(--secondary-text-color);
+  }
+}

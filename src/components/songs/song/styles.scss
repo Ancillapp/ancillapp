@@ -1,0 +1,26 @@
+.phrase {
+  padding: 0 0 .3rem;
+  margin: 0 .3rem 0 0;
+  line-height: .15rem;
+  display: inline-block;
+  white-space: pre;
+}
+
+.join {
+  margin-left: -.3rem;
+}
+
+.chord {
+  padding: .3rem .3rem .6rem 0;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.no-lyric .chord {
+  padding-right: 0;
+}
+
+.section-header {
+  color: #ccc;
+  font-variant: small-caps;
+}
