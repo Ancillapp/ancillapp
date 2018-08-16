@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const cors = require('cors');
 const songs = require('./songs');
+const ancillas = require('./ancillas');
 const router = new Router();
 
 let whitelist = [];
@@ -23,5 +24,6 @@ router.use(cors({
 }));
 
 router.use('/songs', songs);
+router.use('/ancillas', ancillas);
 
 module.exports = router;

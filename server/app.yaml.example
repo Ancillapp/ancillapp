@@ -4,6 +4,8 @@ env_variables:
   MONGO_URI: 'mongodb://user:pass@server:port'
   MONGO_DB: 'db'
   CORS_WHITELIST: '["https://my-domain.example.com"]'
+  GOOGLE_CLOUD_PROJECT: 'project-on-gcloud'
+  CLOUD_STORAGE_BUCKET: 'bucket-on-gcloud'
 handlers:
   - url: /.*
     secure: always
