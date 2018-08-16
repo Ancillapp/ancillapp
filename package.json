@@ -16,11 +16,12 @@
     "serve": "yarn run server dev",
     "gulp": "gulp -f gulp/config.js --cwd .",
     "build": "yarn run gulp build:app-engine",
-    "lint": "yarn run gulp lint"
+    "lint": "yarn run gulp lint",
+    "deploy": "gcloud app deploy server/app.yaml"
   },
   "engines": {
-    "node": ">=8.11.3",
-    "yarn": ">=1.9.4"
+    "node": "8.x",
+    "yarn": "1.9.x"
   },
   "dependencies": {
     "@material/mwc-checkbox": "^0.1.2",
