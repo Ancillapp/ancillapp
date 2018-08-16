@@ -6,7 +6,8 @@ class SongsList extends PageViewElement {
     if (!this._songs) {
       this._songs =
         fetch('/api/songs')
-          .then((res) => res.json());
+          .then((res) => res.json())
+          .then(({ data }) => data);
     }
     return this::template({
       ...props,

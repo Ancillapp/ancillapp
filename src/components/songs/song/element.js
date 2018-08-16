@@ -47,7 +47,7 @@ class SongPage extends PageViewElement {
     return this._showChords && chord ? html`
       <div class="chord">
         ${chord.replace(/[A-G][#b]?/, (c) =>
-          this._transposeChord(c)).replace(/([#b])/, (_, modifier) => SongPage._modifiers[modifier])}
+      this._transposeChord(c)).replace(/([#b])/, (_, modifier) => SongPage._modifiers[modifier])}
       </div>
     ` : '';
   }
@@ -84,10 +84,10 @@ class SongPage extends PageViewElement {
         this._songPromises[props.song] =
           fetch(`/api/songs/${props.song}`)
             .then((res) => res.json())
-            .then((song) => {
-              const parsedMarkato = parse(song.markato);
+            .then(({ data }) => {
+              const parsedMarkato = parse(data.markato);
               return {
-                ...song,
+                ...data,
                 parsedMarkato,
               };
             });
