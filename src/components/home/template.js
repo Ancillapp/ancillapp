@@ -29,7 +29,7 @@ export default function template({ _today }) {
         </a>
           </li>
           <li>
-        <a href="/ancilla">
+        <a href="/ancillas">
             <span>Sfoglia l'ultimo Ancilla Domini</span>
             ${ancillaIcon}
         </a>

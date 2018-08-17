@@ -16,7 +16,7 @@ class AncillappShell extends LitElement {
 
   static pages = {
     'home': 'Home',
-    'ancilla': 'Ancilla Domini',
+    'ancillas': 'Ancilla Domini',
     'songs': 'Canti',
   };
 

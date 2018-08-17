@@ -5,10 +5,11 @@ const router = new Router();
 router.get('/', async (req, res) => {
   const [files] = await bucket.getFiles({
     prefix: 'ancillas',
+    delimiter: 'thumbs',
   });
   res.json({
     status: 200,
-    data: files.slice(1).map(({ name }) => name),
+    data: files.slice(1).map(({ name }) => name.slice(9, 16)),
   });
 });
 
