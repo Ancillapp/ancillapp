@@ -19,6 +19,17 @@
   --divider-color: rgba(0, 0, 0, .12);
 }
 
+/* stylelint-disable unit-whitelist */
+@media (min-width: 768px) {
+  :host([drawer-opened]) {
+    app-header, .main-content {
+      left: 256px;
+      width: calc(100% - 256px);
+    }
+  }
+}
+/* stylelint-enable unit-whitelist */
+
 :host([dark]) {
   --background-color: #303030;
   --drawer-color: #121212;
@@ -41,6 +52,8 @@ app-header {
   background-color: var(--primary-color);
   color: #fff;
   border-bottom: .0625rem solid #597c96;
+  will-change: width, left;
+  transition: .3s width, .3s left;
 }
 
 [main-title] {
@@ -155,7 +168,13 @@ app-drawer {
 }
 
 .main-content {
+  position: relative;
+  top: 0;
+  left: 0;
   padding: 5.5rem 1.5rem 1.5rem 1.5rem;
+  width: 100%;
   min-height: 100%;
   background: var(--background-color);
+  will-change: width, left;
+  transition: .3s width, .3s left;
 }

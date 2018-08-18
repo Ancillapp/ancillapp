@@ -1,5 +1,6 @@
 import { LitElement } from '@polymer/lit-element';
 import { installRouter } from 'pwa-helpers/router';
+import { installMediaQueryWatcher } from 'pwa-helpers/media-query';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
 import template from './template';
 import { updateMetadata } from 'pwa-helpers/metadata';
@@ -9,8 +10,8 @@ class AncillappShell extends LitElement {
   static properties = {
     appTitle: String,
     page: String,
+    narrow: Boolean,
     _drawerOpened: Boolean,
-    _narrow: Boolean,
     _subroute: String,
   };
 
@@ -23,7 +24,12 @@ class AncillappShell extends LitElement {
   constructor() {
     super();
     setPassiveTouchGestures(true);
-    this._drawerOpened = false;
+    this._updateDrawerState(
+      window.matchMedia('(min-width: 768px)').matches ?
+        localStorage.getItem('drawer-opened') === 'true' :
+        false,
+    );
+    installMediaQueryWatcher('(min-width: 768px)', (matches) => this.narrow = matches);
   }
 
   _render(props) {
@@ -60,12 +66,20 @@ class AncillappShell extends LitElement {
     const [page, subroute] = path.slice(1).split('/');
     this._loadPage(page, subroute);
     // Close the drawer - in case the *path* change came from a link in the drawer.
-    this._updateDrawerState(false);
+    if (!this.narrow) {
+      this._updateDrawerState(false);
+    }
   }
 
   _updateDrawerState(opened) {
     if (opened !== this._drawerOpened) {
       this._drawerOpened = opened;
+      localStorage.setItem('drawer-opened', opened);
+      if (opened) {
+        this.setAttribute('drawer-opened', '');
+      } else {
+        this.removeAttribute('drawer-opened');
+      }
     }
   }
 

@@ -8,7 +8,7 @@ import { html } from '@polymer/lit-element';
 import sharedStyles from '../shared-styles';
 import styles from './styles';
 
-export default function template({ appTitle, page, _drawerOpened, _offline, _subroute, _pageTitle }) {
+export default function template({ appTitle, page, narrow, _drawerOpened, _offline, _subroute, _pageTitle }) {
   return html`
     ${sharedStyles}
     ${styles}
@@ -16,13 +16,15 @@ export default function template({ appTitle, page, _drawerOpened, _offline, _sub
     <!-- Header -->
     <app-header condenses reveals effects="waterfall" id="header">
       <app-toolbar class="toolbar-top">
-        <button class="menu-btn" title="Menu" on-click="${() => this._updateDrawerState(true)}">${menuIcon}</button>
+        <button class="menu-btn" title="Menu" on-click="${() => this._updateDrawerState(!_drawerOpened)}">
+          ${menuIcon}
+        </button>
         <div main-title>${tau} ${appTitle} - ${_pageTitle}</div>
       </app-toolbar>
     </app-header>
     
     <!-- Drawer content -->
-    <app-drawer swipe-open opened="${_drawerOpened}"
+    <app-drawer swipe-open persistent?="${narrow}" opened="${_drawerOpened}"
         on-opened-changed="${(e) => this._updateDrawerState(e.target.opened)}">
       <app-toolbar>Menù</app-toolbar>
       <nav class="drawer-list">
