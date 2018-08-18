@@ -1,5 +1,3 @@
-import * as _ from 'underscore';
-
 const isChordLine = (line) => line.startsWith(':');
 
 const parseFooterStartLine = function(state) {
@@ -210,46 +208,51 @@ const interpretLyricChordLine = function(state, section, lineObj, lineNum) {
 
 // Given a parse state, interpret the lyric/chord lines
 const interpretLyricSection = function(state, section) {
-  section.lines = _.map(section.lines, _.partial(interpretLyricChordLine, state, section));
+  section.lines = section.lines.map((...phrases) => interpretLyricChordLine(state, section, ...phrases));
 
   // If this is an empty section, retrieve the lyrics/chords from the first instance of that section
   if (!section.lines.length) {
-    section.lines = _.findWhere(state.content, { section: section.section }).lines.concat();
+    section.lines = state.content.find((state) => state.section === section.section).lines.concat();
 
     // None of the phrases are exceptions since we're copying them
     // We also have to clone the phrase objects so that we don't overwrite the other versions
-    section.lines =
-      _.map(section.lines, (line) => _.map(line, (phrase) => _.extend(_.clone(phrase), { exception: false })));
+    section.lines = section.lines.map((line) => line.map((phrase) => ({
+      ...phrase,
+      exception: false,
+    })));
   }
 
   return section;
 };
 
 // Given a finished parse state, return a markato object
-const markatoObjectFromState = function(state) {
+const markatoObjectFromState = function(s) {
   let chordId;
   let lineId;
   let lyricId;
   let phraseId;
-  state = _.omit(state, 'current');
+  let { current, ...state } = s;
 
   // Add ids for sections, lines, and phrases
   let sectionId = (lineId = (phraseId = (lyricId = (chordId = 0))));
-  _.each(state.content, function(section) {
-    section.sectionId = sectionId++;
-    return _.each(section.lines, function(line) {
-      line.lineId = lineId++;
-      return _.each(line, function(phrase) {
-        phrase.phraseId = phraseId++;
-        if (phrase.chord) {
-          phrase.chordId = chordId++;
-        }
-        if (phrase.lyric) {
-          return phrase.lyricId = lyricId++;
-        }
-      });
-    });
-  });
+  state.content = state.content.map((section) => ({
+    ...section,
+    sectionId: section.sectionId + 1,
+    lines: section.lines.map((l) => {
+      const line = l.map((phrase) => ({
+        ...phrase,
+        phraseId: phrase.phraseId + 1,
+        ...phrase.chord ? {
+          chordId: phrase.chordId + 1,
+        } : {},
+        ...phrase.lyric ? {
+          lyricId: phrase.lyricId + 1,
+        } : {},
+      }));
+      line.lineId = l.lineId + 1;
+      return line;
+    }),
+  }));
 
   state.count = {
     sections: sectionId,
@@ -279,10 +282,10 @@ const parseString = function(str) {
   };
 
   // Run parser
-  parseState = _.reduce(lines, parseLine, parseState);
+  parseState = lines.reduce(parseLine, parseState);
 
   // Interpret lyric/chord lines
-  parseState.content = _.map(parseState.content, _.partial(interpretLyricSection, parseState));
+  parseState.content = parseState.content.map((...content) => interpretLyricSection(parseState, ...content));
 
   return markatoObjectFromState(parseState);
 };

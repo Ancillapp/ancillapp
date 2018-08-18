@@ -50,6 +50,11 @@
     "require-yield": "error",
     "require-jsdoc": "off",
     "no-unused-expressions": "error",
-    "no-unused-vars": "error"
+    "no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true
+      }
+    ]
   }
 }

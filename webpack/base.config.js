@@ -3,6 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ScriptExtHtmlPlugin = require('script-ext-html-webpack-plugin');
 const { InjectManifest: InjectManifestPlugin } = require('workbox-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   cache: true,
@@ -83,5 +84,10 @@ module.exports = {
       exclude: [/components\/[0-9]+\.js$/, /images\/manifest/, /favicon\.ico$/],
       importWorkboxFrom: 'local',
     }),
+    ...process.env.ENABLE_BUNDLE_ANALYZER ? [
+      new BundleAnalyzerPlugin({
+        analyzerHost: 'localhost',
+        analyzerPort: 8081,
+      })] : [],
   ],
 };
