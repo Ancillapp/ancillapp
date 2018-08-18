@@ -37,4 +37,11 @@ router.use((req, res, next) => {
 router.use('/songs', songs);
 router.use('/ancillas', ancillas);
 
+// Fallback for any other API route
+router.use((req, res) =>
+  res.status(404).json({
+    status: 404,
+    data: 'Not Found',
+  }));
+
 module.exports = router;
