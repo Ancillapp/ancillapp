@@ -31,10 +31,6 @@ router.post('/subscribe', async (req, res) => {
     notifications.sendNotification(subscription, JSON.stringify({
       title: 'Perfetto!',
       body: 'Sei stato registrato correttamente!',
-      icon: '/assets/images/icons/apple-touch-icon.png',
-      badge: '/assets/images/icons/apple-touch-icon.png',
-      image: '/assets/images/icons/apple-touch-icon.png',
-      vibrate: [300, 300, 300, 300, 300, 1000, 600, 600, 600, 600, 600, 1000, 300, 300, 300, 300, 300],
     })),
   ]);
   res.json({

@@ -1,26 +1,41 @@
 /* eslint-env serviceworker, es6 */
 /* global workbox */
 
+const openOrFocus = (url) =>
+  clients.matchAll({
+    type: 'window',
+  }).then((clientsList) => {
+    for (const client of clientsList) {
+      if (client.url === url) {
+        return client.focus();
+      }
+    }
+    return clients.openWindow(url);
+  });
+
 self.addEventListener('push', (e) => {
   const data = e.data.json();
-  e.waitUntil(self.registration.showNotification(data.title, data));
+  // We will have a default icon, badge and vibration, but the server might decide
+  // to send different data, so we allow it to override them
+  e.waitUntil(self.registration.showNotification(data.title, Object.assign({
+    icon: '/assets/images/icons/apple-touch-icon.png',
+    badge: '/assets/images/icons/favicon-194x194-white.png',
+    vibrate: [300, 300, 300, 300, 300, 1000, 600, 600, 600, 600, 600, 1000, 300, 300, 300, 300, 300],
+  }, data)));
 });
 
 self.addEventListener('notificationclick', (e) => {
   e.notification.close();
-  if (e.action === 'dismiss') {
-    return;
+  switch (e.action) {
+    case 'dismiss':
+      break;
+    case 'latest-ancilla':
+      e.waitUntil(openOrFocus('/ancillas/latest'));
+      break;
+    default:
+      e.waitUntil(openOrFocus('/'));
+      break;
   }
-  e.waitUntil(clients.matchAll({
-    type: 'window',
-  }).then((clientsList) => {
-    for (const client of clientsList) {
-      if (client.url === '/ancillas/latest') {
-        return client.focus();
-      }
-    }
-    return clients.openWindow('/ancillas/latest');
-  }));
 });
 
 workbox.skipWaiting();
