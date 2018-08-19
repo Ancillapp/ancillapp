@@ -43,4 +43,21 @@ workbox.clientsClaim();
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 workbox.routing.registerNavigationRoute('/index.html');
-workbox.routing.registerRoute(/scripts\/[0-9]+\.js/, workbox.strategies.staleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(
+  /(?:fonts\.gstatic\.com|assets\/fonts)/,
+  workbox.strategies.cacheFirst({
+    cacheName: 'fonts',
+    plugins: [
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200],
+      }),
+    ],
+  }),
+  'GET',
+);
+workbox.routing.registerRoute(
+  /(?:styles|components\/(?:[0-9]+|app)\.js$)/,
+  workbox.strategies.staleWhileRevalidate(),
+  'GET',
+);
+workbox.googleAnalytics.initialize();
