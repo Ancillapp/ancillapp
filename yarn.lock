@@ -3482,25 +3482,6 @@ gzip-size@^4.1.0:
     duplexer "^0.1.1"
     pify "^3.0.0"
 
-handlebars-loader@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/handlebars-loader/-/handlebars-loader-1.7.0.tgz#4f750bc62c350fb922e52d8564d667887e909723"
-  dependencies:
-    async "~0.2.10"
-    fastparse "^1.0.0"
-    loader-utils "1.0.x"
-    object-assign "^4.1.0"
-
-handlebars@^4.0.11:
-  version "4.0.11"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.11.tgz#630a35dfe0294bc281edae6ffc5d329fc7982dcc"
-  dependencies:
-    async "^1.4.0"
-    optimist "^0.6.1"
-    source-map "^0.4.4"
-  optionalDependencies:
-    uglify-js "^2.6"
-
 har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"

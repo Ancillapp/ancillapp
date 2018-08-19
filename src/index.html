@@ -21,7 +21,7 @@
 
     <title>Ancillapp</title>
     <meta name="description" content="Ancillapp">
-    <base href="{{htmlWebpackPlugin.options.base}}">
+    <base href="/">
 
     <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -85,7 +85,7 @@
         overflow: hidden;
       }
 
-      @media (min-width: 28.75rem) {
+      @media (min-width: 480px) {
         html, body {
           font-size: 16px;
         }
@@ -94,9 +94,10 @@
     <script>
       // Load and register pre-caching Service Worker
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', {
-          scope: '{{htmlWebpackPlugin.options.base}}',
-        }));
+        window.addEventListener('load', () =>
+          navigator.serviceWorker.register('sw.js', {
+            scope: '/',
+          }));
       }
     </script>
   </head>

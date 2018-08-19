@@ -25,7 +25,7 @@ task('lint:styles', () =>
 
 // TODO: find a way to lint the HTML inside JS template literals, as currently we are linting only index.html
 task('lint:templates', () =>
-  src('src/**/*.{html,hbs}')
+  src('src/**/*.html')
     .pipe(htmllint({
       failOnError: true,
     })));

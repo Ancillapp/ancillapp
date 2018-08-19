@@ -93,8 +93,7 @@ module.exports = smartMerge({
       },
       hash: true,
       inject: 'head',
-      template: `!!handlebars-loader!${resolve(__dirname, '../src/index.hbs')}`,
-      base: process.env.BASE_PATH || '/',
+      template: resolve(__dirname, '../src/index.html'),
     }),
   ],
 });
