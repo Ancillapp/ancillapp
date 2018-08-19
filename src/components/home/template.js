@@ -1,7 +1,7 @@
+import { ancillaIcon, breviaryIcon, prayersIcon, songsIcon } from '../icons';
 import { html } from '@polymer/lit-element';
 import sharedStyles from '../shared-styles';
 import styles from './styles';
-import { ancillaIcon, breviaryIcon, prayersIcon, songsIcon } from '../icons';
 
 export default function template({ _today }) {
   return html`

@@ -1,7 +1,9 @@
 const { Router } = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const songs = require('./songs');
 const ancillas = require('./ancillas');
+const notifications = require('./notifications');
 const router = new Router();
 
 let whitelist = [];
@@ -23,6 +25,8 @@ router.use(cors({
   },
 }));
 
+router.use(bodyParser.json());
+
 router.use((req, res, next) => {
   try {
     next();
@@ -36,6 +40,7 @@ router.use((req, res, next) => {
 
 router.use('/songs', songs);
 router.use('/ancillas', ancillas);
+router.use('/notifications', notifications);
 
 // Fallback for any other API route
 router.use((req, res) =>

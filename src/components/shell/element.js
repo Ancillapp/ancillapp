@@ -1,6 +1,6 @@
 import { LitElement } from '@polymer/lit-element';
-import { installRouter } from 'pwa-helpers/router';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query';
+import { installRouter } from 'pwa-helpers/router';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
 import template from './template';
 import { updateMetadata } from 'pwa-helpers/metadata';

@@ -8,7 +8,7 @@ import { html } from '@polymer/lit-element';
 import sharedStyles from '../shared-styles';
 import styles from './styles';
 
-export default function template({ appTitle, page, narrow, _drawerOpened, _offline, _subroute, _pageTitle }) {
+export default function template({ appTitle, page, narrow, _drawerOpened, _subroute, _pageTitle }) {
   return html`
     ${sharedStyles}
     ${styles}

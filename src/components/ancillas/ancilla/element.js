@@ -1,6 +1,4 @@
 import { PageViewElement } from '../../page-view-element';
-import { html } from '@polymer/lit-element';
-import { parse } from '../../utils/markato';
 import template from './template';
 
 class AncillaPage extends PageViewElement {
