@@ -37,12 +37,12 @@ class AncillasList extends PageViewElement {
     }
     const pushSubscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: [
+      applicationServerKey: new Uint8Array([
         4, 12, 223, 82, 207, 103, 63, 216, 215, 188, 194, 38, 255, 91, 171, 245,
         132, 190, 242, 133, 124, 56, 160, 3, 91, 122, 176, 229, 117, 129, 100, 200,
         165, 144, 136, 51, 112, 200, 230, 16, 53, 59, 140, 206, 141, 47, 164, 86, 219,
         154, 154, 105, 252, 231, 23, 206, 158, 134, 42, 2, 243, 131, 34, 157, 22,
-      ],
+      ]),
     });
     if (Notification.permission !== 'granted') {
       return;
