@@ -6,11 +6,11 @@ const openOrFocus = (url) =>
     type: 'window',
   }).then((clientsList) => {
     for (const client of clientsList) {
-      if (client.url === url) {
+      if ((url === '*' && client.url.startsWith('/')) || url === client.url) {
         return client.focus();
       }
     }
-    return clients.openWindow(url);
+    return clients.openWindow(url === '*' ? '/' : url);
   });
 
 self.addEventListener('push', (e) => {
@@ -19,7 +19,7 @@ self.addEventListener('push', (e) => {
   // to send different data, so we allow it to override them
   e.waitUntil(self.registration.showNotification(data.title, Object.assign({
     icon: '/assets/images/icons/android-chrome-512x512.png',
-    badge: '/assets/images/icons/favicon-194x194-white.png',
+    badge: '/assets/images/icons/badge.png',
     vibrate: [300, 300, 300, 300, 300, 1000, 600, 600, 600, 600, 600, 1000, 300, 300, 300, 300, 300],
   }, data)));
 });
@@ -33,7 +33,7 @@ self.addEventListener('notificationclick', (e) => {
       e.waitUntil(openOrFocus('/ancillas/latest'));
       break;
     default:
-      e.waitUntil(openOrFocus('/'));
+      e.waitUntil(openOrFocus('*'));
       break;
   }
 });
