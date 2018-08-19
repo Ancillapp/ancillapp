@@ -10,11 +10,17 @@ export default function template({ _needUserNotificationsPermission, _ancillas }
     ${sharedStyles}
     ${styles}
     ${until(_ancillas.then((ancillas) => html`
-      <div class="notifications-permission" hidden?="${!_needUserNotificationsPermission}">
+      <section class="notifications-permission" hidden?="${!_needUserNotificationsPermission}">
         Vuoi ricevere le notifiche ogni volta che viene pubblicato un nuovo Ancilla Domini?
-        <mwc-button on-click="${() => this._updateNotificationsPermission(false)}">No, grazie</mwc-button>
-        <mwc-button on-click="${() => this._updateNotificationsPermission(true)}">Certo!</mwc-button>
-      </div>
+        <div class="actions">
+          <mwc-button on-click="${() => this._updateNotificationsPermission('never')}"
+            label="Non chiedermelo più"></mwc-button>
+          <mwc-button on-click="${() => this._updateNotificationsPermission('no')}"
+            label="No, grazie"></mwc-button>
+          <mwc-button on-click="${() => this._updateNotificationsPermission('yes')}"
+            label="Certo!"></mwc-button>
+        </div>
+      </section>
       <div class="ancillas-container">
         ${ancillas.map((ancilla) => html`
           <a href="https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/${ancilla}.pdf" class="ancilla">

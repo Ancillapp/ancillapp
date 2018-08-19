@@ -1,3 +1,22 @@
+.notifications-permission {
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+
+    & > * {
+      --mdc-theme-primary: var(--secondary-text-color);
+
+      &:last-child {
+        --mdc-theme-primary: var(--accent-color);
+      }
+    }
+  }
+}
+
 .ancillas-container {
   display: flex;
   justify-content: center;

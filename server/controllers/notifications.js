@@ -27,7 +27,7 @@ router.post('/subscribe', async (req, res) => {
     },
   };
   await Promise.all([
-    db.collection('subscriptions').insert(subscription),
+    db.collection('subscriptions').insertOne(subscription),
     notifications.sendNotification(subscription, JSON.stringify({
       title: 'Perfetto!',
       body: 'Sei stato registrato correttamente!',

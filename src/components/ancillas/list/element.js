@@ -8,7 +8,7 @@ class AncillasList extends PageViewElement {
 
   constructor() {
     super();
-    if (Notification.permission === 'default') {
+    if (Notification.permission === 'default' && !localStorage.getItem('no-notifications-prompt')) {
       this._needUserNotificationsPermission = true;
     }
   }
@@ -28,7 +28,11 @@ class AncillasList extends PageViewElement {
 
   async _updateNotificationsPermission(grant) {
     this._needUserNotificationsPermission = false;
-    if (!grant) {
+    if (grant === 'no' || !grant) {
+      return;
+    }
+    if (grant === 'never') {
+      localStorage.setItem('no-notifications-prompt', true);
       return;
     }
     const registration = await navigator.serviceWorker.getRegistration('/');
