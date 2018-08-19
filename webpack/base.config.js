@@ -82,7 +82,8 @@ module.exports = {
       swSrc: resolve(__dirname, '../src/sw.js'),
       swDest: './sw.js',
       exclude: [/components\/[0-9]+\.js$/, /images\/manifest/, /favicon\.ico$/],
-      importWorkboxFrom: 'local',
+      // TODO: import Workbox from local. See https://github.com/GoogleChrome/workbox/issues/1596
+      // importWorkboxFrom: 'local',
     }),
     ...process.env.ENABLE_BUNDLE_ANALYZER ? [
       new BundleAnalyzerPlugin({
