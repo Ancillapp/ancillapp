@@ -3,6 +3,12 @@ import { PageViewElement } from '../page-view-element';
 import template from './template';
 
 class HomePage extends PageViewElement {
+  constructor() {
+    super();
+    this.loadResourceForLocale(`/assets/locales/home/${this.globalLocale}.ftl`, this.globalLocale)
+      .then(() => this.requestRender());
+  }
+
   yyyymmdd(date) {
     const m = date.getMonth() + 1;
     const d = date.getDate();

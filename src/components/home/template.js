@@ -8,29 +8,29 @@ export default function template({ _today }) {
     ${sharedStyles}
     ${styles}
     <section>
-      <h2>Pace e Bene!</h2>
+      <h2>${this.localize('peace-and-good')}</h2>
       <ul>
           <li>
         <a href="/breviary/${_today}">
-            <span>Prega la Liturgia delle Ore</span>
+            <span>${this.localize('pray-liturgy')}</span>
             ${breviaryIcon}
         </a>
           </li>
           <li>
         <a href="/prayers">
-            <span>Prega le preghiere giornaliere</span>
+            <span>${this.localize('pray-daily-prayers')}</span>
             ${prayersIcon}
         </a>
           </li>
           <li>
         <a href="/songs">
-            <span>Canta i canti della Fraternità</span>
+            <span>${this.localize('sing-fraternity-songs')}</span>
             ${songsIcon}
         </a>
           </li>
           <li>
         <a href="/ancillas/latest">
-            <span>Sfoglia l'ultimo Ancilla Domini</span>
+            <span>${this.localize('read-latest-ancilla')}</span>
             ${ancillasIcon}
         </a>
           </li>
