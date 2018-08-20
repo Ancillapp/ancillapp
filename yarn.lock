@@ -636,6 +636,13 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
 
+"@dabolus/localized-lit-element@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@dabolus/localized-lit-element/-/localized-lit-element-0.3.0.tgz#581a0f24352d1f3b1c86ddb7056b4ad305ed141c"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    fluent "^0.8.0"
+
 "@material/animation@^0.34.0":
   version "0.34.0"
   resolved "https://registry.yarnpkg.com/@material/animation/-/animation-0.34.0.tgz#a99cc9dabf7d0179b4da9a0aaa1575c4d1513823"
@@ -1138,10 +1145,6 @@ array-initial@^1.0.0:
   dependencies:
     array-slice "^1.0.0"
     is-number "^4.0.0"
-
-array-iterate@^1.0.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/array-iterate/-/array-iterate-1.1.2.tgz#f66a57e84426f8097f4197fbb6c051b8e5cdf7d8"
 
 array-last@^1.1.1:
   version "1.3.0"
@@ -3090,6 +3093,10 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
+fluent@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/fluent/-/fluent-0.8.0.tgz#2a0909e5910313581f5c0d108ed2163d9e080111"
+
 flush-write-stream@^1.0.0, flush-write-stream@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"
@@ -4632,10 +4639,9 @@ md5.js@^1.3.4:
     inherits "^2.0.1"
 
 mdast-util-compact@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/mdast-util-compact/-/mdast-util-compact-1.0.1.tgz#cdb5f84e2b6a2d3114df33bd05d9cb32e3c4083a"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/mdast-util-compact/-/mdast-util-compact-1.0.2.tgz#c12ebe16fffc84573d3e19767726de226e95f649"
   dependencies:
-    unist-util-modify-children "^1.0.0"
     unist-util-visit "^1.1.0"
 
 mdn-data@^1.0.0, mdn-data@~1.1.0:
@@ -7322,8 +7328,8 @@ supports-color@^3.2.3:
     has-flag "^1.0.0"
 
 supports-color@^5.3.0, supports-color@^5.4.0:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.4.0.tgz#1c6b337402c2137605efe19f10fec390f6faab54"
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f"
   dependencies:
     has-flag "^3.0.0"
 
@@ -7710,12 +7716,6 @@ unist-util-find-all-after@^1.0.2:
 unist-util-is@^2.0.0, unist-util-is@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/unist-util-is/-/unist-util-is-2.1.2.tgz#1193fa8f2bfbbb82150633f3a8d2eb9a1c1d55db"
-
-unist-util-modify-children@^1.0.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/unist-util-modify-children/-/unist-util-modify-children-1.1.2.tgz#c7f1b91712554ee59c47a05b551ed3e052a4e2d1"
-  dependencies:
-    array-iterate "^1.0.0"
 
 unist-util-remove-position@^1.0.0:
   version "1.1.2"

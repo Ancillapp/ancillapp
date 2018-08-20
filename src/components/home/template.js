@@ -1,4 +1,4 @@
-import { ancillaIcon, breviaryIcon, prayersIcon, songsIcon } from '../icons';
+import { ancillasIcon, breviaryIcon, prayersIcon, songsIcon } from '../icons';
 import { html } from '@polymer/lit-element';
 import sharedStyles from '../shared-styles';
 import styles from './styles';
@@ -31,7 +31,7 @@ export default function template({ _today }) {
           <li>
         <a href="/ancillas/latest">
             <span>Sfoglia l'ultimo Ancilla Domini</span>
-            ${ancillaIcon}
+            ${ancillasIcon}
         </a>
           </li>
       </ul>

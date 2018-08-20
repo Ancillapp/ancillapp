@@ -1,29 +1,27 @@
-import { LitElement } from '@polymer/lit-element';
+import { LocalizedLitElement } from '@dabolus/localized-lit-element';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query';
 import { installRouter } from 'pwa-helpers/router';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
 import template from './template';
 import { updateMetadata } from 'pwa-helpers/metadata';
 
-
-class AncillappShell extends LitElement {
+class AncillappShell extends LocalizedLitElement {
   static properties = {
     appTitle: String,
     page: String,
     narrow: Boolean,
     _drawerOpened: Boolean,
     _subroute: String,
-  };
-
-  static pages = {
-    'home': 'Home',
-    'ancillas': 'Ancilla Domini',
-    'songs': 'Canti',
+    _pages: Array,
   };
 
   constructor() {
     super();
     setPassiveTouchGestures(true);
+    this._pages = ['home', 'ancillas', 'songs', 'breviary', 'prayers'];
+    this.globalLocale = window.navigator.language.substr(0, 2);
+    this.loadResourceForLocale(`/assets/locales/shell/${this.globalLocale}.ftl`, this.globalLocale)
+      .then(() => this.requestRender());
     this._updateDrawerState(
       window.matchMedia('(min-width: 768px)').matches ?
         localStorage.getItem('drawer-opened') === 'true' :
@@ -33,10 +31,7 @@ class AncillappShell extends LitElement {
   }
 
   _render(props) {
-    return this::template({
-      ...props,
-      _pageTitle: AncillappShell.pages[props.page] || 'Home',
-    });
+    return this::template(props);
   }
 
   _firstRendered() {
@@ -45,8 +40,8 @@ class AncillappShell extends LitElement {
   }
 
   _didRender(properties, changeList) {
-    if ('page' in changeList) {
-      const pageTitle = `${properties.appTitle} - ${AncillappShell.pages[changeList.page]}`;
+    if (!changeList || 'page' in changeList) {
+      const pageTitle = `${this.appTitle} - ${this.localize(this.page || 'home')}`;
       updateMetadata({
         title: pageTitle,
         description: pageTitle,
@@ -84,7 +79,7 @@ class AncillappShell extends LitElement {
   }
 
   _loadPage(page, subroute) {
-    if (!Object.keys(AncillappShell.pages).includes(page)) {
+    if (!this._pages.includes(page)) {
       page = 'home';
     }
     import(`../${page}/element`);

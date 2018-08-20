@@ -2,13 +2,13 @@ import '@polymer/app-layout/app-drawer/app-drawer';
 import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
-import { ancillaIcon, breviaryIcon, homeIcon, menuIcon, prayersIcon, songsIcon, tau } from '../icons';
-import { html } from '@polymer/lit-element';
+import * as icons from '../icons';
+import { html } from '@dabolus/localized-lit-element';
 
 import sharedStyles from '../shared-styles';
 import styles from './styles';
 
-export default function template({ appTitle, page, narrow, _drawerOpened, _subroute, _pageTitle }) {
+export default function template({ appTitle, page, narrow, _drawerOpened, _subroute, _pages }) {
   return html`
     ${sharedStyles}
     ${styles}
@@ -17,9 +17,9 @@ export default function template({ appTitle, page, narrow, _drawerOpened, _subro
     <app-header condenses reveals effects="waterfall" id="header">
       <app-toolbar class="toolbar-top">
         <button class="menu-btn" title="Menu" on-click="${() => this._updateDrawerState(!_drawerOpened)}">
-          ${menuIcon}
+          ${icons.menuIcon}
         </button>
-        <div main-title>${tau} ${appTitle} - ${_pageTitle}</div>
+        <div main-title>${icons.tau} ${appTitle} - ${this.localize(page)}</div>
       </app-toolbar>
     </app-header>
     
@@ -28,27 +28,12 @@ export default function template({ appTitle, page, narrow, _drawerOpened, _subro
         on-opened-changed="${(e) => this._updateDrawerState(e.target.opened)}">
       <app-toolbar>Menù</app-toolbar>
       <nav class="drawer-list">
-        <a selected?="${page === 'home'}" href="/home">
-          <div class="icon">${homeIcon}</div>
-          <div class="name">Home</div>
-        </a>
-        <hr>
-        <a selected?="${page === 'ancillas'}" href="/ancillas">
-          <div class="icon">${ancillaIcon}</div>
-          <div class="name">Ancilla Domini</div>
-        </a>
-        <a selected?="${page === 'songs'}" href="/songs">
-          <div class="icon">${songsIcon}</div>
-          <div class="name">Canti</div>
-        </a>
-        <a selected?="${page === 'breviary'}" href="/breviary">
-          <div class="icon">${breviaryIcon}</div>
-          <div class="name">Breviario</div>
-        </a>
-        <a selected?="${page === 'prayers'}" href="/prayers">
-          <div class="icon">${prayersIcon}</div>
-          <div class="name">Preghiere</div>
-        </a>
+        ${_pages.map((p) => html`
+          <a selected?="${page === p}" href="/${p}">
+            <div class="icon">${icons[`${p}Icon`]}</div>
+            <div class="name">${this.localize(p)}</div>
+          </a>
+        `)}
       </nav>
     </app-drawer>
     
