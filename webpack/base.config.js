@@ -81,7 +81,7 @@ module.exports = {
     new InjectManifestPlugin({
       swSrc: resolve(__dirname, '../src/sw.js'),
       swDest: './sw.js',
-      exclude: [/components\/[0-9]+\.js$/, /images\/icons/],
+      exclude: [/components\/[0-9]+\.js$/, /images\/icons/, /\.LICENSE$/],
       // TODO: import Workbox from local. See https://github.com/GoogleChrome/workbox/issues/1596
       // importWorkboxFrom: 'local',
     }),
