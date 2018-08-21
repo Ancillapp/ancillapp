@@ -15,11 +15,14 @@ class AncillappShell extends LocalizedLitElement {
     _pages: Array,
   };
 
+  static supportedLanguages = ['it', 'en', 'pt'];
+
   constructor() {
     super();
     setPassiveTouchGestures(true);
     this._pages = ['home', 'ancillas', 'songs', 'breviary', 'prayers'];
-    this.globalLocale = window.navigator.language.substr(0, 2);
+    const userLocale = window.navigator.language.substring(0, 2);
+    this.globalLocale = AncillappShell.supportedLanguages.includes(userLocale) ? userLocale : 'it';
     this.loadResourceForLocale(`/assets/locales/shell/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender());
     this._updateDrawerState(
