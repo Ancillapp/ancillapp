@@ -56,7 +56,7 @@ workbox.routing.registerRoute(
   'GET',
 );
 workbox.routing.registerRoute(
-  /(?:styles|components\/(?:[0-9]+|app)\.js$)/,
+  /(?:styles|assets\/locales|components\/(?:[0-9]+|app)\.js$)/,
   workbox.strategies.staleWhileRevalidate(),
   'GET',
 );
