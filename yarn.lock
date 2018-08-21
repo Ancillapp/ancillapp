@@ -636,9 +636,9 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
 
-"@dabolus/localized-lit-element@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@dabolus/localized-lit-element/-/localized-lit-element-0.3.0.tgz#581a0f24352d1f3b1c86ddb7056b4ad305ed141c"
+"@dabolus/localized-lit-element@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@dabolus/localized-lit-element/-/localized-lit-element-0.3.1.tgz#54c590aee60a1bac897175af1fa8069a005ceb74"
   dependencies:
     "@polymer/lit-element" "^0.5.2"
     fluent "^0.8.0"
@@ -946,8 +946,8 @@
   resolved "https://registry.yarnpkg.com/@webcomponents/shadycss/-/shadycss-1.5.0.tgz#109e596027eed04bc5032414c9f094e1aeb9260e"
 
 "@webcomponents/webcomponentsjs@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@webcomponents/webcomponentsjs/-/webcomponentsjs-2.0.4.tgz#fe18c288f99b7103e9ae7a766020f9702cedcc08"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@webcomponents/webcomponentsjs/-/webcomponentsjs-2.1.0.tgz#0300177ce212fbed4c981a61e3a569e6aa1f0c95"
 
 "@webpack-contrib/schema-utils@^1.0.0-beta.0":
   version "1.0.0-beta.0"
@@ -2566,8 +2566,8 @@ ejs@^2.5.7:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
 
 electron-to-chromium@^1.3.47, electron-to-chromium@^1.3.57:
-  version "1.3.58"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.58.tgz#8267a4000014e93986d9d18c65a8b4022ca75188"
+  version "1.3.59"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.59.tgz#6377db04d8d3991d6286c72ed5c3fde6f4aaf112"
 
 elliptic@^6.0.0:
   version "6.4.1"
