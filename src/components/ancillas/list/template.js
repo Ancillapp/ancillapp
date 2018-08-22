@@ -22,9 +22,12 @@ export default function template({ _needUserNotificationsPermission, _ancillas }
         </div>
       </section>
       <div class="ancillas-container">
-        ${ancillas.map((ancilla) => html`
-          <a href="https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/${ancilla}.pdf" class="ancilla">
-            <div style$="background-image: url('https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/thumbs/${ancilla}.jpg')"></div>
+        ${ancillas.map(({ period, special }) => html`
+          <a
+            href="https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/${period}.pdf"
+            title="${this.localize('ancilla-title', { period, special })}"
+            class="ancilla">
+            <div style$="background-image: url('https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/thumbs/${period}.jpg')"></div>
           </a>
         `)}
       </div>
