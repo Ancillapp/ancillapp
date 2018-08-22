@@ -7,7 +7,7 @@
     justify-content: flex-end;
     flex-wrap: wrap;
 
-    & > * {
+    > * {
       --mdc-theme-primary: var(--secondary-text-color);
 
       &:last-child {
@@ -34,7 +34,6 @@
   div {
     width: 10.625rem;
     height: 15rem;
-    background: var(--card-color) no-repeat center;
-    background-size: cover;
+    background: var(--card-color) no-repeat center / cover;
   }
 }

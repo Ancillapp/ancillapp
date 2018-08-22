@@ -28,6 +28,7 @@
     }
   }
 }
+
 /* stylelint-enable unit-whitelist */
 
 :host([dark]) {
@@ -80,7 +81,7 @@ app-header {
   overflow-x: auto;
   white-space: nowrap;
 
-  & > a {
+  > a {
     display: inline-block;
     color: rgba(255, 255, 255, .7);
     text-decoration: none;
@@ -112,7 +113,7 @@ app-header, app-drawer {
 }
 
 app-drawer {
-  & > * {
+  > * {
     background: var(--drawer-color);
     color: var(--secondary-text-color);
   }
@@ -128,7 +129,7 @@ app-drawer {
   display: flex;
   flex-direction: column;
 
-  & > a {
+  > a {
     fill: var(--secondary-text-color);
     color: var(--secondary-text-color);
     background: inherit;
@@ -154,14 +155,14 @@ app-drawer {
       font-weight: 700;
     }
 
-    & > .icon {
+    > .icon {
       width: 1.5em;
       height: 1.5em;
       margin-right: 2em;
       flex: 0 0 auto;
     }
 
-    & > .name {
+    > .name {
       flex: 1 1 auto;
     }
   }
