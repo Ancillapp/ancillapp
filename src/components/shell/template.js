@@ -34,6 +34,11 @@ export default function template({ appTitle, page, narrow, _drawerOpened, _subro
             <div class="name">${this.localize(p)}</div>
           </a>
         `)}
+        <div class="spacing"></div>
+        <a selected?="${page === 'settings'}" href="/settings">
+          <div class="icon">${icons.settingsIcon}</div>
+          <div class="name">${this.localize('settings')}</div>
+        </a>
       </nav>
     </app-drawer>
     
