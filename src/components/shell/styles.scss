@@ -19,18 +19,6 @@
   --divider-color: rgba(0, 0, 0, .12);
 }
 
-/* stylelint-disable unit-whitelist */
-@media (min-width: 768px) {
-  :host([drawer-opened]) {
-    app-header, .main-content {
-      left: 256px;
-      width: calc(100% - 256px);
-    }
-  }
-}
-
-/* stylelint-enable unit-whitelist */
-
 :host([dark]) {
   --background-color: #303030;
   --drawer-color: #121212;
@@ -53,8 +41,7 @@ app-header {
   background-color: var(--primary-color);
   color: #fff;
   border-bottom: .0625rem solid #597c96;
-  will-change: width, left;
-  transition: .3s width, .3s left;
+  z-index: 9;
 }
 
 [main-title] {
@@ -108,11 +95,11 @@ app-header {
   /* stylelint-enable unit-whitelist */
 }
 
-app-header, app-drawer {
-  z-index: 100;
-}
-
 app-drawer {
+  top: 0;
+  margin: -120px 0; // stylelint-disable-line unit-whitelist
+  z-index: 10;
+
   > * {
     background: var(--drawer-color);
     color: var(--secondary-text-color);
@@ -179,3 +166,23 @@ app-drawer {
   will-change: width, left;
   transition: .3s width, .3s left;
 }
+
+/* stylelint-disable unit-whitelist */
+@media (min-width: 768px) {
+  app-header {
+    z-index: 11;
+  }
+
+  app-drawer {
+    top: 64px;
+  }
+
+  :host([drawer-opened]) {
+    .main-content {
+      left: 256px;
+      width: calc(100% - 256px);
+    }
+  }
+}
+
+/* stylelint-enable unit-whitelist */
