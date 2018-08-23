@@ -11,14 +11,14 @@ export default function template({ _needUserNotificationsPermission, _ancillas }
     ${styles}
     ${until(_ancillas.then((ancillas) => html`
       <section class="notifications-permission" hidden?="${!_needUserNotificationsPermission}">
-        Vuoi ricevere le notifiche ogni volta che viene pubblicato un nuovo Ancilla Domini?
+        ${this.localize('ancillas-notifications-question')}
         <div class="actions">
           <mwc-button on-click="${() => this._updateNotificationsPermission('never')}"
-            label="Non chiedermelo più"></mwc-button>
+            label="${this.localize('ancillas-notifications-never')}"></mwc-button>
           <mwc-button on-click="${() => this._updateNotificationsPermission('no')}"
-            label="No, grazie"></mwc-button>
+            label="${this.localize('ancillas-notifications-no')}"></mwc-button>
           <mwc-button on-click="${() => this._updateNotificationsPermission('yes')}"
-            label="Certo!"></mwc-button>
+            label="${this.localize('ancillas-notifications-yes')}"></mwc-button>
         </div>
       </section>
       <div class="ancillas-container">
