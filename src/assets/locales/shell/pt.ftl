@@ -4,3 +4,4 @@ songs = Canções
 breviary = Breviário
 prayers = Orações
 settings = Configurações
+info = Informações

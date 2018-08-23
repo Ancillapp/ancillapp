@@ -12,7 +12,8 @@ class AncillappShell extends LocalizedLitElement {
     narrow: Boolean,
     _drawerOpened: Boolean,
     _subroute: String,
-    _pages: Array,
+    _topNavPages: Array,
+    _bottomNavPages: Array,
   };
 
   static supportedLanguages = ['it', 'en', 'pt'];
@@ -20,7 +21,8 @@ class AncillappShell extends LocalizedLitElement {
   constructor() {
     super();
     setPassiveTouchGestures(true);
-    this._pages = ['home', 'ancillas', 'songs', 'breviary', 'prayers'];
+    this._topNavPages = ['home', 'ancillas', 'songs', 'breviary', 'prayers'];
+    this._bottomNavPages = ['settings', 'info'];
     const userLocale = window.navigator.language.substring(0, 2);
     this.globalLocale = AncillappShell.supportedLanguages.includes(userLocale) ? userLocale : 'it';
     this.loadResourceForLocale(`/assets/locales/shell/${this.globalLocale}.ftl`, this.globalLocale)
@@ -82,7 +84,7 @@ class AncillappShell extends LocalizedLitElement {
   }
 
   _loadPage(page, subroute) {
-    if (!this._pages.includes(page)) {
+    if (![...this._topNavPages, ...this._bottomNavPages].includes(page)) {
       page = 'home';
     }
     import(`../${page}/element`);

@@ -4,3 +4,4 @@ songs = Songs
 breviary = Breviary
 prayers = Prayers
 settings = Settings
+info = Info

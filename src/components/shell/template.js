@@ -8,7 +8,7 @@ import { html } from '@dabolus/localized-lit-element';
 import sharedStyles from '../shared-styles';
 import styles from './styles';
 
-export default function template({ appTitle, page, narrow, _drawerOpened, _subroute, _pages }) {
+export default function template({ appTitle, page, narrow, _drawerOpened, _subroute, _topNavPages, _bottomNavPages }) {
   return html`
     ${sharedStyles}
     ${styles}
@@ -29,7 +29,7 @@ export default function template({ appTitle, page, narrow, _drawerOpened, _subro
       <app-toolbar>Menù</app-toolbar>
       <nav class="drawer-list">
         <div class="top-nav">
-          ${_pages.map((p) => html`
+          ${_topNavPages.map((p) => html`
             <a selected?="${page === p}" href="/${p}">
               <div class="icon">${icons[`${p}Icon`]}</div>
               <div class="name">${this.localize(p)}</div>
@@ -39,10 +39,12 @@ export default function template({ appTitle, page, narrow, _drawerOpened, _subro
         </div>
         <div class="bottom-nav">
           <hr>
-          <a selected?="${page === 'settings'}" href="/settings">
-            <div class="icon">${icons.settingsIcon}</div>
-            <div class="name">${this.localize('settings')}</div>
-          </a>
+          ${_bottomNavPages.map((p) => html`
+            <a selected?="${page === p}" href="/${p}">
+              <div class="icon">${icons[`${p}Icon`]}</div>
+              <div class="name">${this.localize(p)}</div>
+            </a>
+          `)}
         </div>
       </nav>
     </app-drawer>
