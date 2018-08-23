@@ -62,26 +62,6 @@ app-header {
   font-size: 20px; // stylelint-disable-line unit-whitelist
 }
 
-.toolbar-list {
-  text-align: center;
-  text-transform: uppercase;
-  overflow-x: auto;
-  white-space: nowrap;
-
-  > a {
-    display: inline-block;
-    color: rgba(255, 255, 255, .7);
-    text-decoration: none;
-    line-height: 1.875em;
-    padding: .25em 1.5em;
-
-    &[selected] {
-      color: var(--accent-color);
-      border-bottom: .25em solid var(--accent-color);
-    }
-  }
-}
-
 .menu-btn {
   background: none;
   border: none;
@@ -115,7 +95,17 @@ app-drawer {
   display: flex;
   flex-direction: column;
 
-  > a {
+  > .top-nav {
+    height: 100%;
+    overflow-y: auto;
+    flex: 1 1 auto;
+  }
+
+  > .bottom-nav {
+    flex: 0 0 auto;
+  }
+
+  a {
     fill: var(--secondary-text-color);
     color: var(--secondary-text-color);
     background: inherit;
@@ -151,10 +141,6 @@ app-drawer {
     > .name {
       flex: 1 1 auto;
     }
-  }
-
-  > .spacing {
-    flex: 1 1 auto;
   }
 }
 

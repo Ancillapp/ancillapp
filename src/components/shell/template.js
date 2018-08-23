@@ -28,17 +28,22 @@ export default function template({ appTitle, page, narrow, _drawerOpened, _subro
         on-opened-changed="${(e) => this._updateDrawerState(e.target.opened)}">
       <app-toolbar>Menù</app-toolbar>
       <nav class="drawer-list">
-        ${_pages.map((p) => html`
-          <a selected?="${page === p}" href="/${p}">
-            <div class="icon">${icons[`${p}Icon`]}</div>
-            <div class="name">${this.localize(p)}</div>
+        <div class="top-nav">
+          ${_pages.map((p) => html`
+            <a selected?="${page === p}" href="/${p}">
+              <div class="icon">${icons[`${p}Icon`]}</div>
+              <div class="name">${this.localize(p)}</div>
+            </a>
+            ${p === 'home' ? html`<hr>` : ''}
+          `)}
+        </div>
+        <div class="bottom-nav">
+          <hr>
+          <a selected?="${page === 'settings'}" href="/settings">
+            <div class="icon">${icons.settingsIcon}</div>
+            <div class="name">${this.localize('settings')}</div>
           </a>
-        `)}
-        <div class="spacing"></div>
-        <a selected?="${page === 'settings'}" href="/settings">
-          <div class="icon">${icons.settingsIcon}</div>
-          <div class="name">${this.localize('settings')}</div>
-        </a>
+        </div>
       </nav>
     </app-drawer>
     
