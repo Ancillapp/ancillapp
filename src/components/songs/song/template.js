@@ -12,11 +12,11 @@ export default function template({ _song }) {
       ${until(_song.then((song) => html`
         <div class="settings">
           <div style="cursor: pointer; display: flex; align-items: center;" on-click="${() => this._toggleChords()}">
-            <label for="show-chords">Mostra accordi</label>
+            <label for="show-chords">${this.localize('show-chords')}</label>
             <mwc-checkbox id="show-chords" checked?="${this._showChords}"></mwc-checkbox>
           </div>
           <div hidden?="${!this._showChords}">
-            <label id="transpose-label">Trasponi</label>
+            <label id="transpose-label">${this.localize('transpose')}</label>
             <button aria-labelledby="transpose-label"
               on-click="${() => this._transposeDelta = Math.max(-11, this._transposeDelta - 1)}">-</button>
             <span>${this._transposeDelta}</span>
