@@ -42,11 +42,13 @@ self.addEventListener('message', (e) => {
   switch (e.data.action) {
     case 'update':
       // Skip the waiting phase and immediately replace the old Service Worker
-      workbox.skipWaiting();
+      self.skipWaiting();
       break;
   }
 });
 
+// Skip the waiting phase
+workbox.skipWaiting();
 // Claim the clients, so that we can immediately use all the SW goodies
 workbox.clientsClaim();
 workbox.precaching.suppressWarnings();
