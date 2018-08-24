@@ -69,4 +69,4 @@ workbox.routing.registerRoute(
   workbox.strategies.staleWhileRevalidate(),
   'GET',
 );
-workbox.googleAnalytics.initialize();
+// workbox.googleAnalytics.initialize();
