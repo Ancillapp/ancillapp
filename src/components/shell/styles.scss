@@ -156,6 +156,14 @@ app-drawer {
   transition: .3s width, .3s left;
 }
 
+snack-bar mwc-button {
+  --mdc-theme-primary: var(--secondary-text-color);
+
+  &:last-child {
+    --mdc-theme-primary: var(--accent-color);
+  }
+}
+
 /* stylelint-disable unit-whitelist */
 @media (min-width: 768px) {
   app-header {

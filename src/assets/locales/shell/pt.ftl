@@ -5,3 +5,6 @@ breviary = Breviário
 prayers = Orações
 settings = Configurações
 info = Informações
+update-available = Atualização disponível!
+update-ignore = Ignorar
+update-now = Atualizar agora

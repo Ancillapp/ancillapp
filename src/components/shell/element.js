@@ -14,12 +14,14 @@ class AncillappShell extends LocalizedLitElement {
     _subroute: String,
     _topNavPages: Array,
     _bottomNavPages: Array,
+    _showUpdateNotification: Boolean,
   };
 
   static supportedLanguages = ['it', 'en', 'pt'];
 
   constructor() {
     super();
+    this.checkUpdates();
     setPassiveTouchGestures(true);
     this._topNavPages = ['home', 'ancillas', 'songs', 'breviary', 'prayers'];
     this._bottomNavPages = ['settings', 'info'];
@@ -33,6 +35,46 @@ class AncillappShell extends LocalizedLitElement {
         false,
     );
     installMediaQueryWatcher('(min-width: 768px)', (matches) => this.narrow = matches);
+  }
+
+  async checkUpdates() {
+    if (!navigator.serviceWorker.controller) {
+      return;
+    }
+    const registration = await navigator.serviceWorker.getRegistration('/');
+    if (!registration) {
+      return;
+    }
+    if (registration.waiting) {
+      this.newSw = registration.waiting;
+      this._showUpdateNotification = true;
+      return;
+    }
+    if (registration.installing) {
+      this.trackInstallation(registration.installing);
+      return;
+    }
+    registration.addEventListener('updatefound', () =>
+      this.trackInstallation(registration.installing));
+    navigator.serviceWorker.addEventListener('controllerchange', () =>
+      window.location.reload());
+  }
+
+  trackInstallation(sw) {
+    sw.addEventListener('statechange', () => {
+      if (sw.state === 'installed') {
+        this.newSw = sw;
+        this._showUpdateNotification = true;
+      }
+    });
+  }
+
+  update() {
+    this._showUpdateNotification = false;
+    if (!this.newSw) {
+      return;
+    }
+    this.newSw.postMessage({ action: 'update' });
   }
 
   _render(props) {

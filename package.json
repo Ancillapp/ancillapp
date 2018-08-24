@@ -29,6 +29,7 @@
     "@material/mwc-button": "^0.1.2",
     "@material/mwc-checkbox": "^0.1.2",
     "@polymer/app-layout": "^3.0.0-pre.21",
+    "@polymer/lit-element": "^0.5.2",
     "@polymer/polymer": "^3.0.5",
     "@webcomponents/webcomponentsjs": "^2.0.4",
     "lit-html": "^0.10.2",
