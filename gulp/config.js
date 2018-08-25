@@ -32,7 +32,7 @@ task('lint:templates', () =>
 
 task('lint', parallel('lint:scripts', 'lint:styles', 'lint:templates'));
 
-task('build', (cb) => exec('npx webpack --config webpack/prod.config.js', cb));
+task('build', (cb) => exec('yarn run build', cb));
 
 task('clean:build', () => del('build'));
 
