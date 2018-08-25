@@ -34,7 +34,8 @@
     "@polymer/polymer": "^3.0.5",
     "@webcomponents/webcomponentsjs": "^2.0.4",
     "lit-html": "^0.10.2",
-    "pwa-helpers": "^0.8.3"
+    "pwa-helpers": "^0.8.3",
+    "rollbar-browser": "^1.9.5"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",

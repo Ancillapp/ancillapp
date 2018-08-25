@@ -21,14 +21,24 @@ class AncillappShell extends LocalizedLitElement {
 
   constructor() {
     super();
-    this.checkUpdates();
     setPassiveTouchGestures(true);
-    this._topNavPages = ['home', 'ancillas', 'songs', 'breviary', 'prayers'];
-    this._bottomNavPages = ['settings', 'info'];
     const userLocale = window.navigator.language.substring(0, 2);
     this.globalLocale = AncillappShell.supportedLanguages.includes(userLocale) ? userLocale : 'it';
     this.loadResourceForLocale(`/assets/locales/shell/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender());
+    this.checkUpdates();
+    import('rollbar-browser')
+      .then((rollbar) =>
+        window.Rollbar = rollbar.default.init({
+          accessToken: 'cc51426087ef43f4ab001aa4974ac65a',
+          captureUncaught: true,
+          captureUnhandledRejections: true,
+          payload: {
+            environment: 'production',
+          },
+        }));
+    this._topNavPages = ['home', 'ancillas', 'songs', 'breviary', 'prayers'];
+    this._bottomNavPages = ['settings', 'info'];
     this._updateDrawerState(
       window.matchMedia('(min-width: 768px)').matches ?
         localStorage.getItem('drawer-opened') === 'true' :
