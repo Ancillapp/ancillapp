@@ -19,7 +19,8 @@
     "build:debug": "cross-env DEBUG=true yarn run build",
     "build:app-engine": "yarn run gulp build:app-engine",
     "lint": "yarn run gulp lint",
-    "deploy": "gcloud app deploy server/app.yaml -q"
+    "deploy": "gcloud app deploy server/app.yaml -q",
+    "bad": "yarn run build:app-engine && yarn run deploy"
   },
   "engines": {
     "node": "8.x",
