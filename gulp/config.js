@@ -1,7 +1,7 @@
 /* eslint-env node, es6 */
 
 const { task, src, dest, series, parallel } = require('gulp');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const eslint = require('gulp-eslint');
 const stylelint = require('gulp-stylelint');
 const htmllint = require('gulp-htmllint');
@@ -32,7 +32,13 @@ task('lint:templates', () =>
 
 task('lint', parallel('lint:scripts', 'lint:styles', 'lint:templates'));
 
-task('build', (cb) => exec('yarn run build', cb));
+task('build', () => new Promise((resolve, reject) => {
+  const buildProc = spawn('yarn', ['run', 'build'], {
+    stdio: 'inherit',
+  });
+  buildProc.on('error', reject);
+  buildProc.on('close', resolve);
+}));
 
 task('clean:build', () => del('build'));
 
