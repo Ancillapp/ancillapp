@@ -1,3 +1,4 @@
+menu = Menu
 home = Home
 ancillas = Ancilla Domini
 songs = Canções

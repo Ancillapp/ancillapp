@@ -28,7 +28,7 @@ export default function template() {
     <!-- Drawer content -->
     <app-drawer swipe-open persistent?="${this.narrow}" opened="${this._drawerOpened}"
         on-opened-changed="${(e) => this._updateDrawerState(e.target.opened)}">
-      <app-toolbar>Menù</app-toolbar>
+      <app-toolbar>${this.localize('menu')}</app-toolbar>
       <nav class="drawer-list">
         <div class="top-nav">
           ${this._topNavPages.map((p) => html`
