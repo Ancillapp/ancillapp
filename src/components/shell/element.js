@@ -153,6 +153,7 @@ class AncillappShell extends LocalizedLitElement {
     } else {
       this.removeAttribute('dark');
     }
+    document.documentElement.className = document.body.className = this.dark ? 'dark' : '';
     localStorage.setItem('dark', this.dark);
   }
 }
