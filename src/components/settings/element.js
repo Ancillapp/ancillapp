@@ -16,10 +16,6 @@ class SettingsPage extends PageViewElement {
   _render() {
     return this::template();
   }
-
-  _toggleDarkTheme() {
-
-  }
 }
 
 window.customElements.define('settings-page', SettingsPage);
