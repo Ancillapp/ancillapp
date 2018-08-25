@@ -18,10 +18,11 @@ export default function template() {
     <!-- Header -->
     <app-header condenses reveals effects="waterfall" id="header">
       <app-toolbar class="toolbar-top">
-        <button class="menu-btn" title="Menu" on-click="${() => this._updateDrawerState(!this._drawerOpened)}">
+        <button class="menu-btn" title="${this.localize('menu')}"
+          on-click="${() => this._updateDrawerState(!this._drawerOpened)}">
           ${icons.menuIcon}
         </button>
-        <div main-title>${icons.tau} ${this.appTitle} - ${this.localize(this.page)}</div>
+        <div main-title>${icons.tau} ${this.page === 'home' ? this.appTitle : this.localize(this.page)}</div>
       </app-toolbar>
     </app-header>
     
