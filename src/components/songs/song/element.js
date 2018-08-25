@@ -79,12 +79,12 @@ class SongPage extends PageViewElement {
     `);
   }
 
-  _render(props) {
+  _render() {
     if (!this._songPromises) {
       this._songPromises = {};
-      if (!this._songPromises[props.song]) {
-        this._songPromises[props.song] =
-          fetch(`/api/songs/${props.song}`)
+      if (!this._songPromises[this.song]) {
+        this._songPromises[this.song] =
+          fetch(`/api/songs/${this.song}`)
             .then((res) => res.json())
             .then(({ data }) => {
               const parsedMarkato = parse(data.markato);
@@ -95,13 +95,11 @@ class SongPage extends PageViewElement {
             });
       }
     }
-    return this::template({
-      ...props,
-      _song: this._songPromises[props.song].then((song) => ({
-        ...song,
-        html: this._markatoToHtml(song.parsedMarkato),
-      })),
-    });
+    this._song = this._songPromises[this.song].then((song) => ({
+      ...song,
+      html: this._markatoToHtml(song.parsedMarkato),
+    }));
+    return this::template();
   }
 }
 

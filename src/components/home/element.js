@@ -7,6 +7,7 @@ class HomePage extends PageViewElement {
     super();
     this.loadResourceForLocale(`/assets/locales/home/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender());
+    this._today = this.yyyymmdd(new Date());
   }
 
   yyyymmdd(date) {
@@ -15,11 +16,8 @@ class HomePage extends PageViewElement {
     return `${date.getFullYear()}-${m > 9 ? m : '0' + m}-${d > 9 ? d : '0' + d}`;
   }
 
-  _render(props) {
-    return this::template({
-      ...props,
-      _today: this.yyyymmdd(new Date()),
-    });
+  _render() {
+    return this::template();
   }
 }
 

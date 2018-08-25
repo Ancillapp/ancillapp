@@ -15,17 +15,14 @@ class AncillasList extends PageViewElement {
     }
   }
 
-  _render(props) {
+  _render() {
     if (!this._ancillas) {
       this._ancillas =
         fetch('/api/ancillas')
           .then((res) => res.json())
           .then(({ data }) => data);
     }
-    return this::template({
-      ...props,
-      _ancillas: this._ancillas,
-    });
+    return this::template();
   }
 
   async _updateNotificationsPermission(grant) {

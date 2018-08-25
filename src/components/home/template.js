@@ -3,7 +3,7 @@ import { html } from '@polymer/lit-element';
 import sharedStyles from '../shared-styles';
 import styles from './styles';
 
-export default function template({ _today }) {
+export default function template() {
   return html`
     ${sharedStyles}
     ${styles}
@@ -11,7 +11,7 @@ export default function template({ _today }) {
       <h2>${this.localize('peace-and-good')}</h2>
       <ul>
           <li>
-        <a href="/breviary/${_today}">
+        <a href="/breviary/${this._today}">
             <span>${this.localize('pray-liturgy')}</span>
             ${breviaryIcon}
         </a>

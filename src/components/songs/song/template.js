@@ -4,12 +4,12 @@ import sharedStyles from '../../shared-styles';
 import styles from './styles';
 import { until } from 'lit-html/lib/until';
 
-export default function template({ _song }) {
+export default function template() {
   return html`
     ${sharedStyles}
     ${styles}
     <section>
-      ${until(_song.then((song) => html`
+      ${until(this._song.then((song) => html`
         <div class="settings">
           <div style="cursor: pointer; display: flex; align-items: center;" on-click="${() => this._toggleChords()}">
             <label for="show-chords">${this.localize('show-chords')}</label>

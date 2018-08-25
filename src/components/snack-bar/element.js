@@ -8,8 +8,8 @@ class SnackBar extends LitElement {
     };
   }
 
-  _render(props) {
-    return this::template(props);
+  _render() {
+    return this::template();
   }
 }
 

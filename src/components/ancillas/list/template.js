@@ -4,13 +4,13 @@ import sharedStyles from '../../shared-styles';
 import styles from './styles';
 import { until } from 'lit-html/lib/until';
 
-export default function template({ _needUserNotificationsPermission, _ancillas }) {
+export default function template() {
   /* eslint-disable max-len */
   return html`
     ${sharedStyles}
     ${styles}
-    ${until(_ancillas.then((ancillas) => html`
-      <section class="notifications-permission" hidden?="${!_needUserNotificationsPermission}">
+    ${until(this._ancillas.then((ancillas) => html`
+      <section class="notifications-permission" hidden?="${!this._needUserNotificationsPermission}">
         ${this.localize('ancillas-notifications-question')}
         <div class="actions">
           <mwc-button on-click="${() => this._updateNotificationsPermission('never')}"

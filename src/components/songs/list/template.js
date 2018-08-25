@@ -4,11 +4,11 @@ import sharedStyles from '../../shared-styles';
 import styles from './styles';
 import { until } from 'lit-html/lib/until';
 
-export default function template({ _songs }) {
+export default function template() {
   return html`
     ${sharedStyles}
     ${styles}
-    ${until(_songs.then((songs) => html`
+    ${until(this._songs.then((songs) => html`
       <div class="songs-container">
         ${repeat(songs, (s) => s.number, (s) => html`
           <a href="/songs/${s.number}" class="song">

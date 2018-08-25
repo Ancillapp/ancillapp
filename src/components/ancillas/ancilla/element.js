@@ -6,20 +6,18 @@ class AncillaPage extends PageViewElement {
     ancilla: String,
   };
 
-  _render(props) {
+  _render() {
     if (!this._ancillaPromises) {
       this._ancillaPromises = {};
-      if (!this._ancillaPromises[props.ancilla]) {
-        this._ancillaPromises[props.ancilla] =
-          fetch(`/api/ancillas/${props.ancilla}`)
+      if (!this._ancillaPromises[this.ancilla]) {
+        this._ancillaPromises[this.ancilla] =
+          fetch(`/api/ancillas/${this.ancilla}`)
             .then((res) => res.json())
             .then(({ data }) => data);
       }
     }
-    return this::template({
-      ...props,
-      _ancilla: this._ancillaPromises[props.ancilla],
-    });
+    this._ancilla = this._ancillaPromises[this.ancilla];
+    return this::template();
   }
 }
 

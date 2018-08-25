@@ -77,8 +77,8 @@ class AncillappShell extends LocalizedLitElement {
     this.newSw.postMessage({ action: 'update' });
   }
 
-  _render(props) {
-    return this::template(props);
+  _render() {
+    return this::template();
   }
 
   _firstRendered() {

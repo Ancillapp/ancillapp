@@ -9,8 +9,8 @@ class SettingsPage extends PageViewElement {
       .then(() => this.requestRender());
   }
 
-  _render(props) {
-    return this::template(props);
+  _render() {
+    return this::template();
   }
 }
 

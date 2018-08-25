@@ -6,13 +6,13 @@ class AncillasPage extends PageViewElement {
     subroute: String,
   };
 
-  _render(props) {
-    if (props.subroute) {
+  _render() {
+    if (this.subroute) {
       import('./ancilla/element');
     } else {
       import('./list/element');
     }
-    return this::template(props);
+    return this::template();
   }
 }
 
