@@ -18,7 +18,7 @@
     "build": "cross-env ENABLE_BUNDLE_ANALYZER=true webpack --config webpack/prod.config.js",
     "build:app-engine": "yarn run gulp build:app-engine",
     "lint": "yarn run gulp lint",
-    "deploy": "gcloud app deploy server/app.yaml"
+    "deploy": "gcloud app deploy server/app.yaml -q"
   },
   "engines": {
     "node": "8.x",
