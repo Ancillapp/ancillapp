@@ -47,9 +47,8 @@ self.addEventListener('message', (e) => {
   }
 });
 
-// Skip the waiting phase
-workbox.skipWaiting();
-// Claim the clients, so that we can immediately use all the SW goodies
+// workbox.googleAnalytics.initialize();
+// workbox.skipWaiting();
 workbox.clientsClaim();
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
@@ -71,4 +70,3 @@ workbox.routing.registerRoute(
   workbox.strategies.staleWhileRevalidate(),
   'GET',
 );
-// workbox.googleAnalytics.initialize();
