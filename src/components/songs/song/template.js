@@ -11,7 +11,7 @@ export default function template() {
     <section>
       ${until(this._song.then((song) => html`
         <div class="settings">
-          <div style="cursor: pointer; display: flex; align-items: center;" on-click="${() => this._toggleChords()}">
+          <div class="checkbox-container" on-click="${() => this._toggleChords()}">
             <label for="show-chords">${this.localize('show-chords')}</label>
             <mwc-checkbox id="show-chords" checked?="${this._showChords}"></mwc-checkbox>
           </div>

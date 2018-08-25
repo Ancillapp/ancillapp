@@ -17,13 +17,16 @@
   --secondary-text-color: rgba(0, 0, 0, .54);
   --disabled-text-color: rgba(0, 0, 0, .38);
   --divider-color: rgba(0, 0, 0, .12);
+
+  --mdc-theme-primary: var(--primary-color);
+  --mdc-theme-secondary: var(--accent-color);
 }
 
 :host([dark]) {
   --background-color: #303030;
-  --drawer-color: #121212;
+  --drawer-color: #212121;
   --dark-drawer-color: #080808;
-  --card-color: #6d6d6d;
+  --card-color: #424242;
   --primary-text-color: #fff;
   --secondary-text-color: rgba(255, 255, 255, .7);
   --disabled-text-color: rgba(255, 255, 255, .5);

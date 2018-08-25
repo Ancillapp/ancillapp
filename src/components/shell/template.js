@@ -58,7 +58,11 @@ export default function template() {
       <songs-page class="page" active?="${this.page === 'songs'}" subroute="${this._subroute}"></songs-page>
       <breviary-page class="page" active?="${this.page === 'breviary'}"></breviary-page>
       <prayers-page class="page" active?="${this.page === 'prayers'}"></prayers-page>
-      <settings-page class="page" active?="${this.page === 'settings'}"></settings-page>
+      <settings-page
+        class="page"
+        active?="${this.page === 'settings'}"
+        darkThemeEnabled?="${this.dark}"
+        on-toggle-dark-theme="${() => this._toggleDarkTheme()}"></settings-page>
       <info-page class="page" active?="${this.page === 'info'}"></info-page>
     </main>
     

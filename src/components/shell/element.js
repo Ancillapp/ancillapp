@@ -15,6 +15,7 @@ class AncillappShell extends LocalizedLitElement {
     _topNavPages: Array,
     _bottomNavPages: Array,
     _showUpdateNotification: Boolean,
+    dark: Boolean,
   };
 
   static supportedLanguages = ['it', 'en', 'pt'];
@@ -37,6 +38,7 @@ class AncillappShell extends LocalizedLitElement {
             environment: 'production',
           },
         }));
+    this._toggleDarkTheme(localStorage.getItem('dark') === 'true');
     this._topNavPages = ['home', 'ancillas', 'songs', 'breviary', 'prayers'];
     this._bottomNavPages = ['settings', 'info'];
     this._updateDrawerState(
@@ -142,6 +144,16 @@ class AncillappShell extends LocalizedLitElement {
     import(`../${page}/element`);
     this.page = page;
     this._subroute = subroute;
+  }
+
+  _toggleDarkTheme(state) {
+    this.dark = typeof state === 'undefined' ? !this.dark : state;
+    if (this.dark) {
+      this.setAttribute('dark', '');
+    } else {
+      this.removeAttribute('dark');
+    }
+    localStorage.setItem('dark', this.dark);
   }
 }
 

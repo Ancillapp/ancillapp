@@ -1,1 +1,1 @@
-settings = Configurações
+dark-theme = Tema sombrio

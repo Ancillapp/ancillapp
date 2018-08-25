@@ -21,6 +21,7 @@ section {
   max-width: 37.5rem;
   margin: auto;
   border-radius: .5rem;
+  color: var(--primary-text-color);
   box-shadow: 0 .06rem .065rem 0 rgba(0, 0, 0, 0.14), 0 .003rem .15rem 0 rgba(0, 0, 0, 0.12), 0 .09rem .0035rem -.065rem rgba(0, 0, 0, 0.2);
 }
 
@@ -114,4 +115,14 @@ input, textarea {
 
 form > * {
   width: 100%;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &, * {
+    cursor: pointer;
+  }
 }

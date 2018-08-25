@@ -1,1 +1,1 @@
-settings = Settings
+dark-theme = Dark theme
