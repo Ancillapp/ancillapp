@@ -54,7 +54,7 @@ workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 workbox.routing.registerNavigationRoute('/index.html');
 workbox.routing.registerRoute(
-  /(?:fonts\.gstatic\.com|assets\/fonts)/,
+  /assets\/fonts/,
   workbox.strategies.cacheFirst({
     cacheName: 'fonts',
     plugins: [
@@ -66,7 +66,7 @@ workbox.routing.registerRoute(
   'GET',
 );
 workbox.routing.registerRoute(
-  /(?:styles|assets\/locales|components\/(?:[0-9]+|app)\.js$)/,
+  /assets\/locales/,
   workbox.strategies.staleWhileRevalidate(),
   'GET',
 );
