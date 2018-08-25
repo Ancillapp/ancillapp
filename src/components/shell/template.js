@@ -58,8 +58,10 @@ export default function template({
       <home-page class="page" active?="${page === 'home'}"></home-page>
       <ancillas-page class="page" active?="${page === 'ancillas'}"></ancillas-page>
       <songs-page class="page" active?="${page === 'songs'}" subroute="${_subroute}"></songs-page>
-      <my-view3 class="page" active?="${page === 'view3'}"></my-view3>
-      <my-view404 class="page" active?="${page === 'view404'}"></my-view404>
+      <breviary-page class="page" active?="${page === 'breviary'}"></breviary-page>
+      <prayers-page class="page" active?="${page === 'prayers'}"></prayers-page>
+      <settings-page class="page" active?="${page === 'settings'}"></settings-page>
+      <info-page class="page" active?="${page === 'info'}"></info-page>
     </main>
     
     <snack-bar active?="${_showUpdateNotification}">
