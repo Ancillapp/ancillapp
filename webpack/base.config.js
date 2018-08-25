@@ -16,7 +16,7 @@ module.exports = {
     filename: 'components/[name].js',
     chunkFilename: 'components/[id].js',
     path: resolve(__dirname, '../build'),
-    pathinfo: false,
+    pathinfo: !!process.env.DEBUG,
     crossOriginLoading: 'anonymous',
     globalObject: 'self',
   },
@@ -85,7 +85,7 @@ module.exports = {
       // TODO: import Workbox from local. See https://github.com/GoogleChrome/workbox/issues/1596
       // importWorkboxFrom: 'local',
     }),
-    ...process.env.ENABLE_BUNDLE_ANALYZER ? [
+    ...process.env.DEBUG ? [
       new BundleAnalyzerPlugin({
         analyzerHost: 'localhost',
         analyzerPort: 8081,
