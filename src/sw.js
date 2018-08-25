@@ -65,8 +65,3 @@ workbox.routing.registerRoute(
   }),
   'GET',
 );
-workbox.routing.registerRoute(
-  /assets\/locales/,
-  workbox.strategies.staleWhileRevalidate(),
-  'GET',
-);
