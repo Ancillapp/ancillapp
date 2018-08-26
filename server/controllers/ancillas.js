@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const { OAuth2Client } = require('google-auth-library');
+const mongo = require('../services/mongodb');
 const bucket = require('../services/storage');
 const router = new Router();
 
@@ -23,6 +25,40 @@ router.get('/:yyyymm', (req, res) => {
         data: 'Not Found',
       });
     }).pipe(res);
+});
+
+router.post('/', async (req, res) => {
+  if (
+    !req.body ||
+    !req.body.period) {
+    res.status(400).json({
+      status: 400,
+      data: 'Bad Request',
+    });
+    return;
+  }
+  const db = await mongo;
+  // We want to make sure we only add the necessary data to the DB
+  const code = `${req.body.special ? 'S' : ''}${req.body.period}`;
+  const ancilla = {
+    code,
+    period: req.body.period,
+    ...req.body.special ? {
+      special: true,
+    } : {},
+  };
+  await Promise.all([
+    db.collection('ancillas').insertOne(ancilla),
+    /* notifications.sendNotification(subscription, JSON.stringify({
+      title: 'Perfetto!',
+      body: 'Sei stato registrato correttamente!',
+    })), */
+    // TODO: insert image into bucket
+  ]);
+  res.json({
+    status: 200,
+    data: 'OK',
+  });
 });
 
 module.exports = router;
