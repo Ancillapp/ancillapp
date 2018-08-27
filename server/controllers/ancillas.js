@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const { OAuth2Client } = require('google-auth-library');
 const mongo = require('../services/mongodb');
 const bucket = require('../services/storage');
 const multer = require('multer');
