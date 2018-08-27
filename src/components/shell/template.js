@@ -16,7 +16,7 @@ export default function template() {
     ${styles}
   
     <!-- Header -->
-    <app-header condenses reveals effects="waterfall" id="header">
+    <app-header condenses reveals fixed?="${this.narrow}" effects="waterfall" id="header">
       <app-toolbar class="toolbar-top">
         <button class="menu-btn" title="${this.localize('menu')}"
           on-click="${() => this._updateDrawerState(!this._drawerOpened)}">
