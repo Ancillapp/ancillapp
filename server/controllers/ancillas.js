@@ -2,7 +2,10 @@ const { Router } = require('express');
 const { OAuth2Client } = require('google-auth-library');
 const mongo = require('../services/mongodb');
 const bucket = require('../services/storage');
+const multer = require('multer');
+const notifications = require('../services/notifications');
 const router = new Router();
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/', async (req, res) => {
   const [files] = await bucket.getFiles({
@@ -27,10 +30,12 @@ router.get('/:yyyymm', (req, res) => {
     }).pipe(res);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
   if (
     !req.body ||
-    !req.body.period) {
+    !req.body.period ||
+    !req.file ||
+    !req.file.buffer) {
     res.status(400).json({
       status: 400,
       data: 'Bad Request',
@@ -47,18 +52,38 @@ router.post('/', async (req, res) => {
       special: true,
     } : {},
   };
-  await Promise.all([
+  // Insert the ancilla into MongoDB and save its file into the bucket
+  const [subscriptions] = await Promise.all([
+    db.collection('subscriptions').find().toArray(),
     db.collection('ancillas').insertOne(ancilla),
-    /* notifications.sendNotification(subscription, JSON.stringify({
-      title: 'Perfetto!',
-      body: 'Sei stato registrato correttamente!',
-    })), */
-    // TODO: insert image into bucket
+    bucket.file(`ancillas/${code}`).save(req.file.buffer),
   ]);
+  // We successfully uploaded the Ancilla, so we can already give a
+  // successful answer to the user.
   res.json({
     status: 200,
     data: 'OK',
   });
+  // Now that we know that the file has been uploaded and the info has been
+  // saved on MongoDB, we can send a notification to the subscribed users.
+  // If we fail to send a notification, most probably it means that the user
+  // revoked the permission, so we remove its subscription from the DB.
+  // If that fails, we just ignore it, as we don't want to fail sending the
+  // notifications for just one error.
+  await subscriptions.map((subscription) =>
+    notifications.sendNotification(subscription, JSON.stringify({
+      title: 'È uscito un nuovo Ancilla Domini!',
+      body: `Edizione ${ancilla.special ? 'speciale' : 'ordinaria'} del ${ancilla.period}`,
+      actions: [{
+        action: 'dismiss',
+        title: 'Ignora',
+      }, {
+        action: 'latest-ancilla',
+        title: 'Leggi ora',
+      }],
+    })).catch(() =>
+      db.collection('subscriptions').findOneAndDelete(subscription))
+      .catch(() => null));
 });
 
 module.exports = router;
