@@ -12,11 +12,15 @@ if (process.env.GOOGLE_AUTH_DOMAINS) {
 
 const authMiddleware = () => async (req, res, next) => {
   try {
-    if (!req.header.authorization || !/ /g.test(req.header.authorization)) {
+    if (!req.header.authorization) {
+      throw new Error();
+    }
+    const [, idToken] = /Bearer (.+)/g.exec(req.header.authorization);
+    if (!idToken) {
       throw new Error();
     }
     const ticket = await client.verifyIdToken({
-      idToken: '',
+      idToken,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
     const payload = ticket.getPayload();
