@@ -3,6 +3,7 @@ const mongo = require('../services/mongodb');
 const bucket = require('../services/storage');
 const multer = require('multer');
 const notifications = require('../services/notifications');
+const auth = require('../services/auth');
 const router = new Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -29,7 +30,7 @@ router.get('/:yyyymm', (req, res) => {
     }).pipe(res);
 });
 
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', auth(), upload.single('image'), async (req, res) => {
   if (
     !req.body ||
     !req.body.period ||
