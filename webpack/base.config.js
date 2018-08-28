@@ -9,7 +9,6 @@ module.exports = {
   cache: true,
   context: resolve(__dirname, '..'),
   entry: {
-    'wc/webcomponents-loader': './node_modules/@webcomponents/webcomponentsjs/webcomponents-loader',
     'app': './src/index',
   },
   output: {
@@ -63,12 +62,6 @@ module.exports = {
       {
         from: resolve(__dirname, '../src/assets'),
         to: 'assets',
-      },
-      // Web Components polyfills
-      {
-        from: resolve(__dirname, '../node_modules/@webcomponents/webcomponentsjs/bundles/**/*'),
-        to: './components/wc/bundles',
-        flatten: true,
       },
     ]),
     new MiniCssExtractPlugin({

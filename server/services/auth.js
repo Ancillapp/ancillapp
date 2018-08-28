@@ -30,6 +30,7 @@ const authMiddleware = () => async (req, res, next) => {
     res.locals.user = payload;
     next();
   } catch (e) {
+    console.error(e);
     res.status(403).json({
       status: 403,
       data: 'Forbidden',

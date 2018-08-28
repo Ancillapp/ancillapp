@@ -32,6 +32,7 @@ router.use((req, res, next) => {
   try {
     next();
   } catch (e) {
+    console.error(e);
     res.status(500).json({
       status: 500,
       data: 'Internal Server Error',
