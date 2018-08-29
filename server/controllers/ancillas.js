@@ -8,13 +8,11 @@ const router = new Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/', async (req, res) => {
-  const [files] = await bucket.getFiles({
-    prefix: 'ancillas',
-    delimiter: 'thumbs',
-  });
+  const db = await mongo;
+  const ancillas = await db.collection('ancillas').find().toArray();
   res.json({
     status: 200,
-    data: files.slice(1).map(({ name }) => name.slice(9, 16)),
+    data: ancillas,
   });
 });
 
