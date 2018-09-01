@@ -24,10 +24,10 @@ export default function template() {
       <div class="ancillas-container">
         ${ancillas.map(({ period, special }) => html`
           <a
-            href="https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/${period}.pdf"
+            href="https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/${special ? 'S' : ''}${period}.pdf"
             title="${this.localize('ancilla-title', { period, special })}"
             class="ancilla">
-            <div style$="background-image: url('https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/thumbs/${period}.jpg')"></div>
+            <div style$="background-image: url('https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/thumbs/${special ? 'S' : ''}${period}.jpg')"></div>
           </a>
         `)}
       </div>

@@ -44,7 +44,6 @@ router.post('/', auth(), upload.single('image'), async (req, res) => {
   // We want to make sure we only add the necessary data to the DB
   const code = `${req.body.special ? 'S' : ''}${req.body.period}`;
   const ancilla = {
-    code,
     period: req.body.period,
     ...req.body.special ? {
       special: true,
