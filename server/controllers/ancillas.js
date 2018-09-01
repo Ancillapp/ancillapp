@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
   });
 });
 
-router.get('/:yyyymm', (req, res) => {
+router.get('/:code', (req, res) => {
   bucket
-    .file(`ancillas/${req.params.yyyymm}.pdf`)
+    .file(`ancillas/${req.params.code}.pdf`)
     .createReadStream()
     .on('error', () => {
       res.status(404).json({
