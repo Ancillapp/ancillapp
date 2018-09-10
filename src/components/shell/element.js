@@ -23,7 +23,7 @@ class AncillappShell extends LocalizedLitElement {
   constructor() {
     super();
     setPassiveTouchGestures(true);
-    const userLocale = window.navigator.language.substring(0, 2);
+    const userLocale = localStorage.getItem('language') || window.navigator.language.substring(0, 2);
     this.globalLocale = AncillappShell.supportedLanguages.includes(userLocale) ? userLocale : 'it';
     this.loadResourceForLocale(`/assets/locales/shell/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender());
