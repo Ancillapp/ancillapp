@@ -28,6 +28,18 @@ router.get('/:code', (req, res) => {
     }).pipe(res);
 });
 
+router.get('/:code/thumb', (req, res) => {
+  bucket
+    .file(`ancillas/thumbs/${req.params.code}.jpg`)
+    .createReadStream()
+    .on('error', () => {
+      res.status(404).json({
+        status: 404,
+        data: 'Not Found',
+      });
+    }).pipe(res);
+});
+
 router.post('/', auth(), upload.single('image'), async (req, res) => {
   if (
     !req.body ||
