@@ -24,7 +24,7 @@ export default function template() {
       <div class="ancillas-container">
         ${ancillas.map(({ period, special }) => html`
           <a
-            href="https://storage.googleapis.com/ffb-ancillapp.appspot.com/ancillas/${special ? 'S' : ''}${period}.pdf"
+            href="/ancillas/${special ? 'S' : ''}${period}"
             title="${this.localize('ancilla-title', { period, special })}"
             class="ancilla">
             <div style$="background-image: url('/api/ancillas/${special ? 'S' : ''}${period}/thumb')"></div>

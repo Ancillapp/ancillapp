@@ -55,7 +55,7 @@ export default function template() {
     <!-- Main content -->
     <main role="main" class="main-content">
       <home-page class="page" active?="${this.page === 'home'}"></home-page>
-      <ancillas-page class="page" active?="${this.page === 'ancillas'}"></ancillas-page>
+      <ancillas-page class="page" active?="${this.page === 'ancillas'}" subroute="${this._subroute}"></ancillas-page>
       <songs-page class="page" active?="${this.page === 'songs'}" subroute="${this._subroute}"></songs-page>
       <breviary-page class="page" active?="${this.page === 'breviary'}"></breviary-page>
       <prayers-page class="page" active?="${this.page === 'prayers'}"></prayers-page>

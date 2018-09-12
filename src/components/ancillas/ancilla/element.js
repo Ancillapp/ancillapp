@@ -1,4 +1,5 @@
 import { PageViewElement } from '../../page-view-element';
+import pdfjs from 'pdfjs-dist';
 import template from './template';
 
 class AncillaPage extends PageViewElement {
@@ -16,6 +17,8 @@ class AncillaPage extends PageViewElement {
             .then(({ data }) => data);
       }
     }
+    pdfjs.getDocument(`/api/ancillas/${this.ancilla}`)
+      .then(console.log);
     this._ancilla = this._ancillaPromises[this.ancilla];
     return this::template();
   }
