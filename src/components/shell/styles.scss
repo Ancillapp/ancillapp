@@ -156,7 +156,6 @@ app-drawer {
   min-height: 100%;
   background: var(--background-color);
   will-change: width;
-  transition: .3s width;
 }
 
 snack-bar mwc-button {
@@ -183,5 +182,4 @@ snack-bar mwc-button {
     }
   }
 }
-
 /* stylelint-enable unit-whitelist */
