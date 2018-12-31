@@ -148,15 +148,15 @@ app-drawer {
 }
 
 .main-content {
-  position: relative;
+  position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   padding: 5.5rem 1.5rem 1.5rem 1.5rem;
   width: 100%;
   min-height: 100%;
   background: var(--background-color);
-  will-change: width, left;
-  transition: .3s width, .3s left;
+  will-change: width;
+  transition: .3s width;
 }
 
 snack-bar mwc-button {
@@ -179,7 +179,6 @@ snack-bar mwc-button {
 
   :host([drawer-opened]) {
     .main-content {
-      left: 256px;
       width: calc(100% - 256px);
     }
   }
