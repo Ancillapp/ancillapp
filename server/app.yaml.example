@@ -1,4 +1,4 @@
-runtime: nodejs8
+runtime: nodejs10
 env_variables:
   PORT: 8080
   MONGO_URI: 'mongodb://user:pass@server:port'
