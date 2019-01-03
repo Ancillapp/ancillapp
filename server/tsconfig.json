@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "lib": ["esnext"],
+    "module": "commonjs",
+    "target": "es2018",
+    "strict": true,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "typings.d.ts",
+    "src/**/*.ts"
+  ]
+}
