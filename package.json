@@ -10,6 +10,7 @@
     "gulp": "gulp -f gulp/config.ts --cwd .",
     "server": "yarn --cwd server",
     "start": "cross-env BROWSERSLIST=\"edge > 12\" yarn server dev",
+    "start:sw": "cross-env ENABLE_SW=true yarn start",
     "build": "yarn gulp build",
     "lint": "yarn gulp lint",
     "deploy": "gcloud app deploy server/app.yaml -q",

@@ -80,11 +80,13 @@ const config: webpack.Configuration = {
     new ScriptExtHtmlPlugin({
       defaultAttribute: 'defer',
     }),
-    new InjectManifestPlugin({
-      swSrc: resolve(__dirname, '../src/service-worker.js'),
-      swDest: './service-worker.js',
-      exclude: [/hot-update/, /images\/icons/, /browserconfig\.xml/, /robots\.txt/, /\.LICENSE$/],
-    }),
+    ...process.env.ENABLE_SW ? [
+      new InjectManifestPlugin({
+        swSrc: resolve(__dirname, '../src/service-worker.js'),
+        swDest: './service-worker.js',
+        exclude: [/hot-update/, /images\/icons/, /browserconfig\.xml/, /robots\.txt/, /\.LICENSE$/],
+      }),
+    ] : [],
   ],
 };
 
