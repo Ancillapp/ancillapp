@@ -12,7 +12,7 @@ import { apiController } from './controllers/api.controller';
 const app = new Koa();
 const router = new Router();
 
-router.use('/api', apiController);
+router.use('/api', ...apiController);
 
 koaWebpack({ config })
   .then(webpack =>
