@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "node lib/main.js",
-    "dev": "nodemon -w 'src/**/*' -e ts,tsx --exec ts-node src/dev"
+    "dev": "nodemon -w 'src/**/*' -e ts,tsx --exec 'ts-node --files' src/dev"
   },
   "dependencies": {
     "@koa/cors": "^2.2.3",
