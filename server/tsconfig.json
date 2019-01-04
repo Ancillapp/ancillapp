@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "rootDir": "src",
-    "lib": ["esnext"],
+    "outDir": "lib",
+    "lib": ["esnext", "dom"],
     "module": "commonjs",
     "target": "es2018",
     "strict": true,
@@ -12,5 +13,9 @@
   "include": [
     "typings.d.ts",
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/dev.ts"
   ]
 }

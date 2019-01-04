@@ -14,7 +14,7 @@ const config: webpack.Configuration = {
   output: {
     filename: 'components/[name].js',
     chunkFilename: 'components/[id].js',
-    path: resolve(__dirname, '../build', process.env.BUILD_NAME || ''),
+    path: resolve(__dirname, '../server/build', process.env.BUILD_NAME || ''),
     publicPath: '/',
     pathinfo: false,
     crossOriginLoading: 'anonymous',

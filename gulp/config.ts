@@ -8,6 +8,7 @@ import stylelint from 'gulp-stylelint';
 import tslint from 'gulp-tslint';
 import { resolve as resolvePath } from 'path';
 import { ConfigHelper } from './helpers';
+import { exec } from 'child_process';
 
 /* LINTING TASKS */
 task('lint:scripts', () =>
@@ -46,10 +47,23 @@ task('build:es5', () =>
 task('build:es6', () =>
   configHelper.createBuild('es6', 'edge > 12', ['es2015']));
 
-task('write-polymer-config', (cb) =>
-  writeFile(resolvePath(__dirname, '../build/polymer.json'), configHelper.output, cb));
+task('build:server', () => new Promise((resolve, reject) =>
+  // tslint:disable-next-line:max-line-length
+  exec('yarn server build', (err) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve();
+    }
+  })));
 
-task('build', series(
-  parallel('build:es5', 'build:es6'),
-  'write-polymer-config',
+task('write-polymer-config', (cb) =>
+  writeFile(resolvePath(__dirname, '../server/build/polymer.json'), configHelper.output, cb));
+
+task('build', parallel(
+  'build:server',
+  series(
+    parallel('build:es5', 'build:es6'),
+    'write-polymer-config',
+  ),
 ));
