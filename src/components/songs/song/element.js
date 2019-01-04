@@ -18,7 +18,7 @@ class SongPage extends PageViewElement {
 
   constructor() {
     super();
-    this.loadResourceForLocale(`/assets/locales/songs/song/${this.globalLocale}.ftl`, this.globalLocale)
+    this.loadResourceForLocale(`locales/songs/song/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender());
     this._showChords = localStorage.getItem('show-chords') === 'true';
     this._transposeDelta = 0;

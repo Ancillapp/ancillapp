@@ -5,7 +5,7 @@ import template from './template';
 class HomePage extends PageViewElement {
   constructor() {
     super();
-    this.loadResourceForLocale(`/assets/locales/home/${this.globalLocale}.ftl`, this.globalLocale)
+    this.loadResourceForLocale(`locales/home/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender());
     this._today = this.yyyymmdd(new Date());
   }

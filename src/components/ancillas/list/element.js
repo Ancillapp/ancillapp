@@ -8,7 +8,7 @@ class AncillasList extends PageViewElement {
 
   constructor() {
     super();
-    this.loadResourceForLocale(`/assets/locales/ancillas/list/${this.globalLocale}.ftl`, this.globalLocale)
+    this.loadResourceForLocale(`locales/ancillas/list/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender());
     if (Notification.permission === 'default' && !localStorage.getItem('no-notifications-prompt')) {
       this._needUserNotificationsPermission = true;
