@@ -35,7 +35,7 @@ const config: webpack.Configuration = smartMerge({
     ],
   },
   plugins: [
-    new CleanPlugin([`build/${process.env.BUILD_NAME || ''}`], { root: resolve(__dirname, '..') }),
+    new CleanPlugin([`server/build/${process.env.BUILD_NAME || ''}`], { root: resolve(__dirname, '..') }),
     new HtmlPlugin({
       minify: {
         collapseWhitespace: true,

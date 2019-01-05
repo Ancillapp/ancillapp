@@ -15,7 +15,7 @@ const config: webpack.Configuration = {
     filename: 'components/[name].js',
     chunkFilename: 'components/[id].js',
     path: resolve(__dirname, '../server/build', process.env.BUILD_NAME || ''),
-    publicPath: '/',
+    publicPath: process.env.BUILD_NAME ? `/${process.env.BUILD_NAME}/` : '/',
     pathinfo: false,
     crossOriginLoading: 'anonymous',
     globalObject: 'self',
@@ -71,6 +71,10 @@ const config: webpack.Configuration = {
   },
   plugins: [
     new CopyPlugin([
+      {
+        from: resolve(__dirname, '../node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js'),
+        to: 'components',
+      },
       // Assets
       {
         from: resolve(__dirname, '../src/assets'),
