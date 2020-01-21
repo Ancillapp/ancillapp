@@ -1,0 +1,6 @@
+*.log
+.firebase*
+node_modules/
+pwa/dist/
+functions/lib/
+.env
