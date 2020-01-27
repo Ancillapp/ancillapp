@@ -8,7 +8,7 @@ import { Configuration } from 'webpack';
 const config: Configuration = {
   cache: true,
   context: path.resolve(__dirname, '../src'),
-  entry: path.resolve(__dirname, '../src/components/shell/shell.component'),
+  entry: path.resolve(__dirname, '../src/index'),
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, '../src/components/'),
