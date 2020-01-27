@@ -10,8 +10,11 @@
     "module": "commonjs",
     "target": "esnext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "lib": [
-      "esnext"
+      "esnext",
+      "dom",
+      "dom.iterable"
     ],
   }
 }
