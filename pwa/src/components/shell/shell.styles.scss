@@ -1,0 +1,94 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  // Needed by Material Design Components
+  --mdc-theme-primary: var(--ancillapp-primary-color);
+  --mdc-theme-secondary: var(--ancillapp-accent-color);
+  --mdc-theme-surface: var(--ancillapp-card-color);
+  --mdc-theme-background: var(--ancillapp-background-color);
+
+  // Constants
+  --ancillapp-text-font: 'Rosario';
+  --ancillapp-display-font: 'Humana Serif';
+  --ancillapp-icon-font: 'Material Icons';
+  --ancillapp-border-radius-sm: 0.25rem;
+  --ancillapp-border-radius-md: 0.5rem;
+  --ancillapp-border-radius-lg: 1rem;
+
+  // Variables (different for each theme)
+  --ancillapp-primary-color: #6f8ba3;
+  --ancillapp-accent-color: #d50000;
+  --ancillapp-background-color: #fafafa;
+  --ancillapp-drawer-color: #f5f5f5;
+  --ancillapp-card-color: #fff;
+  --ancillapp-primary-opacity: 0.87;
+  --ancillapp-secondary-opacity: 0.6;
+  --ancillapp-disabled-opacity: 0.38;
+  --ancillapp-divider-opacity: 0.12;
+  --ancillapp-backdrop-opacity: 0.54;
+  --ancillapp-primary-text-color: rgba(
+    0,
+    0,
+    0,
+    var(--ancillapp-primary-opacity)
+  );
+  --ancillapp-secondary-text-color: rgba(
+    0,
+    0,
+    0,
+    var(--ancillapp-secondary-opacity)
+  );
+  --ancillapp-disabled-text-color: rgba(
+    0,
+    0,
+    0,
+    var(--ancillapp-disabled-opacity)
+  );
+  --ancillapp-divider-color: rgba(0, 0, 0, var(--ancillapp-divider-opacity));
+  --ancillapp-backdrop-color: rgba(0, 0, 0, var(--ancillapp-backdrop-opacity));
+  --ancillapp-text-on-accent-color: #fff;
+  --ancillapp-error-text-color: #b00020;
+}
+
+:host([theme='dark']) {
+  --ancillapp-primary-color: #000;
+  --ancillapp-accent-color: #1a73e8;
+  --ancillapp-background-color: #303030;
+  --ancillapp-card-color: #424242;
+  --ancillapp-bars-color: #212121;
+  --ancillapp-primary-opacity: 1;
+  --ancillapp-secondary-opacity: 0.7;
+  --ancillapp-disabled-opacity: 0.5;
+  --ancillapp-divider-opacity: 0.12;
+  --ancillapp-backdrop-opacity: 0.54;
+  --ancillapp-primary-text-color: rgba(
+    255,
+    255,
+    255,
+    var(--ancillapp-primary-opacity)
+  );
+  --ancillapp-secondary-text-color: rgba(
+    255,
+    255,
+    255,
+    var(--ancillapp-secondary-opacity)
+  );
+  --ancillapp-disabled-text-color: rgba(
+    255,
+    255,
+    255,
+    var(--ancillapp-disabled-opacity)
+  );
+  --ancillapp-divider-color: rgba(
+    255,
+    255,
+    255,
+    var(--ancillapp-divider-opacity)
+  );
+  --ancillapp-backdrop-color: rgba(0, 0, 0, var(--ancillapp-backdrop-opacity));
+  --ancillapp-text-on-accent-color: #fff;
+  --ancillapp-error-text-color: #b00020;
+}

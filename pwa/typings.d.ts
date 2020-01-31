@@ -40,3 +40,10 @@ declare module 'terser-webpack-plugin' {
 }
 
 declare module 'html-webpack-plugin';
+
+declare module '*.styles' {
+  import { CSSResult } from 'lit-element';
+
+  const content: CSSResult;
+  export default content;
+}
