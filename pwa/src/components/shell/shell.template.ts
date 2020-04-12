@@ -23,25 +23,27 @@ export default function template(this: Shell) {
         <mwc-list activatable class="top-nav">
           ${this._topNavPages.map(
             (page) => html`
-              <mwc-list-item
-                ?selected="${this._page === page}"
-                ?activated="${this._page === page}"
-                graphic="icon"
-              >
-                <div slot="graphic">
-                  ${(icons as { [key: string]: SVGTemplateResult })[
-                    `${page}Icon`
-                  ]}
-                </div>
-                <slot
-                  >${(this.localeData as { [key: string]: string })?.[
-                    page
-                  ]}</slot
+              <a class="nav-link" href="/${page}">
+                <mwc-list-item
+                  ?selected="${this._page === page}"
+                  ?activated="${this._page === page}"
+                  graphic="icon"
                 >
-              </mwc-list-item>
-              ${page === 'home'
-                ? html`<li divider role="separator"></li>`
-                : nothing}
+                  <div slot="graphic">
+                    ${(icons as { [key: string]: SVGTemplateResult })[
+                      `${page}Icon`
+                    ]}
+                  </div>
+                  <slot
+                    >${(this.localeData as { [key: string]: string })?.[
+                      page
+                    ]}</slot
+                  >
+                </mwc-list-item>
+                ${page === 'home'
+                  ? html`<li divider role="separator"></li>`
+                  : nothing}
+              </a>
             `,
           )}
         </mwc-list>
@@ -49,22 +51,24 @@ export default function template(this: Shell) {
           <li divider role="separator"></li>
           ${this._bottomNavPages.map(
             (page) => html`
-              <mwc-list-item
-                ?selected="${this._page === page}"
-                ?activated="${this._page === page}"
-                graphic="icon"
-              >
-                <div slot="graphic">
-                  ${(icons as { [key: string]: SVGTemplateResult })[
-                    `${page}Icon`
-                  ]}
-                </div>
-                <slot
-                  >${(this.localeData as { [key: string]: string })?.[
-                    page
-                  ]}</slot
+              <a class="nav-link" href="/${page}">
+                <mwc-list-item
+                  ?selected="${this._page === page}"
+                  ?activated="${this._page === page}"
+                  graphic="icon"
                 >
-              </mwc-list-item>
+                  <div slot="graphic">
+                    ${(icons as { [key: string]: SVGTemplateResult })[
+                      `${page}Icon`
+                    ]}
+                  </div>
+                  <slot
+                    >${(this.localeData as { [key: string]: string })?.[
+                      page
+                    ]}</slot
+                  >
+                </mwc-list-item>
+              </a>
             `,
           )}
         </mwc-list>

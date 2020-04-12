@@ -4,7 +4,11 @@ import {
   property,
   PropertyValues,
 } from 'lit-element';
-import { installMediaQueryWatcher } from 'pwa-helpers';
+import {
+  installMediaQueryWatcher,
+  installRouter,
+  updateMetadata,
+} from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 
 import styles from './shell.styles';
@@ -21,6 +25,9 @@ export class Shell extends localize(LitElement) {
 
   @property({ type: String })
   protected _page = 'home';
+
+  @property({ type: String })
+  protected _subroute: string;
 
   @property({ type: Boolean })
   protected _drawerOpened = false;
@@ -50,9 +57,47 @@ export class Shell extends localize(LitElement) {
     );
   }
 
-  protected update(changedProperties: PropertyValues) {
-    console.log(changedProperties);
-    super.update(changedProperties);
+  protected updated(changedProperties: PropertyValues) {
+    if (changedProperties.has('_page')) {
+      const pageTitle = `Ancillapp - ${
+        (this.localeData as { [key: string]: string })?.[this._page || 'home']
+      }`;
+
+      updateMetadata({
+        title: pageTitle,
+        description: pageTitle,
+        // This object also takes an image property, that points to an img src.
+      });
+    }
+  }
+
+  protected firstUpdated() {
+    installRouter((location) => this._locationChanged(location));
+  }
+
+  protected _locationChanged(location: Location) {
+    let path = window.decodeURIComponent(location.pathname);
+    if (path === '/') {
+      // Redirect to home, replacing the history state.
+      // In this way, the user won't be trapped in the home page when trying to go back.
+      window.history.replaceState({}, '', '/home');
+      path = '/home';
+    }
+    const [page, subroute] = path.slice(1).split('/');
+    this._loadPage(page, subroute);
+    // Close the drawer - in case the *path* change came from a link in the drawer.
+    if (!this._narrow) {
+      this._updateDrawerState(false);
+    }
+  }
+
+  protected _loadPage(page: string, subroute: string) {
+    if (![...this._topNavPages, ...this._bottomNavPages].includes(page)) {
+      page = 'home';
+    }
+    import(`../${page}/${page}.component`);
+    this._page = page;
+    this._subroute = subroute;
   }
 
   protected _updateDrawerState(opened: boolean) {

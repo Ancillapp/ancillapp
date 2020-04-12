@@ -122,6 +122,10 @@ mwc-drawer .menu {
   }
 }
 
+.nav-link {
+  text-decoration: none;
+}
+
 mwc-list-item[activated] svg {
   fill: var(--mdc-theme-primary);
 }
