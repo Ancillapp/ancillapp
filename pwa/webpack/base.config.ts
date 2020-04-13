@@ -72,6 +72,10 @@ const config: Configuration = {
       {
         from: path.resolve(__dirname, '../src/assets'),
         to: 'assets',
+        transform: (content, path) =>
+          path.endsWith('.json')
+            ? JSON.stringify(JSON.parse(content.toString()))
+            : content,
       },
     ]),
     new MiniCssExtractPlugin({
