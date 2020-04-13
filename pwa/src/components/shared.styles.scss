@@ -19,11 +19,11 @@
 
 section {
   padding: 2rem 3rem;
-  background: var(--card-color);
+  background: var(--ancillapp-card-color);
   max-width: 37.5rem;
   margin: auto;
   border-radius: 0.5rem;
-  color: var(--primary-text-color);
+  color: var(--ancillapp-primary-text-color);
   box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
     0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
     0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
@@ -31,20 +31,21 @@ section {
 
 blockquote {
   font-style: italic;
-  border: 0.02rem solid var(--divider-color);
-  border-left: 0.2rem solid var(--primary-color);
+  border: 0.02rem solid var(--ancillapp-divider-color);
+  border-left: 0.2rem solid var(--ancillapp-primary-color);
   margin: 0.25rem 0 0.75rem 0;
   padding: 1rem 2rem;
   text-align: justify;
-  background: var(--background-color);
+  background: var(--ancillapp-background-color);
   border-radius: 0 0.5rem 0.5rem 0;
 }
 
 h2 {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--primary-text-color);
+  color: var(--ancillapp-primary-text-color);
   margin: 1.2rem 0 0.6rem 0;
+  font-family: var(--ancillapp-display-font);
 }
 
 h3 {
@@ -61,12 +62,12 @@ hr {
   border: 0;
   padding: 0.025rem;
   margin: 0.5rem;
-  background-color: var(--divider-color);
+  background-color: var(--ancillapp-divider-color);
 }
 
 a {
   text-decoration: none;
-  color: var(--accent-color);
+  color: var(--ancillapp-accent-color);
 
   &:hover,
   &:active {
@@ -96,11 +97,11 @@ table {
 td,
 th {
   padding: 0.25rem 0.75rem;
-  border: 0.05rem solid var(--divider-color);
+  border: 0.05rem solid var(--ancillapp-divider-color);
 }
 
 th {
-  border-bottom: 0.2rem solid var(--divider-color);
+  border-bottom: 0.2rem solid var(--ancillapp-divider-color);
   padding: 0.75rem 1rem;
 }
 
@@ -109,9 +110,9 @@ textarea {
   resize: none;
   border-radius: 0.5rem;
   display: block;
-  background: var(--background-color);
-  color: var(--primary-text-color);
-  border: 0.025rem solid var(--divider-color);
+  background: var(--ancillapp-background-color);
+  color: var(--ancillapp-primary-text-color);
+  border: 0.025rem solid var(--ancillapp-divider-color);
   box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14) inset,
     0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12) inset,
     0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2) inset;
