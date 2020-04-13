@@ -27,13 +27,16 @@ export class Shell extends localize(LitElement) {
   protected _page = 'home';
 
   @property({ type: String })
-  protected _subroute: string;
+  protected _subroute: string = '';
 
   @property({ type: Boolean })
   protected _drawerOpened = false;
 
   @property({ type: Boolean })
   protected _narrow = false;
+
+  @property({ type: Boolean })
+  protected _updateNotificationShown = false;
 
   protected readonly _topNavPages = [
     'home',
@@ -44,8 +47,11 @@ export class Shell extends localize(LitElement) {
   ];
   protected readonly _bottomNavPages = ['settings', 'info'];
 
+  private _newSw?: ServiceWorker = undefined;
+
   constructor() {
     super();
+    this._checkForUpdates();
     this._updateDrawerState(
       window.matchMedia('(min-width: 768px)').matches
         ? localStorage.getItem('drawerOpened') === 'true'
@@ -95,7 +101,7 @@ export class Shell extends localize(LitElement) {
     if (![...this._topNavPages, ...this._bottomNavPages].includes(page)) {
       page = 'home';
     }
-    import(`../${page}/${page}.component`);
+    import(`../pages/${page}/${page}.component`);
     this._page = page;
     this._subroute = subroute;
   }
@@ -105,6 +111,48 @@ export class Shell extends localize(LitElement) {
       this._drawerOpened = opened;
       localStorage.setItem('drawerOpened', `${opened}`);
     }
+  }
+
+  protected async _checkForUpdates() {
+    if (!navigator.serviceWorker.controller) {
+      return;
+    }
+    const registration = await navigator.serviceWorker.getRegistration('/');
+    if (!registration) {
+      return;
+    }
+    if (registration.waiting) {
+      this._newSw = registration.waiting;
+      this._updateNotificationShown = true;
+      return;
+    }
+    if (registration.installing) {
+      this._trackInstallation(registration.installing);
+      return;
+    }
+    registration.addEventListener('updatefound', () =>
+      this._trackInstallation(registration.installing!),
+    );
+    navigator.serviceWorker.addEventListener('controllerchange', () =>
+      window.location.reload(),
+    );
+  }
+
+  protected _trackInstallation(sw: ServiceWorker) {
+    sw.addEventListener('statechange', () => {
+      if (sw.state === 'installed') {
+        this._newSw = sw;
+        this._updateNotificationShown = true;
+      }
+    });
+  }
+
+  protected _updateApp() {
+    this._updateNotificationShown = false;
+    if (!this._newSw) {
+      return;
+    }
+    this._newSw.postMessage({ action: 'update' });
   }
 }
 

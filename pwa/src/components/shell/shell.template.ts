@@ -91,5 +91,19 @@ export default function template(this: Shell) {
         </div>
       </div>
     </mwc-drawer>
+
+    <snack-bar ?active="${this._updateNotificationShown}">
+      <div slot="text">${this.localeData?.updateAvailable}</div>
+      <div slot="actions">
+        <mwc-button
+          @click="${() => (this._updateNotificationShown = false)}"
+          label="${this.localeData?.ignore}"
+        ></mwc-button>
+        <mwc-button
+          @click="${() => this._updateApp()}"
+          label="${this.localeData?.updateNow}"
+        ></mwc-button>
+      </div>
+    </snack-bar>
   `;
 }
