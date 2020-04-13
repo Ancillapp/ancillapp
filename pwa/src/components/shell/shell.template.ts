@@ -5,10 +5,12 @@ import * as icons from '../icons';
 
 import '@material/mwc-top-app-bar';
 import '@material/mwc-drawer';
+import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import '@material/mwc-icon';
 import '@material/mwc-list/mwc-list';
 import '@material/mwc-list/mwc-list-item';
+import '../snackbar/snackbar.component';
 
 export default function template(this: Shell) {
   return html`
@@ -86,14 +88,45 @@ export default function template(this: Shell) {
               : (this.localeData as { [key: string]: string })?.[this._page]}
           </div>
         </mwc-top-app-bar>
-        <div>
-          <p>Main Content!</p>
-        </div>
+        <main>
+          <home-page
+            class="page"
+            ?active="${this._page === 'home'}"
+          ></home-page>
+          <ancillas-page
+            class="page"
+            ?active="${this._page === 'ancillas'}"
+            subroute="${this._subroute}"
+          ></ancillas-page>
+          <songs-page
+            class="page"
+            ?active="${this._page === 'songs'}"
+            subroute="${this._subroute}"
+          ></songs-page>
+          <breviary-page
+            class="page"
+            ?active="${this._page === 'breviary'}"
+          ></breviary-page>
+          <prayers-page
+            class="page"
+            ?active="${this._page === 'prayers'}"
+          ></prayers-page>
+          <settings-page
+            class="page"
+            ?active="${this._page === 'settings'}"
+            theme="${this.theme}"
+            @themechange="${console.log}"
+          ></settings-page>
+          <info-page
+            class="page"
+            ?active="${this._page === 'info'}"
+          ></info-page>
+        </main>
       </div>
     </mwc-drawer>
 
     <snack-bar ?active="${this._updateNotificationShown}">
-      <div slot="text">${this.localeData?.updateAvailable}</div>
+      <slot>${this.localeData?.updateAvailable}</slot>
       <div slot="actions">
         <mwc-button
           @click="${() => (this._updateNotificationShown = false)}"

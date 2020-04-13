@@ -107,18 +107,24 @@ mwc-top-app-bar [slot='title'] {
   }
 }
 
-mwc-drawer .menu {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+mwc-drawer {
+  .menu {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
-  > .top-nav {
-    overflow-y: auto;
-    flex: 1 1 100%;
+    > .top-nav {
+      overflow-y: auto;
+      flex: 1 1 100%;
+    }
+
+    > .bottom-nav {
+      flex: 0 0 auto;
+    }
   }
 
-  > .bottom-nav {
-    flex: 0 0 auto;
+  [slot='appContent'] {
+    height: 100%;
   }
 }
 
@@ -128,4 +134,24 @@ mwc-drawer .menu {
 
 mwc-list-item[activated] svg {
   fill: var(--mdc-theme-primary);
+}
+
+main {
+  box-sizing: border-box;
+  padding: 5.5rem 1.5rem 1.5rem 1.5rem;
+  width: 100%;
+  min-height: calc(100% - 56px);
+  background: var(--ancillapp-background-color);
+
+  @media (min-width: 600px) {
+    min-height: calc(100% - 64px);
+  }
+}
+
+snack-bar mwc-button {
+  --mdc-theme-primary: var(--ancillapp-secondary-text-color);
+
+  &:last-child {
+    --mdc-theme-primary: var(--ancillapp-accent-color);
+  }
 }
