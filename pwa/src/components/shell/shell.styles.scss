@@ -129,7 +129,11 @@ mwc-drawer {
 }
 
 .nav-link {
-  text-decoration: none;
+  &,
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
 }
 
 mwc-list-item[activated] svg {
