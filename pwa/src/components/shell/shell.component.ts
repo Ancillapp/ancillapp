@@ -64,7 +64,7 @@ export class Shell extends localize(LitElement) {
   }
 
   protected updated(changedProperties: PropertyValues) {
-    if (changedProperties.has('_page')) {
+    if (changedProperties.size < 1 || changedProperties.has('_page')) {
       const pageTitle = `Ancillapp - ${
         (this.localeData as { [key: string]: string })?.[this._page || 'home']
       }`;
