@@ -1,0 +1,22 @@
+{
+  "menu": "Menù",
+  "home": "Home",
+  "ancillas": "Ancilla Domini",
+  "songs": "Canti",
+  "breviary": "Breviario",
+  "prayers": "Preghiere",
+  "settings": "Impostazioni",
+  "info": "Informazioni",
+  "updateAvailable": "Aggiornamento disponibile!",
+  "ignore": "Ignora",
+  "updateNow": "Aggiorna ora",
+  "peaceAndGood": "Pace e Bene!",
+  "prayLiturgy": "Prega la Liturgia delle Ore",
+  "prayDailyPrayers": "Prega le preghiere giornaliere",
+  "singFraternitySongs": "Canta i canti della Fraternità",
+  "readLatestAncilla": "Sfoglia l'ultimo Ancilla Domini",
+  "newAncillaNotification": "Vuoi ricevere una notifica ogni volta che viene pubblicato un nuovo Ancilla Domini?",
+  "dontAskAnymore": "Non chiedermelo più",
+  "noThanks": "No, grazie",
+  "sure": "Certo!"
+}
