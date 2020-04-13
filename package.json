@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "npm --prefix pwa start",
-    "build": "npm --prefix pwa build",
+    "build": "npm --prefix pwa run build",
     "postinstall": "lerna bootstrap --hoist --strict"
   },
   "devDependencies": {
