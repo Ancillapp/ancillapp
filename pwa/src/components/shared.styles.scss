@@ -1,0 +1,140 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+  box-sizing: border-box;
+}
+
+.page {
+  display: none;
+
+  &[active] {
+    display: block;
+  }
+}
+
+section {
+  padding: 2rem 3rem;
+  background: var(--card-color);
+  max-width: 37.5rem;
+  margin: auto;
+  border-radius: 0.5rem;
+  color: var(--primary-text-color);
+  box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
+    0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
+    0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
+}
+
+blockquote {
+  font-style: italic;
+  border: 0.02rem solid var(--divider-color);
+  border-left: 0.2rem solid var(--primary-color);
+  margin: 0.25rem 0 0.75rem 0;
+  padding: 1rem 2rem;
+  text-align: justify;
+  background: var(--background-color);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-text-color);
+  margin: 1.2rem 0 0.6rem 0;
+}
+
+h3 {
+  margin: 1rem 0 0.5rem 0;
+}
+
+p {
+  text-align: justify;
+  margin: 0.75rem 0;
+}
+
+hr {
+  width: calc(100% - 1rem);
+  border: 0;
+  padding: 0.025rem;
+  margin: 0.5rem;
+  background-color: var(--divider-color);
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
+}
+
+.responsive-table {
+  width: 100%;
+  overflow-x: auto;
+  box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
+    0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
+    0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: none;
+  margin: 0;
+  border-radius: 0.5rem;
+}
+
+td,
+th {
+  padding: 0.25rem 0.75rem;
+  border: 0.05rem solid var(--divider-color);
+}
+
+th {
+  border-bottom: 0.2rem solid var(--divider-color);
+  padding: 0.75rem 1rem;
+}
+
+input,
+textarea {
+  resize: none;
+  border-radius: 0.5rem;
+  display: block;
+  background: var(--background-color);
+  color: var(--primary-text-color);
+  border: 0.025rem solid var(--divider-color);
+  box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14) inset,
+    0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12) inset,
+    0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2) inset;
+  font-size: 0.75rem;
+  margin: 0.5rem 0;
+  padding: 0.4rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+form > * {
+  width: 100%;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &,
+  * {
+    cursor: pointer;
+  }
+}

@@ -12,9 +12,9 @@
   --mdc-typography-font-family: var(--ancillapp-text-font);
 
   // Constants
-  --ancillapp-text-font: 'Rosario';
-  --ancillapp-display-font: 'Humana Serif';
-  --ancillapp-icon-font: 'Material Icons';
+  --ancillapp-text-font: 'Rosario', 'Roboto', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --ancillapp-display-font: 'Humana Serif', 'Times New Roman', serif;
   --ancillapp-border-radius-sm: 0.25rem;
   --ancillapp-border-radius-md: 0.5rem;
   --ancillapp-border-radius-lg: 1rem;
@@ -101,7 +101,7 @@ mwc-top-app-bar [slot='title'] {
   font-style: italic;
 
   svg {
-    height: 24px;
+    height: 36px;
     padding: 0 10px 12px 0;
     fill: #fff;
   }
@@ -137,7 +137,6 @@ mwc-list-item[activated] svg {
 }
 
 main {
-  box-sizing: border-box;
   padding: 5.5rem 1.5rem 1.5rem 1.5rem;
   width: 100%;
   min-height: calc(100% - 56px);

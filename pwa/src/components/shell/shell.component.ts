@@ -11,12 +11,13 @@ import {
 } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 
+import sharedStyles from '../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
 @customElement('ancillapp-shell')
 export class Shell extends localize(LitElement) {
-  public static styles = styles;
+  public static styles = [sharedStyles, styles];
 
   protected render = template;
 
