@@ -158,6 +158,6 @@ export class Shell extends localize(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'gad-shell': Shell;
+    'ancillapp-shell': Shell;
   }
 }
