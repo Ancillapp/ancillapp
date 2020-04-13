@@ -3,7 +3,7 @@ import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ScriptExtHtmlPlugin from 'script-ext-html-webpack-plugin';
-import { Configuration } from 'webpack';
+import { Configuration, EnvironmentPlugin } from 'webpack';
 
 const config: Configuration = {
   cache: true,
@@ -67,6 +67,7 @@ const config: Configuration = {
     ],
   },
   plugins: [
+    new EnvironmentPlugin(['NODE_ENV']),
     new CopyPlugin([
       // Assets
       {

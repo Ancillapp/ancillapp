@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --config webpack/dev.config.ts"
+    "start": "NODE_ENV=development webpack-dev-server --config webpack/dev.config.ts",
+    "build": "NODE_ENV=production webpack --config webpack/prod.config.ts"
   },
   "dependencies": {
     "@material/mwc-button": "^0.14.1",
@@ -16,7 +17,12 @@
     "@material/mwc-top-app-bar": "^0.14.1",
     "@webcomponents/webcomponentsjs": "^2.4.3",
     "lit-element": "^2.3.1",
-    "pwa-helpers": "^0.9.1"
+    "pwa-helpers": "^0.9.1",
+    "workbox-cacheable-response": "^5.1.2",
+    "workbox-core": "^5.1.2",
+    "workbox-precaching": "^5.1.2",
+    "workbox-routing": "^5.1.2",
+    "workbox-strategies": "^5.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -32,6 +38,7 @@
     "@types/webpack": "^4.41.10",
     "@types/webpack-dev-server": "^3.10.1",
     "@types/webpack-merge": "^4.1.5",
+    "@types/workbox-webpack-plugin": "^5.0.0",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
     "babel-plugin-template-html-minifier": "^4.1.0",
@@ -50,6 +57,7 @@
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "workbox-webpack-plugin": "^5.1.2"
   }
 }
