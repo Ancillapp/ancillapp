@@ -9,6 +9,7 @@
     "start": "webpack-dev-server --config webpack/dev.config.ts"
   },
   "dependencies": {
+    "@material/mwc-button": "^0.14.1",
     "@material/mwc-drawer": "^0.14.1",
     "@material/mwc-icon-button": "^0.14.1",
     "@material/mwc-list": "^0.14.1",
