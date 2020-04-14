@@ -8,7 +8,8 @@
   "scripts": {
     "start": "npm --prefix pwa start",
     "build": "npm --prefix pwa run build",
-    "postinstall": "lerna bootstrap --hoist --strict"
+    "postinstall": "lerna bootstrap --hoist --strict",
+    "start:functions": "npm --prefix functions start"
   },
   "devDependencies": {
     "lerna": "^3.20.2",
