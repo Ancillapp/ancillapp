@@ -1,9 +1,11 @@
 import * as functions from 'firebase-functions';
-import { mongoClient } from './helpers/mongo';
+import { mongoDb } from './helpers/mongo';
 
 export const getAncillas = functions.https.onRequest(async (_, res) => {
-  const client = await mongoClient;
-  const ancillasCollection = client.db('Main').collection('ancillas');
+  res.set('Access-Control-Allow-Origin', '*');
+
+  const db = await mongoDb;
+  const ancillasCollection = db.collection('ancillas');
 
   const ancillas = await ancillasCollection
     .find(
@@ -18,5 +20,16 @@ export const getAncillas = functions.https.onRequest(async (_, res) => {
     )
     .toArray();
 
-  res.json(ancillas);
+  res.json(
+    ancillas.map(({ code, ...rest }) => ({
+      ...rest,
+      code,
+      link: `https://firebasestorage.googleapis.com/v0/b/ancillas/o/processed%2F${encodeURIComponent(
+        code,
+      )}.pdf?alt=media`,
+      thumbnail: `https://firebasestorage.googleapis.com/v0/b/ancillas/o/processed%2F${encodeURIComponent(
+        code,
+      )}.jpg?alt=media`,
+    })),
+  );
 });

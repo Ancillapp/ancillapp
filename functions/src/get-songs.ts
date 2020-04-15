@@ -1,9 +1,9 @@
 import * as functions from 'firebase-functions';
-import { mongoClient } from './helpers/mongo';
+import { mongoDb } from './helpers/mongo';
 
 export const getSongs = functions.https.onRequest(async (_, res) => {
-  const client = await mongoClient;
-  const songsCollection = client.db('Main').collection('songs');
+  const db = await mongoDb;
+  const songsCollection = db.collection('songs');
 
   const songs = await songsCollection
     .find(

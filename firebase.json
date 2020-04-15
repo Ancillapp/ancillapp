@@ -15,6 +15,10 @@
         "function": "getAncillas"
       },
       {
+        "source": "/api/notifications/subscribe",
+        "function": "subscribeForNotifications"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

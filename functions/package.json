@@ -17,11 +17,13 @@
     "firebase-admin": "^8.10.0",
     "firebase-functions": "^3.6.0",
     "gs": "https://github.com/sina-masnadi/node-gs/tarball/master",
-    "mongodb": "^3.5.5"
+    "mongodb": "^3.5.5",
+    "web-push": "^3.4.3"
   },
   "devDependencies": {
     "@types/child-process-promise": "^2.2.1",
     "@types/mongodb": "^3.5.6",
+    "@types/web-push": "^3.3.0",
     "firebase-functions-test": "^0.2.0",
     "typescript": "^3.8.3"
   },
