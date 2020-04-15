@@ -112,7 +112,6 @@ export class Shell extends localize(LitElement) {
           return;
         }
 
-        console.log('done!');
         window.clearInterval(intervalRef);
         topAppBarRef.style.position = 'fixed';
       };
