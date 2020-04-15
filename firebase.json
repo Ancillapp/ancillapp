@@ -24,6 +24,21 @@
       }
     ]
   },
+  "headers": [
+    {
+      "source": "**/sw.js",
+      "headers": [
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    }
+  ],
   "emulators": {
     "functions": {
       "port": 5001
