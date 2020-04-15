@@ -15,6 +15,9 @@ import sharedStyles from '../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
+import type { TopAppBar } from '@material/mwc-top-app-bar';
+import type { Drawer } from '@material/mwc-drawer';
+
 @customElement('ancillapp-shell')
 export class Shell extends localize(LitElement) {
   public static styles = [sharedStyles, styles];
@@ -80,6 +83,46 @@ export class Shell extends localize(LitElement) {
 
   protected firstUpdated() {
     installRouter((location) => this._locationChanged(location));
+
+    // TODO: replace this awful workaround by implementing a custom top app bar
+    const drawerRoot = this.shadowRoot!.querySelector('mwc-drawer')!
+      .shadowRoot!;
+    const topAppBar = this.shadowRoot!.querySelector<TopAppBar>(
+      'mwc-top-app-bar',
+    )!;
+
+    const slotChangeListener = () => {
+      const drawerContent = drawerRoot.querySelector<HTMLDivElement>(
+        '.mdc-drawer-app-content',
+      );
+
+      if (!drawerContent) {
+        return;
+      }
+
+      drawerRoot.removeEventListener('slotchange', slotChangeListener);
+
+      const topAppBarRef = topAppBar.shadowRoot!.querySelector<HTMLDivElement>(
+        '.mdc-top-app-bar',
+      )!;
+      let intervalRef: number;
+
+      const updatePosition = () => {
+        if (!topAppBarRef.style.position) {
+          return;
+        }
+
+        console.log('done!');
+        window.clearInterval(intervalRef);
+        topAppBarRef.style.position = 'fixed';
+      };
+
+      updatePosition();
+      intervalRef = window.setInterval(updatePosition, 100);
+      topAppBar.scrollTarget = drawerContent;
+    };
+
+    drawerRoot.addEventListener('slotchange', slotChangeListener);
   }
 
   protected _locationChanged(location: Location) {
