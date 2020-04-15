@@ -141,7 +141,7 @@ export class Shell extends localize(LitElement) {
     }
   }
 
-  protected _loadPage(page: string, subroute: string) {
+  protected _loadPage(page: string, subroute = '') {
     if (![...this._topNavPages, ...this._bottomNavPages].includes(page)) {
       page = 'home';
     }
