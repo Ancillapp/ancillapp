@@ -3,7 +3,11 @@ import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ScriptExtHtmlPlugin from 'script-ext-html-webpack-plugin';
-import { Configuration, EnvironmentPlugin } from 'webpack';
+import {
+  Configuration,
+  EnvironmentPlugin,
+  NormalModuleReplacementPlugin,
+} from 'webpack';
 
 const config: Configuration = {
   cache: true,
@@ -68,6 +72,15 @@ const config: Configuration = {
   },
   plugins: [
     new EnvironmentPlugin(['NODE_ENV']),
+    new NormalModuleReplacementPlugin(
+      /config\/default(?:\.json)?$/,
+      (resource: any) => {
+        resource.request = resource.request.replace(
+          'config/default',
+          `config/${process.env.NODE_ENV}`,
+        );
+      },
+    ),
     new CopyPlugin([
       // Assets
       {
