@@ -20,6 +20,7 @@ ul {
     width: 14rem;
     margin: 0.5rem;
     border-radius: 0.5rem;
+    will-change: transform;
 
     span {
       flex: 1 1 auto;
@@ -35,6 +36,7 @@ ul {
       transition: 0.3s transform;
       flex: 0 0 auto;
       fill: var(--ancillapp-accent-color);
+      will-change: transform;
     }
 
     a {
