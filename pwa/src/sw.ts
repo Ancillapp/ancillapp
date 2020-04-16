@@ -4,6 +4,8 @@ import { registerRoute, NavigationRoute } from 'workbox-routing';
 import { CacheFirst } from 'workbox-strategies';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { PrecacheEntry } from 'workbox-precaching/_types';
+import { get } from 'idb-keyval';
+import type { Localized, SupportedLocale } from './helpers/localize';
 
 type ClientType = 'window' | 'worker' | 'sharedworker' | 'all';
 
@@ -41,40 +43,59 @@ const openOrFocus = async (url: string) => {
   return self.clients.openWindow(url === '*' ? '/' : url);
 };
 
-self.addEventListener('push', (event) => {
-  const data = event.data?.json();
+self.addEventListener('push', async (event) => {
+  const lang = (await get<SupportedLocale>('locale')) || 'it';
+
+  const {
+    title: { [lang]: title },
+    body: { [lang]: body },
+    actions,
+    ...data
+  }: {
+    title: Localized<string>;
+    body: Localized<string>;
+    actions?: {
+      action: string;
+      title: Localized<string>;
+    }[];
+    [key: string]: unknown;
+  } = event.data?.json();
+
   // We will have a default icon, badge and vibration, but the server might decide
   // to send different data, so we allow it to override them
   event.waitUntil(
-    self.registration.showNotification(
-      data.title,
-      Object.assign(
-        {
-          icon: '/assets/images/icons/android-chrome-512x512.png',
-          badge: '/assets/images/icons/badge.png',
-          vibrate: [
-            300,
-            300,
-            300,
-            300,
-            300,
-            1000,
-            600,
-            600,
-            600,
-            600,
-            600,
-            1000,
-            300,
-            300,
-            300,
-            300,
-            300,
-          ],
-        },
-        data,
-      ),
-    ),
+    self.registration.showNotification(title, {
+      icon: '/assets/images/icons/android-chrome-512x512.png',
+      badge: '/assets/images/icons/badge.png',
+      vibrate: [
+        300,
+        300,
+        300,
+        300,
+        300,
+        1000,
+        600,
+        600,
+        600,
+        600,
+        600,
+        1000,
+        300,
+        300,
+        300,
+        300,
+        300,
+      ],
+      body,
+      lang,
+      ...(actions && {
+        actions: actions.map(({ title: { [lang]: title }, ...rest }) => ({
+          title,
+          ...rest,
+        })),
+      }),
+      ...data,
+    }),
   );
 });
 

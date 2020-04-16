@@ -7,6 +7,8 @@ export type SupportedLocale = 'it' | 'en' | 'de' | 'pt';
 
 export type LocaleData = typeof import('../assets/locales/it.json');
 
+export type Localized<T> = { [key in SupportedLocale]: T };
+
 const supportedLocales: readonly SupportedLocale[] = ['it', 'en', 'de', 'pt'];
 const defaultLocale: SupportedLocale = 'it';
 const localesPromises: { [key in SupportedLocale]?: Promise<LocaleData> } = {};
@@ -29,8 +31,8 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
 
       return this.setLocale(
         storedLocale ||
-        (supportedLocales.includes(userLocale as SupportedLocale)
-          ? userLocale
+          (supportedLocales.includes(userLocale as SupportedLocale)
+            ? userLocale
             : defaultLocale),
       );
     }

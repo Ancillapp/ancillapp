@@ -39,8 +39,18 @@ export const subscribeForNotifications = functions.https.onRequest(
     await sendNotification(
       subscription,
       JSON.stringify({
-        title: 'Perfetto!',
-        body: 'Sei stato registrato correttamente!',
+        title: {
+          it: 'Fatto!',
+          en: 'Done!',
+          de: 'Getan!',
+          pt: 'Feito!',
+        },
+        body: {
+          it: 'Sei stato registrato con successo!',
+          en: 'You have been successfully registered!',
+          de: 'Sie wurden erfolgreich registriert!',
+          pt: 'Você foi registrado com sucesso!',
+        },
       }),
     );
 
