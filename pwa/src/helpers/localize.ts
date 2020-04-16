@@ -1,5 +1,5 @@
 import { LitElement } from 'lit-element';
-import { get } from 'idb-keyval';
+import { get, set } from 'idb-keyval';
 
 type Constructor<T> = new (...args: any[]) => T;
 
@@ -27,13 +27,12 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
       const storedLocale = await get<SupportedLocale>('locale');
       const userLocale = navigator.language.slice(0, 2);
 
-      currentLocale =
+      return this.setLocale(
         storedLocale ||
         (supportedLocales.includes(userLocale as SupportedLocale)
           ? userLocale
-          : defaultLocale);
-
-      return this._updateCurrentLocaleData();
+            : defaultLocale),
+      );
     }
 
     private async _updateCurrentLocaleData() {
@@ -51,7 +50,10 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
     public async setLocale(locale: SupportedLocale) {
       currentLocale = locale;
 
-      await this._updateCurrentLocaleData();
+      await Promise.all([
+        this._updateCurrentLocaleData(),
+        set('locale', locale),
+      ]);
     }
 
     public get locale() {
