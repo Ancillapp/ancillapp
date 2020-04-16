@@ -1,12 +1,7 @@
 import { LitElement } from 'lit-element';
+import { get } from 'idb-keyval';
 
 type Constructor<T> = new (...args: any[]) => T;
-
-interface CustomElement {
-  connectedCallback?(): void;
-  disconnectedCallback?(): void;
-  readonly isConnected: boolean;
-}
 
 export type SupportedLocale = 'it' | 'en' | 'de' | 'pt';
 
@@ -21,18 +16,24 @@ let currentLocaleData: LocaleData;
 export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
   class extends BaseElement {
     connectedCallback() {
-      const userLocale = navigator.language.slice(0, 2);
+      super.connectedCallback();
 
       if (!currentLocale) {
-        currentLocale =
-          (localStorage.getItem('locale') as SupportedLocale) ||
-          (supportedLocales.includes(userLocale as SupportedLocale)
-            ? userLocale
-            : defaultLocale);
-        this._updateCurrentLocaleData();
+        this._loadInitialLocale();
       }
+    }
 
-      super.connectedCallback();
+    private async _loadInitialLocale() {
+      const storedLocale = await get<SupportedLocale>('locale');
+      const userLocale = navigator.language.slice(0, 2);
+
+      currentLocale =
+        storedLocale ||
+        (supportedLocales.includes(userLocale as SupportedLocale)
+          ? userLocale
+          : defaultLocale);
+
+      return this._updateCurrentLocaleData();
     }
 
     private async _updateCurrentLocaleData() {

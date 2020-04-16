@@ -16,7 +16,7 @@ import styles from './shell.styles';
 import template from './shell.template';
 
 import type { TopAppBar } from '@material/mwc-top-app-bar';
-import type { Drawer } from '@material/mwc-drawer';
+import { get, set } from 'idb-keyval';
 
 @customElement('ancillapp-shell')
 export class Shell extends localize(LitElement) {
@@ -56,11 +56,11 @@ export class Shell extends localize(LitElement) {
   constructor() {
     super();
     this._checkForUpdates();
-    this._updateDrawerState(
-      window.matchMedia('(min-width: 768px)').matches
-        ? localStorage.getItem('drawerOpened') === 'true'
-        : false,
-    );
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      get<boolean>('drawerOpened').then((drawerOpened) =>
+        this._updateDrawerState(drawerOpened),
+      );
+    }
     installMediaQueryWatcher(
       '(min-width: 768px)',
       (matches) => (this._narrow = matches),
@@ -149,10 +149,10 @@ export class Shell extends localize(LitElement) {
     this._subroute = subroute;
   }
 
-  protected _updateDrawerState(opened: boolean) {
+  protected async _updateDrawerState(opened: boolean) {
     if (opened !== this._drawerOpened) {
       this._drawerOpened = opened;
-      localStorage.setItem('drawerOpened', `${opened}`);
+      await set('drawerOpened', opened);
     }
   }
 

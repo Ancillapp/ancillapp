@@ -1,4 +1,5 @@
 import { customElement, property } from 'lit-element';
+import { get, set } from 'idb-keyval';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
 
@@ -34,25 +35,31 @@ export class AncillasList extends localize(PageViewElement) {
 
   constructor() {
     super();
-    if (
-      Notification.permission === 'default' &&
-      !localStorage.getItem('no-notifications-prompt')
-    ) {
-      this._needUserNotificationsPermission = true;
-    }
+
+    get<string>('notificationsPreference').then((notificationsPreference) => {
+      if (
+        Notification.permission === 'default' &&
+        notificationsPreference !== 'never'
+      ) {
+        this._needUserNotificationsPermission = true;
+      }
+    });
   }
 
   protected render = template;
 
-  protected async _updateNotificationsPermission(grant: string) {
-    this._needUserNotificationsPermission = false;
-
+  protected async _updateNotificationsPermission(
+    grant: 'yes' | 'no' | 'never',
+  ) {
     if (grant === 'no' || !grant) {
+      await set('notificationsPreference', 'no');
+      this._needUserNotificationsPermission = false;
       return;
     }
 
     if (grant === 'never') {
-      localStorage.setItem('no-notifications-prompt', 'true');
+      await set('notificationsPreference', 'never');
+      this._needUserNotificationsPermission = false;
       return;
     }
 
@@ -79,6 +86,8 @@ export class AncillasList extends localize(PageViewElement) {
       },
       body: JSON.stringify(pushSubscription.toJSON()),
     });
+
+    await set('notificationsPreference', 'yes');
   }
 }
 
