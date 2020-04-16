@@ -56,14 +56,22 @@ export class Shell extends localize(LitElement) {
   constructor() {
     super();
     this._checkForUpdates();
+    const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')!;
+
     if (window.matchMedia('(min-width: 768px)').matches) {
       get<boolean>('drawerOpened').then((drawerOpened) =>
         this._updateDrawerState(drawerOpened),
       );
     }
+
     installMediaQueryWatcher(
       '(min-width: 768px)',
       (matches) => (this._narrow = matches),
+    );
+
+    installMediaQueryWatcher(
+      '(prefers-color-scheme: dark)',
+      () => themeColor.content = getComputedStyle(this).getPropertyValue('--ancillapp-top-app-bar-color'),
     );
   }
 

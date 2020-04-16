@@ -10,104 +10,76 @@
   --mdc-theme-surface: var(--ancillapp-card-color);
   --mdc-theme-background: var(--ancillapp-background-color);
   --mdc-typography-font-family: var(--ancillapp-text-font);
+  --mdc-theme-on-surface: var(--ancillapp-primary-text-color);
+  --mdc-theme-text-disabled-on-background: var(--ancillapp-disabled-text-color);
 
   // Constants
   --ancillapp-text-font: 'Rosario', 'Roboto', Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   --ancillapp-display-font: 'Humana Serif', 'Times New Roman', serif;
-  --ancillapp-border-radius-sm: 0.25rem;
-  --ancillapp-border-radius-md: 0.5rem;
-  --ancillapp-border-radius-lg: 1rem;
 
   // Variables (different for each theme)
   --ancillapp-primary-color: #567791;
+  --ancillapp-top-app-bar-color: var(--ancillapp-primary-color);
+  --ancillapp-activated-list-color: var(--ancillapp-primary-color);
   --ancillapp-accent-color: #d50000;
   --ancillapp-background-color: #fafafa;
-  --ancillapp-drawer-color: #f5f5f5;
+  --ancillapp-drawer-color: #fff;
   --ancillapp-card-color: #fff;
-  --ancillapp-primary-opacity: 0.87;
-  --ancillapp-secondary-opacity: 0.6;
-  --ancillapp-disabled-opacity: 0.38;
-  --ancillapp-divider-opacity: 0.12;
-  --ancillapp-backdrop-opacity: 0.54;
-  --ancillapp-primary-text-color: rgba(
-    0,
-    0,
-    0,
-    var(--ancillapp-primary-opacity)
-  );
-  --ancillapp-secondary-text-color: rgba(
-    0,
-    0,
-    0,
-    var(--ancillapp-secondary-opacity)
-  );
-  --ancillapp-disabled-text-color: rgba(
-    0,
-    0,
-    0,
-    var(--ancillapp-disabled-opacity)
-  );
-  --ancillapp-divider-color: rgba(0, 0, 0, var(--ancillapp-divider-opacity));
-  --ancillapp-backdrop-color: rgba(0, 0, 0, var(--ancillapp-backdrop-opacity));
+  --ancillapp-primary-text-color: rgba(0, 0, 0, 0.87);
+  --ancillapp-secondary-text-color: rgba(0, 0, 0, 0.6);
+  --ancillapp-disabled-text-color: rgba(0, 0, 0, 0.38);
+  --ancillapp-divider-color: rgba(0, 0, 0, 0.12);
   --ancillapp-text-on-accent-color: #fff;
   --ancillapp-error-text-color: #b00020;
 }
 
 :host([theme='dark']) {
-  --ancillapp-primary-color: #000;
-  --ancillapp-accent-color: #1a73e8;
+  --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+  --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
   --ancillapp-background-color: #303030;
+  --ancillapp-drawer-color: #212121;
   --ancillapp-card-color: #424242;
-  --ancillapp-bars-color: #212121;
-  --ancillapp-primary-opacity: 1;
-  --ancillapp-secondary-opacity: 0.7;
-  --ancillapp-disabled-opacity: 0.5;
-  --ancillapp-divider-opacity: 0.12;
-  --ancillapp-backdrop-opacity: 0.54;
-  --ancillapp-primary-text-color: rgba(
-    255,
-    255,
-    255,
-    var(--ancillapp-primary-opacity)
-  );
-  --ancillapp-secondary-text-color: rgba(
-    255,
-    255,
-    255,
-    var(--ancillapp-secondary-opacity)
-  );
-  --ancillapp-disabled-text-color: rgba(
-    255,
-    255,
-    255,
-    var(--ancillapp-disabled-opacity)
-  );
-  --ancillapp-divider-color: rgba(
-    255,
-    255,
-    255,
-    var(--ancillapp-divider-opacity)
-  );
-  --ancillapp-backdrop-color: rgba(0, 0, 0, var(--ancillapp-backdrop-opacity));
-  --ancillapp-text-on-accent-color: #fff;
-  --ancillapp-error-text-color: #b00020;
+  --ancillapp-primary-text-color: #fff;
+  --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
+  --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);
+  --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
 }
 
-mwc-top-app-bar [slot='title'] {
-  display: flex;
-  align-items: center;
-  font-family: var(--ancillapp-display-font);
-  font-style: italic;
+@media (prefers-color-scheme: dark) {
+  :host([theme='system']) {
+    --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+    --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
+    --ancillapp-background-color: #303030;
+    --ancillapp-drawer-color: #212121;
+    --ancillapp-card-color: #424242;
+    --ancillapp-primary-text-color: #fff;
+    --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
+    --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);
+    --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
+  }
+}
 
-  svg {
-    height: 36px;
-    padding: 0 10px 12px 0;
-    fill: #fff;
+mwc-top-app-bar {
+  --mdc-theme-primary: var(--ancillapp-top-app-bar-color);
+
+  [slot='title'] {
+    display: flex;
+    align-items: center;
+    font-family: var(--ancillapp-display-font);
+    font-style: italic;
+
+    svg {
+      height: 36px;
+      padding: 0 10px 12px 0;
+      fill: #fff;
+    }
   }
 }
 
 mwc-drawer {
+  --mdc-theme-surface: var(--ancillapp-drawer-color);
+
   .menu {
     display: flex;
     flex-direction: column;
@@ -136,8 +108,25 @@ mwc-drawer {
   }
 }
 
-mwc-list-item[activated] svg {
-  fill: var(--mdc-theme-primary);
+mwc-list-item {
+  color: var(--mdc-theme-on-surface);
+
+  svg {
+    fill: var(--mdc-theme-text-disabled-on-background);
+  }
+
+  &[activated] {
+    color: var(--ancillapp-activated-list-color);
+    font-weight: bold;
+
+    svg {
+      fill: var(--ancillapp-activated-list-color);
+    }
+  }
+}
+
+li[divider] {
+  border-bottom-color: var(--ancillapp-divider-color);
 }
 
 main {
