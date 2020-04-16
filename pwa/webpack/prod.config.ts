@@ -45,7 +45,7 @@ const config: Configuration = smartMerge(baseConfig, {
     new InjectManifestPlugin({
       swSrc: path.resolve(__dirname, '../src/sw.ts'),
       swDest: './sw.js',
-      exclude: [/images\/icons/, /\.LICENSE$/],
+      exclude: [/images\/icons/, /\.LICENSE$/, /\.map$/],
     }),
   ],
 });
