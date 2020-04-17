@@ -6,6 +6,7 @@
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
+    padding: 0.875rem 0 0;
 
     > * {
       --mdc-theme-primary: var(--ancillapp-secondary-text-color);

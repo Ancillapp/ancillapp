@@ -34,14 +34,17 @@ export default function template(this: AncillasList) {
         <mwc-button
           @click="${() => this._updateNotificationsPermission('never')}"
           label="${this.localeData?.dontAskAnymore}"
+          dense
         ></mwc-button>
         <mwc-button
           @click="${() => this._updateNotificationsPermission('no')}"
           label="${this.localeData?.noThanks}"
+          dense
         ></mwc-button>
         <mwc-button
           @click="${() => this._updateNotificationsPermission('yes')}"
           label="${this.localeData?.sure}"
+          dense
         ></mwc-button>
       </div>
     </section>
