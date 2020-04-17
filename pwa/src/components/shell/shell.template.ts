@@ -18,7 +18,6 @@ export default function template(this: Shell) {
       hasHeader
       type="${this._narrow ? 'dismissible' : 'modal'}"
       ?open="${this._drawerOpened}"
-      @MDCDrawer:closed="${() => (this._drawerOpened = false)}"
     >
       <span slot="title">${this.localeData?.menu}</span>
       <div class="menu">

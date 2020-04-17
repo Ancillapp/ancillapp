@@ -56,7 +56,9 @@ export class Shell extends localize(LitElement) {
   constructor() {
     super();
     this._checkForUpdates();
-    const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')!;
+    const themeColor = document.querySelector<HTMLMetaElement>(
+      'meta[name="theme-color"]',
+    )!;
 
     if (window.matchMedia('(min-width: 768px)').matches) {
       get<boolean>('drawerOpened').then((drawerOpened) =>
@@ -71,7 +73,10 @@ export class Shell extends localize(LitElement) {
 
     installMediaQueryWatcher(
       '(prefers-color-scheme: dark)',
-      () => themeColor.content = getComputedStyle(this).getPropertyValue('--ancillapp-top-app-bar-color'),
+      () =>
+        (themeColor.content = getComputedStyle(this).getPropertyValue(
+          '--ancillapp-top-app-bar-color',
+        )),
     );
   }
 
@@ -93,14 +98,21 @@ export class Shell extends localize(LitElement) {
     installRouter((location) => this._locationChanged(location));
 
     // TODO: replace this awful workaround by implementing a custom top app bar
-    const drawerRoot = this.shadowRoot!.querySelector('mwc-drawer')!
-      .shadowRoot!;
+    const drawer = this.shadowRoot!.querySelector('mwc-drawer')!;
     const topAppBar = this.shadowRoot!.querySelector<TopAppBar>(
       'mwc-top-app-bar',
     )!;
 
+    // TODO: discover why we need this instead of just using
+    // @MDCDrawer:closed="${() => (this._drawerOpened = false)}"
+    // in the template
+    drawer.addEventListener(
+      'MDCDrawer:closed',
+      () => (this._drawerOpened = false),
+    );
+
     const slotChangeListener = () => {
-      const drawerContent = drawerRoot.querySelector<HTMLDivElement>(
+      const drawerContent = drawer.shadowRoot!.querySelector<HTMLDivElement>(
         '.mdc-drawer-app-content',
       );
 
@@ -108,7 +120,7 @@ export class Shell extends localize(LitElement) {
         return;
       }
 
-      drawerRoot.removeEventListener('slotchange', slotChangeListener);
+      drawer.shadowRoot!.removeEventListener('slotchange', slotChangeListener);
 
       const topAppBarRef = topAppBar.shadowRoot!.querySelector<HTMLDivElement>(
         '.mdc-top-app-bar',
@@ -129,7 +141,7 @@ export class Shell extends localize(LitElement) {
       topAppBar.scrollTarget = drawerContent;
     };
 
-    drawerRoot.addEventListener('slotchange', slotChangeListener);
+    drawer.shadowRoot!.addEventListener('slotchange', slotChangeListener);
   }
 
   protected _locationChanged(location: Location) {
