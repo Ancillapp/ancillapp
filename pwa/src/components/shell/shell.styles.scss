@@ -37,6 +37,7 @@
 :host([theme='dark']) {
   --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
   --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
+  --ancillapp-accent-color: #ff8f82;
   --ancillapp-background-color: #303030;
   --ancillapp-drawer-color: #212121;
   --ancillapp-card-color: #424242;
@@ -50,6 +51,7 @@
   :host([theme='system']) {
     --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
     --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
+    --ancillapp-accent-color: #ff8f82;
     --ancillapp-background-color: #303030;
     --ancillapp-drawer-color: #212121;
     --ancillapp-card-color: #424242;
