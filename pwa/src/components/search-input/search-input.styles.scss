@@ -1,0 +1,10 @@
+:host {
+  display: inline-block;
+}
+
+mwc-textfield {
+  --mdc-notched-outline-leading-width: 2rem;
+  --mdc-notched-outline-leading-border-radius: 2rem 0 0 2rem;
+  --mdc-notched-outline-trailing-border-radius: 0 2rem 2rem 0;
+  width: 100%;
+}

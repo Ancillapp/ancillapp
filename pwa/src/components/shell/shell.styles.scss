@@ -13,6 +13,15 @@
   --mdc-theme-on-surface: var(--ancillapp-primary-text-color);
   --mdc-theme-text-disabled-on-background: var(--ancillapp-disabled-text-color);
 
+  --mdc-text-field-outlined-idle-border-color: var(
+    --ancillapp-disabled-text-color
+  );
+  --mdc-text-field-outlined-hover-border-color: var(
+    --ancillapp-primary-text-color
+  );
+  --mdc-text-field-ink-color: var(--ancillapp-primary-text-color);
+  --mdc-text-field-label-ink-color: var(--ancillapp-secondary-text-color);
+
   // Constants
   --ancillapp-text-font: 'Rosario', 'Roboto', Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -99,6 +108,7 @@ mwc-drawer {
 
   [slot='appContent'] {
     height: 100%;
+    --mdc-theme-surface: var(--ancillapp-card-color);
   }
 }
 
