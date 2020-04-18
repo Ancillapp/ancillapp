@@ -22,7 +22,9 @@ export default function template(this: SongsList) {
             ({ number }) => number,
             ({ number, title }) => html`
               <a href="/songs/${number}" class="song">
-                <div class="number">${number}</div>
+                <div class="number">
+                  ${number.endsWith('bis') ? `${number.slice(0, -3)}b` : number}
+                </div>
                 <div class="title">${title}</div>
               </a>
             `,
