@@ -18,6 +18,7 @@
     "@material/mwc-textfield": "^0.14.1",
     "@material/mwc-top-app-bar": "^0.14.1",
     "@webcomponents/webcomponentsjs": "^2.4.3",
+    "fuse.js": "^5.1.0",
     "idb-keyval": "^3.2.0",
     "lit-element": "^2.3.1",
     "pwa-helpers": "^0.9.1",
