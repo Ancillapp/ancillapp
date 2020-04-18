@@ -12,11 +12,12 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
 .song {
-  width: 10rem;
-  height: 15rem;
+  width: 5rem;
+  height: 7.5rem;
   background: var(--ancillapp-card-color);
   border-radius: 0.5rem;
   box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
@@ -24,7 +25,7 @@
     0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
   text-align: center;
   padding: 0.25rem;
-  margin: 1rem;
+  margin: 0.5rem;
   will-change: transform;
   transition: 0.3s transform;
 
@@ -35,19 +36,36 @@
   }
 
   .number {
-    height: 10rem;
-    line-height: 10rem;
-    font-size: 4rem;
+    height: 7.5rem;
+    line-height: 6.75rem;
+    font-size: 2rem;
     font-weight: 700;
     font-family: var(--ancillapp-display-font);
     color: var(--ancillapp-primary-text-color);
   }
 
   .title {
-    font-size: 1rem;
-    height: 5rem;
-    font-style: italic;
-    font-family: var(--ancillapp-display-font);
-    color: var(--ancillapp-accent-color);
+    display: none;
+  }
+
+  @media (min-width: 480px) {
+    width: 10rem;
+    height: 15rem;
+    margin: 1rem;
+
+    .number {
+      font-size: 4rem;
+      height: 10rem;
+      line-height: 10rem;
+    }
+
+    .title {
+      display: block;
+      font-size: 1rem;
+      height: 5rem;
+      font-style: italic;
+      font-family: var(--ancillapp-display-font);
+      color: var(--ancillapp-accent-color);
+    }
   }
 }
