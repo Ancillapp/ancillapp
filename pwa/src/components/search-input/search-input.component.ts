@@ -1,4 +1,5 @@
-import { LitElement, customElement, property } from 'lit-element';
+import { LitElement, customElement, property, query } from 'lit-element';
+import { TextField } from '@material/mwc-textfield';
 
 import sharedStyles from '../shared.styles';
 import styles from './search-input.styles';
@@ -13,13 +14,25 @@ export class SearchInput extends LitElement {
   @property({ type: String, reflect: true })
   public label?: string;
 
-  protected _handleSearch(event: InputEvent) {
+  @property({ type: Boolean })
+  protected _numericOnly = true;
+
+  @query('mwc-textfield')
+  protected _textfield?: TextField;
+
+  protected _handleSearch({ target }: InputEvent) {
     this.dispatchEvent(
       new CustomEvent('search', {
         bubbles: true,
-        detail: (event.target as HTMLInputElement).value,
+        detail: (target as HTMLInputElement).value,
       }),
     );
+  }
+
+  protected _handleKeyboardTypeSwitch() {
+    this._numericOnly = !this._numericOnly;
+    this._textfield?.focus();
+    this._textfield?.setSelectionRange(-1, -1);
   }
 }
 

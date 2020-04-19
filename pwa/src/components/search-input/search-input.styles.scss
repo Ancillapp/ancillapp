@@ -1,5 +1,6 @@
 :host {
   display: inline-block;
+  position: relative;
 }
 
 mwc-textfield {
@@ -7,4 +8,15 @@ mwc-textfield {
   --mdc-notched-outline-leading-border-radius: 2rem 0 0 2rem;
   --mdc-notched-outline-trailing-border-radius: 0 2rem 2rem 0;
   width: 100%;
+}
+
+mwc-icon-button {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  color: white;
+
+  @media (hover: hover) {
+    display: none;
+  }
 }
