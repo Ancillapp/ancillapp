@@ -52,6 +52,7 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
     public async setLocale(locale: SupportedLocale) {
       currentLocale = locale;
 
+      document.documentElement.lang = locale;
       await Promise.all([
         this._updateCurrentLocaleData(),
         set('locale', locale),
