@@ -74,6 +74,10 @@
 mwc-top-app-bar {
   --mdc-theme-primary: var(--ancillapp-top-app-bar-color);
 
+  [slot='navigationIcon'] {
+    color: inherit;
+  }
+
   [slot='title'] {
     display: flex;
     align-items: center;

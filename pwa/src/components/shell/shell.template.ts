@@ -76,11 +76,19 @@ export default function template(this: Shell) {
       </div>
       <div slot="appContent">
         <mwc-top-app-bar>
-          <mwc-icon-button
-            slot="navigationIcon"
-            icon="menu"
-            @click="${() => this._updateDrawerState(!this._drawerOpened)}"
-          ></mwc-icon-button>
+          ${this._subroute
+            ? html`
+                <a href="/${this._page}" slot="navigationIcon">
+                  <mwc-icon-button icon="arrow_back"></mwc-icon-button>
+                </a>
+              `
+            : html`
+                <mwc-icon-button
+                  slot="navigationIcon"
+                  icon="menu"
+                  @click="${() => this._updateDrawerState(!this._drawerOpened)}"
+                ></mwc-icon-button>
+              `}
           <div slot="title">
             ${icons.tau} ${this._page === 'home'
               ? 'Ancillapp'
