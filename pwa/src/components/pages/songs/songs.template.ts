@@ -4,7 +4,7 @@ import { SongsPage } from './songs.component';
 
 export default function template(this: SongsPage) {
   const subroute = this.subroute
-    ? import('../../songs-list/songs-list.component').then(
+    ? import('../../song-viewer/song-viewer.component').then(
         () => html`<song-viewer song="${this.subroute}"></song-viewer>`,
       )
     : import('../../songs-list/songs-list.component').then(
