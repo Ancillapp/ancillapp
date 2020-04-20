@@ -6,13 +6,17 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "npm --prefix pwa start",
-    "build": "npm --prefix pwa run build",
-    "postinstall": "lerna bootstrap --hoist --strict",
-    "start:functions": "npm --prefix functions start"
+    "start": "lerna run start --stream",
+    "build": "lerna run build --stream",
+    "start:pwa": "npm --prefix pwa start",
+    "build:pwa": "npm --prefix pwa run build",
+    "start:functions": "npm --prefix functions start",
+    "build:functions": "npm --prefix functions run build",
+    "postinstall": "lerna bootstrap --hoist --strict && patch-package"
   },
   "devDependencies": {
     "lerna": "^3.20.2",
+    "patch-package": "^6.2.2",
     "typescript": "^3.8.3"
   }
 }
