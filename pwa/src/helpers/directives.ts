@@ -31,10 +31,9 @@ export const song = (rawSong: string) =>
       .split('\n\n')
       .map(
         (paragraph) =>
-          `<p class="${getParagraphClass(paragraph)}">${paragraph.replace(
-            /^(rit\.|bridge|\d\.)/i,
-            '<strong>$1</strong>',
-          )}</p>`,
+          `<p class="${getParagraphClass(paragraph)}">${paragraph
+            .replace(/\n/g, '<br>')
+            .replace(/^(rit\.|bridge|\d\.)/i, '<strong>$1</strong>')}</p>`,
       )
       .join(''),
   );
