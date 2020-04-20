@@ -85,7 +85,7 @@ const config: Configuration = {
       // Assets
       {
         from: path.resolve(__dirname, '../src/assets'),
-        to: 'assets',
+        to: '.',
         transform: (content, path) =>
           path.endsWith('.json')
             ? JSON.stringify(JSON.parse(content.toString()))

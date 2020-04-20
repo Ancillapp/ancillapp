@@ -65,8 +65,8 @@ self.addEventListener('push', async (event) => {
   // to send different data, so we allow it to override them
   event.waitUntil(
     self.registration.showNotification(title, {
-      icon: '/assets/images/icons/android-chrome-512x512.png',
-      badge: '/assets/images/icons/badge.png',
+      icon: '/images/icons/android-chrome-512x512.png',
+      badge: '/images/icons/badge.png',
       vibrate: [
         300,
         300,
