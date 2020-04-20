@@ -16,8 +16,8 @@
 }
 
 .song {
-  width: 5rem;
-  height: 7.5rem;
+  width: 4rem;
+  height: 6rem;
   background: var(--ancillapp-card-color);
   border-radius: 0.5rem;
   box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
@@ -36,9 +36,9 @@
   }
 
   .number {
-    height: 7.5rem;
-    line-height: 6.75rem;
-    font-size: 2rem;
+    height: 6rem;
+    line-height: 5.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     font-family: var(--ancillapp-display-font);
     color: var(--ancillapp-primary-text-color);
