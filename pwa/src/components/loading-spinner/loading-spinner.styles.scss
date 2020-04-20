@@ -1,12 +1,5 @@
-$offset: 187;
-$duration: 1.4s;
-
-:host {
-  display: inline-block;
-}
-
-svg {
-  animation: rotator $duration linear infinite;
+.spinner {
+  animation: rotator 1.4s linear infinite;
 }
 
 @keyframes rotator {
@@ -19,41 +12,23 @@ svg {
 }
 
 .path {
-  stroke-dasharray: $offset;
+  stroke: var(--ancillapp-primary-color);
+  stroke-dasharray: 187;
   stroke-dashoffset: 0;
   transform-origin: center;
-  animation: dash $duration ease-in-out infinite,
-    colors ($duration * 4) ease-in-out infinite;
-}
-
-@keyframes colors {
-  0% {
-    stroke: #4285f4;
-  }
-  25% {
-    stroke: #de3e35;
-  }
-  50% {
-    stroke: #f7c223;
-  }
-  75% {
-    stroke: #1b9a59;
-  }
-  100% {
-    stroke: #4285f4;
-  }
+  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
 }
 
 @keyframes dash {
   0% {
-    stroke-dashoffset: $offset;
+    stroke-dashoffset: 187;
   }
   50% {
-    stroke-dashoffset: $offset/4;
+    stroke-dashoffset: 46.75;
     transform: rotate(135deg);
   }
   100% {
-    stroke-dashoffset: $offset;
+    stroke-dashoffset: 187;
     transform: rotate(450deg);
   }
 }
