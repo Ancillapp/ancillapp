@@ -1,4 +1,4 @@
-import { LitElement, property } from 'lit-element';
+import { LitElement } from 'lit-element';
 import { get, set } from 'idb-keyval';
 
 type Constructor<T> = new (...args: any[]) => T;
@@ -15,13 +15,15 @@ const localesPromises: { [key in SupportedLocale]?: Promise<LocaleData> } = {};
 let currentLocale: SupportedLocale;
 let currentLocaleData: LocaleData;
 
-export const localize = <E extends Constructor<LitElement>>(BaseElement: E) => {
-  class LocalizedElement extends BaseElement {
-    connectedCallback() {
-      super.connectedCallback();
+export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
+  class extends BaseElement {
+    constructor(...args: any[]) {
+      super(...args);
 
       if (!currentLocale) {
         this._loadInitialLocale();
+      } else {
+        this._updateCurrentLocaleData();
       }
     }
 
@@ -66,7 +68,4 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) => {
     public get localeData() {
       return currentLocaleData;
     }
-  }
-
-  return LocalizedElement;
-};
+  };
