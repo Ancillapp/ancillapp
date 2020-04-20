@@ -26,6 +26,8 @@ export interface Ancilla {
 export class AncillasList extends localize(PageViewElement) {
   public static styles = [sharedStyles, styles];
 
+  protected render = template;
+
   @property({ type: Boolean })
   protected _needUserNotificationsPermission?: boolean;
 
@@ -45,8 +47,6 @@ export class AncillasList extends localize(PageViewElement) {
       }
     });
   }
-
-  protected render = template;
 
   protected async _updateNotificationsPermission(
     grant: 'yes' | 'no' | 'never',
