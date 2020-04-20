@@ -9,8 +9,13 @@ export type LocaleData = typeof import('../assets/locales/it.json');
 
 export type Localized<T> = { [key in SupportedLocale]: T };
 
-const supportedLocales: readonly SupportedLocale[] = ['it', 'en', 'de', 'pt'];
-const defaultLocale: SupportedLocale = 'it';
+export const supportedLocales: readonly SupportedLocale[] = [
+  'it',
+  'en',
+  'de',
+  'pt',
+];
+export const defaultLocale: SupportedLocale = 'it';
 const localesPromises: { [key in SupportedLocale]?: Promise<LocaleData> } = {};
 let currentLocale: SupportedLocale;
 let currentLocaleData: LocaleData;

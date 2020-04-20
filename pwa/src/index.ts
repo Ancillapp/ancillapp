@@ -1,3 +1,10 @@
+import { get } from 'idb-keyval';
+import {
+  SupportedLocale,
+  supportedLocales,
+  defaultLocale,
+} from './helpers/localize';
+
 // Feature detect which polyfill needs to be imported.
 const needsTemplate = (() => {
   // no real <template> because no `content` property (IE and older browsers)
@@ -51,4 +58,22 @@ if (
 (polyfills.length
   ? import(`@webcomponents/webcomponentsjs/bundles/${polyfills.join('-')}.js`)
   : Promise.resolve()
-).then(() => import('./components/shell/shell.component'));
+)
+  .then(() =>
+    Promise.all([
+      get<SupportedLocale>('locale').then((storedLocale) => {
+        const userLocale = navigator.language.slice(0, 2);
+
+        const locale =
+          storedLocale ||
+          (supportedLocales.includes(userLocale as SupportedLocale)
+            ? userLocale
+            : defaultLocale);
+
+        // Prefetch the needed locale file
+        return fetch(`/locales/${locale}.json`);
+      }),
+      import('./components/shell/shell.component'),
+    ]),
+  )
+  .then(() => document.querySelector('#loading')!.remove());
