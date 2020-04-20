@@ -3,6 +3,7 @@ import path from 'path';
 import HtmlPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { InjectManifest as InjectManifestPlugin } from 'workbox-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { Configuration } from 'webpack';
 import { smart as smartMerge } from 'webpack-merge';
 import baseConfig from './base.config';
@@ -24,6 +25,9 @@ const config: Configuration = smartMerge(baseConfig, {
         },
       }),
     ],
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: [
     new HtmlPlugin({
@@ -47,6 +51,7 @@ const config: Configuration = smartMerge(baseConfig, {
       swDest: './sw.js',
       exclude: [/images\/icons/, /\.LICENSE$/, /\.map$/],
     }),
+    ...(process.env.ANALYZE_BUNDLE ? [new BundleAnalyzerPlugin()] : []),
   ],
 });
 
