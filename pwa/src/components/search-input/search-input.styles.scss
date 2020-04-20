@@ -16,7 +16,7 @@ mwc-icon-button {
   right: 0.25rem;
   color: white;
 
-  @media (hover: hover) {
+  @media (pointer: fine) {
     display: none;
   }
 }
