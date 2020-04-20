@@ -100,20 +100,24 @@ export default function template(this: Shell) {
             class="page"
             ?active="${this._page === 'home'}"
           ></home-page>
-          <ancillas-page
-            class="page"
-            ?active="${this._page === 'ancillas'}"
-            subroute="${this._subroute}"
-          ></ancillas-page>
+          ${undefined /*
+            <ancillas-page
+              class="page"
+              ?active="${this._page === 'ancillas'}"
+              subroute="${this._subroute}"
+            ></ancillas-page>
+          */}
           <songs-page
             class="page"
             ?active="${this._page === 'songs'}"
             subroute="${this._subroute}"
           ></songs-page>
-          <breviary-page
-            class="page"
-            ?active="${this._page === 'breviary'}"
-          ></breviary-page>
+          ${undefined /*
+            <breviary-page
+              class="page"
+              ?active="${this._page === 'breviary'}"
+            ></breviary-page>
+          */}
           <prayers-page
             class="page"
             ?active="${this._page === 'prayers'}"

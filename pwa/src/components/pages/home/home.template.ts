@@ -12,12 +12,13 @@ export default function template(this: HomePage) {
     <section>
       <h2>${this.localeData?.peaceAndGood}</h2>
       <ul>
-        <li>
+        ${undefined /* <li>
           <a href="/breviary/${new Date().toISOString().slice(0, 10)}">
             <span>${this.localeData?.prayLiturgy}</span>
             ${breviaryIcon}
           </a>
         </li>
+        */}
         <li>
           <a href="/prayers">
             <span>${this.localeData?.prayDailyPrayers}</span>
@@ -30,12 +31,13 @@ export default function template(this: HomePage) {
             ${songsIcon}
           </a>
         </li>
-        <li>
+        ${undefined /* <li>
           <a href="/ancillas/latest">
             <span>${this.localeData?.readLatestAncilla}</span>
             ${ancillasIcon}
           </a>
         </li>
+        */}
       </ul>
     </section>
   `;
