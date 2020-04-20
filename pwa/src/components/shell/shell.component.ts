@@ -24,9 +24,6 @@ export class Shell extends localize(LitElement) {
 
   protected render = template;
 
-  @property({ type: String, attribute: true })
-  public theme = 'system';
-
   @property({ type: String })
   protected _page = 'home';
 

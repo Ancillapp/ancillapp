@@ -74,18 +74,81 @@
         min-height: 100%;
         padding: 0;
         margin: 0;
-        color: #000;
-        background: #f0f0f0;
-        font-family: 'Rosario', 'Roboto', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+        color: var(--ancillapp-primary-text-color);
+        background: var(--ancillapp-background-color);
+        font-family: var(--ancillapp-text-font);
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
         font-size: 14px;
         overflow: hidden;
+
+        /* Needed by Material Design Components */
+        --mdc-theme-primary: var(--ancillapp-primary-color);
+        --mdc-theme-secondary: var(--ancillapp-accent-color);
+        --mdc-theme-surface: var(--ancillapp-card-color);
+        --mdc-theme-background: var(--ancillapp-background-color);
+        --mdc-typography-font-family: var(--ancillapp-text-font);
+        --mdc-theme-on-surface: var(--ancillapp-primary-text-color);
+        --mdc-theme-text-disabled-on-background: var(--ancillapp-disabled-text-color);
+
+        --mdc-text-field-outlined-idle-border-color: var(
+          --ancillapp-disabled-text-color
+        );
+        --mdc-text-field-outlined-hover-border-color: var(
+          --ancillapp-primary-text-color
+        );
+        --mdc-text-field-ink-color: var(--ancillapp-primary-text-color);
+        --mdc-text-field-label-ink-color: var(--ancillapp-secondary-text-color);
+
+        /* Constants */
+        --ancillapp-text-font: 'Rosario', 'Roboto', Helvetica, Arial, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+        --ancillapp-display-font: 'Humana Serif', 'Times New Roman', serif;
+
+        /* Variables (different for each theme) */
+        --ancillapp-primary-color: #567791;
+        --ancillapp-top-app-bar-color: var(--ancillapp-primary-color);
+        --ancillapp-activated-list-color: var(--ancillapp-primary-color);
+        --ancillapp-accent-color: #d50000;
+        --ancillapp-background-color: #fafafa;
+        --ancillapp-drawer-color: #fff;
+        --ancillapp-card-color: #fff;
+        --ancillapp-primary-text-color: rgba(0, 0, 0, 0.87);
+        --ancillapp-secondary-text-color: rgba(0, 0, 0, 0.6);
+        --ancillapp-disabled-text-color: rgba(0, 0, 0, 0.38);
+        --ancillapp-divider-color: rgba(0, 0, 0, 0.12);
+        --ancillapp-text-on-accent-color: #fff;
+        --ancillapp-error-text-color: #b00020;
       }
 
-      html.dark, body.dark {
-        background: #1c1c1c;
+      body[data-theme='dark'] {
+        --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+        --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
+        --ancillapp-accent-color: #ff8f82;
+        --ancillapp-background-color: #303030;
+        --ancillapp-drawer-color: #212121;
+        --ancillapp-card-color: #424242;
+        --ancillapp-primary-text-color: #fff;
+        --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
+        --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);
+        --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
       }
+
+      @media (prefers-color-scheme: dark) {
+        body[data-theme='system'] {
+          --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+          --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
+          --ancillapp-accent-color: #ff8f82;
+          --ancillapp-background-color: #303030;
+          --ancillapp-drawer-color: #212121;
+          --ancillapp-card-color: #424242;
+          --ancillapp-primary-text-color: #fff;
+          --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
+          --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);
+          --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
+        }
+      }
+
 
       @media (min-width: 480px) {
         html, body {
@@ -148,13 +211,13 @@
       }
     </script>
   </head>
-  <body>
+  <body data-theme="system">
     <div id="loading">
-      <svg class="spinner" width="24" height="24" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+      <svg class="spinner" width="36" height="36" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
         <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
        </svg>
     </div>
-    <ancillapp-shell theme="system"></ancillapp-shell>
+    <ancillapp-shell></ancillapp-shell>
     <noscript>
       Per favore, abilita il JavaScript per utilizzare questo sito.
     </noscript>

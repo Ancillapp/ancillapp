@@ -121,7 +121,7 @@ export default function template(this: Shell) {
           <settings-page
             class="page"
             ?active="${this._page === 'settings'}"
-            theme="${this.theme}"
+            theme="system"
             @themechange="${console.log}"
           ></settings-page>
           <info-page
