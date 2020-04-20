@@ -1,4 +1,4 @@
-import { LitElement } from 'lit-element';
+import { LitElement, property } from 'lit-element';
 import { get, set } from 'idb-keyval';
 
 type Constructor<T> = new (...args: any[]) => T;
@@ -13,10 +13,12 @@ const supportedLocales: readonly SupportedLocale[] = ['it', 'en', 'de', 'pt'];
 const defaultLocale: SupportedLocale = 'it';
 const localesPromises: { [key in SupportedLocale]?: Promise<LocaleData> } = {};
 let currentLocale: SupportedLocale;
-let currentLocaleData: LocaleData;
 
-export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
-  class extends BaseElement {
+export const localize = <E extends Constructor<LitElement>>(BaseElement: E) => {
+  class LocalizedElement extends BaseElement {
+    @property({ type: Object })
+    private _currentLocaleData?: LocaleData;
+
     connectedCallback() {
       super.connectedCallback();
 
@@ -44,9 +46,7 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
         ).then((res) => res.json());
       }
 
-      currentLocaleData = await localesPromises[currentLocale]!;
-
-      await super.requestUpdate();
+      this._currentLocaleData = await localesPromises[currentLocale]!;
     }
 
     public async setLocale(locale: SupportedLocale) {
@@ -64,6 +64,9 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
     }
 
     public get localeData() {
-      return currentLocaleData;
+      return this._currentLocaleData;
     }
-  };
+  }
+
+  return LocalizedElement;
+};
