@@ -2,6 +2,8 @@ import * as functions from 'firebase-functions';
 import { mongoDb } from './helpers/mongo';
 
 export const getSongs = functions.https.onRequest(async (_, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+
   const db = await mongoDb;
   const songsCollection = db.collection('songs');
 
