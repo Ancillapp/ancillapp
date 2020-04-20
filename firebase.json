@@ -11,6 +11,10 @@
         "function": "getSongs"
       },
       {
+        "source": "/api/songs/*",
+        "function": "getSong"
+      },
+      {
         "source": "/api/ancillas",
         "function": "getAncillas"
       },
