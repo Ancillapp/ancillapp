@@ -2,6 +2,8 @@ import { html } from 'lit-element';
 import { until } from 'lit-html/directives/until';
 import { SongsPage } from './songs.component';
 
+import '../../loading-spinner/loading-spinner.component';
+
 export default function template(this: SongsPage) {
   const subroute = this.subroute
     ? import('../../song-viewer/song-viewer.component').then(
@@ -11,5 +13,5 @@ export default function template(this: SongsPage) {
         () => html`<songs-list></songs-list>`,
       );
 
-  return until(subroute, html`<p>Loading...</p>`);
+  return until(subroute, html`<loading-spinner></loading-spinner>`);
 }

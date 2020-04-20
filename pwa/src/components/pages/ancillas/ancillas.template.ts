@@ -2,6 +2,8 @@ import { html } from 'lit-element';
 import { until } from 'lit-html/directives/until';
 import { AncillasPage } from './ancillas.component';
 
+import '../../loading-spinner/loading-spinner.component';
+
 export default function template(this: AncillasPage) {
   const subroute = this.subroute
     ? import('../../pdf-viewer/pdf-viewer.component').then(
@@ -13,5 +15,5 @@ export default function template(this: AncillasPage) {
         () => html`<ancillas-list></ancillas-list>`,
       );
 
-  return until(subroute, html`<p>Loading...</p>`);
+  return until(subroute, html`<loading-spinner></loading-spinner>`);
 }

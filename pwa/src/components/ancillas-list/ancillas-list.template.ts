@@ -1,29 +1,9 @@
 import { html } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
-import { until } from 'lit-html/directives/until';
+import { load } from '../../helpers/directives';
 import { AncillasList } from './ancillas-list.component';
 
 export default function template(this: AncillasList) {
-  const ancillasTemplate = this._ancillas
-    .then(
-      (ancillas) =>
-        html`${repeat(
-          ancillas,
-          ({ code }) => code,
-          ({ code, name, thumbnail }) => html`
-            <a
-              href="/ancillas/${code}"
-              title="${name[this.locale]}"
-              class="ancilla"
-            >
-              <img src="${thumbnail}" width="340" height="480" />
-              <p>${name[this.locale]}</p>
-            </a>
-          `,
-        )}`,
-    )
-    .catch((error: Error) => html`${error.message}`);
-
   return html`
     <section
       class="notifications-permission"
@@ -49,7 +29,25 @@ export default function template(this: AncillasList) {
       </div>
     </section>
     <div class="ancillas-container">
-      ${until(ancillasTemplate, html`<p>Loading...</p>`)}
+      ${load(
+        this._ancillas,
+        (ancillas) =>
+          html`${repeat(
+            ancillas,
+            ({ code }) => code,
+            ({ code, name, thumbnail }) => html`
+              <a
+                href="/ancillas/${code}"
+                title="${name[this.locale]}"
+                class="ancilla"
+              >
+                <img src="${thumbnail}" width="340" height="480" />
+                <p>${name[this.locale]}</p>
+              </a>
+            `,
+          )}`,
+        (error) => html`${error.message}`,
+      )}
     </div>
   `;
 }
