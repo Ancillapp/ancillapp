@@ -1,5 +1,5 @@
 import { customElement } from 'lit-element';
-import { localize } from '../../../helpers/localize';
+import { localize, SupportedLocale } from '../../../helpers/localize';
 import { PageViewElement } from '../page-view-element';
 import { set } from 'idb-keyval';
 
@@ -19,6 +19,11 @@ export class SettingsPage extends localize(PageViewElement) {
     const newTheme = (target as Select).value;
     document.body.dataset.theme = newTheme;
     await set('theme', newTheme);
+  }
+
+  protected async _handleLanguageChange({ target }: Event) {
+    const newLanguage = (target as Select).value as SupportedLocale;
+    await this.setLocale(newLanguage);
   }
 }
 

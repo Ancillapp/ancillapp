@@ -23,5 +23,6 @@
   "theme": "Theme",
   "system": "System",
   "light": "Light",
-  "dark": "Dark"
+  "dark": "Dark",
+  "language": "Language"
 }
