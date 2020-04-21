@@ -19,16 +19,19 @@ export const defaultLocale: SupportedLocale = 'it';
 const localesPromises: { [key in SupportedLocale]?: Promise<LocaleData> } = {};
 let currentLocale: SupportedLocale;
 let currentLocaleData: LocaleData;
+const localizedComponents: any[] = [];
 
 export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
   class extends BaseElement {
     constructor(...args: any[]) {
       super(...args);
 
+      localizedComponents.push(this);
+
       if (!currentLocale) {
         this._loadInitialLocale();
       } else {
-        this._updateCurrentLocaleData();
+        this.updateCurrentLocaleData();
       }
     }
 
@@ -44,7 +47,7 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
       );
     }
 
-    private async _updateCurrentLocaleData() {
+    public async updateCurrentLocaleData() {
       if (!localesPromises[currentLocale]) {
         localesPromises[currentLocale] = fetch(
           `/locales/${currentLocale}.json`,
@@ -61,7 +64,9 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
 
       document.documentElement.lang = locale;
       await Promise.all([
-        this._updateCurrentLocaleData(),
+        ...localizedComponents.map((localizedComponent) =>
+          localizedComponent.updateCurrentLocaleData(),
+        ),
         set('locale', locale),
       ]);
     }
