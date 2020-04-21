@@ -19,5 +19,9 @@
   "dontAskAnymore": "Non chiedermelo più",
   "noThanks": "No, grazie",
   "sure": "Certo!",
-  "search": "Cerca"
+  "search": "Cerca",
+  "theme": "Tema",
+  "system": "Sistema",
+  "light": "Chiaro",
+  "dark": "Scuro"
 }
