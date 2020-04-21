@@ -73,6 +73,10 @@ if (
         // Prefetch the needed locale file
         return fetch(`/locales/${locale}.json`);
       }),
+      get<string>('theme').then(
+        (storedTheme) =>
+          (document.body.dataset.theme = storedTheme || 'system'),
+      ),
       import('./components/shell/shell.component'),
     ]),
   )
