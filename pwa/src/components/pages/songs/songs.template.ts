@@ -1,17 +1,14 @@
 import { html } from 'lit-element';
-import { until } from 'lit-html/directives/until';
+import { cache } from 'lit-html/directives/cache';
 import { SongsPage } from './songs.component';
 
-import '../../loading-spinner/loading-spinner.component';
+import '../../song-viewer/song-viewer.component';
+import '../../songs-list/songs-list.component';
 
 export default function template(this: SongsPage) {
-  const subroute = this.subroute
-    ? import('../../song-viewer/song-viewer.component').then(
-        () => html`<song-viewer song="${this.subroute}"></song-viewer>`,
-      )
-    : import('../../songs-list/songs-list.component').then(
-        () => html`<songs-list></songs-list>`,
-      );
-
-  return until(subroute, html`<loading-spinner></loading-spinner>`);
+  return html`${cache(
+    this.subroute
+      ? html`<song-viewer song="${this.subroute}"></song-viewer>`
+      : html`<songs-list></songs-list>`,
+  )}`;
 }
