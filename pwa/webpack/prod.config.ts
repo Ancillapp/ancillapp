@@ -49,7 +49,7 @@ const config: Configuration = smartMerge(baseConfig, {
     new InjectManifestPlugin({
       swSrc: path.resolve(__dirname, '../src/sw.ts'),
       swDest: './sw.js',
-      exclude: [/images\/icons/, /\.LICENSE$/, /\.map$/],
+      exclude: [/images\/icons/, /\.LICENSE$/, /\.map$/, /(?:^|\/)\..+$/],
     }),
     ...(process.env.ANALYZE_BUNDLE ? [new BundleAnalyzerPlugin()] : []),
   ],
