@@ -1,8 +1,6 @@
 import { setCacheNameDetails, clientsClaim } from 'workbox-core';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute, NavigationRoute } from 'workbox-routing';
-import { CacheFirst } from 'workbox-strategies';
-import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { PrecacheEntry } from 'workbox-precaching/_types';
 import { get } from 'idb-keyval';
 import type { Localized, SupportedLocale } from './helpers/localize';
@@ -129,15 +127,3 @@ setCacheNameDetails({
 clientsClaim();
 precacheAndRoute(self.__WB_MANIFEST);
 registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
-registerRoute(
-  /assets\/fonts/,
-  new CacheFirst({
-    cacheName: 'fonts',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  }),
-  'GET',
-);
