@@ -78,7 +78,7 @@ export default function template(this: Shell) {
           ${this._subroute
             ? html`
                 <a href="/${this._page}" slot="navigationIcon">
-                  <icon-button icon="arrow_back"></icon-button>
+                  <icon-button icon="arrowBack"></icon-button>
                 </a>
               `
             : html`
