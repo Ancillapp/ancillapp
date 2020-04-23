@@ -13,6 +13,10 @@ const config: Configuration = {
   cache: true,
   context: path.resolve(__dirname, '../src'),
   entry: path.resolve(__dirname, '../src/index'),
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    pathinfo: false,
+  },
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, '../src/components/'),

@@ -11,9 +11,6 @@ import baseConfig from './base.config';
 const config: Configuration = smartMerge(baseConfig, {
   mode: 'production',
   devtool: 'source-map',
-  output: {
-    pathinfo: false,
-  },
   optimization: {
     minimizer: [
       new TerserPlugin({
@@ -27,6 +24,9 @@ const config: Configuration = smartMerge(baseConfig, {
     ],
     splitChunks: {
       chunks: 'all',
+      maxInitialRequests: 30,
+      maxAsyncRequests: 30,
+      maxSize: 100000,
     },
   },
   plugins: [
