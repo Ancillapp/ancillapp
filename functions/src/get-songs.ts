@@ -18,6 +18,7 @@ export const getSongs = functions.https.onRequest(async (_, res) => {
         },
       },
     )
+    .sort({ _id: 1 })
     .toArray();
 
   res.json(songs);
