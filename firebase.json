@@ -15,6 +15,14 @@
         "function": "getSong"
       },
       {
+        "source": "/api/prayers",
+        "function": "getPrayers"
+      },
+      {
+        "source": "/api/prayers/*",
+        "function": "getPrayer"
+      },
+      {
         "source": "/api/ancillas",
         "function": "getAncillas"
       },
