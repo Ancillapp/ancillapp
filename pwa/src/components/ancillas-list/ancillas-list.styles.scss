@@ -1,0 +1,53 @@
+.notifications-permission {
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    padding: 0.875rem 0 0;
+
+    > * {
+      --mdc-theme-primary: var(--ancillapp-secondary-text-color);
+
+      &:last-child {
+        --mdc-theme-primary: var(--ancillapp-accent-color);
+      }
+    }
+  }
+}
+
+.ancillas-container {
+  display: flex;
+  justify-content: center;
+}
+
+.ancilla {
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+
+  > img {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
+      0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
+      0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
+    width: 10.625rem;
+    height: 15rem;
+    object-fit: cover;
+    display: block;
+    will-change: transform;
+    transition: 0.3s transform;
+
+    &:hover,
+    &:active {
+      transform: scale(1.025);
+    }
+  }
+
+  > p {
+    text-align: center;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "mongodb": {
+    "uri": "<mongodb-uri>"
+  },
+  "webpush": {
+    "subject": "<subject>",
+    "publickey": "<public-key>",
+    "privatekey": "<private-key>"
+  }
+}

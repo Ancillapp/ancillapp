@@ -1,0 +1,16 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+}

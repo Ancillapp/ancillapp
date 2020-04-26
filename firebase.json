@@ -1,0 +1,62 @@
+{
+  "functions": {
+    "predeploy": "npm --prefix functions run build"
+  },
+  "hosting": {
+    "public": "pwa/dist/",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "/api/songs",
+        "function": "getSongs"
+      },
+      {
+        "source": "/api/songs/*",
+        "function": "getSong"
+      },
+      {
+        "source": "/api/prayers",
+        "function": "getPrayers"
+      },
+      {
+        "source": "/api/prayers/*",
+        "function": "getPrayer"
+      },
+      {
+        "source": "/api/ancillas",
+        "function": "getAncillas"
+      },
+      {
+        "source": "/api/notifications/subscribe",
+        "function": "subscribeForNotifications"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "headers": [
+    {
+      "source": "**/sw.js",
+      "headers": [
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    }
+  ],
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "hosting": {
+      "port": 5000
+    }
+  }
+}

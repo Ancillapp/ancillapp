@@ -1,15 +1,22 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
-    "lib": ["esnext", "dom"],
-    "module": "commonjs",
-    "target": "es2018",
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "strictNullChecks": false,
-    "esModuleInterop": true
-  },
-  "include": [
-    "typings.d.ts",
-    "src/**/*.ts"
-  ]
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "webworker"
+    ],
+  }
 }

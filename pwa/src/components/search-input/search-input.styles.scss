@@ -1,0 +1,22 @@
+:host {
+  display: inline-block;
+  position: relative;
+}
+
+mwc-textfield {
+  --mdc-notched-outline-leading-width: 2rem;
+  --mdc-notched-outline-leading-border-radius: 2rem 0 0 2rem;
+  --mdc-notched-outline-trailing-border-radius: 0 2rem 2rem 0;
+  width: 100%;
+}
+
+icon-button {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  color: white;
+
+  @media (pointer: fine) {
+    display: none;
+  }
+}
