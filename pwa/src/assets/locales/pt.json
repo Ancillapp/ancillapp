@@ -24,5 +24,6 @@
   "system": "Sistema",
   "light": "Chiaro",
   "dark": "Scuro",
-  "language": "Linguagem"
+  "language": "Linguagem",
+  "noResults": "Sem resultados"
 }

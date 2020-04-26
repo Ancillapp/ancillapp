@@ -17,18 +17,22 @@ export default function template(this: SongsList) {
       this._displayedSongs,
       (songs) => html`
         <div class="songs-container">
-          ${repeat(
-            songs,
-            ({ number }) => number,
-            ({ number, title }) => html`
-              <a href="/songs/${number}" class="song">
-                <div class="number">
-                  ${number.endsWith('bis') ? `${number.slice(0, -3)}b` : number}
-                </div>
-                <div class="title">${title}</div>
-              </a>
-            `,
-          )}
+          ${songs.length > 0
+            ? repeat(
+                songs,
+                ({ number }) => number,
+                ({ number, title }) => html`
+                  <a href="/songs/${number}" class="song">
+                    <div class="number">
+                      ${number.endsWith('bis')
+                        ? `${number.slice(0, -3)}b`
+                        : number}
+                    </div>
+                    <div class="title">${title}</div>
+                  </a>
+                `,
+              )
+            : html`<p>${this.localeData?.noResults}</p>`}
         </div>
       `,
       (error) => html`${error.message}`,

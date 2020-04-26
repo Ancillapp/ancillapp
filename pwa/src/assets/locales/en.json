@@ -24,5 +24,6 @@
   "system": "System",
   "light": "Light",
   "dark": "Dark",
-  "language": "Language"
+  "language": "Language",
+  "noResults": "No results"
 }
