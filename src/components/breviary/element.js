@@ -5,7 +5,7 @@ import template from './template';
 class BreviaryPage extends PageViewElement {
   constructor() {
     super();
-    /* this.loadResourceForLocale(`/assets/locales/breviary/${this.globalLocale}.ftl`, this.globalLocale)
+    /* this.loadResourceForLocale(`locales/breviary/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender()); */
   }
 

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ancillapp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ancillapp">
+
+    <base href="<%= htmlWebpackPlugin.options.buildName ? `/${htmlWebpackPlugin.options.buildName}/` : '/' %>">
+
+    <%- include fragments/icons -%>
+    <%- include fragments/critical-css -%>
+    <%- include fragments/critical-js -%>
+  </head>
+  <body>
+    <ancillapp-shell appTitle="Ancillapp"></ancillapp-shell>
+    <noscript>
+      Per favore, abilita il JavaScript per utilizzare questo sito.
+    </noscript>
+  </body>
+</html>

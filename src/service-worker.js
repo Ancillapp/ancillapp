@@ -18,8 +18,8 @@ self.addEventListener('push', (e) => {
   // We will have a default icon, badge and vibration, but the server might decide
   // to send different data, so we allow it to override them
   e.waitUntil(self.registration.showNotification(data.title, Object.assign({
-    icon: '/assets/images/icons/android-chrome-512x512.png',
-    badge: '/assets/images/icons/badge.png',
+    icon: 'images/icons/android-chrome-512x512.png',
+    badge: 'images/icons/badge.png',
     vibrate: [300, 300, 300, 300, 300, 1000, 600, 600, 600, 600, 600, 1000, 300, 300, 300, 300, 300],
   }, data)));
 });
@@ -54,7 +54,7 @@ workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 workbox.routing.registerNavigationRoute('/index.html');
 workbox.routing.registerRoute(
-  /assets\/fonts/,
+  /fonts/,
   workbox.strategies.cacheFirst({
     cacheName: 'fonts',
     plugins: [

@@ -5,7 +5,7 @@ import template from './template';
 class InfoPage extends PageViewElement {
   constructor() {
     super();
-    /* this.loadResourceForLocale(`/assets/locales/info/${this.globalLocale}.ftl`, this.globalLocale)
+    /* this.loadResourceForLocale(`locales/info/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender()); */
   }
 

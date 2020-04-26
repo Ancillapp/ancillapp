@@ -9,7 +9,7 @@ class SettingsPage extends PageViewElement {
 
   constructor() {
     super();
-    this.loadResourceForLocale(`/assets/locales/settings/${this.globalLocale}.ftl`, this.globalLocale)
+    this.loadResourceForLocale(`locales/settings/${this.globalLocale}.ftl`, this.globalLocale)
       .then(() => this.requestRender());
   }
 
