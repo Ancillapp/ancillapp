@@ -1,3 +1,7 @@
+:host {
+  display: flex;
+}
+
 h1 {
   font-family: var(--ancillapp-display-font);
   border-bottom: 1px solid var(--ancillapp-disabled-text-color);
@@ -23,4 +27,15 @@ p {
     color: var(--ancillapp-accent-color);
     font-weight: bold;
   }
+}
+
+.loading-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  align-self: flex-start;
 }

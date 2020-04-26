@@ -13,10 +13,10 @@ export default function template(this: SongsList) {
         @search="${this._handleSearch}"
       ></search-input>
     </div>
-    <div class="songs-container">
-      ${load(
-        this._displayedSongs,
-        (songs) => html`
+    ${load(
+      this._displayedSongs,
+      (songs) => html`
+        <div class="songs-container">
           ${repeat(
             songs,
             ({ number }) => number,
@@ -29,9 +29,9 @@ export default function template(this: SongsList) {
               </a>
             `,
           )}
-        `,
-        (error) => html`${error.message}`,
-      )}
-    </div>
+        </div>
+      `,
+      (error) => html`${error.message}`,
+    )}
   `;
 }

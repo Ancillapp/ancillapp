@@ -1,3 +1,8 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
 .search-input-container {
   width: 100%;
   text-align: center;
@@ -7,6 +12,13 @@
     width: 100%;
     max-width: 20rem;
   }
+}
+
+.loading-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .songs-container {

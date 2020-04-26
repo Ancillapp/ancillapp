@@ -11,6 +11,7 @@
 
 .page {
   display: none;
+  flex: 1;
 
   &[active] {
     display: block;
@@ -20,8 +21,9 @@
 section {
   padding: 1rem 1.5rem;
   background: var(--ancillapp-card-color);
+  width: 100%;
   max-width: 40rem;
-  margin: auto;
+  margin: 0 auto;
   border-radius: 0.5rem;
   color: var(--ancillapp-primary-text-color);
   box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),

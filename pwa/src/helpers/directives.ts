@@ -12,7 +12,9 @@ export const load = <T>(
 ) =>
   until(
     promise.then(onSuccess).catch(onFailure),
-    html`<loading-spinner></loading-spinner>`,
+    html`<div class="loading-container">
+      <loading-spinner></loading-spinner>
+    </div>`,
   );
 
 const getParagraphClass = (paragraph: string) => {
