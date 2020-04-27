@@ -53,9 +53,7 @@ export class Shell extends localize(LitElement) {
   constructor() {
     super();
     this._checkForUpdates();
-    const themeColor = document.querySelector<HTMLMetaElement>(
-      'meta[name="theme-color"]',
-    )!;
+    this._observeForThemeChanges();
 
     if (window.matchMedia('(min-width: 768px)').matches) {
       get<boolean>('drawerOpened').then((drawerOpened) =>
@@ -66,14 +64,6 @@ export class Shell extends localize(LitElement) {
     installMediaQueryWatcher(
       '(min-width: 768px)',
       (matches) => (this._narrow = matches),
-    );
-
-    installMediaQueryWatcher(
-      '(prefers-color-scheme: dark)',
-      () =>
-        (themeColor.content = getComputedStyle(this).getPropertyValue(
-          '--ancillapp-top-app-bar-color',
-        )),
     );
   }
 
@@ -139,6 +129,34 @@ export class Shell extends localize(LitElement) {
     };
 
     drawer.shadowRoot!.addEventListener('slotchange', slotChangeListener);
+  }
+
+  protected _observeForThemeChanges() {
+    let currentTheme = 'system';
+    const themeColor = document.querySelector<HTMLMetaElement>(
+      'meta[name="theme-color"]',
+    )!;
+
+    const themeColorUpdateCallback = () =>
+      (themeColor.content = getComputedStyle(document.body).getPropertyValue(
+        '--ancillapp-top-app-bar-color',
+      ));
+
+    const observer = new MutationObserver((mutations) =>
+      mutations.forEach(({ attributeName }) => {
+        if (attributeName === 'data-theme') {
+          currentTheme = document.body.dataset.theme || 'system';
+          themeColorUpdateCallback();
+        }
+      }),
+    );
+
+    observer.observe(document.body, { attributes: true });
+
+    installMediaQueryWatcher(
+      '(prefers-color-scheme: dark)',
+      themeColorUpdateCallback,
+    );
   }
 
   protected _locationChanged(location: Location) {
