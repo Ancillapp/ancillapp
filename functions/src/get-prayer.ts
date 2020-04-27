@@ -4,7 +4,7 @@ import { mongoDb } from './helpers/mongo';
 export const getPrayer = functions.https.onRequest(async (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
 
-  const slug = req.path.match(/\/api\/prayers\/([a-z\d]+)/)?.[1];
+  const slug = req.path.match(/\/api\/prayers\/([a-z-]+)/)?.[1];
 
   if (!slug) {
     res.status(404).send();
