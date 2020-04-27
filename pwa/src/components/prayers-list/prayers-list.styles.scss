@@ -3,17 +3,6 @@
   flex-direction: column;
 }
 
-.search-input-container {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 0.5rem;
-
-  search-input {
-    width: 100%;
-    max-width: 20rem;
-  }
-}
-
 .loading-container {
   flex: 1;
   display: flex;

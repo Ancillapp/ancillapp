@@ -4,16 +4,8 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { PrayersList } from './prayers-list.component';
 import { load } from '../../helpers/directives';
 
-import '../search-input/search-input.component';
-
 export default function template(this: PrayersList) {
   return html`
-    <div class="search-input-container">
-      <search-input
-        label="${this.localeData?.search}"
-        @search="${this._handleSearch}"
-      ></search-input>
-    </div>
     ${load(
       this._displayedPrayers,
       (prayers) => html`
