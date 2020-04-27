@@ -15,6 +15,7 @@ export const getPrayers = functions.https.onRequest(async (_, res) => {
           _id: 0,
           slug: 1,
           title: 1,
+          image: 1,
         },
       },
     )
