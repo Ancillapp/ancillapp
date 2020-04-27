@@ -1,14 +1,14 @@
 import { html } from 'lit-element';
-import { SongViewer } from './song-viewer.component';
+import { PrayerViewer } from './prayer-viewer.component';
 import { load, compile } from '../../helpers/directives';
 
-export default function template(this: SongViewer) {
+export default function template(this: PrayerViewer) {
   return html`
     ${load(
-      this._songPromise,
-      ({ number, title, content }) => html`
+      this._prayerPromise,
+      ({ title, content }) => html`
         <section>
-          <h1>${number}. ${title}</h1>
+          <h1>${title}</h1>
           ${compile(content)}
         </section>
       `,

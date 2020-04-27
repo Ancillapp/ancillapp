@@ -27,9 +27,9 @@ const getParagraphClass = (paragraph: string) => {
   return 'verse';
 };
 
-export const song = (rawSong: string) =>
+export const compile = (rawString: string) =>
   unsafeHTML(
-    rawSong
+    rawString
       .split('\n\n')
       .map(
         (paragraph) =>

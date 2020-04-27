@@ -120,6 +120,7 @@ export default function template(this: Shell) {
           <prayers-page
             class="page"
             ?active="${this._page === 'prayers'}"
+            subroute="${this._subroute}"
           ></prayers-page>
           <settings-page
             class="page"
