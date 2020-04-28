@@ -8,6 +8,7 @@ export const getPrayer = functions.https.onRequest(async (req, res) => {
 
   if (!slug) {
     res.status(404).send();
+    return;
   }
 
   const db = await mongoDb;
