@@ -18,6 +18,7 @@ export const getAncillas = functions.https.onRequest(async (_, res) => {
         },
       },
     )
+    .sort({ date: -1 })
     .toArray();
 
   res.json(
