@@ -31,13 +31,12 @@ export default function template(this: HomePage) {
             ${songsIcon}
           </a>
         </li>
-        ${undefined /* <li>
+        <li>
           <a href="/ancillas/latest">
             <span>${this.localeData?.readLatestAncilla}</span>
             ${ancillasIcon}
           </a>
         </li>
-        */}
       </ul>
     </section>
   `;

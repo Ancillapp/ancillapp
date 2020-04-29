@@ -41,7 +41,7 @@ export class Shell extends localize(LitElement) {
 
   protected readonly _topNavPages = [
     'home',
-    // 'ancillas',
+    'ancillas',
     'songs',
     // 'breviary',
     'prayers',

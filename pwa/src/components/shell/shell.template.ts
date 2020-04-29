@@ -99,13 +99,11 @@ export default function template(this: Shell) {
             class="page padded"
             ?active="${this._page === 'home'}"
           ></home-page>
-          ${undefined /*
-            <ancillas-page
-              class="page"
-              ?active="${this._page === 'ancillas'}"
-              subroute="${this._subroute}"
-            ></ancillas-page>
-          */}
+          <ancillas-page
+            class="page"
+            ?active="${this._page === 'ancillas'}"
+            subroute="${this._subroute}"
+          ></ancillas-page>
           <songs-page
             class="page padded"
             ?active="${this._page === 'songs'}"
