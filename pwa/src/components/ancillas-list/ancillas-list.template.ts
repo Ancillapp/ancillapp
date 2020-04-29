@@ -28,26 +28,28 @@ export default function template(this: AncillasList) {
         ></mwc-button>
       </div>
     </section>
-    <div class="ancillas-container">
-      ${load(
-        this._ancillas,
-        (ancillas) =>
-          html`${repeat(
-            ancillas,
-            ({ code }) => code,
-            ({ code, name, thumbnail }) => html`
-              <a
-                href="/ancillas/${code}"
-                title="${name[this.locale]}"
-                class="ancilla"
-              >
-                <img src="${thumbnail}" width="340" height="480" />
-                <p>${name[this.locale]}</p>
-              </a>
-            `,
-          )}`,
-        (error) => html`${error.message}`,
-      )}
-    </div>
+    ${load(
+      this._ancillas,
+      (ancillas) =>
+        html`
+          <div class="ancillas-container">
+            ${repeat(
+              ancillas,
+              ({ code }) => code,
+              ({ code, name, thumbnail }) => html`
+                <a
+                  href="/ancillas/${code}"
+                  title="${name[this.locale]}"
+                  class="ancilla"
+                >
+                  <img src="${thumbnail}" width="340" height="480" />
+                  <p>${name[this.locale]}</p>
+                </a>
+              `,
+            )}
+          </div>
+        `,
+      (error) => html`${error.message}`,
+    )}
   `;
 }
