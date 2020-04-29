@@ -4,9 +4,9 @@ import { mongoDb } from './helpers/mongo';
 export const getAncilla = functions.https.onRequest(async (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
 
-  const code = req.path.match(/\/api\/ancillas\/([a-z\d_-]+)/i)?.[1];
+  const inputCode = req.path.match(/\/api\/ancillas\/([a-z\d_-]+)/i)?.[1];
 
-  if (!code) {
+  if (!inputCode) {
     res.status(404).send();
     return;
   }
@@ -14,15 +14,29 @@ export const getAncilla = functions.https.onRequest(async (req, res) => {
   const db = await mongoDb;
   const ancillasCollection = db.collection('ancillas');
 
-  const ancilla = await ancillasCollection.findOne(
-    { code },
-    {
-      projection: {
-        _id: 0,
-        name: 1,
-      },
-    },
-  );
+  const projection = {
+    _id: 0,
+    code: 1,
+    name: 1,
+  };
+
+  const data =
+    inputCode === 'latest'
+      ? (
+          await ancillasCollection
+            .find({}, { projection })
+            .sort({ date: -1 })
+            .limit(1)
+            .toArray()
+        )[0]
+      : await ancillasCollection.findOne({ code: inputCode }, { projection });
+
+  if (!data) {
+    res.status(404).send();
+    return;
+  }
+
+  const { code, ...ancilla } = data;
 
   res.json({
     ...ancilla,
