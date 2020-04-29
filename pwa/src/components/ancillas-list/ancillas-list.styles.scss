@@ -5,6 +5,9 @@
 }
 
 .notifications-permission {
+  // TODO: re-enable this dialog when it's certain that it works correctly
+  display: none;
+
   padding: 1rem 2rem;
   margin-bottom: 2rem;
 
