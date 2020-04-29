@@ -32,7 +32,7 @@ export class AncillaViewer extends localize(PageViewElement) {
   @property({ type: Object })
   protected _ancillaPromise: Promise<Ancilla> = new Promise(() => {});
 
-  attributeChangedCallback(
+  async attributeChangedCallback(
     name: string,
     old: string | null,
     value: string | null,
@@ -43,6 +43,12 @@ export class AncillaViewer extends localize(PageViewElement) {
       );
     }
     super.attributeChangedCallback(name, old, value);
+
+    const { code } = await this._ancillaPromise;
+
+    if (value !== code) {
+      window.history.replaceState({}, '', `/ancillas/${code}`);
+    }
   }
 }
 
