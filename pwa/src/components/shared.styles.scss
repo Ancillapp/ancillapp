@@ -16,6 +16,10 @@
   &[active] {
     display: block;
   }
+
+  &.padded {
+    padding: 1.5rem;
+  }
 }
 
 section {

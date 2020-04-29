@@ -96,7 +96,7 @@ export default function template(this: Shell) {
         </mwc-top-app-bar>
         <main>
           <home-page
-            class="page"
+            class="page padded"
             ?active="${this._page === 'home'}"
           ></home-page>
           ${undefined /*
@@ -107,7 +107,7 @@ export default function template(this: Shell) {
             ></ancillas-page>
           */}
           <songs-page
-            class="page"
+            class="page padded"
             ?active="${this._page === 'songs'}"
             subroute="${this._subroute}"
           ></songs-page>
@@ -118,16 +118,16 @@ export default function template(this: Shell) {
             ></breviary-page>
           */}
           <prayers-page
-            class="page"
+            class="page padded"
             ?active="${this._page === 'prayers'}"
             subroute="${this._subroute}"
           ></prayers-page>
           <settings-page
-            class="page"
+            class="page padded"
             ?active="${this._page === 'settings'}"
           ></settings-page>
           <info-page
-            class="page"
+            class="page padded"
             ?active="${this._page === 'info'}"
           ></info-page>
         </main>
