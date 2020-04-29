@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.loading-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
