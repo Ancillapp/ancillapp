@@ -8,7 +8,12 @@ import '../../ancillas-list/ancillas-list.component';
 export default function template(this: AncillasPage) {
   return html`${cache(
     this.subroute
-      ? html`<ancilla-viewer ancilla="${this.subroute}"></ancilla-viewer>`
-      : html`<ancillas-list></ancillas-list>`,
+      ? html`<ancilla-viewer
+          ?active="${this.active && this.subroute}"
+          ancilla="${this.subroute}"
+        ></ancilla-viewer>`
+      : html`<ancillas-list
+          ?active="${this.active && !this.subroute}"
+        ></ancillas-list>`,
   )}`;
 }

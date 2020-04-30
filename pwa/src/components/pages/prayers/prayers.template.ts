@@ -8,7 +8,12 @@ import '../../prayers-list/prayers-list.component';
 export default function template(this: PrayersPage) {
   return html`${cache(
     this.subroute
-      ? html`<prayer-viewer prayer="${this.subroute}"></prayer-viewer>`
-      : html`<prayers-list></prayers-list>`,
+      ? html`<prayer-viewer
+          ?active="${this.active && this.subroute}"
+          prayer="${this.subroute}"
+        ></prayer-viewer>`
+      : html`<prayers-list
+          ?active="${this.active && !this.subroute}"
+        ></prayers-list>`,
   )}`;
 }

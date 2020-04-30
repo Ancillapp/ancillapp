@@ -31,7 +31,7 @@ export class SongViewer extends localize(PageViewElement) {
     old: string | null,
     value: string | null,
   ) {
-    if (name === 'song' && value && old !== value) {
+    if (this.active && name === 'song' && value && old !== value) {
       this._songPromise = fetch(`${apiUrl}/songs/${value}`).then((res) =>
         res.json(),
       );

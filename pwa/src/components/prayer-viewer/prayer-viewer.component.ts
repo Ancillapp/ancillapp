@@ -31,7 +31,7 @@ export class PrayerViewer extends localize(PageViewElement) {
     old: string | null,
     value: string | null,
   ) {
-    if (name === 'prayer' && value && old !== value) {
+    if (this.active && name === 'prayer' && value && old !== value) {
       this._prayerPromise = fetch(`${apiUrl}/prayers/${value}`).then((res) =>
         res.json(),
       );

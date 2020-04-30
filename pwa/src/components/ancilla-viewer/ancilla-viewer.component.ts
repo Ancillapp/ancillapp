@@ -37,7 +37,7 @@ export class AncillaViewer extends localize(PageViewElement) {
     old: string | null,
     value: string | null,
   ) {
-    if (name === 'ancilla' && value && old !== value) {
+    if (this.active && name === 'ancilla' && value && old !== value) {
       this._ancillaPromise = fetch(`${apiUrl}/ancillas/${value}`).then((res) =>
         res.json(),
       );
