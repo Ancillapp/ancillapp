@@ -1,11 +1,6 @@
-import { openDB, deleteDB } from 'idb';
+import { initDB } from './utils';
 
-const dbPromise = openDB('ancillapp-settings', 1, {
-  upgrade(db) {
-    deleteDB('keyval-store');
-    db.createObjectStore('settings');
-  },
-});
+const dbPromise = initDB();
 
 export const get = async <T>(key: string): Promise<T> =>
   (await dbPromise).get('settings', key);

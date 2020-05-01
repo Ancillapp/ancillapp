@@ -29,6 +29,7 @@ declare global {
 
 import './notifications';
 import './communication';
+import './caching';
 
 clientsClaim();
 
