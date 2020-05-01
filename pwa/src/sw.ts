@@ -120,10 +120,14 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// workbox.googleAnalytics.initialize();
-setCacheNameDetails({
-  prefix: 'ancillapp',
-});
 clientsClaim();
-precacheAndRoute(self.__WB_MANIFEST);
-registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
+
+if (process.env.NODE_ENV === 'production') {
+  setCacheNameDetails({
+    prefix: 'ancillapp',
+  });
+  precacheAndRoute(self.__WB_MANIFEST);
+  registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
+} else {
+  console.info('Workbox precache manifest: ', self.__WB_MANIFEST);
+}

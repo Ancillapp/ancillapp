@@ -4,6 +4,7 @@ import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import { smart as smartMerge } from 'webpack-merge';
 import baseConfig from './base.config';
+import { InjectManifest as InjectManifestPlugin } from 'workbox-webpack-plugin';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -29,6 +30,11 @@ const config: Configuration = smartMerge(baseConfig, {
       inject: 'head',
       template: path.resolve(__dirname, '../src/index.html'),
       showErrors: true,
+    }),
+    new InjectManifestPlugin({
+      swSrc: path.resolve(__dirname, '../src/sw.ts'),
+      swDest: './sw.js',
+      exclude: [/images\/icons/, /\.LICENSE$/, /\.map$/, /(?:^|\/)\..+$/],
     }),
   ],
 });
