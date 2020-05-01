@@ -1,20 +1,21 @@
-import { openDB } from 'idb';
+import { openDB, deleteDB } from 'idb';
 
-const dbPromise = openDB('keyval-store', 1, {
+const dbPromise = openDB('ancillapp-settings', 1, {
   upgrade(db) {
-    db.createObjectStore('keyval');
+    deleteDB('keyval-store');
+    db.createObjectStore('settings');
   },
 });
 
 export const get = async <T>(key: string): Promise<T> =>
-  (await dbPromise).get('keyval', key);
+  (await dbPromise).get('settings', key);
 
 export const set = async (key: string, val: any) =>
-  (await dbPromise).put('keyval', val, key);
+  (await dbPromise).put('settings', val, key);
 
 export const remove = async (key: string) =>
-  (await dbPromise).delete('keyval', key);
+  (await dbPromise).delete('settings', key);
 
-export const clear = async () => (await dbPromise).clear('keyval');
+export const clear = async () => (await dbPromise).clear('settings');
 
-export const keys = async () => (await dbPromise).getAllKeys('keyval');
+export const keys = async () => (await dbPromise).getAllKeys('settings');
