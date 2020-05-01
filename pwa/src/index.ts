@@ -1,4 +1,4 @@
-import { get } from 'idb-keyval';
+import { get } from './helpers/keyval';
 import {
   SupportedLocale,
   supportedLocales,

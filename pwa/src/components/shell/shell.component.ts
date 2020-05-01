@@ -16,7 +16,7 @@ import styles from './shell.styles';
 import template from './shell.template';
 
 import type { TopAppBar } from '@material/mwc-top-app-bar';
-import { get, set } from 'idb-keyval';
+import { get, set } from '../../helpers/keyval';
 
 import firebase from 'firebase/app';
 

@@ -1,5 +1,5 @@
 import { customElement, property } from 'lit-element';
-import { get, set } from 'idb-keyval';
+import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
 

@@ -1,7 +1,7 @@
 import { customElement } from 'lit-element';
 import { localize, SupportedLocale } from '../../../helpers/localize';
 import { PageViewElement } from '../page-view-element';
-import { set } from 'idb-keyval';
+import { set } from '../../../helpers/keyval';
 
 import sharedStyles from '../../shared.styles';
 import styles from './settings.styles';

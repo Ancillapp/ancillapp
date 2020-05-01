@@ -2,7 +2,7 @@ import { setCacheNameDetails, clientsClaim } from 'workbox-core';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute, NavigationRoute } from 'workbox-routing';
 import { PrecacheEntry } from 'workbox-precaching/_types';
-import { get } from 'idb-keyval';
+import { get } from './helpers/keyval';
 import type { Localized, SupportedLocale } from './helpers/localize';
 
 type ClientType = 'window' | 'worker' | 'sharedworker' | 'all';

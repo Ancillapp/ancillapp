@@ -1,5 +1,5 @@
 import { LitElement } from 'lit-element';
-import { get, set } from 'idb-keyval';
+import { get, set } from './keyval';
 
 type Constructor<T> = new (...args: any[]) => T;
 
