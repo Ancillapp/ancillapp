@@ -5,6 +5,16 @@ import {
   defaultLocale,
 } from './helpers/localize';
 
+import firebase from 'firebase/app';
+import 'firebase/analytics';
+
+firebase.initializeApp({
+  apiKey: 'AIzaSyB-OWVImHaeQUfkfWqsTsXQ089oa3P4Dvk',
+  projectId: 'ffb-ancillapp',
+  appId: '1:890551951388:web:7fc7ea5791d55be747bfd9',
+  measurementId: 'G-LV1NNN9Y30',
+});
+
 // Feature detect which polyfill needs to be imported.
 const needsTemplate = (() => {
   // no real <template> because no `content` property (IE and older browsers)

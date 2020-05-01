@@ -18,6 +18,10 @@ import template from './shell.template';
 import type { TopAppBar } from '@material/mwc-top-app-bar';
 import { get, set } from 'idb-keyval';
 
+import firebase from 'firebase/app';
+
+const analytics = firebase.analytics();
+
 @customElement('ancillapp-shell')
 export class Shell extends localize(LitElement) {
   public static styles = [sharedStyles, styles];
@@ -70,7 +74,13 @@ export class Shell extends localize(LitElement) {
   protected updated(changedProperties: PropertyValues) {
     if (changedProperties.size < 1 || changedProperties.has('_page')) {
       const pageTitle = `Ancillapp - ${
-        (this.localeData as { [key: string]: string })?.[this._page || 'home']
+        (this.localeData as { [key: string]: string })?.[
+          this._page || 'home'
+        ] ||
+        `${this._page?.[0]?.toUpperCase() || ''}${
+          this._page?.slice(1) || ''
+        }` ||
+        'Home'
       }`;
 
       updateMetadata({
@@ -161,14 +171,30 @@ export class Shell extends localize(LitElement) {
 
   protected _locationChanged(location: Location) {
     let path = window.decodeURIComponent(location.pathname);
+
     if (path === '/') {
       // Redirect to home, replacing the history state.
       // In this way, the user won't be trapped in the home page when trying to go back.
       window.history.replaceState({}, '', '/home');
       path = '/home';
     }
+
     const [page, subroute] = path.slice(1).split('/');
+
     this._loadPage(page, subroute);
+
+    const pageTitle = `Ancillapp - ${
+      (this.localeData as { [key: string]: string })?.[this._page || 'home'] ||
+      `${this._page?.[0]?.toUpperCase() || ''}${this._page?.slice(1) || ''}` ||
+      'Home'
+    }`;
+
+    analytics.logEvent('page_view', {
+      page_title: pageTitle,
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+    });
+
     // Close the drawer - in case the *path* change came from a link in the drawer.
     if (!this._narrow) {
       this._updateDrawerState(false);
