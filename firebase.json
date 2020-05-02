@@ -1,45 +1,84 @@
 {
-  "functions": {
-    "predeploy": "npm --prefix functions run build"
-  },
-  "hosting": {
-    "public": "pwa/dist/",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "/api/songs",
-        "function": "getSongs"
-      },
-      {
-        "source": "/api/songs/*",
-        "function": "getSong"
-      },
-      {
-        "source": "/api/prayers",
-        "function": "getPrayers"
-      },
-      {
-        "source": "/api/prayers/*",
-        "function": "getPrayer"
-      },
-      {
-        "source": "/api/ancillas",
-        "function": "getAncillas"
-      },
-      {
-        "source": "/api/ancillas/*",
-        "function": "getAncilla"
-      },
-      {
-        "source": "/api/notifications/subscribe",
-        "function": "subscribeForNotifications"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  },
+  "hosting": [
+    {
+      "target": "production",
+      "public": "pwa/dist/",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/api/songs",
+          "function": "getSongsProduction"
+        },
+        {
+          "source": "/api/songs/*",
+          "function": "getSongProduction"
+        },
+        {
+          "source": "/api/prayers",
+          "function": "getPrayersProduction"
+        },
+        {
+          "source": "/api/prayers/*",
+          "function": "getPrayerProduction"
+        },
+        {
+          "source": "/api/ancillas",
+          "function": "getAncillasProduction"
+        },
+        {
+          "source": "/api/ancillas/*",
+          "function": "getAncillaProduction"
+        },
+        {
+          "source": "/api/notifications/subscribe",
+          "function": "subscribeForNotificationsProduction"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "staging",
+      "public": "pwa/dist/",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/api/songs",
+          "function": "getSongsStaging"
+        },
+        {
+          "source": "/api/songs/*",
+          "function": "getSongStaging"
+        },
+        {
+          "source": "/api/prayers",
+          "function": "getPrayersStaging"
+        },
+        {
+          "source": "/api/prayers/*",
+          "function": "getPrayerStaging"
+        },
+        {
+          "source": "/api/ancillas",
+          "function": "getAncillasStaging"
+        },
+        {
+          "source": "/api/ancillas/*",
+          "function": "getAncillaStaging"
+        },
+        {
+          "source": "/api/notifications/subscribe",
+          "function": "subscribeForNotificationsStaging"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
   "headers": [
     {
       "source": "**/sw.js",

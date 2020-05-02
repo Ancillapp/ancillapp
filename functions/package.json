@@ -2,7 +2,7 @@
   "name": "functions",
   "scripts": {
     "start": "run-p start:firebase start:functions",
-    "start:firebase": "cross-env NODE_ENV=development firebase serve",
+    "start:firebase": "cross-env NODE_ENV=development firebase serve --only hosting:staging,functions",
     "start:functions": "cross-env NODE_ENV=development tsc -w",
     "build": "cross-env NODE_ENV=production tsc"
   },
