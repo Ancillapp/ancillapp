@@ -42,10 +42,16 @@ export default function template(this: AncillasList) {
               ({ code, name, thumbnail }) => html`
                 <a
                   href="/ancillas/${code}"
-                  title="${name[this.locale]}"
+                  title="Ancilla Domini - ${name[this.locale]}"
                   class="ancilla"
                 >
-                  <img src="${thumbnail}" width="340" height="480" />
+                  <img
+                    src="${thumbnail}"
+                    alt="Ancilla Domini - ${name[this.locale]}"
+                    width="340"
+                    height="480"
+                    loading="lazy"
+                  />
                   <p>${name[this.locale]}</p>
                 </a>
               `,
