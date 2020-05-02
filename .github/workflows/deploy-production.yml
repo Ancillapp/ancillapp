@@ -19,3 +19,5 @@ jobs:
         run: npm run build
       - name: Deploy
         run: npx firebase deploy --project ffb-ancillapp --token "$FIREBASE_TOKEN" --only hosting:production,functions:production
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
