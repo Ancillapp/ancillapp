@@ -1,0 +1,23 @@
+name: Deploy to staging
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@master
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install deps
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting:staging,functions:staging
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

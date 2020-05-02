@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "ffb-ancillapp"
+  },
+  "targets": {
+    "ffb-ancillapp": {
+      "hosting": {
+        "production": [
+          "ffb-ancillapp"
+        ],
+        "staging": [
+          "ffb-ancillapp-staging"
+        ]
+      }
+    }
+  }
+}

@@ -1,8 +1,30 @@
-export { processAncilla } from './process-ancilla';
-export { getAncillas } from './get-ancillas';
-export { getAncilla } from './get-ancilla';
-export { getSongs } from './get-songs';
-export { getSong } from './get-song';
-export { getPrayers } from './get-prayers';
-export { getPrayer } from './get-prayer';
-export { subscribeForNotifications } from './subscribe-for-notifications';
+import { processAncilla } from './process-ancilla';
+import { getAncillas } from './get-ancillas';
+import { getAncilla } from './get-ancilla';
+import { getSongs } from './get-songs';
+import { getSong } from './get-song';
+import { getPrayers } from './get-prayers';
+import { getPrayer } from './get-prayer';
+import { subscribeForNotifications } from './subscribe-for-notifications';
+
+export const production = {
+  processAncilla,
+  getAncillas,
+  getAncilla,
+  getSongs,
+  getSong,
+  getPrayers,
+  getPrayer,
+  subscribeForNotifications,
+};
+
+export const staging = {
+  processAncilla,
+  getAncillas,
+  getAncilla,
+  getSongs,
+  getSong,
+  getPrayers,
+  getPrayer,
+  subscribeForNotifications,
+};
