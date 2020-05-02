@@ -1,6 +1,9 @@
 import { html } from 'lit-element';
 import { LoadingButton } from './loading-button.component';
 
+import '@material/mwc-button';
+import '../loading-spinner/loading-spinner.component';
+
 export default function template(this: LoadingButton) {
   return html`
     <mwc-button
