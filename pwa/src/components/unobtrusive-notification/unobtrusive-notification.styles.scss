@@ -15,11 +15,13 @@ section {
       align-items: center;
     }
 
-    ::slotted(mwc-button) {
+    ::slotted(mwc-button),
+    ::slotted(loading-button) {
       --mdc-theme-primary: var(--ancillapp-secondary-text-color);
     }
 
-    ::slotted(mwc-button:last-child) {
+    ::slotted(mwc-button:last-child),
+    ::slotted(loading-button:last-child) {
       --mdc-theme-primary: var(--ancillapp-accent-color);
     }
   }

@@ -25,5 +25,6 @@
   "light": "Light",
   "dark": "Dark",
   "language": "Language",
-  "noResults": "No results"
+  "noResults": "No results",
+  "songsDownload": "Do you want to download all the songs to be able to consult them offline?"
 }

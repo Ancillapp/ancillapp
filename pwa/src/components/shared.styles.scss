@@ -22,6 +22,10 @@
   }
 }
 
+[hidden] {
+  display: none;
+}
+
 section {
   padding: 1rem 1.5rem;
   background: var(--ancillapp-card-color);

@@ -1,0 +1,9 @@
+:host {
+  position: relative;
+}
+
+loading-spinner {
+  position: absolute;
+  top: calc(50% - 0.5rem);
+  left: calc(50% - 0.5rem);
+}
