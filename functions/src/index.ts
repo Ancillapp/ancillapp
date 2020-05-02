@@ -8,23 +8,23 @@ import { getPrayer } from './get-prayer';
 import { subscribeForNotifications } from './subscribe-for-notifications';
 
 export const production = {
-  processAncillaProduction: processAncilla,
-  getAncillasProduction: getAncillas,
-  getAncillaProduction: getAncilla,
-  getSongsProduction: getSongs,
-  getSongProduction: getSong,
-  getPrayersProduction: getPrayers,
-  getPrayerProduction: getPrayer,
-  subscribeForNotificationsProduction: subscribeForNotifications,
+  processAncilla,
+  getAncillas,
+  getAncilla,
+  getSongs,
+  getSong,
+  getPrayers,
+  getPrayer,
+  subscribeForNotifications,
 };
 
 export const staging = {
-  processAncillaStaging: processAncilla,
-  getAncillasStaging: getAncillas,
-  getAncillaStaging: getAncilla,
-  getSongsStaging: getSongs,
-  getSongStaging: getSong,
-  getPrayersStaging: getPrayers,
-  getPrayerStaging: getPrayer,
-  subscribeForNotificationsStaging: subscribeForNotifications,
+  processAncilla,
+  getAncillas,
+  getAncilla,
+  getSongs,
+  getSong,
+  getPrayers,
+  getPrayer,
+  subscribeForNotifications,
 };

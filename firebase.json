@@ -7,31 +7,31 @@
       "rewrites": [
         {
           "source": "/api/songs",
-          "function": "getSongsProduction"
+          "function": "production-getSongs"
         },
         {
           "source": "/api/songs/*",
-          "function": "getSongProduction"
+          "function": "production-getSong"
         },
         {
           "source": "/api/prayers",
-          "function": "getPrayersProduction"
+          "function": "production-getPrayers"
         },
         {
           "source": "/api/prayers/*",
-          "function": "getPrayerProduction"
+          "function": "production-getPrayer"
         },
         {
           "source": "/api/ancillas",
-          "function": "getAncillasProduction"
+          "function": "production-getAncillas"
         },
         {
           "source": "/api/ancillas/*",
-          "function": "getAncillaProduction"
+          "function": "production-getAncilla"
         },
         {
           "source": "/api/notifications/subscribe",
-          "function": "subscribeForNotificationsProduction"
+          "function": "production-subscribeForNotifications"
         },
         {
           "source": "**",
@@ -46,31 +46,31 @@
       "rewrites": [
         {
           "source": "/api/songs",
-          "function": "getSongsStaging"
+          "function": "staging-getSongs"
         },
         {
           "source": "/api/songs/*",
-          "function": "getSongStaging"
+          "function": "staging-getSong"
         },
         {
           "source": "/api/prayers",
-          "function": "getPrayersStaging"
+          "function": "staging-getPrayers"
         },
         {
           "source": "/api/prayers/*",
-          "function": "getPrayerStaging"
+          "function": "staging-getPrayer"
         },
         {
           "source": "/api/ancillas",
-          "function": "getAncillasStaging"
+          "function": "staging-getAncillas"
         },
         {
           "source": "/api/ancillas/*",
-          "function": "getAncillaStaging"
+          "function": "staging-getAncilla"
         },
         {
           "source": "/api/notifications/subscribe",
-          "function": "subscribeForNotificationsStaging"
+          "function": "staging-subscribeForNotifications"
         },
         {
           "source": "**",
