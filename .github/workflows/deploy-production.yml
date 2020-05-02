@@ -18,4 +18,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        run: npx firebase deploy --only hosting:production,functions:production
+        run: npx firebase deploy --project ffb-ancillapp --token "$FIREBASE_TOKEN" --only hosting:production,functions:production
