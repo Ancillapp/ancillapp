@@ -32,6 +32,16 @@
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
+
+  ::slotted(mwc-button),
+  ::slotted(loading-button) {
+    --mdc-theme-primary: var(--ancillapp-secondary-text-color);
+  }
+
+  ::slotted(mwc-button:last-child),
+  ::slotted(loading-button:last-child) {
+    --mdc-theme-primary: var(--ancillapp-accent-color);
+  }
 }
 
 @media (min-width: 28.75rem) {
