@@ -84,7 +84,7 @@ const getResponse = async (
 ): Promise<Response> => {
   const db = await dbPromise;
 
-  if (!id) {
+  if (!id || id === 'fullData') {
     const cachedData = await db.getAll(entity);
 
     const localDBSummaryDataUpdatePromise = updateLocalDBSummaryData(
@@ -94,7 +94,22 @@ const getResponse = async (
     );
 
     return cachedData.length > 0
-      ? new Response(JSON.stringify(cachedData))
+      ? new Response(
+          JSON.stringify(
+            entity === 'songs'
+              ? cachedData.sort(({ number: a }: any, { number: b }: any) => {
+                  const normalizedA = a.replace('bis', '').padStart(4, 0);
+                  const normalizedB = b.replace('bis', '').padStart(4, 0);
+
+                  if (normalizedA === normalizedB) {
+                    return b.endsWith('bis') ? -1 : 1;
+                  }
+
+                  return normalizedA < normalizedB ? -1 : 1;
+                })
+              : cachedData,
+          ),
+        )
       : localDBSummaryDataUpdatePromise;
   }
 
@@ -128,7 +143,7 @@ self.addEventListener('fetch', (event) => {
     return event.respondWith(fetch(event.request));
   }
 
-  const match = event.request.url.match(/\/api\/([a-z]+)\/?(.*)/);
+  const match = event.request.url.match(/\/api\/([a-z]+)[\/?]?(.*)/);
 
   if (!match) {
     return event.respondWith(fetch(event.request));
