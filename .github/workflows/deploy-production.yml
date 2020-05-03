@@ -24,7 +24,7 @@ jobs:
       - name: Purge cache, audit, and report
         run: |
           # Install libgbm
-          apt -y install libgbm1
+          sudo apt-get -y install libgbm1
           # Run the postdeploy script
           node scripts/postdeploy
         env:
