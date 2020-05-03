@@ -134,16 +134,16 @@ export default function template(this: Shell) {
 
     <snack-bar ?active="${this._updateNotificationShown}">
       <slot>${this.localeData?.updateAvailable}</slot>
-      <div slot="actions">
-        <mwc-button
-          @click="${() => (this._updateNotificationShown = false)}"
-          label="${this.localeData?.ignore}"
-        ></mwc-button>
-        <mwc-button
-          @click="${() => this._updateApp()}"
-          label="${this.localeData?.updateNow}"
-        ></mwc-button>
-      </div>
+      <mwc-button
+        slot="actions"
+        @click="${() => (this._updateNotificationShown = false)}"
+        label="${this.localeData?.ignore}"
+      ></mwc-button>
+      <mwc-button
+        slot="actions"
+        @click="${() => this._updateApp()}"
+        label="${this.localeData?.updateNow}"
+      ></mwc-button>
     </snack-bar>
   `;
 }

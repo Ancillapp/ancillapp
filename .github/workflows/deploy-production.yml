@@ -23,12 +23,8 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Purge cache, audit, and report
         run: |
-          # Set Chrome path so that chrome-launcher can find it
-          export CHROME_PATH="$(pwd)/chrome-linux/chrome"
-          # Deprecated, but the download script needs it
-          export LIGHTHOUSE_CHROMIUM_PATH="$CHROME_PATH"
-          # Download chrome
-          curl https://raw.githubusercontent.com/GoogleChrome/chrome-launcher/v0.13.1/scripts/download-chrome.sh | bash
+          # Install libgbm
+          sudo apt-get -y install libgbm1
           # Run the postdeploy script
           node scripts/postdeploy
         env:
