@@ -1,6 +1,8 @@
 import { setCacheNameDetails, clientsClaim } from 'workbox-core';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute, NavigationRoute } from 'workbox-routing';
+import { CacheFirst } from 'workbox-strategies';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { PrecacheEntry } from 'workbox-precaching/_types';
 
 type ClientType = 'window' | 'worker' | 'sharedworker' | 'all';
@@ -39,6 +41,18 @@ if (process.env.NODE_ENV === 'production') {
   });
   precacheAndRoute(self.__WB_MANIFEST);
   registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
+  registerRoute(
+    /^https:\/\/firebasestorage\.googleapis\.com\/.+$/,
+    new CacheFirst({
+      cacheName: 'ancillapp-assets',
+      plugins: [
+        new CacheableResponsePlugin({
+          statuses: [0, 200],
+        }),
+      ],
+    }),
+    'GET',
+  );
 } else {
   console.groupCollapsed('Workbox precache manifest');
   self.__WB_MANIFEST.forEach((entry) => console.info(entry));
