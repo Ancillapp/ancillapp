@@ -15,7 +15,6 @@ const config: Configuration = {
   entry: path.resolve(__dirname, '../src/index'),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    pathinfo: false,
   },
   resolve: {
     alias: {
@@ -90,15 +89,12 @@ const config: Configuration = {
       {
         from: path.resolve(__dirname, '../src/assets'),
         to: '.',
-        transform: (content, path) =>
-          path.endsWith('.json')
-            ? JSON.stringify(JSON.parse(content.toString()))
-            : content,
+        ignore: [{ glob: '**/.DS_Store' }],
       },
     ]),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].css',
-      chunkFilename: 'styles/[id].css',
+      filename: 'styles/[name].[contenthash].css',
+      chunkFilename: 'styles/[id].[contenthash].css',
     }),
     new ScriptExtHtmlPlugin({
       defaultAttribute: 'defer',

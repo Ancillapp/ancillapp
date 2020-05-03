@@ -49,9 +49,9 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
 
     public async updateCurrentLocaleData() {
       if (!localesPromises[currentLocale]) {
-        localesPromises[currentLocale] = fetch(
-          `/locales/${currentLocale}.json`,
-        ).then((res) => res.json());
+        localesPromises[currentLocale] = import(
+          `../locales/${currentLocale}.json`
+        );
       }
 
       currentLocaleData = await localesPromises[currentLocale]!;

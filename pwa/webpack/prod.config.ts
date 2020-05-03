@@ -11,6 +11,9 @@ import baseConfig from './base.config';
 const config: Configuration = smartMerge(baseConfig, {
   mode: 'production',
   devtool: 'source-map',
+  output: {
+    filename: '[name].[contenthash].js',
+  },
   optimization: {
     minimizer: [
       new TerserPlugin({
