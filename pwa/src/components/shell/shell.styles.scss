@@ -89,11 +89,3 @@ main {
     min-height: calc(100% - 64px);
   }
 }
-
-snack-bar mwc-button {
-  --mdc-theme-primary: var(--ancillapp-secondary-text-color);
-
-  &:last-child {
-    --mdc-theme-primary: var(--ancillapp-accent-color);
-  }
-}

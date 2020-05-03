@@ -3,6 +3,10 @@ import { mongoDb } from './helpers/mongo';
 
 export const getAncilla = functions.https.onRequest(async (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
+  res.set(
+    'Cache-Control',
+    'public, s-maxage=86400, stale-while-revalidate=86400',
+  );
 
   const inputCode = req.path.match(/\/api\/ancillas\/([a-z\d_-]+)/i)?.[1];
 

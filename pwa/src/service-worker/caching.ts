@@ -77,6 +77,23 @@ const updateLocalDBDetailData = async (
   return clonedResponse;
 };
 
+const formatCachedResponse = (entity: Entity, cachedData: any) => {
+  if (entity === 'songs') {
+    return cachedData.sort(({ number: a }: any, { number: b }: any) => {
+      const normalizedA = a.replace('bis', '').padStart(4, 0);
+      const normalizedB = b.replace('bis', '').padStart(4, 0);
+
+      if (normalizedA === normalizedB) {
+        return b.endsWith('bis') ? -1 : 1;
+      }
+
+      return normalizedA < normalizedB ? -1 : 1;
+    });
+  }
+
+  return cachedData;
+};
+
 const getResponse = async (
   request: Request,
   entity: Entity,
@@ -94,22 +111,7 @@ const getResponse = async (
     );
 
     return cachedData.length > 0
-      ? new Response(
-          JSON.stringify(
-            entity === 'songs'
-              ? cachedData.sort(({ number: a }: any, { number: b }: any) => {
-                  const normalizedA = a.replace('bis', '').padStart(4, 0);
-                  const normalizedB = b.replace('bis', '').padStart(4, 0);
-
-                  if (normalizedA === normalizedB) {
-                    return b.endsWith('bis') ? -1 : 1;
-                  }
-
-                  return normalizedA < normalizedB ? -1 : 1;
-                })
-              : cachedData,
-          ),
-        )
+      ? new Response(JSON.stringify(formatCachedResponse(entity, cachedData)))
       : localDBSummaryDataUpdatePromise;
   }
 

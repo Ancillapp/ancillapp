@@ -81,7 +81,7 @@ if (
             : defaultLocale);
 
         // Prefetch the needed locale file
-        return fetch(`/locales/${locale}.json`);
+        return import(`./locales/${locale}.json`);
       }),
       get<string>('theme').then(
         (storedTheme) =>

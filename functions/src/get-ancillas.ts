@@ -3,6 +3,10 @@ import { mongoDb } from './helpers/mongo';
 
 export const getAncillas = functions.https.onRequest(async (_, res) => {
   res.set('Access-Control-Allow-Origin', '*');
+  res.set(
+    'Cache-Control',
+    'public, s-maxage=86400, stale-while-revalidate=86400',
+  );
 
   const db = await mongoDb;
   const ancillasCollection = db.collection('ancillas');
