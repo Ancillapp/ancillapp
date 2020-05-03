@@ -101,6 +101,15 @@
           "value": "no-cache"
         }
       ]
+    },
+    {
+      "source": "**",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=86400"
+        }
+      ]
     }
   ],
   "emulators": {
