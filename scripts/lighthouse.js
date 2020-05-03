@@ -54,7 +54,7 @@ const auditPage = async (chrome, url) => {
 module.exports = async () => {
   process.stdout.write('Starting Chrome...\n');
   const chrome = await chromeLauncher.launch({
-    chromeFlags: ['--headless'],
+    chromeFlags: ['--headless', '--no-sandbox'],
   });
 
   const results = await configs.reduce(
