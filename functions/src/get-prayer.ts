@@ -3,6 +3,10 @@ import { mongoDb } from './helpers/mongo';
 
 export const getPrayer = functions.https.onRequest(async (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
+  res.set(
+    'Cache-Control',
+    'public, s-maxage=86400, stale-while-revalidate=86400',
+  );
 
   const slug = req.path.match(/\/api\/prayers\/([a-z-]+)/)?.[1];
 
