@@ -54,7 +54,8 @@ const auditPage = async (chrome, url) => {
 module.exports = async () => {
   process.stdout.write('Starting Chrome...\n');
   const chrome = await chromeLauncher.launch({
-    chromeFlags: ['--headless', '--no-sandbox'],
+    chromeFlags: ['--headless', '--disable-gpu', '--no-sandbox'],
+    maxConnectionRetries: 120,
   });
 
   const results = await configs.reduce(
