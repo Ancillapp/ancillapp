@@ -1,0 +1,43 @@
+:host {
+  display: inline-block;
+  position: relative;
+}
+
+select {
+  appearance: none;
+  outline: none;
+  background: transparent;
+  color: var(--ancillapp-primary-text-color);
+  border: 1px solid var(--ancillapp-disabled-text-color);
+  border-radius: 4px;
+  font-family: var(--ancillapp-text-font);
+  font-size: 1rem;
+  padding: 0.75rem 2rem 0.75rem 1rem;
+  width: 12.5rem;
+
+  & + svg {
+    position: absolute;
+    top: 0;
+    right: 0.25rem;
+    width: 1.5rem;
+    height: 100%;
+    fill: var(--ancillapp-disabled-text-color);
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: var(--ancillapp-primary-text-color);
+  }
+
+  &.active {
+    border-color: var(--ancillapp-primary-color);
+
+    & + svg {
+      fill: var(--ancillapp-primary-color);
+    }
+  }
+}
+
+slot {
+  display: none;
+}

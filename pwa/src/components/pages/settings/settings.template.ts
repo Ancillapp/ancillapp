@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { SettingsPage } from './settings.component';
 
-import '@material/mwc-select';
+import '../../outlined-select/outlined-select.component';
 
 export default function template(this: SettingsPage) {
   return html`
@@ -9,36 +9,30 @@ export default function template(this: SettingsPage) {
       <ul>
         <li>
           <label for="theme">${this.localeData?.theme}</label>
-          <mwc-select
+          <outlined-select
             id="theme"
-            outlined
             @change=${this._handleThemeChange}
             value="${document.body.dataset.theme || 'system'}"
           >
-            <mwc-list-item value="system"
-              >${this.localeData?.system || 'System'}</mwc-list-item
+            <option value="system"
+              >${this.localeData?.system || 'System'}</option
             >
-            <mwc-list-item value="light"
-              >${this.localeData?.light || 'Light'}</mwc-list-item
-            >
-            <mwc-list-item value="dark"
-              >${this.localeData?.dark || 'Dark'}</mwc-list-item
-            >
-          </mwc-select>
+            <option value="light">${this.localeData?.light || 'Light'}</option>
+            <option value="dark">${this.localeData?.dark || 'Dark'}</option>
+          </outlined-select>
         </li>
         <li>
           <label for="language">${this.localeData?.language}</label>
-          <mwc-select
+          <outlined-select
             id="language"
-            outlined
             @change=${this._handleLanguageChange}
             value="${this.locale}"
           >
-            <mwc-list-item value="it">Italiano</mwc-list-item>
-            <mwc-list-item value="en">English</mwc-list-item>
-            <mwc-list-item value="de">Deutsch</mwc-list-item>
-            <mwc-list-item value="pt">Português</mwc-list-item>
-          </mwc-select>
+            <option value="it">Italiano</option>
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="pt">Português</option>
+          </outlined-select>
         </li>
       </ul>
     </section>
