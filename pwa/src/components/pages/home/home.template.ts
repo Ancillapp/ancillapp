@@ -19,15 +19,15 @@ export default function template(this: HomePage) {
           </a>
         </li>
         <li>
-          <a href="/prayers">
-            <span>${this.localeData?.prayDailyPrayers}</span>
-            ${prayersIcon}
-          </a>
-        </li>
-        <li>
           <a href="/songs">
             <span>${this.localeData?.singFraternitySongs}</span>
             ${songsIcon}
+          </a>
+        </li>
+        <li>
+          <a href="/prayers">
+            <span>${this.localeData?.prayDailyPrayers}</span>
+            ${prayersIcon}
           </a>
         </li>
         <li>
