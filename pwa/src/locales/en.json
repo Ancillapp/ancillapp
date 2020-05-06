@@ -27,5 +27,14 @@
   "language": "Language",
   "noResults": "No results",
   "songsDownload": "Do you want to download all the songs to be able to consult them offline?",
-  "prayersDownload": "Do you want to download all the prayers to be able to consult them offline?"
+  "prayersDownload": "Do you want to download all the prayers to be able to consult them offline?",
+  "date": "Date",
+  "invitatory": "Invitatory",
+  "office": "Office",
+  "lauds": "Lauds",
+  "terce": "Terce",
+  "sext": "Sext",
+  "none": "None",
+  "vespers": "Vespers",
+  "compline": "Compline"
 }

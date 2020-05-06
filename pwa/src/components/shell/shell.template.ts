@@ -109,12 +109,11 @@ export default function template(this: Shell) {
             ?active="${this._page === 'songs'}"
             subroute="${this._subroute}"
           ></songs-page>
-          ${undefined /*
-            <breviary-page
-              class="page"
-              ?active="${this._page === 'breviary'}"
-            ></breviary-page>
-          */}
+          <breviary-page
+            class="page padded"
+            ?active="${this._page === 'breviary'}"
+            subroute="${this._subroute}"
+          ></breviary-page>
           <prayers-page
             class="page padded"
             ?active="${this._page === 'prayers'}"

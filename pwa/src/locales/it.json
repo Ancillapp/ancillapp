@@ -27,5 +27,14 @@
   "language": "Lingua",
   "noResults": "Nessun risultato",
   "songsDownload": "Vuoi scaricare tutte le canzoni ora in modo da poterle consultare anche quando sei offline?",
-  "prayersDownload": "Vuoi scaricare tutte le preghiere ora in modo da poterle consultare anche quando sei offline?"
+  "prayersDownload": "Vuoi scaricare tutte le preghiere ora in modo da poterle consultare anche quando sei offline?",
+  "date": "Data",
+  "invitatory": "Invitatorio",
+  "office": "Ufficio delle Letture",
+  "lauds": "Lodi",
+  "terce": "Ora Terza",
+  "sext": "Ora Sesta",
+  "none": "Ora Nona",
+  "vespers": "Vespri",
+  "compline": "Compieta"
 }

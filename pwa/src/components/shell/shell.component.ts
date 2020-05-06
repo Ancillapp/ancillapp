@@ -47,7 +47,7 @@ export class Shell extends localize(LitElement) {
     'home',
     'ancillas',
     'songs',
-    // 'breviary',
+    'breviary',
     'prayers',
   ];
   protected readonly _bottomNavPages = ['settings', 'info'];
@@ -179,9 +179,9 @@ export class Shell extends localize(LitElement) {
       path = '/home';
     }
 
-    const [page, subroute] = path.slice(1).split('/');
+    const [page, ...subroutes] = path.slice(1).split('/');
 
-    this._loadPage(page, subroute);
+    this._loadPage(page, subroutes.join('/'));
 
     const pageTitle = `Ancillapp - ${
       (this.localeData as { [key: string]: string })?.[this._page || 'home'] ||

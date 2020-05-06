@@ -1,0 +1,59 @@
+:host {
+  display: flex;
+}
+
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--ancillapp-display-font);
+  border-bottom: 1px solid var(--ancillapp-disabled-text-color);
+  font-size: 1.25rem;
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-family: var(--ancillapp-display-font);
+  color: var(--ancillapp-accent-color);
+}
+
+small {
+  font-size: 0.8rem;
+}
+
+.small-caps {
+  font-variant: small-caps;
+}
+
+strong {
+  font-weight: normal;
+  color: var(--ancillapp-accent-color);
+}
+
+.alternative {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loading-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  align-self: flex-start;
+}

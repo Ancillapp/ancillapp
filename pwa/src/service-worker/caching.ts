@@ -2,6 +2,8 @@ import { initDB } from '../helpers/utils';
 
 type Entity = 'songs' | 'prayers' | 'ancillas';
 
+const supportedEntities: Entity[] = ['songs', 'prayers', 'ancillas'];
+
 const entityToIdFieldMap: { [key in Entity]: string } = {
   songs: 'number',
   prayers: 'slug',
@@ -152,6 +154,10 @@ self.addEventListener('fetch', (event) => {
   }
 
   const [, entity, id] = match;
+
+  if (!supportedEntities.includes(entity as Entity)) {
+    return event.respondWith(fetch(event.request));
+  }
 
   return event.respondWith(getResponse(event.request, entity as Entity, id));
 });
