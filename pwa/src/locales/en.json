@@ -36,5 +36,6 @@
   "sext": "Sext",
   "none": "None",
   "vespers": "Vespers",
-  "compline": "Compline"
+  "compline": "Compline",
+  "syncInProgress": "Sync in progress..."
 }

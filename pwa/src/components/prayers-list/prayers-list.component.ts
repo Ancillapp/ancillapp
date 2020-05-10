@@ -2,6 +2,10 @@ import { customElement, property } from 'lit-element';
 import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
+import {
+  staleWhileRevalidate,
+  APIResponse,
+} from '../../helpers/stale-while-revalidate';
 
 import sharedStyles from '../shared.styles';
 import styles from './prayers-list.styles';
@@ -21,20 +25,11 @@ export class PrayersList extends localize(PageViewElement) {
 
   protected render = template;
 
-  protected _prayers: Promise<PrayerSummary[]> = get<string>(
-    'prayersDownloadPreference',
-  )
-    .then((prayersDownloadPreference) =>
-      fetch(
-        `${apiUrl}/prayers${
-          prayersDownloadPreference === 'yes' ? '?fullData' : ''
-        }`,
-      ),
-    )
-    .then((res) => res.json());
-
   @property({ type: Object })
-  protected _displayedPrayers: Promise<PrayerSummary[]> = this._prayers;
+  protected _prayerStatus: APIResponse<PrayerSummary[]> = {
+    loading: true,
+    refreshing: false,
+  };
 
   @property({ type: Boolean })
   protected _needPrayersDownloadPermission?: boolean;
@@ -45,13 +40,25 @@ export class PrayersList extends localize(PageViewElement) {
   constructor() {
     super();
 
-    get<string>('prayersDownloadPreference').then(
-      (prayersDownloadPreference) => {
-        if (!prayersDownloadPreference || prayersDownloadPreference === 'no') {
-          this._needPrayersDownloadPermission = true;
-        }
-      },
+    this._preparePrayers();
+  }
+
+  private async _preparePrayers() {
+    const prayersDownloadPreference = await get<string>(
+      'prayersDownloadPreference',
     );
+
+    if (!prayersDownloadPreference || prayersDownloadPreference === 'no') {
+      this._needPrayersDownloadPermission = true;
+    }
+
+    for await (const status of staleWhileRevalidate<PrayerSummary[]>(
+      `${apiUrl}/prayers${
+        prayersDownloadPreference === 'yes' ? '?fullData' : ''
+      }`,
+    )) {
+      this._prayerStatus = status;
+    }
   }
 
   protected async _updatePrayersDownloadPermission(
@@ -71,12 +78,17 @@ export class PrayersList extends localize(PageViewElement) {
 
     this._downloadingPrayers = true;
 
-    try {
-      const res = await fetch(`${apiUrl}/prayers?fullData`);
-      await res.json();
-      await set('prayersDownloadPreference', 'yes');
-      this._needPrayersDownloadPermission = false;
-    } catch {}
+    for await (const {
+      loading,
+      refreshing,
+      data,
+      error,
+    } of staleWhileRevalidate<PrayerSummary[]>(`${apiUrl}/prayers?fullData`)) {
+      if (!loading && !refreshing && data && !error) {
+        await set('prayersDownloadPreference', 'yes');
+        this._needPrayersDownloadPermission = false;
+      }
+    }
 
     this._downloadingPrayers = false;
   }

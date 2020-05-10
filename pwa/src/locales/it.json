@@ -36,5 +36,6 @@
   "sext": "Ora Sesta",
   "none": "Ora Nona",
   "vespers": "Vespri",
-  "compline": "Compieta"
+  "compline": "Compieta",
+  "syncInProgress": "Sincronizzazione in corso..."
 }
