@@ -1,6 +1,10 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
+import {
+  staleWhileRevalidate,
+  APIResponse,
+} from '../../helpers/stale-while-revalidate';
 
 import sharedStyles from '../shared.styles';
 import styles from './song-viewer.styles';
@@ -24,7 +28,18 @@ export class SongViewer extends localize(PageViewElement) {
   public song?: string;
 
   @property({ type: Object })
-  protected _songPromise: Promise<Song> = new Promise(() => {});
+  protected _songStatus: APIResponse<Song> = {
+    loading: true,
+    refreshing: false,
+  };
+
+  private async _fetchSong(number: string) {
+    for await (const status of staleWhileRevalidate<Song>(
+      `${apiUrl}/songs/${number}`,
+    )) {
+      this._songStatus = status;
+    }
+  }
 
   attributeChangedCallback(
     name: string,
@@ -32,9 +47,7 @@ export class SongViewer extends localize(PageViewElement) {
     value: string | null,
   ) {
     if (this.active && name === 'song' && value && old !== value) {
-      this._songPromise = fetch(`${apiUrl}/songs/${value}`).then((res) =>
-        res.json(),
-      );
+      this._fetchSong(value);
     }
     super.attributeChangedCallback(name, old, value);
   }
