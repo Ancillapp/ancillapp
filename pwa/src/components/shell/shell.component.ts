@@ -45,10 +45,10 @@ export class Shell extends localize(LitElement) {
 
   protected readonly _topNavPages = [
     'home',
-    'ancillas',
+    'breviary',
     'songs',
-    // 'breviary',
     'prayers',
+    'ancillas',
   ];
   protected readonly _bottomNavPages = ['settings', 'info'];
 
@@ -59,14 +59,14 @@ export class Shell extends localize(LitElement) {
     this._checkForUpdates();
     this._observeForThemeChanges();
 
-    if (window.matchMedia('(min-width: 768px)').matches) {
+    if (window.matchMedia('(min-width: 48rem)').matches) {
       get<boolean>('drawerOpened').then((drawerOpened) =>
         this._updateDrawerState(drawerOpened),
       );
     }
 
     installMediaQueryWatcher(
-      '(min-width: 768px)',
+      '(min-width: 48rem)',
       (matches) => (this._narrow = matches),
     );
   }
@@ -179,9 +179,9 @@ export class Shell extends localize(LitElement) {
       path = '/home';
     }
 
-    const [page, subroute] = path.slice(1).split('/');
+    const [page, ...subroutes] = path.slice(1).split('/');
 
-    this._loadPage(page, subroute);
+    this._loadPage(page, subroutes.join('/'));
 
     const pageTitle = `Ancillapp - ${
       (this.localeData as { [key: string]: string })?.[this._page || 'home'] ||

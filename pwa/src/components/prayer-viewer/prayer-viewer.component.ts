@@ -1,6 +1,10 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
+import {
+  staleWhileRevalidate,
+  APIResponse,
+} from '../../helpers/stale-while-revalidate';
 
 import sharedStyles from '../shared.styles';
 import styles from './prayer-viewer.styles';
@@ -24,7 +28,18 @@ export class PrayerViewer extends localize(PageViewElement) {
   public prayer?: string;
 
   @property({ type: Object })
-  protected _prayerPromise: Promise<Prayer> = new Promise(() => {});
+  protected _prayerStatus: APIResponse<Prayer> = {
+    loading: true,
+    refreshing: false,
+  };
+
+  private async _fetchPrayer(slug: string) {
+    for await (const status of staleWhileRevalidate<Prayer>(
+      `${apiUrl}/prayers/${slug}`,
+    )) {
+      this._prayerStatus = status;
+    }
+  }
 
   attributeChangedCallback(
     name: string,
@@ -32,9 +47,7 @@ export class PrayerViewer extends localize(PageViewElement) {
     value: string | null,
   ) {
     if (this.active && name === 'prayer' && value && old !== value) {
-      this._prayerPromise = fetch(`${apiUrl}/prayers/${value}`).then((res) =>
-        res.json(),
-      );
+      this._fetchPrayer(value);
     }
     super.attributeChangedCallback(name, old, value);
   }

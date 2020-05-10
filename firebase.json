@@ -30,6 +30,10 @@
           "function": "production-getAncilla"
         },
         {
+          "source": "/api/breviary",
+          "function": "production-getBreviary"
+        },
+        {
           "source": "/api/notifications/subscribe",
           "function": "production-subscribeForNotifications"
         },
@@ -67,6 +71,10 @@
         {
           "source": "/api/ancillas/*",
           "function": "staging-getAncilla"
+        },
+        {
+          "source": "/api/breviary",
+          "function": "staging-getBreviary"
         },
         {
           "source": "/api/notifications/subscribe",

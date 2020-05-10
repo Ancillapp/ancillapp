@@ -12,23 +12,22 @@ export default function template(this: HomePage) {
     <section>
       <h2>${this.localeData?.peaceAndGood}</h2>
       <ul>
-        ${undefined /* <li>
-          <a href="/breviary/${new Date().toISOString().slice(0, 10)}">
+        <li>
+          <a href="/breviary">
             <span>${this.localeData?.prayLiturgy}</span>
             ${breviaryIcon}
-          </a>
-        </li>
-        */}
-        <li>
-          <a href="/prayers">
-            <span>${this.localeData?.prayDailyPrayers}</span>
-            ${prayersIcon}
           </a>
         </li>
         <li>
           <a href="/songs">
             <span>${this.localeData?.singFraternitySongs}</span>
             ${songsIcon}
+          </a>
+        </li>
+        <li>
+          <a href="/prayers">
+            <span>${this.localeData?.prayDailyPrayers}</span>
+            ${prayersIcon}
           </a>
         </li>
         <li>

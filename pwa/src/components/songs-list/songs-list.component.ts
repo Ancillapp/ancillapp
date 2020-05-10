@@ -3,6 +3,10 @@ import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
 import Fuse from 'fuse.js';
+import {
+  staleWhileRevalidate,
+  APIResponse,
+} from '../../helpers/stale-while-revalidate';
 
 import sharedStyles from '../shared.styles';
 import styles from './songs-list.styles';
@@ -21,30 +25,19 @@ export class SongsList extends localize(PageViewElement) {
 
   protected render = template;
 
-  protected _songs: Promise<SongSummary[]> = get<string>(
-    'songsDownloadPreference',
-  )
-    .then((songsDownloadPreference) =>
-      fetch(
-        `${apiUrl}/songs${
-          songsDownloadPreference === 'yes' ? '?fullData' : ''
-        }`,
-      ),
-    )
-    .then((res) => res.json());
+  private _fuse?: Fuse<SongSummary, { keys: ['number', 'title'] }>;
 
-  private _fuse = this._songs.then(
-    (songs) =>
-      new Fuse(songs, {
-        keys: ['number', 'title'],
-      }),
-  );
+  @property({ type: Object })
+  protected _songsStatus: APIResponse<SongSummary[]> = {
+    loading: true,
+    refreshing: false,
+  };
 
   @property({ type: String })
   protected _searchTerm = '';
 
-  @property({ type: Object })
-  protected _displayedSongs: Promise<SongSummary[]> = this._songs;
+  @property({ type: Array })
+  protected _displayedSongs: SongSummary[] = [];
 
   @property({ type: Boolean })
   protected _needSongsDownloadPermission?: boolean;
@@ -55,17 +48,51 @@ export class SongsList extends localize(PageViewElement) {
   constructor() {
     super();
 
-    get<string>('songsDownloadPreference').then((songsDownloadPreference) => {
-      if (!songsDownloadPreference || songsDownloadPreference === 'no') {
-        this._needSongsDownloadPermission = true;
-      }
-    });
+    this._prepareSongs();
   }
 
-  protected _handleSearch({ detail }: CustomEvent<string>) {
-    this._displayedSongs = detail
-      ? this._fuse.then((fuse) => fuse.search(detail).map(({ item }) => item))
-      : this._songs;
+  private async _prepareSongs() {
+    const songsDownloadPreference = await get<string>(
+      'songsDownloadPreference',
+    );
+
+    if (!songsDownloadPreference || songsDownloadPreference === 'no') {
+      this._needSongsDownloadPermission = true;
+    }
+
+    for await (const status of staleWhileRevalidate<SongSummary[]>(
+      `${apiUrl}/songs${songsDownloadPreference === 'yes' ? '?fullData' : ''}`,
+    )) {
+      this._songsStatus = status;
+
+      if (status.data) {
+        if (!this._fuse) {
+          this._fuse = new Fuse(status.data, {
+            keys: ['number', 'title'],
+          });
+        }
+
+        this._displayedSongs = this._searchTerm
+          ? this._fuse.search(this._searchTerm).map(({ item }) => item)
+          : status.data;
+      }
+    }
+  }
+
+  protected _handleSearch({ detail: searchTerm }: CustomEvent<string>) {
+    this._searchTerm = searchTerm;
+
+    const songs = this._songsStatus.data || [];
+
+    if (!this._fuse) {
+      this._fuse = new Fuse(songs, {
+        keys: ['number', 'title'],
+      });
+    }
+
+    this._displayedSongs = this._searchTerm
+      ? this._fuse.search(this._searchTerm).map(({ item }) => item)
+      : songs;
   }
 
   protected async _updateSongsDownloadPermission(
@@ -85,12 +112,17 @@ export class SongsList extends localize(PageViewElement) {
 
     this._downloadingSongs = true;
 
-    try {
-      const res = await fetch(`${apiUrl}/songs?fullData`);
-      await res.json();
-      await set('songsDownloadPreference', 'yes');
-      this._needSongsDownloadPermission = false;
-    } catch {}
+    for await (const {
+      loading,
+      refreshing,
+      data,
+      error,
+    } of staleWhileRevalidate<SongSummary[]>(`${apiUrl}/songs?fullData`)) {
+      if (!loading && !refreshing && data && !error) {
+        await set('songsDownloadPreference', 'yes');
+        this._needSongsDownloadPermission = false;
+      }
+    }
 
     this._downloadingSongs = false;
   }

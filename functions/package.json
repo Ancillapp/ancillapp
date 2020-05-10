@@ -16,11 +16,15 @@
     "firebase-functions": "^3.6.1",
     "gs": "https://github.com/sina-masnadi/node-gs/tarball/master",
     "mongodb": "^3.5.6",
+    "node-fetch": "^2.6.0",
+    "sanitize-html": "^1.23.0",
     "web-push": "^3.4.3"
   },
   "devDependencies": {
     "@types/child-process-promise": "^2.2.1",
     "@types/mongodb": "^3.5.14",
+    "@types/node-fetch": "^2.5.7",
+    "@types/sanitize-html": "^1.23.0",
     "@types/web-push": "^3.3.0",
     "cross-env": "^7.0.2",
     "firebase-functions-test": "^0.2.1",
