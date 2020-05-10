@@ -2,8 +2,17 @@
   text-align: center;
 }
 
+mwc-textfield {
+  margin-top: 1rem;
+
+  @media (min-width: 28.75rem) {
+    margin-top: 0;
+  }
+}
+
 ul {
   padding: 0;
+  margin: 1.5rem 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
