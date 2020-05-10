@@ -43,7 +43,7 @@ export default function template(this: SongsList) {
       ></search-input>
     </div>
 
-    ${this._songStatus.loading
+    ${this._songsStatus.loading
       ? html`
           <div class="loading-container">
             <loading-spinner></loading-spinner>
@@ -73,7 +73,7 @@ export default function template(this: SongsList) {
 
     <mwc-snackbar
       leading
-      ?open="${this._songStatus.refreshing}"
+      ?open="${this._songsStatus.refreshing}"
       labelText="${this.localeData?.syncInProgress}"
     ></mwc-snackbar>
   `;

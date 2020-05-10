@@ -36,7 +36,7 @@ export default function template(this: PrayersList) {
       ></loading-button>
     </unobtrusive-notification>
 
-    ${this._prayerStatus.loading || !this._prayerStatus.data
+    ${this._prayersStatus.loading || !this._prayersStatus.data
       ? html`
           <div class="loading-container">
             <loading-spinner></loading-spinner>
@@ -44,11 +44,11 @@ export default function template(this: PrayersList) {
         `
       : html`
           <div class="prayers-container">
-            ${this._prayerStatus.data.length < 1
+            ${this._prayersStatus.data.length < 1
               ? html`<p>${this.localeData?.noResults}</p>`
               : html`${nothing}`}
             ${repeat(
-              this._prayerStatus.data,
+              this._prayersStatus.data,
               ({ slug }) => slug,
               ({ slug, title, image }) => html`
                 <a href="/prayers/${slug}" class="prayer">
@@ -64,7 +64,7 @@ export default function template(this: PrayersList) {
 
     <mwc-snackbar
       leading
-      ?open="${this._prayerStatus.refreshing}"
+      ?open="${this._prayersStatus.refreshing}"
       labelText="${this.localeData?.syncInProgress}"
     ></mwc-snackbar>
   `;

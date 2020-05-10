@@ -26,7 +26,7 @@ export class PrayersList extends localize(PageViewElement) {
   protected render = template;
 
   @property({ type: Object })
-  protected _prayerStatus: APIResponse<PrayerSummary[]> = {
+  protected _prayersStatus: APIResponse<PrayerSummary[]> = {
     loading: true,
     refreshing: false,
   };
@@ -57,7 +57,7 @@ export class PrayersList extends localize(PageViewElement) {
         prayersDownloadPreference === 'yes' ? '?fullData' : ''
       }`,
     )) {
-      this._prayerStatus = status;
+      this._prayersStatus = status;
     }
   }
 

@@ -28,7 +28,7 @@ export class SongsList extends localize(PageViewElement) {
   private _fuse?: Fuse<SongSummary, { keys: ['number', 'title'] }>;
 
   @property({ type: Object })
-  protected _songStatus: APIResponse<SongSummary[]> = {
+  protected _songsStatus: APIResponse<SongSummary[]> = {
     loading: true,
     refreshing: false,
   };
@@ -63,7 +63,7 @@ export class SongsList extends localize(PageViewElement) {
     for await (const status of staleWhileRevalidate<SongSummary[]>(
       `${apiUrl}/songs${songsDownloadPreference === 'yes' ? '?fullData' : ''}`,
     )) {
-      this._songStatus = status;
+      this._songsStatus = status;
 
       if (status.data) {
         if (!this._fuse) {
@@ -82,7 +82,7 @@ export class SongsList extends localize(PageViewElement) {
   protected _handleSearch({ detail: searchTerm }: CustomEvent<string>) {
     this._searchTerm = searchTerm;
 
-    const songs = this._songStatus.data || [];
+    const songs = this._songsStatus.data || [];
 
     if (!this._fuse) {
       this._fuse = new Fuse(songs, {
