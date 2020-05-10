@@ -59,14 +59,14 @@ export class Shell extends localize(LitElement) {
     this._checkForUpdates();
     this._observeForThemeChanges();
 
-    if (window.matchMedia('(min-width: 768px)').matches) {
+    if (window.matchMedia('(min-width: 48rem)').matches) {
       get<boolean>('drawerOpened').then((drawerOpened) =>
         this._updateDrawerState(drawerOpened),
       );
     }
 
     installMediaQueryWatcher(
-      '(min-width: 768px)',
+      '(min-width: 48rem)',
       (matches) => (this._narrow = matches),
     );
   }
