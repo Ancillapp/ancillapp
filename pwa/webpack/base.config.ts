@@ -55,6 +55,7 @@ const config: Configuration = {
                     'advanced',
                     {
                       autoprefixer: false,
+                      zindex: false,
                     },
                   ],
                 }),
