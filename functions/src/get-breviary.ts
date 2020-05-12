@@ -78,6 +78,7 @@ export const getBreviary = functions.https.onRequest(
       ' parametro': 0,
       ' Abbreviazione': 0,
       ' SenzaInvitatorio': 0,
+      ' Celebrazione': 1,
     };
 
     const response = await fetch(`${apiUrl}?${stringify(params)}`);

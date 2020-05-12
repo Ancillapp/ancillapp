@@ -47,3 +47,28 @@ declare module '*.styles' {
   const content: CSSResult;
   export default content;
 }
+
+declare module 'hyperlist' {
+  export interface HyperListConfig {
+    itemHeight: number;
+    total: number;
+    generate(index: number): Node;
+    reverse?: boolean;
+    horizontal?: boolean;
+    width?: string | number;
+    height?: string | number;
+    scrollerTagName?: keyof HTMLElementTagNameMap;
+    rowClassName?: string;
+    overrideScrollPosition?: boolean;
+    applyPatch?(node: Node, fragment: DocumentFragment): void;
+    afterRender?(): void;
+    scroller?: Node;
+    useFragment?: boolean;
+  }
+
+  export default class HyperList {
+    constructor(node: Node, config: HyperListConfig);
+    static create(node: Node, config: HyperListConfig): HyperList;
+    refresh(node: Node, config: HyperListConfig): void;
+  }
+}
