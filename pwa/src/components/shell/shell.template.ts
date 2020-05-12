@@ -105,7 +105,7 @@ export default function template(this: Shell) {
             subroute="${this._subroute}"
           ></breviary-page>
           <songs-page
-            class="page padded"
+            class="page"
             ?active="${this._page === 'songs'}"
             subroute="${this._subroute}"
           ></songs-page>

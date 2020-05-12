@@ -43,36 +43,11 @@ export default function template(this: SongsList) {
       ></search-input>
     </div>
 
-    ${this._songsStatus.loading
-      ? html`
-          <div class="loading-container">
-            <loading-spinner></loading-spinner>
-          </div>
-        `
-      : html`
-          <div class="songs-container">
-            ${this._displayedSongs.length < 1
-              ? html`<p>${this.localeData?.noResults}</p>`
-              : html`${nothing}`}
-            ${repeat(
-              this._displayedSongs,
-              ({ number }) => number,
-              ({ number, title }) => html`
-                <a href="/songs/${number}" class="song">
-                  <div class="book">
-                    <div class="number">
-                      ${number.endsWith('bis')
-                        ? `${number.slice(0, -3)}b`
-                        : number}
-                    </div>
-                    <div class="title">${title}</div>
-                  </div>
-                  <div class="title">${title}</div>
-                </a>
-              `,
-            )}
-          </div>
-        `}
+    <div class="songs-container">
+      <div class="loading-container">
+        <loading-spinner></loading-spinner>
+      </div>
+    </div>
 
     <mwc-snackbar
       leading

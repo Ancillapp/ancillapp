@@ -4,9 +4,10 @@
   flex-direction: column;
 }
 
-// TODO: re-enable this dialog when it's certain that it works correctly
 unobtrusive-notification {
+  // TODO: re-enable this dialog when it's certain that it works correctly
   display: none;
+  margin-bottom: 1rem;
 }
 
 .loading-container {

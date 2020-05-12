@@ -43,6 +43,12 @@ module.exports = {
         loose: true,
       },
     ],
+    [
+      '@babel/proposal-nullish-coalescing-operator',
+      {
+        loose: true,
+      },
+    ],
     '@babel/syntax-dynamic-import',
   ],
 };
