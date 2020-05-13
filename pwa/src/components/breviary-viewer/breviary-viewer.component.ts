@@ -1,11 +1,12 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
+import { refresh } from '../icons';
 
 import sharedStyles from '../shared.styles';
 import styles from './breviary-viewer.styles';
 import template from './breviary-viewer.template';
-import '../icon-button/icon-button.component';
+import '@material/mwc-icon-button';
 
 import { apiUrl } from '../../config/default.json';
 
@@ -62,8 +63,8 @@ export class BreviaryViewer extends localize(PageViewElement) {
             header.className = 'header';
             header.appendChild(heading);
 
-            const button = document.createElement('icon-button');
-            button.icon = 'refresh';
+            const button = document.createElement('mwc-icon-button');
+            button.innerHTML = refresh.getHTML();
             button.addEventListener('click', () =>
               this._handleAlternativeChange(),
             );
