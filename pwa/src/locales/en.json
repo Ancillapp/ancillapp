@@ -37,11 +37,11 @@
   "none": "None",
   "vespers": "Vespers",
   "compline": "Compline",
-  "syncInProgress": "Sync in progress...",
+  "syncInProgress": "Sync in progress…",
   "share": "Share",
   "shareAncillaText": "Take a look at this Ancilla Domini!",
   "shareSongText": "Take a look at this song!",
   "set": "Set",
   "cancel": "Cancel",
-  "loading": "Loading..."
+  "loading": "Loading…"
 }
