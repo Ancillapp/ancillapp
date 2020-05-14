@@ -1,8 +1,8 @@
-export const validateAge = (age?: unknown): age is string => {
-  if (!age || typeof age !== 'string') {
+export const validateDate = (date?: unknown): date is string => {
+  if (!date || typeof date !== 'string') {
     return false;
   }
-  const match = age.match(/^([1-9]\d{3})-(\d{1,2})-(\d{1,2})$/);
+  const match = date.match(/^([1-9]\d{3})-(\d{1,2})-(\d{1,2})$/);
 
   if (!match) {
     return false;

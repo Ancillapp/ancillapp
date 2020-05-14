@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import fetch from 'node-fetch';
 import { stringify } from 'querystring';
 import * as sanitizeHtml from 'sanitize-html';
-import { validateAge } from './helpers/validators';
+import { validateDate } from './helpers/validators';
 
 const apiUrl = 'http://www.liturgiadelleore.it/ajax/Testo.php';
 
@@ -45,7 +45,7 @@ export const getBreviary = functions.https.onRequest(
       'public, s-maxage=86400, stale-while-revalidate=86400',
     );
 
-    if (!validateAge(date)) {
+    if (!validateDate(date)) {
       res.status(400).send();
       return;
     }
