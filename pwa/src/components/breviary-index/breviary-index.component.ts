@@ -7,7 +7,6 @@ import sharedStyles from '../shared.styles';
 import styles from './breviary-index.styles';
 import template from './breviary-index.template';
 
-import type { TextField } from '@material/mwc-textfield';
 import type {
   DatepickerDialog,
   DatepickerDialogClosed,
@@ -36,6 +35,7 @@ export class BreviaryIndex extends localize(PageViewElement) {
 
   protected _handleTextfieldClick(event: Event) {
     event.preventDefault();
+    console.log(this._datepickerDialog.constructor);
     this._datepickerDialog!.open();
   }
 
