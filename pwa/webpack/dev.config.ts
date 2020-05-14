@@ -19,6 +19,7 @@ const config: Configuration = smartMerge(baseConfig, {
     overlay: true,
     port: parseInt(`${process.env.PORT}`, 10) || 8080,
     historyApiFallback: true,
+    host: '0.0.0.0',
   },
   optimization: {
     removeAvailableModules: false,
