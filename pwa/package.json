@@ -20,6 +20,7 @@
     "@material/mwc-textfield": "^0.15.0",
     "@material/mwc-top-app-bar": "^0.15.0",
     "@webcomponents/webcomponentsjs": "^2.4.3",
+    "app-datepicker": "^4.1.0",
     "firebase": "^7.14.2",
     "fuse.js": "^5.2.3",
     "hyperlist": "^1.0.0",

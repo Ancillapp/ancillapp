@@ -40,5 +40,8 @@
   "syncInProgress": "Sync in progress...",
   "share": "Share",
   "shareAncillaText": "Take a look at this Ancilla Domini!",
-  "shareSongText": "Take a look at this song!"
+  "shareSongText": "Take a look at this song!",
+  "set": "Set",
+  "cancel": "Cancel",
+  "loading": "Loading..."
 }

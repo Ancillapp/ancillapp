@@ -40,5 +40,8 @@
   "syncInProgress": "Sincronizzazione in corso...",
   "share": "Condividi",
   "shareAncillaText": "Dai un'occhiata a questo Ancilla Domini!",
-  "shareSongText": "Dai un'occhiata a questo canto!"
+  "shareSongText": "Dai un'occhiata a questo canto!",
+  "set": "Imposta",
+  "cancel": "Annulla",
+  "loading": "Caricamento..."
 }
