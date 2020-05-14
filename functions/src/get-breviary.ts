@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import fetch from 'node-fetch';
 import { stringify } from 'querystring';
 import * as sanitizeHtml from 'sanitize-html';
+import { validateAge } from './helpers/validators';
 
 const apiUrl = 'http://www.liturgiadelleore.it/ajax/Testo.php';
 
@@ -12,39 +13,28 @@ const formatDate = (date: Date) =>
   )}/${date.getFullYear()}`;
 
 const transformTag = (className: string, content: string) => {
-  if (className === 'Titolo') {
-    return `<h2>${content}</h2>`;
+  switch (className) {
+    case 'Titolo':
+      return `<h2>${content}</h2>`;
+    case 'Ora':
+      return `<h3>${content}</h3>`;
+    case 'Grado':
+      return `<small>${content}</small>`;
+    case 'Risalto':
+      return `<strong class="small-caps">${content}</strong>`;
+    case 'Rosso':
+    case 'EvidenzaVersetto':
+    case 'Rubrica':
+      return `<strong>${content}</strong>`;
+    case 'Minuscoletto':
+      return content.toLowerCase();
+    case 'Spiegazione':
+      return `<h4>${content}</h4>`;
+    case 'Citazione':
+      return `<em>${content}</em>`;
+    default:
+      return content;
   }
-
-  if (className === 'Ora') {
-    return `<h3>${content}</h3>`;
-  }
-
-  if (className === 'Risalto') {
-    return `<strong class="small-caps">${content}</strong>`;
-  }
-
-  if (
-    className === 'Rosso' ||
-    className === 'EvidenzaVersetto' ||
-    className === 'Rubrica'
-  ) {
-    return `<strong>${content}</strong>`;
-  }
-
-  if (className === 'Minuscoletto') {
-    return content.toLowerCase();
-  }
-
-  if (className === 'Spiegazione') {
-    return `<h4>${content}</h4>`;
-  }
-
-  if (className === 'Citazione') {
-    return `<em>${content}</em>`;
-  }
-
-  return content;
 };
 
 export const getBreviary = functions.https.onRequest(
@@ -55,9 +45,13 @@ export const getBreviary = functions.https.onRequest(
       'public, s-maxage=86400, stale-while-revalidate=86400',
     );
 
-    const parsedDate = new Date(date as string);
+    if (!validateAge(date)) {
+      res.status(400).send();
+      return;
+    }
 
     const prayers = {
+      title: 0,
       invitatory: 0,
       office: 1,
       lauds: 2,
@@ -67,13 +61,17 @@ export const getBreviary = functions.https.onRequest(
       vespers: 6,
       compline: 7,
     };
+    const memories = ['05-13'];
+
+    const monthDay = date.slice(5);
+    const parsedDate = new Date(date);
 
     const params = {
       '  Data': formatDate(
         isNaN(parsedDate.valueOf()) ? new Date() : parsedDate,
       ),
       ' Ora': prayers[prayer as keyof typeof prayers] || prayers.invitatory,
-      ' MemoriaFacoltativa': 0,
+      ' MemoriaFacoltativa': memories.includes(monthDay) ? 1 : 0,
       ' CorrettoreMemoriaFacoltativa': 0,
       ' parametro': 0,
       ' Abbreviazione': 0,
@@ -99,8 +97,15 @@ export const getBreviary = functions.https.onRequest(
         (_, className, content) => transformTag(className, content),
       )
       .replace(
-        /<font class="Risalto">([^<]+)<\/font>/g,
-        (_, content) => `<h3>${content}</h3>`,
+        /<font class="(Risalto|Titolo)">(.+?)<\/font>/g,
+        (_, className, content) => {
+          const tagName = className === 'Risalto' ? 'h3' : 'h2';
+          const fixedContent = content
+            .replace(/<br \/>/g, '')
+            .replace(/</g, '<br><');
+
+          return `<${tagName}>${fixedContent}</${tagName}>`;
+        },
       )
       .replace(/<br \/>/g, '<br>')
       .replace(
@@ -109,6 +114,15 @@ export const getBreviary = functions.https.onRequest(
       )
       .replace(/<div><h3>/g, '<div class="alternative"><h3>')
       .replace(/[*†]/g, '<strong>$&</strong>');
+
+    if (prayer === 'title') {
+      res
+        .type('html')
+        .send(
+          replacedHtml.match(/^<h2>.+?<\/h2>/)?.[0] || 'Liturgia delle Ore',
+        );
+      return;
+    }
 
     res.type('html').send(replacedHtml);
   },
