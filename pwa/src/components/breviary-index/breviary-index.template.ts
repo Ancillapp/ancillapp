@@ -10,22 +10,12 @@ export default function template(this: BreviaryIndex) {
     <section>
       <mwc-textfield
         outlined
-        required
+        readonly
         type="date"
         label="${this.localeData?.date}"
-        @click="${this._handleTextfieldClick}"
         value="${this._date}"
+        @click="${this._handleTextfieldClick}"
       ></mwc-textfield>
-      <app-datepicker-dialog
-        clearLabel=""
-        confirmLabel="${this.localeData?.set}"
-        dismissLabel="${this.localeData?.cancel}"
-        min="1900-01-01"
-        max="2100-12-31"
-        locale="${this.locale}"
-        @datepicker-dialog-closed="${this._handleDateChange}"
-      >
-      </app-datepicker-dialog>
       ${until(
         this._titlePromise,
         html`<h2>${this.localeData?.loading.toUpperCase()}</h2>`,
@@ -51,5 +41,15 @@ export default function template(this: BreviaryIndex) {
         )}
       </ul>
     </section>
+
+    <app-datepicker-dialog
+      clearLabel=""
+      confirmLabel="${this.localeData?.set}"
+      dismissLabel="${this.localeData?.cancel}"
+      min="1900-01-01"
+      max="2100-12-31"
+      locale="${this.locale}"
+    >
+    </app-datepicker-dialog>
   `;
 }
