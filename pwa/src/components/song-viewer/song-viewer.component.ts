@@ -1,10 +1,7 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
-import {
-  staleWhileRevalidate,
-  APIResponse,
-} from '../../helpers/stale-while-revalidate';
+import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 
 import sharedStyles from '../shared.styles';
 import styles from './song-viewer.styles';
@@ -34,7 +31,7 @@ export class SongViewer extends localize(PageViewElement) {
   };
 
   private async _fetchSong(number: string) {
-    for await (const status of staleWhileRevalidate<Song>(
+    for await (const status of cacheAndNetwork<Song>(
       `${apiUrl}/songs/${number}`,
     )) {
       this._songStatus = status;

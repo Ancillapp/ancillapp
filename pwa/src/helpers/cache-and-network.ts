@@ -99,7 +99,7 @@ const formatCachedResponse = (entity: Entity, cachedData: any[]) => {
   return cachedData;
 };
 
-export async function* staleWhileRevalidate<T>(
+export async function* cacheAndNetwork<T>(
   requestInfo: RequestInfo | Promise<RequestInfo>,
 ): AsyncGenerator<APIResponse<T>> {
   try {
