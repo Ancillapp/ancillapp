@@ -20,6 +20,7 @@ export const getSongs = functions.https.onRequest(
             _id: 0,
             number: 1,
             title: 1,
+            language: 1,
             ...(typeof fullData !== 'undefined' && {
               content: 1,
             }),

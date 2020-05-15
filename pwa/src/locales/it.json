@@ -43,5 +43,9 @@
   "shareSongText": "Dai un'occhiata a questo canto!",
   "set": "Imposta",
   "cancel": "Annulla",
-  "loading": "Caricamento…"
+  "loading": "Caricamento…",
+  "setFilters": "Imposta filtri",
+  "close": "Chiudi",
+  "italian": "Italiano",
+  "german": "Tedesco"
 }
