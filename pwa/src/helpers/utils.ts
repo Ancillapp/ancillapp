@@ -54,8 +54,14 @@ interface AncillappDataDBSchema extends DBSchema {
     key: string;
     value: {
       slug: string;
-      title: string;
-      content: string;
+      title: {
+        it?: string;
+        la?: string;
+      };
+      content: {
+        it?: string;
+        la?: string;
+      };
     };
   };
   ancillas: {

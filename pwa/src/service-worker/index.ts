@@ -31,8 +31,46 @@ declare global {
 
 import './notifications';
 import './communication';
+import { initDB } from '../helpers/utils';
 
 clientsClaim();
+
+// TODO: remove this part in a week or two
+self.addEventListener('install', (event: any) => {
+  event.waitUntil(
+    (async () => {
+      const db = await initDB();
+
+      const songs = await db.getAll('songs');
+
+      const deprecatedSongs = songs.filter(
+        ({ number }) => !number.startsWith('IT') && !number.startsWith('DE'),
+      );
+
+      const songsTransaction = db.transaction('songs', 'readwrite');
+
+      const songsObjectStore = songsTransaction.objectStore('songs');
+
+      deprecatedSongs.forEach(({ number }) => songsObjectStore.delete(number));
+
+      await songsTransaction.done;
+
+      const prayers = await db.getAll('prayers');
+
+      const deprecatedPrayers = prayers.filter(
+        ({ title }) => typeof title === 'string',
+      );
+
+      const prayersTransaction = db.transaction('prayers', 'readwrite');
+
+      const prayersObjectStore = prayersTransaction.objectStore('prayers');
+
+      deprecatedPrayers.forEach(({ slug }) => prayersObjectStore.delete(slug));
+
+      await prayersTransaction.done;
+    })(),
+  );
+});
 
 if (process.env.NODE_ENV === 'production') {
   setCacheNameDetails({
