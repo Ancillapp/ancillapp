@@ -18,13 +18,13 @@ export class SettingsPage extends localize(PageViewElement) {
   @queryAll('outlined-select')
   private _selects?: NodeList;
 
-  protected async _handleThemeChange({ target }: Event) {
+  protected async _handleThemeChange({ target }: CustomEvent<null>) {
     const newTheme = (target as OutlinedSelect).value;
     document.body.dataset.theme = newTheme;
     await set('theme', newTheme);
   }
 
-  protected async _handleLanguageChange({ target }: Event) {
+  protected async _handleLanguageChange({ target }: CustomEvent<null>) {
     const newLanguage = (target as OutlinedSelect).value as SupportedLocale;
     await this.setLocale(newLanguage);
     this._selects!.forEach((select) => {

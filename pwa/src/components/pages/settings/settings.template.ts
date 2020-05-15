@@ -6,7 +6,7 @@ import '../../outlined-select/outlined-select.component';
 export default function template(this: SettingsPage) {
   return html`
     <section>
-      <ul>
+      <ul class="settings">
         <li>
           <label for="theme">${this.localeData?.theme}</label>
           <outlined-select
