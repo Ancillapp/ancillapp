@@ -4,10 +4,7 @@ import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
 import Fuse from 'fuse.js';
 import HyperList, { HyperListConfig } from 'hyperlist';
-import {
-  staleWhileRevalidate,
-  APIResponse,
-} from '../../helpers/stale-while-revalidate';
+import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 
 import sharedStyles from '../shared.styles';
 import styles from './songs-list.styles';
@@ -69,7 +66,7 @@ export class SongsList extends localize(PageViewElement) {
       this._needSongsDownloadPermission = true;
     }
 
-    for await (const status of staleWhileRevalidate<SongSummary[]>(
+    for await (const status of cacheAndNetwork<SongSummary[]>(
       `${apiUrl}/songs${songsDownloadPreference === 'yes' ? '?fullData' : ''}`,
     )) {
       this._songsStatus = status;
@@ -230,12 +227,9 @@ export class SongsList extends localize(PageViewElement) {
 
     this._downloadingSongs = true;
 
-    for await (const {
-      loading,
-      refreshing,
-      data,
-      error,
-    } of staleWhileRevalidate<SongSummary[]>(`${apiUrl}/songs?fullData`)) {
+    for await (const { loading, refreshing, data, error } of cacheAndNetwork<
+      SongSummary[]
+    >(`${apiUrl}/songs?fullData`)) {
       if (!loading && !refreshing && data && !error) {
         await set('songsDownloadPreference', 'yes');
         this._needSongsDownloadPermission = false;

@@ -1,10 +1,7 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
-import {
-  staleWhileRevalidate,
-  APIResponse,
-} from '../../helpers/stale-while-revalidate';
+import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 
 import sharedStyles from '../shared.styles';
 import styles from './prayer-viewer.styles';
@@ -34,7 +31,7 @@ export class PrayerViewer extends localize(PageViewElement) {
   };
 
   private async _fetchPrayer(slug: string) {
-    for await (const status of staleWhileRevalidate<Prayer>(
+    for await (const status of cacheAndNetwork<Prayer>(
       `${apiUrl}/prayers/${slug}`,
     )) {
       this._prayerStatus = status;

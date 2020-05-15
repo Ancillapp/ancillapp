@@ -14,8 +14,16 @@ export const urlBase64ToUint8Array = (base64String: string) => {
   return outputArray;
 };
 
-export const importIIFE = (src: string) =>
-  new Promise((resolve, reject) => {
+const scriptsPromiseCache = new Map<string, Promise<unknown>>();
+
+export const importIIFE = (src: string) => {
+  const cachedScriptPromise = scriptsPromiseCache.get(src);
+
+  if (cachedScriptPromise) {
+    return cachedScriptPromise;
+  }
+
+  const scriptPromise = new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = src;
     script.defer = true;
@@ -23,6 +31,11 @@ export const importIIFE = (src: string) =>
     script.addEventListener('error', reject, { once: true });
     document.head.appendChild(script);
   });
+
+  scriptsPromiseCache.set(src, scriptPromise);
+
+  return scriptPromise;
+};
 
 interface AncillappDataDBSchema extends DBSchema {
   settings: {

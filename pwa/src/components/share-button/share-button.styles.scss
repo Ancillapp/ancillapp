@@ -1,0 +1,25 @@
+:host {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9;
+}
+
+div[slot='icon'] {
+  width: 24px;
+  height: 24px;
+
+  > svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+share-menu {
+  --background-color: var(--ancillapp-card-color);
+  --title-color: var(--ancillapp-primary-text-color);
+  --labels-color: var(--ancillapp-primary-text-color);
+  --hint-color: var(--ancillapp-secondary-text-color);
+  --handle-color: var(--ancillapp-secondary-text-color);
+  --divider-color: var(--ancillapp-divider-color);
+}

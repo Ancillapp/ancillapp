@@ -99,7 +99,7 @@ const formatCachedResponse = (entity: Entity, cachedData: any[]) => {
   return cachedData;
 };
 
-export async function* staleWhileRevalidate<T>(
+export async function* cacheAndNetwork<T>(
   requestInfo: RequestInfo | Promise<RequestInfo>,
 ): AsyncGenerator<APIResponse<T>> {
   try {
@@ -138,13 +138,22 @@ export async function* staleWhileRevalidate<T>(
         };
       }
 
-      const data = ((await localDBSummaryDataUpdatePromise) as unknown) as T;
+      try {
+        const data = ((await localDBSummaryDataUpdatePromise) as unknown) as T;
 
-      yield {
-        loading: false,
-        refreshing: false,
-        data,
-      };
+        yield {
+          loading: false,
+          refreshing: false,
+          data,
+        };
+      } catch (fetchError) {
+        yield {
+          loading: false,
+          refreshing: false,
+          error: fetchError,
+          ...(cachedData.length > 0 && { data }),
+        };
+      }
 
       return;
     }
@@ -169,13 +178,26 @@ export async function* staleWhileRevalidate<T>(
       };
     }
 
-    const data = (await localDBDetailDataUpdatePromise) as T;
+    try {
+      const data = (await localDBDetailDataUpdatePromise) as T;
 
-    yield {
-      loading: false,
-      refreshing: false,
-      data,
-    };
+      yield {
+        loading: false,
+        refreshing: false,
+        data,
+      };
+    } catch (fetchError) {
+      yield {
+        loading: false,
+        refreshing: false,
+        error: fetchError,
+        ...(cachedData &&
+          (!entityToDetailFieldMap[entity] ||
+            entityToDetailFieldMap[entity]! in cachedData) && {
+            data: (cachedData as unknown) as T,
+          }),
+      };
+    }
   } catch (error) {
     yield {
       loading: false,

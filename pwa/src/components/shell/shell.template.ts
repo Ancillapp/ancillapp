@@ -6,10 +6,10 @@ import * as icons from '../icons';
 import '@material/mwc-top-app-bar';
 import '@material/mwc-drawer';
 import '@material/mwc-button';
+import '@material/mwc-icon-button';
 import '@material/mwc-list/mwc-list';
 import '@material/mwc-list/mwc-list-item';
 import '../snackbar/snackbar.component';
-import '../icon-button/icon-button.component';
 
 export default function template(this: Shell) {
   return html`
@@ -78,15 +78,16 @@ export default function template(this: Shell) {
           ${this._subroute
             ? html`
                 <a href="/${this._page}" slot="navigationIcon">
-                  <icon-button icon="arrowBack"></icon-button>
+                  <mwc-icon-button>${icons.arrowBack}</mwc-icon-button>
                 </a>
               `
             : html`
-                <icon-button
+                <mwc-icon-button
                   slot="navigationIcon"
-                  icon="menu"
                   @click="${() => this._updateDrawerState(!this._drawerOpened)}"
-                ></icon-button>
+                >
+                  ${icons.menu}
+                </mwc-icon-button>
               `}
           <div slot="title">
             ${icons.tau} ${this._page === 'home'

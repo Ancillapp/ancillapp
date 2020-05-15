@@ -2,10 +2,7 @@ import { customElement, property } from 'lit-element';
 import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
-import {
-  staleWhileRevalidate,
-  APIResponse,
-} from '../../helpers/stale-while-revalidate';
+import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 
 import sharedStyles from '../shared.styles';
 import styles from './prayers-list.styles';
@@ -52,7 +49,7 @@ export class PrayersList extends localize(PageViewElement) {
       this._needPrayersDownloadPermission = true;
     }
 
-    for await (const status of staleWhileRevalidate<PrayerSummary[]>(
+    for await (const status of cacheAndNetwork<PrayerSummary[]>(
       `${apiUrl}/prayers${
         prayersDownloadPreference === 'yes' ? '?fullData' : ''
       }`,
@@ -78,12 +75,9 @@ export class PrayersList extends localize(PageViewElement) {
 
     this._downloadingPrayers = true;
 
-    for await (const {
-      loading,
-      refreshing,
-      data,
-      error,
-    } of staleWhileRevalidate<PrayerSummary[]>(`${apiUrl}/prayers?fullData`)) {
+    for await (const { loading, refreshing, data, error } of cacheAndNetwork<
+      PrayerSummary[]
+    >(`${apiUrl}/prayers?fullData`)) {
       if (!loading && !refreshing && data && !error) {
         await set('prayersDownloadPreference', 'yes');
         this._needPrayersDownloadPermission = false;
