@@ -90,8 +90,8 @@ export class SongsList extends localize(PageViewElement) {
   }
 
   private _refreshSongs() {
-    const songs = (this._songsStatus.data || []).filter(
-      ({ language }) => language === this._selectedLanguage,
+    const songs = (this._songsStatus.data || []).filter(({ number }) =>
+      number.startsWith(this._selectedLanguage.toUpperCase()),
     );
 
     if (!this._fuse) {
@@ -140,8 +140,8 @@ export class SongsList extends localize(PageViewElement) {
                   <div class="number">
                     ${
                       number.endsWith('bis')
-                        ? `${number.slice(0, -3)}b`
-                        : number
+                        ? `${number.slice(2, -3)}b`
+                        : number.slice(2)
                     }
                   </div>
                   <div class="title">${title}</div>
