@@ -14,8 +14,8 @@ export default function template(this: PrayerViewer) {
         `
       : html`
           <section>
-            <h1>${this._prayerStatus.data.title}</h1>
-            ${compile(this._prayerStatus.data.content)}
+            <h1>${this._prayerStatus.data.title.it}</h1>
+            ${compile(this._prayerStatus.data.content.it)}
           </section>
         `}
 

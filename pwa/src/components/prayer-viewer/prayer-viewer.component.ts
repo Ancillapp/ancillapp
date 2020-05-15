@@ -11,8 +11,14 @@ import { apiUrl } from '../../config/default.json';
 
 export interface Prayer {
   slug: string;
-  title: string;
-  content: string;
+  title: {
+    it?: string;
+    la?: string;
+  };
+  content: {
+    it?: string;
+    la?: string;
+  };
 }
 
 @customElement('prayer-viewer')

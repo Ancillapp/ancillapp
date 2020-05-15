@@ -48,9 +48,9 @@ export default function template(this: PrayersList) {
               ? html`<p>${this.localeData?.noResults}</p>`
               : html`${nothing}`}
             ${repeat(
-              this._prayersStatus.data,
+              this._prayersStatus.data.filter(({ title }) => 'it' in title),
               ({ slug }) => slug,
-              ({ slug, title, image }) => html`
+              ({ slug, title: { it: title }, image }) => html`
                 <a href="/prayers/${slug}" class="prayer">
                   <div class="image">
                     ${unsafeHTML(image)}
