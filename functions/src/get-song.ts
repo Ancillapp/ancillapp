@@ -1,14 +1,14 @@
 import * as functions from 'firebase-functions';
 import { mongoDb } from './helpers/mongo';
 
-export const getSong = functions.https.onRequest(async (req, res) => {
+export const getSong = functions.https.onRequest(async ({ path }, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.set(
     'Cache-Control',
     'public, s-maxage=86400, stale-while-revalidate=86400',
   );
 
-  const number = req.path.match(/\/api\/songs\/([a-z\d]+)/)?.[1];
+  const number = path.match(/\/api\/songs\/([a-z\d]+)/i)?.[1];
 
   if (!number) {
     res.status(404).send();
@@ -26,6 +26,11 @@ export const getSong = functions.https.onRequest(async (req, res) => {
       },
     },
   );
+
+  if (!song) {
+    res.status(404).send();
+    return;
+  }
 
   res.json(song);
 });

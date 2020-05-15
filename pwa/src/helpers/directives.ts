@@ -18,11 +18,14 @@ export const load = <T>(
   );
 
 const getParagraphClass = (paragraph: string) => {
-  if (/^rit\./i.test(paragraph)) {
+  if (/^(?:rit\.|refrain:)/i.test(paragraph)) {
     return 'chorus';
   }
   if (/^bridge/i.test(paragraph)) {
     return 'bridge';
+  }
+  if (/^(?:finale|fin\.|ende:)/i.test(paragraph)) {
+    return 'ending';
   }
   return 'verse';
 };
@@ -35,7 +38,10 @@ export const compile = (rawString: string) =>
         (paragraph) =>
           `<p class="${getParagraphClass(paragraph)}">${paragraph
             .replace(/\n/g, '<br>')
-            .replace(/^(rit\.|bridge|\d\.)/i, '<strong>$1</strong>')}</p>`,
+            .replace(
+              /^(rit\.|refrain:|bridge|finale|fin\.|ende:|\d\.)/i,
+              '<strong>$1</strong>',
+            )}</p>`,
       )
       .join(''),
   );

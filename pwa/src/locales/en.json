@@ -43,5 +43,9 @@
   "shareSongText": "Take a look at this song!",
   "set": "Set",
   "cancel": "Cancel",
-  "loading": "Loading…"
+  "loading": "Loading…",
+  "setFilters": "Set filters",
+  "close": "Close",
+  "italian": "Italian",
+  "german": "German"
 }

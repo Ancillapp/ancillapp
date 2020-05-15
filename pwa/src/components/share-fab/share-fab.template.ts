@@ -1,20 +1,16 @@
 import { html } from 'lit-element';
-import { ShareButton } from './share-button.component';
+import { ShareFAB } from './share-fab.component';
 
-import '@material/mwc-fab';
-import { share } from '../icons';
+import '../autosized-fab/autosized-fab.component';
 
-export default function template(this: ShareButton) {
+export default function template(this: ShareFAB) {
   return html`
-    <mwc-fab
-      ?mini="${this._mini}"
+    <autosized-fab
       label="${this.localeData?.share}"
+      icon="share"
       @click="${this._handleShare}"
     >
-      <div slot="icon">
-        ${share}
-      </div>
-    </mwc-fab>
+    </autosized-fab>
 
     <share-menu>
       <share-target-whatsapp></share-target-whatsapp>

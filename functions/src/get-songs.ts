@@ -20,6 +20,7 @@ export const getSongs = functions.https.onRequest(
             _id: 0,
             number: 1,
             title: 1,
+            language: 1,
             ...(typeof fullData !== 'undefined' && {
               content: 1,
             }),
@@ -30,8 +31,8 @@ export const getSongs = functions.https.onRequest(
 
     res.json(
       songs.sort(({ number: a }, { number: b }) => {
-        const normalizedA = a.replace('bis', '').padStart(4, 0);
-        const normalizedB = b.replace('bis', '').padStart(4, 0);
+        const normalizedA = a.slice(2).replace('bis', '').padStart(4, 0);
+        const normalizedB = b.slice(2).replace('bis', '').padStart(4, 0);
 
         if (normalizedA === normalizedB) {
           return b.endsWith('bis') ? -1 : 1;

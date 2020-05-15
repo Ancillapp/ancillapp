@@ -12,9 +12,12 @@ import template from './songs-list.template';
 
 import { apiUrl } from '../../config/default.json';
 
+import type { OutlinedSelect } from '../outlined-select/outlined-select.component';
+
 export interface SongSummary {
   number: string;
   title: string;
+  language: string;
 }
 
 @customElement('songs-list')
@@ -40,13 +43,19 @@ export class SongsList extends localize(PageViewElement) {
   };
 
   @property({ type: String })
+  protected _selectedLanguage = 'it';
+
+  @property({ type: String })
   protected _searchTerm = '';
 
   @property({ type: Boolean })
-  protected _needSongsDownloadPermission?: boolean;
+  protected _needSongsDownloadPermission = false;
 
   @property({ type: Boolean })
-  protected _downloadingSongs?: boolean;
+  protected _downloadingSongs = false;
+
+  @property({ type: Boolean })
+  protected _filtersDialogOpen = false;
 
   @query('.songs-container')
   private _songsContainer?: HTMLDivElement;
@@ -58,13 +67,16 @@ export class SongsList extends localize(PageViewElement) {
   }
 
   private async _prepareSongs() {
-    const songsDownloadPreference = await get<string>(
-      'songsDownloadPreference',
-    );
+    const [songsDownloadPreference, songsLanguage = 'it'] = await Promise.all([
+      get<string>('songsDownloadPreference'),
+      get<string>('songsLanguage'),
+    ]);
 
     if (!songsDownloadPreference || songsDownloadPreference === 'no') {
       this._needSongsDownloadPermission = true;
     }
+
+    this._selectedLanguage = songsLanguage;
 
     for await (const status of cacheAndNetwork<SongSummary[]>(
       `${apiUrl}/songs${songsDownloadPreference === 'yes' ? '?fullData' : ''}`,
@@ -72,19 +84,29 @@ export class SongsList extends localize(PageViewElement) {
       this._songsStatus = status;
 
       if (status.data) {
-        if (!this._fuse) {
-          this._fuse = new Fuse(status.data, {
-            keys: ['number', 'title'],
-          });
-        }
-
-        this._displayedSongs = this._searchTerm
-          ? this._fuse.search(this._searchTerm).map(({ item }) => item)
-          : status.data;
-
-        this._updateSongsList();
+        this._refreshSongs();
       }
     }
+  }
+
+  private _refreshSongs() {
+    const songs = (this._songsStatus.data || []).filter(({ number }) =>
+      number.startsWith(this._selectedLanguage.toUpperCase()),
+    );
+
+    if (!this._fuse) {
+      this._fuse = new Fuse(songs, {
+        keys: ['number', 'title'],
+      });
+    } else {
+      this._fuse.setCollection(songs);
+    }
+
+    this._displayedSongs = this._searchTerm
+      ? this._fuse.search(this._searchTerm).map(({ item }) => item)
+      : songs;
+
+    this._renderSongs();
   }
 
   private _getHyperListConfig(
@@ -118,8 +140,8 @@ export class SongsList extends localize(PageViewElement) {
                   <div class="number">
                     ${
                       number.endsWith('bis')
-                        ? `${number.slice(0, -3)}b`
-                        : number
+                        ? `${number.slice(2, -3)}b`
+                        : number.slice(2)
                     }
                   </div>
                   <div class="title">${title}</div>
@@ -135,8 +157,9 @@ export class SongsList extends localize(PageViewElement) {
     };
   }
 
-  private _updateSongsList() {
-    if (this._displayedSongs.length < 1) {
+  private _renderSongs() {
+    if (!this._songsStatus.loading && this._displayedSongs.length < 1) {
+      this._songsContainer!.innerHTML = `<p>${this.localeData?.noResults}</p>`;
       return;
     }
 
@@ -178,7 +201,7 @@ export class SongsList extends localize(PageViewElement) {
         this._desktopLayout = updatedDesktopLayout;
         this._songsPerRow = updatedSongsPerRow;
 
-        this._updateSongsList();
+        this._renderSongs();
       });
     } else {
       this._hyperlist.refresh(
@@ -195,19 +218,17 @@ export class SongsList extends localize(PageViewElement) {
   protected _handleSearch({ detail: searchTerm }: CustomEvent<string>) {
     this._searchTerm = searchTerm;
 
-    const songs = this._songsStatus.data || [];
+    this._refreshSongs();
+  }
 
-    if (!this._fuse) {
-      this._fuse = new Fuse(songs, {
-        keys: ['number', 'title'],
-      });
-    }
+  protected async _handleLanguageFilter({ target }: CustomEvent<null>) {
+    const newLanguage = (target as OutlinedSelect).value;
 
-    this._displayedSongs = this._searchTerm
-      ? this._fuse.search(this._searchTerm).map(({ item }) => item)
-      : songs;
+    await set('songsLanguage', newLanguage);
 
-    this._updateSongsList();
+    this._selectedLanguage = newLanguage;
+    this._refreshSongs();
+    this._filtersDialogOpen = false;
   }
 
   protected async _updateSongsDownloadPermission(

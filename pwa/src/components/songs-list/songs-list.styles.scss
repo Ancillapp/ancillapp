@@ -133,3 +133,12 @@ unobtrusive-notification {
     }
   }
 }
+
+.no-results {
+  text-align: center;
+}
+
+mwc-dialog > div {
+  width: 24rem;
+  max-width: 100%;
+}

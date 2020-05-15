@@ -2,7 +2,7 @@ import { html } from 'lit-element';
 import { AncillaViewer } from './ancilla-viewer.component';
 import { load } from '../../helpers/directives';
 
-import '../share-button/share-button.component';
+import '../share-fab/share-fab.component';
 
 export default function template(this: AncillaViewer) {
   return html`
@@ -19,11 +19,11 @@ export default function template(this: AncillaViewer) {
             title="Ancilla Domini - ${name[this.locale]}"
           ></iframe>
 
-          <share-button
+          <share-fab
             title="Ancilla Domini - ${name[this.locale]}"
             text="${this.localeData?.shareAncillaText}"
             url="${window.location.href}"
-          ></share-button>
+          ></share-fab>
         `,
       (error) => html`${error.message}`,
     )}
