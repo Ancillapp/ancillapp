@@ -1,18 +1,18 @@
 import { LitElement, customElement, query, property } from 'lit-element';
-import { localize, SupportedLocale } from '../../helpers/localize';
+import { localize } from '../../helpers/localize';
 
 import sharedStyles from '../shared.styles';
-import styles from './share-button.styles';
-import template from './share-button.template';
+import styles from './share-fab.styles';
+import template from './share-fab.template';
 import { importIIFE } from '../../helpers/utils';
 
 import type { ShareMenu } from 'share-menu';
-import { installMediaQueryWatcher } from 'pwa-helpers';
 
 declare global {
   interface Window {
     fbAsyncInit: Function;
   }
+
   interface Navigator {
     share: (options: {
       url?: string;
@@ -47,8 +47,8 @@ const shareReadyPromise =
         }),
       ]);
 
-@customElement('share-button')
-export class ShareButton extends localize(LitElement) {
+@customElement('share-fab')
+export class ShareFAB extends localize(LitElement) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -62,19 +62,8 @@ export class ShareButton extends localize(LitElement) {
   @property({ type: String, reflect: true })
   public url = '';
 
-  @property({ type: Boolean })
-  protected _mini = true;
-
   @query('share-menu')
   private _shareMenu?: ShareMenu;
-
-  constructor() {
-    super();
-    installMediaQueryWatcher(
-      '(min-width: 28.75rem)',
-      (matches) => (this._mini = !matches),
-    );
-  }
 
   protected async _handleShare() {
     await shareReadyPromise;
@@ -93,6 +82,6 @@ export class ShareButton extends localize(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'share-button': ShareButton;
+    'share-fab': ShareFAB;
   }
 }

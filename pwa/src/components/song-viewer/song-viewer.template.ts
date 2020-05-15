@@ -3,7 +3,7 @@ import { SongViewer } from './song-viewer.component';
 import { compile } from '../../helpers/directives';
 
 import '@material/mwc-snackbar';
-import '../share-button/share-button.component';
+import '../share-fab/share-fab.component';
 
 export default function template(this: SongViewer) {
   return html`
@@ -21,12 +21,12 @@ export default function template(this: SongViewer) {
             ${compile(this._songStatus.data.content)}
           </section>
 
-          <share-button
+          <share-fab
             title="${this._songStatus.data.number}. ${this._songStatus.data
               .title}"
             text="${this.localeData?.shareSongText}"
             url="${window.location.href}"
-          ></share-button>
+          ></share-fab>
         `}
 
     <mwc-snackbar
