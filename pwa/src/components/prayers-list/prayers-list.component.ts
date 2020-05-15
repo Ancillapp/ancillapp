@@ -12,7 +12,10 @@ import { apiUrl } from '../../config/default.json';
 
 export interface PrayerSummary {
   slug: string;
-  title: string;
+  title: {
+    it?: string;
+    la?: string;
+  };
   image: string;
 }
 
