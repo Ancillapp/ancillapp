@@ -114,7 +114,7 @@ export const getBreviary = functions.https.onRequest(
       )
       .replace(/<div><h3>/g, '<div class="alternative"><h3>')
       .replace(/[*†]/g, '<strong>$&</strong>')
-      .replace(/<\/h3>\s*<br>/g, '</h3>');
+      .replace(/<\/h[234]>\s*(?:<br>)+/g, '</h3>');
 
     console.log(replacedHtml.match(/<\/h3>\s*<br>/g));
 
