@@ -35,7 +35,6 @@ export class BreviaryIndex extends localize(PageViewElement) {
 
   protected _handleTextfieldClick(event: Event) {
     event.preventDefault();
-    console.log(this._datepickerDialog.constructor);
     this._datepickerDialog!.open();
   }
 
