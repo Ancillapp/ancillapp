@@ -53,7 +53,7 @@ export const getBreviary = functions.https.onRequest(
     const prayers = {
       title: 0,
       invitatory: 0,
-      office: 1,
+      matins: 1,
       lauds: 2,
       terce: 3,
       sext: 4,
