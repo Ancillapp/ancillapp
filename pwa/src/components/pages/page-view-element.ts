@@ -6,12 +6,9 @@ import { LitElement, property, PropertyValues } from 'lit-element';
  */
 export class PageViewElement extends LitElement {
   @property({ type: Boolean, reflect: true })
-  public active?: boolean;
+  public active = false;
 
-  protected shouldUpdate(changedProperties: PropertyValues) {
-    const newActiveState = changedProperties.get('active') as
-      | boolean
-      | undefined;
-    return newActiveState || typeof newActiveState === 'undefined';
+  protected shouldUpdate() {
+    return this.active;
   }
 }

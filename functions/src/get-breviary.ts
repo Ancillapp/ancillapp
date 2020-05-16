@@ -53,7 +53,7 @@ export const getBreviary = functions.https.onRequest(
     const prayers = {
       title: 0,
       invitatory: 0,
-      office: 1,
+      matins: 1,
       lauds: 2,
       terce: 3,
       sext: 4,
@@ -113,13 +113,15 @@ export const getBreviary = functions.https.onRequest(
         '<h3>$1 <small>$2</small></h3>',
       )
       .replace(/<div><h3>/g, '<div class="alternative"><h3>')
-      .replace(/[*†]/g, '<strong>$&</strong>');
+      .replace(/[*†]/g, '<strong>$&</strong>')
+      .replace(/<\/h([234])>\s*(?:<br>)+/g, '</h$1>');
 
     if (prayer === 'title') {
       res
         .type('html')
         .send(
-          replacedHtml.match(/^<h2>.+?<\/h2>/)?.[0] || 'Liturgia delle Ore',
+          replacedHtml.match(/^<h2>.+?<\/h2>/)?.[0] ||
+            '<h2>Liturgia delle Ore</h2>',
         );
       return;
     }

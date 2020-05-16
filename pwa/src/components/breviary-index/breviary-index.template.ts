@@ -27,7 +27,7 @@ export default function template(this: BreviaryIndex) {
       <ul>
         ${[
           'invitatory',
-          'office',
+          'matins',
           'lauds',
           'terce',
           'sext',
