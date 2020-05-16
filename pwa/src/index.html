@@ -145,6 +145,19 @@
         --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
       }
 
+      body[data-theme='oled'] {
+        --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+        --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
+        --ancillapp-accent-color: #f00;
+        --ancillapp-background-color: #000;
+        --ancillapp-drawer-color: #000;
+        --ancillapp-card-color: #000;
+        --ancillapp-primary-text-color: #fff;
+        --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
+        --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);
+        --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
+      }
+
       @media (prefers-color-scheme: dark) {
         body[data-theme='system'] {
           --ancillapp-top-app-bar-color: var(--ancillapp-card-color);

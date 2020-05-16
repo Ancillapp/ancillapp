@@ -19,6 +19,7 @@ export default function template(this: SettingsPage) {
             >
             <option value="light">${this.localeData?.light || 'Light'}</option>
             <option value="dark">${this.localeData?.dark || 'Dark'}</option>
+            <option value="oled">${this.localeData?.oled || 'OLED'}</option>
           </outlined-select>
         </li>
         <li>
