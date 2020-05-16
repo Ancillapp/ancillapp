@@ -116,8 +116,6 @@ export const getBreviary = functions.https.onRequest(
       .replace(/[*†]/g, '<strong>$&</strong>')
       .replace(/<\/h([234])>\s*(?:<br>)+/g, '</h$1>');
 
-    console.log(replacedHtml);
-
     if (prayer === 'title') {
       res
         .type('html')
