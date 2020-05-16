@@ -32,7 +32,7 @@ export class SongViewer extends localize(PageViewElement) {
 
   private async _fetchSong(number: string) {
     for await (const status of cacheAndNetwork<Song>(
-      `${apiUrl}/songs/${number}`,
+      `${apiUrl}/songs/${/^\d/.test(number) ? `IT${number}` : number}`,
     )) {
       this._songStatus = status;
     }
