@@ -114,15 +114,16 @@ export const getBreviary = functions.https.onRequest(
       )
       .replace(/<div><h3>/g, '<div class="alternative"><h3>')
       .replace(/[*†]/g, '<strong>$&</strong>')
-      .replace(/<\/h[234]>\s*(?:<br>)+/g, '</h3>');
+      .replace(/<\/h([234])>\s*(?:<br>)+/g, '</h$1>');
 
-    console.log(replacedHtml.match(/<\/h3>\s*<br>/g));
+    console.log(replacedHtml);
 
     if (prayer === 'title') {
       res
         .type('html')
         .send(
-          replacedHtml.match(/^<h2>.+?<\/h2>/)?.[0] || 'Liturgia delle Ore',
+          replacedHtml.match(/^<h2>.+?<\/h2>/)?.[0] ||
+            '<h2>Liturgia delle Ore</h2>',
         );
       return;
     }
