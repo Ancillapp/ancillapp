@@ -1,6 +1,6 @@
 import { customElement, property, query, PropertyValues } from 'lit-element';
 import { get, set } from '../../helpers/keyval';
-import { localize } from '../../helpers/localize';
+import { localize, SupportedLocale } from '../../helpers/localize';
 import { PageViewElement } from '../pages/page-view-element';
 import Fuse from 'fuse.js';
 import HyperList, { HyperListConfig } from 'hyperlist';
@@ -67,16 +67,23 @@ export class SongsList extends localize(PageViewElement) {
   }
 
   private async _prepareSongs() {
-    const [songsDownloadPreference, songsLanguage = 'it'] = await Promise.all([
+    const supportedSongsLanguages = ['it', 'de'];
+    const [songsDownloadPreference, songsLanguage, locale] = await Promise.all([
       get<string>('songsDownloadPreference'),
       get<string>('songsLanguage'),
+      get<SupportedLocale>('locale'),
     ]);
 
     if (!songsDownloadPreference || songsDownloadPreference === 'no') {
       this._needSongsDownloadPermission = true;
     }
 
-    this._selectedLanguage = songsLanguage;
+    this._selectedLanguage =
+      songsLanguage && supportedSongsLanguages.includes(songsLanguage)
+        ? songsLanguage
+        : locale && supportedSongsLanguages.includes(locale)
+        ? locale
+        : 'it';
 
     for await (const status of cacheAndNetwork<SongSummary[]>(
       `${apiUrl}/songs${songsDownloadPreference === 'yes' ? '?fullData' : ''}`,
