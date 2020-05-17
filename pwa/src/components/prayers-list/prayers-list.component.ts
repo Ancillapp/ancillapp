@@ -15,6 +15,9 @@ export interface PrayerSummary {
   title: {
     it?: string;
     la?: string;
+    de?: string;
+    en?: string;
+    pt?: string;
   };
   image: string;
 }
@@ -37,6 +40,12 @@ export class PrayersList extends localize(PageViewElement) {
   @property({ type: Boolean })
   protected _downloadingPrayers?: boolean;
 
+  @property({ type: String })
+  protected _selectedLanguage = 'it';
+
+  @property({ type: Array })
+  protected _displayedPrayers: PrayerSummary[] = [];
+
   constructor() {
     super();
 
@@ -58,6 +67,21 @@ export class PrayersList extends localize(PageViewElement) {
       }`,
     )) {
       this._prayersStatus = status;
+
+      if (status.data) {
+        this._displayedPrayers = status.data
+          .filter(({ title }) => title[this.locale] || title.la)
+          .sort(
+            (
+              { title: { [this.locale]: localizedTitleA, la: latinTitleA } },
+              { title: { [this.locale]: localizedTitleB, la: latinTitleB } },
+            ) =>
+              (localizedTitleA || latinTitleA!) <
+              (localizedTitleB || latinTitleB!)
+                ? -1
+                : 1,
+          );
+      }
     }
   }
 

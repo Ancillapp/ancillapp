@@ -142,7 +142,6 @@ export class Shell extends localize(LitElement) {
   }
 
   protected _observeForThemeChanges() {
-    let currentTheme = 'system';
     const themeColor = document.querySelector<HTMLMetaElement>(
       'meta[name="theme-color"]',
     )!;
@@ -155,7 +154,6 @@ export class Shell extends localize(LitElement) {
     const observer = new MutationObserver((mutations) =>
       mutations.forEach(({ attributeName }) => {
         if (attributeName === 'data-theme') {
-          currentTheme = document.body.dataset.theme || 'system';
           themeColorUpdateCallback();
         }
       }),
