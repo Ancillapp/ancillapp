@@ -53,6 +53,7 @@ export default function template(this: BreviaryIndex) {
       min="1900-01-01"
       max="2100-12-31"
       locale="${this.locale}"
+      @datepicker-dialog-closed="${this._handleDateChange}"
     >
     </app-datepicker-dialog>
   `;
