@@ -48,14 +48,18 @@ export default function template(this: PrayersList) {
               ? html`<p>${this.localeData?.noResults}</p>`
               : html`${nothing}`}
             ${repeat(
-              this._prayersStatus.data.filter(({ title }) => 'it' in title),
+              this._displayedPrayers,
               ({ slug }) => slug,
-              ({ slug, title: { it: title }, image }) => html`
+              ({
+                slug,
+                title: { [this.locale]: localizedTitle, la: latinTitle },
+                image,
+              }) => html`
                 <a href="/prayers/${slug}" class="prayer">
                   <div class="image">
                     ${unsafeHTML(image)}
                   </div>
-                  <div class="title">${title}</div>
+                  <div class="title">${localizedTitle || latinTitle}</div>
                 </a>
               `,
             )}
