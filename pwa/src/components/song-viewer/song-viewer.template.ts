@@ -23,8 +23,8 @@ export default function template(this: SongViewer) {
           </section>
 
           <share-fab
-            title="${this._songStatus.data.number}. ${this._songStatus.data
-              .title}"
+            title="${this._songStatus.data.number.slice(2)}. ${this._songStatus
+              .data.title}"
             text="${this.localeData?.shareSongText}"
             url="${window.location.href}"
           ></share-fab>
