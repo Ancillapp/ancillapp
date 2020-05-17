@@ -69,9 +69,18 @@ export class PrayersList extends localize(PageViewElement) {
       this._prayersStatus = status;
 
       if (status.data) {
-        this._displayedPrayers = status.data.filter(
-          ({ title }) => title[this.locale] || title.la,
-        );
+        this._displayedPrayers = status.data
+          .filter(({ title }) => title[this.locale] || title.la)
+          .sort(
+            (
+              { title: { [this.locale]: localizedTitleA, la: latinTitleA } },
+              { title: { [this.locale]: localizedTitleB, la: latinTitleB } },
+            ) =>
+              (localizedTitleA || latinTitleA!) <
+              (localizedTitleB || latinTitleB!)
+                ? -1
+                : 1,
+          );
       }
     }
   }

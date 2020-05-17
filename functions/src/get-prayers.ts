@@ -27,7 +27,6 @@ export const getPrayers = functions.https.onRequest(
           },
         },
       )
-      .sort({ _id: 1 })
       .toArray();
 
     res.json(prayers);
