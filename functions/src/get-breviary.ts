@@ -61,7 +61,7 @@ export const getBreviary = functions.https.onRequest(
       vespers: 6,
       compline: 7,
     };
-    const memories = ['05-13'];
+    const memories = ['05-13', '05-18'];
 
     const monthDay = date.slice(5);
     const parsedDate = new Date(date);

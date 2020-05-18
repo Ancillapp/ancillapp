@@ -5,7 +5,7 @@ type Constructor<T> = new (...args: any[]) => T;
 
 export type SupportedLocale = 'it' | 'en' | 'de' | 'pt';
 
-export type LocaleData = typeof import('../assets/locales/it.json');
+export type LocaleData = typeof import('../locales/it.json');
 
 export type Localized<T> = { [key in SupportedLocale]: T };
 
@@ -33,6 +33,10 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
       } else {
         this.updateCurrentLocaleData();
       }
+    }
+
+    shouldUpdate() {
+      return !!this.localeData;
     }
 
     private async _loadInitialLocale() {
