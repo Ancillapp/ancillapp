@@ -249,12 +249,18 @@ export class Shell extends localize(LitElement) {
     });
   }
 
+  protected _cancelUpdate() {
+    this._updateNotificationShown = false;
+    analytics.logEvent('cancel_update');
+  }
+
   protected _updateApp() {
     this._updateNotificationShown = false;
     if (!this._newSw) {
       return;
     }
     this._newSw.postMessage({ action: 'update' });
+    analytics.logEvent('perform_update');
   }
 }
 

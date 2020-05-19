@@ -136,12 +136,12 @@ export default function template(this: Shell) {
       <slot>${this.localeData?.updateAvailable}</slot>
       <mwc-button
         slot="actions"
-        @click="${() => (this._updateNotificationShown = false)}"
+        @click="${this._cancelUpdate}"
         label="${this.localeData?.ignore}"
       ></mwc-button>
       <mwc-button
         slot="actions"
-        @click="${() => this._updateApp()}"
+        @click="${this._updateApp}"
         label="${this.localeData?.updateNow}"
       ></mwc-button>
     </snack-bar>

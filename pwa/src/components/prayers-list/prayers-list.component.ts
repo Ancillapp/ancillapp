@@ -8,6 +8,8 @@ import sharedStyles from '../shared.styles';
 import styles from './prayers-list.styles';
 import template from './prayers-list.template';
 
+import firebase from 'firebase/app';
+
 import { apiUrl } from '../../config/default.json';
 
 export interface PrayerSummary {
@@ -21,6 +23,8 @@ export interface PrayerSummary {
   };
   image: string;
 }
+
+const analytics = firebase.analytics();
 
 @customElement('prayers-list')
 export class PrayersList extends localize(PageViewElement) {
@@ -101,6 +105,8 @@ export class PrayersList extends localize(PageViewElement) {
     }
 
     this._downloadingPrayers = true;
+
+    analytics.logEvent('download_prayers');
 
     for await (const { loading, refreshing, data, error } of cacheAndNetwork<
       PrayerSummary[]

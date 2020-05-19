@@ -12,6 +12,8 @@ import template from './songs-list.template';
 
 import { apiUrl } from '../../config/default.json';
 
+import firebase from 'firebase/app';
+
 import type { OutlinedSelect } from '../outlined-select/outlined-select.component';
 
 export interface SongSummary {
@@ -19,6 +21,8 @@ export interface SongSummary {
   title: string;
   language: string;
 }
+
+const analytics = firebase.analytics();
 
 @customElement('songs-list')
 export class SongsList extends localize(PageViewElement) {
@@ -254,6 +258,8 @@ export class SongsList extends localize(PageViewElement) {
     }
 
     this._downloadingSongs = true;
+
+    analytics.logEvent('download_songs');
 
     for await (const { loading, refreshing, data, error } of cacheAndNetwork<
       SongSummary[]
