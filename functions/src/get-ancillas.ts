@@ -5,7 +5,7 @@ export const getAncillas = functions.https.onRequest(async (_, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.set(
     'Cache-Control',
-    'public, s-maxage=86400, stale-while-revalidate=86400',
+    'public, max-age=1800, s-maxage=3600, stale-while-revalidate=3600',
   );
 
   const db = await mongoDb;

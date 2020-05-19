@@ -5,7 +5,7 @@ export const getSong = functions.https.onRequest(async ({ path }, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.set(
     'Cache-Control',
-    'public, s-maxage=86400, stale-while-revalidate=86400',
+    'public, max-age=1800, s-maxage=3600, stale-while-revalidate=3600',
   );
 
   const number = path.match(/\/api\/songs\/([a-z\d]+)/i)?.[1];

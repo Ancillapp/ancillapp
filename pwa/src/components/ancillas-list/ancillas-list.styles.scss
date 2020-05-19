@@ -20,10 +20,11 @@ unobtrusive-notification {
 .ancillas-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .ancilla {
-  margin: 0.5rem;
+  margin: 1rem;
 
   &:hover,
   &:active {
