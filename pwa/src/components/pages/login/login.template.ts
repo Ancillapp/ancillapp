@@ -29,8 +29,10 @@ export default function template(this: LoginPage) {
             (this._password = (event.target as TextField).value)}"
         ></mwc-textfield>
         <loading-button
+          raised
           label="${this.localeData?.login}"
           @click="${this._handleEmailPasswordLogin}"
+          ?loading="${this._loggingIn}"
         ></loading-button>
       </div>
     </section>

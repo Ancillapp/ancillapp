@@ -22,7 +22,12 @@ export class LoginPage extends localize(PageViewElement) {
   @property({ type: String })
   protected _password = '';
 
+  @property({ type: Boolean })
+  protected _loggingIn = false;
+
   protected async _handleEmailPasswordLogin() {
+    this._loggingIn = true;
+
     try {
       await auth.signInWithEmailAndPassword(this._email, this._password);
     } catch ({ code: signInErrorCode }) {
@@ -41,6 +46,8 @@ export class LoginPage extends localize(PageViewElement) {
 
       console.error(signInErrorCode);
     }
+
+    this._loggingIn = false;
   }
 }
 
