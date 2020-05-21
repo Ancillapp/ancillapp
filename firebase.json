@@ -34,6 +34,22 @@
           "function": "production-getBreviary"
         },
         {
+          "source": "/api/holy-masses",
+          "function": "production-getHolyMasses"
+        },
+        {
+          "source": "/api/fraternities",
+          "function": "production-getFraternities"
+        },
+        {
+          "source": "/api/fraternities/*/holy-masses/*",
+          "function": "production-bookHolyMass"
+        },
+        {
+          "source": "/api/fraternities/*/holy-masses/*/seats",
+          "function": "production-getHolyMassesSeats"
+        },
+        {
           "source": "/api/notifications/subscribe",
           "function": "production-subscribeForNotifications"
         },
@@ -75,6 +91,22 @@
         {
           "source": "/api/breviary",
           "function": "staging-getBreviary"
+        },
+        {
+          "source": "/api/holy-masses",
+          "function": "staging-getHolyMasses"
+        },
+        {
+          "source": "/api/fraternities",
+          "function": "staging-getFraternities"
+        },
+        {
+          "source": "/api/fraternities/*/holy-masses/*",
+          "function": "staging-bookHolyMass"
+        },
+        {
+          "source": "/api/fraternities/*/holy-masses/*/seats",
+          "function": "staging-getHolyMassesSeats"
         },
         {
           "source": "/api/notifications/subscribe",

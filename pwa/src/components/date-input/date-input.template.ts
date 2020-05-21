@@ -25,8 +25,8 @@ export default function template(this: DateInput) {
       clearLabel=""
       confirmLabel="${this.setLabel}"
       dismissLabel="${this.cancelLabel}"
-      min="1900-01-01"
-      max="2100-12-31"
+      min="${this.min}"
+      max="${this.max}"
       locale="${this.locale}"
       @datepicker-dialog-closed="${this._handleDateChange}"
     >

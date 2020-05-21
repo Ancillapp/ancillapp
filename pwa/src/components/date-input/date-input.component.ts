@@ -32,6 +32,12 @@ export class DateInput extends LitElement {
   @property({ type: String, reflect: true })
   public value?: string;
 
+  @property({ type: String, reflect: true })
+  public min = '1900-01-01';
+
+  @property({ type: String, reflect: true })
+  public max = '2100-12-31';
+
   @query('app-datepicker-dialog')
   protected _datepickerDialog?: DatepickerDialog;
 

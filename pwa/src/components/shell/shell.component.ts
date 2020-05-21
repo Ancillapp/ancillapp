@@ -61,6 +61,7 @@ export class Shell extends localize(LitElement) {
     'songs',
     'prayers',
     'ancillas',
+    'holy-mass',
   ];
   protected readonly _bottomNavPages = ['settings', 'info'];
 
@@ -237,7 +238,12 @@ export class Shell extends localize(LitElement) {
   protected _loadPage(page: string, subroute = '') {
     if (
       (page === 'login' && this._user) ||
-      ![...this._topNavPages, 'login', ...this._bottomNavPages].includes(page)
+      ![
+        ...this._topNavPages,
+        'holy-mass',
+        'login',
+        ...this._bottomNavPages,
+      ].includes(page)
     ) {
       window.history.replaceState({}, '', '/home');
       page = 'home';

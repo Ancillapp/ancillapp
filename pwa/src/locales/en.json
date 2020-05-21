@@ -51,5 +51,12 @@
   "italian": "Italian",
   "german": "German",
   "login": "Login",
-  "logout": "Logout"
+  "logout": "Logout",
+  "fraternity": "Fraternity",
+  "book": "Book",
+  "bookSeat": "Book a seat",
+  "bookedSeats": "Booked seats",
+  "seats": "Seats",
+  "noSeatsBooked": "You haven't booked any seats yet.",
+  "massAlreadyBooked": "You've already booked some seats for this Holy Mass."
 }

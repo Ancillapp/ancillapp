@@ -31,12 +31,16 @@ export default function template(this: Shell) {
                 >
                   <div slot="graphic">
                     ${(icons as { [key: string]: SVGTemplateResult })[
-                      `${page}Icon`
+                      `${page.replace(/-([a-z])/g, (_, letter) =>
+                        letter.toUpperCase(),
+                      )}Icon`
                     ]}
                   </div>
                   <slot
                     >${(this.localeData as { [key: string]: string })?.[
-                      page
+                      page.replace(/-([a-z])/g, (_, letter) =>
+                        letter.toUpperCase(),
+                      )
                     ]}</slot
                   >
                 </mwc-list-item>
@@ -147,6 +151,10 @@ export default function template(this: Shell) {
             ?active="${this._page === 'ancillas'}"
             subroute="${this._subroute}"
           ></ancillas-page>
+          <holy-mass-page
+            class="page padded"
+            ?active="${this._page === 'holy-mass'}"
+          ></holy-mass-page>
           <login-page
             class="page padded"
             ?active="${this._page === 'login'}"

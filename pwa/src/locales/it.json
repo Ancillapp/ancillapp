@@ -51,5 +51,12 @@
   "italian": "Italiano",
   "german": "Tedesco",
   "login": "Entra",
-  "logout": "Esci"
+  "logout": "Esci",
+  "fraternity": "Fraternità",
+  "book": "Prenota",
+  "bookSeat": "Prenota un posto",
+  "bookedSeats": "Posti prenotati",
+  "seats": "Posti",
+  "noSeatsBooked": "Non hai ancora prenotato nessun posto.",
+  "massAlreadyBooked": "Hai già prenotato dei posti per questa Santa Messa."
 }

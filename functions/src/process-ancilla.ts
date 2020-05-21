@@ -1,12 +1,10 @@
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
 import * as os from 'os';
 import * as path from 'path';
 import * as gs from 'gs';
 import { spawn } from 'child-process-promise';
 import { unlink as unlinkCb } from 'fs';
-
-admin.initializeApp();
+import { firebase } from './helpers/firebase';
 
 const execGs = (gsInstance: any) =>
   new Promise((resolve, reject) =>
@@ -43,7 +41,7 @@ export const processAncilla = functions
       return;
     }
 
-    const bucket = admin.storage().bucket('ancillas');
+    const bucket = firebase.storage().bucket('ancillas');
     const ancillaName = path.basename(object.name, '.pdf');
     const tmpFileIn = path.resolve(os.tmpdir(), `${ancillaName}_raw.pdf`);
     const tmpFileOut = path.resolve(os.tmpdir(), `${ancillaName}.pdf`);
