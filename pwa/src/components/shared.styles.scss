@@ -159,10 +159,19 @@ form > * {
 }
 
 mwc-dialog {
-  --mdc-theme-primary: var(--ancillapp-accent-color);
   --mdc-dialog-heading-ink-color: var(--ancillapp-primary-text-color);
   --mdc-dialog-content-ink-color: var(--ancillapp-primary-text-color);
   --mdc-dialog-scroll-divider-color: var(--ancillapp-divider-color);
+
+  mwc-button,
+  loading-button {
+    --mdc-theme-primary: var(--ancillapp-secondary-text-color);
+
+    &:last-child,
+    &:last-child {
+      --mdc-theme-primary: var(--ancillapp-accent-color);
+    }
+  }
 }
 
 ul.settings {
@@ -178,6 +187,10 @@ ul.settings {
 
     &:not(:last-child) {
       margin-bottom: 1rem;
+    }
+
+    > :last-child {
+      width: 12.5rem;
     }
   }
 }

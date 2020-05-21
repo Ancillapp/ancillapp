@@ -8,7 +8,7 @@ export class PageViewElement extends LitElement {
   @property({ type: Boolean, reflect: true })
   public active = false;
 
-  protected shouldUpdate() {
-    return this.active;
+  protected shouldUpdate(changedProperties: PropertyValues) {
+    return super.shouldUpdate(changedProperties) && this.active;
   }
 }

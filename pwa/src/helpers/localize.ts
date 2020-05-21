@@ -1,4 +1,4 @@
-import { LitElement } from 'lit-element';
+import type { LitElement } from 'lit-element';
 import { get, set } from './keyval';
 
 type Constructor<T> = new (...args: any[]) => T;
