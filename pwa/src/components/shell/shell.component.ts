@@ -3,6 +3,7 @@ import {
   LitElement,
   property,
   PropertyValues,
+  query,
 } from 'lit-element';
 import {
   installMediaQueryWatcher,
@@ -10,16 +11,18 @@ import {
   updateMetadata,
 } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
+import { get, set } from '../../helpers/keyval';
 
 import sharedStyles from '../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
 import type { TopAppBar } from '@material/mwc-top-app-bar';
-import { get, set } from '../../helpers/keyval';
+import type { IconButton } from '@material/mwc-icon-button';
 
 import firebase from 'firebase/app';
 
+const auth = firebase.auth();
 const analytics = firebase.analytics();
 
 @customElement('ancillapp-shell')
@@ -43,6 +46,15 @@ export class Shell extends localize(LitElement) {
   @property({ type: Boolean })
   protected _updateNotificationShown = false;
 
+  @property({ type: Boolean })
+  protected _userMenuOpen = false;
+
+  @property({ type: Object })
+  protected _user: firebase.User | null = null;
+
+  @query('span[slot=title] > mwc-icon-button')
+  protected _userIconButton: IconButton | null = null;
+
   protected readonly _topNavPages = [
     'home',
     'breviary',
@@ -58,6 +70,17 @@ export class Shell extends localize(LitElement) {
     super();
     this._checkForUpdates();
     this._observeForThemeChanges();
+    auth.onAuthStateChanged((user) => {
+      this._user = user;
+
+      if (
+        (this._user && this._page === 'login') ||
+        (!this._user && this._page === 'holy-mass')
+      ) {
+        window.history.replaceState({}, '', '/home');
+        this._locationChanged(window.location);
+      }
+    });
 
     if (window.matchMedia('(min-width: 48rem)').matches) {
       get<boolean>('drawerOpened').then((drawerOpened) =>
@@ -75,10 +98,15 @@ export class Shell extends localize(LitElement) {
     if (changedProperties.size < 1 || changedProperties.has('_page')) {
       const pageTitle = `Ancillapp - ${
         (this.localeData as { [key: string]: string })?.[
-          this._page || 'home'
+          this._page.replace(/-([a-z])/g, (_, letter) =>
+            letter.toUpperCase(),
+          ) || 'home'
         ] ||
         `${this._page?.[0]?.toUpperCase() || ''}${
-          this._page?.slice(1) || ''
+          this._page
+            ?.slice(1)
+            .replace(/-([a-z])/g, (_, letter) => ` ${letter.toUpperCase()}`) ||
+          ''
         }` ||
         'Home'
       }`;
@@ -182,8 +210,15 @@ export class Shell extends localize(LitElement) {
     this._loadPage(page, subroutes.join('/'));
 
     const pageTitle = `Ancillapp - ${
-      (this.localeData as { [key: string]: string })?.[this._page || 'home'] ||
-      `${this._page?.[0]?.toUpperCase() || ''}${this._page?.slice(1) || ''}` ||
+      (this.localeData as { [key: string]: string })?.[
+        this._page.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()) ||
+          'home'
+      ] ||
+      `${this._page?.[0]?.toUpperCase() || ''}${
+        this._page
+          ?.slice(1)
+          .replace(/-([a-z])/g, (_, letter) => ` ${letter.toUpperCase()}`) || ''
+      }` ||
       'Home'
     }`;
 
@@ -200,9 +235,14 @@ export class Shell extends localize(LitElement) {
   }
 
   protected _loadPage(page: string, subroute = '') {
-    if (![...this._topNavPages, ...this._bottomNavPages].includes(page)) {
+    if (
+      (page === 'login' && this._user) ||
+      ![...this._topNavPages, 'login', ...this._bottomNavPages].includes(page)
+    ) {
+      window.history.replaceState({}, '', '/home');
       page = 'home';
     }
+
     import(`../pages/${page}/${page}.component`);
     this._page = page;
     this._subroute = subroute;
@@ -261,6 +301,10 @@ export class Shell extends localize(LitElement) {
     }
     this._newSw.postMessage({ action: 'update' });
     analytics.logEvent('perform_update');
+  }
+
+  protected async _logout() {
+    await auth.signOut();
   }
 }
 

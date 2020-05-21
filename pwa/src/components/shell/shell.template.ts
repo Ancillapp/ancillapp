@@ -49,6 +49,29 @@ export default function template(this: Shell) {
         </mwc-list>
         <mwc-list activatable class="bottom-nav">
           <li divider role="separator"></li>
+          ${this._user
+            ? html`
+                <mwc-list-item graphic="icon" @click="${this._logout}">
+                  <div slot="graphic">
+                    ${icons.logout}
+                  </div>
+                  <slot>${this.localeData?.logout}</slot>
+                </mwc-list-item>
+              `
+            : html`
+                <a class="nav-link" href="/login">
+                  <mwc-list-item
+                    ?selected="${this._page === 'login'}"
+                    ?activated="${this._page === 'login'}"
+                    graphic="icon"
+                  >
+                    <div slot="graphic">
+                      ${icons.user}
+                    </div>
+                    <slot>${this.localeData?.login}</slot>
+                  </mwc-list-item>
+                </a>
+              `}
           ${this._bottomNavPages.map(
             (page) => html`
               <a class="nav-link" href="/${page}">
@@ -92,7 +115,11 @@ export default function template(this: Shell) {
           <div slot="title">
             ${icons.tau} ${this._page === 'home'
               ? 'Ancillapp'
-              : (this.localeData as { [key: string]: string })?.[this._page]}
+              : (this.localeData as { [key: string]: string })?.[
+                  this._page.replace(/-([a-z])/g, (_, letter) =>
+                    letter.toUpperCase(),
+                  )
+                ]}
           </div>
         </mwc-top-app-bar>
         <main>
@@ -120,6 +147,10 @@ export default function template(this: Shell) {
             ?active="${this._page === 'ancillas'}"
             subroute="${this._subroute}"
           ></ancillas-page>
+          <login-page
+            class="page padded"
+            ?active="${this._page === 'login'}"
+          ></login-page>
           <settings-page
             class="page padded"
             ?active="${this._page === 'settings'}"

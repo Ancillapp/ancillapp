@@ -5,6 +5,7 @@
   "songs": "Canti",
   "breviary": "Breviario",
   "prayers": "Preghiere",
+  "holyMass": "Santa Messa",
   "settings": "Impostazioni",
   "info": "Informazioni",
   "updateAvailable": "Aggiornamento disponibile!",
@@ -15,6 +16,7 @@
   "prayDailyPrayers": "Prega le preghiere giornaliere",
   "singFraternitySongs": "Canta i canti della Fraternità",
   "readLatestAncilla": "Sfoglia l'ultimo Ancilla Domini",
+  "bookHolyMassSeat": "Prenota un posto per la Santa Messa",
   "newAncillaNotification": "Vuoi ricevere una notifica ogni volta che viene pubblicato un nuovo Ancilla Domini?",
   "dontAskAnymore": "Non chiedermelo più",
   "noThanks": "No, grazie",
@@ -47,5 +49,7 @@
   "setFilters": "Imposta filtri",
   "close": "Chiudi",
   "italian": "Italiano",
-  "german": "Tedesco"
+  "german": "Tedesco",
+  "login": "Entra",
+  "logout": "Esci"
 }
