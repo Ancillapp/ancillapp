@@ -7,7 +7,7 @@ export const getHolyMasses = functions.https.onRequest(
     res.set('Access-Control-Allow-Origin', '*');
     res.set('Access-Control-Allow-Headers', '*');
     res.set('Access-Control-Allow-Credentials', 'true');
-    res.set('Cache-Control', 'no-store');
+    res.set('Cache-Control', 'private, no-store');
 
     if (method === 'OPTIONS') {
       res.status(204).send();

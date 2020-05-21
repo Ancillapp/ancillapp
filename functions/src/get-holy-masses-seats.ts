@@ -4,7 +4,7 @@ import { mongoDb, ObjectId } from './helpers/mongo';
 export const getHolyMassesSeats = functions.https.onRequest(
   async (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    res.set('Cache-Control', 'no-cache');
+    res.set('Cache-Control', 'private, no-cache');
 
     const [, fraternityId, date] = req.path.match(
       /\/api\/fraternities\/([a-z\d_-]+)\/holy-masses\/([a-z\d_-]+)\/seats/i,
