@@ -3,23 +3,18 @@ import { until } from 'lit-html/directives/until';
 import { BreviaryIndex } from './breviary-index.component';
 
 import '@material/mwc-textfield';
-import { Datepicker } from 'app-datepicker/dist/datepicker';
-import { DatepickerDialog } from 'app-datepicker/dist/datepicker-dialog';
-
-customElements.define('app-datepicker', Datepicker);
-customElements.define('app-datepicker-dialog', DatepickerDialog);
+import '../date-input/date-input.component';
 
 export default function template(this: BreviaryIndex) {
   return html`
     <section>
-      <mwc-textfield
-        outlined
-        readonly
-        type="date"
+      <date-input
         label="${this.localeData?.date}"
+        set-label="${this.localeData?.set}"
+        cancel-label="${this.localeData?.cancel}"
         value="${this._date}"
-        @click="${this._handleTextfieldClick}"
-      ></mwc-textfield>
+        @change="${this._handleDateChange}"
+      ></date-input>
       ${until(
         this._titlePromise,
         html`<h2>${this.localeData?.loading.toUpperCase()}</h2>`,
@@ -45,16 +40,5 @@ export default function template(this: BreviaryIndex) {
         )}
       </ul>
     </section>
-
-    <app-datepicker-dialog
-      clearLabel=""
-      confirmLabel="${this.localeData?.set}"
-      dismissLabel="${this.localeData?.cancel}"
-      min="1900-01-01"
-      max="2100-12-31"
-      locale="${this.locale}"
-      @datepicker-dialog-closed="${this._handleDateChange}"
-    >
-    </app-datepicker-dialog>
   `;
 }
