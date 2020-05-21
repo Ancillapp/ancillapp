@@ -33,16 +33,6 @@ export default function template(this: LoginPage) {
           @click="${this._handleEmailPasswordLogin}"
         ></loading-button>
       </div>
-      <h4>Oppure:</h4>
-      <mwc-button label="Entra con Google" @click="${this._handleGoogleLogin}">
-        <span slot="icon">${google}</span>
-      </mwc-button>
-      <mwc-button
-        label="Entra con Facebook"
-        @click="${this._handleFacebookLogin}"
-      >
-        <span slot="icon">${facebook}</span>
-      </mwc-button>
     </section>
   `;
 }

@@ -42,17 +42,6 @@ export class LoginPage extends localize(PageViewElement) {
       console.error(signInErrorCode);
     }
   }
-
-  protected _handleGoogleLogin() {
-    auth
-      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then(console.log)
-      .catch(console.error);
-  }
-
-  protected _handleFacebookLogin() {
-    auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-  }
 }
 
 declare global {
