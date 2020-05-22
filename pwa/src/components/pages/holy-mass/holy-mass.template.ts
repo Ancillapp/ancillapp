@@ -19,9 +19,7 @@ export default function template(this: HolyMassPage) {
             this._bookedHolyMassesPromise,
             (holyMasses) => {
               const dayAlreadyBooked = holyMasses.some(
-                ({ date, fraternity: { id } }) =>
-                  date.slice(0, 10) === this._selectedDate &&
-                  id === this._selectedFraternity,
+                ({ date }) => date.slice(0, 10) === this._selectedDate,
               );
 
               return html`
@@ -83,7 +81,7 @@ export default function template(this: HolyMassPage) {
                   <div class="book-action-bar">
                     <p>
                       ${dayAlreadyBooked
-                        ? this.localeData?.massAlreadyBooked
+                        ? this.localeData?.dayAlreadyBooked
                         : nothing}
                     </p>
                     <loading-button

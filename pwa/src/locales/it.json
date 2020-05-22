@@ -57,6 +57,7 @@
   "bookSeat": "Prenota un posto",
   "bookedSeats": "Posti prenotati",
   "seats": "Posti",
+  "actions": "Azioni",
   "noSeatsBooked": "Non hai ancora prenotato nessun posto.",
-  "massAlreadyBooked": "Hai già prenotato dei posti per questa Santa Messa."
+  "dayAlreadyBooked": "Hai già prenotato dei posti per questo giorno."
 }

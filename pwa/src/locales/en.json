@@ -57,6 +57,7 @@
   "bookSeat": "Book a seat",
   "bookedSeats": "Booked seats",
   "seats": "Seats",
+  "actions": "Actions",
   "noSeatsBooked": "You haven't booked any seats yet.",
-  "massAlreadyBooked": "You've already booked some seats for this Holy Mass."
+  "dayAlreadyBooked": "You've already booked some seats for this day."
 }
