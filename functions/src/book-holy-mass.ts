@@ -64,13 +64,13 @@ export const bookHolyMass = functions.https.onRequest(
 
     // If the holy mass doesn't exist yet, create it.
     if (!existingHolyMass) {
-      await holyMassesCollection.insertOne({
+      const { insertedId: id } = await holyMassesCollection.insertOne({
         fraternity: new ObjectId(fraternityId),
         date: new Date(date),
         participants: [{ userId: decodedToken.uid, seats }],
       });
 
-      res.status(201).send();
+      res.status(201).send({ id });
       return;
     }
 
@@ -95,7 +95,7 @@ export const bookHolyMass = functions.https.onRequest(
       return;
     }
 
-    const holyMassUpdateResult = await holyMassesCollection.findOneAndUpdate(
+    const updatedHolyMass = await holyMassesCollection.findOneAndUpdate(
       {
         fraternity: new ObjectId(fraternityId),
         date: new Date(date),
@@ -115,13 +115,14 @@ export const bookHolyMass = functions.https.onRequest(
           },
         },
       },
+      { returnOriginal: false },
     );
 
-    if (!holyMassUpdateResult) {
+    if (!updatedHolyMass?.value?._id) {
       res.status(400).json({ code: 'ALREADY_BOOKED' });
       return;
     }
 
-    res.status(201).send();
+    res.status(201).json({ id: updatedHolyMass.value._id });
   },
 );

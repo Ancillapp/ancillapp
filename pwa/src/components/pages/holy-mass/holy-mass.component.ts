@@ -134,21 +134,33 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
         }),
       },
     );
-    await res.blob();
+    const { id } = await res.json();
 
     this.requestUpdate('_selectedFraternity', this._selectedFraternity);
     this._bookedHolyMassesPromise = this._bookedHolyMassesPromise.then(
-      (bookedHolyMasses) => [
-        {
-          id: btoa(Date.now().toString()),
-          date: this._selectedDate,
+      (bookedHolyMasses) => {
+        const newRecord = {
+          id,
+          date: new Date(this._selectedDate).toISOString(),
           seats: this._selectedSeats,
           fraternity: this._fraternities.find(
             ({ id }) => id === this._selectedFraternity,
           )!,
-        },
-        ...bookedHolyMasses,
-      ],
+        };
+
+        let index = 0;
+
+        while (
+          index < bookedHolyMasses.length &&
+          bookedHolyMasses[index].date > newRecord.date
+        ) {
+          index++;
+        }
+
+        bookedHolyMasses.splice(index, 0, newRecord);
+
+        return bookedHolyMasses;
+      },
     );
     this._availableSeats! -= this._selectedSeats;
 
