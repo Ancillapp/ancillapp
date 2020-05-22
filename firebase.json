@@ -43,7 +43,7 @@
         },
         {
           "source": "/api/fraternities/*/holy-masses/*",
-          "function": "production-bookHolyMass"
+          "function": "production-handleHolyMassBooking"
         },
         {
           "source": "/api/fraternities/*/holy-masses/*/seats",
@@ -102,7 +102,7 @@
         },
         {
           "source": "/api/fraternities/*/holy-masses/*",
-          "function": "staging-bookHolyMass"
+          "function": "staging-handleHolyMassBooking"
         },
         {
           "source": "/api/fraternities/*/holy-masses/*/seats",

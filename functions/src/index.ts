@@ -10,7 +10,7 @@ import { subscribeForNotifications } from './subscribe-for-notifications';
 import { getHolyMasses } from './get-holy-masses';
 import { getFraternities } from './get-fraternities';
 import { getHolyMassesSeats } from './get-holy-masses-seats';
-import { bookHolyMass } from './book-holy-mass';
+import { handleHolyMassBooking } from './handle-holy-mass-booking';
 
 export const production = {
   processAncilla,
@@ -25,7 +25,7 @@ export const production = {
   getHolyMasses,
   getFraternities,
   getHolyMassesSeats,
-  bookHolyMass,
+  handleHolyMassBooking,
 };
 
 export const staging = {
@@ -41,5 +41,5 @@ export const staging = {
   getHolyMasses,
   getFraternities,
   getHolyMassesSeats,
-  bookHolyMass,
+  handleHolyMassBooking,
 };

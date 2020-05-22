@@ -59,5 +59,6 @@
   "seats": "Seats",
   "actions": "Actions",
   "noSeatsBooked": "You haven't booked any seats yet.",
-  "dayAlreadyBooked": "You've already booked some seats for this day."
+  "dayAlreadyBooked": "You've already booked some seats for this day.",
+  "cancelBooking": "Cancel booking"
 }

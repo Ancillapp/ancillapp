@@ -59,5 +59,6 @@
   "seats": "Posti",
   "actions": "Azioni",
   "noSeatsBooked": "Non hai ancora prenotato nessun posto.",
-  "dayAlreadyBooked": "Hai già prenotato dei posti per questo giorno."
+  "dayAlreadyBooked": "Hai già prenotato dei posti per questo giorno.",
+  "cancelBooking": "Elimina prenotazione"
 }

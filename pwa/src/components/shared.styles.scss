@@ -12,6 +12,7 @@
 .page {
   display: none;
   flex: 1;
+  max-width: 100vw;
 
   &[active] {
     display: block;
@@ -124,6 +125,10 @@ td {
 
   &.right {
     text-align: right;
+  }
+
+  &.center {
+    text-align: center;
   }
 }
 

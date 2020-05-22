@@ -51,6 +51,9 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
   @property({ type: String })
   protected _selectedDate = new Date().toISOString().slice(0, 10);
 
+  @property({ type: Object })
+  protected _bookingToCancel?: HolyMassBooking;
+
   protected _minDate?: string;
   protected _maxDate?: string;
 
@@ -165,6 +168,45 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     this._availableSeats! -= this._selectedSeats;
 
     this._bookingHolyMass = false;
+  }
+
+  protected async _cancelHolyMassSeatsBooking({
+    detail: { action },
+  }: CustomEvent<{ action: string }>) {
+    if (action === 'cancelBooking') {
+      if (!this._bookingToCancel || !this.user) {
+        return;
+      }
+
+      const token = await this.user.getIdToken();
+
+      const res = await fetch(
+        `${apiUrl}/fraternities/${
+          this._bookingToCancel.fraternity.id
+        }/holy-masses/${this._bookingToCancel.date.slice(0, 10)}`,
+        {
+          method: 'DELETE',
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      const { id } = await res.json();
+
+      this._bookedHolyMassesPromise = this._bookedHolyMassesPromise.then(
+        (bookedHolyMasses) => {
+          bookedHolyMasses.splice(
+            bookedHolyMasses.findIndex((booking) => booking.id === id),
+            1,
+          );
+
+          return bookedHolyMasses;
+        },
+      );
+    }
+
+    this._bookingToCancel = undefined;
   }
 
   protected _handleDateChange({ detail: newDate }: CustomEvent<string>) {

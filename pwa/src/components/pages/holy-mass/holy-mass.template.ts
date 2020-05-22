@@ -5,11 +5,14 @@ import { HolyMassPage } from './holy-mass.component';
 import { load } from '../../../helpers/directives';
 
 import '@material/mwc-button';
+import '@material/mwc-dialog';
 import '../../outlined-select/outlined-select.component';
 import '../../loading-button/loading-button.component';
 import '../../date-input/date-input.component';
 
 import type { OutlinedSelect } from '../../outlined-select/outlined-select.component';
+
+import { remove } from '../../icons';
 
 export default function template(this: HolyMassPage) {
   return html`
@@ -105,29 +108,43 @@ export default function template(this: HolyMassPage) {
                                 <th>${this.localeData?.fraternity}</th>
                                 <th>${this.localeData?.date}</th>
                                 <th>${this.localeData?.seats}</th>
+                                <th>${this.localeData?.actions}</th>
                               </tr>
                             </thead>
                             <tbody>
                               ${repeat(
                                 holyMasses,
                                 ({ id }) => id,
-                                ({
-                                  fraternity: { location },
-                                  date,
-                                  seats,
-                                }) => html`
-                                  <tr>
-                                    <td>${location}</td>
-                                    <td>
-                                      ${Intl.DateTimeFormat(this.locale, {
-                                        day: 'numeric',
-                                        month: 'numeric',
-                                        year: 'numeric',
-                                      }).format(new Date(date))}
-                                    </td>
-                                    <td class="right">${seats}</td>
-                                  </tr>
-                                `,
+                                (booking) => {
+                                  const {
+                                    fraternity: { id, location },
+                                    date,
+                                    seats,
+                                  } = booking;
+
+                                  return html`
+                                    <tr>
+                                      <td>${location}</td>
+                                      <td>
+                                        ${Intl.DateTimeFormat(this.locale, {
+                                          day: 'numeric',
+                                          month: 'numeric',
+                                          year: 'numeric',
+                                        }).format(new Date(date))}
+                                      </td>
+                                      <td class="right">${seats}</td>
+                                      <td class="center">
+                                        <mwc-icon-button
+                                          ?disabled="${this._bookingToCancel}"
+                                          @click="${() =>
+                                            (this._bookingToCancel = booking)}"
+                                        >
+                                          ${remove}
+                                        </mwc-icon-button>
+                                      </td>
+                                    </tr>
+                                  `;
+                                },
                               )}
                             </tbody>
                           </table>
@@ -135,6 +152,34 @@ export default function template(this: HolyMassPage) {
                       `
                     : html`<p>${this.localeData?.noSeatsBooked}</p>`}
                 </section>
+
+                <mwc-dialog
+                  ?open="${this._bookingToCancel}"
+                  @closing="${this._cancelHolyMassSeatsBooking}"
+                >
+                  <p>
+                    Sicuro di voler eliminare la tua prenotazione per la Messa
+                    della Fraternità di
+                    <strong
+                      >${this._bookingToCancel?.fraternity.location}</strong
+                    >
+                    del giorno
+                    <strong
+                      >${this._bookingToCancel?.date &&
+                      Intl.DateTimeFormat(this.locale, {
+                        day: 'numeric',
+                        month: 'numeric',
+                        year: 'numeric',
+                      }).format(new Date(this._bookingToCancel?.date))}</strong
+                    >?
+                  </p>
+                  <mwc-button dialogAction="close" slot="secondaryAction">
+                    ${this.localeData?.close}
+                  </mwc-button>
+                  <mwc-button dialogAction="cancelBooking" slot="primaryAction">
+                    ${this.localeData?.cancelBooking}
+                  </mwc-button>
+                </mwc-dialog>
               `;
             },
             (error) => html`${error}`,
