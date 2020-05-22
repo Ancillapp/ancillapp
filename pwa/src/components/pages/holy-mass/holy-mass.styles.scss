@@ -1,6 +1,5 @@
-mwc-dialog > div {
-  width: 24rem;
-  max-width: 100%;
+:host {
+  display: flex;
 }
 
 .available-seats {
@@ -31,4 +30,16 @@ h3 {
   margin: 0;
   padding: 1.5rem 0 1rem;
   clear: both;
+}
+
+.loading-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  align-self: flex-start;
 }
