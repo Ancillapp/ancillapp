@@ -8,6 +8,14 @@ import '../../loading-button/loading-button.component';
 import type { TextField } from '@material/mwc-textfield';
 
 export default function template(this: LoginPage) {
+  const loggingIn =
+    this._loggingInWithEmailAndPassword ||
+    this._loggingInWithGoogle ||
+    this._loggingInWithFacebook ||
+    this._loggingInWithTwitter ||
+    this._loggingInWithMicrosoft ||
+    this._loggingInWithGitHub;
+
   return html`
     <section>
       <div>
@@ -27,7 +35,7 @@ export default function template(this: LoginPage) {
                 label="${this.localeData?.resetPassword}"
                 @click="${this._handlePasswordReset}"
                 ?loading="${this._resettingPassword}"
-                ?disabled="${this._passwordReset}"
+                ?disabled="${this._passwordReset || loggingIn}"
               ></loading-button>
 
               ${this._passwordReset
@@ -47,7 +55,8 @@ export default function template(this: LoginPage) {
                 raised
                 label="${this.localeData?.login}"
                 @click="${this._handleEmailPasswordLogin}"
-                ?loading="${this._loggingIn}"
+                ?loading="${this._loggingInWithEmailAndPassword}"
+                ?disabled="${loggingIn}"
               ></loading-button>
             `}
         <p>
@@ -64,47 +73,55 @@ export default function template(this: LoginPage) {
       </div>
       <div>
         <h3>Oppure effettua il login con:</h3>
-        <mwc-button
+        <loading-button
           id="google"
           raised
           label="Google"
           @click="${this._handleGoogleLogin}"
+          ?loading="${this._loggingInWithGoogle}"
+          ?disabled="${loggingIn}"
         >
           <svg slot="icon" viewBox="0 0 256 256" fill="currentColor">
             <path
               d="M254 131c0 73-50 125-124 125a128 128 0 010-256c35 0 64 13 86 34l-35 33C135 23 51 56 51 128c0 45 35 81 79 81 51 0 70-37 73-55h-73v-44h122a112 112 0 012 21z"
             />
           </svg>
-        </mwc-button>
-        <mwc-button
+        </loading-button>
+        <loading-button
           id="facebook"
           raised
           label="Facebook"
           @click="${this._handleFacebookLogin}"
+          ?loading="${this._loggingInWithFacebook}"
+          ?disabled="${loggingIn}"
         >
           <svg slot="icon" viewBox="0 0 256 256" fill="currentColor">
             <path
               d="M94 50v35H68v43h26v128h53V128h36l5-43h-41V55c0-4 6-10 12-10h29V0h-40C93 0 94 43 94 50z"
             />
           </svg>
-        </mwc-button>
-        <mwc-button
+        </loading-button>
+        <loading-button
           id="twitter"
           raised
           label="Twitter"
           @click="${this._handleTwitterLogin}"
+          ?loading="${this._loggingInWithTwitter}"
+          ?disabled="${loggingIn}"
         >
           <svg slot="icon" viewBox="0 0 256 256" fill="currentColor">
             <path
               d="M256 49a105 105 0 0 1-30 8 53 53 0 0 0 23-29 106 106 0 0 1-33 13 53 53 0 0 0-90 48A149 149 0 0 1 18 34a53 53 0 0 0 16 70 53 53 0 0 1-24-7v1a53 53 0 0 0 42 51 53 53 0 0 1-13 2 50 50 0 0 1-10-1 53 53 0 0 0 49 37 105 105 0 0 1-66 22 112 112 0 0 1-12-1 148 148 0 0 0 81 24c96 0 149-80 149-149v-7a105 105 0 0 0 26-27z"
             />
           </svg>
-        </mwc-button>
-        <mwc-button
+        </loading-button>
+        <loading-button
           id="microsoft"
           raised
           label="Microsoft"
           @click="${this._handleMicrosoftLogin}"
+          ?loading="${this._loggingInWithMicrosoft}"
+          ?disabled="${loggingIn}"
         >
           <svg slot="icon" viewBox="0 0 23 23" fill="currentColor">
             <path d="M1 1h10v10H1z" />
@@ -112,19 +129,21 @@ export default function template(this: LoginPage) {
             <path d="M1 12h10v10H1z" />
             <path d="M12 12h10v10H12z" />
           </svg>
-        </mwc-button>
-        <mwc-button
+        </loading-button>
+        <loading-button
           id="github"
           raised
           label="GitHub"
           @click="${this._handleGitHubLogin}"
+          ?loading="${this._loggingInWithGitHub}"
+          ?disabled="${loggingIn}"
         >
           <svg slot="icon" viewBox="0 0 1012 1089" fill="currentColor">
             <path
               d="M171 776zm562 273a671 671 0 01-378 23v-39l-1-66c-193 35-238-101-240-107-30-77-72-97-73-97l-1-1c-97-66 11-65 11-65h1c76 5 117 75 119 79 23 40 52 60 80 68 41 11 82-1 107-11a198 198 0 0131-78c-73-10-147-32-205-80-64-54-107-140-107-281a298 298 0 0171-194c-4-12-10-33-12-61-2-34 2-79 22-130V8s9-7 22-8c8 0 20 0 37 4 32 6 82 24 150 70a661 661 0 01177-23 723 723 0 01176 23C858-18 921 2 922 2l5 2 2 5c21 51 24 96 22 130-2 28-8 49-12 61a286 286 0 0172 194c0 141-44 227-108 281-58 48-132 69-205 80 8 11 16 25 22 41 8 23 13 50 13 82zM137 801c5 1 9 5 9 10-1 4-5 7-10 7-6-1-9-5-9-9 1-5 5-8 10-8zm19 50c1-5 5-8 10-8 5 1 9 5 9 10-1 4-5 7-10 7-5-1-9-5-9-9zM90 737c5 1 9 5 8 9 0 5-5 8-10 8-5-1-9-5-8-10 0-4 5-7 10-7zm25 27c5 1 8 5 8 10-1 4-5 8-10 7s-9-5-8-9c0-5 4-8 10-8zm91 108c5 1 9 5 8 10 0 4-5 7-10 7-5-1-9-5-8-9 0-5 5-8 10-8zm56 16c5 0 9 4 9 9-1 5-5 8-10 7-5 0-9-4-9-9 1-5 5-8 10-7zm53-5c5 1 9 5 8 10 0 4-5 8-10 7-5 0-9-5-8-9 0-5 5-8 10-8z"
             />
           </svg>
-        </mwc-button>
+        </loading-button>
       </div>
     </section>
   `;

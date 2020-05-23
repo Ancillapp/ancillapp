@@ -1,6 +1,7 @@
 mwc-textfield {
   width: 100%;
   max-width: 20rem;
+  display: block;
 }
 
 section > div {
@@ -8,10 +9,10 @@ section > div {
   > * {
     text-align: center;
     padding: 0.5rem 0;
-    margin: 0;
+    margin: 0 auto;
   }
 
-  > mwc-button {
+  > loading-button {
     margin: 0 0.5rem;
   }
 }

@@ -24,7 +24,22 @@ export class LoginPage extends localize(PageViewElement) {
   protected _password = '';
 
   @property({ type: Boolean })
-  protected _loggingIn = false;
+  protected _loggingInWithEmailAndPassword = false;
+
+  @property({ type: Boolean })
+  protected _loggingInWithGoogle = false;
+
+  @property({ type: Boolean })
+  protected _loggingInWithFacebook = false;
+
+  @property({ type: Boolean })
+  protected _loggingInWithTwitter = false;
+
+  @property({ type: Boolean })
+  protected _loggingInWithMicrosoft = false;
+
+  @property({ type: Boolean })
+  protected _loggingInWithGitHub = false;
 
   @property({ type: Boolean })
   protected _forgotPassword = false;
@@ -36,7 +51,7 @@ export class LoginPage extends localize(PageViewElement) {
   protected _passwordReset = false;
 
   protected async _handleEmailPasswordLogin() {
-    this._loggingIn = true;
+    this._loggingInWithEmailAndPassword = true;
 
     try {
       await auth.signInWithEmailAndPassword(this._email, this._password);
@@ -67,7 +82,7 @@ export class LoginPage extends localize(PageViewElement) {
 
     this._email = '';
     this._password = '';
-    this._loggingIn = false;
+    this._loggingInWithEmailAndPassword = false;
   }
 
   protected async _handlePasswordReset() {
@@ -82,30 +97,44 @@ export class LoginPage extends localize(PageViewElement) {
   }
 
   protected async _handleGoogleLogin() {
+    this._loggingInWithGoogle = true;
+
     await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 
     analytics.logEvent('login', {
       method: 'Google',
     });
+
+    this._loggingInWithGoogle = false;
   }
 
   protected async _handleFacebookLogin() {
+    this._loggingInWithFacebook = true;
+
     await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
 
     analytics.logEvent('login', {
       method: 'Facebook',
     });
+
+    this._loggingInWithFacebook = false;
   }
 
   protected async _handleTwitterLogin() {
+    this._loggingInWithTwitter = true;
+
     await auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
 
     analytics.logEvent('login', {
       method: 'Twitter',
     });
+
+    this._loggingInWithTwitter = false;
   }
 
   protected async _handleMicrosoftLogin() {
+    this._loggingInWithMicrosoft = true;
+
     await auth.signInWithPopup(
       new firebase.auth.OAuthProvider('microsoft.com'),
     );
@@ -113,14 +142,20 @@ export class LoginPage extends localize(PageViewElement) {
     analytics.logEvent('login', {
       method: 'Microsoft',
     });
+
+    this._loggingInWithMicrosoft = false;
   }
 
   protected async _handleGitHubLogin() {
+    this._loggingInWithGitHub = true;
+
     await auth.signInWithPopup(new firebase.auth.GithubAuthProvider());
 
     analytics.logEvent('login', {
       method: 'GitHub',
     });
+
+    this._loggingInWithGitHub = false;
   }
 }
 
