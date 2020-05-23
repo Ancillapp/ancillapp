@@ -56,8 +56,13 @@ export const bookHolyMass = async ({
   // The user has already booked some seats for this holy mass
   if (
     existingHolyMass.participants.some(
-      ({ userId: participantId }: { userId: string }) =>
-        userId === participantId,
+      ({
+        userId: participantId,
+        deleted,
+      }: {
+        userId: string;
+        deleted?: boolean;
+      }) => userId === participantId && !deleted,
     )
   ) {
     res.status(400).json({ code: 'ALREADY_BOOKED' });
@@ -65,8 +70,10 @@ export const bookHolyMass = async ({
   }
 
   const takenSeats = existingHolyMass.participants.reduce(
-    (sum: number, { seats: bookedSeats }: { seats: number }) =>
-      sum + bookedSeats,
+    (
+      sum: number,
+      { seats: bookedSeats, deleted }: { seats: number; deleted?: boolean },
+    ) => (deleted ? sum : sum + bookedSeats),
     0,
   );
 
@@ -83,6 +90,9 @@ export const bookHolyMass = async ({
         $not: {
           $elemMatch: {
             userId,
+            deleted: {
+              $ne: true,
+            },
           },
         },
       },

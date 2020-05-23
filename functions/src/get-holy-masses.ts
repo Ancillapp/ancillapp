@@ -41,6 +41,9 @@ export const getHolyMasses = functions.https.onRequest(
             participants: {
               $elemMatch: {
                 userId: decodedToken.uid,
+                deleted: {
+                  $ne: true,
+                },
               },
             },
           },
@@ -72,7 +75,10 @@ export const getHolyMasses = functions.https.onRequest(
                 input: '$participants',
                 as: 'participant',
                 cond: {
-                  $eq: ['$$participant.userId', decodedToken.uid],
+                  $and: [
+                    { $eq: ['$$participant.userId', decodedToken.uid] },
+                    { $ne: ['$$participant.deleted', true] },
+                  ],
                 },
               },
             },
@@ -94,6 +100,7 @@ export const getHolyMasses = functions.https.onRequest(
             fraternity: 1,
             date: 1,
             seats: '$participant.seats',
+            deleted: '$participant.deleted',
           },
         },
         {

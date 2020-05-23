@@ -19,12 +19,18 @@ export const cancelHolyMassBooking = async ({
     {
       fraternity: new ObjectId(fraternityId),
       date: new Date(date),
+      participants: {
+        $elemMatch: {
+          userId,
+          deleted: {
+            $ne: true,
+          },
+        },
+      },
     },
     {
-      $pull: {
-        participants: {
-          userId,
-        },
+      $set: {
+        'participants.$.deleted': true,
       },
     },
     {

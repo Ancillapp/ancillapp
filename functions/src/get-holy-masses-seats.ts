@@ -32,7 +32,10 @@ export const getHolyMassesSeats = functions.https.onRequest(
 
     const takenSeats =
       holyMass?.participants.reduce(
-        (sum: number, { seats }: { seats: number }) => sum + seats,
+        (
+          sum: number,
+          { seats, deleted }: { seats: number; deleted?: boolean },
+        ) => (deleted ? sum : sum + seats),
         0,
       ) || 0;
 
