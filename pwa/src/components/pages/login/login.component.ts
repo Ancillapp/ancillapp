@@ -9,6 +9,7 @@ import template from './login.template';
 import firebase from 'firebase/app';
 
 const auth = firebase.auth();
+const analytics = firebase.analytics();
 
 @customElement('login-page')
 export class LoginPage extends localize(PageViewElement) {
@@ -59,6 +60,10 @@ export class LoginPage extends localize(PageViewElement) {
     this._email = '';
     this._password = '';
     this._loggingIn = false;
+
+    analytics.logEvent('login', {
+      method: 'Email and Password',
+    });
   }
 
   protected async _handlePasswordReset() {
@@ -74,24 +79,44 @@ export class LoginPage extends localize(PageViewElement) {
 
   protected async _handleGoogleLogin() {
     await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+
+    analytics.logEvent('login', {
+      method: 'Google',
+    });
   }
 
   protected async _handleFacebookLogin() {
     await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+
+    analytics.logEvent('login', {
+      method: 'Facebook',
+    });
   }
 
   protected async _handleTwitterLogin() {
     await auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+
+    analytics.logEvent('login', {
+      method: 'Twitter',
+    });
   }
 
   protected async _handleMicrosoftLogin() {
     await auth.signInWithPopup(
       new firebase.auth.OAuthProvider('microsoft.com'),
     );
+
+    analytics.logEvent('login', {
+      method: 'Microsoft',
+    });
   }
 
   protected async _handleGitHubLogin() {
     await auth.signInWithPopup(new firebase.auth.GithubAuthProvider());
+
+    analytics.logEvent('login', {
+      method: 'GitHub',
+    });
   }
 }
 
