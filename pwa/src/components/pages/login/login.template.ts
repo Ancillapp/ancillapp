@@ -25,8 +25,10 @@ export default function template(this: LoginPage) {
           type="email"
           label="Email"
           value="${this._email}"
-          @change="${(event: CustomEvent) =>
-            (this._email = (event.target as TextField).value)}"
+          @input="${(event: CustomEvent) => {
+            this._email = (event.target as TextField).value;
+            this._error = '';
+          }}"
         ></mwc-textfield>
         ${this._forgotPassword
           ? html`
@@ -48,8 +50,10 @@ export default function template(this: LoginPage) {
                 type="password"
                 label="Password"
                 value="${this._password}"
-                @change="${(event: CustomEvent) =>
-                  (this._password = (event.target as TextField).value)}"
+                @input="${(event: CustomEvent) => {
+                  this._password = (event.target as TextField).value;
+                  this._error = '';
+                }}"
               ></mwc-textfield>
               <loading-button
                 raised
@@ -59,6 +63,7 @@ export default function template(this: LoginPage) {
                 ?disabled="${loggingIn}"
               ></loading-button>
             `}
+        ${this._error ? html`<p>${this._error}</p>` : html`${nothing}`}
         <p>
           <a
             role="button"

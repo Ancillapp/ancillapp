@@ -23,6 +23,9 @@ export class LoginPage extends localize(PageViewElement) {
   @property({ type: String })
   protected _password = '';
 
+  @property({ type: String })
+  protected _error = '';
+
   @property({ type: Boolean })
   protected _loggingInWithEmailAndPassword = false;
 
@@ -51,6 +54,16 @@ export class LoginPage extends localize(PageViewElement) {
   protected _passwordReset = false;
 
   protected async _handleEmailPasswordLogin() {
+    if (!this._email) {
+      this._error = 'Per favore, specifica un indirizzo email.';
+      return;
+    }
+
+    if (!this._password) {
+      this._error = 'Per favore, specifica una password.';
+      return;
+    }
+
     this._loggingInWithEmailAndPassword = true;
 
     try {
@@ -59,8 +72,14 @@ export class LoginPage extends localize(PageViewElement) {
       analytics.logEvent('login', {
         method: 'Email and Password',
       });
+
+      this._email = '';
+      this._password = '';
+      this._error = '';
     } catch ({ code: signInErrorCode }) {
-      if (signInErrorCode === 'auth/user-not-found') {
+      let error = signInErrorCode;
+
+      if (error === 'auth/user-not-found') {
         try {
           await auth.createUserWithEmailAndPassword(
             this._email,
@@ -72,16 +91,25 @@ export class LoginPage extends localize(PageViewElement) {
           });
 
           this.dispatchEvent(new CustomEvent('register'));
+
+          this._email = '';
+          this._password = '';
+          this._error = '';
         } catch ({ code: signUpErrorCode }) {
-          console.error(signUpErrorCode);
+          error = signUpErrorCode;
         }
-      } else {
-        console.error(signInErrorCode);
+      }
+
+      switch (error) {
+        case 'auth/invalid-email':
+          this._error = "L'email inserita non è valida.";
+          break;
+        case 'auth/wrong-password':
+          this._error = 'La password inserita è errata.';
+          break;
       }
     }
 
-    this._email = '';
-    this._password = '';
     this._loggingInWithEmailAndPassword = false;
   }
 
