@@ -13,6 +13,16 @@ import { get, set } from '../../../helpers/keyval';
 export interface Fraternity {
   id: string;
   location: string;
+  masses: {
+    sunday?: string[];
+    monday?: string[];
+    tuesday?: string[];
+    wednesday?: string[];
+    thursday?: string[];
+    friday?: string[];
+    saturday?: string[];
+    default?: string[];
+  };
 }
 
 export interface HolyMassBooking {
@@ -42,6 +52,9 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
   @property({ type: String })
   protected _selectedFraternity?: string;
 
+  @property({ type: String })
+  protected _selectedTime?: string;
+
   @property({ type: Number })
   protected _selectedSeats = 1;
 
@@ -66,13 +79,20 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
   constructor() {
     super();
 
-    Promise.all<Fraternity[], string | undefined>([
+    Promise.all<Fraternity[], string | undefined, string | undefined>([
       fetch(`${apiUrl}/fraternities`).then((res) => res.json()),
       get('preferredFraternity'),
-    ]).then(([fraternities, preferredFraternity]) => {
+      get('preferredHolyMassTime'),
+    ]).then(([fraternities, preferredFraternity, preferredHolyMassTime]) => {
       this._fraternities = fraternities;
       this._selectedFraternity =
         preferredFraternity || this._fraternities[0].id;
+
+      const availableTimes = this._getAvailableTimes(this._selectedFraternity);
+      this._selectedTime =
+        preferredHolyMassTime && availableTimes.includes(preferredHolyMassTime)
+          ? preferredHolyMassTime
+          : availableTimes[availableTimes.length - 1];
     });
 
     const now = new Date();
@@ -100,14 +120,31 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
 
     if (
       (changedProperties.has('_selectedFraternity') ||
-        changedProperties.has('_selectedDate')) &&
+        changedProperties.has('_selectedDate') ||
+        changedProperties.has('_selectedTime')) &&
       this._selectedFraternity &&
-      this._selectedDate
+      this._selectedDate &&
+      this._selectedTime
     ) {
       this._availableSeats = undefined;
 
+      if (!changedProperties.has('_selectedTime')) {
+        const availableTimes = this._getAvailableTimes(
+          this._selectedFraternity,
+        );
+
+        if (!availableTimes.includes(this._selectedTime)) {
+          this._selectedTime = availableTimes[availableTimes.length - 1];
+        }
+      }
+
+      const datetime = this._formatDateTime(
+        this._selectedDate,
+        this._selectedTime,
+      );
+
       fetch(
-        `${apiUrl}/fraternities/${this._selectedFraternity}/holy-masses/${this._selectedDate}/seats`,
+        `${apiUrl}/fraternities/${this._selectedFraternity}/holy-masses/${datetime}/seats`,
       )
         .then((res) => res.json())
         .then((availableSeats) => (this._availableSeats = availableSeats));
@@ -118,7 +155,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     if (
       !this._selectedFraternity ||
       !this._selectedDate ||
-      !this._selectedDate ||
+      !this._selectedTime ||
       !this.user
     ) {
       return;
@@ -127,11 +164,17 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     this._bookingHolyMass = true;
 
     await set('preferredFraternity', this._selectedFraternity);
+    await set('preferredHolyMassTime', this._selectedTime);
 
     const token = await this.user.getIdToken();
 
+    const datetime = this._formatDateTime(
+      this._selectedDate,
+      this._selectedTime,
+    );
+
     const res = await fetch(
-      `${apiUrl}/fraternities/${this._selectedFraternity}/holy-masses/${this._selectedDate}`,
+      `${apiUrl}/fraternities/${this._selectedFraternity}/holy-masses/${datetime}`,
       {
         method: 'POST',
         headers: {
@@ -150,7 +193,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
       (bookedHolyMasses) => {
         const newRecord = {
           id,
-          date: new Date(this._selectedDate).toISOString(),
+          date: datetime,
           seats: this._selectedSeats,
           fraternity: this._fraternities.find(
             ({ id }) => id === this._selectedFraternity,
@@ -187,9 +230,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
       const token = await this.user.getIdToken();
 
       const res = await fetch(
-        `${apiUrl}/fraternities/${
-          this._bookingToCancel.fraternity.id
-        }/holy-masses/${this._bookingToCancel.date.slice(0, 10)}`,
+        `${apiUrl}/fraternities/${this._bookingToCancel.fraternity.id}/holy-masses/${this._bookingToCancel.date}`,
         {
           method: 'DELETE',
           headers: {
@@ -211,7 +252,14 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
           return bookedHolyMasses;
         },
       );
-      this._availableSeats! += this._bookingToCancel.seats;
+
+      if (
+        this._selectedFraternity === this._bookingToCancel.fraternity.id &&
+        this._formatDateTime(this._selectedDate, this._selectedTime) ===
+          this._bookingToCancel.date
+      ) {
+        this._availableSeats! += this._bookingToCancel.seats;
+      }
     }
 
     this._bookingToCancel = undefined;
@@ -241,6 +289,37 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
           : "C'è stato un errore non previsto, riprova più tardi.";
     }
     this._verificationEmailSent = true;
+  }
+
+  protected _getAvailableTimes(fraternityId?: string) {
+    const fraternityMasses =
+      this._fraternities.find(({ id }) => id === fraternityId)?.masses || {};
+
+    const dayOfWeek = ([
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+    ] as (keyof Fraternity['masses'])[])[new Date(this._selectedDate).getDay()];
+
+    return fraternityMasses[dayOfWeek] || fraternityMasses.default || [];
+  }
+
+  protected _formatDateTime(date: string, time?: string) {
+    return `${date}T${time?.padStart(5, '0')}Z`;
+  }
+
+  protected _toLocalTimeZone(date: Date) {
+    const todayInCurrentTimeZone = new Date();
+
+    date.setHours(
+      date.getHours() + todayInCurrentTimeZone.getTimezoneOffset() / 60,
+    );
+
+    return date;
   }
 }
 

@@ -34,7 +34,7 @@ export const handleHolyMassBooking = functions.https.onRequest(
     }
 
     const [, fraternityId, date] = path.match(
-      /\/api\/fraternities\/([a-z\d_-]+)\/holy-masses\/([a-z\d_-]+)/i,
+      /\/api\/fraternities\/([a-z\d_-]+)\/holy-masses\/(.+)/i,
     )!;
 
     if (method === 'POST') {

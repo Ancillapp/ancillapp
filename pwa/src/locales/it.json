@@ -65,5 +65,6 @@
   "forgotPassword": "Password dimenticata?",
   "resetPassword": "Reimposta password",
   "backToLogin": "Torna al login",
-  "checkYourInbox": "Fatto! Controlla la tua casella di posta."
+  "checkYourInbox": "Fatto! Controlla la tua casella di posta.",
+  "time": "Ora"
 }

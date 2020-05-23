@@ -18,6 +18,7 @@ export const getFraternities = functions.https.onRequest(async (_, res) => {
         projection: {
           _id: 1,
           location: 1,
+          masses: 1,
         },
       },
     )

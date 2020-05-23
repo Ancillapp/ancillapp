@@ -7,7 +7,7 @@ export const getHolyMassesSeats = functions.https.onRequest(
     res.set('Cache-Control', 'private, no-cache');
 
     const [, fraternityId, date] = req.path.match(
-      /\/api\/fraternities\/([a-z\d_-]+)\/holy-masses\/([a-z\d_-]+)\/seats/i,
+      /\/api\/fraternities\/([a-z\d_-]+)\/holy-masses\/(.+)\/seats/i,
     )!;
 
     const db = await mongoDb;

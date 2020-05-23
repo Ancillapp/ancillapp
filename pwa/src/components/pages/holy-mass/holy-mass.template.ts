@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
-import { HolyMassPage } from './holy-mass.component';
+import { HolyMassPage, Fraternity } from './holy-mass.component';
 import { load } from '../../../helpers/directives';
 
 import '@material/mwc-button';
@@ -34,7 +34,6 @@ export default function template(this: HolyMassPage) {
                       >
                       <outlined-select
                         id="fraternity"
-                        dialogAction="selectFraternity"
                         @change="${({ target }: Event) =>
                           (this._selectedFraternity = (target as OutlinedSelect).value)}"
                         value="${this._selectedFraternity}"
@@ -76,6 +75,19 @@ export default function template(this: HolyMassPage) {
                         max="${this._maxDate}"
                       ></date-input>
                     </li>
+                    <li>
+                      <label for="time">${this.localeData?.time}</label>
+                      <outlined-select
+                        id="time"
+                        @change="${({ target }: Event) =>
+                          (this._selectedTime = (target as OutlinedSelect).value)}"
+                        value="${this._selectedTime}"
+                      >
+                        ${this._getAvailableTimes(this._selectedFraternity).map(
+                          (time) => html`<option>${time}</option>`,
+                        )}
+                      </outlined-select>
+                    </li>
                   </ul>
                   <div class="available-seats">
                     <h4>Posti disponibili</h4>
@@ -107,6 +119,7 @@ export default function template(this: HolyMassPage) {
                               <tr>
                                 <th>${this.localeData?.fraternity}</th>
                                 <th>${this.localeData?.date}</th>
+                                <th>${this.localeData?.time}</th>
                                 <th>${this.localeData?.seats}</th>
                                 <th>${this.localeData?.actions}</th>
                               </tr>
@@ -118,9 +131,13 @@ export default function template(this: HolyMassPage) {
                                 (booking) => {
                                   const {
                                     fraternity: { id, location },
-                                    date,
+                                    date: dateString,
                                     seats,
                                   } = booking;
+
+                                  const date = this._toLocalTimeZone(
+                                    new Date(dateString),
+                                  );
 
                                   return html`
                                     <tr>
@@ -130,7 +147,13 @@ export default function template(this: HolyMassPage) {
                                           day: 'numeric',
                                           month: 'numeric',
                                           year: 'numeric',
-                                        }).format(new Date(date))}
+                                        }).format(date)}
+                                      </td>
+                                      <td>
+                                        ${Intl.DateTimeFormat(this.locale, {
+                                          hour: 'numeric',
+                                          minute: 'numeric',
+                                        }).format(date)}
                                       </td>
                                       <td class="right">${seats}</td>
                                       <td class="center">
@@ -164,13 +187,29 @@ export default function template(this: HolyMassPage) {
                       >${this._bookingToCancel?.fraternity.location}</strong
                     >
                     del giorno
-                    <strong
-                      >${this._bookingToCancel?.date &&
+                    <strong>
+                      ${this._bookingToCancel?.date &&
                       Intl.DateTimeFormat(this.locale, {
                         day: 'numeric',
                         month: 'numeric',
                         year: 'numeric',
-                      }).format(new Date(this._bookingToCancel?.date))}</strong
+                      }).format(
+                        this._toLocalTimeZone(
+                          new Date(this._bookingToCancel?.date),
+                        ),
+                      )}
+                    </strong>
+                    alle ore
+                    <strong
+                      >${this._bookingToCancel?.date &&
+                      Intl.DateTimeFormat(this.locale, {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                      }).format(
+                        this._toLocalTimeZone(
+                          new Date(this._bookingToCancel?.date),
+                        ),
+                      )}</strong
                     >?
                   </p>
                   <mwc-button dialogAction="close" slot="secondaryAction">

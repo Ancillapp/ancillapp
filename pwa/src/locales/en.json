@@ -65,5 +65,6 @@
   "forgotPassword": "Forgot your password?",
   "resetPassword": "Reset password",
   "backToLogin": "Go back to login",
-  "checkYourInbox": "Done! Check your inbox."
+  "checkYourInbox": "Done! Check your inbox.",
+  "time": "Time"
 }

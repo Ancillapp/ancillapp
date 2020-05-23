@@ -32,7 +32,7 @@ export const cancelHolyMassBooking = async ({
     },
   );
 
-  if (!holyMassUpdateResult) {
+  if (!holyMassUpdateResult.value) {
     res.status(404).json({ code: 'HOLY_MASS_NOT_FOUND' });
     return;
   }
