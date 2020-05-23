@@ -79,6 +79,10 @@ export class LoginPage extends localize(PageViewElement) {
   protected async _handleFacebookLogin() {
     await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
+
+  protected async _handleTwitterLogin() {
+    await auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+  }
 }
 
 declare global {
