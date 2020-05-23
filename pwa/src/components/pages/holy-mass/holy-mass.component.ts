@@ -10,6 +10,10 @@ import template from './holy-mass.template';
 import { apiUrl } from '../../../config/default.json';
 import { get, set } from '../../../helpers/keyval';
 
+import firebase from 'firebase/app';
+
+const analytics = firebase.analytics();
+
 export interface Fraternity {
   id: string;
   location: string;
@@ -188,6 +192,14 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     );
     const { id } = await res.json();
 
+    analytics.logEvent('perform_holy_mass_booking', {
+      id,
+      date: this._selectedDate,
+      time: this._selectedTime,
+      seats: this._selectedSeats,
+      fraternity: this._selectedFraternity,
+    });
+
     this.requestUpdate('_selectedFraternity', this._selectedFraternity);
     this._bookedHolyMassesPromise = this._bookedHolyMassesPromise.then(
       (bookedHolyMasses) => {
@@ -240,6 +252,16 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
       );
 
       const { id } = await res.json();
+
+      const { date, time } = this._parseDateTime(this._bookingToCancel.date);
+
+      analytics.logEvent('cancel_holy_mass_booking', {
+        id,
+        date,
+        time,
+        seats: this._bookingToCancel.seats,
+        fraternity: this._bookingToCancel.fraternity.id,
+      });
 
       this.requestUpdate('_selectedFraternity', this._selectedFraternity);
       this._bookedHolyMassesPromise = this._bookedHolyMassesPromise.then(
@@ -310,6 +332,13 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
 
   protected _formatDateTime(date: string, time?: string) {
     return `${date}T${time?.padStart(5, '0')}Z`;
+  }
+
+  protected _parseDateTime(encodedDateTime: string) {
+    const [, date, time] =
+      encodedDateTime.match(/(\d{4}-\d{2}-\d{2})T0*([\d]+:[\d]+)/) || [];
+
+    return { date, time };
   }
 
   protected _toLocalTimeZone(date: Date) {
