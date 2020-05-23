@@ -10,8 +10,8 @@ import type { TextField } from '@material/mwc-textfield';
 export default function template(this: LoginPage) {
   return html`
     <section>
-      <h3>${this.localeData?.loginOrRegister}</h3>
       <div>
+        <h3>${this.localeData?.loginOrRegister}</h3>
         <mwc-textfield
           outlined
           type="email"
@@ -61,6 +61,35 @@ export default function template(this: LoginPage) {
               : this.localeData?.forgotPassword}
           </a>
         </p>
+      </div>
+      <div>
+        <h3>Oppure effettua il login con:</h3>
+        <mwc-button
+          id="google"
+          raised
+          label="Google"
+          @click="${this._handleGoogleLogin}"
+        >
+          <svg slot="icon" viewBox="0 0 256 256">
+            <path
+              fill="currentColor"
+              d="M254 131c0 73-50 125-124 125a128 128 0 010-256c35 0 64 13 86 34l-35 33C135 23 51 56 51 128c0 45 35 81 79 81 51 0 70-37 73-55h-73v-44h122a112 112 0 012 21z"
+            />
+          </svg>
+        </mwc-button>
+        <mwc-button
+          id="facebook"
+          raised
+          label="Facebook"
+          @click="${this._handleFacebookLogin}"
+        >
+          <svg slot="icon" viewBox="0 0 256 256">
+            <path
+              fill="currentColor"
+              d="M94 50v35H68v43h26v128h53V128h36l5-43h-41V55c0-4 6-10 12-10h29V0h-40C93 0 94 43 94 50z"
+            />
+          </svg>
+        </mwc-button>
       </div>
     </section>
   `;

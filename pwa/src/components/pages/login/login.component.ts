@@ -71,6 +71,14 @@ export class LoginPage extends localize(PageViewElement) {
     this._resettingPassword = false;
     this._passwordReset = true;
   }
+
+  protected async _handleGoogleLogin() {
+    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  protected async _handleFacebookLogin() {
+    await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+  }
 }
 
 declare global {
