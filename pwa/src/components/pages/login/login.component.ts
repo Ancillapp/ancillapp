@@ -40,6 +40,10 @@ export class LoginPage extends localize(PageViewElement) {
 
     try {
       await auth.signInWithEmailAndPassword(this._email, this._password);
+
+      analytics.logEvent('login', {
+        method: 'Email and Password',
+      });
     } catch ({ code: signInErrorCode }) {
       if (signInErrorCode === 'auth/user-not-found') {
         try {
@@ -47,6 +51,10 @@ export class LoginPage extends localize(PageViewElement) {
             this._email,
             this._password,
           );
+
+          analytics.logEvent('login', {
+            method: 'Email and Password',
+          });
 
           this.dispatchEvent(new CustomEvent('register'));
         } catch ({ code: signUpErrorCode }) {
@@ -60,10 +68,6 @@ export class LoginPage extends localize(PageViewElement) {
     this._email = '';
     this._password = '';
     this._loggingIn = false;
-
-    analytics.logEvent('login', {
-      method: 'Email and Password',
-    });
   }
 
   protected async _handlePasswordReset() {
