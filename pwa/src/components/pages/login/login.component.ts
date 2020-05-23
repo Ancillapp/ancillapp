@@ -37,16 +37,18 @@ export class LoginPage extends localize(PageViewElement) {
             this._email,
             this._password,
           );
+
+          this.dispatchEvent(new CustomEvent('register'));
         } catch ({ code: signUpErrorCode }) {
           console.error(signUpErrorCode);
         }
-
-        return;
+      } else {
+        console.error(signInErrorCode);
       }
-
-      console.error(signInErrorCode);
     }
 
+    this._email = '';
+    this._password = '';
     this._loggingIn = false;
   }
 }

@@ -1,6 +1,5 @@
 import { html } from 'lit-element';
 import { LoginPage } from './login.component';
-import { google, facebook } from '../../icons';
 
 import '@material/mwc-textfield';
 import '../../loading-button/loading-button.component';

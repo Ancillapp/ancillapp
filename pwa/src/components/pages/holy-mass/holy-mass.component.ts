@@ -54,6 +54,12 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
   @property({ type: Object })
   protected _bookingToCancel?: HolyMassBooking;
 
+  @property({ type: Boolean })
+  protected _verificationEmailSent = false;
+
+  @property({ type: String })
+  protected _emailVerificationError?: string;
+
   protected _minDate?: string;
   protected _maxDate?: string;
 
@@ -215,6 +221,24 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     }
 
     this._selectedDate = newDate;
+  }
+
+  protected async _sendVerificationEmail() {
+    if (!this.user || this.user.emailVerified) {
+      return;
+    }
+
+    try {
+      await this.user.sendEmailVerification({
+        url: window.location.href,
+      });
+    } catch ({ code }) {
+      this._emailVerificationError =
+        code === 'auth/too-many-requests'
+          ? 'Hai effettuato troppe richieste di verifica email, riprova più tardi.'
+          : "C'è stato un errore non previsto, riprova più tardi.";
+    }
+    this._verificationEmailSent = true;
   }
 }
 

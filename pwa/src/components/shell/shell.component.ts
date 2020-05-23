@@ -3,7 +3,6 @@ import {
   LitElement,
   property,
   PropertyValues,
-  query,
 } from 'lit-element';
 import {
   installMediaQueryWatcher,
@@ -11,6 +10,7 @@ import {
   updateMetadata,
 } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
+import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
 
 import sharedStyles from '../shared.styles';
@@ -18,7 +18,6 @@ import styles from './shell.styles';
 import template from './shell.template';
 
 import type { TopAppBar } from '@material/mwc-top-app-bar';
-import type { IconButton } from '@material/mwc-icon-button';
 
 import firebase from 'firebase/app';
 
@@ -26,7 +25,7 @@ const auth = firebase.auth();
 const analytics = firebase.analytics();
 
 @customElement('ancillapp-shell')
-export class Shell extends localize(LitElement) {
+export class Shell extends localize(authorize(LitElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -47,13 +46,9 @@ export class Shell extends localize(LitElement) {
   protected _updateNotificationShown = false;
 
   @property({ type: Boolean })
-  protected _userMenuOpen = false;
-
-  @property({ type: Object })
-  protected _user: firebase.User | null = null;
-
-  @query('span[slot=title] > mwc-icon-button')
-  protected _userIconButton: IconButton | null = null;
+  protected _verificationEmailSent = new URLSearchParams(
+    window.location.search,
+  ).has('registered');
 
   protected readonly _topNavPages = [
     'home',
@@ -71,17 +66,6 @@ export class Shell extends localize(LitElement) {
     super();
     this._checkForUpdates();
     this._observeForThemeChanges();
-    auth.onAuthStateChanged((user) => {
-      this._user = user;
-
-      if (
-        (this._user && this._page === 'login') ||
-        (!this._user && this._page === 'holy-mass')
-      ) {
-        window.history.replaceState({}, '', '/home');
-        this._locationChanged(window.location);
-      }
-    });
 
     if (window.matchMedia('(min-width: 48rem)').matches) {
       get<boolean>('drawerOpened').then((drawerOpened) =>
@@ -117,6 +101,13 @@ export class Shell extends localize(LitElement) {
         description: pageTitle,
         // This object also takes an image property, that points to an img src.
       });
+    }
+
+    if (changedProperties.has('user')) {
+      if (this.user && this._page === 'login') {
+        window.history.replaceState({}, '', '/home');
+        this._locationChanged(window.location);
+      }
     }
   }
 
@@ -237,7 +228,7 @@ export class Shell extends localize(LitElement) {
 
   protected _loadPage(page: string, subroute = '') {
     if (
-      (page === 'login' && this._user) ||
+      (page === 'login' && this.user) ||
       ![
         ...this._topNavPages,
         'holy-mass',

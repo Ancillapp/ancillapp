@@ -9,6 +9,7 @@ import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import '@material/mwc-list/mwc-list';
 import '@material/mwc-list/mwc-list-item';
+import '@material/mwc-snackbar';
 import '../snackbar/snackbar.component';
 
 export default function template(this: Shell) {
@@ -53,7 +54,7 @@ export default function template(this: Shell) {
         </mwc-list>
         <mwc-list activatable class="bottom-nav">
           <li divider role="separator"></li>
-          ${this._user
+          ${this.user
             ? html`
                 <mwc-list-item graphic="icon" @click="${this._logout}">
                   <div slot="graphic">
@@ -158,6 +159,7 @@ export default function template(this: Shell) {
           <login-page
             class="page padded"
             ?active="${this._page === 'login'}"
+            @register="${() => (this._verificationEmailSent = true)}"
           ></login-page>
           <settings-page
             class="page padded"
@@ -184,5 +186,11 @@ export default function template(this: Shell) {
         label="${this.localeData?.updateNow}"
       ></mwc-button>
     </snack-bar>
+
+    <mwc-snackbar
+      leading
+      ?open="${this._verificationEmailSent}"
+      labelText="Fatto! Controlla la tua casella di posta per verificare il tuo indirizzo email"
+    ></mwc-snackbar>
   `;
 }

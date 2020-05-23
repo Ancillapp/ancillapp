@@ -16,7 +16,7 @@ import { remove } from '../../icons';
 
 export default function template(this: HolyMassPage) {
   return html`
-    ${this.user
+    ${this.user?.emailVerified
       ? html`
           ${load(
             this._bookedHolyMassesPromise,
@@ -187,10 +187,31 @@ export default function template(this: HolyMassPage) {
         `
       : html`
           <section>
-            <p>
-              Per favore, effettua il login per usufruire del servizio di
-              prenotazione della Santa Messa
-            </p>
+            ${this.user
+              ? html`
+                  <p>
+                    Per favore, verifica la tua email per usufruire del servizio
+                    di prenotazione della Santa Messa.
+                  </p>
+                  ${this._verificationEmailSent
+                    ? this._emailVerificationError
+                      ? html`<p>${this._emailVerificationError}</p>`
+                      : html`<p>Fatto! Controlla la tua casella di posta.</p>`
+                    : html`
+                        <mwc-button
+                          raised
+                          @click="${this._sendVerificationEmail}"
+                          label="Reinvia email di verifica"
+                        ></mwc-button>
+                      `}
+                `
+              : html`
+                  <p>
+                    Per favore, effettua il login per usufruire del servizio di
+                    prenotazione della Santa Messa.
+                  </p>
+                  <p><a href="/login">Vai alla pagina di login</a></p>
+                `}
           </section>
         `}
   `;
