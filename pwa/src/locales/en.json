@@ -60,5 +60,10 @@
   "actions": "Actions",
   "noSeatsBooked": "You haven't booked any seats yet.",
   "dayAlreadyBooked": "You've already booked some seats for this day.",
-  "cancelBooking": "Cancel booking"
+  "cancelBooking": "Cancel booking",
+  "loginOrRegister": "Login or register",
+  "forgotPassword": "Forgot your password?",
+  "resetPassword": "Reset password",
+  "backToLogin": "Go back to login",
+  "checkYourInbox": "Done! Check your inbox."
 }

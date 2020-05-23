@@ -1,5 +1,15 @@
 mwc-textfield {
   width: 100%;
   max-width: 20rem;
+}
+
+section * {
+  text-align: center;
   padding: 0.5rem 0;
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+  outline: none;
 }

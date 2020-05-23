@@ -25,6 +25,15 @@ export class LoginPage extends localize(PageViewElement) {
   @property({ type: Boolean })
   protected _loggingIn = false;
 
+  @property({ type: Boolean })
+  protected _forgotPassword = false;
+
+  @property({ type: Boolean })
+  protected _resettingPassword = false;
+
+  @property({ type: Boolean })
+  protected _passwordReset = false;
+
   protected async _handleEmailPasswordLogin() {
     this._loggingIn = true;
 
@@ -50,6 +59,17 @@ export class LoginPage extends localize(PageViewElement) {
     this._email = '';
     this._password = '';
     this._loggingIn = false;
+  }
+
+  protected async _handlePasswordReset() {
+    this._resettingPassword = true;
+
+    await auth.sendPasswordResetEmail(this._email, {
+      url: window.location.href,
+    });
+
+    this._resettingPassword = false;
+    this._passwordReset = true;
   }
 }
 
