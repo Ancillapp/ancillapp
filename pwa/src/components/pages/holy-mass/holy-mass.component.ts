@@ -200,6 +200,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
 
       const { id } = await res.json();
 
+      this.requestUpdate('_selectedFraternity', this._selectedFraternity);
       this._bookedHolyMassesPromise = this._bookedHolyMassesPromise.then(
         (bookedHolyMasses) => {
           bookedHolyMasses.splice(
@@ -210,6 +211,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
           return bookedHolyMasses;
         },
       );
+      this._availableSeats! += this._bookingToCancel.seats;
     }
 
     this._bookingToCancel = undefined;
