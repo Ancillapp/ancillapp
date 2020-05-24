@@ -144,8 +144,8 @@ export default function template(this: HolyMassPage) {
                                       <td>${location}</td>
                                       <td>
                                         ${Intl.DateTimeFormat(this.locale, {
-                                          day: 'numeric',
-                                          month: 'numeric',
+                                          day: '2-digit',
+                                          month: '2-digit',
                                           year: 'numeric',
                                         }).format(date)}
                                       </td>
@@ -190,8 +190,8 @@ export default function template(this: HolyMassPage) {
                     <strong>
                       ${this._bookingToCancel?.date &&
                       Intl.DateTimeFormat(this.locale, {
-                        day: 'numeric',
-                        month: 'numeric',
+                        day: '2-digit',
+                        month: '2-digit',
                         year: 'numeric',
                       }).format(
                         this._toLocalTimeZone(
