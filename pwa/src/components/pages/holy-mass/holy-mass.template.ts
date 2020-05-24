@@ -157,13 +157,18 @@ export default function template(this: HolyMassPage) {
                                       </td>
                                       <td class="right">${seats}</td>
                                       <td class="center">
-                                        <mwc-icon-button
-                                          ?disabled="${this._bookingToCancel}"
-                                          @click="${() =>
-                                            (this._bookingToCancel = booking)}"
-                                        >
-                                          ${remove}
-                                        </mwc-icon-button>
+                                        ${date < new Date()
+                                          ? html`${nothing}`
+                                          : html`
+                                              <mwc-icon-button
+                                                ?disabled="${this
+                                                  ._bookingToCancel}"
+                                                @click="${() =>
+                                                  (this._bookingToCancel = booking)}"
+                                              >
+                                                ${remove}
+                                              </mwc-icon-button>
+                                            `}
                                       </td>
                                     </tr>
                                   `;
