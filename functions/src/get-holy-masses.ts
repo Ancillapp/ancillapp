@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import { firebase } from './helpers/firebase';
 import { mongoDb } from './helpers/mongo';
+import type { HolyMass } from './models/mongo';
 
 export const getHolyMasses = functions.https.onRequest(
   async ({ method, headers: { authorization } }, res) => {
@@ -32,7 +33,7 @@ export const getHolyMasses = functions.https.onRequest(
     }
 
     const db = await mongoDb;
-    const holyMassesCollection = db.collection('holyMasses');
+    const holyMassesCollection = db.collection<HolyMass>('holyMasses');
 
     const holyMasses = await holyMassesCollection
       .aggregate([
@@ -49,26 +50,9 @@ export const getHolyMasses = functions.https.onRequest(
           },
         },
         {
-          $lookup: {
-            from: 'fraternities',
-            localField: 'fraternity',
-            foreignField: '_id',
-            as: 'fraternity',
-          },
-        },
-        {
-          $unwind: {
-            path: '$fraternity',
-          },
-        },
-        {
           $project: {
             _id: 0,
-            id: '$_id',
-            fraternity: {
-              id: '$fraternity._id',
-              location: 1,
-            },
+            fraternity: 1,
             date: 1,
             filteredParticipants: {
               $filter: {
@@ -86,7 +70,6 @@ export const getHolyMasses = functions.https.onRequest(
         },
         {
           $project: {
-            id: 1,
             fraternity: 1,
             date: 1,
             participant: {
@@ -96,11 +79,10 @@ export const getHolyMasses = functions.https.onRequest(
         },
         {
           $project: {
-            id: 1,
+            id: '$participant.bookingId',
+            seats: '$participant.seats',
             fraternity: 1,
             date: 1,
-            seats: '$participant.seats',
-            deleted: '$participant.deleted',
           },
         },
         {

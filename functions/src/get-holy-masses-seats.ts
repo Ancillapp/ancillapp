@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import { mongoDb, ObjectId } from './helpers/mongo';
+import type { Fraternity, HolyMass } from './models/mongo';
 
 export const getHolyMassesSeats = functions.https.onRequest(
   async (req, res) => {
@@ -11,8 +12,8 @@ export const getHolyMassesSeats = functions.https.onRequest(
     )!;
 
     const db = await mongoDb;
-    const fraternitiesCollection = db.collection('fraternities');
-    const holyMassesCollection = db.collection('holyMasses');
+    const fraternitiesCollection = db.collection<Fraternity>('fraternities');
+    const holyMassesCollection = db.collection<HolyMass>('holyMasses');
 
     const fraternity = await fraternitiesCollection.findOne({
       _id: new ObjectId(fraternityId),
@@ -26,9 +27,11 @@ export const getHolyMassesSeats = functions.https.onRequest(
     const { seats } = fraternity;
 
     const holyMass = await holyMassesCollection.findOne({
-      fraternity: new ObjectId(fraternityId),
+      'fraternity.id': new ObjectId(fraternityId),
       date: new Date(date),
     });
+
+    console.log(holyMass);
 
     const takenSeats =
       holyMass?.participants.reduce(

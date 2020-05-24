@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import { mongoDb, ObjectId } from './helpers/mongo';
+import { HolyMass } from './models/mongo';
 
 export const cancelHolyMassBooking = async ({
   userId,
@@ -13,11 +14,11 @@ export const cancelHolyMassBooking = async ({
   res: functions.Response<any>;
 }) => {
   const db = await mongoDb;
-  const holyMassesCollection = db.collection('holyMasses');
+  const holyMassesCollection = db.collection<HolyMass>('holyMasses');
 
   const holyMassUpdateResult = await holyMassesCollection.findOneAndUpdate(
     {
-      fraternity: new ObjectId(fraternityId),
+      'fraternity.id': new ObjectId(fraternityId),
       date: new Date(date),
       participants: {
         $elemMatch: {
@@ -34,7 +35,7 @@ export const cancelHolyMassBooking = async ({
       },
     },
     {
-      returnOriginal: false,
+      returnOriginal: true,
     },
   );
 
@@ -43,5 +44,9 @@ export const cancelHolyMassBooking = async ({
     return;
   }
 
-  res.status(200).json({ id: holyMassUpdateResult.value._id });
+  const { bookingId } = holyMassUpdateResult.value.participants.find(
+    (participant) => userId === participant.userId && !participant.deleted,
+  )!;
+
+  res.status(200).json({ id: bookingId });
 };

@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import { mongoDb, ObjectId } from './helpers/mongo';
+import { Fraternity, HolyMass } from './models/mongo';
 
 export const bookHolyMass = async ({
   body,
@@ -22,47 +23,49 @@ export const bookHolyMass = async ({
   }
 
   const db = await mongoDb;
-  const fraternitiesCollection = db.collection('fraternities');
-  const holyMassesCollection = db.collection('holyMasses');
-
-  const fraternity = await fraternitiesCollection.findOne({
-    _id: new ObjectId(fraternityId),
-  });
-
-  if (!fraternity) {
-    res.status(400).json({ code: 'FRATERNITY_NOT_FOUND' });
-    return;
-  }
-
-  const { seats: totalSeats } = fraternity;
+  const holyMassesCollection = db.collection<HolyMass>('holyMasses');
 
   const existingHolyMass = await holyMassesCollection.findOne({
-    fraternity: new ObjectId(fraternityId),
+    'fraternity.id': new ObjectId(fraternityId),
     date: new Date(date),
   });
 
   // If the holy mass doesn't exist yet, create it.
   if (!existingHolyMass) {
-    const { insertedId: id } = await holyMassesCollection.insertOne({
-      fraternity: new ObjectId(fraternityId),
-      date: new Date(date),
-      participants: [{ userId, seats }],
+    const fraternitiesCollection = db.collection<Fraternity>('fraternities');
+
+    const fraternity = await fraternitiesCollection.findOne({
+      _id: new ObjectId(fraternityId),
     });
 
-    res.status(201).send({ id });
+    if (!fraternity) {
+      res.status(400).json({ code: 'FRATERNITY_NOT_FOUND' });
+      return;
+    }
+
+    const { seats: totalSeats, location } = fraternity;
+
+    const bookingId = new ObjectId();
+
+    await holyMassesCollection.insertOne({
+      date: new Date(date),
+      fraternity: {
+        id: new ObjectId(fraternityId),
+        location,
+        seats: totalSeats,
+      },
+      participants: [{ userId, seats, bookingId }],
+    });
+
+    res.status(201).send({ id: bookingId });
     return;
   }
 
   // The user has already booked some seats for this holy mass
   if (
     existingHolyMass.participants.some(
-      ({
-        userId: participantId,
-        deleted,
-      }: {
-        userId: string;
-        deleted?: boolean;
-      }) => userId === participantId && !deleted,
+      ({ userId: participantId, deleted }) =>
+        userId === participantId && !deleted,
     )
   ) {
     res.status(400).json({ code: 'ALREADY_BOOKED' });
@@ -70,21 +73,21 @@ export const bookHolyMass = async ({
   }
 
   const takenSeats = existingHolyMass.participants.reduce(
-    (
-      sum: number,
-      { seats: bookedSeats, deleted }: { seats: number; deleted?: boolean },
-    ) => (deleted ? sum : sum + bookedSeats),
+    (sum: number, { seats: bookedSeats, deleted }) =>
+      deleted ? sum : sum + bookedSeats,
     0,
   );
 
-  if (takenSeats >= totalSeats) {
+  if (takenSeats >= existingHolyMass.fraternity.seats) {
     res.status(400).json({ code: 'MAX_CAPACITY_REACHED' });
     return;
   }
 
+  const bookingId = new ObjectId();
+
   const updatedHolyMass = await holyMassesCollection.findOneAndUpdate(
     {
-      fraternity: new ObjectId(fraternityId),
+      'fraternity.id': new ObjectId(fraternityId),
       date: new Date(date),
       participants: {
         $not: {
@@ -102,6 +105,7 @@ export const bookHolyMass = async ({
         participants: {
           userId,
           seats,
+          bookingId,
         },
       },
     },
@@ -113,5 +117,5 @@ export const bookHolyMass = async ({
     return;
   }
 
-  res.status(201).json({ id: updatedHolyMass.value._id });
+  res.status(201).json({ id: bookingId });
 };

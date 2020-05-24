@@ -279,8 +279,9 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
 
       if (
         this._selectedFraternity === this._bookingToCancel.fraternity.id &&
-        this._formatDateTime(this._selectedDate, this._selectedTime) ===
-          this._bookingToCancel.date
+        new Date(
+          this._formatDateTime(this._selectedDate, this._selectedTime),
+        ).valueOf() === new Date(this._bookingToCancel.date).valueOf()
       ) {
         this._availableSeats! += this._bookingToCancel.seats;
       }
