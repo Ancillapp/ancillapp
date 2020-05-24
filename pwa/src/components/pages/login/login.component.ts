@@ -74,6 +74,7 @@ export class LoginPage extends localize(PageViewElement) {
 
       analytics.logEvent('login', {
         method: 'Email and Password',
+        offline: false,
       });
 
       this._email = '';
@@ -91,6 +92,7 @@ export class LoginPage extends localize(PageViewElement) {
 
           analytics.logEvent('login', {
             method: 'Email and Password',
+            offline: false,
           });
 
           this.dispatchEvent(new CustomEvent('register'));
@@ -134,6 +136,7 @@ export class LoginPage extends localize(PageViewElement) {
 
     analytics.logEvent('login', {
       method: 'Google',
+      offline: false,
     });
 
     this._loggingInWithGoogle = false;
@@ -146,6 +149,7 @@ export class LoginPage extends localize(PageViewElement) {
 
     analytics.logEvent('login', {
       method: 'Facebook',
+      offline: false,
     });
 
     this._loggingInWithFacebook = false;
@@ -158,6 +162,7 @@ export class LoginPage extends localize(PageViewElement) {
 
     analytics.logEvent('login', {
       method: 'Twitter',
+      offline: false,
     });
 
     this._loggingInWithTwitter = false;
@@ -172,6 +177,7 @@ export class LoginPage extends localize(PageViewElement) {
 
     analytics.logEvent('login', {
       method: 'Microsoft',
+      offline: false,
     });
 
     this._loggingInWithMicrosoft = false;
@@ -189,6 +195,7 @@ export class LoginPage extends localize(PageViewElement) {
 
     analytics.logEvent('login', {
       method: 'Apple',
+      offline: false,
     });
 
     this._loggingInWithApple = false;
@@ -201,6 +208,7 @@ export class LoginPage extends localize(PageViewElement) {
 
     analytics.logEvent('login', {
       method: 'GitHub',
+      offline: false,
     });
 
     this._loggingInWithGitHub = false;

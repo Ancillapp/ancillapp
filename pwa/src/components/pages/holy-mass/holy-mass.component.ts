@@ -198,6 +198,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
       time: this._selectedTime,
       seats: this._selectedSeats,
       fraternity: this._selectedFraternity,
+      offline: false,
     });
 
     this.requestUpdate('_selectedFraternity', this._selectedFraternity);
@@ -261,6 +262,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
         time,
         seats: this._bookingToCancel.seats,
         fraternity: this._bookingToCancel.fraternity.id,
+        offline: false,
       });
 
       this.requestUpdate('_selectedFraternity', this._selectedFraternity);

@@ -3,7 +3,8 @@ import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute, NavigationRoute } from 'workbox-routing';
 import { CacheFirst } from 'workbox-strategies';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
-import { PrecacheEntry } from 'workbox-precaching/_types';
+import * as googleAnalytics from 'workbox-google-analytics';
+import type { PrecacheEntry } from 'workbox-precaching/_types';
 
 type ClientType = 'window' | 'worker' | 'sharedworker' | 'all';
 
@@ -95,3 +96,6 @@ if (process.env.NODE_ENV === 'production') {
   self.__WB_MANIFEST.forEach((entry) => console.info(entry));
   console.groupEnd();
 }
+googleAnalytics.initialize({
+  hitFilter: (params) => params.set('ep.offline', 'true'),
+});

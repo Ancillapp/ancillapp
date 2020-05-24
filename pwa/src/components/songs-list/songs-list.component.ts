@@ -259,7 +259,9 @@ export class SongsList extends localize(PageViewElement) {
 
     this._downloadingSongs = true;
 
-    analytics.logEvent('download_songs');
+    analytics.logEvent('download_songs', {
+      offline: false,
+    });
 
     for await (const { loading, refreshing, data, error } of cacheAndNetwork<
       SongSummary[]

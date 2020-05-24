@@ -218,6 +218,7 @@ export class Shell extends localize(authorize(LitElement)) {
       page_title: pageTitle,
       page_location: window.location.href,
       page_path: window.location.pathname,
+      offline: false,
     });
 
     // Close the drawer - in case the *path* change came from a link in the drawer.
@@ -288,7 +289,9 @@ export class Shell extends localize(authorize(LitElement)) {
 
   protected _cancelUpdate() {
     this._updateNotificationShown = false;
-    analytics.logEvent('cancel_update');
+    analytics.logEvent('cancel_update', {
+      offline: false,
+    });
   }
 
   protected _updateApp() {
@@ -297,7 +300,9 @@ export class Shell extends localize(authorize(LitElement)) {
       return;
     }
     this._newSw.postMessage({ action: 'update' });
-    analytics.logEvent('perform_update');
+    analytics.logEvent('perform_update', {
+      offline: false,
+    });
   }
 
   protected async _logout() {
