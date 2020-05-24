@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+}
+
+strong {
+  color: var(--ancillapp-accent-color);
+}
+
+.available-seats {
+  padding: 1.5rem 0;
+
+  > * {
+    text-align: center;
+    margin: 0;
+  }
+
+  > p {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+}
+
+.book-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > p {
+    margin: 0 1.5rem 0 0;
+    text-align: left;
+  }
+}
+
+h3 {
+  margin: 0;
+  padding: 1.5rem 0 1rem;
+  clear: both;
+}
+
+.loading-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  align-self: flex-start;
+}

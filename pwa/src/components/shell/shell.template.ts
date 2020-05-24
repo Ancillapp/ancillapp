@@ -9,6 +9,7 @@ import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import '@material/mwc-list/mwc-list';
 import '@material/mwc-list/mwc-list-item';
+import '@material/mwc-snackbar';
 import '../snackbar/snackbar.component';
 
 export default function template(this: Shell) {
@@ -31,12 +32,16 @@ export default function template(this: Shell) {
                 >
                   <div slot="graphic">
                     ${(icons as { [key: string]: SVGTemplateResult })[
-                      `${page}Icon`
+                      `${page.replace(/-([a-z])/g, (_, letter) =>
+                        letter.toUpperCase(),
+                      )}Icon`
                     ]}
                   </div>
                   <slot
                     >${(this.localeData as { [key: string]: string })?.[
-                      page
+                      page.replace(/-([a-z])/g, (_, letter) =>
+                        letter.toUpperCase(),
+                      )
                     ]}</slot
                   >
                 </mwc-list-item>
@@ -49,6 +54,29 @@ export default function template(this: Shell) {
         </mwc-list>
         <mwc-list activatable class="bottom-nav">
           <li divider role="separator"></li>
+          ${this.user
+            ? html`
+                <mwc-list-item graphic="icon" @click="${this._logout}">
+                  <div slot="graphic">
+                    ${icons.logout}
+                  </div>
+                  <slot>${this.localeData?.logout}</slot>
+                </mwc-list-item>
+              `
+            : html`
+                <a class="nav-link" href="/login">
+                  <mwc-list-item
+                    ?selected="${this._page === 'login'}"
+                    ?activated="${this._page === 'login'}"
+                    graphic="icon"
+                  >
+                    <div slot="graphic">
+                      ${icons.user}
+                    </div>
+                    <slot>${this.localeData?.login}</slot>
+                  </mwc-list-item>
+                </a>
+              `}
           ${this._bottomNavPages.map(
             (page) => html`
               <a class="nav-link" href="/${page}">
@@ -92,7 +120,11 @@ export default function template(this: Shell) {
           <div slot="title">
             ${icons.tau} ${this._page === 'home'
               ? 'Ancillapp'
-              : (this.localeData as { [key: string]: string })?.[this._page]}
+              : (this.localeData as { [key: string]: string })?.[
+                  this._page.replace(/-([a-z])/g, (_, letter) =>
+                    letter.toUpperCase(),
+                  )
+                ]}
           </div>
         </mwc-top-app-bar>
         <main>
@@ -120,6 +152,15 @@ export default function template(this: Shell) {
             ?active="${this._page === 'ancillas'}"
             subroute="${this._subroute}"
           ></ancillas-page>
+          <holy-mass-page
+            class="page padded"
+            ?active="${this._page === 'holy-mass'}"
+          ></holy-mass-page>
+          <login-page
+            class="page padded"
+            ?active="${this._page === 'login'}"
+            @register="${() => (this._verificationEmailSent = true)}"
+          ></login-page>
           <settings-page
             class="page padded"
             ?active="${this._page === 'settings'}"
@@ -145,5 +186,11 @@ export default function template(this: Shell) {
         label="${this.localeData?.updateNow}"
       ></mwc-button>
     </snack-bar>
+
+    <mwc-snackbar
+      leading
+      ?open="${this._verificationEmailSent}"
+      labelText="Fatto! Controlla la tua casella di posta per verificare il tuo indirizzo email"
+    ></mwc-snackbar>
   `;
 }

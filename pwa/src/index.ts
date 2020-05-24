@@ -6,9 +6,11 @@ import {
 } from './helpers/localize';
 
 import firebase from 'firebase/app';
+import 'firebase/auth';
 import 'firebase/analytics';
 
 firebase.initializeApp({
+  authDomain: 'ffb-ancillapp.firebaseapp.com',
   apiKey: 'AIzaSyB-OWVImHaeQUfkfWqsTsXQ089oa3P4Dvk',
   projectId: 'ffb-ancillapp',
   appId: '1:890551951388:web:7fc7ea5791d55be747bfd9',

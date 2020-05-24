@@ -106,7 +106,9 @@ export class PrayersList extends localize(PageViewElement) {
 
     this._downloadingPrayers = true;
 
-    analytics.logEvent('download_prayers');
+    analytics.logEvent('download_prayers', {
+      offline: false,
+    });
 
     for await (const { loading, refreshing, data, error } of cacheAndNetwork<
       PrayerSummary[]

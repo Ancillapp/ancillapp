@@ -12,6 +12,7 @@
 .page {
   display: none;
   flex: 1;
+  max-width: 100vw;
 
   &[active] {
     display: block;
@@ -99,7 +100,6 @@ a {
   box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
     0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
     0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
-  border-radius: 0.5rem;
 }
 
 table {
@@ -109,18 +109,27 @@ table {
   border-collapse: collapse;
   border: none;
   margin: 0;
-  border-radius: 0.5rem;
 }
 
 td,
 th {
-  padding: 0.25rem 0.75rem;
   border: 0.05rem solid var(--ancillapp-divider-color);
 }
 
 th {
-  border-bottom: 0.2rem solid var(--ancillapp-divider-color);
   padding: 0.75rem 1rem;
+}
+
+td {
+  padding: 0.25rem 0.75rem;
+
+  &.right {
+    text-align: right;
+  }
+
+  &.center {
+    text-align: center;
+  }
 }
 
 input,
@@ -159,10 +168,19 @@ form > * {
 }
 
 mwc-dialog {
-  --mdc-theme-primary: var(--ancillapp-accent-color);
   --mdc-dialog-heading-ink-color: var(--ancillapp-primary-text-color);
   --mdc-dialog-content-ink-color: var(--ancillapp-primary-text-color);
   --mdc-dialog-scroll-divider-color: var(--ancillapp-divider-color);
+
+  mwc-button,
+  loading-button {
+    --mdc-theme-primary: var(--ancillapp-secondary-text-color);
+
+    &:last-child,
+    &:last-child {
+      --mdc-theme-primary: var(--ancillapp-accent-color);
+    }
+  }
 }
 
 ul.settings {
@@ -178,6 +196,10 @@ ul.settings {
 
     &:not(:last-child) {
       margin-bottom: 1rem;
+    }
+
+    > :last-child {
+      width: 12.5rem;
     }
   }
 }

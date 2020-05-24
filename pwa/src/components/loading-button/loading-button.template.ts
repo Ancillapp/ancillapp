@@ -17,7 +17,9 @@ export default function template(this: LoadingButton) {
       ?fullwidth="${this.fullwidth}"
       icon="${this.icon}"
       label="${this.label}"
-    ></mwc-button>
+    >
+      <slot name="icon" slot="icon"></slot>
+    </mwc-button>
     <loading-spinner size="1" ?hidden="${!this.loading}"></loading-spinner>
   `;
 }

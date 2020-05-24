@@ -4,6 +4,7 @@ import {
   breviaryIcon,
   prayersIcon,
   songsIcon,
+  holyMassIcon,
 } from '../../icons';
 import { HomePage } from './home.component';
 
@@ -34,6 +35,12 @@ export default function template(this: HomePage) {
           <a href="/ancillas/latest">
             <span>${this.localeData?.readLatestAncilla}</span>
             ${ancillasIcon}
+          </a>
+        </li>
+        <li>
+          <a href="/holy-mass">
+            <span>${this.localeData?.bookHolyMassSeat}</span>
+            ${holyMassIcon}
           </a>
         </li>
       </ul>
