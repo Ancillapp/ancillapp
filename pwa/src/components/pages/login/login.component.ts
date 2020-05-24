@@ -42,6 +42,9 @@ export class LoginPage extends localize(PageViewElement) {
   protected _loggingInWithMicrosoft = false;
 
   @property({ type: Boolean })
+  protected _loggingInWithApple = false;
+
+  @property({ type: Boolean })
   protected _loggingInWithGitHub = false;
 
   @property({ type: Boolean })
@@ -172,6 +175,23 @@ export class LoginPage extends localize(PageViewElement) {
     });
 
     this._loggingInWithMicrosoft = false;
+  }
+
+  protected async _handleAppleLogin() {
+    this._loggingInWithApple = true;
+
+    const provider = new firebase.auth.OAuthProvider('apple.com');
+    provider.setCustomParameters({
+      locale: this.locale,
+    });
+
+    await auth.signInWithPopup(provider);
+
+    analytics.logEvent('login', {
+      method: 'Apple',
+    });
+
+    this._loggingInWithApple = false;
   }
 
   protected async _handleGitHubLogin() {

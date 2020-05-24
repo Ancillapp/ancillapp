@@ -136,6 +136,20 @@ export default function template(this: LoginPage) {
           </svg>
         </loading-button>
         <loading-button
+          id="apple"
+          raised
+          label="Apple"
+          @click="${this._handleAppleLogin}"
+          ?loading="${this._loggingInWithApple}"
+          ?disabled="${loggingIn}"
+        >
+          <svg slot="icon" viewBox="0 0 1000 1187" fill="currentColor">
+            <path
+              d="M979 925c-18 42-39 80-64 115-33 48-61 81-82 99-33 31-68 46-106 47-27 0-59-8-97-23-38-16-73-24-105-24-34 0-70 8-108 24-39 15-70 23-94 24-36 2-72-14-108-48A712 712 0 010 640c0-79 17-148 52-205a303 303 0 01254-151c29 0 66 9 113 27 47 17 77 26 90 26 9 0 43-10 99-31 53-19 98-27 135-24 100 8 175 47 225 118a250 250 0 00-133 227c1 76 29 139 83 189 24 23 52 41 82 54l-21 55zM750 24c0 59-22 115-65 166-52 61-115 96-184 91l-1-23c0-57 25-118 69-168 22-25 50-46 84-63 34-16 66-25 96-27l1 24z"
+            />
+          </svg>
+        </loading-button>
+        <loading-button
           id="github"
           raised
           label="GitHub"
