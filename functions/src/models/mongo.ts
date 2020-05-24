@@ -30,6 +30,7 @@ export interface HolyMassParticipant {
   userId: string;
   seats: number;
   bookingId: ObjectId;
+  deleted?: boolean;
 }
 
 export interface HolyMass {
