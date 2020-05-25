@@ -26,6 +26,9 @@ export interface Fraternity {
     friday?: string[];
     saturday?: string[];
     default?: string[];
+    overrides?: {
+      [day: string]: string[];
+    };
   };
 }
 
@@ -66,7 +69,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
   protected _availableSeats?: number;
 
   @property({ type: String })
-  protected _selectedDate = new Date().toISOString().slice(0, 10);
+  protected _selectedDate: string;
 
   @property({ type: Object })
   protected _bookingToCancel?: HolyMassBooking;
@@ -77,11 +80,21 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
   @property({ type: String })
   protected _emailVerificationError?: string;
 
-  protected _minDate?: string;
-  protected _maxDate?: string;
+  @property({ type: String })
+  protected _minDate: string;
+
+  protected _maxDate: string;
 
   constructor() {
     super();
+
+    const now = new Date();
+    this._minDate = now.toISOString().slice(0, 10);
+
+    now.setDate(now.getDate() + 3);
+    this._maxDate = now.toISOString().slice(0, 10);
+
+    this._selectedDate = this._minDate;
 
     Promise.all<Fraternity[], string | undefined, string | undefined>([
       fetch(`${apiUrl}/fraternities`).then((res) => res.json()),
@@ -93,17 +106,12 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
         preferredFraternity || this._fraternities[0].id;
 
       const availableTimes = this._getAvailableTimes(this._selectedFraternity);
+
       this._selectedTime =
         preferredHolyMassTime && availableTimes.includes(preferredHolyMassTime)
           ? preferredHolyMassTime
           : availableTimes[availableTimes.length - 1];
     });
-
-    const now = new Date();
-    this._minDate = now.toISOString().slice(0, 10);
-
-    now.setDate(now.getDate() + 7);
-    this._maxDate = now.toISOString().slice(0, 10);
   }
 
   protected updated(changedProperties: PropertyValues) {
@@ -127,19 +135,25 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
         changedProperties.has('_selectedDate') ||
         changedProperties.has('_selectedTime')) &&
       this._selectedFraternity &&
-      this._selectedDate &&
-      this._selectedTime
+      this._selectedDate
     ) {
       this._availableSeats = undefined;
 
-      if (!changedProperties.has('_selectedTime')) {
-        const availableTimes = this._getAvailableTimes(
-          this._selectedFraternity,
-        );
+      const availableTimes = this._getAvailableTimes(this._selectedFraternity);
 
-        if (!availableTimes.includes(this._selectedTime)) {
-          this._selectedTime = availableTimes[availableTimes.length - 1];
-        }
+      if (
+        (!this._selectedTime || !availableTimes.includes(this._selectedTime)) &&
+        availableTimes.length > 0
+      ) {
+        this._selectedTime = availableTimes[availableTimes.length - 1];
+      }
+
+      if (this._selectedTime && availableTimes.length < 1) {
+        this._selectedTime = undefined;
+      }
+
+      if (!this._selectedTime) {
+        return;
       }
 
       const datetime = this._formatDateTime(
@@ -320,6 +334,14 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     const fraternityMasses =
       this._fraternities.find(({ id }) => id === fraternityId)?.masses || {};
 
+    const override =
+      fraternityMasses.overrides?.[this._selectedDate] ||
+      fraternityMasses.overrides?.[this._selectedDate.slice(5)];
+
+    if (override) {
+      return override;
+    }
+
     const dayOfWeek = ([
       'sunday',
       'monday',
@@ -328,9 +350,21 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
       'thursday',
       'friday',
       'saturday',
-    ] as (keyof Fraternity['masses'])[])[new Date(this._selectedDate).getDay()];
+    ] as Exclude<keyof Fraternity['masses'], 'default' | 'overrides'>[])[
+      new Date(this._selectedDate).getDay()
+    ];
 
-    return fraternityMasses[dayOfWeek] || fraternityMasses.default || [];
+    const allTimes =
+      fraternityMasses[dayOfWeek] || fraternityMasses.default || [];
+
+    const now = new Date();
+
+    return allTimes.filter((time) => {
+      const datetime = new Date(this._formatDateTime(this._selectedDate, time));
+      const currentTimeZoneDatetime = this._toLocalTimeZone(datetime);
+
+      return now < currentTimeZoneDatetime;
+    });
   }
 
   protected _formatDateTime(date: string, time?: string) {

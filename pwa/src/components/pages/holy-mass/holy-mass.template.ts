@@ -25,6 +25,10 @@ export default function template(this: HolyMassPage) {
                 ({ date }) => date.slice(0, 10) === this._selectedDate,
               );
 
+              const availableTimes = this._getAvailableTimes(
+                this._selectedFraternity,
+              );
+
               return html`
                 <section>
                   <ul class="settings">
@@ -82,8 +86,9 @@ export default function template(this: HolyMassPage) {
                         @change="${({ target }: Event) =>
                           (this._selectedTime = (target as OutlinedSelect).value)}"
                         value="${this._selectedTime}"
+                        ?disabled="${availableTimes.length < 1}"
                       >
-                        ${this._getAvailableTimes(this._selectedFraternity).map(
+                        ${availableTimes.map(
                           (time) => html`<option>${time}</option>`,
                         )}
                       </outlined-select>
@@ -91,12 +96,14 @@ export default function template(this: HolyMassPage) {
                   </ul>
                   <div class="available-seats">
                     <h4>Posti disponibili</h4>
-                    <p>${this._availableSeats ?? '…'}</p>
+                    <p>${this._availableSeats ?? '-'}</p>
                   </div>
                   <div class="book-action-bar">
                     <p>
                       ${dayAlreadyBooked
                         ? this.localeData?.dayAlreadyBooked
+                        : availableTimes.length < 1
+                        ? this.localeData?.noHolyMassesAvailable
                         : nothing}
                     </p>
                     <loading-button
@@ -106,7 +113,8 @@ export default function template(this: HolyMassPage) {
                       dialogAction="book"
                       @click="${this._bookHolyMassSeat}"
                       ?loading="${this._bookingHolyMass}"
-                      ?disabled="${dayAlreadyBooked}"
+                      ?disabled="${dayAlreadyBooked ||
+                      availableTimes.length < 1}"
                     >
                     </loading-button>
                   </div>
@@ -130,13 +138,20 @@ export default function template(this: HolyMassPage) {
                                 ({ id }) => id,
                                 (booking) => {
                                   const {
-                                    fraternity: { id, location },
+                                    fraternity: { location },
                                     date: dateString,
                                     seats,
                                   } = booking;
 
                                   const date = this._toLocalTimeZone(
                                     new Date(dateString),
+                                  );
+
+                                  const thirtyMinutesBeforeDate = new Date(
+                                    date,
+                                  );
+                                  thirtyMinutesBeforeDate.setMinutes(
+                                    date.getMinutes() - 30,
                                   );
 
                                   return html`
@@ -157,8 +172,8 @@ export default function template(this: HolyMassPage) {
                                       </td>
                                       <td class="right">${seats}</td>
                                       <td class="center">
-                                        ${date < new Date()
-                                          ? html`${nothing}`
+                                        ${thirtyMinutesBeforeDate < new Date()
+                                          ? nothing
                                           : html`
                                               <mwc-icon-button
                                                 ?disabled="${this

@@ -31,8 +31,6 @@ export const getHolyMassesSeats = functions.https.onRequest(
       date: new Date(date),
     });
 
-    console.log(holyMass);
-
     const takenSeats =
       holyMass?.participants.reduce(
         (

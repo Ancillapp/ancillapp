@@ -27,6 +27,9 @@ export interface Fraternity extends MongoDBRecord {
     friday?: string[];
     saturday?: string[];
     default?: string[];
+    overrides?: {
+      [day: string]: string[];
+    };
   };
 }
 

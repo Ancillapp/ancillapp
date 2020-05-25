@@ -66,5 +66,6 @@
   "resetPassword": "Reset password",
   "backToLogin": "Go back to login",
   "checkYourInbox": "Done! Check your inbox.",
-  "time": "Time"
+  "time": "Time",
+  "noHolyMassesAvailable": "No Holy Masses available for this day."
 }

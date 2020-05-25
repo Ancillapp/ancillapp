@@ -66,5 +66,6 @@
   "resetPassword": "Reimposta password",
   "backToLogin": "Torna al login",
   "checkYourInbox": "Fatto! Controlla la tua casella di posta.",
-  "time": "Ora"
+  "time": "Ora",
+  "noHolyMassesAvailable": "Nessuna Santa Messa disponibile per questo giorno."
 }

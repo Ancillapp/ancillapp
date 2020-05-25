@@ -25,6 +25,7 @@ export default function template(this: DateInput) {
       clearLabel=""
       confirmLabel="${this.setLabel}"
       dismissLabel="${this.cancelLabel}"
+      firstDayOfWeek="1"
       min="${this.min}"
       max="${this.max}"
       locale="${this.locale}"
