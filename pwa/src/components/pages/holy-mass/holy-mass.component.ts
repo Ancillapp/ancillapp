@@ -88,7 +88,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     const now = new Date();
     this._minDate = now.toISOString().slice(0, 10);
 
-    now.setDate(now.getDate() + 7);
+    now.setDate(now.getDate() + 3);
     this._maxDate = now.toISOString().slice(0, 10);
 
     this._selectedDate = this._minDate;
