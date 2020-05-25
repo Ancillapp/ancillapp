@@ -26,6 +26,9 @@ export interface Fraternity {
     friday?: string[];
     saturday?: string[];
     default?: string[];
+    overrides?: {
+      [day: string]: string[];
+    };
   };
 }
 
@@ -331,6 +334,14 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     const fraternityMasses =
       this._fraternities.find(({ id }) => id === fraternityId)?.masses || {};
 
+    const override =
+      fraternityMasses.overrides?.[this._selectedDate] ||
+      fraternityMasses.overrides?.[this._selectedDate.slice(5)];
+
+    if (override) {
+      return override;
+    }
+
     const dayOfWeek = ([
       'sunday',
       'monday',
@@ -339,7 +350,9 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
       'thursday',
       'friday',
       'saturday',
-    ] as (keyof Fraternity['masses'])[])[new Date(this._selectedDate).getDay()];
+    ] as Exclude<keyof Fraternity['masses'], 'default' | 'overrides'>[])[
+      new Date(this._selectedDate).getDay()
+    ];
 
     const allTimes =
       fraternityMasses[dayOfWeek] || fraternityMasses.default || [];
