@@ -142,18 +142,13 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
         (!this._selectedTime || !availableTimes.includes(this._selectedTime)) &&
         availableTimes.length > 0
       ) {
-        console.log('a');
         this._selectedTime = availableTimes[availableTimes.length - 1];
       }
 
       if (this._selectedTime && availableTimes.length < 1) {
-        console.log('b');
         this._selectedTime = undefined;
       }
 
-      console.log(availableTimes);
-      console.log(this._selectedTime);
-      return;
       if (!this._selectedTime) {
         return;
       }
