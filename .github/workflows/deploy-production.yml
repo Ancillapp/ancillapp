@@ -20,7 +20,7 @@ jobs:
       - name: Build
         run: |
           # Generate the sitemap
-          npm run build:sitemap https://ancill.app
+          npm run build:sitemap
           # Build the PWA and the functions
           npm run build
         env:
