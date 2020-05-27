@@ -1,5 +1,6 @@
 import type { LitElement } from 'lit-element';
 import { get, set } from './keyval';
+import { localizedPages, localizeHref } from './localization';
 
 type Constructor<T> = new (...args: any[]) => T;
 
@@ -39,16 +40,35 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
       return !!this.localeData;
     }
 
-    private async _loadInitialLocale() {
-      const storedLocale = await get<SupportedLocale>('locale');
-      const userLocale = navigator.language.slice(0, 2);
+    public async getPreferredLocale() {
+      const pathLocale = window.location.pathname.slice(
+        1,
+        3,
+      ) as SupportedLocale;
 
-      return this.setLocale(
-        storedLocale ||
-          (supportedLocales.includes(userLocale as SupportedLocale)
-            ? userLocale
-            : defaultLocale),
-      );
+      if (supportedLocales.includes(pathLocale)) {
+        return pathLocale;
+      }
+
+      const storedLocale = await get<SupportedLocale>('locale');
+
+      if (supportedLocales.includes(storedLocale)) {
+        return storedLocale;
+      }
+
+      const userLocale = navigator.language.slice(0, 2) as SupportedLocale;
+
+      if (supportedLocales.includes(userLocale)) {
+        return userLocale;
+      }
+
+      return defaultLocale;
+    }
+
+    private async _loadInitialLocale() {
+      const locale = await this.getPreferredLocale();
+
+      await this.setLocale(locale);
     }
 
     public async updateCurrentLocaleData() {
@@ -64,15 +84,45 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
     }
 
     public async setLocale(locale: SupportedLocale) {
-      currentLocale = locale;
+      if (locale === currentLocale) {
+        return;
+      }
 
       document.documentElement.lang = locale;
+
+      if (!window.location.pathname.startsWith(`/${locale}`)) {
+        const [
+          ,
+          ,
+          page = 'home',
+          ...subroutes
+        ] = window.location.pathname.split('/');
+
+        const pageId =
+          Object.entries(localizedPages).find(
+            ([_, { [currentLocale]: localizedPageId }]) =>
+              page === localizedPageId,
+          )?.[0] || 'home';
+
+        window.history.pushState(
+          {},
+          '',
+          localizeHref(locale, pageId, ...subroutes),
+        );
+      }
+
+      currentLocale = locale;
+
       await Promise.all([
         ...localizedComponents.map((localizedComponent) =>
           localizedComponent.updateCurrentLocaleData(),
         ),
         set('locale', locale),
       ]);
+    }
+
+    public localizeHref(page?: string, ...subroutes: string[]) {
+      return localizeHref(this.locale || defaultLocale, page, ...subroutes);
     }
 
     public get locale() {

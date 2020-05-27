@@ -146,7 +146,7 @@ export class SongsList extends localize(PageViewElement) {
         container.innerHTML = songs.reduce(
           (html, { number, title }) => `
               ${html}
-              <a href="/songs/${number}" class="song">
+              <a href="${this.localizeHref('songs', number)}" class="song">
                 <div class="book">
                   <div class="number">
                     ${

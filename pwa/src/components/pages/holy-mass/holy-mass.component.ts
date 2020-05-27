@@ -97,7 +97,7 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
     this._selectedDate = this._minDate;
 
     Promise.all<Fraternity[], string | undefined, string | undefined>([
-      fetch(`${apiUrl}/fraternities`).then((res) => res.json()),
+      fetch(`${apiUrl}/fraternities?v=${Date.now()}`).then((res) => res.json()),
       get('preferredFraternity'),
       get('preferredHolyMassTime'),
     ]).then(([fraternities, preferredFraternity, preferredHolyMassTime]) => {
@@ -162,7 +162,9 @@ export class HolyMassPage extends localize(authorize(PageViewElement)) {
       );
 
       fetch(
-        `${apiUrl}/fraternities/${this._selectedFraternity}/holy-masses/${datetime}/seats`,
+        `${apiUrl}/fraternities/${
+          this._selectedFraternity
+        }/holy-masses/${datetime}/seats?v=${Date.now()}`,
       )
         .then((res) => res.json())
         .then((availableSeats) => (this._availableSeats = availableSeats));

@@ -9,7 +9,8 @@ import {
   installRouter,
   updateMetadata,
 } from 'pwa-helpers';
-import { localize } from '../../helpers/localize';
+import { localize, SupportedLocale } from '../../helpers/localize';
+import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
 
@@ -105,7 +106,7 @@ export class Shell extends localize(authorize(LitElement)) {
 
     if (changedProperties.has('user')) {
       if (this.user && this._page === 'login') {
-        window.history.replaceState({}, '', '/home');
+        window.history.replaceState({}, '', '/');
         this._locationChanged(window.location);
       }
     }
@@ -187,19 +188,17 @@ export class Shell extends localize(authorize(LitElement)) {
     );
   }
 
-  protected _locationChanged(location: Location) {
-    let path = window.decodeURIComponent(location.pathname);
+  protected async _locationChanged(location: Location) {
+    let [, page = 'home', ...subroutes] = location.pathname.slice(1).split('/');
+    const locale = await this.getPreferredLocale();
 
-    if (path === '/') {
-      // Redirect to home, replacing the history state.
-      // In this way, the user won't be trapped in the home page when trying to go back.
-      window.history.replaceState({}, '', '/home');
-      path = '/home';
+    if (page === 'home') {
+      window.history.replaceState({}, '', this.localizeHref());
     }
 
-    const [page, ...subroutes] = path.slice(1).split('/');
+    await this.setLocale(locale as SupportedLocale);
 
-    this._loadPage(page, subroutes.join('/'));
+    this._loadPage(locale as SupportedLocale, page, subroutes.join('/'));
 
     const pageTitle = `Ancillapp - ${
       (this.localeData as { [key: string]: string })?.[
@@ -227,22 +226,18 @@ export class Shell extends localize(authorize(LitElement)) {
     }
   }
 
-  protected _loadPage(page: string, subroute = '') {
-    if (
-      (page === 'login' && this.user) ||
-      ![
-        ...this._topNavPages,
-        'holy-mass',
-        'login',
-        ...this._bottomNavPages,
-      ].includes(page)
-    ) {
-      window.history.replaceState({}, '', '/home');
-      page = 'home';
+  protected _loadPage(locale: SupportedLocale, page: string, subroute = '') {
+    let pageId = Object.entries(localizedPages).find(
+      ([_, { [locale]: localizedPageId }]) => page === localizedPageId,
+    )?.[0];
+
+    if (!pageId || (pageId === 'login' && this.user)) {
+      window.history.replaceState({}, '', `/${locale}`);
+      pageId = 'home';
     }
 
-    import(`../pages/${page}/${page}.component`);
-    this._page = page;
+    import(`../pages/${pageId}/${pageId}.component`);
+    this._page = pageId;
     this._subroute = subroute;
   }
 

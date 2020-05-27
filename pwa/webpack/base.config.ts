@@ -85,14 +85,18 @@ const config: Configuration = {
         );
       },
     ),
-    new CopyPlugin([
-      // Assets
-      {
-        from: path.resolve(__dirname, '../src/assets'),
-        to: '.',
-        ignore: [{ glob: '**/.DS_Store' }],
-      },
-    ]),
+    new CopyPlugin({
+      patterns: [
+        // Assets
+        {
+          from: path.resolve(__dirname, '../src/assets'),
+          to: '.',
+          globOptions: {
+            ignore: ['**/.DS_Store'],
+          },
+        },
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: 'styles/[name].[contenthash].css',
       chunkFilename: 'styles/[id].[contenthash].css',

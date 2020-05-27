@@ -192,7 +192,7 @@ export default function template(this: InfoPage) {
       </p>
       <p>
         Per ulteriori informazioni, visita il sito
-        <a href="https://www.ffbetania.net/it/home/">ffbetania.net</a>
+        <a href="https://www.ffbetania.net/${this.locale}">ffbetania.net</a>
       </p>
     </section>
   `;
