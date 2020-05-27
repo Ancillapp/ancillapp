@@ -24,7 +24,7 @@ export default function template(this: Shell) {
         <mwc-list activatable class="top-nav">
           ${this._topNavPages.map(
             (page) => html`
-              <a class="nav-link" href="/${page}">
+              <a class="nav-link" href="${this.localizeHref(page)}">
                 <mwc-list-item
                   ?selected="${this._page === page}"
                   ?activated="${this._page === page}"
@@ -64,7 +64,7 @@ export default function template(this: Shell) {
                 </mwc-list-item>
               `
             : html`
-                <a class="nav-link" href="/login">
+                <a class="nav-link" href="${this.localizeHref('login')}">
                   <mwc-list-item
                     ?selected="${this._page === 'login'}"
                     ?activated="${this._page === 'login'}"
@@ -79,7 +79,7 @@ export default function template(this: Shell) {
               `}
           ${this._bottomNavPages.map(
             (page) => html`
-              <a class="nav-link" href="/${page}">
+              <a class="nav-link" href="${this.localizeHref(page)}">
                 <mwc-list-item
                   ?selected="${this._page === page}"
                   ?activated="${this._page === page}"
@@ -105,7 +105,10 @@ export default function template(this: Shell) {
         <mwc-top-app-bar>
           ${this._subroute
             ? html`
-                <a href="/${this._page}" slot="navigationIcon">
+                <a
+                  href="${this.localizeHref(this._page)}"
+                  slot="navigationIcon"
+                >
                   <mwc-icon-button>${icons.arrowBack}</mwc-icon-button>
                 </a>
               `

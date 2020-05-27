@@ -41,7 +41,7 @@ export default function template(this: AncillasList) {
               ({ code }) => code,
               ({ code, name, thumbnail }) => html`
                 <a
-                  href="/ancillas/${code}"
+                  href="${this.localizeHref('ancillas', code)}"
                   title="Ancilla Domini - ${name[this.locale]}"
                   class="ancilla"
                 >

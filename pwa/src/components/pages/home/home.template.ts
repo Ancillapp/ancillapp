@@ -14,31 +14,31 @@ export default function template(this: HomePage) {
       <h2>${this.localeData?.peaceAndGood}</h2>
       <ul>
         <li>
-          <a href="/breviary">
+          <a href="${this.localizeHref('breviary')}">
             <span>${this.localeData?.prayLiturgy}</span>
             ${breviaryIcon}
           </a>
         </li>
         <li>
-          <a href="/songs">
+          <a href="${this.localizeHref('songs')}">
             <span>${this.localeData?.singFraternitySongs}</span>
             ${songsIcon}
           </a>
         </li>
         <li>
-          <a href="/prayers">
+          <a href="${this.localizeHref('prayers')}">
             <span>${this.localeData?.prayDailyPrayers}</span>
             ${prayersIcon}
           </a>
         </li>
         <li>
-          <a href="/ancillas/latest">
+          <a href="${this.localizeHref('ancillas', 'latest')}">
             <span>${this.localeData?.readLatestAncilla}</span>
             ${ancillasIcon}
           </a>
         </li>
         <li>
-          <a href="/holy-mass">
+          <a href="${this.localizeHref('holy-mass')}">
             <span>${this.localeData?.bookHolyMassSeat}</span>
             ${holyMassIcon}
           </a>

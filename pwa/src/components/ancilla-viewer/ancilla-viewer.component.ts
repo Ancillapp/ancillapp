@@ -37,17 +37,22 @@ export class AncillaViewer extends localize(PageViewElement) {
     old: string | null,
     value: string | null,
   ) {
+    super.attributeChangedCallback(name, old, value);
+
     if (this.active && name === 'ancilla' && value && old !== value) {
       this._ancillaPromise = fetch(`${apiUrl}/ancillas/${value}`).then((res) =>
         res.json(),
       );
-    }
-    super.attributeChangedCallback(name, old, value);
 
-    const { code } = await this._ancillaPromise;
+      const { code } = await this._ancillaPromise;
 
-    if (value !== code) {
-      window.history.replaceState({}, '', `/ancillas/${code}`);
+      if (value !== code) {
+        window.history.replaceState(
+          {},
+          '',
+          this.localizeHref('ancilllas', code),
+        );
+      }
     }
   }
 }

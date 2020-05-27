@@ -269,7 +269,11 @@ export default function template(this: HolyMassPage) {
                     Per favore, effettua il login per usufruire del servizio di
                     prenotazione della Santa Messa.
                   </p>
-                  <p><a href="/login">Vai alla pagina di login</a></p>
+                  <p>
+                    <a href="${this.localizeHref('login')}">
+                      Vai alla pagina di login
+                    </a>
+                  </p>
                 `}
           </section>
         `}

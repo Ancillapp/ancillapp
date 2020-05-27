@@ -1,17 +1,27 @@
 import { get } from '../helpers/keyval';
-import type { Localized, SupportedLocale } from '../helpers/localize';
+import { Localized, SupportedLocale, localizeHref } from '../helpers/localize';
 
-const openOrFocus = async (url: string) => {
+const openOrFocus = async (urlOrPage?: string, ...subroutes: string[]) => {
+  let url = urlOrPage;
+
+  if (url && !url.startsWith('/') && !url.startsWith('http')) {
+    const storedLocale = await get<SupportedLocale>('locale');
+    const locale = storedLocale || 'it';
+
+    url = localizeHref(locale, url, ...subroutes);
+  }
+
   const clientsList = await self.clients.matchAll({
     type: 'window',
   });
 
   for (const client of clientsList) {
-    if ((url === '*' && client.url.startsWith('/')) || url === client.url) {
+    if ((!url && client.url.startsWith('/')) || url === client.url) {
       return client.focus();
     }
   }
-  return self.clients.openWindow(url === '*' ? '/' : url);
+
+  return self.clients.openWindow(url || '/');
 };
 
 self.addEventListener('push', (event) => {
@@ -78,10 +88,10 @@ self.addEventListener('notificationclick', (event) => {
     case 'dismiss':
       break;
     case 'latest-ancilla':
-      event.waitUntil(openOrFocus('/ancillas/latest'));
+      event.waitUntil(openOrFocus('ancillas', 'latest'));
       break;
     default:
-      event.waitUntil(openOrFocus('*'));
+      event.waitUntil(openOrFocus());
       break;
   }
 });

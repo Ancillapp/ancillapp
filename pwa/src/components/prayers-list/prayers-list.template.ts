@@ -55,7 +55,7 @@ export default function template(this: PrayersList) {
                 title: { [this.locale]: localizedTitle, la: latinTitle },
                 image,
               }) => html`
-                <a href="/prayers/${slug}" class="prayer">
+                <a href="${this.localizeHref('prayers', slug)}" class="prayer">
                   <div class="image">
                     ${unsafeHTML(image)}
                   </div>

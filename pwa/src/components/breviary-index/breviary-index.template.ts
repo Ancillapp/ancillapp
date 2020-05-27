@@ -32,7 +32,7 @@ export default function template(this: BreviaryIndex) {
         ].map(
           (prayer) => html`
             <li>
-              <a href="/breviary/${prayer}/${this._date}">
+              <a href="${this.localizeHref('breviary', prayer, this._date)}">
                 <span>${this.localeData?.[prayer]}</span>
               </a>
             </li>
