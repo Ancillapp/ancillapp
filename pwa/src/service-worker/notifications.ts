@@ -1,5 +1,6 @@
 import { get } from '../helpers/keyval';
-import { Localized, SupportedLocale, localizeHref } from '../helpers/localize';
+import type { Localized, SupportedLocale } from '../helpers/localize';
+import { localizeHref } from '../helpers/localization';
 
 const openOrFocus = async (urlOrPage?: string, ...subroutes: string[]) => {
   let url = urlOrPage;
