@@ -5,3 +5,4 @@ pwa/dist/
 functions/lib/
 .env
 .runtimeconfig.json
+sitemap.xml

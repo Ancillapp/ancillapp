@@ -12,7 +12,8 @@
     "build:pwa": "npm --prefix pwa run build",
     "start:functions": "npm --prefix functions start",
     "build:functions": "npm --prefix functions run build",
-    "postinstall": "lerna bootstrap --hoist --strict && patch-package"
+    "postinstall": "lerna bootstrap --hoist --strict && patch-package",
+    "build:sitemap": "node scripts/sitemap"
   },
   "devDependencies": {
     "firebase-tools": "^8.4.0",
