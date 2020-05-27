@@ -19,6 +19,8 @@ const config: Configuration = smartMerge(baseConfig, {
       new TerserPlugin({
         extractComments: 'all',
         terserOptions: {
+          ecma: 2017,
+          safari10: true,
           compress: {
             drop_console: true, // eslint-disable-line @typescript-eslint/camelcase
           },

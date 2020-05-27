@@ -28,6 +28,21 @@ declare module 'terser-webpack-plugin' {
           banner(licenseFile: string): string;
         };
     terserOptions?: {
+      ecma?:
+        | 5
+        | 2015
+        | 2016
+        | 2017
+        | 2018
+        | 2019
+        | 2020
+        | 6
+        | 7
+        | 8
+        | 9
+        | 10
+        | 11;
+      safari10?: boolean;
       compress?: {
         drop_console?: boolean;
       };
@@ -40,6 +55,8 @@ declare module 'terser-webpack-plugin' {
 }
 
 declare module 'html-webpack-plugin';
+
+declare module 'copy-webpack-plugin';
 
 declare module '*.styles' {
   import { CSSResult } from 'lit-element';
