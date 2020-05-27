@@ -9,11 +9,8 @@ import {
   installRouter,
   updateMetadata,
 } from 'pwa-helpers';
-import {
-  localize,
-  SupportedLocale,
-  localizedPages,
-} from '../../helpers/localize';
+import { localize, SupportedLocale } from '../../helpers/localize';
+import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
 
