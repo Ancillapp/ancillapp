@@ -19,6 +19,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
         run: npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting:staging,functions:staging
         env:

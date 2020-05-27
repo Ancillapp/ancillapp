@@ -18,7 +18,13 @@ jobs:
       - name: Install deps
         run: npm ci
       - name: Build
-        run: npm run build
+        run: |
+          # Generate the sitemap
+          npm run build:sitemap
+          # Build the PWA and the functions
+          npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
         run: npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting:production,functions:production
         env:
