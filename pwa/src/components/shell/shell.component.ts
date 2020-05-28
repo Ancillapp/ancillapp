@@ -18,7 +18,7 @@ import sharedStyles from '../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
-import type { TopAppBar } from '@material/mwc-top-app-bar';
+import type { TopAppBar } from '../top-app-bar/top-app-bar.component';
 
 import firebase from 'firebase/app';
 
@@ -115,11 +115,8 @@ export class Shell extends localize(authorize(LitElement)) {
   protected firstUpdated() {
     installRouter((location) => this._locationChanged(location));
 
-    // TODO: replace this awful workaround by implementing a custom top app bar
     const drawer = this.shadowRoot!.querySelector('mwc-drawer')!;
-    const topAppBar = this.shadowRoot!.querySelector<TopAppBar>(
-      'mwc-top-app-bar',
-    )!;
+    const topAppBar = this.shadowRoot!.querySelector<TopAppBar>('top-app-bar')!;
 
     // TODO: discover why we need this instead of just using
     // @MDCDrawer:closed="${() => (this._drawerOpened = false)}"
@@ -140,22 +137,6 @@ export class Shell extends localize(authorize(LitElement)) {
 
       drawer.shadowRoot!.removeEventListener('slotchange', slotChangeListener);
 
-      const topAppBarRef = topAppBar.shadowRoot!.querySelector<HTMLDivElement>(
-        '.mdc-top-app-bar',
-      )!;
-      let intervalRef: number;
-
-      const updatePosition = () => {
-        if (!topAppBarRef.style.position) {
-          return;
-        }
-
-        window.clearInterval(intervalRef);
-        topAppBarRef.style.position = 'fixed';
-      };
-
-      updatePosition();
-      intervalRef = window.setInterval(updatePosition, 100);
       topAppBar.scrollTarget = drawerContent;
     };
 

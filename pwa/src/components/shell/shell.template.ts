@@ -3,13 +3,13 @@ import { nothing } from 'lit-html';
 import { Shell } from './shell.component';
 import * as icons from '../icons';
 
-import '@material/mwc-top-app-bar';
 import '@material/mwc-drawer';
 import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import '@material/mwc-list/mwc-list';
 import '@material/mwc-list/mwc-list-item';
 import '@material/mwc-snackbar';
+import '../top-app-bar/top-app-bar.component';
 import '../snackbar/snackbar.component';
 
 export default function template(this: Shell) {
@@ -102,19 +102,16 @@ export default function template(this: Shell) {
         </mwc-list>
       </div>
       <div slot="appContent">
-        <mwc-top-app-bar>
+        <top-app-bar ?drawer-open="${this._narrow && this._drawerOpened}">
           ${this._subroute
             ? html`
-                <a
-                  href="${this.localizeHref(this._page)}"
-                  slot="navigationIcon"
-                >
+                <a href="${this.localizeHref(this._page)}" slot="leadingIcon">
                   <mwc-icon-button>${icons.arrowBack}</mwc-icon-button>
                 </a>
               `
             : html`
                 <mwc-icon-button
-                  slot="navigationIcon"
+                  slot="leadingIcon"
                   @click="${() => this._updateDrawerState(!this._drawerOpened)}"
                 >
                   ${icons.menu}
@@ -129,7 +126,7 @@ export default function template(this: Shell) {
                   )
                 ]}
           </div>
-        </mwc-top-app-bar>
+        </top-app-bar>
         <main>
           <home-page
             class="page padded"

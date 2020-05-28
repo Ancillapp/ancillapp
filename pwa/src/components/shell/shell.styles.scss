@@ -5,10 +5,8 @@
   height: 100%;
 }
 
-mwc-top-app-bar {
-  --mdc-theme-primary: var(--ancillapp-top-app-bar-color);
-
-  [slot='navigationIcon'] {
+top-app-bar {
+  [slot='leadingIcon'] {
     color: inherit;
   }
 
@@ -81,11 +79,12 @@ li[divider] {
 
 main {
   width: 100%;
-  min-height: calc(100% - 56px);
+  min-height: 100%;
+  padding-top: 56px;
   background: var(--ancillapp-background-color);
   display: flex;
 
   @media (min-width: 600px) {
-    min-height: calc(100% - 64px);
+    padding-top: 64px;
   }
 }
