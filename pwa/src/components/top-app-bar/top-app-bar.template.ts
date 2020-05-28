@@ -5,7 +5,10 @@ import '@material/mwc-fab';
 
 export default function template(this: TopAppBar) {
   return html`
-    <header style="transform: translateY(${this._scrollFromTop}px)">
+    <header
+      class="${this._scrolled ? 'scrolled' : ''}"
+      style="transform: translateY(${this._scrollFromTop}px)"
+    >
       <div class="row">
         <section class="start">
           <slot name="leadingIcon"></slot>

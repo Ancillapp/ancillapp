@@ -21,6 +21,9 @@ export class TopAppBar extends LitElement {
   @property({ type: Number })
   protected _scrollFromTop = 0;
 
+  @property({ type: Boolean })
+  protected _scrolled = false;
+
   @property({ type: Object })
   get scrollTarget() {
     return (
@@ -55,13 +58,15 @@ export class TopAppBar extends LitElement {
 
         const realScroll = Math.max(0, scrollTop);
 
+        this._scrolled = realScroll > 32;
+
         if (
           this._latestPos < realScroll &&
-          ((window.innerWidth < 600 && this._scrollFromTop >= -56) ||
-            (window.innerWidth > 599 && this._scrollFromTop >= -64))
+          ((window.innerWidth < 600 && this._scrollFromTop >= -64) ||
+            (window.innerWidth > 599 && this._scrollFromTop >= -72))
         ) {
           this._scrollFromTop = Math.max(
-            window.innerWidth < 600 ? -56 : -64,
+            window.innerWidth < 600 ? -64 : -72,
             this._scrollFromTop + (this._latestPos - realScroll),
           );
         } else if (this._scrollFromTop <= 0) {
