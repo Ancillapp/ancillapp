@@ -1,5 +1,4 @@
 import { LitElement, customElement, query, property } from 'lit-element';
-import { localize, SupportedLocale } from '../../helpers/localize';
 
 import sharedStyles from '../shared.styles';
 import styles from './autosized-fab.styles';
@@ -8,7 +7,7 @@ import template from './autosized-fab.template';
 import { installMediaQueryWatcher } from 'pwa-helpers';
 
 @customElement('autosized-fab')
-export class AutosizedFAB extends localize(LitElement) {
+export class AutosizedFAB extends LitElement {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
