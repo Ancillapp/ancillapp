@@ -150,7 +150,7 @@ export class Shell extends localize(authorize(LitElement)) {
 
     const themeColorUpdateCallback = () =>
       (themeColor.content = getComputedStyle(document.body).getPropertyValue(
-        '--ancillapp-top-app-bar-color',
+        '--ancillapp-top-app-bar-background',
       ));
 
     const observer = new MutationObserver((mutations) =>

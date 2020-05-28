@@ -118,7 +118,8 @@
 
         /* Variables (different for each theme) */
         --ancillapp-primary-color: #567791;
-        --ancillapp-top-app-bar-color: var(--ancillapp-primary-color);
+        --ancillapp-top-app-bar-background: var(--ancillapp-primary-color);
+        --ancillapp-top-app-bar-color: #fff;
         --ancillapp-activated-list-color: var(--ancillapp-primary-color);
         --ancillapp-accent-color: #d50000;
         --ancillapp-background-color: #fafafa;
@@ -133,7 +134,7 @@
       }
 
       body[data-theme='dark'] {
-        --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+        --ancillapp-top-app-bar-background: var(--ancillapp-card-color);
         --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
         --ancillapp-accent-color: #ff8f82;
         --ancillapp-background-color: #303030;
@@ -146,7 +147,7 @@
       }
 
       body[data-theme='oled'] {
-        --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+        --ancillapp-top-app-bar-background: var(--ancillapp-card-color);
         --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
         --ancillapp-accent-color: #f00;
         --ancillapp-background-color: #000;
@@ -160,7 +161,7 @@
 
       @media (prefers-color-scheme: dark) {
         body[data-theme='system'] {
-          --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+          --ancillapp-top-app-bar-background: var(--ancillapp-card-color);
           --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
           --ancillapp-accent-color: #ff8f82;
           --ancillapp-background-color: #303030;
