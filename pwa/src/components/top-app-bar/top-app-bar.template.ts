@@ -9,9 +9,9 @@ export default function template(this: TopAppBar) {
       <div class="row">
         <section class="start">
           <slot name="leadingIcon"></slot>
-          <span class="title">
+          <div class="title">
             <slot name="title"></slot>
-          </span>
+          </div>
         </section>
         <section class="end">
           <slot name="trailingIcon"></slot>

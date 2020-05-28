@@ -6,13 +6,12 @@ import {
   query,
 } from 'lit-element';
 
-import sharedStyles from '../shared.styles';
 import styles from './top-app-bar.styles';
 import template from './top-app-bar.template';
 
 @customElement('top-app-bar')
 export class TopAppBar extends LitElement {
-  public static styles = [sharedStyles, styles];
+  public static styles = [styles];
 
   protected render = template;
 
