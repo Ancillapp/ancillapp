@@ -31,10 +31,6 @@ export default function template(this: SongViewer) {
         `
       : html`
           <section>
-            <h1>
-              ${this._songStatus.data.number.slice(2)}.
-              ${this._songStatus.data.title}
-            </h1>
             ${compile(this._songStatus.data.content)}
           </section>
 
