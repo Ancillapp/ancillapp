@@ -54,6 +54,7 @@ export default function template(this: SongsList) {
       <input
         id="search-input"
         slot="title"
+        placeholder="${this.localeData.search}"
         ?hidden="${!this._searching}"
         @keydown="${this._handleSearchKeyDown}"
         @input="${this._handleSearch}"
