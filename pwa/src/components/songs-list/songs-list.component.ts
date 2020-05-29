@@ -158,25 +158,32 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
             .join(' ');
         }
 
-        container.innerHTML = songs.reduce(
-          (html, { number, title }) => `
-              ${html}
-              <a href="${this.localizeHref('songs', number)}" class="song">
-                <div class="book">
-                  <div class="number">
-                    ${
-                      number.endsWith('bis')
-                        ? `${number.slice(2, -3)}b`
-                        : number.slice(2)
-                    }
-                  </div>
-                  <div class="title">${title}</div>
-                </div>
-                <div class="title">${title}</div>
-              </a>
-            `,
-          '',
-        );
+        songs.forEach(({ number, title }) => {
+          const anchor = document.createElement('a');
+          anchor.href = this.localizeHref('songs', number);
+          anchor.className = 'song';
+          anchor.innerHTML = `
+            <div class="book">
+              <div class="number">
+                ${
+                  number.endsWith('bis')
+                    ? `${number.slice(2, -3)}b`
+                    : number.slice(2)
+                }
+              </div>
+              <div class="title">${title}</div>
+            </div>
+            <div class="title">${title}</div>
+          `;
+          anchor.addEventListener('click', () => {
+            this._searchInput!.value = '';
+            this._searchTerm = '';
+            this._searching = false;
+            this._refreshSongs();
+          });
+
+          container.appendChild(anchor);
+        });
 
         return container;
       },
