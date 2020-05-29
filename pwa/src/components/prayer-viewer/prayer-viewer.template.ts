@@ -28,10 +28,6 @@ export default function template(this: PrayerViewer) {
         `
       : html`
           <section>
-            <h1>
-              ${this._prayerStatus.data.title[this.locale] ||
-              this._prayerStatus.data.title.la}
-            </h1>
             ${compile(
               this._prayerStatus.data.content[this.locale] ||
                 this._prayerStatus.data.content.la!,
