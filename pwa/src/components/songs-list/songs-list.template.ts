@@ -55,6 +55,7 @@ export default function template(this: SongsList) {
         id="search-input"
         slot="title"
         placeholder="${this.localeData.search}"
+        inputmode="${this._numericOnly ? 'numeric' : 'text'}"
         ?hidden="${!this._searching}"
         @keydown="${this._handleSearchKeyDown}"
         @input="${this._handleSearch}"
