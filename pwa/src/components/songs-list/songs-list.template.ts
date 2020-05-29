@@ -1,11 +1,11 @@
 import { html } from 'lit-element';
-import { nothing } from 'lit-html';
-import { repeat } from 'lit-html/directives/repeat';
 import { SongsList } from './songs-list.component';
+import { menu, tau } from '../icons';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
 import '@material/mwc-dialog';
+import '../top-app-bar/top-app-bar.component';
 import '../search-input/search-input.component';
 import '../unobtrusive-notification/unobtrusive-notification.component';
 import '../loading-button/loading-button.component';
@@ -14,6 +14,18 @@ import '../outlined-select/outlined-select.component';
 
 export default function template(this: SongsList) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${tau} ${this.localeData?.songs}
+      </div>
+    </top-app-bar>
+
     <unobtrusive-notification ?hidden="${!this._needSongsDownloadPermission}">
       ${this.localeData?.songsDownload}
       <mwc-button

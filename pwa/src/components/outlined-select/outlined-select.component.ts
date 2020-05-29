@@ -35,7 +35,8 @@ export class OutlinedSelect extends LitElement {
     super.update(changedProperties);
   }
 
-  firstUpdated() {
+  protected firstUpdated(changedProperties: PropertyValues) {
+    super.firstUpdated(changedProperties);
     this._slotRef!.addEventListener('slotchange', () => this._updateOptions());
   }
 

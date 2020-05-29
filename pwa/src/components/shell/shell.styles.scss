@@ -5,25 +5,6 @@
   height: 100%;
 }
 
-top-app-bar {
-  [slot='leadingIcon'] {
-    color: inherit;
-  }
-
-  [slot='title'] {
-    display: flex;
-    align-items: center;
-    font-family: var(--ancillapp-display-font);
-    font-style: italic;
-
-    svg {
-      height: 36px;
-      padding: 0 10px 12px 0;
-      fill: #fff;
-    }
-  }
-}
-
 mwc-drawer {
   --mdc-theme-surface: var(--ancillapp-drawer-color);
 

@@ -1,5 +1,6 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../../helpers/localize';
+import { withTopAppBar } from '../../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 
 import sharedStyles from '../../shared.styles';
@@ -12,7 +13,7 @@ const auth = firebase.auth();
 const analytics = firebase.analytics();
 
 @customElement('login-page')
-export class LoginPage extends localize(PageViewElement) {
+export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;

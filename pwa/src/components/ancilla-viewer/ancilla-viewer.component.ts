@@ -1,5 +1,6 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 
 import sharedStyles from '../shared.styles';
@@ -21,7 +22,7 @@ export interface Ancilla {
 }
 
 @customElement('ancilla-viewer')
-export class AncillaViewer extends localize(PageViewElement) {
+export class AncillaViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;

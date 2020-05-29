@@ -9,10 +9,26 @@ import template from './ancillas.template';
 export class AncillasPage extends PageViewElement {
   public static styles = [sharedStyles, styles];
 
+  protected render = template;
+
   @property({ type: 'String' })
   public subroute?: string;
 
-  protected render = template;
+  @property({ type: Boolean, attribute: 'drawer-open' })
+  public drawerOpen = false;
+
+  @property({ type: Object })
+  public scrollTarget?: HTMLElement;
+
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (this.scrollTarget && this.shadowRoot!.firstElementChild) {
+      (this.shadowRoot!.firstElementChild as Element & {
+        scrollTarget: HTMLElement | undefined;
+      }).scrollTarget = this.scrollTarget;
+    }
+  }
 
   constructor() {
     super();

@@ -1,6 +1,7 @@
 import { customElement, PropertyValues, property } from 'lit-element';
 import { localize } from '../../../helpers/localize';
 import { authorize } from '../../../helpers/authorize';
+import { withTopAppBar } from '../../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 
 import sharedStyles from '../../shared.styles';
@@ -40,7 +41,9 @@ export interface HolyMassBooking {
 }
 
 @customElement('holy-mass-page')
-export class HolyMassPage extends localize(authorize(PageViewElement)) {
+export class HolyMassPage extends localize(
+  authorize(withTopAppBar(PageViewElement)),
+) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;

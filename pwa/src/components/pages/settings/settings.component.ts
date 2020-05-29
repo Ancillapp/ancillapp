@@ -1,5 +1,6 @@
 import { customElement, queryAll } from 'lit-element';
 import { localize, SupportedLocale } from '../../../helpers/localize';
+import { withTopAppBar } from '../../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { set } from '../../../helpers/keyval';
 
@@ -10,7 +11,7 @@ import template from './settings.template';
 import type { OutlinedSelect } from '../../outlined-select/outlined-select.component';
 
 @customElement('settings-page')
-export class SettingsPage extends localize(PageViewElement) {
+export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;

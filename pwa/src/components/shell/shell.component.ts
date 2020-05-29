@@ -3,6 +3,8 @@ import {
   LitElement,
   property,
   PropertyValues,
+  query,
+  queryAll,
 } from 'lit-element';
 import {
   installMediaQueryWatcher,
@@ -18,7 +20,7 @@ import sharedStyles from '../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
-import type { TopAppBar } from '../top-app-bar/top-app-bar.component';
+import type { Drawer } from '@material/mwc-drawer';
 
 import firebase from 'firebase/app';
 
@@ -51,6 +53,12 @@ export class Shell extends localize(authorize(LitElement)) {
     window.location.search,
   ).has('registered');
 
+  @query('mwc-drawer')
+  private _drawer!: Drawer;
+
+  @queryAll('.page')
+  private _pages: { scrollTarget: HTMLElement }[] = [];
+
   protected readonly _topNavPages = [
     'home',
     'breviary',
@@ -81,6 +89,8 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
     if (changedProperties.size < 1 || changedProperties.has('_page')) {
       const pageTitle = `Ancillapp - ${
         (this.localeData as { [key: string]: string })?.[
@@ -112,35 +122,37 @@ export class Shell extends localize(authorize(LitElement)) {
     }
   }
 
-  protected firstUpdated() {
-    installRouter((location) => this._locationChanged(location));
+  protected firstUpdated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
 
-    const drawer = this.shadowRoot!.querySelector('mwc-drawer')!;
-    const topAppBar = this.shadowRoot!.querySelector<TopAppBar>('top-app-bar')!;
+    installRouter((location) => this._locationChanged(location));
 
     // TODO: discover why we need this instead of just using
     // @MDCDrawer:closed="${() => (this._drawerOpened = false)}"
     // in the template
-    drawer.addEventListener(
+    this._drawer.addEventListener(
       'MDCDrawer:closed',
       () => (this._drawerOpened = false),
     );
 
     const slotChangeListener = () => {
-      const drawerContent = drawer.shadowRoot!.querySelector<HTMLDivElement>(
-        '.mdc-drawer-app-content',
-      );
+      const drawerContent = this._drawer.shadowRoot!.querySelector<
+        HTMLDivElement
+      >('.mdc-drawer-app-content');
 
       if (!drawerContent) {
         return;
       }
 
-      drawer.shadowRoot!.removeEventListener('slotchange', slotChangeListener);
+      this._drawer.shadowRoot!.removeEventListener(
+        'slotchange',
+        slotChangeListener,
+      );
 
-      topAppBar.scrollTarget = drawerContent;
+      this._pages.forEach((page) => (page.scrollTarget = drawerContent));
     };
 
-    drawer.shadowRoot!.addEventListener('slotchange', slotChangeListener);
+    this._drawer.shadowRoot!.addEventListener('slotchange', slotChangeListener);
   }
 
   protected _observeForThemeChanges() {

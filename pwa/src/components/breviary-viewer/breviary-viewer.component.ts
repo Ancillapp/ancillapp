@@ -1,5 +1,6 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 import { refresh } from '../icons';
 
@@ -11,7 +12,7 @@ import '@material/mwc-icon-button';
 import { apiUrl } from '../../config/default.json';
 
 @customElement('breviary-viewer')
-export class BreviaryViewer extends localize(PageViewElement) {
+export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -35,7 +36,7 @@ export class BreviaryViewer extends localize(PageViewElement) {
       const [
         prayer,
         date = new Date().toISOString().slice(0, 10),
-      ] = `${value}`.split('/');
+      ] = value.split('/');
 
       this._breviaryPromise = fetch(
         `${apiUrl}/breviary?prayer=${prayer}&date=${date}`,

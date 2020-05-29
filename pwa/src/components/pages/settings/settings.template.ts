@@ -1,10 +1,24 @@
 import { html } from 'lit-element';
 import { SettingsPage } from './settings.component';
+import { menu, tau } from '../../icons';
 
+import '../../top-app-bar/top-app-bar.component';
 import '../../outlined-select/outlined-select.component';
 
 export default function template(this: SettingsPage) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${tau} ${this.localeData?.settings}
+      </div>
+    </top-app-bar>
+
     <section>
       <ul class="settings">
         <li>
@@ -19,7 +33,7 @@ export default function template(this: SettingsPage) {
             >
             <option value="light">${this.localeData?.light || 'Light'}</option>
             <option value="dark">${this.localeData?.dark || 'Dark'}</option>
-            <option value="oled">${this.localeData?.oled || 'OLED'}</option>
+            <option value="oled">OLED</option>
           </outlined-select>
         </li>
         <li>

@@ -3,14 +3,28 @@ import { nothing } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { PrayersList } from './prayers-list.component';
+import { menu, tau } from '../icons';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
+import '../top-app-bar/top-app-bar.component';
 import '../unobtrusive-notification/unobtrusive-notification.component';
 import '../loading-button/loading-button.component';
 
 export default function template(this: PrayersList) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${tau} ${this.localeData?.prayers}
+      </div>
+    </top-app-bar>
+
     <unobtrusive-notification ?hidden="${!this._needPrayersDownloadPermission}">
       ${this.localeData?.prayersDownload}
       <mwc-button

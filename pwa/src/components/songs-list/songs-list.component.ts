@@ -1,6 +1,7 @@
 import { customElement, property, query, PropertyValues } from 'lit-element';
 import { get, set } from '../../helpers/keyval';
 import { localize, SupportedLocale } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 import Fuse from 'fuse.js';
 import HyperList, { HyperListConfig } from 'hyperlist';
@@ -25,7 +26,7 @@ export interface SongSummary {
 const analytics = firebase.analytics();
 
 @customElement('songs-list')
-export class SongsList extends localize(PageViewElement) {
+export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;

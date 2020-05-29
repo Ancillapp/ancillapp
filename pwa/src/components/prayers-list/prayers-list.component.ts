@@ -1,6 +1,7 @@
 import { customElement, property } from 'lit-element';
 import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 
@@ -27,7 +28,7 @@ export interface PrayerSummary {
 const analytics = firebase.analytics();
 
 @customElement('prayers-list')
-export class PrayersList extends localize(PageViewElement) {
+export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;

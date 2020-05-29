@@ -1,5 +1,6 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 
@@ -28,7 +29,7 @@ export interface Prayer {
 }
 
 @customElement('prayer-viewer')
-export class PrayerViewer extends localize(PageViewElement) {
+export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;

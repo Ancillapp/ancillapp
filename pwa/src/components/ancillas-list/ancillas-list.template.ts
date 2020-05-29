@@ -2,11 +2,25 @@ import { html } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { load } from '../../helpers/directives';
 import { AncillasList } from './ancillas-list.component';
+import { menu, tau } from '../icons';
 
+import '../top-app-bar/top-app-bar.component';
 import '../unobtrusive-notification/unobtrusive-notification.component';
 
 export default function template(this: AncillasList) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${tau} ${this.localeData?.ancillas}
+      </div>
+    </top-app-bar>
+
     <unobtrusive-notification
       ?hidden="${!this._needUserNotificationsPermission}"
     >

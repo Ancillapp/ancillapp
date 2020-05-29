@@ -1,6 +1,7 @@
-import { customElement, property, query } from 'lit-element';
+import { customElement, property } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { localize } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 
 import sharedStyles from '../shared.styles';
@@ -10,7 +11,7 @@ import template from './breviary-index.template';
 import { apiUrl } from '../../config/default.json';
 
 @customElement('breviary-index')
-export class BreviaryIndex extends localize(PageViewElement) {
+export class BreviaryIndex extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;

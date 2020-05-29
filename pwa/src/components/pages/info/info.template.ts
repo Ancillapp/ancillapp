@@ -1,8 +1,23 @@
 import { html } from 'lit-element';
 import { InfoPage } from './info.component';
+import { tau, menu } from '../../icons';
+
+import '../../top-app-bar/top-app-bar.component';
 
 export default function template(this: InfoPage) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${tau} ${this.localeData?.info}
+      </div>
+    </top-app-bar>
+
     <section>
       <h2>Fraternità Francescana di Betania</h2>
       <p>

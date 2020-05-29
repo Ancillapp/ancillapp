@@ -1,21 +1,33 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
-import { HolyMassPage, Fraternity } from './holy-mass.component';
+import { HolyMassPage } from './holy-mass.component';
 import { load } from '../../../helpers/directives';
+import { remove, menu, tau } from '../../icons';
 
 import '@material/mwc-button';
 import '@material/mwc-dialog';
+import '../../top-app-bar/top-app-bar.component';
 import '../../outlined-select/outlined-select.component';
 import '../../loading-button/loading-button.component';
 import '../../date-input/date-input.component';
 
 import type { OutlinedSelect } from '../../outlined-select/outlined-select.component';
 
-import { remove } from '../../icons';
-
 export default function template(this: HolyMassPage) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${tau} ${this.localeData?.holyMass}
+      </div>
+    </top-app-bar>
+
     ${this.user?.emailVerified
       ? html`
           ${load(

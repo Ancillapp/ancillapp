@@ -8,12 +8,20 @@ import '../../prayers-list/prayers-list.component';
 export default function template(this: PrayersPage) {
   return html`${cache(
     this.subroute
-      ? html`<prayer-viewer
-          ?active="${this.active && this.subroute}"
-          prayer="${this.subroute}"
-        ></prayer-viewer>`
-      : html`<prayers-list
-          ?active="${this.active && !this.subroute}"
-        ></prayers-list>`,
+      ? html`
+          <prayer-viewer
+            ?active="${this.active && this.subroute}"
+            ?drawer-open="${this.drawerOpen}"
+            prayer="${this.subroute}"
+          ></prayer-viewer>
+        `
+      : html`
+          <prayers-list
+            ?active="${this.active && !this.subroute}"
+            ?drawer-open="${this.drawerOpen}"
+            @menutoggle="${(event: CustomEvent) =>
+              this.dispatchEvent(new CustomEvent(event.type, event))}"
+          ></prayers-list>
+        `,
   )}`;
 }
