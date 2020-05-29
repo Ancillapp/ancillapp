@@ -24,7 +24,7 @@
 }
 
 [hidden] {
-  display: none;
+  display: none !important;
 }
 
 section {
@@ -132,25 +132,26 @@ td {
   }
 }
 
-input,
-textarea {
-  resize: none;
-  border-radius: 0.5rem;
-  display: block;
-  background: var(--ancillapp-background-color);
-  color: var(--ancillapp-primary-text-color);
-  border: 0.025rem solid var(--ancillapp-divider-color);
-  box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14) inset,
-    0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12) inset,
-    0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2) inset;
-  font-size: 0.75rem;
-  margin: 0.5rem 0;
-  padding: 0.4rem;
+// TODO: decide whether we need to remove these styles or not
+// input,
+// textarea {
+//   resize: none;
+//   border-radius: 0.5rem;
+//   display: block;
+//   background: var(--ancillapp-background-color);
+//   color: var(--ancillapp-primary-text-color);
+//   border: 0.025rem solid var(--ancillapp-divider-color);
+//   box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14) inset,
+//     0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12) inset,
+//     0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2) inset;
+//   font-size: 0.75rem;
+//   margin: 0.5rem 0;
+//   padding: 0.4rem;
 
-  &:focus {
-    outline: none;
-  }
-}
+//   &:focus {
+//     outline: none;
+//   }
+// }
 
 form > * {
   width: 100%;
@@ -212,13 +213,16 @@ top-app-bar {
   [slot='title'] {
     display: flex;
     align-items: center;
-    font-family: var(--ancillapp-display-font);
-    font-style: italic;
 
     svg {
       height: 36px;
       padding: 0 10px 12px 0;
       fill: #fff;
     }
+  }
+
+  &.search-mode {
+    --ancillapp-top-app-bar-background: #fff;
+    --ancillapp-top-app-bar-color: #000;
   }
 }

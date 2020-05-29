@@ -1,12 +1,11 @@
 import { html } from 'lit-element';
 import { SongsList } from './songs-list.component';
-import { menu, tau } from '../icons';
+import { menu, tau, search, arrowBack, dialpad, notes } from '../icons';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
 import '@material/mwc-dialog';
 import '../top-app-bar/top-app-bar.component';
-import '../search-input/search-input.component';
 import '../unobtrusive-notification/unobtrusive-notification.component';
 import '../loading-button/loading-button.component';
 import '../autosized-fab/autosized-fab.component';
@@ -14,16 +13,51 @@ import '../outlined-select/outlined-select.component';
 
 export default function template(this: SongsList) {
   return html`
-    <top-app-bar ?drawer-open="${this.drawerOpen}">
-      <mwc-icon-button
-        slot="leadingIcon"
-        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
-      >
-        ${menu}
-      </mwc-icon-button>
-      <div slot="title">
+    <top-app-bar
+      class="${this._searching ? 'search-mode' : ''}"
+      ?drawer-open="${this.drawerOpen}"
+    >
+      ${this._searching
+        ? html`
+            <mwc-icon-button
+              slot="leadingIcon"
+              @click="${() => (this._searching = false)}"
+            >
+              ${arrowBack}
+            </mwc-icon-button>
+            <mwc-icon-button
+              id="keyboard-type-switch"
+              slot="trailingIcon"
+              @click="${this._handleKeyboardTypeSwitch}"
+            >
+              ${this._numericOnly ? dialpad : notes}
+            </mwc-icon-button>
+          `
+        : html`
+            <mwc-icon-button
+              slot="leadingIcon"
+              @click="${() =>
+                this.dispatchEvent(new CustomEvent('menutoggle'))}"
+            >
+              ${menu}
+            </mwc-icon-button>
+            <mwc-icon-button
+              slot="trailingIcon"
+              @click="${() => (this._searching = true)}"
+            >
+              ${search}
+            </mwc-icon-button>
+          `}
+      <div slot="title" ?hidden="${this._searching}">
         ${tau} ${this.localeData?.songs}
       </div>
+      <input
+        id="search-input"
+        slot="title"
+        ?hidden="${!this._searching}"
+        @keydown="${this._handleSearchKeyDown}"
+        @input="${this._handleSearch}"
+      />
     </top-app-bar>
 
     <unobtrusive-notification ?hidden="${!this._needSongsDownloadPermission}">
@@ -50,13 +84,6 @@ export default function template(this: SongsList) {
         dense
       ></loading-button>
     </unobtrusive-notification>
-
-    <div class="search-input-container">
-      <search-input
-        label="${this.localeData?.search}"
-        @search="${this._handleSearch}"
-      ></search-input>
-    </div>
 
     <div class="songs-container">
       <div class="loading-container">

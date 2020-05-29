@@ -60,15 +60,29 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   protected _downloadingSongs = false;
 
   @property({ type: Boolean })
+  protected _searching = false;
+
+  @property({ type: Boolean })
   protected _filtersDialogOpen = false;
+
+  @property({ type: Boolean })
+  protected _numericOnly = false;
 
   @query('.songs-container')
   private _songsContainer?: HTMLDivElement;
+
+  @query('#search-input')
+  private _searchInput?: HTMLInputElement;
 
   constructor() {
     super();
 
     this._prepareSongs();
+
+    get<boolean>('prefersNumericSearchKeyboard').then(
+      (prefersNumericSearchKeyboard) =>
+        (this._numericOnly = prefersNumericSearchKeyboard),
+    );
   }
 
   private async _prepareSongs() {
@@ -227,10 +241,53 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     }
   }
 
-  protected _handleSearch({ detail: searchTerm }: CustomEvent<string>) {
-    this._searchTerm = searchTerm;
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (
+      changedProperties.has('_searching') &&
+      this._searching &&
+      this._searchInput
+    ) {
+      this._searchInput.focus();
+      this._searchInput.setSelectionRange(-1, -1);
+    }
+  }
+
+  protected _handleSearchKeyDown(event: KeyboardEvent) {
+    if (event.code === 'Escape' || event.code === 'Enter') {
+      event.preventDefault();
+
+      if (event.code === 'Escape') {
+        (event.target as HTMLInputElement).value = '';
+        this._searchTerm = '';
+        this._searching = false;
+        this._refreshSongs();
+      }
+
+      const firstSong = this.shadowRoot!.querySelector<HTMLAnchorElement>(
+        '.songs-container > .songs-batch-container > a',
+      );
+
+      if (!firstSong) {
+        return;
+      }
+
+      firstSong.focus();
+    }
+  }
+
+  protected _handleSearch({ target }: InputEvent) {
+    this._searchTerm = (target as HTMLInputElement).value;
 
     this._refreshSongs();
+  }
+
+  protected async _handleKeyboardTypeSwitch() {
+    this._numericOnly = !this._numericOnly;
+    this._searchInput?.focus();
+    this._searchInput?.setSelectionRange(-1, -1);
+    await set('prefersNumericSearchKeyboard', this._numericOnly);
   }
 
   protected async _handleLanguageFilter({ target }: CustomEvent<null>) {

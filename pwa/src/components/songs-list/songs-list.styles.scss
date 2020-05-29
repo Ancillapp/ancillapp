@@ -7,17 +7,6 @@ unobtrusive-notification {
   margin: 1rem 1rem 0;
 }
 
-.search-input-container {
-  width: 100%;
-  text-align: center;
-  padding: 1rem;
-
-  search-input {
-    width: 100%;
-    max-width: 20rem;
-  }
-}
-
 .loading-container {
   flex: 1;
   display: flex;
@@ -141,4 +130,10 @@ unobtrusive-notification {
 mwc-dialog > div {
   width: 24rem;
   max-width: 100%;
+}
+
+@media (pointer: fine) {
+  #keyboard-type-switch {
+    display: none;
+  }
 }
