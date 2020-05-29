@@ -175,12 +175,19 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
             </div>
             <div class="title">${title}</div>
           `;
-          anchor.addEventListener('click', () => {
-            this._searchInput!.value = '';
-            this._searchTerm = '';
-            this._searching = false;
-            this._refreshSongs();
-          });
+          anchor.addEventListener(
+            'click',
+            ({ altKey, ctrlKey, metaKey, shiftKey }) => {
+              if (altKey || ctrlKey || metaKey || shiftKey) {
+                return;
+              }
+
+              this._searchInput!.value = '';
+              this._searchTerm = '';
+              this._searching = false;
+              this._refreshSongs();
+            },
+          );
 
           container.appendChild(anchor);
         });
