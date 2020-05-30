@@ -1,10 +1,14 @@
 {
   "mongodb": {
-    "uri": "<mongodb-uri>"
+    "uri": "<mongodb-uri>",
+    "name": "<mongodb-name>"
   },
   "webpush": {
     "subject": "<subject>",
     "publickey": "<public-key>",
     "privatekey": "<private-key>"
+  },
+  "ancillas": {
+    "bucket": "<ancillas-bucket>"
   }
 }

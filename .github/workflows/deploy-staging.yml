@@ -22,6 +22,8 @@ jobs:
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
-        run: npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting:staging,functions:staging
+        run: |
+          npx firebase use --add ancillapp-staging
+          npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting,functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

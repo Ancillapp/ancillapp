@@ -28,12 +28,14 @@ const unlink = (path: string) =>
     }),
   );
 
+const bucketName = functions.config().ancillas.bucket;
+
 export const processAncilla = functions
   .runWith({
     timeoutSeconds: 120,
     memory: '512MB',
   })
-  .storage.bucket('ancillas')
+  .storage.bucket(bucketName)
   .object()
   .onFinalize(async (object) => {
     if (!object.name || !/^raw\/.+\.pdf$/.test(object.name)) {
@@ -41,7 +43,7 @@ export const processAncilla = functions
       return;
     }
 
-    const bucket = firebase.storage().bucket('ancillas');
+    const bucket = firebase.storage().bucket(bucketName);
     const ancillaName = path.basename(object.name, '.pdf');
     const tmpFileIn = path.resolve(os.tmpdir(), `${ancillaName}_raw.pdf`);
     const tmpFileOut = path.resolve(os.tmpdir(), `${ancillaName}.pdf`);

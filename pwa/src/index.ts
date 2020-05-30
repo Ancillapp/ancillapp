@@ -4,18 +4,13 @@ import {
   supportedLocales,
   defaultLocale,
 } from './helpers/localize';
+import config from './config/default.json';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/analytics';
 
-firebase.initializeApp({
-  authDomain: 'ffb-ancillapp.firebaseapp.com',
-  apiKey: 'AIzaSyB-OWVImHaeQUfkfWqsTsXQ089oa3P4Dvk',
-  projectId: 'ffb-ancillapp',
-  appId: '1:890551951388:web:7fc7ea5791d55be747bfd9',
-  measurementId: 'G-LV1NNN9Y30',
-});
+firebase.initializeApp(config.firebase);
 
 // Feature detect which polyfill needs to be imported.
 const needsTemplate = (() => {
