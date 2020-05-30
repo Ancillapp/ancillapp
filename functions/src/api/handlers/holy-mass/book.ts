@@ -1,26 +1,20 @@
-import * as functions from 'firebase-functions';
-import { mongoDb, ObjectId } from './helpers/mongo';
-import { Fraternity, HolyMass } from './models/mongo';
+import { mongoDb, ObjectId } from '../../../helpers/mongo';
+import { Fraternity, HolyMass } from '../../../models/mongo';
 
-export const bookHolyMass = async ({
-  body,
-  userId,
-  fraternityId,
-  date,
+import type { RequestHandler } from 'express';
+
+export const bookHolyMass: RequestHandler = async (
+  { body, params: { fraternityId, date } },
   res,
-}: {
-  body?: Record<string, any>;
-  userId: string;
-  fraternityId: string;
-  date: string;
-  res: functions.Response<any>;
-}) => {
+) => {
   const seats = body?.seats ?? 1;
 
   if (typeof seats !== 'number' || seats < 1 || seats > 5) {
     res.status(400).json({ code: 'INVALID_SEATS' });
     return;
   }
+
+  const { uid: userId } = res.locals.user;
 
   const db = await mongoDb;
   const holyMassesCollection = db.collection<HolyMass>('holyMasses');

@@ -124,7 +124,7 @@ export class HolyMassPage extends localize(
       this._bookedHolyMassesPromise = this.user
         .getIdToken()
         .then((token) =>
-          fetch(`${apiUrl}/holy-masses`, {
+          fetch(`${apiUrl}/holy-masses?v=${Date.now()}`, {
             headers: {
               authorization: `Bearer ${token}`,
             },

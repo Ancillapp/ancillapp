@@ -1,19 +1,15 @@
-import * as functions from 'firebase-functions';
-import { mongoDb } from './helpers/mongo';
+import { mongoDb } from '../../../helpers/mongo';
 
-export const getAncilla = functions.https.onRequest(async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+import type { RequestHandler } from 'express';
+
+export const getAncilla: RequestHandler = async (
+  { params: { code: inputCode } },
+  res,
+) => {
   res.set(
     'Cache-Control',
     'public, max-age=1800, s-maxage=3600, stale-while-revalidate=3600',
   );
-
-  const inputCode = req.path.match(/\/api\/ancillas\/([a-z\d_-]+)/i)?.[1];
-
-  if (!inputCode) {
-    res.status(404).send();
-    return;
-  }
 
   const db = await mongoDb;
   const ancillasCollection = db.collection('ancillas');
@@ -52,4 +48,4 @@ export const getAncilla = functions.https.onRequest(async (req, res) => {
       code,
     )}.jpg?alt=media`,
   });
-});
+};

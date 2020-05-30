@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
-import { mongoDb } from './helpers/mongo';
-import { sendNotification } from './helpers/notifications';
+import { mongoDb } from '../../../helpers/mongo';
+import { sendNotification } from '../../../helpers/notifications';
 
 export const subscribeForNotifications = functions.https.onRequest(
   async ({ method, body }, res) => {

@@ -1,18 +1,14 @@
-import * as functions from 'firebase-functions';
-import { mongoDb, ObjectId } from './helpers/mongo';
-import { HolyMass } from './models/mongo';
+import { mongoDb, ObjectId } from '../../../helpers/mongo';
+import { HolyMass } from '../../../models/mongo';
 
-export const cancelHolyMassBooking = async ({
-  userId,
-  fraternityId,
-  date,
+import type { RequestHandler } from 'express';
+
+export const cancelHolyMassBooking: RequestHandler = async (
+  { params: { fraternityId, date } },
   res,
-}: {
-  userId: string;
-  fraternityId: string;
-  date: string;
-  res: functions.Response<any>;
-}) => {
+) => {
+  const { uid: userId } = res.locals.user;
+
   const db = await mongoDb;
   const holyMassesCollection = db.collection<HolyMass>('holyMasses');
 

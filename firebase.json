@@ -4,56 +4,8 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
-        "source": "/api/songs",
-        "function": "getSongs"
-      },
-      {
-        "source": "/api/songs/*",
-        "function": "getSong"
-      },
-      {
-        "source": "/api/prayers",
-        "function": "getPrayers"
-      },
-      {
-        "source": "/api/prayers/*",
-        "function": "getPrayer"
-      },
-      {
-        "source": "/api/ancillas",
-        "function": "getAncillas"
-      },
-      {
-        "source": "/api/ancillas/*",
-        "function": "getAncilla"
-      },
-      {
-        "source": "/api/breviary",
-        "function": "getBreviary"
-      },
-      {
-        "source": "/api/holy-masses",
-        "function": "getHolyMasses"
-      },
-      {
-        "source": "/api/fraternities",
-        "function": "getFraternities"
-      },
-      {
-        "source": "/api/fraternities/*/holy-masses/*",
-        "function": "handleHolyMassBooking"
-      },
-      {
-        "source": "/api/fraternities/*/holy-masses/*/seats",
-        "function": "getHolyMassesSeats"
-      },
-      {
-        "source": "/api/notifications/subscribe",
-        "function": "subscribeForNotifications"
-      },
-      {
         "source": "**",
-        "destination": "/index.html"
+        "function": "api"
       }
     ],
     "headers": [
@@ -76,15 +28,6 @@
           {
             "key": "Cache-Control",
             "value": "no-cache"
-          }
-        ]
-      },
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=86400, stale-while-revalidate=86400"
           }
         ]
       }

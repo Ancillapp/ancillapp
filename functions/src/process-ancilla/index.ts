@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as gs from 'gs';
 import { spawn } from 'child-process-promise';
 import { unlink as unlinkCb } from 'fs';
-import { firebase } from './helpers/firebase';
+import { firebase } from '../helpers/firebase';
 
 const execGs = (gsInstance: any) =>
   new Promise((resolve, reject) =>

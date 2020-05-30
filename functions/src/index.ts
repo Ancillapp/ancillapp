@@ -1,13 +1,2 @@
+export { api } from './api';
 export { processAncilla } from './process-ancilla';
-export { getAncillas } from './get-ancillas';
-export { getAncilla } from './get-ancilla';
-export { getSongs } from './get-songs';
-export { getSong } from './get-song';
-export { getPrayers } from './get-prayers';
-export { getPrayer } from './get-prayer';
-export { getBreviary } from './get-breviary';
-export { subscribeForNotifications } from './subscribe-for-notifications';
-export { getHolyMasses } from './get-holy-masses';
-export { getFraternities } from './get-fraternities';
-export { getHolyMassesSeats } from './get-holy-masses-seats';
-export { handleHolyMassBooking } from './handle-holy-mass-booking';
