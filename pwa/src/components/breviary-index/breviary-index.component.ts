@@ -33,10 +33,6 @@ export class BreviaryIndex extends localize(withTopAppBar(PageViewElement)) {
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
-    if (changedProperties.has('active')) {
-      console.log('changed child active: ', this.active);
-    }
-
     if (changedProperties.has('_date')) {
       if (!_titlesPromisesCache.has(this._date)) {
         _titlesPromisesCache.set(
