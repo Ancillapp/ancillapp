@@ -1,4 +1,5 @@
-import { customElement, property } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -22,6 +23,10 @@ export interface Ancilla {
   link: string;
   thumbnail: string;
 }
+
+import firebase from 'firebase/app';
+
+const analytics = firebase.analytics();
 
 @customElement('ancillas-list')
 export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
@@ -47,6 +52,26 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
         this._needUserNotificationsPermission = true;
       }
     });
+  }
+
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('active') && this.active) {
+      const pageTitle = `Ancillapp - ${this.localeData.ancillas}`;
+
+      updateMetadata({
+        title: pageTitle,
+        description: this.localeData.ancillasDescription,
+      });
+
+      analytics.logEvent('page_view', {
+        page_title: pageTitle,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        offline: false,
+      });
+    }
   }
 
   protected async _updateNotificationsPermission(
