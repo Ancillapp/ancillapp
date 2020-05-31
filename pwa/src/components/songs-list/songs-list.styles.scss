@@ -1,10 +1,9 @@
 :host {
-  display: flex;
   flex-direction: column;
 }
 
 unobtrusive-notification {
-  margin: 1rem 1rem 0;
+  margin: 2rem 2rem 0;
 }
 
 .loading-container {
@@ -22,6 +21,7 @@ unobtrusive-notification {
   width: 100%;
   max-width: 70rem;
   margin: 0 auto;
+  padding: 1rem;
 }
 
 .songs-batch-container {
