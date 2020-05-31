@@ -1,5 +1,4 @@
 import { html } from 'lit-element';
-import { cache } from 'lit-html/directives/cache';
 import { BreviaryPage } from './breviary.component';
 
 import '../../breviary-viewer/breviary-viewer.component';
