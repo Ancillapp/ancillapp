@@ -31,7 +31,6 @@ const unlink = (path: string) =>
 const bucketName = functions.config().ancillas.bucket;
 
 export const processAncilla = functions
-  .region('europe-west3')
   .runWith({
     timeoutSeconds: 120,
     memory: '512MB',
