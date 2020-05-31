@@ -48,4 +48,4 @@ app.get(
   getHolyMassesSeats,
 );
 
-export const api = functions.https.onRequest(app);
+export const api = functions.region('europe-west3').https.onRequest(app);
