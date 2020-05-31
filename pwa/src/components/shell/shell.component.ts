@@ -6,11 +6,7 @@ import {
   query,
   queryAll,
 } from 'lit-element';
-import {
-  installMediaQueryWatcher,
-  installRouter,
-  updateMetadata,
-} from 'pwa-helpers';
+import { installMediaQueryWatcher, installRouter } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
@@ -91,29 +87,6 @@ export class Shell extends localize(authorize(LitElement)) {
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
-    if (changedProperties.size < 1 || changedProperties.has('_page')) {
-      const pageTitle = `Ancillapp - ${
-        (this.localeData as { [key: string]: string })?.[
-          this._page.replace(/-([a-z])/g, (_, letter) =>
-            letter.toUpperCase(),
-          ) || 'home'
-        ] ||
-        `${this._page?.[0]?.toUpperCase() || ''}${
-          this._page
-            ?.slice(1)
-            .replace(/-([a-z])/g, (_, letter) => ` ${letter.toUpperCase()}`) ||
-          ''
-        }` ||
-        'Home'
-      }`;
-
-      updateMetadata({
-        title: pageTitle,
-        description: pageTitle,
-        // This object also takes an image property, that points to an img src.
-      });
-    }
-
     if (changedProperties.has('user')) {
       if (this.user && this._page === 'login') {
         window.history.replaceState({}, '', '/');
@@ -192,26 +165,6 @@ export class Shell extends localize(authorize(LitElement)) {
     await this.setLocale(locale as SupportedLocale);
 
     this._loadPage(locale as SupportedLocale, page, subroutes.join('/'));
-
-    const pageTitle = `Ancillapp - ${
-      (this.localeData as { [key: string]: string })?.[
-        this._page.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()) ||
-          'home'
-      ] ||
-      `${this._page?.[0]?.toUpperCase() || ''}${
-        this._page
-          ?.slice(1)
-          .replace(/-([a-z])/g, (_, letter) => ` ${letter.toUpperCase()}`) || ''
-      }` ||
-      'Home'
-    }`;
-
-    analytics.logEvent('page_view', {
-      page_title: pageTitle,
-      page_location: window.location.href,
-      page_path: window.location.pathname,
-      offline: false,
-    });
 
     // Close the drawer - in case the *path* change came from a link in the drawer.
     if (!this._narrow) {
