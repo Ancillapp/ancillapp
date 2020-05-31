@@ -60,6 +60,28 @@ if (
   polyfills = ['sd-ce-pf'];
 }
 
+const getPreferredLocale = async () => {
+  const pathLocale = window.location.pathname.slice(1, 3) as SupportedLocale;
+
+  if (supportedLocales.includes(pathLocale)) {
+    return pathLocale;
+  }
+
+  const storedLocale = await get<SupportedLocale>('locale');
+
+  if (supportedLocales.includes(storedLocale)) {
+    return storedLocale;
+  }
+
+  const userLocale = navigator.language.slice(0, 2) as SupportedLocale;
+
+  if (supportedLocales.includes(userLocale)) {
+    return userLocale;
+  }
+
+  return defaultLocale;
+};
+
 // Note that in this case we need to append the .js extension, otherwise
 // Webpack will try to load the .js.map files into the bundle too.
 (polyfills.length
@@ -68,18 +90,7 @@ if (
 )
   .then(() =>
     Promise.all([
-      get<SupportedLocale>('locale').then((storedLocale) => {
-        const userLocale = navigator.language.slice(0, 2);
-
-        const locale =
-          storedLocale ||
-          (supportedLocales.includes(userLocale as SupportedLocale)
-            ? userLocale
-            : defaultLocale);
-
-        // Prefetch the needed locale file
-        return import(`./locales/${locale}.json`);
-      }),
+      getPreferredLocale().then((locale) => import(`./locales/${locale}.json`)),
       get<string>('theme').then(
         (storedTheme) =>
           (document.body.dataset.theme = storedTheme || 'system'),
