@@ -1,4 +1,5 @@
-import { customElement, property } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -87,6 +88,26 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
                 : 1,
           );
       }
+    }
+  }
+
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('active') && this.active) {
+      const pageTitle = `Ancillapp - ${this.localeData.prayers}`;
+
+      updateMetadata({
+        title: pageTitle,
+        description: this.localeData.prayersDescription,
+      });
+
+      analytics.logEvent('page_view', {
+        page_title: pageTitle,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        offline: false,
+      });
     }
   }
 

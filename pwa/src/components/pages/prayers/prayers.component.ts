@@ -1,15 +1,22 @@
-import { customElement, property, PropertyValues } from 'lit-element';
-import { PageViewElement } from '../page-view-element';
+import {
+  LitElement,
+  customElement,
+  property,
+  PropertyValues,
+} from 'lit-element';
 
 import sharedStyles from '../../shared.styles';
 import styles from './prayers.styles';
 import template from './prayers.template';
 
 @customElement('prayers-page')
-export class PrayersPage extends PageViewElement {
+export class PrayersPage extends LitElement {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
+
+  @property({ type: Boolean, reflect: true })
+  public active = false;
 
   @property({ type: 'String' })
   public subroute?: string;

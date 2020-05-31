@@ -124,7 +124,7 @@ export default function template(this: Shell) {
             subroute="${this._subroute}"
           ></songs-page>
           <prayers-page
-            class="page padded"
+            class="page"
             ?active="${this._page === 'prayers'}"
             ?drawer-open="${this._narrow && this._drawerOpened}"
             @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
