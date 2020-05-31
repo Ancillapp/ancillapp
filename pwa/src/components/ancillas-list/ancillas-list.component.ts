@@ -33,7 +33,7 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
   protected _needUserNotificationsPermission?: boolean;
 
   protected _ancillas: Promise<Ancilla[]> = fetch(
-    `${apiUrl}/ancillas?nocache`,
+    `${apiUrl}/ancillas`,
   ).then((res) => res.json());
 
   constructor() {
