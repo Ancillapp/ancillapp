@@ -1,4 +1,5 @@
 import { customElement, property, query, PropertyValues } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { get, set } from '../../helpers/keyval';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -265,6 +266,22 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     ) {
       this._searchInput.focus();
       this._searchInput.setSelectionRange(-1, -1);
+    }
+
+    if (changedProperties.has('active') && this.active) {
+      const pageTitle = `Ancillapp - ${this.localeData.songs}`;
+
+      updateMetadata({
+        title: pageTitle,
+        description: this.localeData.songsDescription,
+      });
+
+      analytics.logEvent('page_view', {
+        page_title: pageTitle,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        offline: false,
+      });
     }
   }
 
