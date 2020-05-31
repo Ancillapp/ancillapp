@@ -37,6 +37,10 @@ export class TopAppBar extends LitElement {
     this.unregisterScrollListener();
     const old = this.scrollTarget;
     this._scrollTarget = value;
+    this._scrollFromTop = 0;
+    this._scrolled = false;
+    this._ticking = false;
+    this._latestPos = value.scrollTop;
     this.requestUpdate('scrollTarget', old);
     this.registerScrollListener();
   }
