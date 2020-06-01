@@ -73,19 +73,31 @@ export default {
   noHolyMassesAvailable: 'Nessuna Santa Messa disponibile per questo giorno.',
   homeDescription:
     'Prega le preghiere giornaliere, canta i canti, e sfoglia gli Ancilla Domini della Fraternità Francescana di Betania.',
-  breviaryDescription: '',
-  breviaryInvitatoryDescription: '',
-  breviaryMatinsDescription: '',
-  breviaryLaudsDescription: '',
-  breviaryTerceDescription: '',
-  breviarySextDescription: '',
-  breviaryNoneDescription: '',
-  breviaryVespersDescription: '',
-  breviaryComplineDescription: '',
-  songsDescription: '',
-  songDescription: '',
-  prayersDescription: '',
-  prayerDescription: '',
+  breviaryDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  breviaryInvitatoryDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  breviaryMatinsDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  breviaryLaudsDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  breviaryTerceDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  breviarySextDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  breviaryNoneDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  breviaryVespersDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  breviaryComplineDescription:
+    'Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.',
+  songsDescription:
+    'Sfoglia il librone dei canti usato della Fraternità Francescana di Betania.',
+  songDescription: (songName: string) =>
+    `Canta il canto "${songName}" come viene cantato dalla Fraternità Francescana di Betania.`,
+  prayersDescription:
+    'Prega le preghiere giornaliere pregate dalla Fraternità Francescana di Betania',
+  prayerDescription: (prayerName: string) => 'Prega la ',
   ancillasDescription: '',
   ancillaDescription: '',
   holyMassDescription: '',

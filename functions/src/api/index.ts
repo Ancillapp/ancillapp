@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as express from 'express';
 import * as cors from 'cors';
+// import * as path from 'path';
 
 import { ssr } from './middlewares/ssr';
 
@@ -47,5 +48,12 @@ app.get(
   '/api/fraternities/:fraternityId/holy-masses/:date/seats',
   getHolyMassesSeats,
 );
+// app.get('*', (req, res, next) => {
+//   if (req.path !== '/index.html' && req.path.includes('.')) {
+//     return next();
+//   }
+
+//   res.sendFile(path.resolve(__dirname, 'index.html'));
+// });
 
 export const api = functions.https.onRequest(app);
