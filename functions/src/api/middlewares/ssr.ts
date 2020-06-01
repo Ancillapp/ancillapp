@@ -4,6 +4,7 @@ import type { RequestHandler } from 'express';
 
 const rendertronMiddleware = makeMiddleware({
   proxyUrl: 'https://render-tron.appspot.com/render',
+  injectShadyDom: true,
 });
 
 export const ssr: RequestHandler = (req, res, next) => {
