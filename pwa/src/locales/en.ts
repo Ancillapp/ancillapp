@@ -73,23 +73,40 @@ export default {
   noHolyMassesAvailable: 'No Holy Masses available for this day.',
   homeDescription:
     'Pray the daily prayers, sing the songs, and read the Ancilla Dominis of the Franciscan Fraternity of Bethany.',
-  breviaryDescription: '',
-  breviaryInvitatoryDescription: '',
-  breviaryMatinsDescription: '',
-  breviaryLaudsDescription: '',
-  breviaryTerceDescription: '',
-  breviarySextDescription: '',
-  breviaryNoneDescription: '',
-  breviaryVespersDescription: '',
-  breviaryComplineDescription: '',
-  songsDescription: '',
-  songDescription: () => '',
-  prayersDescription: '',
-  prayerDescription: () => '',
-  ancillasDescription: '',
-  ancillaDescription: () => '',
-  holyMassDescription: '',
-  loginDescription: '',
+  breviaryDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  breviaryInvitatoryDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  breviaryMatinsDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  breviaryLaudsDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  breviaryTerceDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  breviarySextDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  breviaryNoneDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  breviaryVespersDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  breviaryComplineDescription:
+    'Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany.',
+  songsDescription:
+    'Browse the songs booklet used by the Franciscan Fraternity of Bethany.',
+  songDescription: (songName: string) =>
+    `Sing the song "${songName}" as it is sung by the Franciscan Fraternity of Bethany.`,
+  prayersDescription:
+    'Pray the daily prayers prayed by the Franciscan Fraternity of Bethany.',
+  prayerDescription: (prayerName: string) =>
+    `Pray "${prayerName}" together with the Franciscan Fraternity of Bethany.`,
+  ancillasDescription:
+    'Browse the Ancilla Domini of the Franciscan Fraternity of Bethany.',
+  ancillaDescription: (ancillaName: string) =>
+    `Browse the Ancilla Domini "${ancillaName}" of the Franciscan Fraternity of Bethany.`,
+  holyMassDescription:
+    'Book a place for the Holy Mass in one of the homes of the Franciscan Fraternity of Bethany.',
+  loginDescription:
+    'Log in to take advantage of the booking service for the Holy Masses of the Franciscan Fraternity of Bethany.',
   settingsDescription:
     'Customize Ancillapp by changing its theme or its language.',
   infoDescription:
