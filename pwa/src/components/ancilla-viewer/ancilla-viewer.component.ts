@@ -1,5 +1,6 @@
 import { customElement, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
+import { localizedPages } from '../../helpers/localization';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 
@@ -41,17 +42,21 @@ export class AncillaViewer extends localize(withTopAppBar(PageViewElement)) {
     super.attributeChangedCallback(name, old, value);
 
     if (this.active && name === 'ancilla' && value && old !== value) {
-      this._ancillaPromise = fetch(`${apiUrl}/ancillas/${value}`).then((res) =>
-        res.json(),
-      );
+      const ancillaCode = Object.values(localizedPages.latest).includes(value)
+        ? 'latest'
+        : value;
+
+      this._ancillaPromise = fetch(
+        `${apiUrl}/ancillas/${ancillaCode}`,
+      ).then((res) => res.json());
 
       const { code } = await this._ancillaPromise;
 
-      if (value !== code) {
+      if (ancillaCode !== code) {
         window.history.replaceState(
           {},
           '',
-          this.localizeHref('ancilllas', code),
+          this.localizeHref('ancillas', code),
         );
       }
     }
