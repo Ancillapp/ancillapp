@@ -1,4 +1,4 @@
-import { customElement, property } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -33,6 +33,8 @@ export interface Prayer {
   };
 }
 
+const _prayersStatusesCache = new Map<string, APIResponse<Prayer>>();
+
 @customElement('prayer-viewer')
 export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
@@ -50,48 +52,47 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
 
   private _previousPageTitle?: string;
 
-  private async _fetchPrayer(slug: string) {
-    for await (const status of cacheAndNetwork<Prayer>(
-      `${apiUrl}/prayers/${slug}`,
-    )) {
-      this._prayerStatus = status;
+  protected async updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
 
-      if (status.data) {
-        const prayerTitle =
-          status.data.title[this.locale] || status.data.title.la!;
+    if (changedProperties.has('prayer') && this.prayer) {
+      if (!_prayersStatusesCache.has(this.prayer)) {
+        for await (const status of cacheAndNetwork<Prayer>(
+          `${apiUrl}/prayers/${this.prayer}`,
+        )) {
+          this._prayerStatus = status;
 
-        const pageTitle = `Ancillapp - ${this.localeData.prayers} - ${prayerTitle}`;
+          if (status.data) {
+            _prayersStatusesCache.set(this.prayer, status);
 
-        if (pageTitle === this._previousPageTitle) {
-          return;
+            const prayerTitle =
+              status.data.title[this.locale] || status.data.title.la!;
+
+            const pageTitle = `Ancillapp - ${this.localeData.prayers} - ${prayerTitle}`;
+
+            if (pageTitle === this._previousPageTitle) {
+              return;
+            }
+
+            this._previousPageTitle = pageTitle;
+
+            updateMetadata({
+              title: pageTitle,
+              description: this.localeData.prayerDescription(prayerTitle),
+            });
+
+            analytics.logEvent('page_view', {
+              page_title: pageTitle,
+              page_location: window.location.href,
+              page_path: window.location.pathname,
+              offline: false,
+            });
+          }
         }
-
-        this._previousPageTitle = pageTitle;
-
-        updateMetadata({
-          title: pageTitle,
-          description: this.localeData.prayerDescription(prayerTitle),
-        });
-
-        analytics.logEvent('page_view', {
-          page_title: pageTitle,
-          page_location: window.location.href,
-          page_path: window.location.pathname,
-          offline: false,
-        });
+      } else {
+        this._prayerStatus = _prayersStatusesCache.get(this.prayer)!;
       }
     }
-  }
-
-  attributeChangedCallback(
-    name: string,
-    old: string | null,
-    value: string | null,
-  ) {
-    if (this.active && name === 'prayer' && value && old !== value) {
-      this._fetchPrayer(value);
-    }
-    super.attributeChangedCallback(name, old, value);
   }
 }
 

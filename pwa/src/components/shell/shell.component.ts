@@ -201,7 +201,11 @@ export class Shell extends localize(authorize(LitElement)) {
         }
         break;
       case 'prayers':
-        import('../pages/prayers/prayers.component');
+        if (subroute) {
+          import('../prayer-viewer/prayer-viewer.component');
+        } else {
+          import('../prayers-list/prayers-list.component');
+        }
         break;
       case 'ancillas':
         import('../pages/ancillas/ancillas.component');
