@@ -1,4 +1,5 @@
 import { customElement, property } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
@@ -9,6 +10,10 @@ import styles from './song-viewer.styles';
 import template from './song-viewer.template';
 
 import { apiUrl } from '../../config/default.json';
+
+import firebase from 'firebase/app';
+
+const analytics = firebase.analytics();
 
 export interface Song {
   number: string;
@@ -31,11 +36,37 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
     refreshing: false,
   };
 
+  private _previousPageTitle?: string;
+
   private async _fetchSong(number: string) {
     for await (const status of cacheAndNetwork<Song>(
       `${apiUrl}/songs/${/^\d/.test(number) ? `IT${number}` : number}`,
     )) {
       this._songStatus = status;
+
+      if (status.data) {
+        const pageTitle = `Ancillapp - ${
+          this.localeData.songs
+        } - ${status.data.number.slice(2)}. ${status.data.title}`;
+
+        if (pageTitle === this._previousPageTitle) {
+          return;
+        }
+
+        this._previousPageTitle = pageTitle;
+
+        updateMetadata({
+          title: pageTitle,
+          description: this.localeData.songDescription(status.data.title),
+        });
+
+        analytics.logEvent('page_view', {
+          page_title: pageTitle,
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          offline: false,
+        });
+      }
     }
   }
 
