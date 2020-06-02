@@ -109,13 +109,18 @@ export default function template(this: Shell) {
             ?drawer-open="${this._narrow && this._drawerOpened}"
             @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
           ></home-page>
-          <breviary-page
+          <breviary-index
             class="page padded"
-            ?active="${this._page === 'breviary'}"
+            ?active="${this._page === 'breviary' && !this._subroute}"
             ?drawer-open="${this._narrow && this._drawerOpened}"
             @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
-            subroute="${this._subroute}"
-          ></breviary-page>
+          ></breviary-index>
+          <breviary-viewer
+            class="page padded"
+            ?active="${this._page === 'breviary' && this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            query="${this._subroute}"
+          ></breviary-viewer>
           <songs-page
             class="page"
             ?active="${this._page === 'songs'}"

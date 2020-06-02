@@ -16,6 +16,8 @@ import firebase from 'firebase/app';
 
 const analytics = firebase.analytics();
 
+const _prayersPromisesCache = new Map<string, Promise<string>>();
+
 @customElement('breviary-viewer')
 export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
@@ -35,37 +37,22 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
-    if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localeData.breviary}`;
+    if (changedProperties.has('query') && this.query) {
+      if (!_prayersPromisesCache.has(this.query)) {
+        const [
+          prayer,
+          date = new Date().toISOString().slice(0, 10),
+        ] = this.query.split('/');
 
-      updateMetadata({
-        title: pageTitle,
-        description: this.localeData.breviaryDescription,
-      });
+        _prayersPromisesCache.set(
+          this.query,
+          fetch(
+            `${apiUrl}/breviary?prayer=${prayer}&date=${date}`,
+          ).then((res) => res.text()),
+        );
+      }
 
-      analytics.logEvent('page_view', {
-        page_title: pageTitle,
-        page_location: window.location.href,
-        page_path: window.location.pathname,
-        offline: false,
-      });
-    }
-  }
-
-  attributeChangedCallback(
-    name: string,
-    old: string | null,
-    value: string | null,
-  ) {
-    if (this.active && name === 'query' && value && old !== value) {
-      const [
-        prayer,
-        date = new Date().toISOString().slice(0, 10),
-      ] = value.split('/');
-
-      this._breviaryPromise = fetch(
-        `${apiUrl}/breviary?prayer=${prayer}&date=${date}`,
-      ).then((res) => res.text());
+      this._breviaryPromise = _prayersPromisesCache.get(this.query)!;
 
       this._breviaryPromise
         .then(() => this.updateComplete)
@@ -102,7 +89,22 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
           this._alternatives[this._currentAlternative].classList.add('active');
         });
     }
-    super.attributeChangedCallback(name, old, value);
+
+    if (changedProperties.has('active') && this.active) {
+      const pageTitle = `Ancillapp - ${this.localeData.breviary}`;
+
+      updateMetadata({
+        title: pageTitle,
+        description: this.localeData.breviaryDescription,
+      });
+
+      analytics.logEvent('page_view', {
+        page_title: pageTitle,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        offline: false,
+      });
+    }
   }
 
   _handleAlternativeChange() {

@@ -182,7 +182,40 @@ export class Shell extends localize(authorize(LitElement)) {
       pageId = 'home';
     }
 
-    import(`../pages/${pageId}/${pageId}.component`);
+    switch (pageId) {
+      case 'home':
+        import('../pages/home/home.component');
+        break;
+      case 'breviary':
+        if (subroute) {
+          import('../breviary-viewer/breviary-viewer.component');
+        } else {
+          import('../breviary-index/breviary-index.component');
+        }
+        break;
+      case 'songs':
+        import('../pages/songs/songs.component');
+        break;
+      case 'prayers':
+        import('../pages/prayers/prayers.component');
+        break;
+      case 'ancillas':
+        import('../pages/ancillas/ancillas.component');
+        break;
+      case 'holy-mass':
+        import('../pages/holy-mass/holy-mass.component');
+        break;
+      case 'login':
+        import('../pages/login/login.component');
+        break;
+      case 'settings':
+        import('../pages/settings/settings.component');
+        break;
+      case 'info':
+        import('../pages/info/info.component');
+        break;
+    }
+
     this._page = pageId;
     this._subroute = subroute;
   }
