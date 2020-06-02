@@ -34,6 +34,38 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
 
   private _currentAlternative = 0;
 
+  protected firstUpdated(changedProperties: PropertyValues) {
+    super.firstUpdated(changedProperties);
+
+    const observer = new MutationObserver(() => {
+      this._alternatives = [
+        ...this.shadowRoot!.querySelectorAll<HTMLDivElement>('.alternative'),
+      ];
+
+      if (this._alternatives.length < 2) {
+        return;
+      }
+
+      this._alternatives.forEach((alternative) => {
+        const heading = alternative.querySelector<HTMLHeadingElement>('h3')!;
+
+        const header = document.createElement('div');
+        header.className = 'header';
+        header.appendChild(heading);
+
+        const button = document.createElement('mwc-icon-button');
+        button.innerHTML = refresh.getHTML();
+        button.addEventListener('click', () => this._handleAlternativeChange());
+        header.appendChild(button);
+
+        alternative.insertBefore(header, alternative.firstChild);
+      });
+      this._currentAlternative = 0;
+      this._alternatives[this._currentAlternative].classList.add('active');
+    });
+    observer.observe(this.shadowRoot!, { childList: true });
+  }
+
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
@@ -53,41 +85,6 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
       }
 
       this._breviaryPromise = _prayersPromisesCache.get(this.query)!;
-
-      this._breviaryPromise
-        .then(() => this.updateComplete)
-        .then(() => {
-          this._alternatives = [
-            ...this.shadowRoot!.querySelectorAll<HTMLDivElement>(
-              '.alternative',
-            ),
-          ];
-
-          if (this._alternatives.length < 2) {
-            return;
-          }
-
-          this._alternatives.forEach((alternative) => {
-            const heading = alternative.querySelector<HTMLHeadingElement>(
-              'h3',
-            )!;
-
-            const header = document.createElement('div');
-            header.className = 'header';
-            header.appendChild(heading);
-
-            const button = document.createElement('mwc-icon-button');
-            button.innerHTML = refresh.getHTML();
-            button.addEventListener('click', () =>
-              this._handleAlternativeChange(),
-            );
-            header.appendChild(button);
-
-            alternative.insertBefore(header, alternative.firstChild);
-          });
-          this._currentAlternative = 0;
-          this._alternatives[this._currentAlternative].classList.add('active');
-        });
     }
 
     if (changedProperties.has('active') && this.active) {
