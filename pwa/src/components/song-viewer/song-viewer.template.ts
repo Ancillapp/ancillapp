@@ -1,12 +1,28 @@
 import { html } from 'lit-element';
 import { SongViewer } from './song-viewer.component';
 import { compile } from '../../helpers/directives';
+import { arrowBack, tau } from '../icons';
 
 import '@material/mwc-snackbar';
+import '../top-app-bar/top-app-bar.component';
 import '../share-fab/share-fab.component';
 
 export default function template(this: SongViewer) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <a href="${this.localizeHref('songs')}" slot="leadingIcon">
+        <mwc-icon-button>${arrowBack}</mwc-icon-button>
+      </a>
+      <div slot="title">
+        ${tau}
+        ${this._songStatus.data
+          ? `${this._songStatus.data.number.slice(2)}. ${
+              this._songStatus.data.title
+            }`
+          : this.localeData?.loading}
+      </div>
+    </top-app-bar>
+
     ${this._songStatus.loading || !this._songStatus.data
       ? html`
           <div class="loading-container">
@@ -15,10 +31,6 @@ export default function template(this: SongViewer) {
         `
       : html`
           <section>
-            <h1>
-              ${this._songStatus.data.number.slice(2)}.
-              ${this._songStatus.data.title}
-            </h1>
             ${compile(this._songStatus.data.content)}
           </section>
 

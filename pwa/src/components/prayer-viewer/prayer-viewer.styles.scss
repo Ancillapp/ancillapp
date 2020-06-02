@@ -1,13 +1,5 @@
 :host {
-  display: flex;
-}
-
-h1 {
-  font-family: var(--ancillapp-display-font);
-  border-bottom: 1px solid var(--ancillapp-disabled-text-color);
-  font-size: 1.75rem;
-  padding-bottom: 0.5rem;
-  margin: 0 0 1.5rem;
+  padding: 1.5rem;
 }
 
 p {

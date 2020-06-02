@@ -19,6 +19,13 @@
     <meta name="msapplication-config" content="/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#567791">
 
+    <meta property="og:title" content="Ancillapp" />
+    <meta property="og:image" content="/images/opengraph.png" />
+    <meta property="og:image:alt" content="Ancillapp" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
     <title>Ancillapp</title>
     <meta name="description" content="Ancillapp">
     <base href="/">
@@ -118,7 +125,8 @@
 
         /* Variables (different for each theme) */
         --ancillapp-primary-color: #567791;
-        --ancillapp-top-app-bar-color: var(--ancillapp-primary-color);
+        --ancillapp-top-app-bar-background: var(--ancillapp-primary-color);
+        --ancillapp-top-app-bar-color: #fff;
         --ancillapp-activated-list-color: var(--ancillapp-primary-color);
         --ancillapp-accent-color: #d50000;
         --ancillapp-background-color: #fafafa;
@@ -133,12 +141,12 @@
       }
 
       body[data-theme='dark'] {
-        --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+        --ancillapp-top-app-bar-background: #1f1f1f;
         --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
         --ancillapp-accent-color: #ff8f82;
-        --ancillapp-background-color: #303030;
-        --ancillapp-drawer-color: #212121;
-        --ancillapp-card-color: #424242;
+        --ancillapp-background-color: #121212;
+        --ancillapp-drawer-color: var(--ancillapp-top-app-bar-background);
+        --ancillapp-card-color: #1e1e1e;
         --ancillapp-primary-text-color: #fff;
         --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
         --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);
@@ -146,7 +154,7 @@
       }
 
       body[data-theme='oled'] {
-        --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+        --ancillapp-top-app-bar-background: var(--ancillapp-card-color);
         --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
         --ancillapp-accent-color: #f00;
         --ancillapp-background-color: #000;
@@ -160,12 +168,12 @@
 
       @media (prefers-color-scheme: dark) {
         body[data-theme='system'] {
-          --ancillapp-top-app-bar-color: var(--ancillapp-card-color);
+          --ancillapp-top-app-bar-background: #1f1f1f;
           --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
           --ancillapp-accent-color: #ff8f82;
-          --ancillapp-background-color: #303030;
-          --ancillapp-drawer-color: #212121;
-          --ancillapp-card-color: #424242;
+          --ancillapp-background-color: #121212;
+          --ancillapp-drawer-color: var(--ancillapp-top-app-bar-background);
+          --ancillapp-card-color: #1e1e1e;
           --ancillapp-primary-text-color: #fff;
           --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
           --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);

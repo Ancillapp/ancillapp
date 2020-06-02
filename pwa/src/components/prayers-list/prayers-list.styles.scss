@@ -1,10 +1,9 @@
 :host {
-  display: flex;
   flex-direction: column;
 }
 
 unobtrusive-notification {
-  margin-bottom: 1rem;
+  margin: 2rem 2rem 0;
 }
 
 .loading-container {
@@ -18,6 +17,7 @@ unobtrusive-notification {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 1rem;
 }
 
 .prayer {

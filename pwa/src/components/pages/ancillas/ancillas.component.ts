@@ -1,18 +1,41 @@
-import { customElement, property, PropertyValues } from 'lit-element';
-import { PageViewElement } from '../page-view-element';
+import {
+  LitElement,
+  customElement,
+  property,
+  PropertyValues,
+} from 'lit-element';
 
 import sharedStyles from '../../shared.styles';
 import styles from './ancillas.styles';
 import template from './ancillas.template';
 
 @customElement('ancillas-page')
-export class AncillasPage extends PageViewElement {
+export class AncillasPage extends LitElement {
   public static styles = [sharedStyles, styles];
+
+  protected render = template;
+
+  @property({ type: Boolean, reflect: true })
+  public active = false;
 
   @property({ type: 'String' })
   public subroute?: string;
 
-  protected render = template;
+  @property({ type: Boolean, attribute: 'drawer-open' })
+  public drawerOpen = false;
+
+  @property({ type: Object })
+  public scrollTarget?: HTMLElement;
+
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (this.scrollTarget && this.shadowRoot!.firstElementChild) {
+      (this.shadowRoot!.firstElementChild as Element & {
+        scrollTarget: HTMLElement | undefined;
+      }).scrollTarget = this.scrollTarget;
+    }
+  }
 
   constructor() {
     super();

@@ -9,6 +9,15 @@ import {
   NormalModuleReplacementPlugin,
 } from 'webpack';
 
+const index = process.argv.indexOf('--env');
+
+const fallbackBrowserEnv = process.env.BROWSER_ENV || 'production';
+
+const browserEnv =
+  index < 0
+    ? fallbackBrowserEnv
+    : process.argv[index + 1] || fallbackBrowserEnv;
+
 const config: Configuration = {
   cache: true,
   context: path.resolve(__dirname, '../src'),
@@ -75,14 +84,25 @@ const config: Configuration = {
     ],
   },
   plugins: [
-    new EnvironmentPlugin(['NODE_ENV']),
+    new EnvironmentPlugin({
+      NODE_ENV: 'production',
+      BROWSER_ENV: browserEnv,
+    }),
     new NormalModuleReplacementPlugin(
       /config\/default(?:\.json)?$/,
       (resource: any) => {
         resource.request = resource.request.replace(
           'config/default',
-          `config/${process.env.NODE_ENV}`,
+          `config/${browserEnv}`,
         );
+      },
+    ),
+    new NormalModuleReplacementPlugin(
+      /^firebase\/analytics$/,
+      (resource: any) => {
+        if (browserEnv !== 'production') {
+          resource.request = path.resolve(__dirname, '../src/mocks/analytics');
+        }
       },
     ),
     new CopyPlugin({

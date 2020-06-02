@@ -1,5 +1,7 @@
-import { customElement, property } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 
@@ -8,6 +10,10 @@ import styles from './prayer-viewer.styles';
 import template from './prayer-viewer.template';
 
 import { apiUrl } from '../../config/default.json';
+
+import firebase from 'firebase/app';
+
+const analytics = firebase.analytics();
 
 export interface Prayer {
   slug: string;
@@ -27,8 +33,10 @@ export interface Prayer {
   };
 }
 
+const _prayersStatusesCache = new Map<string, APIResponse<Prayer>>();
+
 @customElement('prayer-viewer')
-export class PrayerViewer extends localize(PageViewElement) {
+export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -42,23 +50,49 @@ export class PrayerViewer extends localize(PageViewElement) {
     refreshing: false,
   };
 
-  private async _fetchPrayer(slug: string) {
-    for await (const status of cacheAndNetwork<Prayer>(
-      `${apiUrl}/prayers/${slug}`,
-    )) {
-      this._prayerStatus = status;
-    }
-  }
+  private _previousPageTitle?: string;
 
-  attributeChangedCallback(
-    name: string,
-    old: string | null,
-    value: string | null,
-  ) {
-    if (this.active && name === 'prayer' && value && old !== value) {
-      this._fetchPrayer(value);
+  protected async updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('prayer') && this.prayer) {
+      if (!_prayersStatusesCache.has(this.prayer)) {
+        for await (const status of cacheAndNetwork<Prayer>(
+          `${apiUrl}/prayers/${this.prayer}`,
+        )) {
+          this._prayerStatus = status;
+
+          if (status.data) {
+            _prayersStatusesCache.set(this.prayer, status);
+
+            const prayerTitle =
+              status.data.title[this.locale] || status.data.title.la!;
+
+            const pageTitle = `Ancillapp - ${this.localeData.prayers} - ${prayerTitle}`;
+
+            if (pageTitle === this._previousPageTitle) {
+              return;
+            }
+
+            this._previousPageTitle = pageTitle;
+
+            updateMetadata({
+              title: pageTitle,
+              description: this.localeData.prayerDescription(prayerTitle),
+            });
+
+            analytics.logEvent('page_view', {
+              page_title: pageTitle,
+              page_location: window.location.href,
+              page_path: window.location.pathname,
+              offline: false,
+            });
+          }
+        }
+      } else {
+        this._prayerStatus = _prayersStatusesCache.get(this.prayer)!;
+      }
     }
-    super.attributeChangedCallback(name, old, value);
   }
 }
 

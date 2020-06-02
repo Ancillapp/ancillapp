@@ -1,12 +1,25 @@
 import { html } from 'lit-element';
 import { until } from 'lit-html/directives/until';
 import { BreviaryIndex } from './breviary-index.component';
+import { menu, tau } from '../icons';
 
 import '@material/mwc-textfield';
 import '../date-input/date-input.component';
 
 export default function template(this: BreviaryIndex) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${tau} ${this.localeData?.breviary}
+      </div>
+    </top-app-bar>
+
     <section>
       <date-input
         label="${this.localeData?.date}"
@@ -33,7 +46,11 @@ export default function template(this: BreviaryIndex) {
           (prayer) => html`
             <li>
               <a href="${this.localizeHref('breviary', prayer, this._date)}">
-                <span>${this.localeData?.[prayer]}</span>
+                <span
+                  >${(this.localeData as { [key: string]: string })?.[
+                    prayer
+                  ]}</span
+                >
               </a>
             </li>
           `,

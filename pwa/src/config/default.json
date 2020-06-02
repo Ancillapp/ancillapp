@@ -1,4 +1,11 @@
 {
   "apiUrl": "",
-  "vapidPublicKey": ""
+  "vapidPublicKey": "",
+  "firebase": {
+    "authDomain": "",
+    "apiKey": "",
+    "projectId": "",
+    "appId": "",
+    "measurementId": ""
+  }
 }

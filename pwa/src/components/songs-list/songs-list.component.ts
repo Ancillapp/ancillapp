@@ -1,6 +1,8 @@
 import { customElement, property, query, PropertyValues } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { get, set } from '../../helpers/keyval';
 import { localize, SupportedLocale } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 import Fuse from 'fuse.js';
 import HyperList, { HyperListConfig } from 'hyperlist';
@@ -25,7 +27,7 @@ export interface SongSummary {
 const analytics = firebase.analytics();
 
 @customElement('songs-list')
-export class SongsList extends localize(PageViewElement) {
+export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -59,15 +61,29 @@ export class SongsList extends localize(PageViewElement) {
   protected _downloadingSongs = false;
 
   @property({ type: Boolean })
+  protected _searching = false;
+
+  @property({ type: Boolean })
   protected _filtersDialogOpen = false;
+
+  @property({ type: Boolean })
+  protected _numericOnly = false;
 
   @query('.songs-container')
   private _songsContainer?: HTMLDivElement;
+
+  @query('#search-input')
+  private _searchInput?: HTMLInputElement;
 
   constructor() {
     super();
 
     this._prepareSongs();
+
+    get<boolean>('prefersNumericSearchKeyboard').then(
+      (prefersNumericSearchKeyboard) =>
+        (this._numericOnly = prefersNumericSearchKeyboard),
+    );
   }
 
   private async _prepareSongs() {
@@ -143,25 +159,39 @@ export class SongsList extends localize(PageViewElement) {
             .join(' ');
         }
 
-        container.innerHTML = songs.reduce(
-          (html, { number, title }) => `
-              ${html}
-              <a href="${this.localizeHref('songs', number)}" class="song">
-                <div class="book">
-                  <div class="number">
-                    ${
-                      number.endsWith('bis')
-                        ? `${number.slice(2, -3)}b`
-                        : number.slice(2)
-                    }
-                  </div>
-                  <div class="title">${title}</div>
-                </div>
-                <div class="title">${title}</div>
-              </a>
-            `,
-          '',
-        );
+        songs.forEach(({ number, title }) => {
+          const anchor = document.createElement('a');
+          anchor.href = this.localizeHref('songs', number);
+          anchor.className = 'song';
+          anchor.innerHTML = `
+            <div class="book">
+              <div class="number">
+                ${
+                  number.endsWith('bis')
+                    ? `${number.slice(2, -3)}b`
+                    : number.slice(2)
+                }
+              </div>
+              <div class="title">${title}</div>
+            </div>
+            <div class="title">${title}</div>
+          `;
+          anchor.addEventListener(
+            'click',
+            ({ altKey, ctrlKey, metaKey, shiftKey }) => {
+              if (altKey || ctrlKey || metaKey || shiftKey) {
+                return;
+              }
+
+              this._searchInput!.value = '';
+              this._searchTerm = '';
+              this._searching = false;
+              this._refreshSongs();
+            },
+          );
+
+          container.appendChild(anchor);
+        });
 
         return container;
       },
@@ -226,10 +256,69 @@ export class SongsList extends localize(PageViewElement) {
     }
   }
 
-  protected _handleSearch({ detail: searchTerm }: CustomEvent<string>) {
-    this._searchTerm = searchTerm;
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (
+      changedProperties.has('_searching') &&
+      this._searching &&
+      this._searchInput
+    ) {
+      this._searchInput.focus();
+      this._searchInput.setSelectionRange(-1, -1);
+    }
+
+    if (changedProperties.has('active') && this.active) {
+      const pageTitle = `Ancillapp - ${this.localeData.songs}`;
+
+      updateMetadata({
+        title: pageTitle,
+        description: this.localeData.songsDescription,
+      });
+
+      analytics.logEvent('page_view', {
+        page_title: pageTitle,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        offline: false,
+      });
+    }
+  }
+
+  protected _handleSearchKeyDown(event: KeyboardEvent) {
+    if (event.code === 'Escape' || event.code === 'Enter') {
+      event.preventDefault();
+
+      if (event.code === 'Escape') {
+        (event.target as HTMLInputElement).value = '';
+        this._searchTerm = '';
+        this._searching = false;
+        this._refreshSongs();
+      }
+
+      const firstSong = this.shadowRoot!.querySelector<HTMLAnchorElement>(
+        '.songs-container > .songs-batch-container > a',
+      );
+
+      if (!firstSong) {
+        return;
+      }
+
+      firstSong.focus();
+    }
+  }
+
+  protected _handleSearch({ target }: InputEvent) {
+    this._searchTerm = (target as HTMLInputElement).value;
 
     this._refreshSongs();
+  }
+
+  protected async _handleKeyboardTypeSwitch() {
+    this._numericOnly = !this._numericOnly;
+    this._searchInput?.focus();
+    this._searchInput?.setSelectionRange(-1, -1);
+    await set('prefersNumericSearchKeyboard', this._numericOnly);
   }
 
   protected async _handleLanguageFilter({ target }: CustomEvent<null>) {

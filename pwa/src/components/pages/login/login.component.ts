@@ -1,5 +1,7 @@
-import { customElement, property } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../../helpers/localize';
+import { withTopAppBar } from '../../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 
 import sharedStyles from '../../shared.styles';
@@ -12,7 +14,7 @@ const auth = firebase.auth();
 const analytics = firebase.analytics();
 
 @customElement('login-page')
-export class LoginPage extends localize(PageViewElement) {
+export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -55,6 +57,26 @@ export class LoginPage extends localize(PageViewElement) {
 
   @property({ type: Boolean })
   protected _passwordReset = false;
+
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('active') && this.active) {
+      const pageTitle = `Ancillapp - ${this.localeData.login}`;
+
+      updateMetadata({
+        title: pageTitle,
+        description: this.localeData.loginDescription,
+      });
+
+      analytics.logEvent('page_view', {
+        page_title: pageTitle,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        offline: false,
+      });
+    }
+  }
 
   protected async _handleEmailPasswordLogin() {
     if (!this._email) {

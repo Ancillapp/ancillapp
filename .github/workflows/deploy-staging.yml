@@ -11,17 +11,19 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Use Node.js 12
-        uses: actions/setup-node@v1
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2-beta
         with:
-          node-version: 12
+          node-version: 14
       - name: Install deps
         run: npm ci
       - name: Build
-        run: npm run build
+        run: BROWSER_ENV=staging npm run build
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
-        run: npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting:staging,functions:staging
+        run: |
+          npx firebase use --add ancillapp-staging
+          npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting,functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

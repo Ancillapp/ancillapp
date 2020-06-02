@@ -53,15 +53,26 @@ export const localizedPages: {
     de: 'informationen',
     pt: 'informacoes',
   },
+  latest: {
+    it: 'ultimo',
+    en: 'latest',
+    de: 'neueste',
+    pt: 'mais-recentes',
+  },
 };
 
 export const localizeHref = (
   locale: SupportedLocale,
-  page?: string,
+  page = 'home',
   ...subroutes: string[]
 ) => {
-  const localizedPage = localizedPages[page || 'home']?.[locale];
-  const subroute = subroutes.length > 0 ? `/${subroutes.join('/')}` : '';
+  const localizedPage = localizedPages[page]?.[locale];
+  const subroute =
+    subroutes.length > 0
+      ? `/${subroutes
+          .map((subroute) => localizedPages[subroute]?.[locale] || subroute)
+          .join('/')}`
+      : '';
 
   return `/${locale}${localizedPage ? `/${localizedPage}${subroute}` : ''}`;
 };

@@ -4,18 +4,13 @@ import {
   supportedLocales,
   defaultLocale,
 } from './helpers/localize';
+import config from './config/default.json';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/analytics';
 
-firebase.initializeApp({
-  authDomain: 'ffb-ancillapp.firebaseapp.com',
-  apiKey: 'AIzaSyB-OWVImHaeQUfkfWqsTsXQ089oa3P4Dvk',
-  projectId: 'ffb-ancillapp',
-  appId: '1:890551951388:web:7fc7ea5791d55be747bfd9',
-  measurementId: 'G-LV1NNN9Y30',
-});
+firebase.initializeApp(config.firebase);
 
 // Feature detect which polyfill needs to be imported.
 const needsTemplate = (() => {
@@ -65,6 +60,28 @@ if (
   polyfills = ['sd-ce-pf'];
 }
 
+const getPreferredLocale = async () => {
+  const pathLocale = window.location.pathname.slice(1, 3) as SupportedLocale;
+
+  if (supportedLocales.includes(pathLocale)) {
+    return pathLocale;
+  }
+
+  const storedLocale = await get<SupportedLocale>('locale');
+
+  if (supportedLocales.includes(storedLocale)) {
+    return storedLocale;
+  }
+
+  const userLocale = navigator.language.slice(0, 2) as SupportedLocale;
+
+  if (supportedLocales.includes(userLocale)) {
+    return userLocale;
+  }
+
+  return defaultLocale;
+};
+
 // Note that in this case we need to append the .js extension, otherwise
 // Webpack will try to load the .js.map files into the bundle too.
 (polyfills.length
@@ -73,18 +90,7 @@ if (
 )
   .then(() =>
     Promise.all([
-      get<SupportedLocale>('locale').then((storedLocale) => {
-        const userLocale = navigator.language.slice(0, 2);
-
-        const locale =
-          storedLocale ||
-          (supportedLocales.includes(userLocale as SupportedLocale)
-            ? userLocale
-            : defaultLocale);
-
-        // Prefetch the needed locale file
-        return import(`./locales/${locale}.json`);
-      }),
+      getPreferredLocale().then((locale) => import(`./locales/${locale}`)),
       get<string>('theme').then(
         (storedTheme) =>
           (document.body.dataset.theme = storedTheme || 'system'),

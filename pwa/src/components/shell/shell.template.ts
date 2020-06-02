@@ -3,13 +3,13 @@ import { nothing } from 'lit-html';
 import { Shell } from './shell.component';
 import * as icons from '../icons';
 
-import '@material/mwc-top-app-bar';
 import '@material/mwc-drawer';
 import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import '@material/mwc-list/mwc-list';
 import '@material/mwc-list/mwc-list-item';
 import '@material/mwc-snackbar';
+import '../top-app-bar/top-app-bar.component';
 import '../snackbar/snackbar.component';
 
 export default function template(this: Shell) {
@@ -102,75 +102,80 @@ export default function template(this: Shell) {
         </mwc-list>
       </div>
       <div slot="appContent">
-        <mwc-top-app-bar>
-          ${this._subroute
-            ? html`
-                <a
-                  href="${this.localizeHref(this._page)}"
-                  slot="navigationIcon"
-                >
-                  <mwc-icon-button>${icons.arrowBack}</mwc-icon-button>
-                </a>
-              `
-            : html`
-                <mwc-icon-button
-                  slot="navigationIcon"
-                  @click="${() => this._updateDrawerState(!this._drawerOpened)}"
-                >
-                  ${icons.menu}
-                </mwc-icon-button>
-              `}
-          <div slot="title">
-            ${icons.tau} ${this._page === 'home'
-              ? 'Ancillapp'
-              : (this.localeData as { [key: string]: string })?.[
-                  this._page.replace(/-([a-z])/g, (_, letter) =>
-                    letter.toUpperCase(),
-                  )
-                ]}
-          </div>
-        </mwc-top-app-bar>
         <main>
           <home-page
             class="page padded"
             ?active="${this._page === 'home'}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
           ></home-page>
-          <breviary-page
+          <breviary-index
             class="page padded"
-            ?active="${this._page === 'breviary'}"
-            subroute="${this._subroute}"
-          ></breviary-page>
-          <songs-page
+            ?active="${this._page === 'breviary' && !this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+          ></breviary-index>
+          <breviary-viewer
+            class="page padded"
+            ?active="${this._page === 'breviary' && this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            query="${this._subroute}"
+          ></breviary-viewer>
+          <songs-list
             class="page"
-            ?active="${this._page === 'songs'}"
-            subroute="${this._subroute}"
-          ></songs-page>
-          <prayers-page
-            class="page padded"
-            ?active="${this._page === 'prayers'}"
-            subroute="${this._subroute}"
-          ></prayers-page>
+            ?active="${this._page === 'songs' && !this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+          ></songs-list>
+          <song-viewer
+            class="page"
+            ?active="${this._page === 'songs' && this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            song="${this._subroute}"
+          ></song-viewer>
+          <prayers-list
+            class="page"
+            ?active="${this._page === 'prayers' && !this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+          ></prayers-list>
+          <prayer-viewer
+            class="page"
+            ?active="${this._page === 'prayers' && this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            prayer="${this._subroute}"
+          ></prayer-viewer>
           <ancillas-page
             class="page"
             ?active="${this._page === 'ancillas'}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
             subroute="${this._subroute}"
           ></ancillas-page>
           <holy-mass-page
             class="page padded"
             ?active="${this._page === 'holy-mass'}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
           ></holy-mass-page>
           <login-page
             class="page padded"
             ?active="${this._page === 'login'}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
             @register="${() => (this._verificationEmailSent = true)}"
           ></login-page>
           <settings-page
             class="page padded"
             ?active="${this._page === 'settings'}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
           ></settings-page>
           <info-page
             class="page padded"
             ?active="${this._page === 'info'}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
           ></info-page>
         </main>
       </div>

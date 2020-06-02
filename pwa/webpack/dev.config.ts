@@ -5,6 +5,7 @@ import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-serv
 import { smart as smartMerge } from 'webpack-merge';
 import baseConfig from './base.config';
 import { InjectManifest as InjectManifestPlugin } from 'workbox-webpack-plugin';
+import { NormalModuleReplacementPlugin } from 'webpack';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;

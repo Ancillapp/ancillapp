@@ -5,27 +5,6 @@
   height: 100%;
 }
 
-mwc-top-app-bar {
-  --mdc-theme-primary: var(--ancillapp-top-app-bar-color);
-
-  [slot='navigationIcon'] {
-    color: inherit;
-  }
-
-  [slot='title'] {
-    display: flex;
-    align-items: center;
-    font-family: var(--ancillapp-display-font);
-    font-style: italic;
-
-    svg {
-      height: 36px;
-      padding: 0 10px 12px 0;
-      fill: #fff;
-    }
-  }
-}
-
 mwc-drawer {
   --mdc-theme-surface: var(--ancillapp-drawer-color);
 
@@ -81,11 +60,12 @@ li[divider] {
 
 main {
   width: 100%;
-  min-height: calc(100% - 56px);
+  min-height: 100%;
+  padding-top: 56px;
   background: var(--ancillapp-background-color);
   display: flex;
 
   @media (min-width: 600px) {
-    min-height: calc(100% - 64px);
+    padding-top: 64px;
   }
 }

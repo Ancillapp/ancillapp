@@ -3,12 +3,10 @@ import {
   LitElement,
   property,
   PropertyValues,
+  query,
+  queryAll,
 } from 'lit-element';
-import {
-  installMediaQueryWatcher,
-  installRouter,
-  updateMetadata,
-} from 'pwa-helpers';
+import { installMediaQueryWatcher, installRouter } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
@@ -18,7 +16,7 @@ import sharedStyles from '../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
-import type { TopAppBar } from '@material/mwc-top-app-bar';
+import type { Drawer } from '@material/mwc-drawer';
 
 import firebase from 'firebase/app';
 
@@ -51,6 +49,12 @@ export class Shell extends localize(authorize(LitElement)) {
     window.location.search,
   ).has('registered');
 
+  @query('mwc-drawer')
+  private _drawer!: Drawer;
+
+  @queryAll('.page')
+  private _pages: { scrollTarget: HTMLElement }[] = [];
+
   protected readonly _topNavPages = [
     'home',
     'breviary',
@@ -81,28 +85,7 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected updated(changedProperties: PropertyValues) {
-    if (changedProperties.size < 1 || changedProperties.has('_page')) {
-      const pageTitle = `Ancillapp - ${
-        (this.localeData as { [key: string]: string })?.[
-          this._page.replace(/-([a-z])/g, (_, letter) =>
-            letter.toUpperCase(),
-          ) || 'home'
-        ] ||
-        `${this._page?.[0]?.toUpperCase() || ''}${
-          this._page
-            ?.slice(1)
-            .replace(/-([a-z])/g, (_, letter) => ` ${letter.toUpperCase()}`) ||
-          ''
-        }` ||
-        'Home'
-      }`;
-
-      updateMetadata({
-        title: pageTitle,
-        description: pageTitle,
-        // This object also takes an image property, that points to an img src.
-      });
-    }
+    super.updated(changedProperties);
 
     if (changedProperties.has('user')) {
       if (this.user && this._page === 'login') {
@@ -112,54 +95,37 @@ export class Shell extends localize(authorize(LitElement)) {
     }
   }
 
-  protected firstUpdated() {
-    installRouter((location) => this._locationChanged(location));
+  protected firstUpdated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
 
-    // TODO: replace this awful workaround by implementing a custom top app bar
-    const drawer = this.shadowRoot!.querySelector('mwc-drawer')!;
-    const topAppBar = this.shadowRoot!.querySelector<TopAppBar>(
-      'mwc-top-app-bar',
-    )!;
+    installRouter((location) => this._locationChanged(location));
 
     // TODO: discover why we need this instead of just using
     // @MDCDrawer:closed="${() => (this._drawerOpened = false)}"
     // in the template
-    drawer.addEventListener(
+    this._drawer.addEventListener(
       'MDCDrawer:closed',
       () => (this._drawerOpened = false),
     );
 
     const slotChangeListener = () => {
-      const drawerContent = drawer.shadowRoot!.querySelector<HTMLDivElement>(
-        '.mdc-drawer-app-content',
-      );
+      const drawerContent = this._drawer.shadowRoot!.querySelector<
+        HTMLDivElement
+      >('.mdc-drawer-app-content');
 
       if (!drawerContent) {
         return;
       }
 
-      drawer.shadowRoot!.removeEventListener('slotchange', slotChangeListener);
+      this._drawer.shadowRoot!.removeEventListener(
+        'slotchange',
+        slotChangeListener,
+      );
 
-      const topAppBarRef = topAppBar.shadowRoot!.querySelector<HTMLDivElement>(
-        '.mdc-top-app-bar',
-      )!;
-      let intervalRef: number;
-
-      const updatePosition = () => {
-        if (!topAppBarRef.style.position) {
-          return;
-        }
-
-        window.clearInterval(intervalRef);
-        topAppBarRef.style.position = 'fixed';
-      };
-
-      updatePosition();
-      intervalRef = window.setInterval(updatePosition, 100);
-      topAppBar.scrollTarget = drawerContent;
+      this._pages.forEach((page) => (page.scrollTarget = drawerContent));
     };
 
-    drawer.shadowRoot!.addEventListener('slotchange', slotChangeListener);
+    this._drawer.shadowRoot!.addEventListener('slotchange', slotChangeListener);
   }
 
   protected _observeForThemeChanges() {
@@ -169,7 +135,7 @@ export class Shell extends localize(authorize(LitElement)) {
 
     const themeColorUpdateCallback = () =>
       (themeColor.content = getComputedStyle(document.body).getPropertyValue(
-        '--ancillapp-top-app-bar-color',
+        '--ancillapp-top-app-bar-background',
       ));
 
     const observer = new MutationObserver((mutations) =>
@@ -200,26 +166,6 @@ export class Shell extends localize(authorize(LitElement)) {
 
     this._loadPage(locale as SupportedLocale, page, subroutes.join('/'));
 
-    const pageTitle = `Ancillapp - ${
-      (this.localeData as { [key: string]: string })?.[
-        this._page.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()) ||
-          'home'
-      ] ||
-      `${this._page?.[0]?.toUpperCase() || ''}${
-        this._page
-          ?.slice(1)
-          .replace(/-([a-z])/g, (_, letter) => ` ${letter.toUpperCase()}`) || ''
-      }` ||
-      'Home'
-    }`;
-
-    analytics.logEvent('page_view', {
-      page_title: pageTitle,
-      page_location: window.location.href,
-      page_path: window.location.pathname,
-      offline: false,
-    });
-
     // Close the drawer - in case the *path* change came from a link in the drawer.
     if (!this._narrow) {
       this._updateDrawerState(false);
@@ -236,7 +182,48 @@ export class Shell extends localize(authorize(LitElement)) {
       pageId = 'home';
     }
 
-    import(`../pages/${pageId}/${pageId}.component`);
+    switch (pageId) {
+      case 'home':
+        import('../pages/home/home.component');
+        break;
+      case 'breviary':
+        if (subroute) {
+          import('../breviary-viewer/breviary-viewer.component');
+        } else {
+          import('../breviary-index/breviary-index.component');
+        }
+        break;
+      case 'songs':
+        if (subroute) {
+          import('../song-viewer/song-viewer.component');
+        } else {
+          import('../songs-list/songs-list.component');
+        }
+        break;
+      case 'prayers':
+        if (subroute) {
+          import('../prayer-viewer/prayer-viewer.component');
+        } else {
+          import('../prayers-list/prayers-list.component');
+        }
+        break;
+      case 'ancillas':
+        import('../pages/ancillas/ancillas.component');
+        break;
+      case 'holy-mass':
+        import('../pages/holy-mass/holy-mass.component');
+        break;
+      case 'login':
+        import('../pages/login/login.component');
+        break;
+      case 'settings':
+        import('../pages/settings/settings.component');
+        break;
+      case 'info':
+        import('../pages/info/info.component');
+        break;
+    }
+
     this._page = pageId;
     this._subroute = subroute;
   }

@@ -1,157 +1,42 @@
 {
-  "hosting": [
-    {
-      "target": "production",
-      "public": "pwa/dist/",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "rewrites": [
-        {
-          "source": "/api/songs",
-          "function": "production-getSongs"
-        },
-        {
-          "source": "/api/songs/*",
-          "function": "production-getSong"
-        },
-        {
-          "source": "/api/prayers",
-          "function": "production-getPrayers"
-        },
-        {
-          "source": "/api/prayers/*",
-          "function": "production-getPrayer"
-        },
-        {
-          "source": "/api/ancillas",
-          "function": "production-getAncillas"
-        },
-        {
-          "source": "/api/ancillas/*",
-          "function": "production-getAncilla"
-        },
-        {
-          "source": "/api/breviary",
-          "function": "production-getBreviary"
-        },
-        {
-          "source": "/api/holy-masses",
-          "function": "production-getHolyMasses"
-        },
-        {
-          "source": "/api/fraternities",
-          "function": "production-getFraternities"
-        },
-        {
-          "source": "/api/fraternities/*/holy-masses/*",
-          "function": "production-handleHolyMassBooking"
-        },
-        {
-          "source": "/api/fraternities/*/holy-masses/*/seats",
-          "function": "production-getHolyMassesSeats"
-        },
-        {
-          "source": "/api/notifications/subscribe",
-          "function": "production-subscribeForNotifications"
-        },
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
-      "target": "staging",
-      "public": "pwa/dist/",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "rewrites": [
-        {
-          "source": "/api/songs",
-          "function": "staging-getSongs"
-        },
-        {
-          "source": "/api/songs/*",
-          "function": "staging-getSong"
-        },
-        {
-          "source": "/api/prayers",
-          "function": "staging-getPrayers"
-        },
-        {
-          "source": "/api/prayers/*",
-          "function": "staging-getPrayer"
-        },
-        {
-          "source": "/api/ancillas",
-          "function": "staging-getAncillas"
-        },
-        {
-          "source": "/api/ancillas/*",
-          "function": "staging-getAncilla"
-        },
-        {
-          "source": "/api/breviary",
-          "function": "staging-getBreviary"
-        },
-        {
-          "source": "/api/holy-masses",
-          "function": "staging-getHolyMasses"
-        },
-        {
-          "source": "/api/fraternities",
-          "function": "staging-getFraternities"
-        },
-        {
-          "source": "/api/fraternities/*/holy-masses/*",
-          "function": "staging-handleHolyMassBooking"
-        },
-        {
-          "source": "/api/fraternities/*/holy-masses/*/seats",
-          "function": "staging-getHolyMassesSeats"
-        },
-        {
-          "source": "/api/notifications/subscribe",
-          "function": "staging-subscribeForNotifications"
-        },
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    }
-  ],
-  "headers": [
-    {
-      "source": "**/sw.js",
-      "headers": [
-        {
-          "key": "Service-Worker-Allowed",
-          "value": "/"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-cache"
-        }
-      ]
-    },
-    {
-      "source": "/index.html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache"
-        }
-      ]
-    },
-    {
-      "source": "**",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=86400"
-        }
-      ]
-    }
-  ],
+  "hosting": {
+    "public": "pwa/dist/",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "/api/**",
+        "function": "api"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/sw.js",
+        "headers": [
+          {
+            "key": "Service-Worker-Allowed",
+            "value": "/"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/index.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  },
   "emulators": {
     "functions": {
       "port": 5001

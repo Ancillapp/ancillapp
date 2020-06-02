@@ -1,8 +1,10 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { LoginPage } from './login.component';
+import { menu, tau } from '../../icons';
 
 import '@material/mwc-textfield';
+import '../../top-app-bar/top-app-bar.component';
 import '../../loading-button/loading-button.component';
 
 import type { TextField } from '@material/mwc-textfield';
@@ -17,6 +19,18 @@ export default function template(this: LoginPage) {
     this._loggingInWithGitHub;
 
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${tau} ${this.localeData?.login}
+      </div>
+    </top-app-bar>
+
     <section>
       <div>
         <h3>${this.localeData?.loginOrRegister}</h3>

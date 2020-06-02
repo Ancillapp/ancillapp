@@ -11,10 +11,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Use Node.js 12
-        uses: actions/setup-node@v1
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2-beta
         with:
-          node-version: 12
+          node-version: 14
       - name: Install deps
         run: npm ci
       - name: Build
@@ -22,11 +22,13 @@ jobs:
           # Generate the sitemap
           npm run build:sitemap
           # Build the PWA and the functions
-          npm run build
+          BROWSER_ENV=production npm run build
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
-        run: npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting:production,functions:production
+        run: |
+          npx firebase use --add ffb-ancillapp
+          npx firebase deploy --token "$FIREBASE_TOKEN" --only hosting,functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Purge cache, audit, and report

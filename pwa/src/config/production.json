@@ -1,4 +1,11 @@
 {
   "apiUrl": "/api",
-  "vapidPublicKey": "BHpQ6eMN_Dpi987YgeLLMv8qpJbQWqnk3ny6potjce2hdXq4lkI3n3nfP5oUvebDSaUqvp4h1YJS1cpPbYStOuk"
+  "vapidPublicKey": "BHpQ6eMN_Dpi987YgeLLMv8qpJbQWqnk3ny6potjce2hdXq4lkI3n3nfP5oUvebDSaUqvp4h1YJS1cpPbYStOuk",
+  "firebase": {
+    "authDomain": "ffb-ancillapp.firebaseapp.com",
+    "apiKey": "AIzaSyB-OWVImHaeQUfkfWqsTsXQ089oa3P4Dvk",
+    "projectId": "ffb-ancillapp",
+    "appId": "1:890551951388:web:7fc7ea5791d55be747bfd9",
+    "measurementId": "G-LV1NNN9Y30"
+  }
 }

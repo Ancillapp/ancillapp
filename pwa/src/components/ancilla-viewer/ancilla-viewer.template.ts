@@ -1,11 +1,29 @@
 import { html } from 'lit-element';
+import { until } from 'lit-html/directives/until';
 import { AncillaViewer } from './ancilla-viewer.component';
 import { load } from '../../helpers/directives';
+import { arrowBack, tau } from '../icons';
 
+import '../top-app-bar/top-app-bar.component';
 import '../share-fab/share-fab.component';
 
 export default function template(this: AncillaViewer) {
   return html`
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
+      <a href="${this.localizeHref('ancillas')}" slot="leadingIcon">
+        <mwc-icon-button>${arrowBack}</mwc-icon-button>
+      </a>
+      <div slot="title">
+        ${tau}
+        ${until(
+          this._ancillaPromise.then(
+            ({ name: { [this.locale]: localizedName } }) => localizedName,
+          ),
+          this.localeData?.loading,
+        )}
+      </div>
+    </top-app-bar>
+
     ${load(
       this._ancillaPromise,
       ({ link, name }) =>

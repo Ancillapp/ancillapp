@@ -1,5 +1,7 @@
-import { customElement, property } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
+import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 
@@ -9,14 +11,20 @@ import template from './song-viewer.template';
 
 import { apiUrl } from '../../config/default.json';
 
+import firebase from 'firebase/app';
+
+const analytics = firebase.analytics();
+
 export interface Song {
   number: string;
   title: string;
   content: string;
 }
 
+const _songsStatusesCache = new Map<string, APIResponse<Song>>();
+
 @customElement('song-viewer')
-export class SongViewer extends localize(PageViewElement) {
+export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -30,23 +38,50 @@ export class SongViewer extends localize(PageViewElement) {
     refreshing: false,
   };
 
-  private async _fetchSong(number: string) {
-    for await (const status of cacheAndNetwork<Song>(
-      `${apiUrl}/songs/${/^\d/.test(number) ? `IT${number}` : number}`,
-    )) {
-      this._songStatus = status;
-    }
-  }
+  private _previousPageTitle?: string;
 
-  attributeChangedCallback(
-    name: string,
-    old: string | null,
-    value: string | null,
-  ) {
-    if (this.active && name === 'song' && value && old !== value) {
-      this._fetchSong(value);
+  protected async updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('song') && this.song) {
+      if (!_songsStatusesCache.has(this.song)) {
+        for await (const status of cacheAndNetwork<Song>(
+          `${apiUrl}/songs/${
+            /^\d/.test(this.song) ? `IT${this.song}` : this.song
+          }`,
+        )) {
+          this._songStatus = status;
+
+          if (status.data) {
+            _songsStatusesCache.set(this.song, status);
+
+            const pageTitle = `Ancillapp - ${
+              this.localeData.songs
+            } - ${status.data.number.slice(2)}. ${status.data.title}`;
+
+            if (pageTitle === this._previousPageTitle) {
+              return;
+            }
+
+            this._previousPageTitle = pageTitle;
+
+            updateMetadata({
+              title: pageTitle,
+              description: this.localeData.songDescription(status.data.title),
+            });
+
+            analytics.logEvent('page_view', {
+              page_title: pageTitle,
+              page_location: window.location.href,
+              page_path: window.location.pathname,
+              offline: false,
+            });
+          }
+        }
+      } else {
+        this._songStatus = _songsStatusesCache.get(this.song)!;
+      }
     }
-    super.attributeChangedCallback(name, old, value);
   }
 }
 
