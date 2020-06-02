@@ -96,12 +96,17 @@ export default {
   songDescription: (songName: string) =>
     `Canta il canto "${songName}" come viene cantato dalla Fraternità Francescana di Betania.`,
   prayersDescription:
-    'Prega le preghiere giornaliere pregate dalla Fraternità Francescana di Betania',
-  prayerDescription: (prayerName: string) => 'Prega la ',
-  ancillasDescription: '',
-  ancillaDescription: '',
-  holyMassDescription: '',
-  loginDescription: '',
+    'Prega le preghiere giornaliere pregate dalla Fraternità Francescana di Betania.',
+  prayerDescription: (prayerName: string) =>
+    `Prega "${prayerName}" insieme alla Fraternità Francescana di Betania.`,
+  ancillasDescription:
+    'Sfoglia gli Ancilla Domini della Fraternità Francescana di Betania.',
+  ancillaDescription: (ancillaName: string) =>
+    `Sfoglia l'Ancilla Domini "${ancillaName}" della Fraternità Francescana di Betania.`,
+  holyMassDescription:
+    'Prenota un posto per la Santa Messa in una delle case della Fraternità Francescana di Betania.',
+  loginDescription:
+    'Effettua il login per usufruire del servizio di prenotazione delle Sante Messe della Fraternità Francescana di Betania.',
   settingsDescription:
     'Personalizza Ancillapp modificandone il tema o la lingua.',
   infoDescription:
