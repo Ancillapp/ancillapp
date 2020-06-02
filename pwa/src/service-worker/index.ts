@@ -73,7 +73,11 @@ self.addEventListener('install', (event: any) => {
   );
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.BROWSER_ENV === 'development') {
+  console.groupCollapsed('Workbox precache manifest');
+  self.__WB_MANIFEST.forEach((entry) => console.info(entry));
+  console.groupEnd();
+} else {
   setCacheNameDetails({
     prefix: 'ancillapp',
   });
@@ -91,10 +95,6 @@ if (process.env.NODE_ENV === 'production') {
     }),
     'GET',
   );
-} else {
-  console.groupCollapsed('Workbox precache manifest');
-  self.__WB_MANIFEST.forEach((entry) => console.info(entry));
-  console.groupEnd();
 }
 googleAnalytics.initialize({
   hitFilter: (params) => params.set('ep.offline', 'true'),

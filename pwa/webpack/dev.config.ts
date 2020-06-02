@@ -28,11 +28,6 @@ const config: Configuration = smartMerge(baseConfig, {
     splitChunks: false,
   },
   plugins: [
-    new NormalModuleReplacementPlugin(
-      /^firebase\/analytics$/,
-      path.resolve(__dirname, '../src/mocks/analytics'),
-    ),
-    // firebase/analytics
     new HtmlPlugin({
       inject: 'head',
       template: path.resolve(__dirname, '../src/index.html'),

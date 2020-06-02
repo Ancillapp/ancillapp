@@ -1,0 +1,10 @@
+{
+  "apiUrl": "/api",
+  "vapidPublicKey": "BNKjPiIixxq71WdTZNzX5eS33qDc5nb30yOk7Fpj3yuIX3cGM-Unck4lWxn-5CL6qwMf75NgOFdmVa8tRQGg_Kc",
+  "firebase": {
+    "authDomain": "ancillapp-staging.firebaseapp.com",
+    "apiKey": "AIzaSyCQVq2yLjzBGWFofB8EqfnfWaxF3WeSdr0",
+    "projectId": "ancillapp-staging",
+    "appId": "1:763416140715:web:2cc9433d4cdf11426210ee"
+  }
+}
