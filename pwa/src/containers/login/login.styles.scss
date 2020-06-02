@@ -1,0 +1,51 @@
+:host {
+  align-items: flex-start;
+}
+
+mwc-textfield {
+  width: 100%;
+  max-width: 20rem;
+  display: block;
+}
+
+section > div {
+  &,
+  > * {
+    text-align: center;
+    padding: 0.5rem 0;
+    margin: 0 auto;
+  }
+
+  > loading-button {
+    margin: 0 0.5rem;
+  }
+}
+
+a {
+  cursor: pointer;
+  outline: none;
+}
+
+#google {
+  --mdc-theme-primary: #4285f4;
+}
+
+#facebook {
+  --mdc-theme-primary: #3b5998;
+}
+
+#twitter {
+  --mdc-theme-primary: #1da1f2;
+}
+
+#microsoft {
+  --mdc-theme-primary: #00a4ef;
+}
+
+#github {
+  --mdc-theme-primary: #1b1f23;
+}
+
+#apple {
+  --mdc-theme-primary: #000;
+}

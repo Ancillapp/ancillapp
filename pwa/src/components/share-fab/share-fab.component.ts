@@ -1,7 +1,7 @@
 import { LitElement, customElement, query, property } from 'lit-element';
 import { localize } from '../../helpers/localize';
 
-import sharedStyles from '../shared.styles';
+import sharedStyles from '../../shared.styles';
 import styles from './share-fab.styles';
 import template from './share-fab.template';
 import { importIIFE } from '../../helpers/utils';
@@ -11,14 +11,6 @@ import type { ShareMenu } from 'share-menu';
 declare global {
   interface Window {
     fbAsyncInit: Function;
-  }
-
-  interface Navigator {
-    share: (options: {
-      url?: string;
-      text?: string;
-      title?: string;
-    }) => Promise<void>;
   }
 }
 

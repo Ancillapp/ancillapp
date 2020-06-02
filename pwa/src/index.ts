@@ -95,7 +95,7 @@ const getPreferredLocale = async () => {
         (storedTheme) =>
           (document.body.dataset.theme = storedTheme || 'system'),
       ),
-      import('./components/shell/shell.component'),
+      import('./containers/shell/shell.component'),
     ]),
   )
   .then(() => document.querySelector('#loading')!.remove());
