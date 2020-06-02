@@ -28,20 +28,24 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
     super.updated(changedProperties);
 
     if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localeData.settings}`;
-
-      updateMetadata({
-        title: pageTitle,
-        description: this.localeData.settingsDescription,
-      });
-
-      analytics.logEvent('page_view', {
-        page_title: pageTitle,
-        page_location: window.location.href,
-        page_path: window.location.pathname,
-        offline: false,
-      });
+      this._updatePageMetadata();
     }
+  }
+
+  protected _updatePageMetadata() {
+    const pageTitle = `Ancillapp - ${this.localeData.settings}`;
+
+    updateMetadata({
+      title: pageTitle,
+      description: this.localeData.settingsDescription,
+    });
+
+    analytics.logEvent('page_view', {
+      page_title: pageTitle,
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+      offline: false,
+    });
   }
 
   protected async _handleThemeChange({ target }: CustomEvent<null>) {
@@ -52,7 +56,11 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
 
   protected async _handleLanguageChange({ target }: CustomEvent<null>) {
     const newLanguage = (target as OutlinedSelect).value as SupportedLocale;
+
     await this.setLocale(newLanguage);
+
+    this._updatePageMetadata();
+
     this._selects!.forEach((select) => {
       if (select !== target) {
         (select as OutlinedSelect).requestUpdate();
