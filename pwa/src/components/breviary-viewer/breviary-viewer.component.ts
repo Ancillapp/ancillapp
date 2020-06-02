@@ -1,4 +1,5 @@
-import { customElement, property } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
+import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../pages/page-view-element';
@@ -10,6 +11,10 @@ import template from './breviary-viewer.template';
 import '@material/mwc-icon-button';
 
 import { apiUrl } from '../../config/default.json';
+
+import firebase from 'firebase/app';
+
+const analytics = firebase.analytics();
 
 @customElement('breviary-viewer')
 export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
@@ -26,6 +31,26 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
   private _alternatives: HTMLDivElement[] = [];
 
   private _currentAlternative = 0;
+
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('active') && this.active) {
+      const pageTitle = `Ancillapp - ${this.localeData.breviary}`;
+
+      updateMetadata({
+        title: pageTitle,
+        description: this.localeData.breviaryDescription,
+      });
+
+      analytics.logEvent('page_view', {
+        page_title: pageTitle,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        offline: false,
+      });
+    }
+  }
 
   attributeChangedCallback(
     name: string,
