@@ -83,16 +83,6 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
       }
     }
   }
-
-  attributeChangedCallback(
-    name: string,
-    old: string | null,
-    value: string | null,
-  ) {
-    if (this.active && name === 'song' && value && old !== value) {
-    }
-    super.attributeChangedCallback(name, old, value);
-  }
 }
 
 declare global {
