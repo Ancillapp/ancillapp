@@ -2,7 +2,7 @@ import { LitElement, customElement, property, query } from 'lit-element';
 import { TextField } from '@material/mwc-textfield';
 import { get, set } from '../../helpers/keyval';
 
-import sharedStyles from '../shared.styles';
+import sharedStyles from '../../shared.styles';
 import styles from './date-input.styles';
 import template from './date-input.template';
 

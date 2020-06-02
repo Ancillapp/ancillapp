@@ -1,6 +1,6 @@
 import { LitElement, customElement, query, property } from 'lit-element';
 
-import sharedStyles from '../shared.styles';
+import sharedStyles from '../../shared.styles';
 import styles from './autosized-fab.styles';
 import template from './autosized-fab.template';
 

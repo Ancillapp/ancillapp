@@ -1,6 +1,6 @@
 import { LitElement, customElement } from 'lit-element';
 
-import sharedStyles from '../shared.styles';
+import sharedStyles from '../../shared.styles';
 import styles from './unobtrusive-notification.styles';
 import template from './unobtrusive-notification.template';
 
