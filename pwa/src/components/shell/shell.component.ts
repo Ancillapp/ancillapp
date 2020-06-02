@@ -194,7 +194,11 @@ export class Shell extends localize(authorize(LitElement)) {
         }
         break;
       case 'songs':
-        import('../pages/songs/songs.component');
+        if (subroute) {
+          import('../song-viewer/song-viewer.component');
+        } else {
+          import('../songs-list/songs-list.component');
+        }
         break;
       case 'prayers':
         import('../pages/prayers/prayers.component');

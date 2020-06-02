@@ -121,13 +121,18 @@ export default function template(this: Shell) {
             ?drawer-open="${this._narrow && this._drawerOpened}"
             query="${this._subroute}"
           ></breviary-viewer>
-          <songs-page
+          <songs-list
             class="page"
-            ?active="${this._page === 'songs'}"
+            ?active="${this._page === 'songs' && !this._subroute}"
             ?drawer-open="${this._narrow && this._drawerOpened}"
             @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
-            subroute="${this._subroute}"
-          ></songs-page>
+          ></songs-list>
+          <song-viewer
+            class="page"
+            ?active="${this._page === 'songs' && this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            song="${this._subroute}"
+          ></song-viewer>
           <prayers-page
             class="page"
             ?active="${this._page === 'prayers'}"
