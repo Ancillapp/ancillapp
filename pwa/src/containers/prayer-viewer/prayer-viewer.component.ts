@@ -55,7 +55,7 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
   protected async updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
-    if (changedProperties.has('prayer') && this.prayer) {
+    if (this.active && changedProperties.has('prayer') && this.prayer) {
       if (!_prayersStatusesCache.has(this.prayer)) {
         for await (const status of cacheAndNetwork<Prayer>(
           `${apiUrl}/prayers/${this.prayer}`,

@@ -1,4 +1,4 @@
-import { customElement, property } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
@@ -27,6 +27,8 @@ export interface Ancilla {
   thumbnail: string;
 }
 
+const _ancillasPromisesCache = new Map<string, Promise<Ancilla>>();
+
 @customElement('ancilla-viewer')
 export class AncillaViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
@@ -39,47 +41,52 @@ export class AncillaViewer extends localize(withTopAppBar(PageViewElement)) {
   @property({ type: Object })
   protected _ancillaPromise: Promise<Ancilla> = new Promise(() => {});
 
-  async attributeChangedCallback(
-    name: string,
-    old: string | null,
-    value: string | null,
-  ) {
-    super.attributeChangedCallback(name, old, value);
+  protected async updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
 
-    if (this.active && name === 'ancilla' && value && old !== value) {
-      const ancillaCode = Object.values(localizedPages.latest).includes(value)
+    if (this.active && changedProperties.has('ancilla') && this.ancilla) {
+      const ancillaCode = Object.values(localizedPages.latest).includes(
+        this.ancilla,
+      )
         ? 'latest'
-        : value;
+        : this.ancilla;
 
-      this._ancillaPromise = fetch(
-        `${apiUrl}/ancillas/${ancillaCode}`,
-      ).then((res) => res.json());
-
-      const {
-        code,
-        name: { [this.locale]: localizedName },
-      } = await this._ancillaPromise;
-
-      const pageTitle = `Ancillapp - ${this.localeData.ancillas} - ${localizedName}`;
-
-      updateMetadata({
-        title: pageTitle,
-        description: this.localeData.ancillaDescription(localizedName),
-      });
-
-      analytics.logEvent('page_view', {
-        page_title: pageTitle,
-        page_location: window.location.href,
-        page_path: window.location.pathname,
-        offline: false,
-      });
-
-      if (ancillaCode !== code) {
-        window.history.replaceState(
-          {},
-          '',
-          this.localizeHref('ancillas', code),
+      if (!_ancillasPromisesCache.has(ancillaCode)) {
+        _ancillasPromisesCache.set(
+          ancillaCode,
+          fetch(`${apiUrl}/ancillas/${ancillaCode}`).then((res) => res.json()),
         );
+      }
+
+      this._ancillaPromise = _ancillasPromisesCache.get(ancillaCode)!;
+
+      if (changedProperties.has('active')) {
+        const {
+          code,
+          name: { [this.locale]: localizedName },
+        } = await this._ancillaPromise;
+
+        const pageTitle = `Ancillapp - ${this.localeData.ancillas} - ${localizedName}`;
+
+        updateMetadata({
+          title: pageTitle,
+          description: this.localeData.ancillaDescription(localizedName),
+        });
+
+        analytics.logEvent('page_view', {
+          page_title: pageTitle,
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          offline: false,
+        });
+
+        if (ancillaCode !== code) {
+          window.history.replaceState(
+            {},
+            '',
+            this.localizeHref('ancillas', code),
+          );
+        }
       }
     }
   }

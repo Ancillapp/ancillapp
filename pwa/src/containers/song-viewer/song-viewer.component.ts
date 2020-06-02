@@ -43,7 +43,7 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
   protected async updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
-    if (changedProperties.has('song') && this.song) {
+    if (this.active && changedProperties.has('song') && this.song) {
       if (!_songsStatusesCache.has(this.song)) {
         for await (const status of cacheAndNetwork<Song>(
           `${apiUrl}/songs/${

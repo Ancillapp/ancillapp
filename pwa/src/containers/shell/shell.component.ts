@@ -208,7 +208,11 @@ export class Shell extends localize(authorize(LitElement)) {
         }
         break;
       case 'ancillas':
-        import('../ancillas/ancillas.component');
+        if (subroute) {
+          import('../ancilla-viewer/ancilla-viewer.component');
+        } else {
+          import('../ancillas-list/ancillas-list.component');
+        }
         break;
       case 'holy-mass':
         import('../holy-mass/holy-mass.component');

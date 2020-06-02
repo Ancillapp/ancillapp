@@ -145,13 +145,18 @@ export default function template(this: Shell) {
             ?drawer-open="${this._narrow && this._drawerOpened}"
             prayer="${this._subroute}"
           ></prayer-viewer>
-          <ancillas-page
+          <ancillas-list
             class="page"
-            ?active="${this._page === 'ancillas'}"
+            ?active="${this._page === 'ancillas' && !this._subroute}"
             ?drawer-open="${this._narrow && this._drawerOpened}"
             @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
-            subroute="${this._subroute}"
-          ></ancillas-page>
+          ></ancillas-list>
+          <ancilla-viewer
+            class="page"
+            ?active="${this._page === 'ancillas' && this._subroute}"
+            ?drawer-open="${this._narrow && this._drawerOpened}"
+            ancilla="${this._subroute}"
+          ></ancilla-viewer>
           <holy-mass-page
             class="page padded"
             ?active="${this._page === 'holy-mass'}"
