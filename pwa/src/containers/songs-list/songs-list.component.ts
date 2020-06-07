@@ -311,6 +311,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   protected _handleSearch({ target }: InputEvent) {
     this._searchTerm = (target as HTMLInputElement).value;
 
+    this._songsContainer!.scrollTo(0, 0);
     this._refreshSongs();
   }
 
