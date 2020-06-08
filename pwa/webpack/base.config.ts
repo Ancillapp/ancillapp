@@ -32,6 +32,7 @@ const config: Configuration = {
       '@helpers': path.resolve(__dirname, '../src/helpers/'),
     },
     extensions: ['.ts', '.js', '.json', '.scss', '.sass', '.css', '.html'],
+    mainFields: ['module', 'browser', 'main'],
   },
   module: {
     rules: [

@@ -296,8 +296,8 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
         this._refreshSongs();
       }
 
-      const firstSong = this.shadowRoot!.querySelector<HTMLAnchorElement>(
-        '.songs-container > .songs-batch-container > a',
+      const firstSong = this._songsContainer!.querySelector<HTMLAnchorElement>(
+        '.songs-batch-container > a',
       );
 
       if (!firstSong) {
@@ -311,6 +311,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   protected _handleSearch({ target }: InputEvent) {
     this._searchTerm = (target as HTMLInputElement).value;
 
+    this._songsContainer!.scrollTo(0, 0);
     this._refreshSongs();
   }
 

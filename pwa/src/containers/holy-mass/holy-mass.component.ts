@@ -1,5 +1,3 @@
-
-
 import { customElement, PropertyValues, property } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
@@ -140,6 +138,9 @@ export class HolyMassPage extends localize(
     }
 
     if (changedProperties.has('user') && this.user) {
+      const twoHoursAgo = new Date();
+      twoHoursAgo.setHours(twoHoursAgo.getHours() - 2);
+
       this._bookedHolyMassesPromise = this.user
         .getIdToken()
         .then((token) =>
@@ -149,7 +150,13 @@ export class HolyMassPage extends localize(
             },
           }),
         )
-        .then((res) => res.json());
+        .then((res) => res.json())
+        .then((holyMasses: HolyMassBooking[]) =>
+          holyMasses.filter(
+            ({ date: dateString }) =>
+              this._toLocalTimeZone(new Date(dateString)) > twoHoursAgo,
+          ),
+        );
     }
 
     if (
