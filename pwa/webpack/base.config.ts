@@ -37,6 +37,11 @@ const config: Configuration = {
   module: {
     rules: [
       {
+        test: /\.po$/,
+        exclude: /node_modules/,
+        use: '@lingui/loader',
+      },
+      {
         test: /\.[tj]s$/,
         exclude: /node_modules\/(?!(@polymer|lit-html|lit-element|pwa-helpers)\/).*/,
         use: {
