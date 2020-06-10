@@ -3,6 +3,7 @@ import { until } from 'lit-html/directives/until';
 import { AncillaViewer } from './ancilla-viewer.component';
 import { load } from '../../helpers/directives';
 import { arrowBack, tau } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/share-fab/share-fab.component';
@@ -19,7 +20,7 @@ export default function template(this: AncillaViewer) {
           this._ancillaPromise.then(
             ({ name: { [this.locale]: localizedName } }) => localizedName,
           ),
-          this.localeData?.loading,
+          this.localize(t`loading`),
         )}
       </div>
     </top-app-bar>
@@ -41,7 +42,7 @@ export default function template(this: AncillaViewer) {
 
           <share-fab
             title="Ancilla Domini - ${name[this.locale]}"
-            text="${this.localeData?.shareAncillaText}"
+            text="${this.localize(t`shareAncillaText`)}"
             url="${window.location.href}"
           ></share-fab>
         `,

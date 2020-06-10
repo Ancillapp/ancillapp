@@ -7,6 +7,7 @@ import { PageViewElement } from '../../containers/page-view-element';
 import Fuse from 'fuse.js';
 import HyperList, { HyperListConfig } from 'hyperlist';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './songs-list.styles';
@@ -200,7 +201,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   private _renderSongs() {
     if (!this._songsStatus.loading && this._displayedSongs.length < 1) {
-      this._songsContainer!.innerHTML = `<p>${this.localeData?.noResults}</p>`;
+      this._songsContainer!.innerHTML = `<p>${this.localize(t`noResults`)}</p>`;
       return;
     }
 
@@ -269,11 +270,11 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     }
 
     if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localeData.songs}`;
+      const pageTitle = `Ancillapp - ${this.localize(t`songs`)}`;
 
       updateMetadata({
         title: pageTitle,
-        description: this.localeData.songsDescription,
+        description: this.localize(t`songsDescription`),
       });
 
       analytics.logEvent('page_view', {

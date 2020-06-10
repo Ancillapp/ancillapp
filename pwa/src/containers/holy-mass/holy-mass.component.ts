@@ -4,6 +4,7 @@ import { localize } from '../../helpers/localize';
 import { authorize } from '../../helpers/authorize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './holy-mass.styles';
@@ -122,11 +123,11 @@ export class HolyMassPage extends localize(
     super.updated(changedProperties);
 
     if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localeData.holyMass}`;
+      const pageTitle = `Ancillapp - ${this.localize(t`holyMass`)}`;
 
       updateMetadata({
         title: pageTitle,
-        description: this.localeData.holyMassDescription,
+        description: this.localize(t`holyMassDescription`),
       });
 
       analytics.logEvent('page_view', {

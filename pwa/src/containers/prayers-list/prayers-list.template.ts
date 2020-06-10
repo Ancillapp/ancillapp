@@ -4,6 +4,7 @@ import { repeat } from 'lit-html/directives/repeat';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { PrayersList } from './prayers-list.component';
 import { menu, tau } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
@@ -21,31 +22,31 @@ export default function template(this: PrayersList) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localeData?.prayers}
+        ${tau} ${this.localize(t`prayers`)}
       </div>
     </top-app-bar>
 
     <unobtrusive-notification ?hidden="${!this._needPrayersDownloadPermission}">
-      ${this.localeData?.prayersDownload}
+      ${this.localize(t`prayersDownload`)}
       <mwc-button
         slot="actions"
         @click="${() => this._updatePrayersDownloadPermission('never')}"
         ?disabled="${this._downloadingPrayers}"
-        label="${this.localeData?.dontAskAnymore}"
+        label="${this.localize(t`dontAskAnymore`)}"
         dense
       ></mwc-button>
       <mwc-button
         slot="actions"
         @click="${() => this._updatePrayersDownloadPermission('no')}"
         ?disabled="${this._downloadingPrayers}"
-        label="${this.localeData?.noThanks}"
+        label="${this.localize(t`noThanks`)}"
         dense
       ></mwc-button>
       <loading-button
         slot="actions"
         @click="${() => this._updatePrayersDownloadPermission('yes')}"
         ?loading="${this._downloadingPrayers}"
-        label="${this.localeData?.sure}"
+        label="${this.localize(t`sure`)}"
         dense
       ></loading-button>
     </unobtrusive-notification>
@@ -59,7 +60,7 @@ export default function template(this: PrayersList) {
       : html`
           <div class="prayers-container">
             ${this._prayersStatus.data.length < 1
-              ? html`<p>${this.localeData?.noResults}</p>`
+              ? html`<p>${this.localize(t`noResults`)}</p>`
               : html`${nothing}`}
             ${repeat(
               this._displayedPrayers,
@@ -83,7 +84,7 @@ export default function template(this: PrayersList) {
     <mwc-snackbar
       leading
       ?open="${this._prayersStatus.refreshing}"
-      labelText="${this.localeData?.syncInProgress}"
+      labelText="${this.localize(t`syncInProgress`)}"
     ></mwc-snackbar>
   `;
 }

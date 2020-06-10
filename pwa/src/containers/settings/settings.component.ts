@@ -4,6 +4,7 @@ import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { set } from '../../helpers/keyval';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './settings.styles';
@@ -33,11 +34,11 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
   }
 
   protected _updatePageMetadata() {
-    const pageTitle = `Ancillapp - ${this.localeData.settings}`;
+    const pageTitle = `Ancillapp - ${this.localize(t`settings`)}`;
 
     updateMetadata({
       title: pageTitle,
-      description: this.localeData.settingsDescription,
+      description: this.localize(t`settingsDescription`),
     });
 
     analytics.logEvent('page_view', {

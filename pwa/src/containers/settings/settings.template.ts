@@ -1,6 +1,7 @@
 import { html } from 'lit-element';
 import { SettingsPage } from './settings.component';
 import { menu, tau } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/outlined-select/outlined-select.component';
@@ -15,29 +16,29 @@ export default function template(this: SettingsPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localeData?.settings}
+        ${tau} ${this.localize(t`settings`)}
       </div>
     </top-app-bar>
 
     <section>
       <ul class="settings">
         <li>
-          <label for="theme">${this.localeData?.theme}</label>
+          <label for="theme">${this.localize(t`theme`)}</label>
           <outlined-select
             id="theme"
             @change=${this._handleThemeChange}
             value="${document.body.dataset.theme || 'system'}"
           >
             <option value="system"
-              >${this.localeData?.system || 'System'}</option
+              >${this.localize(t`system`) || 'System'}</option
             >
-            <option value="light">${this.localeData?.light || 'Light'}</option>
-            <option value="dark">${this.localeData?.dark || 'Dark'}</option>
+            <option value="light">${this.localize(t`light`) || 'Light'}</option>
+            <option value="dark">${this.localize(t`dark`) || 'Dark'}</option>
             <option value="oled">OLED</option>
           </outlined-select>
         </li>
         <li>
-          <label for="language">${this.localeData?.language}</label>
+          <label for="language">${this.localize(t`language`)}</label>
           <outlined-select
             id="language"
             @change=${this._handleLanguageChange}

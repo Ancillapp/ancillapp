@@ -4,6 +4,7 @@ import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './prayer-viewer.styles';
@@ -65,10 +66,12 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
           if (status.data) {
             _prayersStatusesCache.set(this.prayer, status);
 
-            const prayerTitle =
+            const title =
               status.data.title[this.locale] || status.data.title.la!;
 
-            const pageTitle = `Ancillapp - ${this.localeData.prayers} - ${prayerTitle}`;
+            const pageTitle = `Ancillapp - ${this.localize(
+              t`prayers`,
+            )} - ${title}`;
 
             if (pageTitle === this._previousPageTitle) {
               return;
@@ -78,7 +81,7 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
 
             updateMetadata({
               title: pageTitle,
-              description: this.localeData.prayerDescription(prayerTitle),
+              description: this.localize(`prayerDescription ${title}`),
             });
 
             analytics.logEvent('page_view', {

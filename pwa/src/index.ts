@@ -90,7 +90,7 @@ const getPreferredLocale = async () => {
 )
   .then(() =>
     Promise.all([
-      getPreferredLocale().then((locale) => import(`./locales/${locale}`)),
+      getPreferredLocale().then((locale) => import(`./locales/${locale}.po`)),
       get<string>('theme').then(
         (storedTheme) =>
           (document.body.dataset.theme = storedTheme || 'system'),

@@ -89,3 +89,12 @@ declare module 'hyperlist' {
     refresh(node: Node, config: HyperListConfig): void;
   }
 }
+
+declare module 'remark-html';
+
+declare module '*.po' {
+  import type { CompiledMessage } from '@lingui/core/cjs/i18n';
+
+  const content: { messages: Record<string, CompiledMessage> };
+  export default content;
+}
