@@ -1,12 +1,12 @@
-import type { LitElement } from 'lit-element';
+import type { LitElement, PropertyValues } from 'lit-element';
 import { get, set } from './keyval';
 import { localizedPages, localizeHref } from './localization';
+import { i18n, MessageDescriptor } from '@lingui/core';
+import type { MessageOptions } from '@lingui/core/cjs/i18n';
 
 type Constructor<T> = new (...args: any[]) => T;
 
 export type SupportedLocale = 'it' | 'en' | 'de' | 'pt';
-
-export type LocaleData = typeof import('../locales/it')['default'];
 
 export type Localized<T> = { [key in SupportedLocale]: T };
 
@@ -17,9 +17,8 @@ export const supportedLocales: readonly SupportedLocale[] = [
   'pt',
 ];
 export const defaultLocale: SupportedLocale = 'it';
-const localesPromises: { [key in SupportedLocale]?: Promise<LocaleData> } = {};
-let currentLocale: SupportedLocale;
-let currentLocaleData: LocaleData;
+
+const localesPromisesMap = new Map<SupportedLocale, Promise<void>>();
 const localizedComponents: any[] = [];
 
 export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
@@ -29,15 +28,11 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
 
       localizedComponents.push(this);
 
-      if (!currentLocale) {
-        this._loadInitialLocale();
-      } else {
-        this.updateCurrentLocaleData();
-      }
+      this._loadInitialLocale();
     }
 
-    shouldUpdate() {
-      return !!this.localeData;
+    protected shouldUpdate(changedProperties: PropertyValues) {
+      return super.shouldUpdate(changedProperties) && !!i18n.locale;
     }
 
     public async getPreferredLocale() {
@@ -71,20 +66,8 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
       await this.setLocale(locale);
     }
 
-    public async updateCurrentLocaleData() {
-      if (!localesPromises[currentLocale]) {
-        localesPromises[currentLocale] = import(
-          `../locales/${currentLocale}`
-        ).then((module) => module.default);
-      }
-
-      currentLocaleData = await localesPromises[currentLocale]!;
-
-      await this.requestUpdate();
-    }
-
     public async setLocale(locale: SupportedLocale) {
-      if (locale === currentLocale) {
+      if (locale === i18n.locale) {
         return;
       }
 
@@ -100,7 +83,7 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
 
         const pageId =
           Object.entries(localizedPages).find(
-            ([_, { [currentLocale]: localizedPageId }]) =>
+            ([_, { [i18n.locale as SupportedLocale]: localizedPageId }]) =>
               page === localizedPageId,
           )?.[0] || 'home';
 
@@ -111,25 +94,46 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
         );
       }
 
-      currentLocale = locale;
+      if (!localesPromisesMap.has(locale)) {
+        localesPromisesMap.set(
+          locale,
+          import(`../locales/${locale}.po`)
+            .then(({ default: { messages } }) => messages)
+            .then((localeData) => i18n.load(locale, localeData)),
+        );
+      }
+
+      await localesPromisesMap.get(locale);
+
+      i18n.activate(locale);
 
       await Promise.all([
         ...localizedComponents.map((localizedComponent) =>
-          localizedComponent.updateCurrentLocaleData(),
+          localizedComponent.requestUpdate(),
         ),
         set('locale', locale),
       ]);
     }
 
+    public localize(
+      id: string | MessageDescriptor,
+      values?: Record<string, unknown>,
+      messageOptions?: MessageOptions,
+    ): string {
+      return typeof id === 'string'
+        ? i18n._(id, values, messageOptions)
+        : i18n._(id);
+    }
+
     public localizeHref(page?: string, ...subroutes: string[]) {
-      return localizeHref(this.locale || defaultLocale, page, ...subroutes);
+      return localizeHref(
+        (this.locale || defaultLocale) as SupportedLocale,
+        page,
+        ...subroutes,
+      );
     }
 
     public get locale() {
-      return currentLocale;
-    }
-
-    public get localeData() {
-      return currentLocaleData;
+      return i18n.locale as SupportedLocale;
     }
   };

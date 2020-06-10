@@ -5,6 +5,7 @@ import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './prayers-list.styles';
@@ -95,11 +96,11 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
     super.updated(changedProperties);
 
     if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localeData.prayers}`;
+      const pageTitle = `Ancillapp - ${this.localize(t`prayers`)}`;
 
       updateMetadata({
         title: pageTitle,
-        description: this.localeData.prayersDescription,
+        description: this.localize(t`prayersDescription`),
       });
 
       analytics.logEvent('page_view', {

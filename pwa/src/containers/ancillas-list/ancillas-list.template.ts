@@ -3,6 +3,7 @@ import { repeat } from 'lit-html/directives/repeat';
 import { load } from '../../helpers/directives';
 import { AncillasList } from './ancillas-list.component';
 import { menu, tau } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/unobtrusive-notification/unobtrusive-notification.component';
@@ -17,30 +18,30 @@ export default function template(this: AncillasList) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localeData?.ancillas}
+        ${tau} ${this.localize(t`ancillas`)}
       </div>
     </top-app-bar>
 
     <unobtrusive-notification
       ?hidden="${!this._needUserNotificationsPermission}"
     >
-      ${this.localeData?.newAncillaNotification}
+      ${this.localize(t`newAncillaNotification`)}
       <mwc-button
         slot="actions"
         @click="${() => this._updateNotificationsPermission('never')}"
-        label="${this.localeData?.dontAskAnymore}"
+        label="${this.localize(t`dontAskAnymore`)}"
         dense
       ></mwc-button>
       <mwc-button
         slot="actions"
         @click="${() => this._updateNotificationsPermission('no')}"
-        label="${this.localeData?.noThanks}"
+        label="${this.localize(t`noThanks`)}"
         dense
       ></mwc-button>
       <mwc-button
         slot="actions"
         @click="${() => this._updateNotificationsPermission('yes')}"
-        label="${this.localeData?.sure}"
+        label="${this.localize(t`sure`)}"
         primary
         dense
       ></mwc-button>

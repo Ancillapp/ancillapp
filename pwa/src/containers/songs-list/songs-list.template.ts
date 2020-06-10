@@ -8,6 +8,7 @@ import {
   dialpad,
   notes,
 } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
@@ -56,12 +57,12 @@ export default function template(this: SongsList) {
             </mwc-icon-button>
           `}
       <div slot="title" ?hidden="${this._searching}">
-        ${tau} ${this.localeData?.songs}
+        ${tau} ${this.localize(t`songs`)}
       </div>
       <input
         id="search-input"
         slot="title"
-        placeholder="${this.localeData.search}"
+        placeholder="${this.localize(t`search`)}"
         inputmode="${this._numericOnly ? 'numeric' : 'text'}"
         ?hidden="${!this._searching}"
         @keydown="${this._handleSearchKeyDown}"
@@ -70,26 +71,26 @@ export default function template(this: SongsList) {
     </top-app-bar>
 
     <unobtrusive-notification ?hidden="${!this._needSongsDownloadPermission}">
-      ${this.localeData?.songsDownload}
+      ${this.localize(t`songsDownload`)}
       <mwc-button
         slot="actions"
         @click="${() => this._updateSongsDownloadPermission('never')}"
         ?disabled="${this._downloadingSongs}"
-        label="${this.localeData?.dontAskAnymore}"
+        label="${this.localize(t`dontAskAnymore`)}"
         dense
       ></mwc-button>
       <mwc-button
         slot="actions"
         @click="${() => this._updateSongsDownloadPermission('no')}"
         ?disabled="${this._downloadingSongs}"
-        label="${this.localeData?.noThanks}"
+        label="${this.localize(t`noThanks`)}"
         dense
       ></mwc-button>
       <loading-button
         slot="actions"
         @click="${() => this._updateSongsDownloadPermission('yes')}"
         ?loading="${this._downloadingSongs}"
-        label="${this.localeData?.sure}"
+        label="${this.localize(t`sure`)}"
         dense
       ></loading-button>
     </unobtrusive-notification>
@@ -101,32 +102,32 @@ export default function template(this: SongsList) {
     </div>
 
     <mwc-dialog
-      heading="${this.localeData?.setFilters}"
+      heading="${this.localize(t`setFilters`)}"
       ?open="${this._filtersDialogOpen}"
       @closed="${() => (this._filtersDialogOpen = false)}"
     >
       <div>
         <ul class="settings">
           <li>
-            <label for="language">${this.localeData?.language}</label>
+            <label for="language">${this.localize(t`language`)}</label>
             <outlined-select
               id="language"
               @change=${this._handleLanguageFilter}
               value="${this._selectedLanguage}"
             >
-              <option value="it">${this.localeData?.italian}</option>
-              <option value="de">${this.localeData?.german}</option>
+              <option value="it">${this.localize(t`italian`)}</option>
+              <option value="de">${this.localize(t`german`)}</option>
             </outlined-select>
           </li>
         </ul>
       </div>
       <mwc-button dialogAction="close" slot="primaryAction">
-        ${this.localeData?.close}
+        ${this.localize(t`close`)}
       </mwc-button>
     </mwc-dialog>
 
     <autosized-fab
-      label="${this.localeData?.share}"
+      label="${this.localize(t`share`)}"
       icon="filter"
       @click="${() => (this._filtersDialogOpen = true)}"
     >
@@ -135,7 +136,7 @@ export default function template(this: SongsList) {
     <mwc-snackbar
       leading
       ?open="${this._songsStatus.refreshing}"
-      labelText="${this.localeData?.syncInProgress}"
+      labelText="${this.localize(t`syncInProgress`)}"
     ></mwc-snackbar>
   `;
 }

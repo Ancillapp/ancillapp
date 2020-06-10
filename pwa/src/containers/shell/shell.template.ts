@@ -2,6 +2,7 @@ import { html, SVGTemplateResult } from 'lit-element';
 import { nothing } from 'lit-html';
 import { Shell } from './shell.component';
 import * as icons from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '@material/mwc-drawer';
 import '@material/mwc-button';
@@ -12,6 +13,17 @@ import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/snackbar/snackbar.component';
 
+const pagesTranslations = {
+  home: t`home`,
+  breviary: t`breviary`,
+  songs: t`songs`,
+  prayers: t`prayers`,
+  ancillas: t`ancillas`,
+  holyMass: t`holyMass`,
+  settings: t`settings`,
+  info: t`info`,
+};
+
 export default function template(this: Shell) {
   return html`
     <mwc-drawer
@@ -19,7 +31,7 @@ export default function template(this: Shell) {
       type="${this._narrow ? 'dismissible' : 'modal'}"
       ?open="${this._drawerOpened}"
     >
-      <span slot="title">${this.localeData?.menu}</span>
+      <span slot="title">${this.localize(t`menu`)}</span>
       <div class="menu">
         <mwc-list activatable class="top-nav">
           ${this._topNavPages.map(
@@ -37,13 +49,15 @@ export default function template(this: Shell) {
                       )}Icon`
                     ]}
                   </div>
-                  <slot
-                    >${(this.localeData as { [key: string]: string })?.[
-                      page.replace(/-([a-z])/g, (_, letter) =>
-                        letter.toUpperCase(),
-                      )
-                    ]}</slot
-                  >
+                  <slot>
+                    ${this.localize(
+                      pagesTranslations[
+                        page.replace(/-([a-z])/g, (_, letter) =>
+                          letter.toUpperCase(),
+                        ) as keyof typeof pagesTranslations
+                      ],
+                    )}
+                  </slot>
                 </mwc-list-item>
                 ${page === 'home'
                   ? html`<li divider role="separator"></li>`
@@ -60,7 +74,7 @@ export default function template(this: Shell) {
                   <div slot="graphic">
                     ${icons.logout}
                   </div>
-                  <slot>${this.localeData?.logout}</slot>
+                  <slot>${this.localize(t`logout`)}</slot>
                 </mwc-list-item>
               `
             : html`
@@ -73,7 +87,7 @@ export default function template(this: Shell) {
                     <div slot="graphic">
                       ${icons.user}
                     </div>
-                    <slot>${this.localeData?.login}</slot>
+                    <slot>${this.localize(t`login`)}</slot>
                   </mwc-list-item>
                 </a>
               `}
@@ -90,11 +104,15 @@ export default function template(this: Shell) {
                       `${page}Icon`
                     ]}
                   </div>
-                  <slot
-                    >${(this.localeData as { [key: string]: string })?.[
-                      page
-                    ]}</slot
-                  >
+                  <slot>
+                    ${this.localize(
+                      pagesTranslations[
+                        page.replace(/-([a-z])/g, (_, letter) =>
+                          letter.toUpperCase(),
+                        ) as keyof typeof pagesTranslations
+                      ],
+                    )}
+                  </slot>
                 </mwc-list-item>
               </a>
             `,
@@ -187,16 +205,16 @@ export default function template(this: Shell) {
     </mwc-drawer>
 
     <snack-bar ?active="${this._updateNotificationShown}">
-      <slot>${this.localeData?.updateAvailable}</slot>
+      <slot>${this.localize(t`updateAvailable`)}</slot>
       <mwc-button
         slot="actions"
         @click="${this._cancelUpdate}"
-        label="${this.localeData?.ignore}"
+        label="${this.localize(t`ignore`)}"
       ></mwc-button>
       <mwc-button
         slot="actions"
         @click="${this._updateApp}"
-        label="${this.localeData?.updateNow}"
+        label="${this.localize(t`updateNow`)}"
       ></mwc-button>
     </snack-bar>
 

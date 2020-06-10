@@ -4,6 +4,7 @@ import { localize } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './ancilla-viewer.styles';
@@ -63,14 +64,14 @@ export class AncillaViewer extends localize(withTopAppBar(PageViewElement)) {
       if (changedProperties.has('active')) {
         const {
           code,
-          name: { [this.locale]: localizedName },
+          name: { [this.locale]: name },
         } = await this._ancillaPromise;
 
-        const pageTitle = `Ancillapp - ${this.localeData.ancillas} - ${localizedName}`;
+        const pageTitle = `Ancillapp - ${this.localize(t`ancillas`)} - ${name}`;
 
         updateMetadata({
           title: pageTitle,
-          description: this.localeData.ancillaDescription(localizedName),
+          description: this.localize(t`ancillaDescription ${name}`),
         });
 
         analytics.logEvent('page_view', {

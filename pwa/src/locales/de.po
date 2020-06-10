@@ -1,0 +1,376 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2020-06-09 12:56+0200\n"
+"Mime-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: de\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/containers/holy-mass/holy-mass.template.ts:121
+msgid "actions"
+msgstr ""
+
+#: src/containers/ancilla-viewer/ancilla-viewer.component.ts:55
+msgid "ancillaDescription {name}"
+msgstr ""
+
+#: src/containers/ancilla-viewer/ancilla-viewer.component.ts:52
+#: src/containers/ancillas-list/ancillas-list.component.ts:45
+#: src/containers/ancillas-list/ancillas-list.template.ts:18
+#: src/containers/shell/shell.template.ts:18
+msgid "ancillas"
+msgstr "Ancilla Domini"
+
+#: src/containers/ancillas-list/ancillas-list.component.ts:48
+msgid "ancillasDescription"
+msgstr ""
+
+#: src/containers/login/login.template.ts:82
+msgid "backToLogin"
+msgstr ""
+
+#: src/containers/holy-mass/holy-mass.template.ts:100
+msgid "book"
+msgstr ""
+
+#: src/containers/home/home.template.ts:48
+msgid "bookHolyMassSeat"
+msgstr ""
+
+#: src/containers/holy-mass/holy-mass.template.ts:110
+msgid "bookedSeats"
+msgstr ""
+
+#: src/containers/breviary-index/breviary-index.component.ts:38
+#: src/containers/breviary-index/breviary-index.template.ts:28
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:65
+#: src/containers/shell/shell.template.ts:15
+msgid "breviary"
+msgstr "Brevier"
+
+#: src/containers/breviary-index/breviary-index.component.ts:41
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:68
+msgid "breviaryDescription"
+msgstr ""
+
+#: src/containers/breviary-index/breviary-index.template.ts:36
+#: src/containers/holy-mass/holy-mass.template.ts:67
+msgid "cancel"
+msgstr "Stornieren"
+
+#: src/containers/holy-mass/holy-mass.template.ts:202
+msgid "cancelBooking"
+msgstr ""
+
+#: src/containers/login/login.template.ts:52
+msgid "checkYourInbox"
+msgstr ""
+
+#: src/containers/holy-mass/holy-mass.template.ts:199
+#: src/containers/songs-list/songs-list.template.ts:114
+msgid "close"
+msgstr "Schließen"
+
+#: src/containers/breviary-index/breviary-index.template.ts:15
+msgid "compline"
+msgstr "Komplet"
+
+#: src/containers/settings/settings.template.ts:33
+msgid "dark"
+msgstr "Dunkel"
+
+#: src/containers/breviary-index/breviary-index.template.ts:34
+#: src/containers/holy-mass/holy-mass.template.ts:63
+#: src/containers/holy-mass/holy-mass.template.ts:118
+msgid "date"
+msgstr "Datum"
+
+#: src/containers/holy-mass/holy-mass.template.ts:93
+msgid "dayAlreadyBooked"
+msgstr ""
+
+#: src/containers/ancillas-list/ancillas-list.template.ts:29
+#: src/containers/prayers-list/prayers-list.template.ts:32
+#: src/containers/songs-list/songs-list.template.ts:68
+msgid "dontAskAnymore"
+msgstr "Frag nicht mehr"
+
+#: src/containers/login/login.template.ts:83
+msgid "forgotPassword"
+msgstr ""
+
+#: src/containers/holy-mass/holy-mass.template.ts:38
+#: src/containers/holy-mass/holy-mass.template.ts:117
+msgid "fraternity"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:108
+msgid "german"
+msgstr "Deutsch"
+
+#: src/containers/holy-mass/holy-mass.component.ts:62
+#: src/containers/holy-mass/holy-mass.template.ts:24
+#: src/containers/shell/shell.template.ts:19
+msgid "holyMass"
+msgstr "Heilige Messe"
+
+#: src/containers/holy-mass/holy-mass.component.ts:65
+msgid "holyMassDescription"
+msgstr ""
+
+#: src/containers/home/home.component.ts:26
+#: src/containers/shell/shell.template.ts:14
+msgid "home"
+msgstr "Home"
+
+#: src/containers/home/home.component.ts:29
+msgid "homeDescription"
+msgstr ""
+
+#: src/containers/shell/shell.template.ts:186
+msgid "ignore"
+msgstr "Ignorieren"
+
+#: src/containers/info/info.component.ts:26
+#: src/containers/info/info.template.ts:15
+#: src/containers/shell/shell.template.ts:21
+msgid "info"
+msgstr "Informationen"
+
+#: src/containers/info/info.component.ts:29
+msgid "infoDescription"
+msgstr ""
+
+#: src/containers/breviary-index/breviary-index.template.ts:8
+msgid "invitatory"
+msgstr "Invitatorium"
+
+#: src/containers/songs-list/songs-list.template.ts:107
+msgid "italian"
+msgstr "Italienisch"
+
+#: src/containers/settings/settings.template.ts:38
+#: src/containers/songs-list/songs-list.template.ts:101
+msgid "language"
+msgstr "Sprache"
+
+#: src/containers/breviary-index/breviary-index.template.ts:10
+msgid "lauds"
+msgstr "Laudes"
+
+#: src/containers/settings/settings.template.ts:32
+msgid "light"
+msgstr "Licht"
+
+#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:16
+#: src/containers/breviary-index/breviary-index.template.ts:40
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:17
+#: src/containers/song-viewer/song-viewer.template.ts:18
+msgid "loading"
+msgstr "Wird geladen…"
+
+#: src/containers/login/login.component.ts:49
+#: src/containers/login/login.template.ts:24
+#: src/containers/login/login.template.ts:68
+#: src/containers/shell/shell.template.ts:74
+msgid "login"
+msgstr ""
+
+#: src/containers/login/login.component.ts:52
+msgid "loginDescription"
+msgstr ""
+
+#: src/containers/login/login.template.ts:30
+msgid "loginOrRegister"
+msgstr ""
+
+#: src/containers/shell/shell.template.ts:61
+msgid "logout"
+msgstr ""
+
+#: src/containers/breviary-index/breviary-index.template.ts:9
+msgid "matins"
+msgstr "Lesehore"
+
+#: src/containers/shell/shell.template.ts:30
+msgid "menu"
+msgstr "Menü"
+
+#: src/containers/ancillas-list/ancillas-list.template.ts:25
+msgid "newAncillaNotification"
+msgstr "Möchten Sie jedes Mal eine Benachrichtigung erhalten, wenn eine neue Ancilla Domini veröffentlicht wird?"
+
+#: src/containers/holy-mass/holy-mass.template.ts:95
+msgid "noHolyMassesAvailable"
+msgstr ""
+
+#: src/containers/prayers-list/prayers-list.template.ts:60
+#: src/containers/songs-list/songs-list.component.ts:156
+msgid "noResults"
+msgstr "Keine Ergebnisse"
+
+#: src/containers/holy-mass/holy-mass.template.ts:167
+msgid "noSeatsBooked"
+msgstr ""
+
+#: src/containers/ancillas-list/ancillas-list.template.ts:35
+#: src/containers/prayers-list/prayers-list.template.ts:39
+#: src/containers/songs-list/songs-list.template.ts:75
+msgid "noThanks"
+msgstr "Nein, danke"
+
+#: src/containers/breviary-index/breviary-index.template.ts:13
+msgid "none"
+msgstr "Non"
+
+#: src/containers/home/home.template.ts:20
+msgid "peaceAndGood"
+msgstr "Frieden und Gutes!"
+
+#: src/containers/home/home.template.ts:36
+msgid "prayDailyPrayers"
+msgstr "Bete die täglichen gebete"
+
+#: src/containers/home/home.template.ts:24
+msgid "prayLiturgy"
+msgstr "Bete die Liturgie der Stunden"
+
+#: src/containers/prayer-viewer/prayer-viewer.component.ts:62
+#: src/containers/prayers-list/prayers-list.component.ts:82
+#: src/containers/prayers-list/prayers-list.template.ts:22
+#: src/containers/shell/shell.template.ts:17
+msgid "prayers"
+msgstr "Gebete"
+
+#: src/containers/prayers-list/prayers-list.component.ts:85
+msgid "prayersDescription"
+msgstr ""
+
+#: src/containers/prayers-list/prayers-list.template.ts:27
+msgid "prayersDownload"
+msgstr "Möchten Sie jetzt alle gebete herunterladen, damit Sie sie auch dann abrufen können, wenn Sie offline sind?"
+
+#: src/containers/home/home.template.ts:42
+msgid "readLatestAncilla"
+msgstr "Lesen Sie das neueste Ancilla Domini"
+
+#: src/containers/login/login.template.ts:45
+msgid "resetPassword"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:54
+msgid "search"
+msgstr "Suche"
+
+#: src/containers/holy-mass/holy-mass.template.ts:51
+#: src/containers/holy-mass/holy-mass.template.ts:120
+msgid "seats"
+msgstr ""
+
+#: src/containers/breviary-index/breviary-index.template.ts:35
+#: src/containers/holy-mass/holy-mass.template.ts:66
+msgid "set"
+msgstr "Einstellen"
+
+#: src/containers/songs-list/songs-list.template.ts:94
+msgid "setFilters"
+msgstr "Filter einstellen"
+
+#: src/containers/settings/settings.component.ts:40
+#: src/containers/settings/settings.template.ts:16
+#: src/containers/shell/shell.template.ts:20
+msgid "settings"
+msgstr "Einstellungen"
+
+#: src/containers/settings/settings.component.ts:43
+msgid "settingsDescription"
+msgstr ""
+
+#: src/containers/breviary-index/breviary-index.template.ts:12
+msgid "sext"
+msgstr "Sext"
+
+#: src/components/share-fab/share-fab.template.ts:7
+#: src/containers/songs-list/songs-list.template.ts:119
+msgid "share"
+msgstr "Teilen"
+
+#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:32
+msgid "shareAncillaText"
+msgstr "Schauen Sie sich dieses Ancilla Domini an!"
+
+#: src/containers/song-viewer/song-viewer.template.ts:36
+msgid "shareSongText"
+msgstr "Schauen Sie sich dieses lied an!"
+
+#: src/containers/home/home.template.ts:30
+msgid "singFraternitySongs"
+msgstr "Singe die Gemeinschaftslieder"
+
+#: src/containers/song-viewer/song-viewer.component.ts:69
+msgid "songDescription {title}"
+msgstr ""
+
+#: src/containers/shell/shell.template.ts:16
+#: src/containers/song-viewer/song-viewer.component.ts:61
+#: src/containers/songs-list/songs-list.component.ts:197
+#: src/containers/songs-list/songs-list.template.ts:49
+msgid "songs"
+msgstr "Lieder"
+
+#: src/containers/songs-list/songs-list.component.ts:200
+msgid "songsDescription"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:63
+msgid "songsDownload"
+msgstr "Möchten Sie jetzt alle lieder herunterladen, damit Sie sie auch dann abrufen können, wenn Sie offline sind?"
+
+#: src/containers/ancillas-list/ancillas-list.template.ts:41
+#: src/containers/prayers-list/prayers-list.template.ts:46
+#: src/containers/songs-list/songs-list.template.ts:82
+msgid "sure"
+msgstr "Sicher!"
+
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:37
+#: src/containers/prayers-list/prayers-list.template.ts:76
+#: src/containers/song-viewer/song-viewer.template.ts:44
+#: src/containers/songs-list/songs-list.template.ts:128
+msgid "syncInProgress"
+msgstr "Synchronisierung läuft…"
+
+#: src/containers/settings/settings.template.ts:30
+msgid "system"
+msgstr "System"
+
+#: src/containers/breviary-index/breviary-index.template.ts:11
+msgid "terce"
+msgstr "Terz"
+
+#: src/containers/settings/settings.template.ts:23
+msgid "theme"
+msgstr "Thema"
+
+#: src/containers/holy-mass/holy-mass.template.ts:75
+#: src/containers/holy-mass/holy-mass.template.ts:119
+msgid "time"
+msgstr ""
+
+#: src/containers/shell/shell.template.ts:182
+msgid "updateAvailable"
+msgstr "Update verfügbar!"
+
+#: src/containers/shell/shell.template.ts:191
+msgid "updateNow"
+msgstr "Jetzt aktualisieren"
+
+#: src/containers/breviary-index/breviary-index.template.ts:14
+msgid "vespers"
+msgstr "Vesper"

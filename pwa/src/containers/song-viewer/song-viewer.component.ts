@@ -4,6 +4,7 @@ import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './song-viewer.styles';
@@ -55,9 +56,9 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
           if (status.data) {
             _songsStatusesCache.set(this.song, status);
 
-            const pageTitle = `Ancillapp - ${
-              this.localeData.songs
-            } - ${status.data.number.slice(2)}. ${status.data.title}`;
+            const pageTitle = `Ancillapp - ${this.localize(
+              t`songs`,
+            )} - ${status.data.number.slice(2)}. ${status.data.title}`;
 
             if (pageTitle === this._previousPageTitle) {
               return;
@@ -65,9 +66,13 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
 
             this._previousPageTitle = pageTitle;
 
+            const {
+              data: { title },
+            } = status;
+
             updateMetadata({
               title: pageTitle,
-              description: this.localeData.songDescription(status.data.title),
+              description: this.localize(t`songDescription ${title}`),
             });
 
             analytics.logEvent('page_view', {

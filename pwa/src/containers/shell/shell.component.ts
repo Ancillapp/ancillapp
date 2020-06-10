@@ -11,6 +11,7 @@ import { localize, SupportedLocale } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './shell.styles';

@@ -9,6 +9,7 @@ module.exports = {
     '@babel/typescript',
   ],
   plugins: [
+    'macros',
     [
       'template-html-minifier',
       {

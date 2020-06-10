@@ -5,6 +5,7 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './breviary-index.styles';
@@ -47,11 +48,11 @@ export class BreviaryIndex extends localize(withTopAppBar(PageViewElement)) {
     }
 
     if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localeData.breviary}`;
+      const pageTitle = `Ancillapp - ${this.localize(t`breviary`)}`;
 
       updateMetadata({
         title: pageTitle,
-        description: this.localeData.breviaryDescription,
+        description: this.localize(t`breviaryDescription`),
       });
 
       analytics.logEvent('page_view', {

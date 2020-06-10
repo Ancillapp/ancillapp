@@ -1,9 +1,9 @@
-
 import { customElement, PropertyValues } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './home.styles';
@@ -23,11 +23,11 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     super.updated(changedProperties);
 
     if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localeData.home}`;
+      const pageTitle = `Ancillapp - ${this.localize(t`home`)}`;
 
       updateMetadata({
         title: pageTitle,
-        description: this.localeData.homeDescription,
+        description: this.localize(t`homeDescription`),
       });
 
       analytics.logEvent('page_view', {
