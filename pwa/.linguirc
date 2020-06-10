@@ -16,6 +16,5 @@
     "de",
     "pt"
   ],
-  "fallbackLocale": "it",
-  "orderBy": "origin"
+  "fallbackLocale": "it"
 }
