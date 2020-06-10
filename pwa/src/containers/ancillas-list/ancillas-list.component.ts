@@ -4,6 +4,7 @@ import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
+import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './ancillas-list.styles';
@@ -58,11 +59,11 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
     super.updated(changedProperties);
 
     if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localeData.ancillas}`;
+      const pageTitle = `Ancillapp - ${this.localize(t`ancillas`)}`;
 
       updateMetadata({
         title: pageTitle,
-        description: this.localeData.ancillasDescription,
+        description: this.localize(t`ancillasDescription`),
       });
 
       analytics.logEvent('page_view', {

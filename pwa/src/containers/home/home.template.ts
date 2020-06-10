@@ -9,6 +9,7 @@ import {
   tau,
 } from '../../components/icons';
 import { HomePage } from './home.component';
+import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 
@@ -27,36 +28,35 @@ export default function template(this: HomePage) {
     </top-app-bar>
 
     <section>
-      <h2>${this.localeData?.peaceAndGood}</h2>
+      <h2>${this.localize(t`peaceAndGood`)}</h2>
       <ul>
         <li>
           <a href="${this.localizeHref('breviary')}">
-            <span>${this.localeData?.prayLiturgy}</span>
+            <span>${this.localize(t`prayLiturgy`)}</span>
             ${breviaryIcon}
           </a>
         </li>
         <li>
           <a href="${this.localizeHref('songs')}">
-            <span>${this.localeData?.singFraternitySongs}</span>
+            <span>${this.localize(t`singFraternitySongs`)}</span>
             ${songsIcon}
           </a>
         </li>
         <li>
           <a href="${this.localizeHref('prayers')}">
-            <span>${this.localeData?.prayDailyPrayers}</span>
+            <span>${this.localize(t`prayDailyPrayers`)}</span>
             ${prayersIcon}
           </a>
         </li>
         <li>
           <a href="${this.localizeHref('ancillas', 'latest')}">
-            <span>${this.localeData?.readLatestAncilla}</span>
+            <span>${this.localize(t`readLatestAncilla`)}</span>
             ${ancillasIcon}
           </a>
         </li>
-        <li
-        >
+        <li>
           <a href="${this.localizeHref('holy-mass')}">
-            <span>${this.localeData?.bookHolyMassSeat}</span>
+            <span>${this.localize(t`bookHolyMassSeat`)}</span>
             ${holyMassIcon}
           </a>
         </li>

@@ -4,6 +4,7 @@ import { repeat } from 'lit-html/directives/repeat';
 import { HolyMassPage } from './holy-mass.component';
 import { load } from '../../helpers/directives';
 import { remove, menu, tau } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '@material/mwc-button';
 import '@material/mwc-dialog';
@@ -24,7 +25,7 @@ export default function template(this: HolyMassPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localeData?.holyMass}
+        ${tau} ${this.localize(t`holyMass`)}
       </div>
     </top-app-bar>
 
@@ -46,7 +47,7 @@ export default function template(this: HolyMassPage) {
                   <ul class="settings">
                     <li>
                       <label for="fraternity"
-                        >${this.localeData?.fraternity}</label
+                        >${this.localize(t`fraternity`)}</label
                       >
                       <outlined-select
                         id="fraternity"
@@ -62,7 +63,7 @@ export default function template(this: HolyMassPage) {
                       </outlined-select>
                     </li>
                     <li>
-                      <label for="seats">${this.localeData?.seats}</label>
+                      <label for="seats">${this.localize(t`seats`)}</label>
                       <outlined-select
                         id="seats"
                         @change="${({ target }: Event) =>
@@ -80,11 +81,11 @@ export default function template(this: HolyMassPage) {
                       </outlined-select>
                     </li>
                     <li>
-                      <label for="date">${this.localeData?.date}</label>
+                      <label for="date">${this.localize(t`date`)}</label>
                       <date-input
                         id="date"
-                        set-label="${this.localeData?.set}"
-                        cancel-label="${this.localeData?.cancel}"
+                        set-label="${this.localize(t`set`)}"
+                        cancel-label="${this.localize(t`cancel`)}"
                         value="${this._selectedDate}"
                         @change="${this._handleDateChange}"
                         min="${this._minDate}"
@@ -92,7 +93,7 @@ export default function template(this: HolyMassPage) {
                       ></date-input>
                     </li>
                     <li>
-                      <label for="time">${this.localeData?.time}</label>
+                      <label for="time">${this.localize(t`time`)}</label>
                       <outlined-select
                         id="time"
                         @change="${({ target }: Event) =>
@@ -113,14 +114,14 @@ export default function template(this: HolyMassPage) {
                   <div class="book-action-bar">
                     <p>
                       ${dayAlreadyBooked
-                        ? this.localeData?.dayAlreadyBooked
+                        ? this.localize(t`dayAlreadyBooked`)
                         : availableTimes.length < 1
-                        ? this.localeData?.noHolyMassesAvailable
+                        ? this.localize(t`noHolyMassesAvailable`)
                         : nothing}
                     </p>
                     <loading-button
                       raised
-                      label="${this.localeData?.book}"
+                      label="${this.localize(t`book`)}"
                       slot="primaryAction"
                       dialogAction="book"
                       @click="${this._bookHolyMassSeat}"
@@ -130,18 +131,18 @@ export default function template(this: HolyMassPage) {
                     >
                     </loading-button>
                   </div>
-                  <h3>${this.localeData?.bookedSeats}</h3>
+                  <h3>${this.localize(t`bookedSeats`)}</h3>
                   ${holyMasses.length > 0
                     ? html`
                         <div class="responsive-table">
                           <table>
                             <thead>
                               <tr>
-                                <th>${this.localeData?.fraternity}</th>
-                                <th>${this.localeData?.date}</th>
-                                <th>${this.localeData?.time}</th>
-                                <th>${this.localeData?.seats}</th>
-                                <th>${this.localeData?.actions}</th>
+                                <th>${this.localize(t`fraternity`)}</th>
+                                <th>${this.localize(t`date`)}</th>
+                                <th>${this.localize(t`time`)}</th>
+                                <th>${this.localize(t`seats`)}</th>
+                                <th>${this.localize(t`actions`)}</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -205,7 +206,7 @@ export default function template(this: HolyMassPage) {
                           </table>
                         </div>
                       `
-                    : html`<p>${this.localeData?.noSeatsBooked}</p>`}
+                    : html`<p>${this.localize(t`noSeatsBooked`)}</p>`}
                 </section>
 
                 <mwc-dialog
@@ -245,10 +246,10 @@ export default function template(this: HolyMassPage) {
                     >?
                   </p>
                   <mwc-button dialogAction="close" slot="secondaryAction">
-                    ${this.localeData?.close}
+                    ${this.localize(t`close`)}
                   </mwc-button>
                   <mwc-button dialogAction="cancelBooking" slot="primaryAction">
-                    ${this.localeData?.cancelBooking}
+                    ${this.localize(t`cancelBooking`)}
                   </mwc-button>
                 </mwc-dialog>
               `;

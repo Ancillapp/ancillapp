@@ -2,6 +2,7 @@ import { html } from 'lit-element';
 import { SongViewer } from './song-viewer.component';
 import { compile } from '../../helpers/directives';
 import { arrowBack, tau } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';
@@ -19,7 +20,7 @@ export default function template(this: SongViewer) {
           ? `${this._songStatus.data.number.slice(2)}. ${
               this._songStatus.data.title
             }`
-          : this.localeData?.loading}
+          : this.localize(t`loading`)}
       </div>
     </top-app-bar>
 
@@ -37,7 +38,7 @@ export default function template(this: SongViewer) {
           <share-fab
             title="${this._songStatus.data.number.slice(2)}. ${this._songStatus
               .data.title}"
-            text="${this.localeData?.shareSongText}"
+            text="${this.localize(t`shareSongText`)}"
             url="${window.location.href}"
           ></share-fab>
         `}
@@ -45,7 +46,7 @@ export default function template(this: SongViewer) {
     <mwc-snackbar
       leading
       ?open="${this._songStatus.refreshing}"
-      labelText="${this.localeData?.syncInProgress}"
+      labelText="${this.localize(t`syncInProgress`)}"
     ></mwc-snackbar>
   `;
 }

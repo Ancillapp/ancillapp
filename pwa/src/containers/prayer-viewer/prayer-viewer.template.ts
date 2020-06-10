@@ -2,6 +2,7 @@ import { html } from 'lit-element';
 import { PrayerViewer } from './prayer-viewer.component';
 import { compile } from '../../helpers/directives';
 import { arrowBack, tau } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';
@@ -16,7 +17,7 @@ export default function template(this: PrayerViewer) {
         ${tau}
         ${this._prayerStatus.data?.title[this.locale] ||
         this._prayerStatus.data?.title.la ||
-        this.localeData?.loading}
+        this.localize(t`loading`)}
       </div>
     </top-app-bar>
 
@@ -38,7 +39,7 @@ export default function template(this: PrayerViewer) {
     <mwc-snackbar
       leading
       ?open="${this._prayerStatus.refreshing}"
-      labelText="${this.localeData?.syncInProgress}"
+      labelText="${this.localize(t`syncInProgress`)}"
     ></mwc-snackbar>
   `;
 }

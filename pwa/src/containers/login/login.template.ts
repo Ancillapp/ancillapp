@@ -1,9 +1,8 @@
-
-
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { LoginPage } from './login.component';
 import { menu, tau } from '../../components/icons';
+import { t } from '@lingui/macro';
 
 import '@material/mwc-textfield';
 import '../../components/top-app-bar/top-app-bar.component';
@@ -29,13 +28,13 @@ export default function template(this: LoginPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localeData?.login}
+        ${tau} ${this.localize(t`login`)}
       </div>
     </top-app-bar>
 
     <section>
       <div>
-        <h3>${this.localeData?.loginOrRegister}</h3>
+        <h3>${this.localize(t`loginOrRegister`)}</h3>
         <mwc-textfield
           outlined
           type="email"
@@ -50,14 +49,14 @@ export default function template(this: LoginPage) {
           ? html`
               <loading-button
                 raised
-                label="${this.localeData?.resetPassword}"
+                label="${this.localize(t`resetPassword`)}"
                 @click="${this._handlePasswordReset}"
                 ?loading="${this._resettingPassword}"
                 ?disabled="${this._passwordReset || loggingIn}"
               ></loading-button>
 
               ${this._passwordReset
-                ? html`<p>${this.localeData?.checkYourInbox}</p>`
+                ? html`<p>${this.localize(t`checkYourInbox`)}</p>`
                 : html`${nothing}`}
             `
           : html`
@@ -73,7 +72,7 @@ export default function template(this: LoginPage) {
               ></mwc-textfield>
               <loading-button
                 raised
-                label="${this.localeData?.login}"
+                label="${this.localize(t`login`)}"
                 @click="${this._handleEmailPasswordLogin}"
                 ?loading="${this._loggingInWithEmailAndPassword}"
                 ?disabled="${loggingIn}"
@@ -87,8 +86,8 @@ export default function template(this: LoginPage) {
             @click="${() => (this._forgotPassword = !this._forgotPassword)}"
           >
             ${this._forgotPassword
-              ? this.localeData?.backToLogin
-              : this.localeData?.forgotPassword}
+              ? this.localize(t`backToLogin`)
+              : this.localize(t`forgotPassword`)}
           </a>
         </p>
       </div>
