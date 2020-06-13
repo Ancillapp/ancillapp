@@ -60,6 +60,14 @@ msgstr "Brevier"
 msgid "breviaryDescription"
 msgstr ""
 
+#: src/containers/info/info.template.ts:54
+msgid "brotherlyLifePillarDescription"
+msgstr ""
+
+#: src/containers/info/info.template.ts:53
+msgid "brotherlyLifePillarTitle"
+msgstr ""
+
 #: src/containers/breviary-index/breviary-index.template.ts:36
 #: src/containers/holy-mass/holy-mass.template.ts:67
 msgid "cancel"
@@ -102,8 +110,44 @@ msgstr ""
 msgid "dontAskAnymore"
 msgstr "Frag nicht mehr"
 
+#: src/containers/info/info.template.ts:27
+msgid "ffbInfoDescription"
+msgstr ""
+
+#: src/containers/info/info.template.ts:26
+msgid "ffbInfoTitle"
+msgstr ""
+
 #: src/containers/login/login.template.ts:83
 msgid "forgotPassword"
+msgstr ""
+
+#: src/containers/info/info.template.ts:43
+msgid "foundationDescription"
+msgstr ""
+
+#: src/containers/info/info.template.ts:38
+msgid "foundationPhrase"
+msgstr ""
+
+#: src/containers/info/info.template.ts:40
+msgid "foundationPhraseAuthor"
+msgstr ""
+
+#: src/containers/info/info.template.ts:35
+msgid "founderAndFoundationTitle"
+msgstr ""
+
+#: src/containers/info/info.template.ts:36
+msgid "founderDescription"
+msgstr ""
+
+#: src/containers/info/info.template.ts:33
+msgid "franciscanSpiritualityDescription"
+msgstr ""
+
+#: src/containers/info/info.template.ts:32
+msgid "franciscanSpiritualityTitle"
 msgstr ""
 
 #: src/containers/holy-mass/holy-mass.template.ts:38
@@ -134,12 +178,20 @@ msgstr "Home"
 msgid "homeDescription"
 msgstr ""
 
+#: src/containers/info/info.template.ts:51
+msgid "hospitalityPillarDescription"
+msgstr ""
+
+#: src/containers/info/info.template.ts:50
+msgid "hospitalityPillarTitle"
+msgstr ""
+
 #: src/containers/shell/shell.template.ts:186
 msgid "ignore"
 msgstr "Ignorieren"
 
 #: src/containers/info/info.component.ts:26
-#: src/containers/info/info.template.ts:15
+#: src/containers/info/info.template.ts:21
 #: src/containers/shell/shell.template.ts:21
 msgid "info"
 msgstr "Informationen"
@@ -195,6 +247,14 @@ msgstr ""
 msgid "logout"
 msgstr ""
 
+#: src/containers/info/info.template.ts:30
+msgid "marianSpiritualityDescription"
+msgstr ""
+
+#: src/containers/info/info.template.ts:29
+msgid "marianSpiritualityTitle"
+msgstr ""
+
 #: src/containers/breviary-index/breviary-index.template.ts:9
 msgid "matins"
 msgstr "Lesehore"
@@ -202,6 +262,10 @@ msgstr "Lesehore"
 #: src/containers/shell/shell.template.ts:30
 msgid "menu"
 msgstr "Menü"
+
+#: src/containers/info/info.template.ts:56
+msgid "moreInfoWebsite {websiteUrl}"
+msgstr ""
 
 #: src/containers/ancillas-list/ancillas-list.template.ts:25
 msgid "newAncillaNotification"
@@ -234,6 +298,10 @@ msgstr "Non"
 msgid "peaceAndGood"
 msgstr "Frieden und Gutes!"
 
+#: src/containers/info/info.template.ts:45
+msgid "pillarsTitle"
+msgstr ""
+
 #: src/containers/home/home.template.ts:36
 msgid "prayDailyPrayers"
 msgstr "Bete die täglichen gebete"
@@ -241,6 +309,14 @@ msgstr "Bete die täglichen gebete"
 #: src/containers/home/home.template.ts:24
 msgid "prayLiturgy"
 msgstr "Bete die Liturgie der Stunden"
+
+#: src/containers/info/info.template.ts:48
+msgid "prayerPillarDescription"
+msgstr ""
+
+#: src/containers/info/info.template.ts:47
+msgid "prayerPillarTitle"
+msgstr ""
 
 #: src/containers/prayer-viewer/prayer-viewer.component.ts:62
 #: src/containers/prayers-list/prayers-list.component.ts:82

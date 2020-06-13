@@ -14,20 +14,29 @@ const parser = remark()
   .use(html)
   .use(breaks);
 
-const mapMessage = async (message: string) => {
-  if (!message || typeof message !== 'string') {
-    return message;
+const markdownPoweredTranslations = [
+  'ffbInfoDescription',
+  'marianSpiritualityDescription',
+  'franciscanSpiritualityDescription',
+  'founderDescription',
+  'foundationDescription',
+  'prayerPillarDescription',
+  'hospitalityPillarDescription',
+  'brotherlyLifePillarDescription',
+];
+
+const mapMessage = async (key: string, value: string) => {
+  if (
+    !value ||
+    typeof value !== 'string' ||
+    !markdownPoweredTranslations.includes(key)
+  ) {
+    return value;
   }
 
-  const { contents } = await parser.process(message);
+  const { contents } = await parser.process(value);
 
-  const contentsString = contents.toString();
-
-  const paragraphsCount = (contentsString.match(/<p>/g) || []).length;
-
-  return paragraphsCount > 1
-    ? contentsString
-    : contentsString.replace(/<\/?p>\n?/g, '');
+  return contents.toString();
 };
 
 export default function (
@@ -50,7 +59,7 @@ export default function (
   Promise.all(
     Object.entries<string>(
       sandbox.module.exports.messages,
-    ).map(async ([key, value]) => [key, await mapMessage(value)]),
+    ).map(async ([key, value]) => [key, await mapMessage(key, value)]),
   )
     .then((mappedMessagesKeyVal) => {
       const mappedMessages = mappedMessagesKeyVal.reduce(
