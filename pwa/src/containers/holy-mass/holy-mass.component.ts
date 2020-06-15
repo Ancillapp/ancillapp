@@ -356,8 +356,8 @@ export class HolyMassPage extends localize(
     } catch ({ code }) {
       this._emailVerificationError =
         code === 'auth/too-many-requests'
-          ? 'Hai effettuato troppe richieste di verifica email, riprova più tardi.'
-          : "C'è stato un errore non previsto, riprova più tardi.";
+          ? this.localize(t`tooManyVerificationRequests`)
+          : this.localize(t`unexpectedError`);
     }
     this._verificationEmailSent = true;
   }
