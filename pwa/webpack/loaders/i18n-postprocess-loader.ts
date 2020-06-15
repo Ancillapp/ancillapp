@@ -25,18 +25,53 @@ const markdownPoweredTranslations = [
   'brotherlyLifePillarDescription',
 ];
 
-const mapMessage = async (key: string, value: string) => {
-  if (
-    !value ||
-    typeof value !== 'string' ||
-    !markdownPoweredTranslations.includes(key)
-  ) {
+const mapMessage = async (
+  key: string,
+  value: string | (string | string[])[],
+) => {
+  if (!markdownPoweredTranslations.includes(key)) {
     return value;
   }
 
-  const { contents } = await parser.process(value);
+  if (typeof value === 'string') {
+    const { contents } = await parser.process(value);
 
-  return contents.toString();
+    return contents.toString();
+  }
+
+  if (!Array.isArray(value)) {
+    return value;
+  }
+
+  const tempString = value
+    .map((element, index) =>
+      typeof element === 'string' ? element : `$$${index}$$`,
+    )
+    .join('');
+
+  const { contents } = await parser.process(tempString);
+
+  const contentsString = contents.toString();
+
+  const regex = /\$\$(\d+)\$\$/g;
+  let match;
+  const newArr = [];
+  let prevStartIndex = 0;
+
+  while ((match = regex.exec(contentsString)) !== null) {
+    const { 0: stringMatch, 1: arrIndex, index } = match;
+
+    newArr.push(
+      contents.slice(prevStartIndex, index),
+      value[parseInt(arrIndex, 10)],
+    );
+
+    prevStartIndex = index + stringMatch.length;
+  }
+
+  newArr.push(contents.slice(prevStartIndex));
+
+  return newArr.filter((str) => str !== '') as (string | string[])[];
 };
 
 export default function (
@@ -62,7 +97,10 @@ export default function (
     ).map(async ([key, value]) => [key, await mapMessage(key, value)]),
   )
     .then((mappedMessagesKeyVal) => {
-      const mappedMessages = mappedMessagesKeyVal.reduce(
+      const mappedMessages = (mappedMessagesKeyVal as [
+        string,
+        string | (string | string[])[],
+      ][]).reduce(
         (newMessages, [key, value]) => ({
           ...newMessages,
           [key]: value,
