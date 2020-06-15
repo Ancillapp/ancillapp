@@ -23,6 +23,7 @@ const markdownPoweredTranslations = [
   'prayerPillarDescription',
   'hospitalityPillarDescription',
   'brotherlyLifePillarDescription',
+  'bookingCancellationConfirmation {0} {1} {2}',
 ];
 
 const mapMessage = async (

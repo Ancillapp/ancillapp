@@ -32,6 +32,10 @@ msgstr "Ancilla Domini"
 msgid "ancillasDescription"
 msgstr "Sfoglia gli Ancilla Domini della Fraternità Francescana di Betania."
 
+#: src/containers/holy-mass/holy-mass.template.ts:87
+msgid "availableSeats"
+msgstr "Posti disponibili"
+
 #: src/containers/login/login.template.ts:82
 msgid "backToLogin"
 msgstr "Torna al login"
@@ -47,6 +51,10 @@ msgstr "Prenota un posto per la Santa Messa"
 #: src/containers/holy-mass/holy-mass.template.ts:110
 msgid "bookedSeats"
 msgstr "Posti prenotati"
+
+#: src/containers/holy-mass/holy-mass.template.ts:174
+msgid "bookingCancellationConfirmation {0} {1} {2}"
+msgstr "Sicuro di voler eliminare la tua prenotazione per la Messa della Fraternità di **{0}** del giorno **{1}** alle ore **{2}**?"
 
 #: src/containers/breviary-index/breviary-index.component.ts:38
 #: src/containers/breviary-index/breviary-index.template.ts:28
@@ -73,15 +81,16 @@ msgstr "La vita fraterna"
 msgid "cancel"
 msgstr "Annulla"
 
-#: src/containers/holy-mass/holy-mass.template.ts:202
+#: src/containers/holy-mass/holy-mass.template.ts:212
 msgid "cancelBooking"
 msgstr "Elimina prenotazione"
 
+#: src/containers/holy-mass/holy-mass.template.ts:226
 #: src/containers/login/login.template.ts:52
 msgid "checkYourInbox"
 msgstr "Fatto! Controlla la tua casella di posta."
 
-#: src/containers/holy-mass/holy-mass.template.ts:199
+#: src/containers/holy-mass/holy-mass.template.ts:209
 #: src/containers/songs-list/songs-list.template.ts:114
 msgid "close"
 msgstr "Chiudi"
@@ -170,6 +179,10 @@ msgstr "Fraternità"
 #: src/containers/songs-list/songs-list.template.ts:108
 msgid "german"
 msgstr "Tedesco"
+
+#: src/containers/holy-mass/holy-mass.template.ts:239
+msgid "goToLogin"
+msgstr "Vai alla pagina di login"
 
 #: src/containers/holy-mass/holy-mass.component.ts:62
 #: src/containers/holy-mass/holy-mass.template.ts:24
@@ -264,6 +277,10 @@ msgstr "Effettua il login per usufruire del servizio di prenotazione delle Sante
 #: src/containers/login/login.template.ts:30
 msgid "loginOrRegister"
 msgstr "Accedi o registrati"
+
+#: src/containers/holy-mass/holy-mass.template.ts:236
+msgid "loginToBook"
+msgstr "Per favore, effettua il login per usufruire del servizio di prenotazione della Santa Messa."
 
 #: src/containers/shell/shell.template.ts:61
 msgid "logout"
@@ -365,6 +382,10 @@ msgstr "Vuoi scaricare tutte le preghiere ora in modo da poterle consultare anch
 #: src/containers/home/home.template.ts:42
 msgid "readLatestAncilla"
 msgstr "Sfoglia l'ultimo Ancilla Domini"
+
+#: src/containers/holy-mass/holy-mass.template.ts:231
+msgid "resendVerificationEmail"
+msgstr "Reinvia email di verifica"
 
 #: src/containers/login/login.template.ts:45
 msgid "resetPassword"
@@ -475,6 +496,10 @@ msgstr "Aggiornamento disponibile!"
 #: src/containers/shell/shell.template.ts:191
 msgid "updateNow"
 msgstr "Aggiorna ora"
+
+#: src/containers/holy-mass/holy-mass.template.ts:222
+msgid "verifyEmailToBook"
+msgstr "Per favore, verifica la tua email per usufruire del servizio di prenotazione della Santa Messa."
 
 #: src/containers/breviary-index/breviary-index.template.ts:14
 msgid "vespers"

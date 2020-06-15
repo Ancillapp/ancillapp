@@ -1,6 +1,7 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { HolyMassPage } from './holy-mass.component';
 import { load } from '../../helpers/directives';
 import { remove, menu, tau } from '../../components/icons';
@@ -108,7 +109,7 @@ export default function template(this: HolyMassPage) {
                     </li>
                   </ul>
                   <div class="available-seats">
-                    <h4>Posti disponibili</h4>
+                    <h4>${this.localize(t`availableSeats`)}</h4>
                     <p>${this._availableSeats ?? '-'}</p>
                   </div>
                   <div class="book-action-bar">
@@ -213,38 +214,34 @@ export default function template(this: HolyMassPage) {
                   ?open="${this._bookingToCancel}"
                   @closing="${this._cancelHolyMassSeatsBooking}"
                 >
-                  <p>
-                    Sicuro di voler eliminare la tua prenotazione per la Messa
-                    della Fraternità di
-                    <strong
-                      >${this._bookingToCancel?.fraternity.location}</strong
-                    >
-                    del giorno
-                    <strong>
-                      ${this._bookingToCancel?.date &&
-                      Intl.DateTimeFormat(this.locale, {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                      }).format(
-                        this._toLocalTimeZone(
-                          new Date(this._bookingToCancel?.date),
-                        ),
-                      )}
-                    </strong>
-                    alle ore
-                    <strong
-                      >${this._bookingToCancel?.date &&
-                      Intl.DateTimeFormat(this.locale, {
-                        hour: 'numeric',
-                        minute: 'numeric',
-                      }).format(
-                        this._toLocalTimeZone(
-                          new Date(this._bookingToCancel?.date),
-                        ),
-                      )}</strong
-                    >?
-                  </p>
+                  ${unsafeHTML(
+                    this.localize(
+                      t`bookingCancellationConfirmation ${
+                        this._bookingToCancel?.fraternity.location
+                      } ${
+                        this._bookingToCancel?.date &&
+                        Intl.DateTimeFormat(this.locale, {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                        }).format(
+                          this._toLocalTimeZone(
+                            new Date(this._bookingToCancel?.date),
+                          ),
+                        )
+                      } ${
+                        this._bookingToCancel?.date &&
+                        Intl.DateTimeFormat(this.locale, {
+                          hour: 'numeric',
+                          minute: 'numeric',
+                        }).format(
+                          this._toLocalTimeZone(
+                            new Date(this._bookingToCancel?.date),
+                          ),
+                        )
+                      }`,
+                    ),
+                  )}
                   <mwc-button dialogAction="close" slot="secondaryAction">
                     ${this.localize(t`close`)}
                   </mwc-button>
@@ -261,30 +258,24 @@ export default function template(this: HolyMassPage) {
           <section>
             ${this.user
               ? html`
-                  <p>
-                    Per favore, verifica la tua email per usufruire del servizio
-                    di prenotazione della Santa Messa.
-                  </p>
+                  <p>${this.localize(t`verifyEmailToBook`)}</p>
                   ${this._verificationEmailSent
                     ? this._emailVerificationError
                       ? html`<p>${this._emailVerificationError}</p>`
-                      : html`<p>Fatto! Controlla la tua casella di posta.</p>`
+                      : html`<p>${this.localize(t`checkYourInbox`)}</p>`
                     : html`
                         <mwc-button
                           raised
                           @click="${this._sendVerificationEmail}"
-                          label="Reinvia email di verifica"
+                          label="${this.localize(t`resendVerificationEmail`)}"
                         ></mwc-button>
                       `}
                 `
               : html`
-                  <p>
-                    Per favore, effettua il login per usufruire del servizio di
-                    prenotazione della Santa Messa.
-                  </p>
+                  <p>${this.localize(t`loginToBook`)}</p>
                   <p>
                     <a href="${this.localizeHref('login')}">
-                      Vai alla pagina di login
+                      ${this.localize(t`goToLogin`)}
                     </a>
                   </p>
                 `}

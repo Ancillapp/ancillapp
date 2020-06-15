@@ -32,6 +32,10 @@ msgstr "Ancilla Domini"
 msgid "ancillasDescription"
 msgstr "Browse the Ancilla Dominis of the Franciscan Fraternity of Bethany."
 
+#: src/containers/holy-mass/holy-mass.template.ts:87
+msgid "availableSeats"
+msgstr ""
+
 #: src/containers/login/login.template.ts:82
 msgid "backToLogin"
 msgstr "Go back to login"
@@ -47,6 +51,10 @@ msgstr "Book a seat for the Holy Mass"
 #: src/containers/holy-mass/holy-mass.template.ts:110
 msgid "bookedSeats"
 msgstr "Booked seats"
+
+#: src/containers/holy-mass/holy-mass.template.ts:174
+msgid "bookingCancellationConfirmation {0} {1} {2}"
+msgstr ""
 
 #: src/containers/breviary-index/breviary-index.component.ts:38
 #: src/containers/breviary-index/breviary-index.template.ts:28
@@ -73,15 +81,16 @@ msgstr ""
 msgid "cancel"
 msgstr "Cancel"
 
-#: src/containers/holy-mass/holy-mass.template.ts:202
+#: src/containers/holy-mass/holy-mass.template.ts:212
 msgid "cancelBooking"
 msgstr "Cancel booking"
 
+#: src/containers/holy-mass/holy-mass.template.ts:226
 #: src/containers/login/login.template.ts:52
 msgid "checkYourInbox"
 msgstr "Done! Check your inbox."
 
-#: src/containers/holy-mass/holy-mass.template.ts:199
+#: src/containers/holy-mass/holy-mass.template.ts:209
 #: src/containers/songs-list/songs-list.template.ts:114
 msgid "close"
 msgstr "Close"
@@ -158,6 +167,10 @@ msgstr "Fraternity"
 #: src/containers/songs-list/songs-list.template.ts:108
 msgid "german"
 msgstr "German"
+
+#: src/containers/holy-mass/holy-mass.template.ts:239
+msgid "goToLogin"
+msgstr ""
 
 #: src/containers/holy-mass/holy-mass.component.ts:62
 #: src/containers/holy-mass/holy-mass.template.ts:24
@@ -242,6 +255,10 @@ msgstr "Log in to take advantage of the booking service for the Holy Masses of t
 #: src/containers/login/login.template.ts:30
 msgid "loginOrRegister"
 msgstr "Login or register"
+
+#: src/containers/holy-mass/holy-mass.template.ts:236
+msgid "loginToBook"
+msgstr ""
 
 #: src/containers/shell/shell.template.ts:61
 msgid "logout"
@@ -336,6 +353,10 @@ msgstr "Do you want to download all the prayers to be able to consult them offli
 #: src/containers/home/home.template.ts:42
 msgid "readLatestAncilla"
 msgstr "Read the latest Ancilla Domini"
+
+#: src/containers/holy-mass/holy-mass.template.ts:231
+msgid "resendVerificationEmail"
+msgstr ""
 
 #: src/containers/login/login.template.ts:45
 msgid "resetPassword"
@@ -446,6 +467,10 @@ msgstr "Update available!"
 #: src/containers/shell/shell.template.ts:191
 msgid "updateNow"
 msgstr "Update now"
+
+#: src/containers/holy-mass/holy-mass.template.ts:222
+msgid "verifyEmailToBook"
+msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:14
 msgid "vespers"

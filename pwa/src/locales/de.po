@@ -32,6 +32,10 @@ msgstr "Ancilla Domini"
 msgid "ancillasDescription"
 msgstr ""
 
+#: src/containers/holy-mass/holy-mass.template.ts:87
+msgid "availableSeats"
+msgstr ""
+
 #: src/containers/login/login.template.ts:82
 msgid "backToLogin"
 msgstr ""
@@ -46,6 +50,10 @@ msgstr ""
 
 #: src/containers/holy-mass/holy-mass.template.ts:110
 msgid "bookedSeats"
+msgstr ""
+
+#: src/containers/holy-mass/holy-mass.template.ts:174
+msgid "bookingCancellationConfirmation {0} {1} {2}"
 msgstr ""
 
 #: src/containers/breviary-index/breviary-index.component.ts:38
@@ -73,15 +81,16 @@ msgstr ""
 msgid "cancel"
 msgstr "Stornieren"
 
-#: src/containers/holy-mass/holy-mass.template.ts:202
+#: src/containers/holy-mass/holy-mass.template.ts:212
 msgid "cancelBooking"
 msgstr ""
 
+#: src/containers/holy-mass/holy-mass.template.ts:226
 #: src/containers/login/login.template.ts:52
 msgid "checkYourInbox"
 msgstr ""
 
-#: src/containers/holy-mass/holy-mass.template.ts:199
+#: src/containers/holy-mass/holy-mass.template.ts:209
 #: src/containers/songs-list/songs-list.template.ts:114
 msgid "close"
 msgstr "Schließen"
@@ -158,6 +167,10 @@ msgstr ""
 #: src/containers/songs-list/songs-list.template.ts:108
 msgid "german"
 msgstr "Deutsch"
+
+#: src/containers/holy-mass/holy-mass.template.ts:239
+msgid "goToLogin"
+msgstr ""
 
 #: src/containers/holy-mass/holy-mass.component.ts:62
 #: src/containers/holy-mass/holy-mass.template.ts:24
@@ -241,6 +254,10 @@ msgstr ""
 
 #: src/containers/login/login.template.ts:30
 msgid "loginOrRegister"
+msgstr ""
+
+#: src/containers/holy-mass/holy-mass.template.ts:236
+msgid "loginToBook"
 msgstr ""
 
 #: src/containers/shell/shell.template.ts:61
@@ -336,6 +353,10 @@ msgstr "Möchten Sie jetzt alle gebete herunterladen, damit Sie sie auch dann ab
 #: src/containers/home/home.template.ts:42
 msgid "readLatestAncilla"
 msgstr "Lesen Sie das neueste Ancilla Domini"
+
+#: src/containers/holy-mass/holy-mass.template.ts:231
+msgid "resendVerificationEmail"
+msgstr ""
 
 #: src/containers/login/login.template.ts:45
 msgid "resetPassword"
@@ -446,6 +467,10 @@ msgstr "Update verfügbar!"
 #: src/containers/shell/shell.template.ts:191
 msgid "updateNow"
 msgstr "Jetzt aktualisieren"
+
+#: src/containers/holy-mass/holy-mass.template.ts:222
+msgid "verifyEmailToBook"
+msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:14
 msgid "vespers"
