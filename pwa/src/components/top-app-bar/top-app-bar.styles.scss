@@ -61,12 +61,13 @@ header {
   line-height: var(--mdc-typography-headline6-line-height, 2rem);
   font-weight: var(--mdc-typography-headline6-font-weight, 500);
   width: 100%;
+  text-align: left;
 }
 
 .title {
   padding-left: 12px;
   padding-right: 0px;
-  font-family: var(--ancillapp-display-font);
+  font-family: var(--ancillapp-text-font);
 }
 
 ::slotted(input) {

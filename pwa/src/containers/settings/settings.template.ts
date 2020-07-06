@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
 import { SettingsPage } from './settings.component';
-import { menu, tau } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
@@ -16,7 +16,7 @@ export default function template(this: SettingsPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`settings`)}
+        ${this.localize(t`settings`)}
       </div>
     </top-app-bar>
 

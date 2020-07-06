@@ -4,7 +4,7 @@ import { repeat } from 'lit-html/directives/repeat';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { HolyMassPage } from './holy-mass.component';
 import { load } from '../../helpers/directives';
-import { remove, menu, tau } from '../../components/icons';
+import { remove, menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-button';
@@ -26,7 +26,7 @@ export default function template(this: HolyMassPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`holyMass`)}
+        ${this.localize(t`holyMass`)}
       </div>
     </top-app-bar>
 

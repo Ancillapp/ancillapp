@@ -31,7 +31,7 @@ export default function template(this: Shell) {
       type="${this._narrow ? 'dismissible' : 'modal'}"
       ?open="${this._drawerOpened}"
     >
-      <span slot="title">${this.localize(t`menu`)}</span>
+      <span slot="title">${icons.tau} Ancillapp</span>
       <div class="menu">
         <mwc-list activatable class="top-nav">
           ${this._topNavPages.map(

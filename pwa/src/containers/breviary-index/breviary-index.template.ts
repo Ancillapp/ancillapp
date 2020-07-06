@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { until } from 'lit-html/directives/until';
 import { BreviaryIndex } from './breviary-index.component';
-import { menu, tau } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-textfield';
@@ -28,7 +28,7 @@ export default function template(this: BreviaryIndex) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`breviary`)}
+        ${this.localize(t`breviary`)}
       </div>
     </top-app-bar>
 

@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { LoginPage } from './login.component';
-import { menu, tau } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-textfield';
@@ -28,7 +28,7 @@ export default function template(this: LoginPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`login`)}
+        ${this.localize(t`login`)}
       </div>
     </top-app-bar>
 

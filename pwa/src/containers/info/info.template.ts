@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { InfoPage } from './info.component';
-import { tau, menu } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
@@ -22,7 +22,7 @@ export default function template(this: InfoPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`info`)}
+        ${this.localize(t`info`)}
       </div>
     </top-app-bar>
 

@@ -23,6 +23,24 @@ mwc-drawer {
     }
   }
 
+  [slot='title'] {
+    margin-top: 0.1rem;
+    font-family: var(--ancillapp-display-font);
+    font-size: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    padding: 0.5rem;
+
+    svg {
+      height: 2.25rem;
+      padding-bottom: 0.75rem;
+      fill: #fff;
+      margin-right: 2rem;
+    }
+  }
+
   [slot='appContent'] {
     height: 100%;
     --mdc-theme-surface: var(--ancillapp-card-color);

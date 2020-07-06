@@ -183,6 +183,7 @@ msgid "holyMassDescription"
 msgstr "Book a place for the Holy Mass in one of the homes of the Franciscan Fraternity of Bethany."
 
 #: src/containers/home/home.component.ts:26
+#: src/containers/home/home.template.ts:15
 #: src/containers/shell/shell.template.ts:14
 msgid "home"
 msgstr "Home"
@@ -238,10 +239,10 @@ msgstr "Lauds"
 msgid "light"
 msgstr "Light"
 
-#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:16
+#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:15
 #: src/containers/breviary-index/breviary-index.template.ts:40
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:17
-#: src/containers/song-viewer/song-viewer.template.ts:18
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:16
+#: src/containers/song-viewer/song-viewer.template.ts:17
 msgid "loading"
 msgstr "Loading…"
 
@@ -279,10 +280,6 @@ msgstr ""
 #: src/containers/breviary-index/breviary-index.template.ts:9
 msgid "matins"
 msgstr "Matins"
-
-#: src/containers/shell/shell.template.ts:30
-msgid "menu"
-msgstr "Menu"
 
 #: src/containers/login/login.component.ts:65
 msgid "missingEmail"
@@ -411,11 +408,11 @@ msgstr "Sext"
 msgid "share"
 msgstr "Share"
 
-#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:32
+#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:31
 msgid "shareAncillaText"
 msgstr "Take a look at this Ancilla Domini!"
 
-#: src/containers/song-viewer/song-viewer.template.ts:36
+#: src/containers/song-viewer/song-viewer.template.ts:35
 msgid "shareSongText"
 msgstr "Take a look at this song!"
 
@@ -448,9 +445,9 @@ msgstr "Do you want to download all the songs to be able to consult them offline
 msgid "sure"
 msgstr "Sure!"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:37
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:36
 #: src/containers/prayers-list/prayers-list.template.ts:76
-#: src/containers/song-viewer/song-viewer.template.ts:44
+#: src/containers/song-viewer/song-viewer.template.ts:43
 #: src/containers/songs-list/songs-list.template.ts:128
 msgid "syncInProgress"
 msgstr "Sync in progress…"
@@ -477,7 +474,7 @@ msgid "tooManyVerificationRequests"
 msgstr ""
 
 #: src/containers/holy-mass/holy-mass.component.ts:218
-#: src/containers/login/login.component.ts:110
+#: src/containers/login/login.component.ts:109
 msgid "unexpectedError"
 msgstr ""
 
@@ -497,6 +494,6 @@ msgstr ""
 msgid "vespers"
 msgstr "Vespers"
 
-#: src/containers/login/login.component.ts:107
+#: src/containers/login/login.component.ts:106
 msgid "wrongPassword"
 msgstr ""

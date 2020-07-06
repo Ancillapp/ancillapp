@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { PrayerViewer } from './prayer-viewer.component';
 import { compile } from '../../helpers/directives';
-import { arrowBack, tau } from '../../components/icons';
+import { arrowBack } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-snackbar';
@@ -14,7 +14,6 @@ export default function template(this: PrayerViewer) {
         <mwc-icon-button>${arrowBack}</mwc-icon-button>
       </a>
       <div slot="title">
-        ${tau}
         ${this._prayerStatus.data?.title[this.locale] ||
         this._prayerStatus.data?.title.la ||
         this.localize(t`loading`)}

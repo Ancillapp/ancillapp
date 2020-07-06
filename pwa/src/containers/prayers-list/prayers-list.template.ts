@@ -3,7 +3,7 @@ import { nothing } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { PrayersList } from './prayers-list.component';
-import { menu, tau } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-button';
@@ -22,7 +22,7 @@ export default function template(this: PrayersList) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`prayers`)}
+        ${this.localize(t`prayers`)}
       </div>
     </top-app-bar>
 

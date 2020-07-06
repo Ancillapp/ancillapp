@@ -2,7 +2,7 @@ import { html } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { load } from '../../helpers/directives';
 import { AncillasList } from './ancillas-list.component';
-import { menu, tau } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
@@ -18,7 +18,7 @@ export default function template(this: AncillasList) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`ancillas`)}
+        ${this.localize(t`ancillas`)}
       </div>
     </top-app-bar>
 
