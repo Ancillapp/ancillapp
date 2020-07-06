@@ -38,7 +38,11 @@ mwc-drawer {
 }
 
 mwc-list-item {
+  height: 3rem;
+  margin-right: 0.5rem;
+  border-radius: 0 1.5rem 1.5rem 0;
   color: var(--mdc-theme-on-surface);
+  font-size: 0.875rem;
 
   svg {
     fill: var(--mdc-theme-text-disabled-on-background);
