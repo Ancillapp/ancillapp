@@ -16,9 +16,9 @@
     "build:sitemap": "node scripts/sitemap"
   },
   "devDependencies": {
-    "firebase-tools": "^8.4.1",
-    "lerna": "^3.22.0",
+    "firebase-tools": "^8.5.0",
+    "lerna": "^3.22.1",
     "patch-package": "^6.2.2",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.6"
   }
 }

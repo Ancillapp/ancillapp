@@ -5,10 +5,10 @@ import TerserPlugin from 'terser-webpack-plugin';
 import { InjectManifest as InjectManifestPlugin } from 'workbox-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { Configuration } from 'webpack';
-import { smart as smartMerge } from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import baseConfig from './base.config';
 
-const config: Configuration = smartMerge(baseConfig, {
+const config: Configuration = merge(baseConfig, {
   mode: 'production',
   devtool: 'source-map',
   output: {

@@ -2,16 +2,15 @@ import HtmlPlugin from 'html-webpack-plugin';
 import path from 'path';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
-import { smart as smartMerge } from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import baseConfig from './base.config';
 import { InjectManifest as InjectManifestPlugin } from 'workbox-webpack-plugin';
-import { NormalModuleReplacementPlugin } from 'webpack';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 
-const config: Configuration = smartMerge(baseConfig, {
+const config: Configuration = merge(baseConfig, {
   mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
