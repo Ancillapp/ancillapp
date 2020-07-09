@@ -129,6 +129,9 @@
         --ancillapp-divider-color: rgba(0, 0, 0, 0.12);
         --ancillapp-text-on-accent-color: #fff;
         --ancillapp-error-text-color: #b00020;
+
+        --ancillapp-top-bar-height: 56px;
+        --ancillapp-drawer-width: min(100vw - var(--ancillapp-top-bar-height), var(--ancillapp-top-bar-height) * 5);
       }
 
       body[data-theme='dark'] {
@@ -176,6 +179,12 @@
       @media (min-width: 460px) {
         html, body {
           font-size: 16px;
+        }
+      }
+
+      @media (min-width: 600px) {
+        html, body {
+          --ancillapp-top-bar-height: 64px;
         }
       }
 

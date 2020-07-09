@@ -7,6 +7,7 @@
 
 mwc-drawer {
   --mdc-theme-surface: var(--ancillapp-drawer-color);
+  --mdc-drawer-width: var(--ancillapp-drawer-width);
 
   .menu {
     display: flex;
