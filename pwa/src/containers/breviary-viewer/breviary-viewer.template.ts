@@ -2,7 +2,7 @@ import { html } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { BreviaryViewer } from './breviary-viewer.component';
 import { load } from '../../helpers/directives';
-import { arrowBack, tau } from '../../components/icons';
+import { arrowBack } from '../../components/icons';
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
 
 import '../../components/top-app-bar/top-app-bar.component';
@@ -19,7 +19,6 @@ export default function template(this: BreviaryViewer) {
         <mwc-icon-button>${arrowBack}</mwc-icon-button>
       </a>
       <div slot="title">
-        ${tau}
         ${prayersTranslations[prayer as keyof typeof prayersTranslations]} -
         ${Intl.DateTimeFormat(this.locale, {
           day: '2-digit',

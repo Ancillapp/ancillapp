@@ -35,19 +35,10 @@
 
     <style>
       @font-face {
-        font-family: 'Humana Serif';
+        font-family: 'Vesper Libre';
         font-style: normal;
         font-weight: 400;
-        src: url('/fonts/humana-serif.woff2') format('woff2');
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: 'Humana Serif';
-        font-style: italic;
-        font-weight: 400;
-        src: url('/fonts/humana-serif-itc.woff2') format('woff2');
-        font-display: swap;
+        src: url(/fonts/vesper-libre.woff2) format('woff2');
       }
 
       @font-face {
@@ -121,7 +112,7 @@
         /* Constants */
         --ancillapp-text-font: 'Rosario', 'Roboto', Helvetica, Arial, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-        --ancillapp-display-font: 'Humana Serif', 'Times New Roman', serif;
+        --ancillapp-display-font: 'Vesper Libre', 'Times New Roman', serif;
 
         /* Variables (different for each theme) */
         --ancillapp-primary-color: #567791;
@@ -138,6 +129,10 @@
         --ancillapp-divider-color: rgba(0, 0, 0, 0.12);
         --ancillapp-text-on-accent-color: #fff;
         --ancillapp-error-text-color: #b00020;
+
+        --ancillapp-top-bar-height: 56px;
+        --ancillapp-drawer-width: min(100vw - var(--ancillapp-top-bar-height), var(--ancillapp-top-bar-height) * 5);
+        --ancillapp-mini-drawer-width: 65px;
       }
 
       body[data-theme='dark'] {
@@ -185,6 +180,12 @@
       @media (min-width: 460px) {
         html, body {
           font-size: 16px;
+        }
+      }
+
+      @media (min-width: 600px) {
+        html, body {
+          --ancillapp-top-bar-height: 64px;
         }
       }
 

@@ -2,7 +2,6 @@ import { html } from 'lit-element';
 import { SongsList } from './songs-list.component';
 import {
   menu,
-  tau,
   search,
   arrowBack,
   dialpad,
@@ -57,7 +56,7 @@ export default function template(this: SongsList) {
             </mwc-icon-button>
           `}
       <div slot="title" ?hidden="${this._searching}">
-        ${tau} ${this.localize(t`songs`)}
+        ${this.localize(t`songs`)}
       </div>
       <input
         id="search-input"

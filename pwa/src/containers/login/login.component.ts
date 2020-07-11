@@ -81,12 +81,12 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
 
   protected async _handleEmailPasswordLogin() {
     if (!this._email) {
-      this._error = 'Per favore, specifica un indirizzo email.';
+      this._error = this.localize(t`missingEmail`);
       return;
     }
 
     if (!this._password) {
-      this._error = 'Per favore, specifica una password.';
+      this._error = this.localize(t`missingPassword`);
       return;
     }
 
@@ -130,11 +130,13 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
 
       switch (error) {
         case 'auth/invalid-email':
-          this._error = "L'email inserita non è valida.";
+          this._error = this.localize(t`invalidEmail`);
           break;
         case 'auth/wrong-password':
-          this._error = 'La password inserita è errata.';
+          this._error = this.localize(t`wrongPassword`);
           break;
+        default:
+          this._error = this.localize(t`unexpectedError`);
       }
     }
 

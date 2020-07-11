@@ -1,10 +1,11 @@
 import { html } from 'lit-element';
 import { until } from 'lit-html/directives/until';
 import { BreviaryIndex } from './breviary-index.component';
-import { menu, tau } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-textfield';
+import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/date-input/date-input.component';
 
 export const prayersTranslations = {
@@ -23,12 +24,13 @@ export default function template(this: BreviaryIndex) {
     <top-app-bar ?drawer-open="${this.drawerOpen}">
       <mwc-icon-button
         slot="leadingIcon"
+        ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
       >
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`breviary`)}
+        ${this.localize(t`breviary`)}
       </div>
     </top-app-bar>
 

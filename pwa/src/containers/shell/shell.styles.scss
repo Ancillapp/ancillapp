@@ -5,8 +5,24 @@
   height: 100%;
 }
 
+:host(:not([drawer-expanded])) {
+  @media (min-width: 600px) {
+    mwc-drawer {
+      --mdc-drawer-width: var(--ancillapp-mini-drawer-width);
+
+      mwc-list-item {
+        margin: 0 7px;
+        padding-left: 12.5px;
+        border-radius: 25px;
+        width: 50px;
+      }
+    }
+  }
+}
+
 mwc-drawer {
   --mdc-theme-surface: var(--ancillapp-drawer-color);
+  --mdc-drawer-width: var(--ancillapp-drawer-width);
 
   .menu {
     display: flex;
@@ -20,6 +36,38 @@ mwc-drawer {
 
     > .bottom-nav {
       flex: 0 0 auto;
+    }
+  }
+
+  [slot='title'] {
+    font-family: var(--ancillapp-display-font);
+    font-size: 20.8px;
+    color: var(--ancillapp-primary-text-color);
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: var(--ancillapp-top-bar-height);
+    padding-left: 26px;
+
+    @media (min-width: 600px) {
+      // TODO: discover why this line is needed
+      transform: translateY(-4px);
+      padding-left: 7.5px;
+    }
+
+    > mwc-icon-button {
+      margin-right: 16px;
+    }
+
+    > svg {
+      height: 30px;
+      padding-bottom: 6px;
+      fill: currentColor;
+      margin-right: 16px;
+    }
+
+    span {
+      padding-top: 6px;
     }
   }
 
@@ -38,7 +86,12 @@ mwc-drawer {
 }
 
 mwc-list-item {
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 0 25px 25px 0;
+  padding-left: 19.5px;
   color: var(--mdc-theme-on-surface);
+  font-size: 14px;
 
   svg {
     fill: var(--mdc-theme-text-disabled-on-background);
@@ -61,11 +114,7 @@ li[divider] {
 main {
   width: 100%;
   min-height: 100%;
-  padding-top: 56px;
+  padding-top: var(--ancillapp-top-bar-height);
   background: var(--ancillapp-background-color);
   display: flex;
-
-  @media (min-width: 600px) {
-    padding-top: 64px;
-  }
 }

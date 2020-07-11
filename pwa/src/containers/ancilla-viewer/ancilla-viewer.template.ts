@@ -2,7 +2,7 @@ import { html } from 'lit-element';
 import { until } from 'lit-html/directives/until';
 import { AncillaViewer } from './ancilla-viewer.component';
 import { load } from '../../helpers/directives';
-import { arrowBack, tau } from '../../components/icons';
+import { arrowBack } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
@@ -15,7 +15,6 @@ export default function template(this: AncillaViewer) {
         <mwc-icon-button>${arrowBack}</mwc-icon-button>
       </a>
       <div slot="title">
-        ${tau}
         ${until(
           this._ancillaPromise.then(
             ({ name: { [this.locale]: localizedName } }) => localizedName,

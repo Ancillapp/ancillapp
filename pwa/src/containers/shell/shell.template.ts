@@ -29,9 +29,22 @@ export default function template(this: Shell) {
     <mwc-drawer
       hasHeader
       type="${this._narrow ? 'dismissible' : 'modal'}"
-      ?open="${this._drawerOpened}"
+      ?open="${this._narrow || this._drawerOpened}"
     >
-      <span slot="title">${this.localize(t`menu`)}</span>
+      <span slot="title">
+        ${this._narrow
+          ? html`
+              <mwc-icon-button
+                @click="${() =>
+                  this._updateDrawerExpansionState(!this.drawerExpanded)}"
+              >
+                ${icons.menu}
+              </mwc-icon-button>
+            `
+          : html`${nothing}`}
+        ${icons.tau}
+        <span>Ancillapp</span>
+      </span>
       <div class="menu">
         <mwc-list activatable class="top-nav">
           ${this._topNavPages.map(
@@ -124,81 +137,103 @@ export default function template(this: Shell) {
           <home-page
             class="page padded"
             ?active="${this._page === 'home'}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
           ></home-page>
           <breviary-index
             class="page padded"
             ?active="${this._page === 'breviary' && !this._subroute}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
           ></breviary-index>
           <breviary-viewer
             class="page padded"
             ?active="${this._page === 'breviary' && this._subroute}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
             query="${this._subroute}"
           ></breviary-viewer>
           <songs-list
             class="page"
             ?active="${this._page === 'songs' && !this._subroute}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
           ></songs-list>
           <song-viewer
             class="page"
             ?active="${this._page === 'songs' && this._subroute}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
             song="${this._subroute}"
           ></song-viewer>
           <prayers-list
             class="page"
             ?active="${this._page === 'prayers' && !this._subroute}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
           ></prayers-list>
           <prayer-viewer
             class="page"
             ?active="${this._page === 'prayers' && this._subroute}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
             prayer="${this._subroute}"
           ></prayer-viewer>
           <ancillas-list
             class="page"
             ?active="${this._page === 'ancillas' && !this._subroute}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
           ></ancillas-list>
           <ancilla-viewer
             class="page"
             ?active="${this._page === 'ancillas' && this._subroute}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
             ancilla="${this._subroute}"
           ></ancilla-viewer>
           <holy-mass-page
             class="page padded"
             ?active="${this._page === 'holy-mass'}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
           ></holy-mass-page>
           <login-page
             class="page padded"
             ?active="${this._page === 'login'}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
             @register="${() => (this._verificationEmailSent = true)}"
           ></login-page>
           <settings-page
             class="page padded"
             ?active="${this._page === 'settings'}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
           ></settings-page>
           <info-page
             class="page padded"
             ?active="${this._page === 'info'}"
-            ?drawer-open="${this._narrow && this._drawerOpened}"
-            @menutoggle="${() => this._updateDrawerState(!this._drawerOpened)}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            @menutoggle="${() =>
+              this._updateDrawerOpenState(!this._drawerOpened)}"
           ></info-page>
         </main>
       </div>

@@ -210,17 +210,6 @@ top-app-bar {
     color: inherit;
   }
 
-  [slot='title'] {
-    display: flex;
-    align-items: center;
-
-    svg {
-      height: 36px;
-      padding: 0 10px 12px 0;
-      fill: #fff;
-    }
-  }
-
   &.search-mode {
     --ancillapp-top-app-bar-background: #fff;
     --ancillapp-top-app-bar-color: #000;

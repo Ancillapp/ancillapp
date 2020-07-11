@@ -11,6 +11,9 @@ export const withTopAppBar = <E extends Constructor<LitElement>>(
     @property({ type: Boolean, attribute: 'drawer-open' })
     public drawerOpen = false;
 
+    @property({ type: Boolean, attribute: 'show-menu-button' })
+    public showMenuButton = false;
+
     @property({ type: Object })
     public scrollTarget?: HTMLElement;
 

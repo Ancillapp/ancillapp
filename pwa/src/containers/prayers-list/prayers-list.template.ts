@@ -3,7 +3,7 @@ import { nothing } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { PrayersList } from './prayers-list.component';
-import { menu, tau } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-button';
@@ -17,12 +17,13 @@ export default function template(this: PrayersList) {
     <top-app-bar ?drawer-open="${this.drawerOpen}">
       <mwc-icon-button
         slot="leadingIcon"
+        ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
       >
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} ${this.localize(t`prayers`)}
+        ${this.localize(t`prayers`)}
       </div>
     </top-app-bar>
 

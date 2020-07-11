@@ -6,7 +6,6 @@ import {
   songsIcon,
   holyMassIcon,
   menu,
-  tau,
 } from '../../components/icons';
 import { HomePage } from './home.component';
 import { t } from '@lingui/macro';
@@ -18,12 +17,13 @@ export default function template(this: HomePage) {
     <top-app-bar ?drawer-open="${this.drawerOpen}">
       <mwc-icon-button
         slot="leadingIcon"
+        ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
       >
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${tau} Ancillapp
+        ${this.localize(t`home`)}
       </div>
     </top-app-bar>
 

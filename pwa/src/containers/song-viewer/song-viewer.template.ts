@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { SongViewer } from './song-viewer.component';
 import { compile } from '../../helpers/directives';
-import { arrowBack, tau } from '../../components/icons';
+import { arrowBack } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-snackbar';
@@ -15,7 +15,6 @@ export default function template(this: SongViewer) {
         <mwc-icon-button>${arrowBack}</mwc-icon-button>
       </a>
       <div slot="title">
-        ${tau}
         ${this._songStatus.data
           ? `${this._songStatus.data.number.slice(2)}. ${
               this._songStatus.data.title

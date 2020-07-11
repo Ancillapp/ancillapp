@@ -24,7 +24,7 @@ header {
 }
 
 :host([drawer-open]) header {
-  width: calc(100% - 256px);
+  width: calc(100% - var(--mdc-drawer-width));
 }
 
 .row {
@@ -32,11 +32,8 @@ header {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 56px;
+  height: var(--ancillapp-top-bar-height);
   padding: 8px 12px;
-  @media (min-width: 600px) {
-    height: 64px;
-  }
 
   section {
     display: inline-flex;
@@ -61,13 +58,13 @@ header {
   line-height: var(--mdc-typography-headline6-line-height, 2rem);
   font-weight: var(--mdc-typography-headline6-font-weight, 500);
   width: 100%;
+  text-align: left;
 }
 
 .title {
   padding-left: 12px;
   padding-right: 0px;
-  font-family: var(--ancillapp-display-font);
-  font-style: italic;
+  font-family: var(--ancillapp-text-font);
 }
 
 ::slotted(input) {
