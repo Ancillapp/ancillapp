@@ -30,6 +30,9 @@ export class Shell extends localize(authorize(LitElement)) {
 
   protected render = template;
 
+  @property({ type: Boolean, reflect: true, attribute: 'drawer-expanded' })
+  public drawerExpanded = false;
+
   @property({ type: String })
   protected _page = 'home';
 
@@ -75,7 +78,7 @@ export class Shell extends localize(authorize(LitElement)) {
 
     if (window.matchMedia('(min-width: 48rem)').matches) {
       get<boolean>('drawerOpened').then((drawerOpened) =>
-        this._updateDrawerState(drawerOpened),
+        this._updateDrawerExpansionState(drawerOpened),
       );
     }
 
@@ -169,7 +172,7 @@ export class Shell extends localize(authorize(LitElement)) {
 
     // Close the drawer - in case the *path* change came from a link in the drawer.
     if (!this._narrow) {
-      this._updateDrawerState(false);
+      this._updateDrawerOpenState(false);
     }
   }
 
@@ -233,10 +236,16 @@ export class Shell extends localize(authorize(LitElement)) {
     this._subroute = subroute;
   }
 
-  protected async _updateDrawerState(opened: boolean) {
+  protected _updateDrawerOpenState(opened: boolean) {
     if (opened !== this._drawerOpened) {
       this._drawerOpened = opened;
-      await set('drawerOpened', opened);
+    }
+  }
+
+  protected async _updateDrawerExpansionState(expanded: boolean) {
+    if (expanded !== this.drawerExpanded) {
+      this.drawerExpanded = expanded;
+      await set('drawerOpened', expanded);
     }
   }
 

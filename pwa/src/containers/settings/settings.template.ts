@@ -11,6 +11,7 @@ export default function template(this: SettingsPage) {
     <top-app-bar ?drawer-open="${this.drawerOpen}">
       <mwc-icon-button
         slot="leadingIcon"
+        ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
       >
         ${menu}
