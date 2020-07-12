@@ -43,6 +43,7 @@ export default function template(this: SongsList) {
         : html`
             <mwc-icon-button
               slot="leadingIcon"
+              ?hidden="${!this.showMenuButton}"
               @click="${() =>
                 this.dispatchEvent(new CustomEvent('menutoggle'))}"
             >
