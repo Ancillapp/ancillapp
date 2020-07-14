@@ -1,8 +1,6 @@
 import { html } from 'lit-element';
 import { TopAppBar } from './top-app-bar.component';
 
-import '@material/mwc-fab';
-
 export default function template(this: TopAppBar) {
   return html`
     <header
