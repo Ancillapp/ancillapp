@@ -36,7 +36,7 @@ export default function template(this: Shell) {
           ? html`
               <mwc-icon-button
                 @click="${() =>
-                  this._updateDrawerExpansionState(!this.drawerExpanded)}"
+                  this._updateDrawerShrinkState(!this.drawerShrinked)}"
               >
                 ${icons.menu}
               </mwc-icon-button>

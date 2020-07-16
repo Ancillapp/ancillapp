@@ -30,8 +30,8 @@ export class Shell extends localize(authorize(LitElement)) {
 
   protected render = template;
 
-  @property({ type: Boolean, reflect: true, attribute: 'drawer-expanded' })
-  public drawerExpanded = false;
+  @property({ type: Boolean, reflect: true, attribute: 'drawer-shrinked' })
+  public drawerShrinked = false;
 
   @property({ type: String })
   protected _page = 'home';
@@ -77,8 +77,8 @@ export class Shell extends localize(authorize(LitElement)) {
     this._observeForThemeChanges();
 
     if (window.matchMedia('(min-width: 48rem)').matches) {
-      get<boolean>('drawerOpened').then((drawerOpened) =>
-        this._updateDrawerExpansionState(drawerOpened),
+      get<boolean>('drawerShrinked').then((drawerOpened) =>
+        this._updateDrawerShrinkState(drawerOpened),
       );
     }
 
@@ -242,10 +242,10 @@ export class Shell extends localize(authorize(LitElement)) {
     }
   }
 
-  protected async _updateDrawerExpansionState(expanded: boolean) {
-    if (expanded !== this.drawerExpanded) {
-      this.drawerExpanded = expanded;
-      await set('drawerOpened', expanded);
+  protected async _updateDrawerShrinkState(shrinked: boolean) {
+    if (shrinked !== this.drawerShrinked) {
+      this.drawerShrinked = shrinked;
+      await set('drawerShrinked', shrinked);
     }
   }
 
