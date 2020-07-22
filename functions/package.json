@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production tsc"
   },
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "main": "lib/index.js",
   "dependencies": {
