@@ -54,6 +54,7 @@ header {
 .title,
 ::slotted(input)  {
   -webkit-font-smoothing: antialiased;
+  color: var(--ancillapp-top-app-bar-color);
   font-size: var(--mdc-typography-headline6-font-size, 1.25rem);
   line-height: var(--mdc-typography-headline6-line-height, 2rem);
   font-weight: var(--mdc-typography-headline6-font-weight, 500);
