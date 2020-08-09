@@ -33,7 +33,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   protected render = template;
 
-  private _fuse?: Fuse<SongSummary, { keys: ['number', 'title'] }>;
+  private _fuse?: Fuse<SongSummary>;
 
   private _hyperlist?: HyperList;
 
@@ -53,7 +53,8 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   protected _selectedLanguage = 'it';
 
   @property({ type: String })
-  protected _searchTerm = '';
+  protected _searchTerm =
+    new URLSearchParams(window.location.search).get('search') || '';
 
   @property({ type: Boolean })
   protected _needSongsDownloadPermission = false;
@@ -62,7 +63,8 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   protected _downloadingSongs = false;
 
   @property({ type: Boolean })
-  protected _searching = false;
+  protected _searching =
+    new URLSearchParams(window.location.search).get('search') !== null;
 
   @property({ type: Boolean })
   protected _filtersDialogOpen = false;
@@ -186,7 +188,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
               this._searchInput!.value = '';
               this._searchTerm = '';
-              this._searching = false;
+              this._stopSearching();
               this._refreshSongs();
             },
           );
@@ -293,7 +295,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
       if (event.code === 'Escape') {
         (event.target as HTMLInputElement).value = '';
         this._searchTerm = '';
-        this._searching = false;
+        this._stopSearching();
         this._refreshSongs();
       }
 
@@ -311,6 +313,13 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   protected _handleSearch({ target }: InputEvent) {
     this._searchTerm = (target as HTMLInputElement).value;
+    history.replaceState(
+      {},
+      '',
+      `${window.location.pathname}?search${
+        this._searchTerm ? `=${this._searchTerm}` : ''
+      }`,
+    );
 
     this._songsContainer!.scrollTo(0, 0);
     this._refreshSongs();
@@ -364,6 +373,16 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     }
 
     this._downloadingSongs = false;
+  }
+
+  protected _startSearching() {
+    this._searching = true;
+    history.replaceState({}, '', `${window.location.pathname}?search`);
+  }
+
+  protected _stopSearching() {
+    this._searching = false;
+    history.replaceState({}, '', window.location.pathname);
   }
 }
 

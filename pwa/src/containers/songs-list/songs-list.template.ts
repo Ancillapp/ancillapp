@@ -26,10 +26,7 @@ export default function template(this: SongsList) {
     >
       ${this._searching
         ? html`
-            <mwc-icon-button
-              slot="leadingIcon"
-              @click="${() => (this._searching = false)}"
-            >
+            <mwc-icon-button slot="leadingIcon" @click="${this._stopSearching}">
               ${arrowBack}
             </mwc-icon-button>
             <mwc-icon-button
@@ -51,7 +48,7 @@ export default function template(this: SongsList) {
             </mwc-icon-button>
             <mwc-icon-button
               slot="trailingIcon"
-              @click="${() => (this._searching = true)}"
+              @click="${this._startSearching}"
             >
               ${search}
             </mwc-icon-button>
@@ -67,6 +64,7 @@ export default function template(this: SongsList) {
         ?hidden="${!this._searching}"
         @keydown="${this._handleSearchKeyDown}"
         @input="${this._handleSearch}"
+        value="${this._searchTerm}"
       />
     </top-app-bar>
 
