@@ -6,12 +6,12 @@ import {
   query,
   queryAll,
 } from 'lit-element';
-import { installMediaQueryWatcher, installRouter } from 'pwa-helpers';
+import { installMediaQueryWatcher } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
-import { t } from '@lingui/macro';
+import { installRouter } from '../../helpers/router';
 
 import sharedStyles from '../../shared.styles';
 import styles from './shell.styles';
