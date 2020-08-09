@@ -53,8 +53,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   protected _selectedLanguage = 'it';
 
   @property({ type: String })
-  protected _searchTerm =
-    new URLSearchParams(window.location.search).get('search') || '';
+  protected _searchTerm = '';
 
   @property({ type: Boolean })
   protected _needSongsDownloadPermission = false;
@@ -63,8 +62,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   protected _downloadingSongs = false;
 
   @property({ type: Boolean })
-  protected _searching =
-    new URLSearchParams(window.location.search).get('search') !== null;
+  protected _searching = false;
 
   @property({ type: Boolean })
   protected _filtersDialogOpen = false;
@@ -261,6 +259,13 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
+
+    const searchParam = new URLSearchParams(window.location.search).get(
+      'search',
+    );
+
+    this._searching = searchParam !== null;
+    this._searchTerm = searchParam || '';
 
     if (
       changedProperties.has('_searching') &&

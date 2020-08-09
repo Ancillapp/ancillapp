@@ -65,6 +65,7 @@ export default function template(this: SongsList) {
         @keydown="${this._handleSearchKeyDown}"
         @input="${this._handleSearch}"
         value="${this._searchTerm}"
+        autofocus
       />
     </top-app-bar>
 
