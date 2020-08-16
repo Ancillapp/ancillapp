@@ -1,10 +1,12 @@
 import { html } from 'lit-element';
+import { nothing } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
-import { load } from '../../helpers/directives';
 import { AncillasList } from './ancillas-list.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
+import '@material/mwc-button';
+import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/unobtrusive-notification/unobtrusive-notification.component';
 
@@ -47,13 +49,20 @@ export default function template(this: AncillasList) {
         dense
       ></mwc-button>
     </unobtrusive-notification>
-    ${load(
-      this._ancillas,
-      (ancillas) =>
-        html`
+
+    ${this._ancillasStatus.loading || !this._ancillasStatus.data
+      ? html`
+          <div class="loading-container">
+            <loading-spinner></loading-spinner>
+          </div>
+        `
+      : html`
           <div class="ancillas-container">
+            ${this._ancillasStatus.data.length < 1
+              ? html`<p>${this.localize(t`noResults`)}</p>`
+              : html`${nothing}`}
             ${repeat(
-              ancillas,
+              this._displayedAncillas,
               ({ code }) => code,
               ({ code, name, thumbnail }) => html`
                 <a
@@ -73,8 +82,12 @@ export default function template(this: AncillasList) {
               `,
             )}
           </div>
-        `,
-      (error) => html`${error.message}`,
-    )}
+        `}
+
+    <mwc-snackbar
+      leading
+      ?open="${this._ancillasStatus.refreshing}"
+      labelText="${this.localize(t`syncInProgress`)}"
+    ></mwc-snackbar>
   `;
 }

@@ -10,6 +10,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './ancillas-list.styles';
 import template from './ancillas-list.template';
 import { urlBase64ToUint8Array } from '../../helpers/utils';
+import { APIResponse, cacheAndNetwork } from '../../helpers/cache-and-network';
 
 import { apiUrl, vapidPublicKey } from '../../config/default.json';
 
@@ -38,9 +39,14 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
   @property({ type: Boolean })
   protected _needUserNotificationsPermission?: boolean;
 
-  protected _ancillas: Promise<Ancilla[]> = fetch(
-    `${apiUrl}/ancillas`,
-  ).then((res) => res.json());
+  @property({ type: Object })
+  protected _ancillasStatus: APIResponse<Ancilla[]> = {
+    loading: true,
+    refreshing: false,
+  };
+
+  @property({ type: Array })
+  protected _displayedAncillas: Ancilla[] = [];
 
   constructor() {
     super();
@@ -53,6 +59,20 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
         this._needUserNotificationsPermission = true;
       }
     });
+
+    this._prepareAncillas();
+  }
+
+  private async _prepareAncillas() {
+    for await (const status of cacheAndNetwork<Ancilla[]>(
+      `${apiUrl}/ancillas`,
+    )) {
+      this._ancillasStatus = status;
+
+      if (status.data) {
+        this._displayedAncillas = status.data;
+      }
+    }
   }
 
   protected updated(changedProperties: PropertyValues) {
