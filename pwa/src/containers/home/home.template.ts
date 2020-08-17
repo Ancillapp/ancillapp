@@ -42,55 +42,51 @@ export default function template(this: HomePage) {
   );
 
   return html`
-    ${this.showMenuButton && this._searching
-      ? html`
-          <top-app-bar class="search-mode" ?drawer-open="${this.drawerOpen}">
-            <mwc-icon-button slot="leadingIcon" @click="${this._stopSearching}">
-              ${arrowBack}
-            </mwc-icon-button>
-            <mwc-icon-button
-              id="keyboard-type-switch"
-              slot="trailingIcon"
-              @click="${this._handleKeyboardTypeSwitch}"
-            >
-              ${this._numericOnly ? dialpad : notes}
-            </mwc-icon-button>
-            <div slot="title" ?hidden="${this._searching}">
-              ${this.localize(t`songs`)}
-            </div>
-            <input
-              id="search-input"
-              slot="title"
-              placeholder="Cerca in Ancillapp"
-              inputmode="${this._numericOnly ? 'numeric' : 'text'}"
-              ?hidden="${!this._searching}"
-              @keydown="${this._handleSearchKeyDown}"
-              @input="${this._handleMobileSearch}"
-              value="${this._searchTerm}"
-              autofocus
-            />
-          </top-app-bar>
-        `
-      : html`
-          <search-top-bar
-            ?drawer-open="${this.drawerOpen}"
-            placeholder="Cerca in Ancillapp"
-            @search="${this._handleDesktopSearch}"
-            @searchclick="${this._startSearching}"
-          >
-            <mwc-icon-button
-              slot="leadingIcon"
-              ?hidden="${!this.showMenuButton}"
-              @click="${() =>
-                this.dispatchEvent(new CustomEvent('menutoggle'))}"
-            >
-              ${menu}
-            </mwc-icon-button>
-            <div slot="title">
-              ${this.localize(t`home`)}
-            </div>
-          </search-top-bar>
-        `}
+    <top-app-bar
+      class="search-mode ${this.showMenuButton && this._searching
+        ? ''
+        : 'hidden'}"
+      ?drawer-open="${this.drawerOpen}"
+    >
+      <mwc-icon-button slot="leadingIcon" @click="${this._stopSearching}">
+        ${arrowBack}
+      </mwc-icon-button>
+      <mwc-icon-button
+        id="keyboard-type-switch"
+        slot="trailingIcon"
+        @click="${this._handleKeyboardTypeSwitch}"
+      >
+        ${this._numericOnly ? dialpad : notes}
+      </mwc-icon-button>
+      <input
+        id="search-input"
+        slot="title"
+        placeholder="Cerca in Ancillapp"
+        inputmode="${this._numericOnly ? 'numeric' : 'text'}"
+        @keydown="${this._handleSearchKeyDown}"
+        @input="${this._handleMobileSearch}"
+        value="${this._searchTerm}"
+        autofocus
+      />
+    </top-app-bar>
+    <search-top-bar
+      ?drawer-open="${this.drawerOpen}"
+      placeholder="Cerca in Ancillapp"
+      @search="${this._handleDesktopSearch}"
+      @searchclick="${this._startSearching}"
+      class="${this.showMenuButton && this._searching ? 'hidden' : ''}"
+    >
+      <mwc-icon-button
+        slot="leadingIcon"
+        ?hidden="${!this.showMenuButton}"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+      >
+        ${menu}
+      </mwc-icon-button>
+      <div slot="title">
+        ${this.localize(t`home`)}
+      </div>
+    </search-top-bar>
 
     <div class="search-results" ?hidden="${!this._searching}">
       ${this._searchTerm && this._searchResults.length < 1

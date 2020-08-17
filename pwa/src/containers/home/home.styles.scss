@@ -169,3 +169,17 @@ search-top-bar > mwc-icon-button {
     display: none;
   }
 }
+
+top-app-bar,
+search-top-bar {
+  will-change: opacity, z-index;
+  opacity: 1;
+  z-index: 1;
+  transition: 0.3s opacity, 0.3s z-index step-start;
+}
+
+.hidden {
+  opacity: 0;
+  z-index: -1;
+  transition: 0.3s opacity, 0.3s z-index step-end;
+}
