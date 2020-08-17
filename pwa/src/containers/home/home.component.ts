@@ -213,6 +213,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         },
         description: content,
         link: this.localizeHref('songs', number),
+        keywords: number,
       })),
       ...prayers.map<HomeWorker.SearchItem>(
         ({
@@ -227,6 +228,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
           },
           description: content?.it || content?.la,
           link: this.localizeHref('prayers', slug),
+          keywords: slug,
         }),
       ),
       ...ancillas.map<HomeWorker.SearchItem>(({ code, name, thumbnail }) => ({
@@ -243,6 +245,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
           `,
         },
         link: this.localizeHref('ancillas', code),
+        keywords: code,
       })),
     ]);
   }
