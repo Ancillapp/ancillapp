@@ -99,3 +99,17 @@ declare module '*.po' {
   const content: { messages: Record<string, CompiledMessage> };
   export default content;
 }
+
+interface WakeLockSentinel extends EventTarget {
+  release(): Promise<void>;
+  readonly type: 'screen';
+  readonly onrelease: EventHandlerNonNull;
+}
+
+interface WakeLock {
+  request(type: 'screen'): Promise<WakeLockSentinel>;
+}
+
+interface Navigator {
+  readonly wakeLock: WakeLock;
+}

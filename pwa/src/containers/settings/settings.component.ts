@@ -1,4 +1,4 @@
-import { customElement, queryAll, PropertyValues } from 'lit-element';
+import { customElement, queryAll, PropertyValues, property } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -21,6 +21,9 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
+
+  @property({ type: Boolean, reflect: true, attribute: 'keep-screen-active' })
+  public keepScreenActive = false;
 
   @queryAll('outlined-select')
   private _selects?: NodeList;
@@ -67,6 +70,14 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
         (select as OutlinedSelect).requestUpdate();
       }
     });
+  }
+
+  protected async _handleKeepScreenActiveChange({ target }: MouseEvent) {
+    this.dispatchEvent(
+      new CustomEvent('keepscreenactivechange', {
+        detail: (target as HTMLInputElement).checked,
+      }),
+    );
   }
 }
 

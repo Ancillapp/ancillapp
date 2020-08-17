@@ -199,7 +199,8 @@ ul.settings {
       margin-bottom: 1rem;
     }
 
-    > :last-child {
+    > outlined-select,
+    > date-input {
       width: 12.5rem;
     }
   }

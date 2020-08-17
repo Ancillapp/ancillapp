@@ -53,6 +53,9 @@ export class Shell extends localize(authorize(LitElement)) {
     window.location.search,
   ).has('registered');
 
+  @property({ type: Object })
+  protected _wakeLockSentinel: WakeLockSentinel | null = null;
+
   @query('mwc-drawer')
   private _drawer!: Drawer;
 
@@ -86,6 +89,33 @@ export class Shell extends localize(authorize(LitElement)) {
       '(min-width: 48rem)',
       (matches) => (this._narrow = matches),
     );
+
+    this._setupWakeLockSentinel();
+  }
+
+  private async _setupWakeLockSentinel() {
+    const keepScreenActive = await get<boolean>('keepScreenActive');
+
+    if (keepScreenActive) {
+      this._wakeLockSentinel = await navigator.wakeLock.request('screen');
+    }
+  }
+
+  protected async _handleKeepScreenActiveChange({
+    detail,
+  }: CustomEvent<boolean>) {
+    if (detail) {
+      await set('keepScreenActive', true);
+
+      this._wakeLockSentinel = await navigator.wakeLock.request('screen');
+    } else {
+      await set('keepScreenActive', false);
+
+      if (this._wakeLockSentinel) {
+        await this._wakeLockSentinel.release();
+        this._wakeLockSentinel = null;
+      }
+    }
   }
 
   protected updated(changedProperties: PropertyValues) {

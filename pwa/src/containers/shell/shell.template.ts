@@ -226,6 +226,8 @@ export default function template(this: Shell) {
             ?show-menu-button="${!this._narrow}"
             @menutoggle="${() =>
               this._updateDrawerOpenState(!this._drawerOpened)}"
+            ?keep-screen-active="${this._wakeLockSentinel}"
+            @keepscreenactivechange="${this._handleKeepScreenActiveChange}"
           ></settings-page>
           <info-page
             class="page padded"
