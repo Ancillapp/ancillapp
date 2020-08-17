@@ -1,4 +1,7 @@
 import { html } from 'lit-element';
+import { nothing } from 'lit-html';
+import { repeat } from 'lit-html/directives/repeat';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import {
   ancillasIcon,
   breviaryIcon,
@@ -6,28 +9,97 @@ import {
   songsIcon,
   holyMassIcon,
   menu,
+  arrowBack,
+  dialpad,
+  notes,
 } from '../../components/icons';
 import { HomePage } from './home.component';
 import { t } from '@lingui/macro';
 
-import '../../components/top-app-bar/top-app-bar.component';
+import '../../components/search-top-bar/search-top-bar.component';
 
 export default function template(this: HomePage) {
-  return html`
-    <top-app-bar ?drawer-open="${this.drawerOpen}">
-      <mwc-icon-button
-        slot="leadingIcon"
-        ?hidden="${!this.showMenuButton}"
-        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
-      >
-        ${menu}
-      </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`home`)}
-      </div>
-    </top-app-bar>
+  const searchResults = repeat(
+    this._searchResults,
+    ({ title }) => title,
+    ({ link, preview, title, description }) => html`
+      <a href="${link}" class="search-result">
+        ${preview.type === 'text'
+          ? html`
+              <div class="search-result-preview">
+                ${preview.content}
+              </div>
+            `
+          : html`${unsafeHTML(preview.content)}`}
+        <div class="search-result-content">
+          <h4>${unsafeHTML(title)}</h4>
+          ${description
+            ? html`<h5>${unsafeHTML(description)}</h5>`
+            : html`${nothing}`}
+        </div>
+      </a>
+    `,
+  );
 
-    <section>
+  return html`
+    ${this.showMenuButton && this._searching
+      ? html`
+          <top-app-bar class="search-mode" ?drawer-open="${this.drawerOpen}">
+            <mwc-icon-button slot="leadingIcon" @click="${this._stopSearching}">
+              ${arrowBack}
+            </mwc-icon-button>
+            <mwc-icon-button
+              id="keyboard-type-switch"
+              slot="trailingIcon"
+              @click="${this._handleKeyboardTypeSwitch}"
+            >
+              ${this._numericOnly ? dialpad : notes}
+            </mwc-icon-button>
+            <div slot="title" ?hidden="${this._searching}">
+              ${this.localize(t`songs`)}
+            </div>
+            <input
+              id="search-input"
+              slot="title"
+              placeholder="Cerca in Ancillapp"
+              inputmode="${this._numericOnly ? 'numeric' : 'text'}"
+              ?hidden="${!this._searching}"
+              @keydown="${this._handleSearchKeyDown}"
+              @input="${this._handleMobileSearch}"
+              value="${this._searchTerm}"
+              autofocus
+            />
+          </top-app-bar>
+        `
+      : html`
+          <search-top-bar
+            ?drawer-open="${this.drawerOpen}"
+            placeholder="Cerca in Ancillapp"
+            @search="${this._handleDesktopSearch}"
+            @searchclick="${this._startSearching}"
+          >
+            <mwc-icon-button
+              slot="leadingIcon"
+              ?hidden="${!this.showMenuButton}"
+              @click="${() =>
+                this.dispatchEvent(new CustomEvent('menutoggle'))}"
+            >
+              ${menu}
+            </mwc-icon-button>
+            <div slot="title">
+              ${this.localize(t`home`)}
+            </div>
+          </search-top-bar>
+        `}
+
+    <div class="search-results" ?hidden="${!this._searching}">
+      ${this._searchTerm && this._searchResults.length < 1
+        ? html`<p>${this.localize(t`noResults`)}</p>`
+        : html`${nothing}`}
+      ${searchResults}
+    </div>
+
+    <section ?hidden="${this.showMenuButton && this._searching}">
       <h2>${this.localize(t`peaceAndGood`)}</h2>
       <ul>
         <li>
