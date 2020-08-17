@@ -1,4 +1,5 @@
 import { mongoDb } from '../../../helpers/mongo';
+import { Ancilla } from '../../../models/mongo';
 
 import type { RequestHandler } from 'express';
 
@@ -9,9 +10,9 @@ export const getAncillas: RequestHandler = async (_, res) => {
   );
 
   const db = await mongoDb;
-  const ancillasCollection = db.collection('ancillas');
+  const ancillasCollection = db.collection<Ancilla>('ancillas');
 
-  const ancillas = await ancillasCollection
+  const ancillas = (await ancillasCollection
     .find(
       {},
       {
@@ -23,7 +24,7 @@ export const getAncillas: RequestHandler = async (_, res) => {
       },
     )
     .sort({ date: -1 })
-    .toArray();
+    .toArray()) as Pick<Ancilla, '_id' | 'code' | 'name'>[];
 
   res.json(
     ancillas.map(({ code, ...rest }) => ({

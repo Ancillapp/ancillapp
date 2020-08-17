@@ -1,4 +1,5 @@
 import { mongoDb } from '../../../helpers/mongo';
+import { Ancilla } from '../../../models/mongo';
 
 import type { RequestHandler } from 'express';
 
@@ -12,7 +13,7 @@ export const getAncilla: RequestHandler = async (
   );
 
   const db = await mongoDb;
-  const ancillasCollection = db.collection('ancillas');
+  const ancillasCollection = db.collection<Ancilla>('ancillas');
 
   const projection = {
     _id: 0,
@@ -20,16 +21,18 @@ export const getAncilla: RequestHandler = async (
     name: 1,
   };
 
-  const data =
-    inputCode === 'latest'
-      ? (
-          await ancillasCollection
-            .find({}, { projection })
-            .sort({ date: -1 })
-            .limit(1)
-            .toArray()
-        )[0]
-      : await ancillasCollection.findOne({ code: inputCode }, { projection });
+  const data = (inputCode === 'latest'
+    ? (
+        await ancillasCollection
+          .find({}, { projection })
+          .sort({ date: -1 })
+          .limit(1)
+          .toArray()
+      )[0]
+    : await ancillasCollection.findOne(
+        { code: inputCode },
+        { projection },
+      )) as Pick<Ancilla, '_id' | 'code' | 'name'> | null;
 
   if (!data) {
     res.status(404).send();

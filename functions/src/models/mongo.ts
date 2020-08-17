@@ -80,6 +80,7 @@ export interface Song extends MongoDBRecord {
   number: string;
   title: string;
   content: string;
+  language: string;
 }
 
 export interface Subscription extends MongoDBRecord {
