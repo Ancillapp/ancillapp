@@ -261,6 +261,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     this._searchTerm = searchParam || '';
 
     if (
+      this.showMenuButton &&
       changedProperties.has('_searching') &&
       this._searching &&
       this._searchInput
