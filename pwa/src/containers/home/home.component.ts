@@ -360,6 +360,22 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     this._searching = false;
     history.replaceState({}, '', window.location.pathname);
   }
+
+  protected _handleSearchResultClick({
+    altKey,
+    ctrlKey,
+    metaKey,
+    shiftKey,
+  }: MouseEvent) {
+    if (altKey || ctrlKey || metaKey || shiftKey) {
+      return;
+    }
+
+    this._searchInput!.value = '';
+    this._searchTerm = '';
+    this._stopSearching();
+    this._updateSearchResults();
+  }
 }
 
 declare global {

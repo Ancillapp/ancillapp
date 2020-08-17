@@ -23,7 +23,11 @@ export default function template(this: HomePage) {
     this._searchResults,
     ({ title }) => title,
     ({ link, preview, title, description }) => html`
-      <a href="${link}" class="search-result">
+      <a
+        href="${link}"
+        class="search-result"
+        @click="${this._handleSearchResultClick}"
+      >
         ${preview.type === 'text'
           ? html`
               <div class="search-result-preview">
