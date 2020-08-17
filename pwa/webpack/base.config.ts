@@ -24,6 +24,7 @@ const config: Configuration = {
   entry: path.resolve(__dirname, '../src/index'),
   output: {
     path: path.resolve(__dirname, '../dist'),
+    globalObject: 'self',
   },
   resolve: {
     alias: {
@@ -43,6 +44,11 @@ const config: Configuration = {
           path.resolve(__dirname, 'loaders/i18n-postprocess-loader.ts'),
           '@lingui/loader',
         ],
+      },
+      {
+        test: /\.worker\.[tj]s$/,
+        exclude: /node_modules/,
+        use: 'workerize-loader',
       },
       {
         test: /\.[tj]s$/,
