@@ -14,7 +14,6 @@ export interface SearchItem {
 let _fuse: Fuse<SearchItem>;
 
 export const configureSearch = async (configuration: SearchItem[]) => {
-  console.log('configuring');
   _fuse = new Fuse(configuration, {
     keys: ['keywords', 'title', 'description'],
     includeMatches: true,
@@ -22,7 +21,6 @@ export const configureSearch = async (configuration: SearchItem[]) => {
 };
 
 export const search = async (term: string): Promise<SearchItem[]> => {
-  console.log(_fuse);
   if (!_fuse) {
     return [];
   }
