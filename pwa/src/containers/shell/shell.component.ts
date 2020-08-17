@@ -99,6 +99,12 @@ export class Shell extends localize(authorize(LitElement)) {
     if (keepScreenActive) {
       this._wakeLockSentinel = await navigator.wakeLock.request('screen');
     }
+
+    document.addEventListener('visibilitychange', async () => {
+      if (this._wakeLockSentinel && document.visibilityState === 'visible') {
+        this._wakeLockSentinel = await navigator.wakeLock.request('screen');
+      }
+    });
   }
 
   protected async _handleKeepScreenActiveChange({
