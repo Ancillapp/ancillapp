@@ -88,6 +88,19 @@ search-top-bar > mwc-icon-button {
   > p  {
     text-align: center;
   }
+
+  @media (min-width: 28.75rem) {
+    z-index: 1;
+    position: absolute;
+    top: var(--ancillapp-top-bar-height);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ancillapp-search-bar-color);
+    max-width: 40rem;
+    max-height: 50vh;
+    overflow-y: auto;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
 }
 
 .search-result {
