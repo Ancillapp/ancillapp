@@ -56,10 +56,16 @@ interface AncillappDataDBSchema extends DBSchema {
       slug: string;
       title: {
         it?: string;
+        en?: string;
+        pt?: string;
+        de?: string;
         la?: string;
       };
       content: {
         it?: string;
+        en?: string;
+        pt?: string;
+        de?: string;
         la?: string;
       };
     };
@@ -96,3 +102,27 @@ export const initDB = () =>
       });
     },
   });
+
+export const debounce = <
+  F extends (...args: any) => Promise<any> = (...args: any) => Promise<any>
+>(
+  fn: F,
+  delay: number,
+): F => {
+  let timer: number | null = null;
+
+  return ((...args) =>
+    new Promise((resolve, reject) => {
+      if (timer) {
+        window.clearTimeout(timer);
+      }
+
+      timer = window.setTimeout(
+        () =>
+          fn(...(args as any[]))
+            .then(resolve)
+            .catch(reject),
+        delay,
+      );
+    })) as F;
+};
