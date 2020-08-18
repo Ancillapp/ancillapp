@@ -92,14 +92,14 @@ search-top-bar > mwc-icon-button {
   @media (min-width: 28.75rem) {
     z-index: 1;
     position: absolute;
-    top: var(--ancillapp-top-bar-height);
+    top: calc(var(--ancillapp-top-bar-height) + 6px);
     left: 50%;
     transform: translateX(-50%);
     background: var(--ancillapp-search-bar-color);
     max-width: 40rem;
     max-height: 50vh;
     overflow-y: auto;
-    border-radius: 0 0 0.5rem 0.5rem;
+    border-radius: 0.5rem;
   }
 }
 

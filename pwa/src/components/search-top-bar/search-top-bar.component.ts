@@ -128,6 +128,15 @@ export class SearchTopBar extends LitElement {
   protected _handleSearchClick(event: MouseEvent) {
     this.dispatchEvent(new CustomEvent('searchclick', event));
   }
+
+  protected _handleSearchKeyDown(event: KeyboardEvent) {
+    this.dispatchEvent(
+      new CustomEvent('searchkeydown', {
+        ...event,
+        detail: event,
+      }),
+    );
+  }
 }
 
 declare global {

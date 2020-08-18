@@ -12,6 +12,7 @@ export default function template(this: SearchTopBar) {
           placeholder="${this.placeholder}"
           @input="${this._handleSearch}"
           @click="${this._handleSearchClick}"
+          @keydown="${this._handleSearchKeyDown}"
         />
         <section class="end">
           <slot name="trailingIcon"></slot>

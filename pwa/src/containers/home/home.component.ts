@@ -74,6 +74,10 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
       (prefersNumericSearchKeyboard) =>
         (this._numericOnly = prefersNumericSearchKeyboard),
     );
+
+    document.addEventListener('click', () => {
+      this._stopSearching();
+    });
   }
 
   private async _setupSearch() {
@@ -296,26 +300,32 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     this._searchResults = await search(this._searchTerm);
   }
 
-  protected _handleSearchKeyDown(event: KeyboardEvent) {
-    if (event.code === 'Escape' || event.code === 'Enter') {
+  protected _handleSearchKeyDown(
+    event: KeyboardEvent | CustomEvent<KeyboardEvent>,
+  ) {
+    const { code, target } = (event.detail instanceof KeyboardEvent
+      ? event.detail
+      : event) as KeyboardEvent;
+
+    if (code === 'Escape' || code === 'Enter') {
       event.preventDefault();
 
-      if (event.code === 'Escape') {
-        (event.target as HTMLInputElement).value = '';
+      if (code === 'Escape') {
+        (target as HTMLInputElement).value = '';
         this._searchTerm = '';
         this._stopSearching();
         this._updateSearchResults();
+      } else {
+        const firstSearchResult = this._searchResultsContainer!.querySelector<
+          HTMLAnchorElement
+        >('.search-results > a');
+
+        if (!firstSearchResult) {
+          return;
+        }
+
+        firstSearchResult.focus();
       }
-
-      const firstSong = this._searchResultsContainer!.querySelector<
-        HTMLAnchorElement
-      >('.search-results > a');
-
-      if (!firstSong) {
-        return;
-      }
-
-      firstSong.focus();
     }
   }
 
@@ -354,6 +364,10 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     if (this.showMenuButton) {
       history.replaceState({}, '', `${window.location.pathname}?search`);
     }
+
+    if (this._searchTerm) {
+      this._updateSearchResults();
+    }
   }
 
   protected _stopSearching() {
@@ -371,8 +385,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
       return;
     }
 
-    this._searchInput!.value = '';
-    this._searchTerm = '';
     this._stopSearching();
     this._updateSearchResults();
   }

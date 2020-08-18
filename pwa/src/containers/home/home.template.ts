@@ -78,6 +78,7 @@ export default function template(this: HomePage) {
       placeholder="Cerca in Ancillapp"
       @search="${this._handleDesktopSearch}"
       @searchclick="${this._startSearching}"
+      @searchkeydown="${this._handleSearchKeyDown}"
       class="${this.showMenuButton && this._searching ? 'hidden' : ''}"
     >
       <mwc-icon-button
