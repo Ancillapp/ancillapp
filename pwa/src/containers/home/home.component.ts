@@ -74,11 +74,11 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
       (prefersNumericSearchKeyboard) =>
         (this._numericOnly = prefersNumericSearchKeyboard),
     );
-
-    document.addEventListener('click', () => {
-      this._stopSearching();
-    });
   }
+
+  private _handleDocumentClick = () => {
+    this._stopSearching();
+  };
 
   private async _setupSearch() {
     const db = await initDB();
@@ -264,6 +264,14 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     this._searching = searchParam !== null;
     this._searchTerm = searchParam || '';
 
+    if (changedProperties.has('showMenuButton')) {
+      if (this.showMenuButton) {
+        document.removeEventListener('click', this._handleDocumentClick);
+      } else {
+        document.addEventListener('click', this._handleDocumentClick);
+      }
+    }
+
     if (
       this.showMenuButton &&
       changedProperties.has('_searching') &&
@@ -385,6 +393,8 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
       return;
     }
 
+    this._searchInput!.value = '';
+    this._searchTerm = '';
     this._stopSearching();
     this._updateSearchResults();
   }
