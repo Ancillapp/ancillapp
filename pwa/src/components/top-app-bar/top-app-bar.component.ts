@@ -62,7 +62,7 @@ export class TopAppBar extends LitElement {
 
         const realScroll = Math.max(0, scrollTop);
 
-        this._scrolled = realScroll > 32;
+        this._scrolled = realScroll > 16;
 
         if (
           this._latestPos < realScroll &&
