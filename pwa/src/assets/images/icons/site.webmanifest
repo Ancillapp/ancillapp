@@ -18,5 +18,35 @@
   "theme_color": "#557892",
   "background_color": "#557892",
   "start_url": "/",
-  "display": "standalone"
+  "display": "standalone",
+  "shortcuts": [
+    {
+      "name": "Prega la Liturgia delle Ore",
+      "short_name": "Liturgia delle Ore",
+      "description": "Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania.",
+      "url": "/it/breviario",
+      "icons": [{ "src": "./shortcuts/breviary.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Canta i canti della Fraternità",
+      "short_name": "Canti",
+      "description": "Sfoglia il librone dei canti usato della Fraternità Francescana di Betania.",
+      "url": "/it/canti",
+      "icons": [{ "src": "./shortcuts/songs.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Prega le preghiere giornaliere",
+      "short_name": "Preghiere",
+      "description": "Prega le preghiere giornaliere pregate dalla Fraternità Francescana di Betania.",
+      "url": "/it/preghiere",
+      "icons": [{ "src": "./shortcuts/prayers.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Prenota un posto per la Santa Messa",
+      "short_name": "Santa Messa",
+      "description": "Prenota un posto per la Santa Messa in una delle case della Fraternità Francescana di Betania.",
+      "url": "/it/santa-messa",
+      "icons": [{ "src": "./shortcuts/holy-mass.png", "sizes": "192x192" }]
+    }
+  ]
 }
