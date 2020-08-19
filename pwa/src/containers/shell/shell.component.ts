@@ -49,6 +49,9 @@ export class Shell extends localize(authorize(LitElement)) {
   protected _updateNotificationShown = false;
 
   @property({ type: Boolean })
+  protected _updatingApp = false;
+
+  @property({ type: Boolean })
   protected _verificationEmailSent = new URLSearchParams(
     window.location.search,
   ).has('registered');
@@ -327,14 +330,16 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected _updateApp() {
-    this._updateNotificationShown = false;
     if (!this._newSw) {
       return;
     }
-    this._newSw.postMessage({ action: 'update' });
+    this._updatingApp = true;
+
     analytics.logEvent('perform_update', {
       offline: false,
     });
+
+    this._newSw.postMessage({ action: 'update' });
   }
 
   protected async _logout() {

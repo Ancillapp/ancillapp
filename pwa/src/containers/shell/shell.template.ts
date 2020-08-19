@@ -12,6 +12,7 @@ import '@material/mwc-list/mwc-list-item';
 import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/snackbar/snackbar.component';
+import '../../components/loading-button/loading-button.component';
 
 const pagesTranslations = {
   home: t`home`,
@@ -248,11 +249,12 @@ export default function template(this: Shell) {
         @click="${this._cancelUpdate}"
         label="${this.localize(t`ignore`)}"
       ></mwc-button>
-      <mwc-button
+      <loading-button
         slot="actions"
         @click="${this._updateApp}"
+        ?loading="${this._updatingApp}"
         label="${this.localize(t`updateNow`)}"
-      ></mwc-button>
+      ></loading-button>
     </snack-bar>
 
     <mwc-snackbar
