@@ -30,6 +30,7 @@ import {
   settingsIcon,
   infoIcon,
 } from '../../components/icons';
+import { prayersTranslations } from '../breviary-index/breviary-index.template';
 import { get, set } from '../../helpers/keyval';
 
 import * as HomeWorker from './home.worker';
@@ -89,16 +90,42 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
       db.getAll('ancillas'),
     ]);
 
+    const today = new Date();
+
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const dayAfterTomorrow = new Date(tomorrow);
+    dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 1);
+
+    const dates = [
+      {
+        date: today,
+        keywords: this.localize(t`today`),
+      },
+      {
+        date: tomorrow,
+        keywords: this.localize(t`tomorrow`),
+      },
+      {
+        date: dayAfterTomorrow,
+        keywords: this.localize(t`dayAfterTomorrow`),
+      },
+      {
+        date: yesterday,
+        keywords: this.localize(t`yesterday`),
+      },
+    ];
+
     await configureSearch([
       {
         title: this.localize(t`home`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${homeIcon.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${homeIcon.getHTML()}</div>`,
         },
         description: this.localize(t`homeDescription`),
         link: this.localizeHref('home'),
@@ -107,11 +134,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`breviary`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${breviaryIcon.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${breviaryIcon.getHTML()}</div>`,
         },
         description: this.localize(t`breviaryDescription`),
         link: this.localizeHref('breviary'),
@@ -120,11 +143,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`songs`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${songsIcon.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${songsIcon.getHTML()}</div>`,
         },
         description: this.localize(t`songsDescription`),
         link: this.localizeHref('songs'),
@@ -133,11 +152,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`prayers`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${prayersIcon.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${prayersIcon.getHTML()}</div>`,
         },
         description: this.localize(t`prayersDescription`),
         link: this.localizeHref('prayers'),
@@ -146,11 +161,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`ancillas`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${ancillasIcon.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${ancillasIcon.getHTML()}</div>`,
         },
         description: this.localize(t`ancillasDescription`),
         link: this.localizeHref('ancillas'),
@@ -159,11 +170,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`holyMass`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${holyMassIcon.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${holyMassIcon.getHTML()}</div>`,
         },
         description: this.localize(t`holyMassDescription`),
         link: this.localizeHref('holy-mass'),
@@ -172,11 +179,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`login`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${user.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${user.getHTML()}</div>`,
         },
         description: this.localize(t`loginDescription`),
         link: this.localizeHref('login'),
@@ -185,11 +188,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`settings`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${settingsIcon.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${settingsIcon.getHTML()}</div>`,
         },
         description: this.localize(t`settingsDescription`),
         link: this.localizeHref('settings'),
@@ -198,15 +197,45 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`info`),
         preview: {
           type: 'html',
-          content: `
-            <div class="search-result-preview">
-              ${infoIcon.getHTML()}
-            </div>
-          `,
+          content: `<div class="search-result-preview">${infoIcon.getHTML()}</div>`,
         },
         description: this.localize(t`infoDescription`),
         link: this.localizeHref('info'),
       },
+      ...[
+        'invitatory',
+        'matins',
+        'lauds',
+        'terce',
+        'sext',
+        'none',
+        'vespers',
+        'compline',
+      ].flatMap<HomeWorker.SearchItem>((prayer) =>
+        dates.map(({ date, keywords }) => ({
+          title: `${
+            prayersTranslations[prayer as keyof typeof prayersTranslations]
+          } - ${Intl.DateTimeFormat(this.locale, {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          }).format(date)}`,
+          preview: {
+            type: 'text',
+            content:
+              prayersTranslations[
+                prayer as keyof typeof prayersTranslations
+              ][0],
+          },
+          description: this.localize(t`breviaryDescription`),
+          link: this.localizeHref(
+            'breviary',
+            prayer,
+            date.toISOString().slice(0, 10),
+          ),
+          keywords,
+        })),
+      ),
       ...songs.map<HomeWorker.SearchItem>(({ number, title, content }) => ({
         title,
         preview: {
@@ -240,13 +269,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         description: name[this.locale],
         preview: {
           type: 'html',
-          content: `
-            <img
-              class="search-result-preview"
-              src="${thumbnail}"
-              alt="Ancilla Domini - ${name[this.locale]}"
-            />
-          `,
+          content: `<img class="search-result-preview" src="${thumbnail}" alt="Ancilla Domini - ${
+            name[this.locale]
+          }">`,
         },
         link: this.localizeHref('ancillas', code),
         keywords: code,

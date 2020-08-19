@@ -24,13 +24,13 @@ msgstr "Sfoglia l'Ancilla Domini \"{name}\" della Fraternità Francescana di Bet
 #: src/containers/ancilla-viewer/ancilla-viewer.component.ts:52
 #: src/containers/ancillas-list/ancillas-list.component.ts:79
 #: src/containers/ancillas-list/ancillas-list.template.ts:21
-#: src/containers/home/home.component.ts:105
+#: src/containers/home/home.component.ts:118
 #: src/containers/shell/shell.template.ts:18
 msgid "ancillas"
 msgstr "Ancilla Domini"
 
 #: src/containers/ancillas-list/ancillas-list.component.ts:82
-#: src/containers/home/home.component.ts:114
+#: src/containers/home/home.component.ts:123
 msgid "ancillasDescription"
 msgstr "Sfoglia gli Ancilla Domini della Fraternità Francescana di Betania."
 
@@ -46,7 +46,7 @@ msgstr "Torna al login"
 msgid "book"
 msgstr "Prenota"
 
-#: src/containers/home/home.template.ts:113
+#: src/containers/home/home.template.ts:114
 msgid "bookHolyMassSeat"
 msgstr "Prenota un posto per la Santa Messa"
 
@@ -61,14 +61,15 @@ msgstr "Sicuro di voler eliminare la tua prenotazione per la Messa della Fratern
 #: src/containers/breviary-index/breviary-index.component.ts:38
 #: src/containers/breviary-index/breviary-index.template.ts:30
 #: src/containers/breviary-viewer/breviary-viewer.component.ts:65
-#: src/containers/home/home.component.ts:66
+#: src/containers/home/home.component.ts:91
 #: src/containers/shell/shell.template.ts:15
 msgid "breviary"
 msgstr "Breviario"
 
 #: src/containers/breviary-index/breviary-index.component.ts:41
 #: src/containers/breviary-viewer/breviary-viewer.component.ts:68
-#: src/containers/home/home.component.ts:75
+#: src/containers/home/home.component.ts:96
+#: src/containers/home/home.component.ts:181
 msgid "breviaryDescription"
 msgstr "Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
@@ -112,6 +113,10 @@ msgstr "Scuro"
 #: src/containers/holy-mass/holy-mass.template.ts:120
 msgid "date"
 msgstr "Data"
+
+#: src/containers/home/home.component.ts:77
+msgid "dayAfterTomorrow"
+msgstr "dopodomani"
 
 #: src/containers/holy-mass/holy-mass.template.ts:95
 msgid "dayAlreadyBooked"
@@ -190,25 +195,25 @@ msgstr "Vai alla pagina di login"
 
 #: src/containers/holy-mass/holy-mass.component.ts:62
 #: src/containers/holy-mass/holy-mass.template.ts:26
-#: src/containers/home/home.component.ts:118
+#: src/containers/home/home.component.ts:127
 #: src/containers/shell/shell.template.ts:19
 msgid "holyMass"
 msgstr "Santa Messa"
 
 #: src/containers/holy-mass/holy-mass.component.ts:65
-#: src/containers/home/home.component.ts:127
+#: src/containers/home/home.component.ts:132
 msgid "holyMassDescription"
 msgstr "Prenota un posto per la Santa Messa in una delle case della Fraternità Francescana di Betania."
 
-#: src/containers/home/home.component.ts:53
-#: src/containers/home/home.component.ts:226
-#: src/containers/home/home.template.ts:73
+#: src/containers/home/home.component.ts:82
+#: src/containers/home/home.component.ts:244
+#: src/containers/home/home.template.ts:74
 #: src/containers/shell/shell.template.ts:14
 msgid "home"
 msgstr "Home"
 
-#: src/containers/home/home.component.ts:62
-#: src/containers/home/home.component.ts:229
+#: src/containers/home/home.component.ts:87
+#: src/containers/home/home.component.ts:247
 msgid "homeDescription"
 msgstr "Prega le preghiere giornaliere, canta i canti, e sfoglia gli Ancilla Domini della Fraternità Francescana di Betania."
 
@@ -234,14 +239,14 @@ msgstr "L'accoglienza"
 msgid "ignore"
 msgstr "Ignora"
 
-#: src/containers/home/home.component.ts:157
+#: src/containers/home/home.component.ts:154
 #: src/containers/info/info.component.ts:26
 #: src/containers/info/info.template.ts:22
 #: src/containers/shell/shell.template.ts:21
 msgid "info"
 msgstr "Informazioni"
 
-#: src/containers/home/home.component.ts:166
+#: src/containers/home/home.component.ts:159
 #: src/containers/info/info.component.ts:29
 msgid "infoDescription"
 msgstr "Scopri di più su Ancillapp e sulla Fraternità Francescana di Betania."
@@ -282,7 +287,7 @@ msgstr "Chiaro"
 msgid "loading"
 msgstr "Caricamento…"
 
-#: src/containers/home/home.component.ts:131
+#: src/containers/home/home.component.ts:136
 #: src/containers/login/login.component.ts:49
 #: src/containers/login/login.template.ts:25
 #: src/containers/login/login.template.ts:69
@@ -290,7 +295,7 @@ msgstr "Caricamento…"
 msgid "login"
 msgstr "Accedi"
 
-#: src/containers/home/home.component.ts:140
+#: src/containers/home/home.component.ts:141
 #: src/containers/login/login.component.ts:52
 msgid "loginDescription"
 msgstr "Effettua il login per usufruire del servizio di prenotazione delle Sante Messe della Fraternità Francescana di Betania."
@@ -340,7 +345,7 @@ msgid "noHolyMassesAvailable"
 msgstr "Nessuna Santa Messa disponibile per questo giorno."
 
 #: src/containers/ancillas-list/ancillas-list.template.ts:59
-#: src/containers/home/home.template.ts:79
+#: src/containers/home/home.template.ts:80
 #: src/containers/prayers-list/prayers-list.template.ts:61
 #: src/containers/songs-list/songs-list.component.ts:156
 msgid "noResults"
@@ -360,7 +365,7 @@ msgstr "No, grazie"
 msgid "none"
 msgstr "Ora Nona"
 
-#: src/containers/home/home.template.ts:85
+#: src/containers/home/home.template.ts:86
 msgid "peaceAndGood"
 msgstr "Pace e Bene!"
 
@@ -368,11 +373,11 @@ msgstr "Pace e Bene!"
 msgid "pillarsTitle"
 msgstr "I tre pilastri del carisma"
 
-#: src/containers/home/home.template.ts:101
+#: src/containers/home/home.template.ts:102
 msgid "prayDailyPrayers"
 msgstr "Prega le preghiere giornaliere"
 
-#: src/containers/home/home.template.ts:89
+#: src/containers/home/home.template.ts:90
 msgid "prayLiturgy"
 msgstr "Prega la Liturgia delle Ore"
 
@@ -391,7 +396,7 @@ msgstr ""
 msgid "prayerPillarTitle"
 msgstr "La preghiera"
 
-#: src/containers/home/home.component.ts:92
+#: src/containers/home/home.component.ts:109
 #: src/containers/prayer-viewer/prayer-viewer.component.ts:62
 #: src/containers/prayers-list/prayers-list.component.ts:82
 #: src/containers/prayers-list/prayers-list.template.ts:23
@@ -399,7 +404,7 @@ msgstr "La preghiera"
 msgid "prayers"
 msgstr "Preghiere"
 
-#: src/containers/home/home.component.ts:101
+#: src/containers/home/home.component.ts:114
 #: src/containers/prayers-list/prayers-list.component.ts:85
 msgid "prayersDescription"
 msgstr "Prega le preghiere giornaliere pregate dalla Fraternità Francescana di Betania."
@@ -408,7 +413,7 @@ msgstr "Prega le preghiere giornaliere pregate dalla Fraternità Francescana di 
 msgid "prayersDownload"
 msgstr "Vuoi scaricare tutte le preghiere ora in modo da poterle consultare anche quando sei offline?"
 
-#: src/containers/home/home.template.ts:107
+#: src/containers/home/home.template.ts:108
 msgid "readLatestAncilla"
 msgstr "Sfoglia l'ultimo Ancilla Domini"
 
@@ -438,14 +443,14 @@ msgstr "Imposta"
 msgid "setFilters"
 msgstr "Imposta filtri"
 
-#: src/containers/home/home.component.ts:144
+#: src/containers/home/home.component.ts:145
 #: src/containers/settings/settings.component.ts:41
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:20
 msgid "settings"
 msgstr "Impostazioni"
 
-#: src/containers/home/home.component.ts:153
+#: src/containers/home/home.component.ts:150
 #: src/containers/settings/settings.component.ts:44
 msgid "settingsDescription"
 msgstr "Personalizza Ancillapp modificandone il tema o la lingua."
@@ -467,7 +472,7 @@ msgstr "Dai un'occhiata a questo Ancilla Domini!"
 msgid "shareSongText"
 msgstr "Dai un'occhiata a questo canto!"
 
-#: src/containers/home/home.template.ts:95
+#: src/containers/home/home.template.ts:96
 msgid "singFraternitySongs"
 msgstr "Canta i canti della Fraternità"
 
@@ -475,7 +480,7 @@ msgstr "Canta i canti della Fraternità"
 msgid "songDescription {title}"
 msgstr "Canta il canto \"{title}\" come viene cantato dalla Fraternità Francescana di Betania."
 
-#: src/containers/home/home.component.ts:79
+#: src/containers/home/home.component.ts:100
 #: src/containers/shell/shell.template.ts:16
 #: src/containers/song-viewer/song-viewer.component.ts:62
 #: src/containers/songs-list/songs-list.component.ts:200
@@ -483,7 +488,7 @@ msgstr "Canta il canto \"{title}\" come viene cantato dalla Fraternità Francesc
 msgid "songs"
 msgstr "Canti"
 
-#: src/containers/home/home.component.ts:88
+#: src/containers/home/home.component.ts:105
 #: src/containers/songs-list/songs-list.component.ts:203
 msgid "songsDescription"
 msgstr "Sfoglia il librone dei canti usato della Fraternità Francescana di Betania."
@@ -523,6 +528,14 @@ msgstr "Tema"
 msgid "time"
 msgstr "Ora"
 
+#: src/containers/home/home.component.ts:69
+msgid "today"
+msgstr "oggi"
+
+#: src/containers/home/home.component.ts:73
+msgid "tomorrow"
+msgstr "domani"
+
 #: src/containers/holy-mass/holy-mass.component.ts:217
 msgid "tooManyVerificationRequests"
 msgstr "Hai effettuato troppe richieste di verifica email, riprova più tardi."
@@ -551,3 +564,7 @@ msgstr "Vespri"
 #: src/containers/login/login.component.ts:106
 msgid "wrongPassword"
 msgstr "La password inserita è errata."
+
+#: src/containers/home/home.component.ts:65
+msgid "yesterday"
+msgstr "ieri"
