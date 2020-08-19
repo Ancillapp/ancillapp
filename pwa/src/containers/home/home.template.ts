@@ -10,8 +10,6 @@ import {
   holyMassIcon,
   menu,
   arrowBack,
-  dialpad,
-  notes,
 } from '../../components/icons';
 import { HomePage } from './home.component';
 import { t } from '@lingui/macro';
@@ -55,18 +53,10 @@ export default function template(this: HomePage) {
       <mwc-icon-button slot="leadingIcon" @click="${this._stopSearching}">
         ${arrowBack}
       </mwc-icon-button>
-      <mwc-icon-button
-        id="keyboard-type-switch"
-        slot="trailingIcon"
-        @click="${this._handleKeyboardTypeSwitch}"
-      >
-        ${this._numericOnly ? dialpad : notes}
-      </mwc-icon-button>
       <input
         id="search-input"
         slot="title"
         placeholder="Cerca in Ancillapp"
-        inputmode="${this._numericOnly ? 'numeric' : 'text'}"
         @keydown="${this._handleSearchKeyDown}"
         @input="${this._handleMobileSearch}"
         value="${this._searchTerm}"

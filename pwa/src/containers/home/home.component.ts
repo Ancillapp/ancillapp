@@ -54,9 +54,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   @property({ type: Boolean })
   protected _searching = false;
 
-  @property({ type: Boolean })
-  protected _numericOnly = false;
-
   @property({ type: String })
   protected _searchTerm = '';
 
@@ -70,11 +67,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     super();
 
     this._setupSearch();
-
-    get<boolean>('prefersNumericSearchKeyboard').then(
-      (prefersNumericSearchKeyboard) =>
-        (this._numericOnly = prefersNumericSearchKeyboard),
-    );
   }
 
   private _handleDocumentClick = () => {
@@ -382,13 +374,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
 
     this._searchResultsContainer!.scrollTo(0, 0);
     this._updateSearchResults();
-  }
-
-  protected async _handleKeyboardTypeSwitch() {
-    this._numericOnly = !this._numericOnly;
-    this._searchInput?.focus();
-    this._searchInput?.setSelectionRange(-1, -1);
-    await set('prefersNumericSearchKeyboard', this._numericOnly);
   }
 
   protected _startSearching() {

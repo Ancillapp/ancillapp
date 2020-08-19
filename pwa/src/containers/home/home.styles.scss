@@ -164,12 +164,6 @@ search-top-bar > mwc-icon-button {
   }
 }
 
-@media (pointer: fine) {
-  #keyboard-type-switch {
-    display: none;
-  }
-}
-
 top-app-bar,
 search-top-bar {
   will-change: opacity, z-index;
