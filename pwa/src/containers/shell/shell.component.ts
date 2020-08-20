@@ -12,12 +12,14 @@ import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
 import { installRouter } from '../../helpers/router';
+import { version as currentAppVersion } from '../../../../CHANGELOG.md';
 
 import sharedStyles from '../../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
 import type { Drawer } from '@material/mwc-drawer';
+import type { Checkbox } from '@material/mwc-checkbox';
 
 import firebase from 'firebase/app';
 
@@ -50,6 +52,12 @@ export class Shell extends localize(authorize(LitElement)) {
 
   @property({ type: Boolean })
   protected _updatingApp = false;
+
+  @property({ type: Boolean })
+  protected _changelogAvailable = false;
+
+  @property({ type: Boolean })
+  protected _dontShowChangelog = false;
 
   @property({ type: Boolean })
   protected _verificationEmailSent = new URLSearchParams(
@@ -94,6 +102,19 @@ export class Shell extends localize(authorize(LitElement)) {
     );
 
     this._setupWakeLockSentinel();
+
+    Promise.all([
+      get<boolean>('changelogAvailable'),
+      get<boolean>('dontShowChangelog'),
+    ]).then(async ([changelogAvailable, dontShowChangelog]) => {
+      this._dontShowChangelog = dontShowChangelog;
+
+      if (changelogAvailable && !dontShowChangelog) {
+        this._changelogAvailable = true;
+      }
+
+      await set('changelogAvailable', false);
+    });
   }
 
   private async _setupWakeLockSentinel() {
@@ -298,7 +319,13 @@ export class Shell extends localize(authorize(LitElement)) {
     }
     if (registration.waiting) {
       this._newSw = registration.waiting;
-      this._updateNotificationShown = true;
+
+      const newAppVersion = await get('appVersion');
+
+      if (newAppVersion !== currentAppVersion) {
+        this._updateNotificationShown = true;
+      }
+
       return;
     }
     if (registration.installing) {
@@ -314,22 +341,28 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected _trackInstallation(sw: ServiceWorker) {
-    sw.addEventListener('statechange', () => {
+    sw.addEventListener('statechange', async () => {
       if (sw.state === 'installed') {
         this._newSw = sw;
-        this._updateNotificationShown = true;
+
+        const newAppVersion = await get('appVersion');
+
+        if (newAppVersion !== currentAppVersion) {
+          this._updateNotificationShown = true;
+        }
       }
     });
   }
 
   protected _cancelUpdate() {
     this._updateNotificationShown = false;
+
     analytics.logEvent('cancel_update', {
       offline: false,
     });
   }
 
-  protected _updateApp() {
+  protected async _updateApp() {
     if (!this._newSw) {
       return;
     }
@@ -339,11 +372,19 @@ export class Shell extends localize(authorize(LitElement)) {
       offline: false,
     });
 
+    await set('changelogAvailable', true);
+
     this._newSw.postMessage({ action: 'update' });
   }
 
   protected async _logout() {
     await auth.signOut();
+  }
+
+  protected async _handledontShowChangelogChange({ target }: MouseEvent) {
+    this._dontShowChangelog = (target as Checkbox).checked;
+
+    await set('dontShowChangelog', this._dontShowChangelog);
   }
 }
 
