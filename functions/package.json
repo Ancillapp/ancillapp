@@ -1,5 +1,6 @@
 {
-  "name": "functions",
+  "name": "ancillapp-functions",
+  "version": "1.6.0",
   "scripts": {
     "start": "run-p start:firebase start:functions",
     "start:firebase": "cross-env NODE_ENV=development firebase serve --only hosting,functions",
