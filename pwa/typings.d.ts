@@ -100,6 +100,18 @@ declare module '*.po' {
   export default content;
 }
 
+declare module '*.md' {
+  export interface Changelog {
+    version: string;
+    date: string;
+    news: string[];
+  }
+
+  export const version: Changelog['version'];
+  export const date: Changelog['date'];
+  export const news: Changelog['news'];
+}
+
 interface WakeLockSentinel extends EventTarget {
   release(): Promise<void>;
   readonly type: 'screen';

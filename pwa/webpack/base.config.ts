@@ -38,6 +38,11 @@ const config: Configuration = {
   module: {
     rules: [
       {
+        test: /CHANGELOG/,
+        exclude: /node_modules/,
+        use: path.resolve(__dirname, 'loaders/changelog-loader.ts'),
+      },
+      {
         test: /\.po$/,
         exclude: /node_modules/,
         use: [
