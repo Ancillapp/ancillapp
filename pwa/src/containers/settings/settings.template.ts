@@ -1,10 +1,14 @@
 import { html } from 'lit-element';
+import { nothing } from 'lit-html';
 import { SettingsPage } from './settings.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
+import '@material/mwc-checkbox';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/outlined-select/outlined-select.component';
+
+const SUPPORTS_WAKE_LOCK = 'wakeLock' in navigator;
 
 export default function template(this: SettingsPage) {
   return html`
@@ -51,6 +55,20 @@ export default function template(this: SettingsPage) {
             <option value="pt">Português</option>
           </outlined-select>
         </li>
+        ${SUPPORTS_WAKE_LOCK
+          ? html`
+              <li class="checkbox-container">
+                <label for="keepScreenActive">
+                  ${this.localize(t`keepScreenActive`)}
+                </label>
+                <mwc-checkbox
+                  id="keepScreenActive"
+                  @change="${this._handleKeepScreenActiveChange}"
+                  ?checked="${this.keepScreenActive}"
+                ></mwc-checkbox>
+              </li>
+            `
+          : html`${nothing}`}
       </ul>
     </section>
   `;

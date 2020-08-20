@@ -199,7 +199,8 @@ ul.settings {
       margin-bottom: 1rem;
     }
 
-    > :last-child {
+    > outlined-select,
+    > date-input {
       width: 12.5rem;
     }
   }
@@ -211,7 +212,7 @@ top-app-bar {
   }
 
   &.search-mode {
-    --ancillapp-top-app-bar-background: #fff;
-    --ancillapp-top-app-bar-color: #000;
+    --ancillapp-top-app-bar-background: var(--ancillapp-search-bar-color);
+    --ancillapp-top-app-bar-color: var(--ancillapp-primary-text-color);
   }
 }

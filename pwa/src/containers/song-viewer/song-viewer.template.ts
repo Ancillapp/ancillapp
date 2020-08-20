@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { SongViewer } from './song-viewer.component';
 import { compile } from '../../helpers/directives';
-import { arrowBack } from '../../components/icons';
+import { arrowBack, search } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-snackbar';
@@ -21,6 +21,9 @@ export default function template(this: SongViewer) {
             }`
           : this.localize(t`loading`)}
       </div>
+      <mwc-icon-button slot="trailingIcon" @click="${this._goToSearchPage}">
+        ${search}
+      </mwc-icon-button>
     </top-app-bar>
 
     ${this._songStatus.loading || !this._songStatus.data

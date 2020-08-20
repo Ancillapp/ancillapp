@@ -2,6 +2,7 @@ import { customElement, property, PropertyValues } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
+import { navigateTo } from '../../helpers/router';
 import { PageViewElement } from '../page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 import { t } from '@lingui/macro';
@@ -87,6 +88,10 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
         this._songStatus = _songsStatusesCache.get(this.song)!;
       }
     }
+  }
+
+  protected _goToSearchPage() {
+    navigateTo(`${this.localizeHref('songs')}?search`);
   }
 }
 

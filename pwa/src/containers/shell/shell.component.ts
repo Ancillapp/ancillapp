@@ -6,18 +6,20 @@ import {
   query,
   queryAll,
 } from 'lit-element';
-import { installMediaQueryWatcher, installRouter } from 'pwa-helpers';
+import { installMediaQueryWatcher } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
-import { t } from '@lingui/macro';
+import { installRouter } from '../../helpers/router';
+import { version as currentAppVersion } from '../../../../CHANGELOG.md';
 
 import sharedStyles from '../../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
 import type { Drawer } from '@material/mwc-drawer';
+import type { Checkbox } from '@material/mwc-checkbox';
 
 import firebase from 'firebase/app';
 
@@ -30,8 +32,8 @@ export class Shell extends localize(authorize(LitElement)) {
 
   protected render = template;
 
-  @property({ type: Boolean, reflect: true, attribute: 'drawer-expanded' })
-  public drawerExpanded = false;
+  @property({ type: Boolean, reflect: true, attribute: 'drawer-shrinked' })
+  public drawerShrinked = false;
 
   @property({ type: String })
   protected _page = 'home';
@@ -49,9 +51,21 @@ export class Shell extends localize(authorize(LitElement)) {
   protected _updateNotificationShown = false;
 
   @property({ type: Boolean })
+  protected _updatingApp = false;
+
+  @property({ type: Boolean })
+  protected _changelogAvailable = false;
+
+  @property({ type: Boolean })
+  protected _dontShowChangelog = false;
+
+  @property({ type: Boolean })
   protected _verificationEmailSent = new URLSearchParams(
     window.location.search,
   ).has('registered');
+
+  @property({ type: Object })
+  protected _wakeLockSentinel: WakeLockSentinel | null = null;
 
   @query('mwc-drawer')
   private _drawer!: Drawer;
@@ -77,8 +91,8 @@ export class Shell extends localize(authorize(LitElement)) {
     this._observeForThemeChanges();
 
     if (window.matchMedia('(min-width: 48rem)').matches) {
-      get<boolean>('drawerOpened').then((drawerOpened) =>
-        this._updateDrawerExpansionState(drawerOpened),
+      get<boolean>('drawerShrinked').then((drawerOpened) =>
+        this._updateDrawerShrinkState(drawerOpened),
       );
     }
 
@@ -86,6 +100,52 @@ export class Shell extends localize(authorize(LitElement)) {
       '(min-width: 48rem)',
       (matches) => (this._narrow = matches),
     );
+
+    this._setupWakeLockSentinel();
+
+    Promise.all([
+      get<boolean>('changelogAvailable'),
+      get<boolean>('dontShowChangelog'),
+    ]).then(async ([changelogAvailable, dontShowChangelog]) => {
+      this._dontShowChangelog = dontShowChangelog;
+
+      if (changelogAvailable && !dontShowChangelog) {
+        this._changelogAvailable = true;
+      }
+
+      await set('changelogAvailable', false);
+    });
+  }
+
+  private async _setupWakeLockSentinel() {
+    const keepScreenActive = await get<boolean>('keepScreenActive');
+
+    if (keepScreenActive) {
+      this._wakeLockSentinel = await navigator.wakeLock.request('screen');
+    }
+
+    document.addEventListener('visibilitychange', async () => {
+      if (this._wakeLockSentinel && document.visibilityState === 'visible') {
+        this._wakeLockSentinel = await navigator.wakeLock.request('screen');
+      }
+    });
+  }
+
+  protected async _handleKeepScreenActiveChange({
+    detail,
+  }: CustomEvent<boolean>) {
+    if (detail) {
+      await set('keepScreenActive', true);
+
+      this._wakeLockSentinel = await navigator.wakeLock.request('screen');
+    } else {
+      await set('keepScreenActive', false);
+
+      if (this._wakeLockSentinel) {
+        await this._wakeLockSentinel.release();
+        this._wakeLockSentinel = null;
+      }
+    }
   }
 
   protected updated(changedProperties: PropertyValues) {
@@ -242,10 +302,10 @@ export class Shell extends localize(authorize(LitElement)) {
     }
   }
 
-  protected async _updateDrawerExpansionState(expanded: boolean) {
-    if (expanded !== this.drawerExpanded) {
-      this.drawerExpanded = expanded;
-      await set('drawerOpened', expanded);
+  protected async _updateDrawerShrinkState(shrinked: boolean) {
+    if (shrinked !== this.drawerShrinked) {
+      this.drawerShrinked = shrinked;
+      await set('drawerShrinked', shrinked);
     }
   }
 
@@ -259,7 +319,13 @@ export class Shell extends localize(authorize(LitElement)) {
     }
     if (registration.waiting) {
       this._newSw = registration.waiting;
-      this._updateNotificationShown = true;
+
+      const newAppVersion = await get('appVersion');
+
+      if (newAppVersion !== currentAppVersion) {
+        this._updateNotificationShown = true;
+      }
+
       return;
     }
     if (registration.installing) {
@@ -275,34 +341,50 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected _trackInstallation(sw: ServiceWorker) {
-    sw.addEventListener('statechange', () => {
+    sw.addEventListener('statechange', async () => {
       if (sw.state === 'installed') {
         this._newSw = sw;
-        this._updateNotificationShown = true;
+
+        const newAppVersion = await get('appVersion');
+
+        if (newAppVersion !== currentAppVersion) {
+          this._updateNotificationShown = true;
+        }
       }
     });
   }
 
   protected _cancelUpdate() {
     this._updateNotificationShown = false;
+
     analytics.logEvent('cancel_update', {
       offline: false,
     });
   }
 
-  protected _updateApp() {
-    this._updateNotificationShown = false;
+  protected async _updateApp() {
     if (!this._newSw) {
       return;
     }
-    this._newSw.postMessage({ action: 'update' });
+    this._updatingApp = true;
+
     analytics.logEvent('perform_update', {
       offline: false,
     });
+
+    await set('changelogAvailable', true);
+
+    this._newSw.postMessage({ action: 'update' });
   }
 
   protected async _logout() {
     await auth.signOut();
+  }
+
+  protected async _handledontShowChangelogChange({ target }: MouseEvent) {
+    this._dontShowChangelog = (target as Checkbox).checked;
+
+    await set('dontShowChangelog', this._dontShowChangelog);
   }
 }
 

@@ -1,4 +1,5 @@
 import { mongoDb } from '../../../helpers/mongo';
+import { Song } from '../../../models/mongo';
 
 import type { RequestHandler } from 'express';
 
@@ -12,9 +13,9 @@ export const getSongs: RequestHandler = async (
   );
 
   const db = await mongoDb;
-  const songsCollection = db.collection('songs');
+  const songsCollection = db.collection<Song>('songs');
 
-  const songs = await songsCollection
+  const songs = (await songsCollection
     .find(
       {},
       {
@@ -29,12 +30,12 @@ export const getSongs: RequestHandler = async (
         },
       },
     )
-    .toArray();
+    .toArray()) as Song[];
 
   res.json(
     songs.sort(({ number: a }, { number: b }) => {
-      const normalizedA = a.slice(2).replace('bis', '').padStart(4, 0);
-      const normalizedB = b.slice(2).replace('bis', '').padStart(4, 0);
+      const normalizedA = a.slice(2).replace('bis', '').padStart(4, '0');
+      const normalizedB = b.slice(2).replace('bis', '').padStart(4, '0');
 
       if (normalizedA === normalizedB) {
         return b.endsWith('bis') ? -1 : 1;

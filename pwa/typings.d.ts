@@ -99,3 +99,29 @@ declare module '*.po' {
   const content: { messages: Record<string, CompiledMessage> };
   export default content;
 }
+
+declare module '*.md' {
+  export interface Changelog {
+    version: string;
+    date: string;
+    news: string[];
+  }
+
+  export const version: Changelog['version'];
+  export const date: Changelog['date'];
+  export const news: Changelog['news'];
+}
+
+interface WakeLockSentinel extends EventTarget {
+  release(): Promise<void>;
+  readonly type: 'screen';
+  readonly onrelease: EventHandlerNonNull;
+}
+
+interface WakeLock {
+  request(type: 'screen'): Promise<WakeLockSentinel>;
+}
+
+interface Navigator {
+  readonly wakeLock: WakeLock;
+}

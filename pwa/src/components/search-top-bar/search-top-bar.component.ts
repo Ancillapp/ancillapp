@@ -6,11 +6,11 @@ import {
   query,
 } from 'lit-element';
 
-import styles from './top-app-bar.styles';
-import template from './top-app-bar.template';
+import styles from './search-top-bar.styles';
+import template from './search-top-bar.template';
 
-@customElement('top-app-bar')
-export class TopAppBar extends LitElement {
+@customElement('search-top-bar')
+export class SearchTopBar extends LitElement {
   public static styles = [styles];
 
   protected render = template;
@@ -21,8 +21,8 @@ export class TopAppBar extends LitElement {
   @property({ type: Number })
   protected _scrollFromTop = 0;
 
-  @property({ type: Boolean })
-  protected _scrolled = false;
+  @property({ type: String, reflect: true })
+  public placeholder = '';
 
   @property({ type: Object })
   get scrollTarget() {
@@ -38,7 +38,6 @@ export class TopAppBar extends LitElement {
     const old = this.scrollTarget;
     this._scrollTarget = value;
     this._scrollFromTop = 0;
-    this._scrolled = false;
     this._ticking = false;
     this._latestPos = value.scrollTop;
     this.requestUpdate('scrollTarget', old);
@@ -61,8 +60,6 @@ export class TopAppBar extends LitElement {
         const { scrollTop } = this.scrollTarget;
 
         const realScroll = Math.max(0, scrollTop);
-
-        this._scrolled = realScroll > 16;
 
         if (
           this._latestPos < realScroll &&
@@ -117,10 +114,33 @@ export class TopAppBar extends LitElement {
     super.disconnectedCallback();
     this.unregisterListeners();
   }
+
+  protected _handleSearch(event: KeyboardEvent) {
+    event.stopImmediatePropagation();
+
+    this.dispatchEvent(
+      new CustomEvent('search', {
+        detail: (event.target as HTMLInputElement).value,
+      }),
+    );
+  }
+
+  protected _handleSearchClick(event: MouseEvent) {
+    this.dispatchEvent(new CustomEvent('searchclick', event));
+  }
+
+  protected _handleSearchKeyDown(event: KeyboardEvent) {
+    this.dispatchEvent(
+      new CustomEvent('searchkeydown', {
+        ...event,
+        detail: event,
+      }),
+    );
+  }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'top-app-bar': TopAppBar;
+    'search-top-bar': SearchTopBar;
   }
 }

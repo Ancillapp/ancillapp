@@ -8,19 +8,7 @@ export const getHolyMassesSeats: RequestHandler = async (
   res,
 ) => {
   const db = await mongoDb;
-  const fraternitiesCollection = db.collection<Fraternity>('fraternities');
   const holyMassesCollection = db.collection<HolyMass>('holyMasses');
-
-  const fraternity = await fraternitiesCollection.findOne({
-    _id: new ObjectId(fraternityId),
-  });
-
-  if (!fraternity) {
-    res.status(400).send();
-    return;
-  }
-
-  const { seats } = fraternity;
 
   const holyMass = await holyMassesCollection.findOne({
     'fraternity.id': new ObjectId(fraternityId),
@@ -34,7 +22,20 @@ export const getHolyMassesSeats: RequestHandler = async (
       0,
     ) || 0;
 
-  const availableSeats = seats - takenSeats;
+  const totalSeats =
+    holyMass?.fraternity.seats ||
+    (
+      await db.collection<Fraternity>('fraternities').findOne({
+        _id: new ObjectId(fraternityId),
+      })
+    )?.seats;
+
+  if (typeof totalSeats !== 'number') {
+    res.status(400).send();
+    return;
+  }
+
+  const availableSeats = totalSeats - takenSeats;
 
   res.json(availableSeats);
 };

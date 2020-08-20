@@ -6,6 +6,16 @@ h2 {
   text-align: center;
 }
 
+h4,
+h5 {
+  font-weight: 400;
+
+  strong {
+    font-weight: 700;
+    color: var(--ancillapp-accent-color);
+  }
+}
+
 ul {
   padding: 0;
   display: flex;
@@ -66,4 +76,104 @@ ul {
       }
     }
   }
+}
+
+search-top-bar > mwc-icon-button {
+  margin: 0px -12px 0px 4px;
+}
+
+.search-results {
+  width: 100%;
+
+  > p  {
+    text-align: center;
+  }
+
+  @media (min-width: 28.75rem) {
+    z-index: 1;
+    position: absolute;
+    top: calc(var(--ancillapp-top-bar-height) + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ancillapp-search-bar-color);
+    max-width: 40rem;
+    max-height: 50vh;
+    overflow-y: auto;
+    border-radius: 0.5rem;
+  }
+}
+
+.search-result {
+  display: flex;
+  color: var(--ancillapp-primary-text-color);
+  padding: 0.5rem;
+
+  &:hover,
+  &:active {
+    text-decoration: none;
+    background: var(--ancillapp-divider-color);
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--ancillapp-divider-color);
+  }
+}
+
+.search-result-preview {
+  flex: 0 0 auto;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
+    0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
+    0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
+  width: 5.3125rem;
+  height: 7.5rem;
+  object-fit: cover;
+  background: var(--ancillapp-card-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+
+  > svg {
+    fill: var(--ancillapp-primary-text-color);
+    width: 3rem;
+  }
+}
+
+.search-result-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+
+  > * {
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  > h5 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+top-app-bar,
+search-top-bar {
+  will-change: opacity, z-index;
+  opacity: 1;
+  z-index: 1;
+  transition: 0.3s opacity, 0.3s z-index step-start;
+}
+
+.hidden {
+  opacity: 0;
+  z-index: -1;
+  transition: 0.3s opacity, 0.3s z-index step-end;
 }

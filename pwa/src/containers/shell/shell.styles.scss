@@ -5,7 +5,7 @@
   height: 100%;
 }
 
-:host(:not([drawer-expanded])) {
+:host([drawer-shrinked]) {
   @media (min-width: 600px) {
     mwc-drawer {
       --mdc-drawer-width: var(--ancillapp-mini-drawer-width);
@@ -40,7 +40,6 @@ mwc-drawer {
   }
 
   [slot='title'] {
-    font-family: var(--ancillapp-display-font);
     font-size: 20.8px;
     color: var(--ancillapp-primary-text-color);
     display: inline-flex;
@@ -117,4 +116,27 @@ main {
   padding-top: var(--ancillapp-top-bar-height);
   background: var(--ancillapp-background-color);
   display: flex;
+}
+
+.changelog-news {
+  padding-left: 1.25em;
+  margin-top: 4px;
+}
+
+.changelog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px -12px -12px -16px;
+}
+
+#full-changelog-link {
+  display: inline-flex;
+  align-items: center;
+
+  > svg {
+    margin-left: 0.5rem;
+    width: 1rem;
+    fill: var(--ancillapp-accent-color);
+  }
 }
