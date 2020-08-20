@@ -3,7 +3,7 @@ import { updateMetadata } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
-import { set } from '../../helpers/keyval';
+import { get, set } from '../../helpers/keyval';
 import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
@@ -25,8 +25,19 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
   @property({ type: Boolean, reflect: true, attribute: 'keep-screen-active' })
   public keepScreenActive = false;
 
+  @property({ type: Boolean, reflect: true, attribute: 'keep-screen-active' })
+  public showChangelog = true;
+
   @queryAll('outlined-select')
   private _selects?: NodeList;
+
+  constructor() {
+    super();
+
+    get<boolean>('dontShowChangelog').then(
+      (dontShowChangelog) => (this.showChangelog = !dontShowChangelog),
+    );
+  }
 
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
@@ -78,6 +89,12 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
         detail: (target as HTMLInputElement).checked,
       }),
     );
+  }
+
+  protected async _handleShowChangelogChange({ target }: MouseEvent) {
+    this.showChangelog = (target as HTMLInputElement).checked;
+
+    await set('dontShowChangelog', !this.showChangelog);
   }
 }
 

@@ -96,7 +96,7 @@ msgid "checkYourInbox"
 msgstr ""
 
 #: src/containers/holy-mass/holy-mass.template.ts:187
-#: src/containers/shell/shell.template.ts:261
+#: src/containers/shell/shell.template.ts:266
 #: src/containers/songs-list/songs-list.template.ts:114
 msgid "close"
 msgstr "Schließen"
@@ -129,7 +129,7 @@ msgstr ""
 msgid "dontAskAnymore"
 msgstr "Frag nicht mehr"
 
-#: src/containers/shell/shell.template.ts:253
+#: src/containers/shell/shell.template.ts:258
 msgid "dontShowAnymore"
 msgstr ""
 
@@ -420,14 +420,14 @@ msgid "setFilters"
 msgstr "Filter einstellen"
 
 #: src/containers/home/home.component.ts:142
-#: src/containers/settings/settings.component.ts:41
+#: src/containers/settings/settings.component.ts:43
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:25
 msgid "settings"
 msgstr "Einstellungen"
 
 #: src/containers/home/home.component.ts:147
-#: src/containers/settings/settings.component.ts:44
+#: src/containers/settings/settings.component.ts:46
 msgid "settingsDescription"
 msgstr ""
 
@@ -447,6 +447,10 @@ msgstr "Schauen Sie sich dieses Ancilla Domini an!"
 #: src/containers/song-viewer/song-viewer.template.ts:38
 msgid "shareSongText"
 msgstr "Schauen Sie sich dieses lied an!"
+
+#: src/containers/settings/settings.template.ts:70
+msgid "showChangelog"
+msgstr ""
 
 #: src/containers/home/home.template.ts:88
 msgid "singFraternitySongs"
@@ -537,7 +541,7 @@ msgstr ""
 msgid "vespers"
 msgstr "Vesper"
 
-#: src/containers/shell/shell.template.ts:250
+#: src/containers/shell/shell.template.ts:255
 msgid "viewFullChangelog"
 msgstr ""
 

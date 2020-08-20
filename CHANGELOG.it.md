@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.0 (2020-08-20)
+- Aggiunta un'opzione per abilitare/disabilitare il changelog
+
 ## 1.5.0 (2020-08-20)
 - Aggiunta del changelog
 

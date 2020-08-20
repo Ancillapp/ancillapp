@@ -96,7 +96,7 @@ msgid "checkYourInbox"
 msgstr "Fatto! Controlla la tua casella di posta."
 
 #: src/containers/holy-mass/holy-mass.template.ts:187
-#: src/containers/shell/shell.template.ts:261
+#: src/containers/shell/shell.template.ts:266
 #: src/containers/songs-list/songs-list.template.ts:114
 msgid "close"
 msgstr "Chiudi"
@@ -129,7 +129,7 @@ msgstr "Hai già prenotato dei posti per questo giorno."
 msgid "dontAskAnymore"
 msgstr "Non chiedermelo più"
 
-#: src/containers/shell/shell.template.ts:253
+#: src/containers/shell/shell.template.ts:258
 msgid "dontShowAnymore"
 msgstr "Non mostrare più"
 
@@ -449,14 +449,14 @@ msgid "setFilters"
 msgstr "Imposta filtri"
 
 #: src/containers/home/home.component.ts:142
-#: src/containers/settings/settings.component.ts:41
+#: src/containers/settings/settings.component.ts:43
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:25
 msgid "settings"
 msgstr "Impostazioni"
 
 #: src/containers/home/home.component.ts:147
-#: src/containers/settings/settings.component.ts:44
+#: src/containers/settings/settings.component.ts:46
 msgid "settingsDescription"
 msgstr "Personalizza Ancillapp modificandone il tema o la lingua."
 
@@ -476,6 +476,10 @@ msgstr "Dai un'occhiata a questo Ancilla Domini!"
 #: src/containers/song-viewer/song-viewer.template.ts:38
 msgid "shareSongText"
 msgstr "Dai un'occhiata a questo canto!"
+
+#: src/containers/settings/settings.template.ts:70
+msgid "showChangelog"
+msgstr "Mostra changelog"
 
 #: src/containers/home/home.template.ts:88
 msgid "singFraternitySongs"
@@ -566,7 +570,7 @@ msgstr "Per favore, verifica la tua email per usufruire del servizio di prenotaz
 msgid "vespers"
 msgstr "Vespri"
 
-#: src/containers/shell/shell.template.ts:250
+#: src/containers/shell/shell.template.ts:255
 msgid "viewFullChangelog"
 msgstr "Visualizza changelog completo"
 
