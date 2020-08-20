@@ -69,6 +69,16 @@ export default function template(this: SettingsPage) {
               </li>
             `
           : html`${nothing}`}
+        <li class="checkbox-container">
+          <label for="showChangelog">
+            ${this.localize(t`showChangelog`)}
+          </label>
+          <mwc-checkbox
+            id="showChangelog"
+            @change="${this._handleShowChangelogChange}"
+            ?checked="${this.showChangelog}"
+          ></mwc-checkbox>
+        </li>
       </ul>
     </section>
   `;
