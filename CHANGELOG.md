@@ -24,5 +24,5 @@
 - Removed a menu button that shouldn't have existed
 
 ## 1.0.0 (2020-07-11)
-- Modernizzazione completa dell'interfaccia grafica
-- Aggiunta gestione delle traduzioni tramite [POEditor](https://poeditor.com)
+- Complete UI modernization
+- Added translations handling via [POEditor](https://poeditor.com)

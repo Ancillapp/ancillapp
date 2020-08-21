@@ -25,7 +25,7 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
   @property({ type: Boolean, reflect: true, attribute: 'keep-screen-active' })
   public keepScreenActive = false;
 
-  @property({ type: Boolean, reflect: true, attribute: 'keep-screen-active' })
+  @property({ type: Boolean })
   public showChangelog = true;
 
   @queryAll('outlined-select')
