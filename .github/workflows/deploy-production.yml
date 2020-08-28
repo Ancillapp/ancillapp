@@ -26,7 +26,7 @@ jobs:
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
-        run: npx firebase deploy --project ffb-ancillapp --config "../../firebase.production.json" --token "$FIREBASE_TOKEN" --only hosting:ffb-ancillapp,functions:pwa
+        run: npx firebase deploy --project ffb-ancillapp --config firebase.production.json --token "$FIREBASE_TOKEN" --only hosting:ffb-ancillapp,functions:pwa
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Purge cache, audit, and report
