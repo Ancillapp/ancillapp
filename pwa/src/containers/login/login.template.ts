@@ -28,9 +28,7 @@ export default function template(this: LoginPage) {
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`login`)}
-      </div>
+      <div slot="title">${this.localize(t`login`)}</div>
     </top-app-bar>
 
     <section>

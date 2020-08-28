@@ -1,2 +1,4 @@
-export { api } from './api';
-export { processAncilla } from './process-ancilla';
+import { api } from './api';
+import { processAncilla } from './process-ancilla';
+
+export const pwa = { api, processAncilla };
