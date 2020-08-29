@@ -8,6 +8,14 @@ const {
 
 const [, , host = 'https://ancill.app'] = process.argv;
 
+const addDays = (date, days) => {
+  const newDate = new Date(date);
+
+  newDate.setDate(newDate.getDate() + days);
+
+  return newDate;
+};
+
 const run = async () => {
   const client = await new mongodb.MongoClient(uri, {
     useUnifiedTopology: true,
@@ -56,6 +64,9 @@ const run = async () => {
   ]);
 
   await client.close();
+
+  const midday = new Date();
+  midday.setHours(12, 0, 0, 0);
 
   const urls = [
     // Home
@@ -148,7 +159,28 @@ const run = async () => {
       [],
     ),
 
-    // TODO: add breviary pages
+    // Breviary details
+    ...[...Array(32)].flatMap((_, index) => {
+      const date = addDays(midday, index - 2)
+        .toISOString()
+        .slice(0, 10);
+
+      return [
+        'invitatory',
+        'matins',
+        'lauds',
+        'terce',
+        'sext',
+        'none',
+        'vespers',
+        'compline',
+      ].flatMap((prayer) => [
+        `/it/breviario/${prayer}/${date}`,
+        `/en/breviary/${prayer}/${date}`,
+        `/de/brevier/${prayer}/${date}`,
+        `/pt/breviario/${prayer}/${date}`,
+      ]);
+    }),
   ];
 
   const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.reduce(
