@@ -157,17 +157,6 @@ form > * {
   width: 100%;
 }
 
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  &,
-  * {
-    cursor: pointer;
-  }
-}
-
 mwc-dialog {
   --mdc-dialog-heading-ink-color: var(--ancillapp-primary-text-color);
   --mdc-dialog-content-ink-color: var(--ancillapp-primary-text-color);
@@ -194,6 +183,7 @@ ul.settings {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 0.875rem;
 
     &:not(:last-child) {
       margin-bottom: 1rem;
@@ -202,6 +192,11 @@ ul.settings {
     > outlined-select,
     > date-input {
       width: 12.5rem;
+    }
+
+    > mwc-formfield {
+      width: 100%;
+      cursor: pointer;
     }
   }
 }
