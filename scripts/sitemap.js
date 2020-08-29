@@ -16,6 +16,57 @@ const addDays = (date, days) => {
   return newDate;
 };
 
+const breviaryTranslations = {
+  invitatory: {
+    it: 'invitatorio',
+    en: 'invitatory',
+    de: 'invitatorium',
+    pt: 'invitatory',
+  },
+  matins: {
+    it: 'ufficio',
+    en: 'matins',
+    de: 'lesehore',
+    pt: 'matins',
+  },
+  lauds: {
+    it: 'lodi',
+    en: 'lauds',
+    de: 'laudes',
+    pt: 'lauds',
+  },
+  terce: {
+    it: 'terza',
+    en: 'terce',
+    de: 'terz',
+    pt: 'terce',
+  },
+  sext: {
+    it: 'sesta',
+    en: 'sext',
+    de: 'sext',
+    pt: 'sext',
+  },
+  none: {
+    it: 'nona',
+    en: 'none',
+    de: 'non',
+    pt: 'none',
+  },
+  vespers: {
+    it: 'vespri',
+    en: 'vespers',
+    de: 'vesper',
+    pt: 'vespers',
+  },
+  compline: {
+    it: 'compieta',
+    en: 'compline',
+    de: 'komplet',
+    pt: 'compline',
+  },
+};
+
 const run = async () => {
   const client = await new mongodb.MongoClient(uri, {
     useUnifiedTopology: true,
@@ -175,10 +226,10 @@ const run = async () => {
         'vespers',
         'compline',
       ].flatMap((prayer) => [
-        `/it/breviario/${prayer}/${date}`,
-        `/en/breviary/${prayer}/${date}`,
-        `/de/brevier/${prayer}/${date}`,
-        `/pt/breviario/${prayer}/${date}`,
+        `/it/breviario/${breviaryTranslations[prayer].it}/${date}`,
+        `/en/breviary/${breviaryTranslations[prayer].en}/${date}`,
+        `/de/brevier/${breviaryTranslations[prayer].de}/${date}`,
+        `/pt/breviario/${breviaryTranslations[prayer].pt}/${date}`,
       ]);
     }),
   ];
