@@ -54,6 +54,7 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
 
         const button = document.createElement('mwc-icon-button');
         button.innerHTML = refresh.getHTML();
+        button.label = this.localize(t`switchAlternative`);
         button.addEventListener('click', () => this._handleAlternativeChange());
         header.appendChild(button);
 

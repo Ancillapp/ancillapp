@@ -19,12 +19,11 @@ export default function template(this: InfoPage) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`info`)}
-      </div>
+      <div slot="title">${this.localize(t`info`)}</div>
     </top-app-bar>
 
     <section>

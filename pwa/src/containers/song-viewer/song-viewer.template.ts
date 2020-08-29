@@ -12,7 +12,9 @@ export default function template(this: SongViewer) {
   return html`
     <top-app-bar ?drawer-open="${this.drawerOpen}">
       <a href="${this.localizeHref('songs')}" slot="leadingIcon">
-        <mwc-icon-button>${arrowBack}</mwc-icon-button>
+        <mwc-icon-button label="${this.localize(t`back`)}">
+          ${arrowBack}
+        </mwc-icon-button>
       </a>
       <div slot="title">
         ${this._songStatus.data
@@ -21,7 +23,11 @@ export default function template(this: SongViewer) {
             }`
           : this.localize(t`loading`)}
       </div>
-      <mwc-icon-button slot="trailingIcon" @click="${this._goToSearchPage}">
+      <mwc-icon-button
+        slot="trailingIcon"
+        @click="${this._goToSearchPage}"
+        label="${this.localize(t`search`)}"
+      >
         ${search}
       </mwc-icon-button>
     </top-app-bar>
@@ -33,9 +39,7 @@ export default function template(this: SongViewer) {
           </div>
         `
       : html`
-          <section>
-            ${compile(this._songStatus.data.content)}
-          </section>
+          <section>${compile(this._songStatus.data.content)}</section>
 
           <share-fab
             title="${this._songStatus.data.number.slice(2)}. ${this._songStatus

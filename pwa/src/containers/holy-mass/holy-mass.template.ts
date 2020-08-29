@@ -23,12 +23,11 @@ export default function template(this: HolyMassPage) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`holyMass`)}
-      </div>
+      <div slot="title">${this.localize(t`holyMass`)}</div>
     </top-app-bar>
 
     ${this.user?.emailVerified
@@ -195,6 +194,9 @@ export default function template(this: HolyMassPage) {
                                                   ._bookingToCancel}"
                                                 @click="${() =>
                                                   (this._bookingToCancel = booking)}"
+                                                label="${this.localize(
+                                                  t`cancelBooking`,
+                                                )}"
                                               >
                                                 ${remove}
                                               </mwc-icon-button>

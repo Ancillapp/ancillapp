@@ -17,12 +17,11 @@ export default function template(this: SettingsPage) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`settings`)}
-      </div>
+      <div slot="title">${this.localize(t`settings`)}</div>
     </top-app-bar>
 
     <section>
@@ -34,9 +33,9 @@ export default function template(this: SettingsPage) {
             @change=${this._handleThemeChange}
             value="${document.body.dataset.theme || 'system'}"
           >
-            <option value="system"
-              >${this.localize(t`system`) || 'System'}</option
-            >
+            <option value="system">
+              ${this.localize(t`system`) || 'System'}
+            </option>
             <option value="light">${this.localize(t`light`) || 'Light'}</option>
             <option value="dark">${this.localize(t`dark`) || 'Dark'}</option>
             <option value="oled">OLED</option>

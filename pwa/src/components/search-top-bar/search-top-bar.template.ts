@@ -9,10 +9,12 @@ export default function template(this: SearchTopBar) {
           <slot name="leadingIcon"></slot>
         </section>
         <input
+          type="search"
           placeholder="${this.placeholder}"
           @input="${this._handleSearch}"
           @click="${this._handleSearchClick}"
           @keydown="${this._handleSearchKeyDown}"
+          aria-label="${this.placeholder}"
         />
         <section class="end">
           <slot name="trailingIcon"></slot>

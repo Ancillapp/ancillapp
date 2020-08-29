@@ -26,13 +26,20 @@ export default function template(this: SongsList) {
     >
       ${this._searching
         ? html`
-            <mwc-icon-button slot="leadingIcon" @click="${this._stopSearching}">
+            <mwc-icon-button
+              slot="leadingIcon"
+              @click="${this._stopSearching}"
+              label="${this.localize(t`back`)}"
+            >
               ${arrowBack}
             </mwc-icon-button>
             <mwc-icon-button
               id="keyboard-type-switch"
               slot="trailingIcon"
               @click="${this._handleKeyboardTypeSwitch}"
+              label="${this._numericOnly
+                ? this.localize(t`switchToTextKeyboard`)
+                : this.localize(t`switchToNumericKeyboard`)}"
             >
               ${this._numericOnly ? dialpad : notes}
             </mwc-icon-button>
@@ -43,12 +50,14 @@ export default function template(this: SongsList) {
               ?hidden="${!this.showMenuButton}"
               @click="${() =>
                 this.dispatchEvent(new CustomEvent('menutoggle'))}"
+              label="${this.localize(t`menu`)}"
             >
               ${menu}
             </mwc-icon-button>
             <mwc-icon-button
               slot="trailingIcon"
               @click="${this._startSearching}"
+              label="${this.localize(t`search`)}"
             >
               ${search}
             </mwc-icon-button>
@@ -58,6 +67,7 @@ export default function template(this: SongsList) {
       </div>
       <input
         id="search-input"
+        type="search"
         slot="title"
         placeholder="${this.localize(t`search`)}"
         inputmode="${this._numericOnly ? 'numeric' : 'text'}"
@@ -66,6 +76,7 @@ export default function template(this: SongsList) {
         @input="${this._handleSearch}"
         value="${this._searchTerm}"
         autofocus
+        aria-label="${this.localize(t`search`)}"
       />
     </top-app-bar>
 

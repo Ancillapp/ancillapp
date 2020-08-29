@@ -4,6 +4,7 @@ import { BreviaryViewer } from './breviary-viewer.component';
 import { load } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
+import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 
@@ -16,7 +17,9 @@ export default function template(this: BreviaryViewer) {
   return html`
     <top-app-bar ?drawer-open="${this.drawerOpen}">
       <a href="${this.localizeHref('breviary')}" slot="leadingIcon">
-        <mwc-icon-button>${arrowBack}</mwc-icon-button>
+        <mwc-icon-button label="${this.localize(t`back`)}">
+          ${arrowBack}
+        </mwc-icon-button>
       </a>
       <div slot="title">
         ${prayersTranslations[prayer as keyof typeof prayersTranslations]} -

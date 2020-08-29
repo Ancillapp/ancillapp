@@ -25,6 +25,7 @@ export default function template(this: LoginPage) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
