@@ -12,10 +12,22 @@ import template from './breviary-viewer.template';
 import '@material/mwc-icon-button';
 
 import { apiUrl } from '../../config/default.json';
-
 import { logEvent } from '../../helpers/firebase';
 
+import { prayersTranslations } from '../breviary-index/breviary-index.template';
+
 const _prayersPromisesCache = new Map<string, Promise<string>>();
+
+const descriptions = {
+  invitatory: (date: string) => t`invitatoryDescription ${date}`,
+  matins: (date: string) => t`matinsDescription ${date}`,
+  lauds: (date: string) => t`laudsDescription ${date}`,
+  terce: (date: string) => t`terceDescription ${date}`,
+  sext: (date: string) => t`sextDescription ${date}`,
+  none: (date: string) => t`noneDescription ${date}`,
+  vespers: (date: string) => t`vespersDescription ${date}`,
+  compline: (date: string) => t`complineDescription ${date}`,
+};
 
 @customElement('breviary-viewer')
 export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
@@ -87,12 +99,25 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
       this._breviaryPromise = _prayersPromisesCache.get(this.query)!;
     }
 
-    if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localize(t`breviary`)}`;
+    if (changedProperties.has('active') && this.active && this.query) {
+      const [
+        prayer,
+        rawDate = new Date().toISOString().slice(0, 10),
+      ] = this.query.split('/');
+
+      const date = Intl.DateTimeFormat(this.locale, {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }).format(new Date(rawDate));
+
+      const pageTitle = `Ancillapp - ${this.localize(t`breviary`)} - ${
+        prayersTranslations[prayer as keyof typeof prayersTranslations]
+      } - ${date}`;
 
       updateMetadata({
         title: pageTitle,
-        description: this.localize(t`breviaryDescription`),
+        description: descriptions[prayer as keyof typeof descriptions](date),
       });
 
       logEvent('page_view', {

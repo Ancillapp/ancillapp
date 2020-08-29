@@ -69,14 +69,13 @@ msgstr "Sicuro di voler eliminare la tua prenotazione per la Messa della Fratern
 
 #: src/containers/breviary-index/breviary-index.component.ts:37
 #: src/containers/breviary-index/breviary-index.template.ts:30
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:65
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:82
 #: src/containers/home/home.component.ts:87
 #: src/containers/shell/shell.template.ts:20
 msgid "breviary"
 msgstr "Breviario"
 
 #: src/containers/breviary-index/breviary-index.component.ts:40
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:68
 #: src/containers/home/home.component.ts:92
 #: src/containers/home/home.component.ts:177
 msgid "breviaryDescription"
@@ -115,7 +114,11 @@ msgstr "Chiudi"
 msgid "compline"
 msgstr "Compieta"
 
-#: src/containers/settings/settings.template.ts:36
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:30
+msgid "complineDescription {date}"
+msgstr "Prega la Compieta del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
+
+#: src/containers/settings/settings.template.ts:37
 msgid "dark"
 msgstr "Scuro"
 
@@ -274,15 +277,19 @@ msgstr "L'email inserita non è valida."
 msgid "invitatory"
 msgstr "Invitatorio"
 
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:23
+msgid "invitatoryDescription {date}"
+msgstr "Prega l'Invitatorio del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
+
 #: src/containers/songs-list/songs-list.template.ts:118
 msgid "italian"
 msgstr "Italiano"
 
-#: src/containers/settings/settings.template.ts:57
+#: src/containers/settings/settings.template.ts:58
 msgid "keepScreenActive"
 msgstr "Mantieni lo schermo attivo"
 
-#: src/containers/settings/settings.template.ts:41
+#: src/containers/settings/settings.template.ts:42
 #: src/containers/songs-list/songs-list.template.ts:112
 msgid "language"
 msgstr "Lingua"
@@ -291,7 +298,11 @@ msgstr "Lingua"
 msgid "lauds"
 msgstr "Lodi"
 
-#: src/containers/settings/settings.template.ts:35
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:25
+msgid "laudsDescription {date}"
+msgstr "Prega le Lodi del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
+
+#: src/containers/settings/settings.template.ts:36
 msgid "light"
 msgstr "Chiaro"
 
@@ -339,6 +350,10 @@ msgstr "Spiritualità Mariana"
 msgid "matins"
 msgstr "Ufficio delle Letture"
 
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:24
+msgid "matinsDescription {date}"
+msgstr "Prega l'Ufficio delle Letture del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
+
 #: src/containers/ancillas-list/ancillas-list.template.ts:17
 #: src/containers/breviary-index/breviary-index.template.ts:26
 #: src/containers/holy-mass/holy-mass.template.ts:22
@@ -346,7 +361,7 @@ msgstr "Ufficio delle Letture"
 #: src/containers/info/info.template.ts:18
 #: src/containers/login/login.template.ts:21
 #: src/containers/prayers-list/prayers-list.template.ts:19
-#: src/containers/settings/settings.template.ts:16
+#: src/containers/settings/settings.template.ts:17
 #: src/containers/shell/shell.template.ts:40
 #: src/containers/songs-list/songs-list.template.ts:43
 msgid "menu"
@@ -392,6 +407,10 @@ msgstr "No, grazie"
 #: src/containers/breviary-index/breviary-index.template.ts:14
 msgid "none"
 msgstr "Ora Nona"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:28
+msgid "noneDescription {date}"
+msgstr "Prega l'Ora Nona del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
 #: src/containers/home/home.template.ts:79
 msgid "peaceAndGood"
@@ -482,7 +501,7 @@ msgstr "Imposta filtri"
 
 #: src/containers/home/home.component.ts:141
 #: src/containers/settings/settings.component.ts:42
-#: src/containers/settings/settings.template.ts:20
+#: src/containers/settings/settings.template.ts:21
 #: src/containers/shell/shell.template.ts:25
 msgid "settings"
 msgstr "Impostazioni"
@@ -495,6 +514,10 @@ msgstr "Personalizza Ancillapp modificandone il tema o la lingua."
 #: src/containers/breviary-index/breviary-index.template.ts:13
 msgid "sext"
 msgstr "Ora Sesta"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:27
+msgid "sextDescription {date}"
+msgstr "Prega l'Ora Sesta del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
 #: src/components/share-fab/share-fab.template.ts:7
 #: src/containers/songs-list/songs-list.template.ts:130
@@ -509,7 +532,7 @@ msgstr "Dai un'occhiata a questo Ancilla Domini!"
 msgid "shareSongText"
 msgstr "Dai un'occhiata a questo canto!"
 
-#: src/containers/settings/settings.template.ts:69
+#: src/containers/settings/settings.template.ts:72
 msgid "showChangelog"
 msgstr "Mostra changelog"
 
@@ -544,7 +567,7 @@ msgstr "Vuoi scaricare tutte le canzoni ora in modo da poterle consultare anche 
 msgid "sure"
 msgstr "Certo!"
 
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:45
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:56
 msgid "switchAlternative"
 msgstr "Cambia alternativa"
 
@@ -564,7 +587,7 @@ msgstr "Passa alla tastiera testuale"
 msgid "syncInProgress"
 msgstr "Sincronizzazione in corso…"
 
-#: src/containers/settings/settings.template.ts:33
+#: src/containers/settings/settings.template.ts:34
 msgid "system"
 msgstr "Sistema"
 
@@ -572,7 +595,11 @@ msgstr "Sistema"
 msgid "terce"
 msgstr "Ora Terza"
 
-#: src/containers/settings/settings.template.ts:26
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:26
+msgid "terceDescription {date}"
+msgstr "Prega l'Ora Terza del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
+
+#: src/containers/settings/settings.template.ts:27
 msgid "theme"
 msgstr "Tema"
 
@@ -613,6 +640,10 @@ msgstr "Per favore, verifica la tua email per usufruire del servizio di prenotaz
 #: src/containers/breviary-index/breviary-index.template.ts:15
 msgid "vespers"
 msgstr "Vespri"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:29
+msgid "vespersDescription {date}"
+msgstr "Prega i Vespri del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
 #: src/containers/shell/shell.template.ts:252
 msgid "viewFullChangelog"

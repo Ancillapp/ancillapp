@@ -69,14 +69,13 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.component.ts:37
 #: src/containers/breviary-index/breviary-index.template.ts:30
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:65
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:82
 #: src/containers/home/home.component.ts:87
 #: src/containers/shell/shell.template.ts:20
 msgid "breviary"
 msgstr "Breviary"
 
 #: src/containers/breviary-index/breviary-index.component.ts:40
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:68
 #: src/containers/home/home.component.ts:92
 #: src/containers/home/home.component.ts:177
 msgid "breviaryDescription"
@@ -115,7 +114,11 @@ msgstr "Close"
 msgid "compline"
 msgstr "Compline"
 
-#: src/containers/settings/settings.template.ts:36
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:30
+msgid "complineDescription {date}"
+msgstr "Pray the Compline of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
+
+#: src/containers/settings/settings.template.ts:37
 msgid "dark"
 msgstr "Dark"
 
@@ -252,15 +255,19 @@ msgstr ""
 msgid "invitatory"
 msgstr "Invitatory"
 
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:23
+msgid "invitatoryDescription {date}"
+msgstr "Pray the Invitatory of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
+
 #: src/containers/songs-list/songs-list.template.ts:118
 msgid "italian"
 msgstr "Italian"
 
-#: src/containers/settings/settings.template.ts:57
+#: src/containers/settings/settings.template.ts:58
 msgid "keepScreenActive"
 msgstr "Keep the screen active"
 
-#: src/containers/settings/settings.template.ts:41
+#: src/containers/settings/settings.template.ts:42
 #: src/containers/songs-list/songs-list.template.ts:112
 msgid "language"
 msgstr "Language"
@@ -269,7 +276,11 @@ msgstr "Language"
 msgid "lauds"
 msgstr "Lauds"
 
-#: src/containers/settings/settings.template.ts:35
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:25
+msgid "laudsDescription {date}"
+msgstr "Pray the Lauds of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
+
+#: src/containers/settings/settings.template.ts:36
 msgid "light"
 msgstr "Light"
 
@@ -317,6 +328,10 @@ msgstr ""
 msgid "matins"
 msgstr "Matins"
 
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:24
+msgid "matinsDescription {date}"
+msgstr "Pray the Matins of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
+
 #: src/containers/ancillas-list/ancillas-list.template.ts:17
 #: src/containers/breviary-index/breviary-index.template.ts:26
 #: src/containers/holy-mass/holy-mass.template.ts:22
@@ -324,7 +339,7 @@ msgstr "Matins"
 #: src/containers/info/info.template.ts:18
 #: src/containers/login/login.template.ts:21
 #: src/containers/prayers-list/prayers-list.template.ts:19
-#: src/containers/settings/settings.template.ts:16
+#: src/containers/settings/settings.template.ts:17
 #: src/containers/shell/shell.template.ts:40
 #: src/containers/songs-list/songs-list.template.ts:43
 msgid "menu"
@@ -370,6 +385,10 @@ msgstr "No, thanks"
 #: src/containers/breviary-index/breviary-index.template.ts:14
 msgid "none"
 msgstr "None"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:28
+msgid "noneDescription {date}"
+msgstr "Pray the None of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
 #: src/containers/home/home.template.ts:79
 msgid "peaceAndGood"
@@ -453,7 +472,7 @@ msgstr "Set filters"
 
 #: src/containers/home/home.component.ts:141
 #: src/containers/settings/settings.component.ts:42
-#: src/containers/settings/settings.template.ts:20
+#: src/containers/settings/settings.template.ts:21
 #: src/containers/shell/shell.template.ts:25
 msgid "settings"
 msgstr "Settings"
@@ -466,6 +485,10 @@ msgstr "Customize Ancillapp by changing its theme or its language."
 #: src/containers/breviary-index/breviary-index.template.ts:13
 msgid "sext"
 msgstr "Sext"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:27
+msgid "sextDescription {date}"
+msgstr "Pray the Sext of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
 #: src/components/share-fab/share-fab.template.ts:7
 #: src/containers/songs-list/songs-list.template.ts:130
@@ -480,7 +503,7 @@ msgstr "Take a look at this Ancilla Domini!"
 msgid "shareSongText"
 msgstr "Take a look at this song!"
 
-#: src/containers/settings/settings.template.ts:69
+#: src/containers/settings/settings.template.ts:72
 msgid "showChangelog"
 msgstr "Show changelog"
 
@@ -515,7 +538,7 @@ msgstr "Do you want to download all the songs to be able to consult them offline
 msgid "sure"
 msgstr "Sure!"
 
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:45
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:56
 msgid "switchAlternative"
 msgstr "Switch alternative"
 
@@ -535,7 +558,7 @@ msgstr "Switch to text keyboard"
 msgid "syncInProgress"
 msgstr "Sync in progress…"
 
-#: src/containers/settings/settings.template.ts:33
+#: src/containers/settings/settings.template.ts:34
 msgid "system"
 msgstr "System"
 
@@ -543,7 +566,11 @@ msgstr "System"
 msgid "terce"
 msgstr "Terce"
 
-#: src/containers/settings/settings.template.ts:26
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:26
+msgid "terceDescription {date}"
+msgstr "Pray the Terce of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
+
+#: src/containers/settings/settings.template.ts:27
 msgid "theme"
 msgstr "Theme"
 
@@ -584,6 +611,10 @@ msgstr ""
 #: src/containers/breviary-index/breviary-index.template.ts:15
 msgid "vespers"
 msgstr "Vespers"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:29
+msgid "vespersDescription {date}"
+msgstr "Pray the Vespers of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
 #: src/containers/shell/shell.template.ts:252
 msgid "viewFullChangelog"

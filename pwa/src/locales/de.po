@@ -69,14 +69,13 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.component.ts:37
 #: src/containers/breviary-index/breviary-index.template.ts:30
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:65
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:82
 #: src/containers/home/home.component.ts:87
 #: src/containers/shell/shell.template.ts:20
 msgid "breviary"
 msgstr "Brevier"
 
 #: src/containers/breviary-index/breviary-index.component.ts:40
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:68
 #: src/containers/home/home.component.ts:92
 #: src/containers/home/home.component.ts:177
 msgid "breviaryDescription"
@@ -115,7 +114,11 @@ msgstr "Schließen"
 msgid "compline"
 msgstr "Komplet"
 
-#: src/containers/settings/settings.template.ts:36
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:30
+msgid "complineDescription {date}"
+msgstr ""
+
+#: src/containers/settings/settings.template.ts:37
 msgid "dark"
 msgstr "Dunkel"
 
@@ -252,15 +255,19 @@ msgstr ""
 msgid "invitatory"
 msgstr "Invitatorium"
 
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:23
+msgid "invitatoryDescription {date}"
+msgstr ""
+
 #: src/containers/songs-list/songs-list.template.ts:118
 msgid "italian"
 msgstr "Italienisch"
 
-#: src/containers/settings/settings.template.ts:57
+#: src/containers/settings/settings.template.ts:58
 msgid "keepScreenActive"
 msgstr ""
 
-#: src/containers/settings/settings.template.ts:41
+#: src/containers/settings/settings.template.ts:42
 #: src/containers/songs-list/songs-list.template.ts:112
 msgid "language"
 msgstr "Sprache"
@@ -269,7 +276,11 @@ msgstr "Sprache"
 msgid "lauds"
 msgstr "Laudes"
 
-#: src/containers/settings/settings.template.ts:35
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:25
+msgid "laudsDescription {date}"
+msgstr ""
+
+#: src/containers/settings/settings.template.ts:36
 msgid "light"
 msgstr "Licht"
 
@@ -317,6 +328,10 @@ msgstr ""
 msgid "matins"
 msgstr "Lesehore"
 
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:24
+msgid "matinsDescription {date}"
+msgstr ""
+
 #: src/containers/ancillas-list/ancillas-list.template.ts:17
 #: src/containers/breviary-index/breviary-index.template.ts:26
 #: src/containers/holy-mass/holy-mass.template.ts:22
@@ -324,7 +339,7 @@ msgstr "Lesehore"
 #: src/containers/info/info.template.ts:18
 #: src/containers/login/login.template.ts:21
 #: src/containers/prayers-list/prayers-list.template.ts:19
-#: src/containers/settings/settings.template.ts:16
+#: src/containers/settings/settings.template.ts:17
 #: src/containers/shell/shell.template.ts:40
 #: src/containers/songs-list/songs-list.template.ts:43
 msgid "menu"
@@ -370,6 +385,10 @@ msgstr "Nein, danke"
 #: src/containers/breviary-index/breviary-index.template.ts:14
 msgid "none"
 msgstr "Non"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:28
+msgid "noneDescription {date}"
+msgstr ""
 
 #: src/containers/home/home.template.ts:79
 msgid "peaceAndGood"
@@ -453,7 +472,7 @@ msgstr "Filter einstellen"
 
 #: src/containers/home/home.component.ts:141
 #: src/containers/settings/settings.component.ts:42
-#: src/containers/settings/settings.template.ts:20
+#: src/containers/settings/settings.template.ts:21
 #: src/containers/shell/shell.template.ts:25
 msgid "settings"
 msgstr "Einstellungen"
@@ -466,6 +485,10 @@ msgstr ""
 #: src/containers/breviary-index/breviary-index.template.ts:13
 msgid "sext"
 msgstr "Sext"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:27
+msgid "sextDescription {date}"
+msgstr ""
 
 #: src/components/share-fab/share-fab.template.ts:7
 #: src/containers/songs-list/songs-list.template.ts:130
@@ -480,7 +503,7 @@ msgstr "Schauen Sie sich dieses Ancilla Domini an!"
 msgid "shareSongText"
 msgstr "Schauen Sie sich dieses lied an!"
 
-#: src/containers/settings/settings.template.ts:69
+#: src/containers/settings/settings.template.ts:72
 msgid "showChangelog"
 msgstr ""
 
@@ -515,7 +538,7 @@ msgstr "Möchten Sie jetzt alle lieder herunterladen, damit Sie sie auch dann ab
 msgid "sure"
 msgstr "Sicher!"
 
-#: src/containers/breviary-viewer/breviary-viewer.component.ts:45
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:56
 msgid "switchAlternative"
 msgstr ""
 
@@ -535,7 +558,7 @@ msgstr ""
 msgid "syncInProgress"
 msgstr "Synchronisierung läuft…"
 
-#: src/containers/settings/settings.template.ts:33
+#: src/containers/settings/settings.template.ts:34
 msgid "system"
 msgstr "System"
 
@@ -543,7 +566,11 @@ msgstr "System"
 msgid "terce"
 msgstr "Terz"
 
-#: src/containers/settings/settings.template.ts:26
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:26
+msgid "terceDescription {date}"
+msgstr ""
+
+#: src/containers/settings/settings.template.ts:27
 msgid "theme"
 msgstr "Thema"
 
@@ -584,6 +611,10 @@ msgstr ""
 #: src/containers/breviary-index/breviary-index.template.ts:15
 msgid "vespers"
 msgstr "Vesper"
+
+#: src/containers/breviary-viewer/breviary-viewer.component.ts:29
+msgid "vespersDescription {date}"
+msgstr ""
 
 #: src/containers/shell/shell.template.ts:252
 msgid "viewFullChangelog"
