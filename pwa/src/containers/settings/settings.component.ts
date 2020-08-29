@@ -10,11 +10,9 @@ import sharedStyles from '../../shared.styles';
 import styles from './settings.styles';
 import template from './settings.template';
 
+import { logEvent } from '../../helpers/firebase';
+
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
-
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
 
 @customElement('settings-page')
 export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
@@ -55,11 +53,10 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
       description: this.localize(t`settingsDescription`),
     });
 
-    analytics.logEvent('page_view', {
+    logEvent('page_view', {
       page_title: pageTitle,
       page_location: window.location.href,
       page_path: window.location.pathname,
-      offline: false,
     });
   }
 

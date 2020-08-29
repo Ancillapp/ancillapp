@@ -9,9 +9,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './info.styles';
 import template from './info.template';
 
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
+import { logEvent } from '../../helpers/firebase';
 
 @customElement('info-page')
 export class InfoPage extends localize(withTopAppBar(PageViewElement)) {
@@ -30,11 +28,10 @@ export class InfoPage extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`infoDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
   }

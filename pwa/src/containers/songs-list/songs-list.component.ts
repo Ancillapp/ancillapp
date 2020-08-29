@@ -14,8 +14,7 @@ import styles from './songs-list.styles';
 import template from './songs-list.template';
 
 import { apiUrl } from '../../config/default.json';
-
-import firebase from 'firebase/app';
+import { logEvent } from '../../helpers/firebase';
 
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
 
@@ -24,8 +23,6 @@ export interface SongSummary {
   title: string;
   language: string;
 }
-
-const analytics = firebase.analytics();
 
 @customElement('songs-list')
 export class SongsList extends localize(withTopAppBar(PageViewElement)) {
@@ -284,11 +281,10 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`songsDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
   }
@@ -364,9 +360,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
     this._downloadingSongs = true;
 
-    analytics.logEvent('download_songs', {
-      offline: false,
-    });
+    logEvent('download_songs');
 
     for await (const { loading, refreshing, data, error } of cacheAndNetwork<
       SongSummary[]

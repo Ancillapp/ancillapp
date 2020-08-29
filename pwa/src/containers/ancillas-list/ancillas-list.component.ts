@@ -14,6 +14,8 @@ import { APIResponse, cacheAndNetwork } from '../../helpers/cache-and-network';
 
 import { apiUrl, vapidPublicKey } from '../../config/default.json';
 
+import { logEvent } from '../../helpers/firebase';
+
 export interface Ancilla {
   code: string;
   name: {
@@ -25,10 +27,6 @@ export interface Ancilla {
   link: string;
   thumbnail: string;
 }
-
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
 
 @customElement('ancillas-list')
 export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
@@ -86,11 +84,10 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`ancillasDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
   }

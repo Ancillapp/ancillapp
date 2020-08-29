@@ -12,9 +12,7 @@ import template from './ancilla-viewer.template';
 
 import { apiUrl } from '../../config/default.json';
 
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
+import { logEvent } from '../../helpers/firebase';
 
 export interface Ancilla {
   code: string;
@@ -74,11 +72,10 @@ export class AncillaViewer extends localize(withTopAppBar(PageViewElement)) {
           description: this.localize(t`ancillaDescription ${name}`),
         });
 
-        analytics.logEvent('page_view', {
+        logEvent('page_view', {
           page_title: pageTitle,
           page_location: window.location.href,
           page_path: window.location.pathname,
-          offline: false,
         });
 
         if (ancillaCode !== code) {

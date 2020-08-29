@@ -12,10 +12,7 @@ import styles from './song-viewer.styles';
 import template from './song-viewer.template';
 
 import { apiUrl } from '../../config/default.json';
-
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
+import { logEvent } from '../../helpers/firebase';
 
 export interface Song {
   number: string;
@@ -76,11 +73,10 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
               description: this.localize(t`songDescription ${title}`),
             });
 
-            analytics.logEvent('page_view', {
+            logEvent('page_view', {
               page_title: pageTitle,
               page_location: window.location.href,
               page_path: window.location.pathname,
-              offline: false,
             });
           }
         }

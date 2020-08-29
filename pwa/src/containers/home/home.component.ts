@@ -1,12 +1,4 @@
-import {
-  customElement,
-  PropertyValues,
-  property,
-  TemplateResult,
-  SVGTemplateResult,
-  html,
-  query,
-} from 'lit-element';
+import { customElement, PropertyValues, property, query } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -17,7 +9,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './home.styles';
 import template from './home.template';
 
-import firebase from 'firebase/app';
+import { logEvent } from '../../helpers/firebase';
 import { initDB } from '../../helpers/utils';
 import {
   homeIcon,
@@ -31,7 +23,6 @@ import {
   infoIcon,
 } from '../../components/icons';
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
-import { get, set } from '../../helpers/keyval';
 
 import * as HomeWorker from './home.worker';
 
@@ -39,8 +30,6 @@ const {
   configureSearch,
   search,
 } = new (HomeWorker as any)() as typeof HomeWorker;
-
-const analytics = firebase.analytics();
 
 @customElement('home-page')
 export class HomePage extends localize(withTopAppBar(PageViewElement)) {
@@ -307,11 +296,10 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`homeDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
   }

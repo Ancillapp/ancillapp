@@ -13,9 +13,7 @@ import '@material/mwc-icon-button';
 
 import { apiUrl } from '../../config/default.json';
 
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
+import { logEvent } from '../../helpers/firebase';
 
 const _prayersPromisesCache = new Map<string, Promise<string>>();
 
@@ -96,11 +94,10 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`breviaryDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
   }

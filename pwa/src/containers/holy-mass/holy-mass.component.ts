@@ -12,10 +12,7 @@ import template from './holy-mass.template';
 
 import { apiUrl } from '../../config/default.json';
 import { get, set } from '../../helpers/keyval';
-
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
+import { logEvent } from '../../helpers/firebase';
 
 export interface Fraternity {
   id: string;
@@ -130,11 +127,10 @@ export class HolyMassPage extends localize(
         description: this.localize(t`holyMassDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
 
@@ -238,13 +234,12 @@ export class HolyMassPage extends localize(
     );
     const { id } = await res.json();
 
-    analytics.logEvent('perform_holy_mass_booking', {
+    logEvent('perform_holy_mass_booking', {
       id,
       date: this._selectedDate,
       time: this._selectedTime,
       seats: this._selectedSeats,
       fraternity: this._selectedFraternity,
-      offline: false,
     });
 
     this.requestUpdate('_selectedFraternity', this._selectedFraternity);
@@ -302,13 +297,12 @@ export class HolyMassPage extends localize(
 
       const { date, time } = this._parseDateTime(this._bookingToCancel.date);
 
-      analytics.logEvent('cancel_holy_mass_booking', {
+      logEvent('cancel_holy_mass_booking', {
         id,
         date,
         time,
         seats: this._bookingToCancel.seats,
         fraternity: this._bookingToCancel.fraternity.id,
-        offline: false,
       });
 
       this.requestUpdate('_selectedFraternity', this._selectedFraternity);

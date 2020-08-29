@@ -21,10 +21,7 @@ import template from './shell.template';
 import type { Drawer } from '@material/mwc-drawer';
 import type { Checkbox } from '@material/mwc-checkbox';
 
-import firebase from 'firebase/app';
-
-const auth = firebase.auth();
-const analytics = firebase.analytics();
+import { firebasePromise, logEvent } from '../../helpers/firebase';
 
 @customElement('ancillapp-shell')
 export class Shell extends localize(authorize(LitElement)) {
@@ -357,9 +354,7 @@ export class Shell extends localize(authorize(LitElement)) {
   protected _cancelUpdate() {
     this._updateNotificationShown = false;
 
-    analytics.logEvent('cancel_update', {
-      offline: false,
-    });
+    logEvent('cancel_update');
   }
 
   protected async _updateApp() {
@@ -368,17 +363,18 @@ export class Shell extends localize(authorize(LitElement)) {
     }
     this._updatingApp = true;
 
-    analytics.logEvent('perform_update', {
-      offline: false,
-    });
-
-    await set('changelogAvailable', true);
+    await Promise.all([
+      logEvent('perform_update'),
+      set('changelogAvailable', true),
+    ]);
 
     this._newSw.postMessage({ action: 'update' });
   }
 
   protected async _logout() {
-    await auth.signOut();
+    const firebase = await firebasePromise;
+
+    await firebase.auth().signOut();
   }
 
   protected async _handledontShowChangelogChange({ target }: MouseEvent) {
