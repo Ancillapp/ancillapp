@@ -13,6 +13,7 @@ import '@material/mwc-icon-button';
 
 import { apiUrl } from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
+import { localizedPages } from '../../helpers/localization';
 
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
 
@@ -28,6 +29,40 @@ const descriptions = {
   vespers: (date: string) => t`vespersDescription ${date}`,
   compline: (date: string) => t`complineDescription ${date}`,
 };
+
+const {
+  invitatory,
+  matins,
+  lauds,
+  terce,
+  sext,
+  none,
+  vespers,
+  compline,
+} = localizedPages;
+
+export const localizedPrayerToKeyMap: Record<string, string> = Object.entries({
+  invitatory,
+  matins,
+  lauds,
+  terce,
+  sext,
+  none,
+  vespers,
+  compline,
+}).reduce(
+  (map, [key, localizedPrayers]) => ({
+    ...map,
+    ...Object.values(localizedPrayers).reduce(
+      (acc, localizedPrayer) => ({
+        ...acc,
+        [localizedPrayer]: key,
+      }),
+      {},
+    ),
+  }),
+  {},
+);
 
 @customElement('breviary-viewer')
 export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
@@ -91,7 +126,7 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
         _prayersPromisesCache.set(
           this.query,
           fetch(
-            `${apiUrl}/breviary?prayer=${prayer}&date=${date}`,
+            `${apiUrl}/breviary?prayer=${localizedPrayerToKeyMap[prayer]}&date=${date}`,
           ).then((res) => res.text()),
         );
       }
@@ -101,10 +136,11 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
 
     if (changedProperties.has('active') && this.active && this.query) {
       const [
-        prayer,
+        rawPrayer,
         rawDate = new Date().toISOString().slice(0, 10),
       ] = this.query.split('/');
 
+      const prayer = localizedPrayerToKeyMap[rawPrayer];
       const date = Intl.DateTimeFormat(this.locale, {
         day: '2-digit',
         month: '2-digit',

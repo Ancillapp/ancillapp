@@ -1,6 +1,9 @@
 import { html } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import { BreviaryViewer } from './breviary-viewer.component';
+import {
+  BreviaryViewer,
+  localizedPrayerToKeyMap,
+} from './breviary-viewer.component';
 import { load } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
@@ -22,7 +25,10 @@ export default function template(this: BreviaryViewer) {
         </mwc-icon-button>
       </a>
       <div slot="title">
-        ${prayersTranslations[prayer as keyof typeof prayersTranslations]} -
+        ${prayersTranslations[
+          localizedPrayerToKeyMap[prayer] as keyof typeof prayersTranslations
+        ]}
+        -
         ${Intl.DateTimeFormat(this.locale, {
           day: '2-digit',
           month: '2-digit',
