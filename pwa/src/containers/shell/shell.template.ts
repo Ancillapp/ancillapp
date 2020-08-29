@@ -43,6 +43,7 @@ export default function template(this: Shell) {
               <mwc-icon-button
                 @click="${() =>
                   this._updateDrawerShrinkState(!this.drawerShrinked)}"
+                label="${this.localize(t`menu`)}"
               >
                 ${icons.menu}
               </mwc-icon-button>
@@ -90,9 +91,7 @@ export default function template(this: Shell) {
           ${this.user
             ? html`
                 <mwc-list-item graphic="icon" @click="${this._logout}">
-                  <div slot="graphic">
-                    ${icons.logout}
-                  </div>
+                  <div slot="graphic">${icons.logout}</div>
                   <slot>${this.localize(t`logout`)}</slot>
                 </mwc-list-item>
               `
@@ -103,9 +102,7 @@ export default function template(this: Shell) {
                     ?activated="${this._page === 'login'}"
                     graphic="icon"
                   >
-                    <div slot="graphic">
-                      ${icons.user}
-                    </div>
+                    <div slot="graphic">${icons.user}</div>
                     <slot>${this.localize(t`login`)}</slot>
                   </mwc-list-item>
                 </a>

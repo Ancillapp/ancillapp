@@ -11,10 +11,7 @@ import styles from './prayer-viewer.styles';
 import template from './prayer-viewer.template';
 
 import { apiUrl } from '../../config/default.json';
-
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
+import { logEvent } from '../../helpers/firebase';
 
 export interface Prayer {
   slug: string;
@@ -84,11 +81,10 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
               description: this.localize(`prayerDescription ${title}`),
             });
 
-            analytics.logEvent('page_view', {
+            logEvent('page_view', {
               page_title: pageTitle,
               page_location: window.location.href,
               page_path: window.location.pathname,
-              offline: false,
             });
           }
         }

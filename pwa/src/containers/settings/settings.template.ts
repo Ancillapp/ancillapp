@@ -5,6 +5,7 @@ import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-checkbox';
+import '@material/mwc-formfield';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/outlined-select/outlined-select.component';
 
@@ -17,12 +18,11 @@ export default function template(this: SettingsPage) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`settings`)}
-      </div>
+      <div slot="title">${this.localize(t`settings`)}</div>
     </top-app-bar>
 
     <section>
@@ -30,13 +30,13 @@ export default function template(this: SettingsPage) {
         <li>
           <label for="theme">${this.localize(t`theme`)}</label>
           <outlined-select
-            id="theme"
+            select-id="theme"
             @change=${this._handleThemeChange}
             value="${document.body.dataset.theme || 'system'}"
           >
-            <option value="system"
-              >${this.localize(t`system`) || 'System'}</option
-            >
+            <option value="system">
+              ${this.localize(t`system`) || 'System'}
+            </option>
             <option value="light">${this.localize(t`light`) || 'Light'}</option>
             <option value="dark">${this.localize(t`dark`) || 'Dark'}</option>
             <option value="oled">OLED</option>
@@ -45,7 +45,7 @@ export default function template(this: SettingsPage) {
         <li>
           <label for="language">${this.localize(t`language`)}</label>
           <outlined-select
-            id="language"
+            select-id="language"
             @change=${this._handleLanguageChange}
             value="${this.locale}"
           >
@@ -57,27 +57,31 @@ export default function template(this: SettingsPage) {
         </li>
         ${SUPPORTS_WAKE_LOCK
           ? html`
-              <li class="checkbox-container">
-                <label for="keepScreenActive">
-                  ${this.localize(t`keepScreenActive`)}
-                </label>
-                <mwc-checkbox
-                  id="keepScreenActive"
-                  @change="${this._handleKeepScreenActiveChange}"
-                  ?checked="${this.keepScreenActive}"
-                ></mwc-checkbox>
+              <li>
+                <mwc-formfield
+                  label="${this.localize(t`keepScreenActive`)}"
+                  alignEnd
+                  spaceBetween
+                >
+                  <mwc-checkbox
+                    @change="${this._handleKeepScreenActiveChange}"
+                    ?checked="${this.keepScreenActive}"
+                  ></mwc-checkbox>
+                </mwc-formfield>
               </li>
             `
           : html`${nothing}`}
-        <li class="checkbox-container">
-          <label for="showChangelog">
-            ${this.localize(t`showChangelog`)}
-          </label>
-          <mwc-checkbox
-            id="showChangelog"
-            @change="${this._handleShowChangelogChange}"
-            ?checked="${this.showChangelog}"
-          ></mwc-checkbox>
+        <li>
+          <mwc-formfield
+            label="${this.localize(t`showChangelog`)}"
+            alignEnd
+            spaceBetween
+          >
+            <mwc-checkbox
+              @change="${this._handleShowChangelogChange}"
+              ?checked="${this.showChangelog}"
+            ></mwc-checkbox>
+          </mwc-formfield>
         </li>
       </ul>
     </section>

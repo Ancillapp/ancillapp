@@ -26,12 +26,11 @@ export default function template(this: BreviaryIndex) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`breviary`)}
-      </div>
+      <div slot="title">${this.localize(t`breviary`)}</div>
     </top-app-bar>
 
     <section>

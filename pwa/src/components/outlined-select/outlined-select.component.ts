@@ -15,6 +15,9 @@ export class OutlinedSelect extends LitElement {
 
   protected render = template;
 
+  @property({ type: String, reflect: true, attribute: 'select-id' })
+  public selectId = '';
+
   @property({ type: String, attribute: true })
   public value = '';
 

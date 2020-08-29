@@ -6,6 +6,7 @@ import { dropDown, dropUp } from '../icons';
 export default function template(this: OutlinedSelect) {
   return html`
     <select
+      id="${this.selectId}"
       @focus="${() => (this._active = true)}"
       @blur="${() => (this._active = false)}"
       @change="${(event: Event) => {

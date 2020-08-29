@@ -17,12 +17,11 @@ export default function template(this: AncillasList) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`ancillas`)}
-      </div>
+      <div slot="title">${this.localize(t`ancillas`)}</div>
     </top-app-bar>
 
     <unobtrusive-notification

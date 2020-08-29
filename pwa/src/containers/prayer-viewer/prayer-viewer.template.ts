@@ -11,7 +11,9 @@ export default function template(this: PrayerViewer) {
   return html`
     <top-app-bar ?drawer-open="${this.drawerOpen}">
       <a href="${this.localizeHref('prayers')}" slot="leadingIcon">
-        <mwc-icon-button>${arrowBack}</mwc-icon-button>
+        <mwc-icon-button label="${this.localize(t`back`)}">
+          ${arrowBack}
+        </mwc-icon-button>
       </a>
       <div slot="title">
         ${this._prayerStatus.data?.title[this.locale] ||

@@ -13,9 +13,7 @@ import template from './breviary-index.template';
 
 import { apiUrl } from '../../config/default.json';
 
-import firebase from 'firebase/app';
-
-const analytics = firebase.analytics();
+import { logEvent } from '../../helpers/firebase';
 
 const _titlesPromisesCache = new Map<string, Promise<(part: Part) => void>>();
 
@@ -55,11 +53,10 @@ export class BreviaryIndex extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`breviaryDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
   }

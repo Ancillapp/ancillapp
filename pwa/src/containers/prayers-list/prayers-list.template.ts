@@ -19,12 +19,11 @@ export default function template(this: PrayersList) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`prayers`)}
-      </div>
+      <div slot="title">${this.localize(t`prayers`)}</div>
     </top-app-bar>
 
     <unobtrusive-notification ?hidden="${!this._needPrayersDownloadPermission}">
@@ -72,9 +71,7 @@ export default function template(this: PrayersList) {
                 image,
               }) => html`
                 <a href="${this.localizeHref('prayers', slug)}" class="prayer">
-                  <div class="image">
-                    ${unsafeHTML(image)}
-                  </div>
+                  <div class="image">${unsafeHTML(image)}</div>
                   <div class="title">${localizedTitle || latinTitle}</div>
                 </a>
               `,

@@ -4,13 +4,6 @@ import {
   supportedLocales,
   defaultLocale,
 } from './helpers/localize';
-import config from './config/default.json';
-
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/analytics';
-
-firebase.initializeApp(config.firebase);
 
 // Feature detect which polyfill needs to be imported.
 const needsTemplate = (() => {

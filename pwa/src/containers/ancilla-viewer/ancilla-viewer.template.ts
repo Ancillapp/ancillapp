@@ -12,7 +12,9 @@ export default function template(this: AncillaViewer) {
   return html`
     <top-app-bar ?drawer-open="${this.drawerOpen}">
       <a href="${this.localizeHref('ancillas')}" slot="leadingIcon">
-        <mwc-icon-button>${arrowBack}</mwc-icon-button>
+        <mwc-icon-button label="${this.localize(t`back`)}">
+          ${arrowBack}
+        </mwc-icon-button>
       </a>
       <div slot="title">
         ${until(

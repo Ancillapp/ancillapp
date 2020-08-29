@@ -11,9 +11,8 @@ import sharedStyles from '../../shared.styles';
 import styles from './prayers-list.styles';
 import template from './prayers-list.template';
 
-import firebase from 'firebase/app';
-
 import { apiUrl } from '../../config/default.json';
+import { logEvent } from '../../helpers/firebase';
 
 export interface PrayerSummary {
   slug: string;
@@ -26,8 +25,6 @@ export interface PrayerSummary {
   };
   image: string;
 }
-
-const analytics = firebase.analytics();
 
 @customElement('prayers-list')
 export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
@@ -103,11 +100,10 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`prayersDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
   }
@@ -129,9 +125,7 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
 
     this._downloadingPrayers = true;
 
-    analytics.logEvent('download_prayers', {
-      offline: false,
-    });
+    logEvent('download_prayers');
 
     for await (const { loading, refreshing, data, error } of cacheAndNetwork<
       PrayerSummary[]

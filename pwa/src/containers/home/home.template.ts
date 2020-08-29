@@ -27,11 +27,7 @@ export default function template(this: HomePage) {
         @click="${this._handleSearchResultClick}"
       >
         ${preview.type === 'text'
-          ? html`
-              <div class="search-result-preview">
-                ${preview.content}
-              </div>
-            `
+          ? html` <div class="search-result-preview">${preview.content}</div> `
           : html`${unsafeHTML(preview.content)}`}
         <div class="search-result-content">
           <h4>${unsafeHTML(title)}</h4>
@@ -50,22 +46,28 @@ export default function template(this: HomePage) {
         : 'hidden'}"
       ?drawer-open="${this.drawerOpen}"
     >
-      <mwc-icon-button slot="leadingIcon" @click="${this._stopSearching}">
+      <mwc-icon-button
+        slot="leadingIcon"
+        @click="${this._stopSearching}"
+        label="${this.localize(t`back`)}"
+      >
         ${arrowBack}
       </mwc-icon-button>
       <input
         id="search-input"
+        type="search"
         slot="title"
-        placeholder="Cerca in Ancillapp"
+        placeholder="${this.localize(t`searchInAncillapp`)}"
         @keydown="${this._handleSearchKeyDown}"
         @input="${this._handleMobileSearch}"
         value="${this._searchTerm}"
         autofocus
+        aria-label="${this.localize(t`searchInAncillapp`)}"
       />
     </top-app-bar>
     <search-top-bar
       ?drawer-open="${this.drawerOpen}"
-      placeholder="Cerca in Ancillapp"
+      placeholder="${this.localize(t`searchInAncillapp`)}"
       @search="${this._handleDesktopSearch}"
       @searchclick="${this._startSearching}"
       @searchkeydown="${this._handleSearchKeyDown}"
@@ -75,12 +77,11 @@ export default function template(this: HomePage) {
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
         @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        label="${this.localize(t`menu`)}"
       >
         ${menu}
       </mwc-icon-button>
-      <div slot="title">
-        ${this.localize(t`home`)}
-      </div>
+      <div slot="title">${this.localize(t`home`)}</div>
     </search-top-bar>
 
     <div class="search-results" ?hidden="${!this._searching}">

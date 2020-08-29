@@ -7,39 +7,55 @@ const {
 
 const configs = [
   {
-    url: '/home',
+    url: '/it',
     title: 'Home',
   },
   {
-    url: '/ancillas',
-    title: 'Ancillas',
+    url: '/it/breviario',
+    title: 'Breviary index',
   },
   {
-    url: '/ancillas/AD2_2018',
-    title: 'Ancilla',
+    url: `/it/breviario/invitatory/${new Date().toISOString().slice(0, 10)}`,
+    title: 'Breviary page',
   },
   {
-    url: '/songs',
+    url: '/it/canti',
     title: 'Songs',
   },
   {
-    url: '/songs/1',
+    url: '/it/canti/IT1',
     title: 'Song',
   },
   {
-    url: '/prayers',
+    url: '/it/preghiere',
     title: 'Prayers',
   },
   {
-    url: '/prayers/anima-di-cristo',
+    url: '/it/preghiere/angelo-di-dio',
     title: 'Prayer',
   },
   {
-    url: '/settings',
+    url: '/it/ancilla-domini',
+    title: 'Ancillas',
+  },
+  {
+    url: '/it/ancilla-domini/AD4_2019',
+    title: 'Ancilla',
+  },
+  {
+    url: '/it/santa-messa',
+    title: 'Holy Mass',
+  },
+  {
+    url: '/it/accesso',
+    title: 'Login',
+  },
+  {
+    url: '/it/impostazioni',
     title: 'Settings',
   },
   {
-    url: '/info',
+    url: '/it/informazioni',
     title: 'Info',
   },
 ];

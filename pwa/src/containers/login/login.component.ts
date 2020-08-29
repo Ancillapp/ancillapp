@@ -9,10 +9,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './login.styles';
 import template from './login.template';
 
-import firebase from 'firebase/app';
-
-const auth = firebase.auth();
-const analytics = firebase.analytics();
+import { firebasePromise, logEvent } from '../../helpers/firebase';
 
 @customElement('login-page')
 export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
@@ -70,11 +67,10 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`loginDescription`),
       });
 
-      analytics.logEvent('page_view', {
+      logEvent('page_view', {
         page_title: pageTitle,
         page_location: window.location.href,
         page_path: window.location.pathname,
-        offline: false,
       });
     }
   }
@@ -92,13 +88,14 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
 
     this._loggingInWithEmailAndPassword = true;
 
-    try {
-      await auth.signInWithEmailAndPassword(this._email, this._password);
+    const firebase = await firebasePromise;
 
-      analytics.logEvent('login', {
-        method: 'Email and Password',
-        offline: false,
-      });
+    try {
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(this._email, this._password);
+
+      logEvent('login', { method: 'Email and Password' });
 
       this._email = '';
       this._password = '';
@@ -108,15 +105,11 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
 
       if (error === 'auth/user-not-found') {
         try {
-          await auth.createUserWithEmailAndPassword(
-            this._email,
-            this._password,
-          );
+          await firebase
+            .auth()
+            .createUserWithEmailAndPassword(this._email, this._password);
 
-          analytics.logEvent('login', {
-            method: 'Email and Password',
-            offline: false,
-          });
+          logEvent('login', { method: 'Email and Password' });
 
           this.dispatchEvent(new CustomEvent('register'));
 
@@ -146,7 +139,9 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handlePasswordReset() {
     this._resettingPassword = true;
 
-    await auth.sendPasswordResetEmail(this._email, {
+    const firebase = await firebasePromise;
+
+    await firebase.auth().sendPasswordResetEmail(this._email, {
       url: window.location.href,
     });
 
@@ -157,12 +152,13 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleGoogleLogin() {
     this._loggingInWithGoogle = true;
 
-    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    const firebase = await firebasePromise;
 
-    analytics.logEvent('login', {
-      method: 'Google',
-      offline: false,
-    });
+    await firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider());
+
+    logEvent('login', { method: 'Google' });
 
     this._loggingInWithGoogle = false;
   }
@@ -170,12 +166,13 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleFacebookLogin() {
     this._loggingInWithFacebook = true;
 
-    await auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    const firebase = await firebasePromise;
 
-    analytics.logEvent('login', {
-      method: 'Facebook',
-      offline: false,
-    });
+    await firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider());
+
+    logEvent('login', { method: 'Facebook' });
 
     this._loggingInWithFacebook = false;
   }
@@ -183,12 +180,13 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleTwitterLogin() {
     this._loggingInWithTwitter = true;
 
-    await auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+    const firebase = await firebasePromise;
 
-    analytics.logEvent('login', {
-      method: 'Twitter',
-      offline: false,
-    });
+    await firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.TwitterAuthProvider());
+
+    logEvent('login', { method: 'Twitter' });
 
     this._loggingInWithTwitter = false;
   }
@@ -196,14 +194,13 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleMicrosoftLogin() {
     this._loggingInWithMicrosoft = true;
 
-    await auth.signInWithPopup(
-      new firebase.auth.OAuthProvider('microsoft.com'),
-    );
+    const firebase = await firebasePromise;
 
-    analytics.logEvent('login', {
-      method: 'Microsoft',
-      offline: false,
-    });
+    await firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.OAuthProvider('microsoft.com'));
+
+    logEvent('login', { method: 'Microsoft' });
 
     this._loggingInWithMicrosoft = false;
   }
@@ -211,17 +208,16 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleAppleLogin() {
     this._loggingInWithApple = true;
 
+    const firebase = await firebasePromise;
+
     const provider = new firebase.auth.OAuthProvider('apple.com');
     provider.setCustomParameters({
       locale: this.locale,
     });
 
-    await auth.signInWithPopup(provider);
+    await firebase.auth().signInWithPopup(provider);
 
-    analytics.logEvent('login', {
-      method: 'Apple',
-      offline: false,
-    });
+    logEvent('login', { method: 'Apple' });
 
     this._loggingInWithApple = false;
   }
@@ -229,12 +225,13 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleGitHubLogin() {
     this._loggingInWithGitHub = true;
 
-    await auth.signInWithPopup(new firebase.auth.GithubAuthProvider());
+    const firebase = await firebasePromise;
 
-    analytics.logEvent('login', {
-      method: 'GitHub',
-      offline: false,
-    });
+    await firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.GithubAuthProvider());
+
+    logEvent('login', { method: 'GitHub' });
 
     this._loggingInWithGitHub = false;
   }
