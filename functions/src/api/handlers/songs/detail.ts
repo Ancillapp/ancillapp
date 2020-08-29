@@ -1,4 +1,5 @@
 import { mongoDb } from '../../../helpers/mongo';
+import { Song } from '../../../models/mongo';
 
 import type { RequestHandler } from 'express';
 
@@ -9,7 +10,7 @@ export const getSong: RequestHandler = async ({ params: { number } }, res) => {
   );
 
   const db = await mongoDb;
-  const songsCollection = db.collection('songs');
+  const songsCollection = db.collection<Song>('songs');
 
   const song = await songsCollection.findOne(
     { number },
