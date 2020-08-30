@@ -17,6 +17,7 @@ export const configureSearch = async (configuration: SearchItem[]) => {
   _fuse = new Fuse(configuration, {
     keys: ['keywords', 'title', 'description'],
     includeMatches: true,
+    ignoreLocation: true,
   });
 };
 
