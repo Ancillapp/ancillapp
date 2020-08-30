@@ -121,7 +121,8 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
     if (!this._fuse) {
       this._fuse = new Fuse(songs, {
-        keys: ['number', 'title'],
+        keys: ['number', 'title', 'content'],
+        ignoreLocation: true,
       });
     } else {
       this._fuse.setCollection(songs);
