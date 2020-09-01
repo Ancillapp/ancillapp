@@ -21,7 +21,7 @@ import template from './shell.template';
 import type { Drawer } from '@material/mwc-drawer';
 import type { Checkbox } from '@material/mwc-checkbox';
 
-import { logout, logEvent } from '../../helpers/firebase';
+import { firebasePromise, logEvent } from '../../helpers/firebase';
 
 @customElement('ancillapp-shell')
 export class Shell extends localize(authorize(LitElement)) {
@@ -372,7 +372,9 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected async _logout() {
-    await logout();
+    const firebase = await firebasePromise;
+
+    await firebase.auth().signOut();
   }
 
   protected async _handledontShowChangelogChange({ target }: MouseEvent) {
