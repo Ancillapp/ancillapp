@@ -5,7 +5,7 @@ firebase.analytics = (() => ({
     console.groupCollapsed('Analytics event');
     console.info(`Name: ${event}`);
 
-    const { ...filteredParams } = params;
+    const { offline, ...filteredParams } = params;
 
     if (Object.keys(filteredParams).length > 0) {
       console.info('Params:');
