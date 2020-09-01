@@ -1,4 +1,4 @@
-import { firebasePromise } from './firebase';
+import { onAuthStateChanged } from './firebase';
 import { LitElement, property } from 'lit-element';
 
 type Constructor<T> = new (...args: any[]) => T;
@@ -13,13 +13,7 @@ export const authorize = <E extends Constructor<LitElement>>(
     constructor(...args: any[]) {
       super(...args);
 
-      firebasePromise.then((firebase) =>
-        firebase
-          .auth()
-          .onAuthStateChanged(
-            (user: firebase.User | null) => (this.user = user),
-          ),
-      );
+      onAuthStateChanged((user) => (this.user = user));
     }
   }
 
