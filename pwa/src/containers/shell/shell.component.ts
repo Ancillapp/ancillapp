@@ -117,7 +117,7 @@ export class Shell extends localize(authorize(LitElement)) {
   private async _setupWakeLockSentinel() {
     const keepScreenActive = await get<boolean>('keepScreenActive');
 
-    if (keepScreenActive) {
+    if (keepScreenActive && document.visibilityState === 'visible') {
       this._wakeLockSentinel = await navigator.wakeLock.request('screen');
     }
 

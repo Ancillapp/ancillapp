@@ -69,15 +69,13 @@ export default function template(this: Shell) {
                       )}Icon`
                     ]}
                   </div>
-                  <slot>
-                    ${this.localize(
-                      pagesTranslations[
-                        page.replace(/-([a-z])/g, (_, letter) =>
-                          letter.toUpperCase(),
-                        ) as keyof typeof pagesTranslations
-                      ],
-                    )}
-                  </slot>
+                  ${this.localize(
+                    pagesTranslations[
+                      page.replace(/-([a-z])/g, (_, letter) =>
+                        letter.toUpperCase(),
+                      ) as keyof typeof pagesTranslations
+                    ],
+                  )}
                 </mwc-list-item>
                 ${page === 'home'
                   ? html`<li divider role="separator"></li>`
@@ -92,7 +90,7 @@ export default function template(this: Shell) {
             ? html`
                 <mwc-list-item graphic="icon" @click="${this._logout}">
                   <div slot="graphic">${icons.logout}</div>
-                  <slot>${this.localize(t`logout`)}</slot>
+                  ${this.localize(t`logout`)}
                 </mwc-list-item>
               `
             : html`
@@ -103,7 +101,7 @@ export default function template(this: Shell) {
                     graphic="icon"
                   >
                     <div slot="graphic">${icons.user}</div>
-                    <slot>${this.localize(t`login`)}</slot>
+                    ${this.localize(t`login`)}
                   </mwc-list-item>
                 </a>
               `}
@@ -120,15 +118,13 @@ export default function template(this: Shell) {
                       `${page}Icon`
                     ]}
                   </div>
-                  <slot>
-                    ${this.localize(
-                      pagesTranslations[
-                        page.replace(/-([a-z])/g, (_, letter) =>
-                          letter.toUpperCase(),
-                        ) as keyof typeof pagesTranslations
-                      ],
-                    )}
-                  </slot>
+                  ${this.localize(
+                    pagesTranslations[
+                      page.replace(/-([a-z])/g, (_, letter) =>
+                        letter.toUpperCase(),
+                      ) as keyof typeof pagesTranslations
+                    ],
+                  )}
                 </mwc-list-item>
               </a>
             `,
@@ -245,7 +241,7 @@ export default function template(this: Shell) {
     </mwc-drawer>
 
     <snack-bar ?active="${this._updateNotificationShown}">
-      <slot>${this.localize(t`updateAvailable`)}</slot>
+      ${this.localize(t`updateAvailable`)}
       <mwc-button
         slot="actions"
         @click="${this._cancelUpdate}"

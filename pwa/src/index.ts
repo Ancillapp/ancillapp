@@ -80,15 +80,12 @@ const getPreferredLocale = async () => {
 (polyfills.length
   ? import(`@webcomponents/webcomponentsjs/bundles/${polyfills.join('-')}.js`)
   : Promise.resolve()
-)
-  .then(() =>
-    Promise.all([
-      getPreferredLocale().then((locale) => import(`./locales/${locale}.po`)),
-      get<string>('theme').then(
-        (storedTheme) =>
-          (document.body.dataset.theme = storedTheme || 'system'),
-      ),
-      import('./containers/shell/shell.component'),
-    ]),
-  )
-  .then(() => document.querySelector('#loading')!.remove());
+).then(() =>
+  Promise.all([
+    getPreferredLocale().then((locale) => import(`./locales/${locale}.po`)),
+    get<string>('theme').then(
+      (storedTheme) => (document.body.dataset.theme = storedTheme || 'system'),
+    ),
+    import('./containers/shell/shell.component'),
+  ]),
+);
