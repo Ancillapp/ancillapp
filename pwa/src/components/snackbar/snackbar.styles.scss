@@ -1,7 +1,7 @@
 :host {
   display: block;
   position: fixed;
-  bottom: 0;
+  top: 100%;
   left: 0;
   right: 0;
   padding: 0.5rem 1.25rem;
@@ -11,7 +11,7 @@
     0 0.012rem 0.6rem 0 rgba(0, 0, 0, 0.12),
     0 0.36rem 0.014rem -0.26rem rgba(0, 0, 0, 0.2);
   will-change: transform;
-  transform: translateY(100%);
+  transform: translate3d(0, 0, 0);
   transition-property: visibility, transform;
   transition-duration: 0.3s;
   visibility: hidden;
@@ -20,7 +20,7 @@
 
 :host([active]) {
   visibility: visible;
-  transform: translateY(0);
+  transform: translate3d(0, -100%, 0);
 }
 
 .text {
