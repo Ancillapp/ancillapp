@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { DateInput } from './date-input.component';
 
-import '@material/mwc-textfield';
+import '../outlined-input/outlined-input.component';
 import '@material/mwc-icon-button';
 
 import { Datepicker } from 'app-datepicker/dist/datepicker';
@@ -12,14 +12,13 @@ customElements.define('app-datepicker-dialog', DatepickerDialog);
 
 export default function template(this: DateInput) {
   return html`
-    <mwc-textfield
-      outlined
+    <outlined-input
       readonly
       type="date"
       label="${this.label}"
       value="${this.value}"
       @click="${this._handleTextfieldClick}"
-    ></mwc-textfield>
+    ></outlined-input>
 
     <app-datepicker-dialog
       clearLabel=""

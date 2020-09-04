@@ -4,11 +4,9 @@ import { LoginPage } from './login.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
-import '@material/mwc-textfield';
+import '../../components/outlined-input/outlined-input.component';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/loading-button/loading-button.component';
-
-import type { TextField } from '@material/mwc-textfield';
 
 export default function template(this: LoginPage) {
   const loggingIn =
@@ -35,16 +33,15 @@ export default function template(this: LoginPage) {
     <section>
       <div>
         <h3>${this.localize(t`loginOrRegister`)}</h3>
-        <mwc-textfield
-          outlined
+        <outlined-input
           type="email"
           label="Email"
           value="${this._email}"
-          @input="${(event: CustomEvent) => {
-            this._email = (event.target as TextField).value;
+          @input="${({ detail }: CustomEvent<string>) => {
+            this._email = detail;
             this._error = '';
           }}"
-        ></mwc-textfield>
+        ></outlined-input>
         ${this._forgotPassword
           ? html`
               <loading-button
@@ -60,16 +57,15 @@ export default function template(this: LoginPage) {
                 : html`${nothing}`}
             `
           : html`
-              <mwc-textfield
-                outlined
+              <outlined-input
                 type="password"
                 label="Password"
                 value="${this._password}"
-                @input="${(event: CustomEvent) => {
-                  this._password = (event.target as TextField).value;
+                @input="${({ detail }: CustomEvent) => {
+                  this._password = detail;
                   this._error = '';
                 }}"
-              ></mwc-textfield>
+              ></outlined-input>
               <loading-button
                 raised
                 label="${this.localize(t`login`)}"

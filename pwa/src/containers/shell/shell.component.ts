@@ -45,18 +45,6 @@ export class Shell extends localize(authorize(LitElement)) {
   protected _narrow = false;
 
   @property({ type: Boolean })
-  protected _updateNotificationShown = false;
-
-  @property({ type: Boolean })
-  protected _updatingApp = false;
-
-  @property({ type: Boolean })
-  protected _changelogAvailable = false;
-
-  @property({ type: Boolean })
-  protected _dontShowChangelog = false;
-
-  @property({ type: Boolean })
   protected _verificationEmailSent = new URLSearchParams(
     window.location.search,
   ).has('registered');
@@ -80,11 +68,8 @@ export class Shell extends localize(authorize(LitElement)) {
   ];
   protected readonly _bottomNavPages = ['settings', 'info'];
 
-  private _newSw?: ServiceWorker = undefined;
-
   constructor() {
     super();
-    this._checkForUpdates();
     this._observeForThemeChanges();
 
     if (window.matchMedia('(min-width: 48rem)').matches) {
@@ -99,19 +84,6 @@ export class Shell extends localize(authorize(LitElement)) {
     );
 
     this._setupWakeLockSentinel();
-
-    Promise.all([
-      get<boolean>('changelogAvailable'),
-      get<boolean>('dontShowChangelog'),
-    ]).then(async ([changelogAvailable, dontShowChangelog]) => {
-      this._dontShowChangelog = dontShowChangelog;
-
-      if (changelogAvailable && !dontShowChangelog) {
-        this._changelogAvailable = true;
-      }
-
-      await set('changelogAvailable', false);
-    });
   }
 
   private async _setupWakeLockSentinel() {
@@ -306,81 +278,10 @@ export class Shell extends localize(authorize(LitElement)) {
     }
   }
 
-  protected async _checkForUpdates() {
-    if (!navigator.serviceWorker.controller) {
-      return;
-    }
-    const registration = await navigator.serviceWorker.getRegistration('/');
-    if (!registration) {
-      return;
-    }
-    if (registration.waiting) {
-      this._newSw = registration.waiting;
-
-      const newAppVersion = await get('appVersion');
-
-      if (newAppVersion !== currentAppVersion) {
-        this._updateNotificationShown = true;
-      }
-
-      return;
-    }
-    if (registration.installing) {
-      this._trackInstallation(registration.installing);
-      return;
-    }
-    registration.addEventListener('updatefound', () =>
-      this._trackInstallation(registration.installing!),
-    );
-    navigator.serviceWorker.addEventListener('controllerchange', () =>
-      window.location.reload(),
-    );
-  }
-
-  protected _trackInstallation(sw: ServiceWorker) {
-    sw.addEventListener('statechange', async () => {
-      if (sw.state === 'installed') {
-        this._newSw = sw;
-
-        const newAppVersion = await get('appVersion');
-
-        if (newAppVersion !== currentAppVersion) {
-          this._updateNotificationShown = true;
-        }
-      }
-    });
-  }
-
-  protected _cancelUpdate() {
-    this._updateNotificationShown = false;
-
-    logEvent('cancel_update');
-  }
-
-  protected async _updateApp() {
-    if (!this._newSw) {
-      return;
-    }
-    this._updatingApp = true;
-
-    await Promise.all([
-      logEvent('perform_update'),
-      set('changelogAvailable', true),
-    ]);
-
-    this._newSw.postMessage({ action: 'update' });
-  }
-
   protected async _logout() {
     const firebase = await firebasePromise;
 
     await firebase.auth().signOut();
-  }
-
-  protected async _handledontShowChangelogChange({ target }: MouseEvent) {
-    this._dontShowChangelog = (target as Checkbox).checked;
-
-    await set('dontShowChangelog', this._dontShowChangelog);
   }
 }
 

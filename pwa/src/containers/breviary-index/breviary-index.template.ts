@@ -4,7 +4,6 @@ import { BreviaryIndex } from './breviary-index.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
-import '@material/mwc-textfield';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/date-input/date-input.component';
 

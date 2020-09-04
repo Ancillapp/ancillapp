@@ -22,7 +22,6 @@
     "@material/mwc-list": "^0.18.0",
     "@material/mwc-ripple": "^0.18.0",
     "@material/mwc-snackbar": "^0.18.0",
-    "@material/mwc-textfield": "^0.18.0",
     "@webcomponents/webcomponentsjs": "^2.4.4",
     "app-datepicker": "^4.1.0",
     "firebase": "^7.19.1",
@@ -97,7 +96,6 @@
     "@material/mwc-icon-button": "0.18.0",
     "@material/mwc-list": "0.18.0",
     "@material/mwc-ripple": "0.18.0",
-    "@material/mwc-snackbar": "0.18.0",
-    "@material/mwc-textfield": "0.18.0"
+    "@material/mwc-snackbar": "0.18.0"
   }
 }

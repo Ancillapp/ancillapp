@@ -57,7 +57,7 @@ const config: Configuration = {
       },
       {
         test: /\.[tj]s$/,
-        exclude: /node_modules\/(?!(@polymer|lit-html|lit-element|pwa-helpers)\/).*/,
+        exclude: /node_modules\/(?!(@polymer|@material|lit-html|lit-element|pwa-helpers)\/).*/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -138,8 +138,9 @@ const config: Configuration = {
       ],
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
-      chunkFilename: 'styles/[id].[contenthash].css',
+      // TODO: switch to contenthash when migrating to Webpack 5
+      filename: 'styles/[name].[chunkhash].css',
+      chunkFilename: 'styles/[id].[chunkhash].css',
     }),
     new ScriptExtHtmlPlugin({
       defaultAttribute: 'defer',
