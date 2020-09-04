@@ -4,20 +4,15 @@ import { Shell } from './shell.component';
 import * as icons from '../../components/icons';
 import { t } from '@lingui/macro';
 
-import '@material/mwc-dialog';
 import '@material/mwc-drawer';
-import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import '@material/mwc-list/mwc-list';
 import '@material/mwc-list/mwc-list-item';
-import '@material/mwc-snackbar';
-import '@material/mwc-formfield';
-import '@material/mwc-checkbox';
 import '../../components/top-app-bar/top-app-bar.component';
-import '../../components/snackbar/snackbar.component';
-import '../../components/loading-button/loading-button.component';
 
-import { changelog } from '../../helpers/changelog';
+// Asynchronous imports
+import('@material/mwc-snackbar');
+import('../update-checker/update-checker.component');
 
 const pagesTranslations = {
   home: t`home`,
@@ -240,67 +235,12 @@ export default function template(this: Shell) {
       </div>
     </mwc-drawer>
 
-    <snack-bar ?active="${this._updateNotificationShown}">
-      ${this.localize(t`updateAvailable`)}
-      <mwc-button
-        slot="actions"
-        @click="${this._cancelUpdate}"
-        label="${this.localize(t`ignore`)}"
-      ></mwc-button>
-      <loading-button
-        slot="actions"
-        @click="${this._updateApp}"
-        ?loading="${this._updatingApp}"
-        label="${this.localize(t`updateNow`)}"
-      ></loading-button>
-    </snack-bar>
-
     <mwc-snackbar
       leading
       ?open="${this._verificationEmailSent}"
       labelText="Fatto! Controlla la tua casella di posta per verificare il tuo indirizzo email"
     ></mwc-snackbar>
 
-    <mwc-dialog
-      heading="v${changelog[this.locale].version} — ${Intl.DateTimeFormat(
-        this.locale,
-        {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        },
-      ).format(new Date(changelog[this.locale].date))}"
-      hideActions
-      ?open="${this._changelogAvailable}"
-    >
-      <ul class="changelog-news">
-        ${changelog[this.locale].news.map(
-          (newsItem) => html`<li>${newsItem}</li>`,
-        )}
-      </ul>
-      <a
-        id="full-changelog-link"
-        href="https://github.com/Ancillapp/ancillapp/blob/master/CHANGELOG${this
-          .locale === 'en'
-          ? ''
-          : '.it'}.md"
-        rel="external nofollow"
-        target="ancillapp-changelog"
-      >
-        ${this.localize(t`viewFullChangelog`)} ${icons.external}
-      </a>
-      <footer class="changelog-footer">
-        <mwc-formfield label="${this.localize(t`dontShowAnymore`)}">
-          <mwc-checkbox
-            ?checked="${this._dontShowChangelog}"
-            @change="${this._handledontShowChangelogChange}"
-          ></mwc-checkbox>
-        </mwc-formfield>
-        <mwc-button
-          dialogAction="close"
-          label="${this.localize(t`close`)}"
-        ></mwc-button>
-      </footer>
-    </mwc-dialog>
+    <update-checker></update-checker>
   `;
 }

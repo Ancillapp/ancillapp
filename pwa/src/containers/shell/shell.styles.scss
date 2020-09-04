@@ -117,26 +117,3 @@ main {
   background: var(--ancillapp-background-color);
   display: flex;
 }
-
-.changelog-news {
-  padding-left: 1.25em;
-  margin-top: 4px;
-}
-
-.changelog-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 8px -12px -12px -16px;
-}
-
-#full-changelog-link {
-  display: inline-flex;
-  align-items: center;
-
-  > svg {
-    margin-left: 0.5rem;
-    width: 1rem;
-    fill: var(--ancillapp-accent-color);
-  }
-}
