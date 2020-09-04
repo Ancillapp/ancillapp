@@ -57,7 +57,7 @@ const config: Configuration = {
       },
       {
         test: /\.[tj]s$/,
-        exclude: /node_modules\/(?!(@polymer|lit-html|lit-element|pwa-helpers)\/).*/,
+        exclude: /node_modules\/(?!(@polymer|@material|lit-html|lit-element|pwa-helpers)\/).*/,
         use: {
           loader: 'babel-loader',
           options: {
