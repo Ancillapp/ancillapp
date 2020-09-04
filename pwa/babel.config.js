@@ -21,7 +21,11 @@ module.exports = {
       {
         modules: {
           'lit-html': ['html', 'svg'], // lit-html
-          'lit-element': ['html', 'svg'], // lit-element
+          'lit-element': [
+            'html',
+            'svg',
+            { name: 'css', encapsulation: 'style' },
+          ], // lit-element
           '@polymer/polymer/polymer-element': ['html'], // Polymer 3 - exported from Polymer Element
           '@polymer/polymer/lib/utils/html-tag.js': ['html'], // Polymer 3 - exported from utils (used by PolymerElements family)
         },
