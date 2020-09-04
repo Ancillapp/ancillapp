@@ -33,7 +33,6 @@ export class UpdateChecker extends localize(LitElement) {
 
   constructor() {
     super();
-    console.log('test');
 
     this._checkForUpdates();
 
