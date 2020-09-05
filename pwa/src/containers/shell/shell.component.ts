@@ -58,16 +58,6 @@ export class Shell extends localize(authorize(LitElement)) {
   @queryAll('.page')
   private _pages: { scrollTarget: HTMLElement }[] = [];
 
-  protected readonly _topNavPages = [
-    'home',
-    'breviary',
-    'songs',
-    'prayers',
-    'ancillas',
-    'holy-mass',
-  ];
-  protected readonly _bottomNavPages = ['settings', 'info'];
-
   constructor() {
     super();
     this._observeForThemeChanges();

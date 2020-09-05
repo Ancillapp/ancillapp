@@ -2,7 +2,6 @@ import { html } from 'lit-element';
 import { AutosizedFAB } from './autosized-fab.component';
 
 import '@material/mwc-fab';
-import * as icons from '../icons';
 
 export default function template(this: AutosizedFAB) {
   return html`
@@ -13,7 +12,7 @@ export default function template(this: AutosizedFAB) {
       label="${this.label || this.icon}"
     >
       <div slot="icon">
-        ${icons[this.icon as keyof typeof icons]}
+        <slot></slot>
       </div>
     </mwc-fab>
   `;
