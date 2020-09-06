@@ -34,6 +34,7 @@ export class UpdateChecker extends localize(LitElement) {
   constructor() {
     super();
 
+    setInterval(() => this._checkForUpdates(), 30000);
     this._checkForUpdates();
 
     Promise.all([
