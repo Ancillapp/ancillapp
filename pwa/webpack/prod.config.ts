@@ -13,7 +13,7 @@ const config: Configuration = merge(baseConfig, {
   devtool: 'source-map',
   output: {
     // TODO: switch to contenthash when migrating to Webpack 5
-    filename: '[name].[chunkhash].js',
+    filename: 'a[name].[chunkhash].js',
   },
   optimization: {
     minimizer: [
