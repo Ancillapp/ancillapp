@@ -1,7 +1,20 @@
 import { html, SVGTemplateResult } from 'lit-element';
 import { nothing } from 'lit-html';
 import { Shell } from './shell.component';
-import * as icons from '../../components/icons';
+import {
+  homeIcon,
+  breviaryIcon,
+  songsIcon,
+  prayersIcon,
+  ancillasIcon,
+  holyMassIcon,
+  settingsIcon,
+  infoIcon,
+  menu,
+  tau,
+  logout,
+  user,
+} from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-drawer';
@@ -25,6 +38,19 @@ const pagesTranslations = {
   info: t`info`,
 };
 
+const topNavPages: [string, SVGTemplateResult][] = [
+  ['home', homeIcon],
+  ['breviary', breviaryIcon],
+  ['songs', songsIcon],
+  ['prayers', prayersIcon],
+  ['ancillas', ancillasIcon],
+  ['holy-mass', holyMassIcon],
+];
+const bottomNavPages: [string, SVGTemplateResult][] = [
+  ['settings', settingsIcon],
+  ['info', infoIcon],
+];
+
 export default function template(this: Shell) {
   return html`
     <mwc-drawer
@@ -40,30 +66,24 @@ export default function template(this: Shell) {
                   this._updateDrawerShrinkState(!this.drawerShrinked)}"
                 label="${this.localize(t`menu`)}"
               >
-                ${icons.menu}
+                ${menu}
               </mwc-icon-button>
             `
           : html`${nothing}`}
-        ${icons.tau}
+        ${tau}
         <span>Ancillapp</span>
       </span>
       <div class="menu">
         <mwc-list activatable class="top-nav">
-          ${this._topNavPages.map(
-            (page) => html`
+          ${topNavPages.map(
+            ([page, icon]) => html`
               <a class="nav-link" href="${this.localizeHref(page)}">
                 <mwc-list-item
                   ?selected="${this._page === page}"
                   ?activated="${this._page === page}"
                   graphic="icon"
                 >
-                  <div slot="graphic">
-                    ${(icons as { [key: string]: SVGTemplateResult })[
-                      `${page.replace(/-([a-z])/g, (_, letter) =>
-                        letter.toUpperCase(),
-                      )}Icon`
-                    ]}
-                  </div>
+                  <div slot="graphic">${icon}</div>
                   ${this.localize(
                     pagesTranslations[
                       page.replace(/-([a-z])/g, (_, letter) =>
@@ -84,7 +104,7 @@ export default function template(this: Shell) {
           ${this.user
             ? html`
                 <mwc-list-item graphic="icon" @click="${this._logout}">
-                  <div slot="graphic">${icons.logout}</div>
+                  <div slot="graphic">${logout}</div>
                   ${this.localize(t`logout`)}
                 </mwc-list-item>
               `
@@ -95,24 +115,20 @@ export default function template(this: Shell) {
                     ?activated="${this._page === 'login'}"
                     graphic="icon"
                   >
-                    <div slot="graphic">${icons.user}</div>
+                    <div slot="graphic">${user}</div>
                     ${this.localize(t`login`)}
                   </mwc-list-item>
                 </a>
               `}
-          ${this._bottomNavPages.map(
-            (page) => html`
+          ${bottomNavPages.map(
+            ([page, icon]) => html`
               <a class="nav-link" href="${this.localizeHref(page)}">
                 <mwc-list-item
                   ?selected="${this._page === page}"
                   ?activated="${this._page === page}"
                   graphic="icon"
                 >
-                  <div slot="graphic">
-                    ${(icons as { [key: string]: SVGTemplateResult })[
-                      `${page}Icon`
-                    ]}
-                  </div>
+                  <div slot="graphic">${icon}</div>
                   ${this.localize(
                     pagesTranslations[
                       page.replace(/-([a-z])/g, (_, letter) =>

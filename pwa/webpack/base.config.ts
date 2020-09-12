@@ -139,8 +139,8 @@ const config: Configuration = {
     }),
     new MiniCssExtractPlugin({
       // TODO: switch to contenthash when migrating to Webpack 5
-      filename: 'styles/[name].[chunkhash].css',
-      chunkFilename: 'styles/[id].[chunkhash].css',
+      filename: 'styles/a[name].[chunkhash].css',
+      chunkFilename: 'styles/a[id].[chunkhash].css',
     }),
     new ScriptExtHtmlPlugin({
       defaultAttribute: 'defer',

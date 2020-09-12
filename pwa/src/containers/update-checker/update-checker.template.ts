@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
 import { UpdateChecker } from './update-checker.component';
-import * as icons from '../../components/icons';
+import { external } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-drawer';
@@ -62,7 +62,7 @@ export default function template(this: UpdateChecker) {
               rel="external nofollow"
               target="ancillapp-changelog"
             >
-              ${this.localize(t`viewFullChangelog`)} ${icons.external}
+              ${this.localize(t`viewFullChangelog`)} ${external}
             </a>
             <footer class="changelog-footer">
               <mwc-formfield label="${this.localize(t`dontShowAnymore`)}">

@@ -6,6 +6,7 @@ import {
   arrowBack,
   dialpad,
   notes,
+  filter,
 } from '../../components/icons';
 import { t } from '@lingui/macro';
 
@@ -138,9 +139,9 @@ export default function template(this: SongsList) {
 
     <autosized-fab
       label="${this.localize(t`share`)}"
-      icon="filter"
       @click="${() => (this._filtersDialogOpen = true)}"
     >
+      ${filter}
     </autosized-fab>
 
     <mwc-snackbar
