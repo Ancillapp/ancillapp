@@ -3,6 +3,7 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { InfoPage } from './info.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
+import { version as currentAppVersion } from '../../../../CHANGELOG.md';
 
 import '../../components/top-app-bar/top-app-bar.component';
 
@@ -24,6 +25,7 @@ export default function template(this: InfoPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">${this.localize(t`info`)}</div>
+      <small slot="trailingIcon">v${currentAppVersion}</small>
     </top-app-bar>
 
     <section>
