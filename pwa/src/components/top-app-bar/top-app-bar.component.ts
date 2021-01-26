@@ -66,11 +66,11 @@ export class TopAppBar extends LitElement {
 
         if (
           this._latestPos < realScroll &&
-          ((window.innerWidth < 600 && this._scrollFromTop >= -64) ||
-            (window.innerWidth > 599 && this._scrollFromTop >= -72))
+          ((window.innerWidth < 600 && this._scrollFromTop >= -56) ||
+            (window.innerWidth > 599 && this._scrollFromTop >= -64))
         ) {
           this._scrollFromTop = Math.max(
-            window.innerWidth < 600 ? -64 : -72,
+            window.innerWidth < 600 ? -56 : -64,
             this._scrollFromTop + (this._latestPos - realScroll),
           );
         } else if (this._scrollFromTop <= 0) {
