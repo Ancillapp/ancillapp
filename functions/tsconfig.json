@@ -7,10 +7,9 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2017",
-    "lib": ["dom", "esnext"]
+    "lib": ["dom", "es2017"],
+    "skipLibCheck": true
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
