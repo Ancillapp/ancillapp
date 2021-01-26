@@ -14,13 +14,13 @@ export const firebasePromise = initializeFirebase();
 
 export const logEvent = async (
   eventName: Parameters<
-    import('firebase/app').analytics.Analytics['logEvent']
+    import('firebase/app').default.analytics.Analytics['logEvent']
   >[0],
   eventParams?: Parameters<
-    import('firebase/app').analytics.Analytics['logEvent']
+    import('firebase/app').default.analytics.Analytics['logEvent']
   >[1],
   options?: Parameters<
-    import('firebase/app').analytics.Analytics['logEvent']
+    import('firebase/app').default.analytics.Analytics['logEvent']
   >[2],
 ) => {
   const firebase = await firebasePromise;

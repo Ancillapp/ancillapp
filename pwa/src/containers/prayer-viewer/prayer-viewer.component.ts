@@ -10,7 +10,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './prayer-viewer.styles';
 import template from './prayer-viewer.template';
 
-import { apiUrl } from '../../config/default.json';
+import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 
 export interface Prayer {
@@ -56,7 +56,7 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
     if (this.active && changedProperties.has('prayer') && this.prayer) {
       if (!_prayersStatusesCache.has(this.prayer)) {
         for await (const status of cacheAndNetwork<Prayer>(
-          `${apiUrl}/prayers/${this.prayer}`,
+          `${config.apiUrl}/prayers/${this.prayer}`,
         )) {
           this._prayerStatus = status;
 

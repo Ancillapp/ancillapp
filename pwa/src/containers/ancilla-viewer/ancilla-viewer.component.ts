@@ -10,7 +10,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './ancilla-viewer.styles';
 import template from './ancilla-viewer.template';
 
-import { apiUrl } from '../../config/default.json';
+import config from '../../config/default.json';
 
 import { logEvent } from '../../helpers/firebase';
 
@@ -53,7 +53,9 @@ export class AncillaViewer extends localize(withTopAppBar(PageViewElement)) {
       if (!_ancillasPromisesCache.has(ancillaCode)) {
         _ancillasPromisesCache.set(
           ancillaCode,
-          fetch(`${apiUrl}/ancillas/${ancillaCode}`).then((res) => res.json()),
+          fetch(`${config.apiUrl}/ancillas/${ancillaCode}`).then((res) =>
+            res.json(),
+          ),
         );
       }
 

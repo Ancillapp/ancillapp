@@ -12,8 +12,7 @@ const config: Configuration = merge(baseConfig, {
   mode: 'production',
   devtool: 'source-map',
   output: {
-    // TODO: switch to contenthash when migrating to Webpack 5
-    filename: 'a[name].[chunkhash].js',
+    filename: '[name].[contenthash].js',
   },
   optimization: {
     minimizer: [
@@ -50,6 +49,7 @@ const config: Configuration = merge(baseConfig, {
         minifyJS: true,
       },
       inject: 'head',
+      scriptLoading: 'defer',
       template: path.resolve(__dirname, '../src/index.html'),
     }),
     new InjectManifestPlugin({

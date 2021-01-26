@@ -26,10 +26,14 @@ import { prayersTranslations } from '../breviary-index/breviary-index.template';
 
 import * as HomeWorker from './home.worker';
 
-const {
-  configureSearch,
-  search,
-} = new (HomeWorker as any)() as typeof HomeWorker;
+// TODO: convert this module back to a worker as soon as workerize-loader gets support for Webpack 5
+// See: https://github.com/developit/workerize-loader/issues/77
+const { configureSearch, search } = HomeWorker;
+
+// const {
+//   configureSearch,
+//   search,
+// } = new (HomeWorker as any)() as typeof HomeWorker;
 
 @customElement('home-page')
 export class HomePage extends localize(withTopAppBar(PageViewElement)) {
@@ -329,9 +333,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         this._stopSearching();
         this._updateSearchResults();
       } else {
-        const firstSearchResult = this._searchResultsContainer!.querySelector<
-          HTMLAnchorElement
-        >('.search-results > a');
+        const firstSearchResult = this._searchResultsContainer!.querySelector<HTMLAnchorElement>(
+          '.search-results > a',
+        );
 
         if (!firstSearchResult) {
           return;

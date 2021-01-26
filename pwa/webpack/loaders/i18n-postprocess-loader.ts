@@ -1,7 +1,6 @@
 import remark from 'remark';
 import html from 'remark-html';
 import breaks from 'remark-breaks';
-import { loader } from 'webpack';
 import { Script } from 'vm';
 
 const parser = remark()
@@ -75,11 +74,7 @@ const mapMessage = async (
   return newArr.filter((str) => str !== '') as (string | string[])[];
 };
 
-export default function (
-  this: loader.LoaderContext,
-  content: string | Buffer,
-  sourceMap: any,
-) {
+export default function (this: any, content: string | Buffer, sourceMap: any) {
   this.cacheable && this.cacheable();
 
   const callback = this.async()!;

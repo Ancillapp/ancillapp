@@ -11,7 +11,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './song-viewer.styles';
 import template from './song-viewer.template';
 
-import { apiUrl } from '../../config/default.json';
+import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 
 export interface Song {
@@ -45,7 +45,7 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
     if (this.active && changedProperties.has('song') && this.song) {
       if (!_songsStatusesCache.has(this.song)) {
         for await (const status of cacheAndNetwork<Song>(
-          `${apiUrl}/songs/${
+          `${config.apiUrl}/songs/${
             /^\d/.test(this.song) ? `IT${this.song}` : this.song
           }`,
         )) {

@@ -11,7 +11,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './prayers-list.styles';
 import template from './prayers-list.template';
 
-import { apiUrl } from '../../config/default.json';
+import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 
 export interface PrayerSummary {
@@ -66,7 +66,7 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
     }
 
     for await (const status of cacheAndNetwork<PrayerSummary[]>(
-      `${apiUrl}/prayers${
+      `${config.apiUrl}/prayers${
         prayersDownloadPreference === 'yes' ? '?fullData' : ''
       }`,
     )) {
@@ -129,7 +129,7 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
 
     for await (const { loading, refreshing, data, error } of cacheAndNetwork<
       PrayerSummary[]
-    >(`${apiUrl}/prayers?fullData`)) {
+    >(`${config.apiUrl}/prayers?fullData`)) {
       if (!loading && !refreshing && data && !error) {
         await set('prayersDownloadPreference', 'yes');
         this._needPrayersDownloadPermission = false;

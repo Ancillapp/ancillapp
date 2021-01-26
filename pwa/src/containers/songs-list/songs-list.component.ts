@@ -13,7 +13,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './songs-list.styles';
 import template from './songs-list.template';
 
-import { apiUrl } from '../../config/default.json';
+import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
@@ -104,7 +104,9 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
         : 'it';
 
     for await (const status of cacheAndNetwork<SongSummary[]>(
-      `${apiUrl}/songs${songsDownloadPreference === 'yes' ? '?fullData' : ''}`,
+      `${config.apiUrl}/songs${
+        songsDownloadPreference === 'yes' ? '?fullData' : ''
+      }`,
     )) {
       this._songsStatus = status;
 
@@ -365,7 +367,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
     for await (const { loading, refreshing, data, error } of cacheAndNetwork<
       SongSummary[]
-    >(`${apiUrl}/songs?fullData`)) {
+    >(`${config.apiUrl}/songs?fullData`)) {
       if (!loading && !refreshing && data && !error) {
         await set('songsDownloadPreference', 'yes');
         this._needSongsDownloadPermission = false;

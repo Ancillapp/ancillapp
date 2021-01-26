@@ -8,7 +8,7 @@ export const authorize = <E extends Constructor<LitElement>>(
 ) => {
   class AuthorizedElement extends BaseElement {
     @property({ type: Object })
-    public user: firebase.User | null = null;
+    public user: firebase.default.User | null = null;
 
     constructor(...args: any[]) {
       super(...args);
@@ -17,7 +17,7 @@ export const authorize = <E extends Constructor<LitElement>>(
         firebase
           .auth()
           .onAuthStateChanged(
-            (user: firebase.User | null) => (this.user = user),
+            (user: firebase.default.User | null) => (this.user = user),
           ),
       );
     }

@@ -12,7 +12,7 @@ import template from './ancillas-list.template';
 import { urlBase64ToUint8Array } from '../../helpers/utils';
 import { APIResponse, cacheAndNetwork } from '../../helpers/cache-and-network';
 
-import { apiUrl, vapidPublicKey } from '../../config/default.json';
+import config from '../../config/default.json';
 
 import { logEvent } from '../../helpers/firebase';
 
@@ -63,7 +63,7 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
 
   private async _prepareAncillas() {
     for await (const status of cacheAndNetwork<Ancilla[]>(
-      `${apiUrl}/ancillas`,
+      `${config.apiUrl}/ancillas`,
     )) {
       this._ancillasStatus = status;
 
@@ -115,14 +115,14 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
 
     const pushSubscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
+      applicationServerKey: urlBase64ToUint8Array(config.vapidPublicKey),
     });
 
     if (Notification.permission !== 'granted') {
       return;
     }
 
-    await fetch(`${apiUrl}/notifications/subscribe`, {
+    await fetch(`${config.apiUrl}/notifications/subscribe`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
