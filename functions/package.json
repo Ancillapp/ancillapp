@@ -7,35 +7,31 @@
     "start:functions": "cross-env NODE_ENV=development tsc -w",
     "build": "cross-env NODE_ENV=production tsc"
   },
-  "engines": {
-    "node": "10"
-  },
   "main": "lib/index.js",
   "dependencies": {
     "child-process-promise": "^2.2.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "firebase-admin": "^9.1.1",
-    "firebase-functions": "^3.11.0",
+    "firebase-admin": "^9.4.2",
+    "firebase-functions": "^3.13.1",
     "gs": "https://github.com/sina-masnadi/node-gs/tarball/master",
-    "mongodb": "^3.6.0",
-    "node-fetch": "^2.6.0",
+    "mongodb": "^3.6.3",
+    "node-fetch": "^2.6.1",
     "rendertron-middleware": "^0.1.5",
-    "sanitize-html": "^1.27.4",
+    "sanitize-html": "^2.3.1",
     "web-push": "^3.4.4"
   },
   "devDependencies": {
     "@types/child-process-promise": "^2.2.1",
-    "@types/cors": "^2.8.7",
-    "@types/mongodb": "^3.5.26",
-    "@types/node": "^14.6.2",
-    "@types/node-fetch": "^2.5.7",
-    "@types/sanitize-html": "^1.23.3",
+    "@types/cors": "^2.8.9",
+    "@types/mongodb": "^3.6.3",
+    "@types/node": "^14.14.22",
+    "@types/node-fetch": "^2.5.8",
+    "@types/sanitize-html": "^1.27.1",
     "@types/web-push": "^3.3.0",
-    "cross-env": "^7.0.2",
-    "firebase-functions-test": "^0.2.1",
+    "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
-    "typescript": "^4.0.2"
+    "typescript": "^4.1.3"
   },
   "private": true
 }

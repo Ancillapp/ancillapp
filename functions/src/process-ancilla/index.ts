@@ -7,7 +7,7 @@ import { unlink as unlinkCb } from 'fs';
 import { firebase } from '../helpers/firebase';
 
 const execGs = (gsInstance: any) =>
-  new Promise((resolve, reject) =>
+  new Promise<void>((resolve, reject) =>
     gsInstance.exec((error: Error) => {
       if (error) {
         reject(error);
@@ -18,7 +18,7 @@ const execGs = (gsInstance: any) =>
   );
 
 const unlink = (path: string) =>
-  new Promise((resolve, reject) =>
+  new Promise<void>((resolve, reject) =>
     unlinkCb(path, (err) => {
       if (err) {
         reject(err);
@@ -56,7 +56,7 @@ export const processAncilla = functions
     });
 
     await Promise.all([
-      new Promise(async (resolve) => {
+      new Promise<void>(async (resolve) => {
         console.info('Shrinking the PDF file size...');
 
         await execGs(
@@ -91,7 +91,7 @@ export const processAncilla = functions
 
         resolve();
       }),
-      new Promise(async (resolve) => {
+      new Promise<void>(async (resolve) => {
         console.info('Converting the first page of the PDF into an image...');
 
         await execGs(

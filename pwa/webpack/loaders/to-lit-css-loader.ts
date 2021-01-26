@@ -1,6 +1,4 @@
-import { loader } from 'webpack';
-
-export default function(this: loader.LoaderContext, source: string) {
+export default function (this: any, source: string) {
   this.cacheable && this.cacheable();
 
   return `

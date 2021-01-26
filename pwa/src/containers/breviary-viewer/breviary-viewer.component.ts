@@ -11,7 +11,7 @@ import styles from './breviary-viewer.styles';
 import template from './breviary-viewer.template';
 import '@material/mwc-icon-button';
 
-import { apiUrl } from '../../config/default.json';
+import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 import { localizedPages } from '../../helpers/localization';
 
@@ -126,7 +126,7 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
         _prayersPromisesCache.set(
           this.query,
           fetch(
-            `${apiUrl}/breviary?prayer=${localizedPrayerToKeyMap[prayer]}&date=${date}`,
+            `${config.apiUrl}/breviary?prayer=${localizedPrayerToKeyMap[prayer]}&date=${date}`,
           ).then((res) => res.text()),
         );
       }

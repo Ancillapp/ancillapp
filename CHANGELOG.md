@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.0 (2021-01-26)
+- Added option to view prayers in different languages
+
 ## 1.6.0 (2020-08-20)
 - Added option to enable/disable changelog
 

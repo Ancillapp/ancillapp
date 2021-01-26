@@ -11,7 +11,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './breviary-index.styles';
 import template from './breviary-index.template';
 
-import { apiUrl } from '../../config/default.json';
+import config from '../../config/default.json';
 
 import { logEvent } from '../../helpers/firebase';
 
@@ -36,7 +36,7 @@ export class BreviaryIndex extends localize(withTopAppBar(PageViewElement)) {
       if (!_titlesPromisesCache.has(this._date)) {
         _titlesPromisesCache.set(
           this._date,
-          fetch(`${apiUrl}/breviary?prayer=title&date=${this._date}`)
+          fetch(`${config.apiUrl}/breviary?prayer=title&date=${this._date}`)
             .then((res) => res.text())
             .then((title) => unsafeHTML(title)),
         );

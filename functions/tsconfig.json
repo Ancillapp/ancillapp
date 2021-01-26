@@ -6,11 +6,10 @@
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017",
-    "lib": ["dom", "esnext"]
+    "target": "es2020",
+    "lib": ["dom", "es2020"],
+    "skipLibCheck": true
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

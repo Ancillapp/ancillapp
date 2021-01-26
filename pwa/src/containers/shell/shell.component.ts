@@ -12,7 +12,6 @@ import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
 import { installRouter } from '../../helpers/router';
-import { version as currentAppVersion } from '../../../../CHANGELOG.md';
 
 import sharedStyles from '../../shared.styles';
 import styles from './shell.styles';
@@ -132,9 +131,9 @@ export class Shell extends localize(authorize(LitElement)) {
     );
 
     const slotChangeListener = () => {
-      const drawerContent = this._drawer.shadowRoot!.querySelector<
-        HTMLDivElement
-      >('.mdc-drawer-app-content');
+      const drawerContent = this._drawer.shadowRoot!.querySelector<HTMLDivElement>(
+        '.mdc-drawer-app-content',
+      );
 
       if (!drawerContent) {
         return;

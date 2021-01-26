@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.0 (2021-01-26)
+- Aggiunta la possibilità di visualizzare le preghiere in lingue diverse
+
 ## 1.6.0 (2020-08-20)
 - Aggiunta un'opzione per abilitare/disabilitare il changelog
 

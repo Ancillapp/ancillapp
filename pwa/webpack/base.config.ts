@@ -2,7 +2,6 @@
 import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import ScriptExtHtmlPlugin from 'script-ext-html-webpack-plugin';
 import {
   Configuration,
   EnvironmentPlugin,
@@ -50,11 +49,13 @@ const config: Configuration = {
           '@lingui/loader',
         ],
       },
-      {
-        test: /\.worker\.[tj]s$/,
-        exclude: /node_modules/,
-        use: 'workerize-loader',
-      },
+      // TODO: re-add workerize-loader as soon as it gets support for Webpack 5
+      // See: https://github.com/developit/workerize-loader/issues/77
+      // {
+      //   test: /\.worker\.[tj]s$/,
+      //   exclude: /node_modules/,
+      //   use: 'workerize-loader',
+      // },
       {
         test: /\.[tj]s$/,
         exclude: /node_modules\/(?!(@polymer|@material|lit-html|lit-element|pwa-helpers)\/).*/,
@@ -75,20 +76,24 @@ const config: Configuration = {
           {
             loader: 'postcss-loader',
             options: {
-              ident: 'postcss',
-              plugins: () => [
-                require('postcss-preset-env')(),
-                require('autoprefixer')(),
-                require('cssnano')({
-                  preset: [
-                    'advanced',
+              postcssOptions: {
+                plugins: [
+                  'postcss-preset-env',
+                  'autoprefixer',
+                  [
+                    'cssnano',
                     {
-                      autoprefixer: false,
-                      zindex: false,
+                      preset: [
+                        'advanced',
+                        {
+                          autoprefixer: false,
+                          zindex: false,
+                        },
+                      ],
                     },
                   ],
-                }),
-              ],
+                ],
+              },
             },
           },
           {
@@ -138,12 +143,8 @@ const config: Configuration = {
       ],
     }),
     new MiniCssExtractPlugin({
-      // TODO: switch to contenthash when migrating to Webpack 5
-      filename: 'styles/a[name].[chunkhash].css',
-      chunkFilename: 'styles/a[id].[chunkhash].css',
-    }),
-    new ScriptExtHtmlPlugin({
-      defaultAttribute: 'defer',
+      filename: 'styles/[name].[contenthash].css',
+      chunkFilename: 'styles/[id].[contenthash].css',
     }),
   ],
 };

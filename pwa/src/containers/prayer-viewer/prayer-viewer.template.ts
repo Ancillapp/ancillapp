@@ -1,11 +1,22 @@
 import { html } from 'lit-element';
-import { PrayerViewer } from './prayer-viewer.component';
+import { nothing } from 'lit-html';
+import { Prayer, PrayerViewer } from './prayer-viewer.component';
 import { compile } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-snackbar';
+import '@material/mwc-tab-bar';
+import '@material/mwc-tab';
 import '../../components/top-app-bar/top-app-bar.component';
+
+const languagesTranslationMap: Record<keyof Prayer['title'], string> = {
+  it: t`italian`,
+  la: t`latin`,
+  de: t`german`,
+  en: t`english`,
+  pt: t`portuguese`,
+};
 
 export default function template(this: PrayerViewer) {
   return html`
@@ -20,6 +31,26 @@ export default function template(this: PrayerViewer) {
         this._prayerStatus.data?.title.la ||
         this.localize(t`loading`)}
       </div>
+      ${this._prayerLanguages.length > 1
+        ? html`
+            <mwc-tab-bar
+              activeIndex="${this._prayerLanguages.indexOf(
+                this._selectedPrayerLanguage,
+              )}"
+            >
+              ${this._prayerLanguages.map(
+                (language) =>
+                  html`
+                    <mwc-tab
+                      label="${languagesTranslationMap[language]}"
+                      @click="${() =>
+                        (this._selectedPrayerLanguage = language)}"
+                    ></mwc-tab>
+                  `,
+              )}
+            </mwc-tab-bar>
+          `
+        : html`${nothing}`}
     </top-app-bar>
 
     ${this._prayerStatus.loading || !this._prayerStatus.data
@@ -29,11 +60,16 @@ export default function template(this: PrayerViewer) {
           </div>
         `
       : html`
-          <section>
-            ${compile(
-              this._prayerStatus.data.content[this.locale] ||
-                this._prayerStatus.data.content.la!,
-            )}
+          <section
+            class="${this._prayerLanguages.length > 1 ? 'multilanguage' : ''}"
+          >
+            ${this._selectedPrayerLanguage in this._prayerStatus.data.content
+              ? compile(
+                  this._prayerStatus.data.content[
+                    this._selectedPrayerLanguage
+                  ]!,
+                )
+              : html`${nothing}`}
           </section>
         `}
 

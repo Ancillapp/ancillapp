@@ -2,7 +2,7 @@
   "compilerOptions": {
     "noEmit": true,
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -12,11 +12,6 @@
     "target": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "webworker"
-    ],
+    "lib": ["esnext", "dom", "dom.iterable", "webworker"]
   }
 }

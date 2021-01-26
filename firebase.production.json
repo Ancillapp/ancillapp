@@ -1,4 +1,7 @@
 {
+  "functions": {
+    "runtime": "nodejs14"
+  },
   "hosting": {
     "site": "ffb-ancillapp",
     "public": "pwa/dist",

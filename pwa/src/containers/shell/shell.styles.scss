@@ -47,6 +47,7 @@ mwc-drawer {
     width: 100%;
     height: var(--ancillapp-top-bar-height);
     padding-left: 26px;
+    margin-left: -16px;
 
     @media (min-width: 600px) {
       // TODO: discover why this line is needed

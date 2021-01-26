@@ -18,6 +18,7 @@ export default function template(this: TopAppBar) {
           <slot name="trailingIcon"></slot>
         </section>
       </div>
+      <slot></slot>
     </header>
   `;
 }

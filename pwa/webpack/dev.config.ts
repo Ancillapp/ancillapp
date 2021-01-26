@@ -29,6 +29,7 @@ const config: Configuration = merge(baseConfig, {
   plugins: [
     new HtmlPlugin({
       inject: 'head',
+      scriptLoading: 'defer',
       template: path.resolve(__dirname, '../src/index.html'),
       showErrors: true,
     }),

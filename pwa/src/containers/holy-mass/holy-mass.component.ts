@@ -10,7 +10,7 @@ import sharedStyles from '../../shared.styles';
 import styles from './holy-mass.styles';
 import template from './holy-mass.template';
 
-import { apiUrl } from '../../config/default.json';
+import config from '../../config/default.json';
 import { get, set } from '../../helpers/keyval';
 import { logEvent } from '../../helpers/firebase';
 
@@ -99,7 +99,9 @@ export class HolyMassPage extends localize(
     this._selectedDate = this._minDate;
 
     Promise.all<Fraternity[], string | undefined, string | undefined>([
-      fetch(`${apiUrl}/fraternities?v=${Date.now()}`).then((res) => res.json()),
+      fetch(`${config.apiUrl}/fraternities?v=${Date.now()}`).then((res) =>
+        res.json(),
+      ),
       get('preferredFraternity'),
       get('preferredHolyMassTime'),
     ]).then(([fraternities, preferredFraternity, preferredHolyMassTime]) => {
@@ -141,7 +143,7 @@ export class HolyMassPage extends localize(
       this._bookedHolyMassesPromise = this.user
         .getIdToken()
         .then((token) =>
-          fetch(`${apiUrl}/holy-masses?v=${Date.now()}`, {
+          fetch(`${config.apiUrl}/holy-masses?v=${Date.now()}`, {
             headers: {
               authorization: `Bearer ${token}`,
             },
@@ -188,7 +190,7 @@ export class HolyMassPage extends localize(
       );
 
       fetch(
-        `${apiUrl}/fraternities/${
+        `${config.apiUrl}/fraternities/${
           this._selectedFraternity
         }/holy-masses/${datetime}/seats?v=${Date.now()}`,
       )
@@ -220,7 +222,7 @@ export class HolyMassPage extends localize(
     );
 
     const res = await fetch(
-      `${apiUrl}/fraternities/${this._selectedFraternity}/holy-masses/${datetime}`,
+      `${config.apiUrl}/fraternities/${this._selectedFraternity}/holy-masses/${datetime}`,
       {
         method: 'POST',
         headers: {
@@ -284,7 +286,7 @@ export class HolyMassPage extends localize(
       const token = await this.user.getIdToken();
 
       const res = await fetch(
-        `${apiUrl}/fraternities/${this._bookingToCancel.fraternity.id}/holy-masses/${this._bookingToCancel.date}`,
+        `${config.apiUrl}/fraternities/${this._bookingToCancel.fraternity.id}/holy-masses/${this._bookingToCancel.date}`,
         {
           method: 'DELETE',
           headers: {

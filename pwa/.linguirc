@@ -16,5 +16,7 @@
     "de",
     "pt"
   ],
-  "fallbackLocale": "it"
+  "fallbackLocales": {
+    "default": "it"
+  }
 }

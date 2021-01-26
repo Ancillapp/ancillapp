@@ -3,12 +3,20 @@ import { get, set } from './keyval';
 import { localizedPages, localizeHref } from './localization';
 import { i18n, MessageDescriptor } from '@lingui/core';
 import type { MessageOptions } from '@lingui/core/cjs/i18n';
+import { it, en, de, pt } from 'make-plural/plurals';
 
 type Constructor<T> = new (...args: any[]) => T;
 
 export type SupportedLocale = 'it' | 'en' | 'de' | 'pt';
 
 export type Localized<T> = { [key in SupportedLocale]: T };
+
+i18n.loadLocaleData({
+  it: { plurals: it },
+  en: { plurals: en },
+  de: { plurals: de },
+  pt: { plurals: pt },
+});
 
 export const supportedLocales: readonly SupportedLocale[] = [
   'it',

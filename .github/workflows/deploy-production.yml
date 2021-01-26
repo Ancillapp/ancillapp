@@ -16,17 +16,18 @@ jobs:
         with:
           node-version: 14
       - name: Install deps
-        run: npm ci
+        run: yarn install
       - name: Build
         run: |
           # Generate the sitemap
-          npm run build:sitemap
+          yarn build:sitemap
           # Build the PWA and the functions
-          BROWSER_ENV=production npm run build
+          yarn build
         env:
+          BROWSER_ENV: production
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
-        run: npx firebase deploy --project ffb-ancillapp --config firebase.production.json --token "$FIREBASE_TOKEN" --only hosting:ffb-ancillapp,functions:pwa
+        run: yarn firebase deploy --project ffb-ancillapp --config firebase.production.json --token "$FIREBASE_TOKEN" --only hosting:ffb-ancillapp,functions:pwa
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Purge cache, audit, and report
@@ -34,7 +35,7 @@ jobs:
           # Install libgbm
           sudo apt-get -y install libgbm1
           # Install required libraries
-          npm i -D node-fetch lighthouse puppeteer node-telegram-bot-api
+          yarn add -D node-fetch lighthouse puppeteer node-telegram-bot-api
           # Run the postdeploy script
           node scripts/postdeploy
         env:
