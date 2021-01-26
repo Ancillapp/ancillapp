@@ -1,4 +1,4 @@
-import { customElement, property, PropertyValues } from 'lit-element';
+import { customElement, property, PropertyValues, query } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -33,6 +33,8 @@ export interface Prayer {
 
 const _prayersStatusesCache = new Map<string, APIResponse<Prayer>>();
 
+const _languagesOrder = ['it', 'la', 'de', 'pt', 'en'];
+
 @customElement('prayer-viewer')
 export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
@@ -47,6 +49,12 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
     loading: true,
     refreshing: false,
   };
+
+  @property({ type: String })
+  protected _selectedPrayerLanguage: keyof Prayer['title'] = 'it';
+
+  @property({ type: Array })
+  protected _prayerLanguages: (keyof Prayer['title'])[] = [];
 
   private _previousPageTitle?: string;
 
@@ -63,8 +71,13 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
           if (status.data) {
             _prayersStatusesCache.set(this.prayer, status);
 
-            const title =
-              status.data.title[this.locale] || status.data.title.la!;
+            this._setupLanguageTabs();
+
+            const prayerDefaultLanguage = this._getDefaultPrayerLanguage(
+              status.data,
+            );
+
+            const title = status.data.title[prayerDefaultLanguage];
 
             const pageTitle = `Ancillapp - ${this.localize(
               t`prayers`,
@@ -90,8 +103,49 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
         }
       } else {
         this._prayerStatus = _prayersStatusesCache.get(this.prayer)!;
+        this._setupLanguageTabs();
       }
     }
+  }
+
+  private _setupLanguageTabs() {
+    const prayerDefaultLanguage = this._getDefaultPrayerLanguage(
+      this._prayerStatus.data!,
+    );
+
+    this._selectedPrayerLanguage = prayerDefaultLanguage;
+    this._prayerLanguages = Object.entries(this._prayerStatus.data?.title || {})
+      .filter(([_, title]) => title)
+      .sort(
+        ([language1], [language2]) =>
+          _languagesOrder.indexOf(language1) -
+          _languagesOrder.indexOf(language2),
+      )
+      .map(([language]) => language) as (keyof Prayer['title'])[];
+  }
+
+  private _getDefaultPrayerLanguage(prayer: Prayer) {
+    if (prayer.title[this.locale]) {
+      return this.locale;
+    }
+
+    if (prayer.title.la) {
+      return 'la';
+    }
+
+    if (prayer.title.it) {
+      return 'it';
+    }
+
+    if (prayer.title.de) {
+      return 'de';
+    }
+
+    if (prayer.title.pt) {
+      return 'pt';
+    }
+
+    return 'en';
   }
 }
 

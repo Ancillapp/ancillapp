@@ -21,6 +21,8 @@
     "@material/mwc-list": "^0.20.0",
     "@material/mwc-ripple": "^0.20.0",
     "@material/mwc-snackbar": "^0.20.0",
+    "@material/mwc-tab": "^0.20.0",
+    "@material/mwc-tab-bar": "^0.20.0",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "app-datepicker": "^4.5.1",
     "firebase": "^8.2.4",

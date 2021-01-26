@@ -17,4 +17,8 @@ p {
 
 section {
   align-self: flex-start;
+
+  &.multilanguage {
+    margin-top: 48px;
+  }
 }
