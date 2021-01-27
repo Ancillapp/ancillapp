@@ -4,3 +4,5 @@ node_modules/
 pwa/dist/
 functions/lib/
 .env
+.eslintrc*
+babel.config.js

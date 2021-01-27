@@ -2,6 +2,7 @@
 import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ForkTsCheckerPlugin from 'fork-ts-checker-webpack-plugin';
 import {
   Configuration,
   EnvironmentPlugin,
@@ -115,21 +116,18 @@ const config: Configuration = {
     }),
     new NormalModuleReplacementPlugin(
       /config\/default(?:\.json)?$/,
-      (resource: any) => {
+      (resource) => {
         resource.request = resource.request.replace(
           'config/default',
           `config/${browserEnv}`,
         );
       },
     ),
-    new NormalModuleReplacementPlugin(
-      /^firebase\/analytics$/,
-      (resource: any) => {
-        if (browserEnv !== 'production') {
-          resource.request = path.resolve(__dirname, '../src/mocks/analytics');
-        }
-      },
-    ),
+    new NormalModuleReplacementPlugin(/^firebase\/analytics$/, (resource) => {
+      if (browserEnv !== 'production') {
+        resource.request = path.resolve(__dirname, '../src/mocks/analytics');
+      }
+    }),
     new CopyPlugin({
       patterns: [
         // Assets
@@ -145,6 +143,21 @@ const config: Configuration = {
     new MiniCssExtractPlugin({
       filename: 'styles/[name].[contenthash].css',
       chunkFilename: 'styles/[id].[contenthash].css',
+    }),
+    new ForkTsCheckerPlugin({
+      typescript: {
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+      },
+      eslint: {
+        files: '**/*.{ts,js}',
+        options: {
+          configFile: path.resolve(__dirname, '../.eslintrc.js'),
+        },
+      },
     }),
   ],
 };

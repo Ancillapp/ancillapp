@@ -15,8 +15,14 @@
     "build:sitemap": "node scripts/sitemap"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "firebase-tools": "^9.2.2",
     "lerna": "^3.22.1",
+    "prettier": "^2.2.1",
     "typescript": "^4.1.3"
   },
   "workspaces": [
