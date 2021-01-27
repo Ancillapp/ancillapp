@@ -1,10 +1,6 @@
 import type { SupportedLocale } from './localize';
 
-export const localizedPages: {
-  [key: string]: {
-    [key in SupportedLocale]: string;
-  };
-} = {
+export const localizedPages: Record<string, Record<SupportedLocale, string>> = {
   breviary: {
     it: 'breviario',
     en: 'breviary',

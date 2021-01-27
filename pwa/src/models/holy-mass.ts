@@ -10,9 +10,7 @@ export interface Fraternity {
     friday?: string[];
     saturday?: string[];
     default?: string[];
-    overrides?: {
-      [day: string]: string[];
-    };
+    overrides?: Record<string, string[]>;
   };
 }
 

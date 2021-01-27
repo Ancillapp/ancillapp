@@ -44,7 +44,6 @@ self.addEventListener('push', (event) => {
           action: string;
           title: Localized<string>;
         }[];
-        [key: string]: unknown;
       } = event.data?.json();
 
       return self.registration.showNotification(title, {
