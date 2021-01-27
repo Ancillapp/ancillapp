@@ -13,12 +13,7 @@ import template from './song-viewer.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
-
-export interface Song {
-  number: string;
-  title: string;
-  content: string;
-}
+import { Song } from '../../models/song';
 
 const _songsStatusesCache = new Map<string, APIResponse<Song>>();
 

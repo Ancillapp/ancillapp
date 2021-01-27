@@ -15,14 +15,9 @@ import template from './songs-list.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
+import { SongSummary } from '../../models/song';
 
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
-
-export interface SongSummary {
-  number: string;
-  title: string;
-  language: string;
-}
 
 @customElement('songs-list')
 export class SongsList extends localize(withTopAppBar(PageViewElement)) {

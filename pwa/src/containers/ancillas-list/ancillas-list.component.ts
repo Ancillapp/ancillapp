@@ -13,20 +13,8 @@ import { urlBase64ToUint8Array } from '../../helpers/utils';
 import { APIResponse, cacheAndNetwork } from '../../helpers/cache-and-network';
 
 import config from '../../config/default.json';
-
 import { logEvent } from '../../helpers/firebase';
-
-export interface Ancilla {
-  code: string;
-  name: {
-    it: string;
-    en: string;
-    pt: string;
-    de: string;
-  };
-  link: string;
-  thumbnail: string;
-}
+import { Ancilla } from '../../models/ancilla';
 
 @customElement('ancillas-list')
 export class AncillasList extends localize(withTopAppBar(PageViewElement)) {

@@ -11,20 +11,8 @@ import styles from './ancilla-viewer.styles';
 import template from './ancilla-viewer.template';
 
 import config from '../../config/default.json';
-
 import { logEvent } from '../../helpers/firebase';
-
-export interface Ancilla {
-  code: string;
-  name: {
-    it: string;
-    en: string;
-    pt: string;
-    de: string;
-  };
-  link: string;
-  thumbnail: string;
-}
+import { Ancilla } from '../../models/ancilla';
 
 const _ancillasPromisesCache = new Map<string, Promise<Ancilla>>();
 

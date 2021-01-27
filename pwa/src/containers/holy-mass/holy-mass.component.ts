@@ -13,31 +13,7 @@ import template from './holy-mass.template';
 import config from '../../config/default.json';
 import { get, set } from '../../helpers/keyval';
 import { logEvent } from '../../helpers/firebase';
-
-export interface Fraternity {
-  id: string;
-  location: string;
-  masses: {
-    sunday?: string[];
-    monday?: string[];
-    tuesday?: string[];
-    wednesday?: string[];
-    thursday?: string[];
-    friday?: string[];
-    saturday?: string[];
-    default?: string[];
-    overrides?: {
-      [day: string]: string[];
-    };
-  };
-}
-
-export interface HolyMassBooking {
-  id: string;
-  fraternity: Fraternity;
-  date: string;
-  seats: number;
-}
+import { Fraternity, HolyMassBooking } from '../../models/holy-mass';
 
 @customElement('holy-mass-page')
 export class HolyMassPage extends localize(

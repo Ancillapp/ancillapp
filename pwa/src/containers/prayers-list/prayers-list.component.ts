@@ -13,18 +13,7 @@ import template from './prayers-list.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
-
-export interface PrayerSummary {
-  slug: string;
-  title: {
-    it?: string;
-    la?: string;
-    de?: string;
-    en?: string;
-    pt?: string;
-  };
-  image: string;
-}
+import { PrayerSummary } from '../../models/prayer';
 
 @customElement('prayers-list')
 export class PrayersList extends localize(withTopAppBar(PageViewElement)) {

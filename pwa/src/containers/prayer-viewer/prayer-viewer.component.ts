@@ -12,24 +12,7 @@ import template from './prayer-viewer.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
-
-export interface Prayer {
-  slug: string;
-  title: {
-    it?: string;
-    la?: string;
-    de?: string;
-    en?: string;
-    pt?: string;
-  };
-  content: {
-    it?: string;
-    la?: string;
-    de?: string;
-    en?: string;
-    pt?: string;
-  };
-}
+import { Prayer } from '../../models/prayer';
 
 const _prayersStatusesCache = new Map<string, APIResponse<Prayer>>();
 
