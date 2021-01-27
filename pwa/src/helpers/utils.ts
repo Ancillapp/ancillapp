@@ -37,10 +37,10 @@ export const importIIFE = (src: string) => {
   return scriptPromise;
 };
 
-interface AncillappDataDBSchema extends DBSchema {
+export interface AncillappDataDBSchema extends DBSchema {
   settings: {
     key: string;
-    value: any;
+    value: string | number | boolean | Date | null | undefined;
   };
   songs: {
     key: string;
@@ -104,6 +104,7 @@ export const initDB = () =>
   });
 
 export const debounce = <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   F extends (...args: any) => Promise<any> = (...args: any) => Promise<any>
 >(
   fn: F,
@@ -119,7 +120,7 @@ export const debounce = <
 
       timer = window.setTimeout(
         () =>
-          fn(...(args as any[]))
+          fn(...args)
             .then(resolve)
             .catch(reject),
         delay,

@@ -10,7 +10,7 @@ import type { ShareMenu } from 'share-menu';
 
 declare global {
   interface Window {
-    fbAsyncInit: Function;
+    fbAsyncInit(): void;
   }
 }
 
@@ -27,7 +27,7 @@ const shareReadyPromise =
         import('share-menu/targets/twitter'),
         import('share-menu/targets/pinterest'),
         import('share-menu/targets/tumblr'),
-        new Promise((resolve, reject) => {
+        new Promise<void>((resolve, reject) => {
           window.fbAsyncInit = () => {
             FB.init({
               appId: '479712196089264',

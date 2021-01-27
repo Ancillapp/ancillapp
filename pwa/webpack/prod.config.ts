@@ -22,7 +22,7 @@ const config: Configuration = merge(baseConfig, {
           ecma: 2017,
           safari10: true,
           compress: {
-            drop_console: true, // eslint-disable-line @typescript-eslint/camelcase
+            drop_console: true,
           },
         },
       }),

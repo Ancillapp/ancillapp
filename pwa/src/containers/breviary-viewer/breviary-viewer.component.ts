@@ -74,7 +74,7 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
   public query?: string;
 
   @property({ type: Object })
-  protected _breviaryPromise: Promise<string> = new Promise(() => {});
+  protected _breviaryPromise: Promise<string> = new Promise(() => undefined);
 
   private _alternatives: HTMLDivElement[] = [];
 

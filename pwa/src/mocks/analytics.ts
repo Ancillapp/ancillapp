@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import firebase from 'firebase/app';
 
 firebase.analytics = (() => ({
@@ -5,6 +6,7 @@ firebase.analytics = (() => ({
     console.groupCollapsed('Analytics event');
     console.info(`Name: ${event}`);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { offline, ...filteredParams } = params;
 
     if (Object.keys(filteredParams).length > 0) {
@@ -14,4 +16,5 @@ firebase.analytics = (() => ({
 
     console.groupEnd();
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 })) as any;

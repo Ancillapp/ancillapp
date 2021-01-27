@@ -5,6 +5,14 @@ import {
   defaultLocale,
 } from './helpers/localize';
 
+declare global {
+  interface Window {
+    ShadyDOM?: {
+      force?: boolean;
+    };
+  }
+}
+
 // Feature detect which polyfill needs to be imported.
 const needsTemplate = (() => {
   // no real <template> because no `content` property (IE and older browsers)
@@ -23,7 +31,8 @@ const needsTemplate = (() => {
   const clone = template.cloneNode(true) as HTMLTemplateElement;
   return (
     clone.content.childNodes.length === 0 ||
-    (clone.content.firstChild as any).content.childNodes.length === 0
+    (clone.content.firstChild as HTMLTemplateElement).content.childNodes
+      .length === 0
   );
 })();
 
@@ -33,10 +42,11 @@ if (
   !(
     'attachShadow' in Element.prototype && 'getRootNode' in Element.prototype
   ) ||
-  (window as any).ShadyDOM?.force
+  window.ShadyDOM?.force
 ) {
   polyfills.push('sd');
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 if (!window.customElements || (window.customElements as any).forcePolyfill) {
   polyfills.push('ce');
 }

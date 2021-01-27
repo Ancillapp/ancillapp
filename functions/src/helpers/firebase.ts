@@ -1,4 +1,4 @@
-import * as firebase from 'firebase-admin';
+import firebase from 'firebase-admin';
 
 firebase.initializeApp();
 

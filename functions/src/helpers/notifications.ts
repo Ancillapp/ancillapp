@@ -1,5 +1,5 @@
-import * as functions from 'firebase-functions';
-import * as webPush from 'web-push';
+import functions from 'firebase-functions';
+import webPush from 'web-push';
 
 const { subject, publickey, privatekey } = functions.config().webpush;
 

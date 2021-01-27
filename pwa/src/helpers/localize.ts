@@ -5,6 +5,7 @@ import { i18n, MessageDescriptor } from '@lingui/core';
 import type { MessageOptions } from '@lingui/core/cjs/i18n';
 import { it, en, de, pt } from 'make-plural/plurals';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T> = new (...args: any[]) => T;
 
 export type SupportedLocale = 'it' | 'en' | 'de' | 'pt';
@@ -27,10 +28,11 @@ export const supportedLocales: readonly SupportedLocale[] = [
 export const defaultLocale: SupportedLocale = 'it';
 
 const localesPromisesMap = new Map<SupportedLocale, Promise<void>>();
-const localizedComponents: any[] = [];
+const localizedComponents: LitElement[] = [];
 
 export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
   class extends BaseElement {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(...args: any[]) {
       super(...args);
 
@@ -91,7 +93,7 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
 
         const pageId =
           Object.entries(localizedPages).find(
-            ([_, { [i18n.locale as SupportedLocale]: localizedPageId }]) =>
+            ([, { [i18n.locale as SupportedLocale]: localizedPageId }]) =>
               page === localizedPageId,
           )?.[0] || 'home';
 

@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { stringify } from 'querystring';
-import * as sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html';
 import { validateDate } from '../../../helpers/validators';
 
 import type { RequestHandler } from 'express';

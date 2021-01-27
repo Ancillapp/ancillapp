@@ -1,9 +1,9 @@
-import * as functions from 'firebase-functions';
-import * as os from 'os';
-import * as path from 'path';
-import * as gs from 'gs';
+import functions from 'firebase-functions';
+import os from 'os';
+import path from 'path';
+import gs from 'gs';
 import { spawn } from 'child-process-promise';
-import { unlink as unlinkCb } from 'fs';
+import { promises as fs } from 'fs';
 import { firebase } from '../helpers/firebase';
 
 const execGs = (gsInstance: any) =>
@@ -11,17 +11,6 @@ const execGs = (gsInstance: any) =>
     gsInstance.exec((error: Error) => {
       if (error) {
         reject(error);
-      } else {
-        resolve();
-      }
-    }),
-  );
-
-const unlink = (path: string) =>
-  new Promise<void>((resolve, reject) =>
-    unlinkCb(path, (err) => {
-      if (err) {
-        reject(err);
       } else {
         resolve();
       }
@@ -85,7 +74,7 @@ export const processAncilla = functions
           destination: `processed/${ancillaName}.pdf`,
         });
 
-        await unlink(tmpFileOut);
+        await fs.unlink(tmpFileOut);
 
         console.info('PDF shrinked successfully.');
 
@@ -143,7 +132,7 @@ export const processAncilla = functions
           destination: `processed/${ancillaName}.jpg`,
         });
 
-        await unlink(tmpThumbnailOut);
+        await fs.unlink(tmpThumbnailOut);
 
         console.info('Thumbnail generated successfully.');
 
@@ -151,7 +140,7 @@ export const processAncilla = functions
       }),
     ]);
 
-    await unlink(tmpFileIn);
+    await fs.unlink(tmpFileIn);
 
     console.info('Done!');
   });

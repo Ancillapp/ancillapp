@@ -29,6 +29,8 @@ declare global {
     push: PushEvent;
     notificationclick: NotificationEvent;
     fetch: FetchEvent;
+    install: ExtendableEvent;
+    activate: ExtendableEvent;
   }
   function skipWaiting(): void;
 }
@@ -38,14 +40,16 @@ import './communication';
 
 clientsClaim();
 
-self.addEventListener('install', (event: any) => {
+self.addEventListener('install', (event) => {
   event.waitUntil(set('appVersion', version));
 });
 
 if (process.env.BROWSER_ENV === 'development') {
+  /* eslint-disable no-console */
   console.groupCollapsed('Workbox precache manifest');
   self.__WB_MANIFEST.forEach((entry) => console.info(entry));
   console.groupEnd();
+  /* eslint-enable no-console */
 } else {
   setCacheNameDetails({
     prefix: 'ancillapp',

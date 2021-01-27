@@ -24,6 +24,7 @@ const entityToDetailFieldMap: { [key in Entity]?: string } = {
 
 const dbPromise = initDB();
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const updateLocalDBSummaryData = async <T extends any[]>(
   request: RequestInfo,
   entity: Entity,
@@ -64,7 +65,7 @@ const updateLocalDBSummaryData = async <T extends any[]>(
 const updateLocalDBDetailData = async <T extends Record<string, unknown>>(
   request: RequestInfo,
   entity: Entity,
-  cachedData: any,
+  cachedData?: T,
 ): Promise<T> => {
   const db = await dbPromise;
 
@@ -82,18 +83,24 @@ const updateLocalDBDetailData = async <T extends Record<string, unknown>>(
   return newData;
 };
 
-const formatCachedResponse = (entity: Entity, cachedData: any[]) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const formatCachedResponse = <T extends any[]>(
+  entity: Entity,
+  cachedData: T,
+) => {
   if (entity === 'songs') {
-    return cachedData.sort(({ number: a }: any, { number: b }: any) => {
-      const normalizedA = a.slice(2).replace('bis', '').padStart(4, 0);
-      const normalizedB = b.slice(2).replace('bis', '').padStart(4, 0);
+    return cachedData.sort(
+      ({ number: a }: T[number], { number: b }: T[number]) => {
+        const normalizedA = a.slice(2).replace('bis', '').padStart(4, 0);
+        const normalizedB = b.slice(2).replace('bis', '').padStart(4, 0);
 
-      if (normalizedA === normalizedB) {
-        return b.endsWith('bis') ? -1 : 1;
-      }
+        if (normalizedA === normalizedB) {
+          return b.endsWith('bis') ? -1 : 1;
+        }
 
-      return normalizedA < normalizedB ? -1 : 1;
-    });
+        return normalizedA < normalizedB ? -1 : 1;
+      },
+    );
   }
 
   return cachedData;
@@ -108,7 +115,7 @@ export async function* cacheAndNetwork<T>(
     const [db, request] = await Promise.all([dbPromise, requestInfo]);
 
     const match = (typeof request === 'string' ? request : request.url).match(
-      /\/api\/([a-z]+)[\/?]?(.*)/,
+      /\/api\/([a-z]+)[/?]?(.*)/,
     );
 
     if (!match) {
@@ -151,7 +158,9 @@ export async function* cacheAndNetwork<T>(
           loading: false,
           refreshing: false,
           error: fetchError,
-          ...(cachedData.length > 0 && { data }),
+          ...(cachedData.length > 0 && {
+            data: (formatCachedResponse(entity, cachedData) as unknown) as T,
+          }),
         };
       }
 
@@ -179,7 +188,7 @@ export async function* cacheAndNetwork<T>(
     }
 
     try {
-      const data = (await localDBDetailDataUpdatePromise) as T;
+      const data = ((await localDBDetailDataUpdatePromise) as unknown) as T;
 
       yield {
         loading: false,

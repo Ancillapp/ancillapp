@@ -98,12 +98,12 @@ export class HolyMassPage extends localize(
 
     this._selectedDate = this._minDate;
 
-    Promise.all<Fraternity[], string | undefined, string | undefined>([
+    Promise.all([
       fetch(`${config.apiUrl}/fraternities?v=${Date.now()}`).then((res) =>
         res.json(),
       ),
-      get('preferredFraternity'),
-      get('preferredHolyMassTime'),
+      get<string | undefined>('preferredFraternity'),
+      get<string | undefined>('preferredHolyMassTime'),
     ]).then(([fraternities, preferredFraternity, preferredHolyMassTime]) => {
       this._fraternities = fraternities;
       this._selectedFraternity =

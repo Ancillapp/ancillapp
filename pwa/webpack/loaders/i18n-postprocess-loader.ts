@@ -74,15 +74,17 @@ const mapMessage = async (
   return newArr.filter((str) => str !== '') as (string | string[])[];
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function (this: any, content: string | Buffer, sourceMap: any) {
   this.cacheable && this.cacheable();
 
-  const callback = this.async()!;
+  const callback = this.async();
 
   const source = content.toString();
 
   const script = new Script(source);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sandbox: any = { module: {} };
 
   script.runInNewContext(sandbox);

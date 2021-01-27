@@ -18,9 +18,8 @@ import styles from './shell.styles';
 import template from './shell.template';
 
 import type { Drawer } from '@material/mwc-drawer';
-import type { Checkbox } from '@material/mwc-checkbox';
 
-import { firebasePromise, logEvent } from '../../helpers/firebase';
+import { firebasePromise } from '../../helpers/firebase';
 
 @customElement('ancillapp-shell')
 export class Shell extends localize(authorize(LitElement)) {
@@ -35,7 +34,7 @@ export class Shell extends localize(authorize(LitElement)) {
   protected _page = 'home';
 
   @property({ type: String })
-  protected _subroute: string = '';
+  protected _subroute = '';
 
   @property({ type: Boolean })
   protected _drawerOpened = false;
@@ -177,7 +176,9 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected async _locationChanged(location: Location) {
-    let [, page = 'home', ...subroutes] = location.pathname.slice(1).split('/');
+    const [, page = 'home', ...subroutes] = location.pathname
+      .slice(1)
+      .split('/');
     const locale = await this.getPreferredLocale();
 
     if (page === 'home') {
@@ -196,7 +197,7 @@ export class Shell extends localize(authorize(LitElement)) {
 
   protected _loadPage(locale: SupportedLocale, page: string, subroute = '') {
     let pageId = Object.entries(localizedPages).find(
-      ([_, { [locale]: localizedPageId }]) => page === localizedPageId,
+      ([, { [locale]: localizedPageId }]) => page === localizedPageId,
     )?.[0];
 
     if (!pageId || (pageId === 'login' && this.user)) {

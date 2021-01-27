@@ -38,7 +38,7 @@ export class AncillaViewer extends localize(withTopAppBar(PageViewElement)) {
   public ancilla?: string;
 
   @property({ type: Object })
-  protected _ancillaPromise: Promise<Ancilla> = new Promise(() => {});
+  protected _ancillaPromise: Promise<Ancilla> = new Promise(() => undefined);
 
   protected async updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);

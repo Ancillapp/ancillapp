@@ -10,7 +10,7 @@ export class LoadingSpinner extends LitElement {
   protected render = template;
 
   @property({ type: Number, reflect: true })
-  public size: number = 2;
+  public size = 2;
 }
 
 declare global {

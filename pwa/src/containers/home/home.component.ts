@@ -242,7 +242,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
           title: localizedTitle || latinTitle!,
           preview: {
             type: 'text',
-            content: (localizedTitle || latinTitle)?.[0]!,
+            content: (localizedTitle || latinTitle)![0]!,
           },
           description: content?.it || content?.la,
           link: this.localizeHref('prayers', slug),

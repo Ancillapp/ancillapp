@@ -1,4 +1,4 @@
-import { customElement, property, PropertyValues, query } from 'lit-element';
+import { customElement, property, PropertyValues } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -115,7 +115,7 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
 
     this._selectedPrayerLanguage = prayerDefaultLanguage;
     this._prayerLanguages = Object.entries(this._prayerStatus.data?.title || {})
-      .filter(([_, title]) => title)
+      .filter(([, title]) => title)
       .sort(
         ([language1], [language2]) =>
           _languagesOrder.indexOf(language1) -

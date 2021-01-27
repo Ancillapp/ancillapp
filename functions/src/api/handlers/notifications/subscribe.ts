@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import functions from 'firebase-functions';
 import { mongoDb } from '../../../helpers/mongo';
 import { sendNotification } from '../../../helpers/notifications';
 
