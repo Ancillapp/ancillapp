@@ -1,4 +1,4 @@
-import functions from 'firebase-functions';
+import * as functions from 'firebase-functions';
 import os from 'os';
 import path from 'path';
 import gs from 'gs';
