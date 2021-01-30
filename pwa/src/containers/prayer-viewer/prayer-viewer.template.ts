@@ -1,9 +1,10 @@
 import { html } from 'lit-element';
 import { nothing } from 'lit-html';
-import { Prayer, PrayerViewer } from './prayer-viewer.component';
+import { PrayerViewer } from './prayer-viewer.component';
 import { compile } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
 import { t } from '@lingui/macro';
+import { Prayer } from '../../models/prayer';
 
 import '@material/mwc-snackbar';
 import '@material/mwc-tab-bar';
