@@ -1,5 +1,7 @@
 :host {
-  padding: 1.5rem;
+  @media (min-width: 28.75rem) {
+    padding: 1.5rem;
+  }
 }
 
 p {
@@ -15,10 +17,6 @@ p {
   justify-content: center;
 }
 
-section {
-  align-self: flex-start;
-
-  &.multilanguage {
-    margin-top: 48px;
-  }
+section.multilanguage {
+  margin-top: 48px;
 }

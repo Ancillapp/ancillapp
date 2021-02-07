@@ -1,3 +1,9 @@
+:host {
+  @media (min-width: 28.75rem) {
+    padding: 1.5rem;
+  }
+}
+
 strong {
   color: var(--ancillapp-accent-color);
 }
@@ -39,8 +45,4 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-section {
-  align-self: flex-start;
 }

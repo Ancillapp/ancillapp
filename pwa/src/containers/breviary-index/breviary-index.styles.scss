@@ -1,5 +1,4 @@
 :host {
-  align-items: flex-start;
   text-align: center;
 }
 
@@ -69,4 +68,9 @@ ul {
       }
     }
   }
+}
+
+section {
+  border-radius: 0.5rem;
+  align-self: flex-start;
 }

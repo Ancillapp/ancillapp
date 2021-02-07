@@ -161,7 +161,7 @@ export default function template(this: Shell) {
               this._updateDrawerOpenState(!this._drawerOpened)}"
           ></breviary-index>
           <breviary-viewer
-            class="page padded"
+            class="page"
             ?active="${this._page === 'breviary' && this._subroute}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
@@ -213,7 +213,7 @@ export default function template(this: Shell) {
             ancilla="${this._subroute}"
           ></ancilla-viewer>
           <holy-mass-page
-            class="page padded"
+            class="page"
             ?active="${this._page === 'holy-mass'}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
@@ -221,7 +221,7 @@ export default function template(this: Shell) {
               this._updateDrawerOpenState(!this._drawerOpened)}"
           ></holy-mass-page>
           <login-page
-            class="page padded"
+            class="page"
             ?active="${this._page === 'login'}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
@@ -230,7 +230,7 @@ export default function template(this: Shell) {
             @register="${() => (this._verificationEmailSent = true)}"
           ></login-page>
           <settings-page
-            class="page padded"
+            class="page"
             ?active="${this._page === 'settings'}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
@@ -240,7 +240,7 @@ export default function template(this: Shell) {
             @keepscreenactivechange="${this._handleKeepScreenActiveChange}"
           ></settings-page>
           <info-page
-            class="page padded"
+            class="page"
             ?active="${this._page === 'info'}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"

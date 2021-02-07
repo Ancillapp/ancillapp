@@ -1,7 +1,3 @@
-:host {
-  align-items: flex-start;
-}
-
 h2 {
   text-align: center;
 }
@@ -176,4 +172,9 @@ search-top-bar {
   opacity: 0;
   z-index: -1;
   transition: 0.3s opacity, 0.3s z-index step-end;
+}
+
+section {
+  border-radius: 0.5rem;
+  align-self: flex-start;
 }

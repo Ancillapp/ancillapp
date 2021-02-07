@@ -1,3 +1,5 @@
 :host {
-  align-items: flex-start;
+  @media (min-width: 28.75rem) {
+    padding: 1.5rem;
+  }
 }

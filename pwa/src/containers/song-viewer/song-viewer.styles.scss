@@ -1,5 +1,7 @@
 :host {
-  padding: 1.5rem;
+  @media (min-width: 28.75rem) {
+    padding: 1.5rem;
+  }
 }
 
 p {
@@ -26,8 +28,4 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-section {
-  align-self: flex-start;
 }
