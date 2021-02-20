@@ -7,19 +7,19 @@ import {
   queryAll,
 } from 'lit-element';
 import { installMediaQueryWatcher } from 'pwa-helpers';
+import { signOut } from 'firebase/auth';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
 import { installRouter } from '../../helpers/router';
+import { auth } from '../../helpers/firebase';
 
 import sharedStyles from '../../shared.styles';
 import styles from './shell.styles';
 import template from './shell.template';
 
 import type { Drawer } from '@material/mwc-drawer';
-
-import { firebasePromise } from '../../helpers/firebase';
 
 @customElement('ancillapp-shell')
 export class Shell extends localize(authorize(LitElement)) {
@@ -269,9 +269,7 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected async _logout() {
-    const firebase = await firebasePromise;
-
-    await firebase.auth().signOut();
+    await signOut(auth);
   }
 }
 

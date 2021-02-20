@@ -123,11 +123,6 @@ const config: Configuration = {
         );
       },
     ),
-    new NormalModuleReplacementPlugin(/^firebase\/analytics$/, (resource) => {
-      if (browserEnv !== 'production') {
-        resource.request = path.resolve(__dirname, '../src/mocks/analytics');
-      }
-    }),
     new CopyPlugin({
       patterns: [
         // Assets

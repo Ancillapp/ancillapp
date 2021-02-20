@@ -25,7 +25,7 @@
     "@material/mwc-tab-bar": "^0.20.0",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "app-datepicker": "^4.5.1",
-    "firebase": "^8.2.4",
+    "firebase": "0.900.14",
     "fuse.js": "^6.4.6",
     "hyperlist": "^1.0.0",
     "idb": "^6.0.0",

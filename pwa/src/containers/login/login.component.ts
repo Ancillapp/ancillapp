@@ -1,15 +1,26 @@
 import { customElement, property, PropertyValues } from 'lit-element';
 import { updateMetadata } from 'pwa-helpers';
+import {
+  createUserWithEmailAndPassword,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  OAuthProvider,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  TwitterAuthProvider,
+} from 'firebase/auth';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
+import { logEvent, auth } from '../../helpers/firebase';
+
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './login.styles';
 import template from './login.template';
-
-import { firebasePromise, logEvent } from '../../helpers/firebase';
 
 @customElement('login-page')
 export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
@@ -88,12 +99,8 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
 
     this._loggingInWithEmailAndPassword = true;
 
-    const firebase = await firebasePromise;
-
     try {
-      await firebase
-        .auth()
-        .signInWithEmailAndPassword(this._email, this._password);
+      await signInWithEmailAndPassword(auth, this._email, this._password);
 
       logEvent('login', { method: 'Email and Password' });
 
@@ -105,9 +112,11 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
 
       if (error === 'auth/user-not-found') {
         try {
-          await firebase
-            .auth()
-            .createUserWithEmailAndPassword(this._email, this._password);
+          await createUserWithEmailAndPassword(
+            auth,
+            this._email,
+            this._password,
+          );
 
           logEvent('login', { method: 'Email and Password' });
 
@@ -139,9 +148,7 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handlePasswordReset() {
     this._resettingPassword = true;
 
-    const firebase = await firebasePromise;
-
-    await firebase.auth().sendPasswordResetEmail(this._email, {
+    await sendPasswordResetEmail(auth, this._email, {
       url: window.location.href,
     });
 
@@ -152,11 +159,7 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleGoogleLogin() {
     this._loggingInWithGoogle = true;
 
-    const firebase = await firebasePromise;
-
-    await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    await signInWithPopup(auth, new GoogleAuthProvider());
 
     logEvent('login', { method: 'Google' });
 
@@ -166,11 +169,7 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleFacebookLogin() {
     this._loggingInWithFacebook = true;
 
-    const firebase = await firebasePromise;
-
-    await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    await signInWithPopup(auth, new FacebookAuthProvider());
 
     logEvent('login', { method: 'Facebook' });
 
@@ -180,11 +179,7 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleTwitterLogin() {
     this._loggingInWithTwitter = true;
 
-    const firebase = await firebasePromise;
-
-    await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.TwitterAuthProvider());
+    await signInWithPopup(auth, new TwitterAuthProvider());
 
     logEvent('login', { method: 'Twitter' });
 
@@ -194,11 +189,7 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleMicrosoftLogin() {
     this._loggingInWithMicrosoft = true;
 
-    const firebase = await firebasePromise;
-
-    await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.OAuthProvider('microsoft.com'));
+    await signInWithPopup(auth, new OAuthProvider('microsoft.com'));
 
     logEvent('login', { method: 'Microsoft' });
 
@@ -208,14 +199,12 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleAppleLogin() {
     this._loggingInWithApple = true;
 
-    const firebase = await firebasePromise;
-
-    const provider = new firebase.auth.OAuthProvider('apple.com');
+    const provider = new OAuthProvider('apple.com');
     provider.setCustomParameters({
       locale: this.locale,
     });
 
-    await firebase.auth().signInWithPopup(provider);
+    await signInWithPopup(auth, provider);
 
     logEvent('login', { method: 'Apple' });
 
@@ -225,11 +214,7 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
   protected async _handleGitHubLogin() {
     this._loggingInWithGitHub = true;
 
-    const firebase = await firebasePromise;
-
-    await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.GithubAuthProvider());
+    await signInWithPopup(auth, new GithubAuthProvider());
 
     logEvent('login', { method: 'GitHub' });
 

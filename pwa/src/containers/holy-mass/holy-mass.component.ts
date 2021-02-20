@@ -14,6 +14,7 @@ import config from '../../config/default.json';
 import { get, set } from '../../helpers/keyval';
 import { logEvent } from '../../helpers/firebase';
 import { Fraternity, HolyMassBooking } from '../../models/holy-mass';
+import { sendEmailVerification } from 'firebase/auth';
 
 @customElement('holy-mass-page')
 export class HolyMassPage extends localize(
@@ -322,7 +323,7 @@ export class HolyMassPage extends localize(
     }
 
     try {
-      await this.user.sendEmailVerification({
+      await sendEmailVerification(this.user, {
         url: window.location.href,
       });
     } catch ({ code }) {
