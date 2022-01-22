@@ -16,7 +16,7 @@
     "firebase-functions": "^3.13.1",
     "gs": "https://github.com/sina-masnadi/node-gs/tarball/master",
     "mongodb": "^3.6.3",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.1",
     "rendertron-middleware": "^0.1.5",
     "sanitize-html": "^2.3.1",
     "web-push": "^3.4.4"
