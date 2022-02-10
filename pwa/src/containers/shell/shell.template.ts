@@ -51,6 +51,24 @@ const bottomNavPages: [string, SVGTemplateResult][] = [
   ['info', infoIcon],
 ];
 
+/*
+  <breviary-index
+    class="page padded"
+    ?active="${this._page === 'breviary' && !this._subroute}"
+    ?drawer-open="${this._narrow}"
+    ?show-menu-button="${!this._narrow}"
+    @menutoggle="${() =>
+    this._updateDrawerOpenState(!this._drawerOpened)}"
+  ></breviary-index>
+  <breviary-viewer
+    class="page padded"
+    ?active="${this._page === 'breviary' && this._subroute}"
+    ?drawer-open="${this._narrow}"
+    ?show-menu-button="${!this._narrow}"
+    query="${this._subroute}"
+  ></breviary-viewer>
+*/
+
 export default function template(this: Shell) {
   return html`
     <mwc-drawer
@@ -152,21 +170,14 @@ export default function template(this: Shell) {
             @menutoggle="${() =>
               this._updateDrawerOpenState(!this._drawerOpened)}"
           ></home-page>
-          <breviary-index
+          <breviary-placeholder
             class="page padded"
             ?active="${this._page === 'breviary' && !this._subroute}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
             @menutoggle="${() =>
               this._updateDrawerOpenState(!this._drawerOpened)}"
-          ></breviary-index>
-          <breviary-viewer
-            class="page padded"
-            ?active="${this._page === 'breviary' && this._subroute}"
-            ?drawer-open="${this._narrow}"
-            ?show-menu-button="${!this._narrow}"
-            query="${this._subroute}"
-          ></breviary-viewer>
+          ></breviary-placeholder>
           <songs-list
             class="page"
             ?active="${this._page === 'songs' && !this._subroute}"

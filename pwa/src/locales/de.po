@@ -41,7 +41,7 @@ msgstr ""
 #: src/containers/ancilla-viewer/ancilla-viewer.template.ts:12
 #: src/containers/breviary-viewer/breviary-viewer.template.ts:14
 #: src/containers/home/home.template.ts:36
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:25
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:22
 #: src/containers/song-viewer/song-viewer.template.ts:12
 #: src/containers/songs-list/songs-list.template.ts:23
 msgid "back"
@@ -69,23 +69,34 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.component.ts:37
 #: src/containers/breviary-index/breviary-index.template.ts:29
+#: src/containers/breviary-placeholder/breviary-placeholder.component.ts:37
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:27
 #: src/containers/breviary-viewer/breviary-viewer.component.ts:95
 #: src/containers/home/home.component.ts:93
 #: src/containers/shell/shell.template.ts:15
 msgid "breviary"
 msgstr "Brevier"
 
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:32
+msgid "breviaryAlternative"
+msgstr ""
+
 #: src/containers/breviary-index/breviary-index.component.ts:40
+#: src/containers/breviary-placeholder/breviary-placeholder.component.ts:40
 #: src/containers/home/home.component.ts:98
 #: src/containers/home/home.component.ts:183
 msgid "breviaryDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:54
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:31
+msgid "breviaryUnavailable"
+msgstr ""
+
+#: src/containers/info/info.template.ts:56
 msgid "brotherlyLifePillarDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:53
+#: src/containers/info/info.template.ts:55
 msgid "brotherlyLifePillarTitle"
 msgstr ""
 
@@ -111,6 +122,7 @@ msgid "close"
 msgstr "Schließen"
 
 #: src/containers/breviary-index/breviary-index.template.ts:15
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:14
 msgid "compline"
 msgstr "Komplet"
 
@@ -150,11 +162,11 @@ msgstr ""
 msgid "english"
 msgstr "Englisch"
 
-#: src/containers/info/info.template.ts:27
+#: src/containers/info/info.template.ts:29
 msgid "ffbInfoDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:26
+#: src/containers/info/info.template.ts:28
 msgid "ffbInfoTitle"
 msgstr ""
 
@@ -162,31 +174,31 @@ msgstr ""
 msgid "forgotPassword"
 msgstr ""
 
-#: src/containers/info/info.template.ts:43
+#: src/containers/info/info.template.ts:45
 msgid "foundationDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:38
+#: src/containers/info/info.template.ts:40
 msgid "foundationPhrase"
 msgstr ""
 
-#: src/containers/info/info.template.ts:40
+#: src/containers/info/info.template.ts:42
 msgid "foundationPhraseAuthor"
 msgstr ""
 
-#: src/containers/info/info.template.ts:35
+#: src/containers/info/info.template.ts:37
 msgid "founderAndFoundationTitle"
 msgstr ""
 
-#: src/containers/info/info.template.ts:36
+#: src/containers/info/info.template.ts:38
 msgid "founderDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:33
+#: src/containers/info/info.template.ts:35
 msgid "franciscanSpiritualityDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:32
+#: src/containers/info/info.template.ts:34
 msgid "franciscanSpiritualityTitle"
 msgstr ""
 
@@ -228,11 +240,11 @@ msgstr "Home"
 msgid "homeDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:51
+#: src/containers/info/info.template.ts:53
 msgid "hospitalityPillarDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:50
+#: src/containers/info/info.template.ts:52
 msgid "hospitalityPillarTitle"
 msgstr ""
 
@@ -242,7 +254,7 @@ msgstr "Ignorieren"
 
 #: src/containers/home/home.component.ts:156
 #: src/containers/info/info.component.ts:25
-#: src/containers/info/info.template.ts:22
+#: src/containers/info/info.template.ts:23
 #: src/containers/shell/shell.template.ts:21
 msgid "info"
 msgstr "Informationen"
@@ -257,6 +269,7 @@ msgid "invalidEmail"
 msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:8
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:7
 msgid "invitatory"
 msgstr "Invitatorium"
 
@@ -283,6 +296,7 @@ msgid "latin"
 msgstr "Latein"
 
 #: src/containers/breviary-index/breviary-index.template.ts:10
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:9
 msgid "lauds"
 msgstr "Laudes"
 
@@ -296,7 +310,7 @@ msgstr "Licht"
 
 #: src/containers/ancilla-viewer/ancilla-viewer.template.ts:17
 #: src/containers/breviary-index/breviary-index.template.ts:40
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:31
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:28
 #: src/containers/song-viewer/song-viewer.template.ts:19
 msgid "loading"
 msgstr "Wird geladen…"
@@ -326,15 +340,16 @@ msgstr ""
 msgid "logout"
 msgstr ""
 
-#: src/containers/info/info.template.ts:30
+#: src/containers/info/info.template.ts:32
 msgid "marianSpiritualityDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:29
+#: src/containers/info/info.template.ts:31
 msgid "marianSpiritualityTitle"
 msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:9
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:8
 msgid "matins"
 msgstr "Lesehore"
 
@@ -344,9 +359,10 @@ msgstr ""
 
 #: src/containers/ancillas-list/ancillas-list.template.ts:17
 #: src/containers/breviary-index/breviary-index.template.ts:25
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:23
 #: src/containers/holy-mass/holy-mass.template.ts:22
 #: src/containers/home/home.template.ts:64
-#: src/containers/info/info.template.ts:18
+#: src/containers/info/info.template.ts:19
 #: src/containers/login/login.template.ts:21
 #: src/containers/prayers-list/prayers-list.template.ts:19
 #: src/containers/settings/settings.template.ts:17
@@ -363,7 +379,7 @@ msgstr ""
 msgid "missingPassword"
 msgstr ""
 
-#: src/containers/info/info.template.ts:56
+#: src/containers/info/info.template.ts:58
 msgid "moreInfoWebsite {websiteUrl}"
 msgstr ""
 
@@ -393,6 +409,7 @@ msgid "noThanks"
 msgstr "Nein, danke"
 
 #: src/containers/breviary-index/breviary-index.template.ts:13
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:12
 msgid "none"
 msgstr "Non"
 
@@ -404,7 +421,7 @@ msgstr ""
 msgid "peaceAndGood"
 msgstr "Frieden und Gutes!"
 
-#: src/containers/info/info.template.ts:45
+#: src/containers/info/info.template.ts:47
 msgid "pillarsTitle"
 msgstr ""
 
@@ -420,16 +437,16 @@ msgstr "Bete die täglichen gebete"
 msgid "prayLiturgy"
 msgstr "Bete die Liturgie der Stunden"
 
-#: src/containers/info/info.template.ts:48
+#: src/containers/info/info.template.ts:50
 msgid "prayerPillarDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:47
+#: src/containers/info/info.template.ts:49
 msgid "prayerPillarTitle"
 msgstr ""
 
 #: src/containers/home/home.component.ts:111
-#: src/containers/prayer-viewer/prayer-viewer.component.ts:64
+#: src/containers/prayer-viewer/prayer-viewer.component.ts:66
 #: src/containers/prayers-list/prayers-list.component.ts:81
 #: src/containers/prayers-list/prayers-list.template.ts:23
 #: src/containers/shell/shell.template.ts:17
@@ -497,6 +514,7 @@ msgid "settingsDescription"
 msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:12
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:11
 msgid "sext"
 msgstr "Sext"
 
@@ -565,7 +583,7 @@ msgid "switchToTextKeyboard"
 msgstr ""
 
 #: src/containers/ancillas-list/ancillas-list.template.ts:82
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:64
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:65
 #: src/containers/prayers-list/prayers-list.template.ts:74
 #: src/containers/song-viewer/song-viewer.template.ts:50
 #: src/containers/songs-list/songs-list.template.ts:139
@@ -577,6 +595,7 @@ msgid "system"
 msgstr "System"
 
 #: src/containers/breviary-index/breviary-index.template.ts:11
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:10
 msgid "terce"
 msgstr "Terz"
 
@@ -623,6 +642,7 @@ msgid "verifyEmailToBook"
 msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:14
+#: src/containers/breviary-placeholder/breviary-placeholder.template.ts:13
 msgid "vespers"
 msgstr "Vesper"
 

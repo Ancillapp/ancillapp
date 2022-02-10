@@ -23,6 +23,7 @@ const markdownPoweredTranslations = [
   'hospitalityPillarDescription',
   'brotherlyLifePillarDescription',
   'bookingCancellationConfirmation {0} {1} {2}',
+  'breviaryAlternative',
 ];
 
 const mapMessage = async (
@@ -88,15 +89,14 @@ export default function (this: any, content: string | Buffer, sourceMap: any) {
   script.runInNewContext(sandbox);
 
   Promise.all(
-    Object.entries<string>(
-      sandbox.module.exports.messages,
-    ).map(async ([key, value]) => [key, await mapMessage(key, value)]),
+    Object.entries<string>(sandbox.module.exports.messages).map(
+      async ([key, value]) => [key, await mapMessage(key, value)],
+    ),
   )
     .then((mappedMessagesKeyVal) => {
-      const mappedMessages = (mappedMessagesKeyVal as [
-        string,
-        string | (string | string[])[],
-      ][]).reduce(
+      const mappedMessages = (
+        mappedMessagesKeyVal as [string, string | (string | string[])[]][]
+      ).reduce(
         (newMessages, [key, value]) => ({
           ...newMessages,
           [key]: value,
