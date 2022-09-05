@@ -6,18 +6,3 @@ outlined-input {
   width: 100%;
   cursor: pointer;
 }
-
-app-datepicker-dialog {
-  --app-datepicker-accent-color: var(--ancillapp-accent-color);
-  --app-datepicker-bg-color: var(--ancillapp-card-color);
-  --app-datepicker-color: var(--ancillapp-primary-text-color);
-  --app-datepicker-disabled-day-color: var(--ancillapp-disabled-text-color);
-  --app-datepicker-focused-year-bg-color: var(--ancillapp-accent-color);
-  --app-datepicker-selector-color: var(--ancillapp-secondary-text-color);
-  --app-datepicker-separator-color: var(--ancillapp-divider-color);
-  --app-datepicker-weekday-color: var(--ancillapp-secondary-text-color);
-
-  &::part(clear) {
-    display: none;
-  }
-}

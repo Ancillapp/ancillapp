@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { TopAppBar } from './top-app-bar.component';
 
 export default function template(this: TopAppBar) {

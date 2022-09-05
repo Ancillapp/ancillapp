@@ -59,7 +59,8 @@ const config: Configuration = {
       // },
       {
         test: /\.[tj]s$/,
-        exclude: /node_modules\/(?!(@polymer|@material|lit-html|lit-element|pwa-helpers)\/).*/,
+        exclude:
+          /node_modules\/(?!(@polymer|@material|lit|lit-html|lit-element|pwa-helpers)\/).*/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -145,12 +146,6 @@ const config: Configuration = {
         diagnosticOptions: {
           semantic: true,
           syntactic: true,
-        },
-      },
-      eslint: {
-        files: '**/*.{ts,js}',
-        options: {
-          configFile: path.resolve(__dirname, '../.eslintrc.js'),
         },
       },
     }),

@@ -1,4 +1,4 @@
-import type { LitElement, PropertyValues } from 'lit-element';
+import type { LitElement, PropertyValues } from 'lit';
 import { get, set } from './keyval';
 import { localizedPages, localizeHref } from './localization';
 import { i18n, MessageDescriptor } from '@lingui/core';
@@ -84,12 +84,8 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
       document.documentElement.lang = locale;
 
       if (!window.location.pathname.startsWith(`/${locale}`)) {
-        const [
-          ,
-          ,
-          page = 'home',
-          ...subroutes
-        ] = window.location.pathname.split('/');
+        const [, , page = 'home', ...subroutes] =
+          window.location.pathname.split('/');
 
         const pageId =
           Object.entries(localizedPages).find(

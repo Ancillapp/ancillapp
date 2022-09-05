@@ -1,5 +1,4 @@
-import { html, SVGTemplateResult } from 'lit-element';
-import { nothing } from 'lit-html';
+import { html, nothing, SVGTemplateResult } from 'lit';
 import { Shell } from './shell.component';
 import {
   homeIcon,

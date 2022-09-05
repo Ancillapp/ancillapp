@@ -1,5 +1,5 @@
-import { html } from 'lit-element';
-import { until } from 'lit-html/directives/until';
+import { html } from 'lit';
+import { until } from 'lit/directives/until.js';
 import { AncillaViewer } from './ancilla-viewer.component';
 import { load } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';

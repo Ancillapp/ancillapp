@@ -1,4 +1,5 @@
-import { LitElement, property, PropertyValues, query } from 'lit-element';
+import { LitElement, PropertyValues } from 'lit';
+import { property, query } from 'lit/decorators.js';
 
 import type { TopAppBar } from '../components/top-app-bar/top-app-bar.component';
 

@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { AutosizedFAB } from './autosized-fab.component';
 
 import '@material/mwc-fab';

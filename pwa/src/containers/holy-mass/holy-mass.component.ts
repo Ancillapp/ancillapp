@@ -1,4 +1,5 @@
-import { customElement, PropertyValues, property } from 'lit-element';
+import { PropertyValues } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { authorize } from '../../helpers/authorize';
@@ -25,9 +26,9 @@ export class HolyMassPage extends localize(
   protected render = template;
 
   @property({ type: Object })
-  protected _bookedHolyMassesPromise: Promise<
-    HolyMassBooking[]
-  > = new Promise(() => []);
+  protected _bookedHolyMassesPromise: Promise<HolyMassBooking[]> = new Promise(
+    () => [],
+  );
 
   @property({ type: Array })
   protected _fraternities: Fraternity[] = [];
@@ -347,17 +348,17 @@ export class HolyMassPage extends localize(
       return override;
     }
 
-    const dayOfWeek = ([
-      'sunday',
-      'monday',
-      'tuesday',
-      'wednesday',
-      'thursday',
-      'friday',
-      'saturday',
-    ] as Exclude<keyof Fraternity['masses'], 'default' | 'overrides'>[])[
-      new Date(this._selectedDate).getDay()
-    ];
+    const dayOfWeek = (
+      [
+        'sunday',
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
+      ] as Exclude<keyof Fraternity['masses'], 'default' | 'overrides'>[]
+    )[new Date(this._selectedDate).getDay()];
 
     const allTimes =
       fraternityMasses[dayOfWeek] || fraternityMasses.default || [];

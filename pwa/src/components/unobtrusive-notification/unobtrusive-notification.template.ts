@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { UnobtrusiveNotification } from './unobtrusive-notification.component';
 
 export default function template(this: UnobtrusiveNotification) {

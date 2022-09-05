@@ -24,7 +24,7 @@ export const getAncillas: RequestHandler = async (_, res) => {
       },
     )
     .sort({ date: -1 })
-    .toArray()) as Pick<Ancilla, '_id' | 'code' | 'name'>[];
+    .toArray()) as Pick<Ancilla, 'code' | 'name'>[];
 
   res.json(
     ancillas.map(({ code, ...rest }) => ({

@@ -1,11 +1,5 @@
-import {
-  customElement,
-  LitElement,
-  property,
-  PropertyValues,
-  query,
-  queryAll,
-} from 'lit-element';
+import { LitElement, PropertyValues } from 'lit';
+import { customElement, property, query, queryAll } from 'lit/decorators.js';
 import { installMediaQueryWatcher } from 'pwa-helpers';
 import { signOut } from 'firebase/auth';
 import { localize, SupportedLocale } from '../../helpers/localize';

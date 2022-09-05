@@ -21,18 +21,17 @@ export const getAncilla: RequestHandler = async (
     name: 1,
   };
 
-  const data = (inputCode === 'latest'
-    ? (
-        await ancillasCollection
-          .find({}, { projection })
-          .sort({ date: -1 })
-          .limit(1)
-          .toArray()
-      )[0]
-    : await ancillasCollection.findOne(
-        { code: inputCode },
-        { projection },
-      )) as Pick<Ancilla, '_id' | 'code' | 'name'> | null;
+  const data = (
+    inputCode === 'latest'
+      ? (
+          await ancillasCollection
+            .find({}, { projection })
+            .sort({ date: -1 })
+            .limit(1)
+            .toArray()
+        )[0]
+      : await ancillasCollection.findOne({ code: inputCode }, { projection })
+  ) as Pick<Ancilla, 'code' | 'name'> | null;
 
   if (!data) {
     res.status(404).send();

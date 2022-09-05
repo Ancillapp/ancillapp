@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { LoadingButton } from './loading-button.component';
 
 import '@material/mwc-button';

@@ -85,12 +85,16 @@ const getPreferredLocale = async () => {
   return defaultLocale;
 };
 
-// Note that in this case we need to append the .js extension, otherwise
-// Webpack will try to load the .js.map files into the bundle too.
-(polyfills.length
-  ? import(`@webcomponents/webcomponentsjs/bundles/${polyfills.join('-')}.js`)
-  : Promise.resolve()
-).then(() =>
+const polyfillsPromise = polyfills.length
+  ? Promise.all([
+      import(
+        `@webcomponents/webcomponentsjs/bundles/${polyfills.join('-')}.js`
+      ),
+      import(`lit/polyfill-support.js`),
+    ])
+  : Promise.resolve();
+
+polyfillsPromise.then(() =>
   Promise.all([
     getPreferredLocale().then((locale) => import(`./locales/${locale}.po`)),
     get<string>('theme').then(

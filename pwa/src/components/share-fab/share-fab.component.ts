@@ -1,4 +1,5 @@
-import { LitElement, customElement, query, property } from 'lit-element';
+import { LitElement } from 'lit';
+import { customElement, query, property } from 'lit/decorators.js';
 import { localize } from '../../helpers/localize';
 
 import sharedStyles from '../../shared.styles';

@@ -1,4 +1,5 @@
-import { customElement, property, PropertyValues } from 'lit-element';
+import { PropertyValues } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -30,16 +31,8 @@ const descriptions = {
   compline: (date: string) => t`complineDescription ${date}`,
 };
 
-const {
-  invitatory,
-  matins,
-  lauds,
-  terce,
-  sext,
-  none,
-  vespers,
-  compline,
-} = localizedPages;
+const { invitatory, matins, lauds, terce, sext, none, vespers, compline } =
+  localizedPages;
 
 export const localizedPrayerToKeyMap: Record<string, string> = Object.entries({
   invitatory,
@@ -100,8 +93,8 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
         header.appendChild(heading);
 
         const button = document.createElement('mwc-icon-button');
-        button.innerHTML = refresh.getHTML();
-        button.label = this.localize(t`switchAlternative`);
+        button.innerHTML = `${refresh}`;
+        button.ariaLabel = this.localize(t`switchAlternative`);
         button.addEventListener('click', () => this._handleAlternativeChange());
         header.appendChild(button);
 
@@ -118,10 +111,8 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
 
     if (changedProperties.has('query') && this.query) {
       if (!_prayersPromisesCache.has(this.query)) {
-        const [
-          prayer,
-          date = new Date().toISOString().slice(0, 10),
-        ] = this.query.split('/');
+        const [prayer, date = new Date().toISOString().slice(0, 10)] =
+          this.query.split('/');
 
         _prayersPromisesCache.set(
           this.query,
@@ -135,10 +126,8 @@ export class BreviaryViewer extends localize(withTopAppBar(PageViewElement)) {
     }
 
     if (changedProperties.has('active') && this.active && this.query) {
-      const [
-        rawPrayer,
-        rawDate = new Date().toISOString().slice(0, 10),
-      ] = this.query.split('/');
+      const [rawPrayer, rawDate = new Date().toISOString().slice(0, 10)] =
+        this.query.split('/');
 
       const prayer = localizedPrayerToKeyMap[rawPrayer];
       const date = Intl.DateTimeFormat(this.locale, {

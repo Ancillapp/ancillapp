@@ -1,4 +1,5 @@
-import { LitElement, property } from 'lit-element';
+import { LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
 import { onAuthStateChanged, User } from 'firebase/auth';
 
 import { auth } from './firebase';

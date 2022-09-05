@@ -1,5 +1,5 @@
-import { html } from 'lit-element';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { html } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import {
   BreviaryViewer,
   localizedPrayerToKeyMap,
@@ -12,10 +12,8 @@ import { t } from '@lingui/macro';
 import '../../components/top-app-bar/top-app-bar.component';
 
 export default function template(this: BreviaryViewer) {
-  const [
-    prayer,
-    date = new Date().toISOString().slice(0, 10),
-  ] = this.query!.split('/');
+  const [prayer, date = new Date().toISOString().slice(0, 10)] =
+    this.query!.split('/');
 
   return html`
     <top-app-bar ?drawer-open="${this.drawerOpen}">

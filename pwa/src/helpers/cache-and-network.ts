@@ -141,12 +141,12 @@ export async function* cacheAndNetwork<T>(
         yield {
           loading: false,
           refreshing: true,
-          data: (formatCachedResponse(entity, cachedData) as unknown) as T,
+          data: formatCachedResponse(entity, cachedData) as unknown as T,
         };
       }
 
       try {
-        const data = ((await localDBSummaryDataUpdatePromise) as unknown) as T;
+        const data = (await localDBSummaryDataUpdatePromise) as unknown as T;
 
         yield {
           loading: false,
@@ -157,9 +157,9 @@ export async function* cacheAndNetwork<T>(
         yield {
           loading: false,
           refreshing: false,
-          error: fetchError,
+          error: fetchError as TypeError,
           ...(cachedData.length > 0 && {
-            data: (formatCachedResponse(entity, cachedData) as unknown) as T,
+            data: formatCachedResponse(entity, cachedData) as unknown as T,
           }),
         };
       }
@@ -183,12 +183,12 @@ export async function* cacheAndNetwork<T>(
       yield {
         loading: false,
         refreshing: true,
-        data: (cachedData as unknown) as T,
+        data: cachedData as unknown as T,
       };
     }
 
     try {
-      const data = ((await localDBDetailDataUpdatePromise) as unknown) as T;
+      const data = (await localDBDetailDataUpdatePromise) as unknown as T;
 
       yield {
         loading: false,
@@ -199,11 +199,11 @@ export async function* cacheAndNetwork<T>(
       yield {
         loading: false,
         refreshing: false,
-        error: fetchError,
+        error: fetchError as TypeError,
         ...(cachedData &&
           (!entityToDetailFieldMap[entity] ||
             entityToDetailFieldMap[entity]! in cachedData) && {
-            data: (cachedData as unknown) as T,
+            data: cachedData as unknown as T,
           }),
       };
     }
@@ -211,7 +211,7 @@ export async function* cacheAndNetwork<T>(
     yield {
       loading: false,
       refreshing: false,
-      error,
+      error: error as Error,
     };
   }
 }

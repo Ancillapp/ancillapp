@@ -1,4 +1,5 @@
-import { customElement, LitElement, property } from 'lit-element';
+import { LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { localize } from '../../helpers/localize';
 import { get, set } from '../../helpers/keyval';
 import { version as currentAppVersion } from '../../../../CHANGELOG.md';

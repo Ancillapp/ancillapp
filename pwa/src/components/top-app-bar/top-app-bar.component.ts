@@ -1,10 +1,5 @@
-import {
-  LitElement,
-  customElement,
-  property,
-  PropertyValues,
-  query,
-} from 'lit-element';
+import { LitElement, PropertyValues } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 
 import styles from './top-app-bar.styles';
 import template from './top-app-bar.template';

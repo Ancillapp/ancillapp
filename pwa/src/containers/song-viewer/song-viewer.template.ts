@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { SongViewer } from './song-viewer.component';
 import { compile } from '../../helpers/directives';
 import { arrowBack, search } from '../../components/icons';

@@ -1,7 +1,6 @@
-import { html } from 'lit-element';
-import { nothing } from 'lit-html';
-import { repeat } from 'lit-html/directives/repeat';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { html, nothing } from 'lit';
+import { repeat } from 'lit/directives/repeat.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { PrayersList } from './prayers-list.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';

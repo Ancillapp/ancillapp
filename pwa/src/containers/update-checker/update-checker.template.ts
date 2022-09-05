@@ -1,5 +1,4 @@
-import { html } from 'lit-element';
-import { nothing } from 'lit-html';
+import { html, nothing } from 'lit';
 import { UpdateChecker } from './update-checker.component';
 import { external } from '../../components/icons';
 import { t } from '@lingui/macro';

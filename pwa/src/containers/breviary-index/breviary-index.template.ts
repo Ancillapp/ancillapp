@@ -1,5 +1,5 @@
-import { html } from 'lit-element';
-import { until } from 'lit-html/directives/until';
+import { html } from 'lit';
+import { until } from 'lit/directives/until.js';
 import { BreviaryIndex } from './breviary-index.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
@@ -45,16 +45,18 @@ export default function template(this: BreviaryIndex) {
         html`<h2>${this.localize(t`loading`)?.toUpperCase()}</h2>`,
       )}
       <ul>
-        ${([
-          'invitatory',
-          'matins',
-          'lauds',
-          'terce',
-          'sext',
-          'none',
-          'vespers',
-          'compline',
-        ] as (keyof typeof prayersTranslations)[]).map(
+        ${(
+          [
+            'invitatory',
+            'matins',
+            'lauds',
+            'terce',
+            'sext',
+            'none',
+            'vespers',
+            'compline',
+          ] as (keyof typeof prayersTranslations)[]
+        ).map(
           (prayer) => html`
             <li>
               <a href="${this.localizeHref('breviary', prayer, this._date)}">

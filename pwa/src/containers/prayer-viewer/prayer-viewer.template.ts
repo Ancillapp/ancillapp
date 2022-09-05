@@ -1,5 +1,4 @@
-import { html } from 'lit-element';
-import { nothing } from 'lit-html';
+import { html, nothing } from 'lit';
 import { PrayerViewer } from './prayer-viewer.component';
 import { compile } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';

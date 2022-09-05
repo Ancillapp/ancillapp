@@ -103,7 +103,7 @@ export const bookHolyMass: RequestHandler = async (
         },
       },
     },
-    { returnOriginal: false },
+    { returnDocument: 'after' },
   );
 
   if (!updatedHolyMass?.value?._id) {

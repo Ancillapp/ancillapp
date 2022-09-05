@@ -1,4 +1,5 @@
-import { customElement, PropertyValues, property, query } from 'lit-element';
+import { PropertyValues } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -110,7 +111,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`home`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${homeIcon.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${homeIcon}</div>`,
         },
         description: this.localize(t`homeDescription`),
         link: this.localizeHref('home'),
@@ -119,7 +120,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`breviary`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${breviaryIcon.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${breviaryIcon}</div>`,
         },
         description: this.localize(t`breviaryDescription`),
         link: this.localizeHref('breviary'),
@@ -128,7 +129,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`songs`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${songsIcon.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${songsIcon}</div>`,
         },
         description: this.localize(t`songsDescription`),
         link: this.localizeHref('songs'),
@@ -137,7 +138,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`prayers`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${prayersIcon.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${prayersIcon}</div>`,
         },
         description: this.localize(t`prayersDescription`),
         link: this.localizeHref('prayers'),
@@ -146,7 +147,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`ancillas`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${ancillasIcon.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${ancillasIcon}</div>`,
         },
         description: this.localize(t`ancillasDescription`),
         link: this.localizeHref('ancillas'),
@@ -155,7 +156,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`holyMass`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${holyMassIcon.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${holyMassIcon}</div>`,
         },
         description: this.localize(t`holyMassDescription`),
         link: this.localizeHref('holy-mass'),
@@ -164,7 +165,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`login`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${user.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${user}</div>`,
         },
         description: this.localize(t`loginDescription`),
         link: this.localizeHref('login'),
@@ -173,7 +174,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`settings`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${settingsIcon.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${settingsIcon}</div>`,
         },
         description: this.localize(t`settingsDescription`),
         link: this.localizeHref('settings'),
@@ -182,7 +183,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`info`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${infoIcon.getHTML()}</div>`,
+          content: `<div class="search-result-preview">${infoIcon}</div>`,
         },
         description: this.localize(t`infoDescription`),
         link: this.localizeHref('info'),
@@ -320,9 +321,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   protected _handleSearchKeyDown(
     event: KeyboardEvent | CustomEvent<KeyboardEvent>,
   ) {
-    const { code, target } = (event.detail instanceof KeyboardEvent
-      ? event.detail
-      : event) as KeyboardEvent;
+    const { code, target } = (
+      event.detail instanceof KeyboardEvent ? event.detail : event
+    ) as KeyboardEvent;
 
     if (code === 'Escape' || code === 'Enter') {
       event.preventDefault();
@@ -333,9 +334,10 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         this._stopSearching();
         this._updateSearchResults();
       } else {
-        const firstSearchResult = this._searchResultsContainer!.querySelector<HTMLAnchorElement>(
-          '.search-results > a',
-        );
+        const firstSearchResult =
+          this._searchResultsContainer!.querySelector<HTMLAnchorElement>(
+            '.search-results > a',
+          );
 
         if (!firstSearchResult) {
           return;

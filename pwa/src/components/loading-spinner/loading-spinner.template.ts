@@ -1,4 +1,4 @@
-import { svg } from 'lit-element';
+import { svg } from 'lit';
 import { LoadingSpinner } from './loading-spinner.component';
 
 export default function template(this: LoadingSpinner) {

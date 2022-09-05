@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 
 import { OutlinedInput } from './outlined-input.component';
 

@@ -1,4 +1,5 @@
-import { customElement, property, query, PropertyValues } from 'lit-element';
+import { PropertyValues } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { get, set } from '../../helpers/keyval';
 import { localize, SupportedLocale } from '../../helpers/localize';

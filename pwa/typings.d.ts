@@ -1,15 +1,9 @@
-declare module 'terser-webpack-plugin';
-
-declare module 'html-webpack-plugin';
-
-declare module 'copy-webpack-plugin';
-
 declare module 'webpack-bundle-analyzer-brotli' {
   export * from 'webpack-bundle-analyzer';
 }
 
 declare module '*.styles' {
-  import { CSSResult } from 'lit-element';
+  import type { CSSResult } from 'lit';
 
   const content: CSSResult;
   export default content;

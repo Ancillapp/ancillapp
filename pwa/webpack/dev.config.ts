@@ -16,10 +16,15 @@ const config: Configuration = merge(baseConfig, {
   devServer: {
     hot: true,
     compress: true,
-    overlay: true,
     port: parseInt(`${process.env.PORT}`, 10) || 8080,
     historyApiFallback: true,
     host: '0.0.0.0',
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    },
   },
   optimization: {
     removeAvailableModules: false,

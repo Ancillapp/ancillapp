@@ -1,7 +1,6 @@
-import { html } from 'lit-element';
-import { nothing } from 'lit-html';
-import { repeat } from 'lit-html/directives/repeat';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { html, nothing } from 'lit';
+import { repeat } from 'lit/directives/repeat.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { HolyMassPage } from './holy-mass.component';
 import { load } from '../../helpers/directives';
 import { remove, menu } from '../../components/icons';
@@ -12,7 +11,7 @@ import '@material/mwc-dialog';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/outlined-select/outlined-select.component';
 import '../../components/loading-button/loading-button.component';
-import '../../components/date-input/date-input.component';
+// import '../../components/date-input/date-input.component';
 
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
 
@@ -53,7 +52,9 @@ export default function template(this: HolyMassPage) {
                       <outlined-select
                         id="fraternity"
                         @change="${({ target }: Event) =>
-                          (this._selectedFraternity = (target as OutlinedSelect).value)}"
+                          (this._selectedFraternity = (
+                            target as OutlinedSelect
+                          ).value)}"
                         value="${this._selectedFraternity}"
                       >
                         ${this._fraternities.map(
@@ -98,7 +99,9 @@ export default function template(this: HolyMassPage) {
                       <outlined-select
                         id="time"
                         @change="${({ target }: Event) =>
-                          (this._selectedTime = (target as OutlinedSelect).value)}"
+                          (this._selectedTime = (
+                            target as OutlinedSelect
+                          ).value)}"
                         value="${this._selectedTime}"
                         ?disabled="${availableTimes.length < 1}"
                       >
@@ -193,7 +196,8 @@ export default function template(this: HolyMassPage) {
                                                 ?disabled="${this
                                                   ._bookingToCancel}"
                                                 @click="${() =>
-                                                  (this._bookingToCancel = booking)}"
+                                                  (this._bookingToCancel =
+                                                    booking)}"
                                                 label="${this.localize(
                                                   t`cancelBooking`,
                                                 )}"

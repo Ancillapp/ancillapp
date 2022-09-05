@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { ShareFAB } from './share-fab.component';
 import { t } from '@lingui/macro';
 import { share } from '../icons';

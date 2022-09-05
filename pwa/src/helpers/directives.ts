@@ -1,7 +1,6 @@
-import { TemplateResult, html } from 'lit-element';
-import { nothing } from 'lit-html';
-import { until } from 'lit-html/directives/until';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { TemplateResult, html, nothing } from 'lit';
+import { until } from 'lit/directives/until.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import '../components/loading-spinner/loading-spinner.component';
 

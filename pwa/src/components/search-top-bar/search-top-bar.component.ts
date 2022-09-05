@@ -1,10 +1,5 @@
-import {
-  LitElement,
-  customElement,
-  property,
-  PropertyValues,
-  query,
-} from 'lit-element';
+import { LitElement, PropertyValues } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 
 import styles from './search-top-bar.styles';
 import template from './search-top-bar.template';

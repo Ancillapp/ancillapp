@@ -1,6 +1,5 @@
-import { html } from 'lit-element';
-import { nothing } from 'lit-html';
-import { repeat } from 'lit-html/directives/repeat';
+import { html, nothing } from 'lit';
+import { repeat } from 'lit/directives/repeat.js';
 import { AncillasList } from './ancillas-list.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';

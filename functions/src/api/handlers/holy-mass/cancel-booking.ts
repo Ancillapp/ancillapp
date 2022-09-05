@@ -31,7 +31,7 @@ export const cancelHolyMassBooking: RequestHandler = async (
       },
     },
     {
-      returnOriginal: true,
+      returnDocument: 'before',
     },
   );
 

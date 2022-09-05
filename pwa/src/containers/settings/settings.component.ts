@@ -1,4 +1,5 @@
-import { customElement, queryAll, PropertyValues, property } from 'lit-element';
+import { PropertyValues } from 'lit';
+import { customElement, queryAll, property } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';

@@ -1,11 +1,11 @@
-import { html } from 'lit-element';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { html } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { BreviaryPlaceholder } from './breviary-placeholder.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
-import '../../components/date-input/date-input.component';
+// import '../../components/date-input/date-input.component';
 
 export const prayersTranslations = {
   invitatory: t`invitatory`,

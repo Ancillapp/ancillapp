@@ -1,4 +1,5 @@
-import { LitElement, property, PropertyValues } from 'lit-element';
+import { LitElement, PropertyValues } from 'lit';
+import { property } from 'lit/decorators.js';
 
 /**
  * A base class for building elements that act as a page

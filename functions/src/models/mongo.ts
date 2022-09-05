@@ -1,10 +1,6 @@
 import type { ObjectId } from 'mongodb';
 
-export interface MongoDBRecord {
-  _id: ObjectId;
-}
-
-export interface Ancilla extends MongoDBRecord {
+export interface Ancilla {
   code: string;
   name: {
     en: string;
@@ -15,7 +11,7 @@ export interface Ancilla extends MongoDBRecord {
   date: Date;
 }
 
-export interface Fraternity extends MongoDBRecord {
+export interface Fraternity {
   location: string;
   seats: number;
   masses: {
@@ -38,7 +34,7 @@ export interface HolyMassParticipant {
   deleted?: boolean;
 }
 
-export interface HolyMass extends MongoDBRecord {
+export interface HolyMass {
   date: Date;
   fraternity: {
     id: ObjectId;
@@ -48,7 +44,7 @@ export interface HolyMass extends MongoDBRecord {
   participants: HolyMassParticipant[];
 }
 
-export interface Prayer extends MongoDBRecord {
+export interface Prayer {
   slug: string;
   title: {
     it?: string;
@@ -74,13 +70,13 @@ export interface Prayer extends MongoDBRecord {
   image: string;
 }
 
-export interface Song extends MongoDBRecord {
+export interface Song {
   number: string;
   title: string;
   content: string;
 }
 
-export interface Subscription extends MongoDBRecord {
+export interface Subscription {
   endpoint: string;
   keys: {
     auth: string;

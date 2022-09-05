@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { Snackbar } from './snackbar.component';
 
 export default function template(this: Snackbar) {

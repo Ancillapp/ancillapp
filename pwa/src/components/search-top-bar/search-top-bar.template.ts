@@ -1,4 +1,4 @@
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { SearchTopBar } from './search-top-bar.component';
 
 export default function template(this: SearchTopBar) {

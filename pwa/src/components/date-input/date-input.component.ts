@@ -1,13 +1,9 @@
-import { LitElement, customElement, property, query } from 'lit-element';
+import { LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 import sharedStyles from '../../shared.styles';
 import styles from './date-input.styles';
 import template from './date-input.template';
-
-import type {
-  DatepickerDialog,
-  DatepickerDialogClosed,
-} from 'app-datepicker/dist/datepicker-dialog';
 
 @customElement('date-input')
 export class DateInput extends LitElement {
@@ -36,17 +32,7 @@ export class DateInput extends LitElement {
   @property({ type: String, reflect: true })
   public max = '2100-12-31';
 
-  @query('app-datepicker-dialog')
-  protected _datepickerDialog?: DatepickerDialog;
-
-  protected _handleTextfieldClick(event: Event) {
-    event.preventDefault();
-    this._datepickerDialog!.open();
-  }
-
-  protected _handleDateChange({
-    detail: { value },
-  }: CustomEvent<DatepickerDialogClosed>) {
+  protected _handleDateChange({ detail: { value } }: CustomEvent<any>) {
     if (!value || value === this.value) {
       return;
     }

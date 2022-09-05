@@ -3,7 +3,7 @@ export default function (this: any, source: string) {
   this.cacheable && this.cacheable();
 
   return `
-    const {css} = require('lit-element');
+    const {css} = require('lit');
     module.exports = css\`${source}\`;
   `;
 }
