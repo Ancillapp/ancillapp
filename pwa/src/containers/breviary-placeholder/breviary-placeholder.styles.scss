@@ -1,0 +1,12 @@
+:host {
+  align-items: flex-start;
+  text-align: center;
+}
+
+h2 {
+  font-family: var(--ancillapp-display-font);
+  border-top: 1px solid var(--ancillapp-disabled-text-color);
+  border-bottom: 1px solid var(--ancillapp-disabled-text-color);
+  font-size: 1.25rem;
+  padding: 0.5rem 0;
+}

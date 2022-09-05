@@ -130,9 +130,10 @@ export class Shell extends localize(authorize(LitElement)) {
     );
 
     const slotChangeListener = () => {
-      const drawerContent = this._drawer.shadowRoot!.querySelector<HTMLDivElement>(
-        '.mdc-drawer-app-content',
-      );
+      const drawerContent =
+        this._drawer.shadowRoot!.querySelector<HTMLDivElement>(
+          '.mdc-drawer-app-content',
+        );
 
       if (!drawerContent) {
         return;
@@ -210,11 +211,12 @@ export class Shell extends localize(authorize(LitElement)) {
         import('../home/home.component');
         break;
       case 'breviary':
-        if (subroute) {
-          import('../breviary-viewer/breviary-viewer.component');
-        } else {
-          import('../breviary-index/breviary-index.component');
-        }
+        import('../breviary-placeholder/breviary-placeholder.component');
+        // if (subroute) {
+        //   import('../breviary-viewer/breviary-viewer.component');
+        // } else {
+        //   import('../breviary-index/breviary-index.component');
+        // }
         break;
       case 'songs':
         if (subroute) {
