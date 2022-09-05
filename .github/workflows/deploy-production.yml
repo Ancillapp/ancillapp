@@ -28,11 +28,11 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
         run: |
-          echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 --decode > ~/firebase-service-account.json
+          echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 --decode > firebase-service-account.json
           yarn firebase deploy --project ffb-ancillapp --config firebase.production.json --token "$FIREBASE_TOKEN" --only hosting:ffb-ancillapp,functions:pwa
         env:
           FIREBASE_SERVICE_ACCOUNT_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64_PRODUCTION }}
-          GOOGLE_APPLICATION_CREDENTIALS: ~/firebase-service-account.json
+          GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
       - name: Purge cache, audit, and report
         run: |
           # Install libgbm

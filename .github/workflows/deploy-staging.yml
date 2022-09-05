@@ -24,8 +24,8 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
         run: |
-          echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 --decode > ~/firebase-service-account.json
+          echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 --decode > firebase-service-account.json
           yarn firebase deploy --debug --project ancillapp-staging --config firebase.json --only hosting:ancillapp-staging,functions:pwa
         env:
           FIREBASE_SERVICE_ACCOUNT_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64_STAGING }}
-          GOOGLE_APPLICATION_CREDENTIALS: ~/firebase-service-account.json
+          GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
