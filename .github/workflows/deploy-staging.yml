@@ -23,6 +23,9 @@ jobs:
           BROWSER_ENV: staging
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
-        run: yarn firebase deploy --project ancillapp-staging --config firebase.json --token "$FIREBASE_TOKEN" --only hosting:ancillapp-staging,functions:pwa
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 --decode > ~/firebase-service-account.json
+          yarn firebase deploy --project ancillapp-staging --config firebase.json --only hosting:ancillapp-staging,functions:pwa
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_SERVICE_ACCOUNT_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64_STAGING }}
+          GOOGLE_APPLICATION_CREDENTIALS: ~/firebase-service-account.json
