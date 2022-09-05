@@ -2,7 +2,7 @@
   "name": "ancillapp",
   "version": "1.6.0",
   "description": "Ancillapp",
-  "author": "Giorgio Garasto <giorgio@garasto.it>",
+  "author": "Giorgio Garasto <giorgio@garasto.me>",
   "license": "MIT",
   "private": true,
   "scripts": {
