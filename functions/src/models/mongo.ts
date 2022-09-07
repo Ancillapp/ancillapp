@@ -71,10 +71,14 @@ export interface Prayer {
 }
 
 export interface Song {
+  language: string;
+  category: string;
   number: string;
   title: string;
   content: string;
 }
+
+export type SongSummary = Omit<Song, 'content'>;
 
 export interface Subscription {
   endpoint: string;

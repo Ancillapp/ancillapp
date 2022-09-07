@@ -18,9 +18,7 @@ export default function template(this: SongViewer) {
       </a>
       <div slot="title">
         ${this._songStatus.data
-          ? `${this._songStatus.data.number.slice(2)}. ${
-              this._songStatus.data.title
-            }`
+          ? `${this._songStatus.data.number}. ${this._songStatus.data.title}`
           : this.localize(t`loading`)}
       </div>
       <mwc-icon-button
@@ -42,8 +40,8 @@ export default function template(this: SongViewer) {
           <section>${compile(this._songStatus.data.content)}</section>
 
           <share-fab
-            title="${this._songStatus.data.number.slice(2)}. ${this._songStatus
-              .data.title}"
+            title="${this._songStatus.data.number}. ${this._songStatus.data
+              .title}"
             text="${this.localize(t`shareSongText`)}"
             url="${window.location.href}"
           ></share-fab>

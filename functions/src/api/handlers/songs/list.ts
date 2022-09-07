@@ -1,12 +1,18 @@
 import { mongoDb } from '../../../helpers/mongo';
-import { Song } from '../../../models/mongo';
+import { Song, SongSummary } from '../../../models/mongo';
 
 import type { RequestHandler } from 'express';
 
-export const getSongs: RequestHandler = async (
-  { query: { fullData } },
-  res,
-) => {
+export interface GetSongsQueryParams {
+  fullData?: string;
+}
+
+export const getSongs: RequestHandler<
+  void,
+  Song[] | SongSummary[],
+  void,
+  GetSongsQueryParams
+> = async ({ query: { fullData } }, res) => {
   res.set(
     'Cache-Control',
     'public, max-age=1800, s-maxage=3600, stale-while-revalidate=3600',
@@ -15,32 +21,35 @@ export const getSongs: RequestHandler = async (
   const db = await mongoDb;
   const songsCollection = db.collection<Song>('songs');
 
-  const songs = (await songsCollection
-    .find(
-      {},
-      {
-        projection: {
-          _id: 0,
-          number: 1,
-          title: 1,
-          ...(typeof fullData !== 'undefined' && {
-            content: 1,
-          }),
+  const songs: typeof fullData extends string ? Song[] : SongSummary[] =
+    await songsCollection
+      .find(
+        {},
+        {
+          projection: {
+            _id: 0,
+            language: 1,
+            category: 1,
+            number: 1,
+            title: 1,
+            ...(typeof fullData !== 'undefined' && {
+              content: 1,
+            }),
+          },
         },
-      },
-    )
-    .toArray()) as Song[];
+      )
+      .toArray();
 
-  res.json(
-    songs.sort(({ number: a }, { number: b }) => {
-      const normalizedA = a.slice(2).replace('bis', '').padStart(4, '0');
-      const normalizedB = b.slice(2).replace('bis', '').padStart(4, '0');
+  const sortedSongs = songs.sort(({ number: a }, { number: b }) => {
+    const normalizedA = a.replace('bis', '').padStart(4, '0');
+    const normalizedB = b.replace('bis', '').padStart(4, '0');
 
-      if (normalizedA === normalizedB) {
-        return b.endsWith('bis') ? -1 : 1;
-      }
+    if (normalizedA === normalizedB) {
+      return b.endsWith('bis') ? -1 : 1;
+    }
 
-      return normalizedA < normalizedB ? -1 : 1;
-    }),
-  );
+    return normalizedA < normalizedB ? -1 : 1;
+  });
+
+  res.json(sortedSongs);
 };

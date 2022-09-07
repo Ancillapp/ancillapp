@@ -30,7 +30,7 @@ app.get('/api/ancillas/:code', getAncilla);
 app.get('/api/prayers', getPrayers);
 app.get('/api/prayers/:slug', getPrayer);
 app.get('/api/songs', getSongs);
-app.get('/api/songs/:number', getSong);
+app.get('/api/songs/:language/:category/:number', getSong);
 app.get('/api/breviary', getBreviary);
 app.get('/api/fraternities', getFraternities);
 app.get('/api/holy-masses', authorize, getHolyMasses);

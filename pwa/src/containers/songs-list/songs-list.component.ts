@@ -113,8 +113,8 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   }
 
   private _refreshSongs() {
-    const songs = (this._songsStatus.data || []).filter(({ number }) =>
-      number.startsWith(this._selectedLanguage.toUpperCase()),
+    const songs = (this._songsStatus.data || []).filter(
+      ({ language }) => language === this._selectedLanguage,
     );
 
     if (!this._fuse) {
@@ -156,18 +156,14 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
             .join(' ');
         }
 
-        songs.forEach(({ number, title }) => {
+        songs.forEach(({ language, category, number, title }) => {
           const anchor = document.createElement('a');
-          anchor.href = this.localizeHref('songs', number);
+          anchor.href = this.localizeHref('songs', language, category, number);
           anchor.className = 'song';
           anchor.innerHTML = `
             <div class="book">
               <div class="number">
-                ${
-                  number.endsWith('bis')
-                    ? `${number.slice(2, -3)}b`
-                    : number.slice(2)
-                }
+                ${number.endsWith('bis') ? `${number.slice(0, -3)}b` : number}
               </div>
               <div class="title">${title}</div>
             </div>

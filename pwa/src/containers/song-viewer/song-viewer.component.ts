@@ -41,18 +41,16 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
     if (this.active && changedProperties.has('song') && this.song) {
       if (!_songsStatusesCache.has(this.song)) {
         for await (const status of cacheAndNetwork<Song>(
-          `${config.apiUrl}/songs/${
-            /^\d/.test(this.song) ? `IT${this.song}` : this.song
-          }`,
+          `${config.apiUrl}/songs/${this.song}`,
         )) {
           this._songStatus = status;
 
           if (status.data) {
             _songsStatusesCache.set(this.song, status);
 
-            const pageTitle = `Ancillapp - ${this.localize(
-              t`songs`,
-            )} - ${status.data.number.slice(2)}. ${status.data.title}`;
+            const pageTitle = `Ancillapp - ${this.localize(t`songs`)} - ${
+              status.data.number
+            }. ${status.data.title}`;
 
             if (pageTitle === this._previousPageTitle) {
               return;
