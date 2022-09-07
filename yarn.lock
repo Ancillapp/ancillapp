@@ -89,7 +89,7 @@ __metadata:
     fork-ts-checker-webpack-plugin: ^7.2.13
     fuse.js: ^6.6.2
     html-webpack-plugin: ^5.5.0
-    hyperlist: ^1.0.0
+    hyperlist: "https://github.com/tbranyen/hyperlist/tarball/master"
     idb: ^7.0.2
     lit: ^2.3.1
     make-plural: ^7.1.0
@@ -10590,10 +10590,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hyperlist@npm:^1.0.0":
+"hyperlist@https://github.com/tbranyen/hyperlist/tarball/master":
   version: 1.0.0
-  resolution: "hyperlist@npm:1.0.0"
-  checksum: 45a56b9f71b2fda8e6598827e5ee93b1b8606c09ac3ea4ddb96e086e6f54fc578440575c5b84ccc8fc71cc09e49656380bc88cdea13f91bf3ee8532fb4ae0d37
+  resolution: "hyperlist@https://github.com/tbranyen/hyperlist.git#commit=1677be5b8d607b3437f4c3afb1b4668d2d05207d"
+  checksum: 4c415ce53f997359de674cbc582c40d145018cf2a4006bc0f662bfd21da6a0e17509586a32b2039e408495edd91accf94984f4b50ce8836517ef87f0832fb562
   languageName: node
   linkType: hard
 

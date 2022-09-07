@@ -26,7 +26,7 @@
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "firebase": "^9.9.4",
     "fuse.js": "^6.6.2",
-    "hyperlist": "^1.0.0",
+    "hyperlist": "https://github.com/tbranyen/hyperlist/tarball/master",
     "idb": "^7.0.2",
     "lit": "^2.3.1",
     "make-plural": "^7.1.0",
