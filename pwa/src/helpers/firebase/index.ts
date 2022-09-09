@@ -18,7 +18,6 @@ export const logEvent = async (
   options?: Parameters<typeof firebaseLogEvent>[3],
 ) => {
   if (process.env.BROWSER_ENV !== 'production') {
-    /* eslint-disable no-console */
     console.groupCollapsed('Analytics event');
     console.info(`Name: ${eventName}`);
 
@@ -36,7 +35,6 @@ export const logEvent = async (
     console.groupEnd();
 
     return;
-    /* eslint-enable no-console */
   }
 
   return firebaseLogEvent(

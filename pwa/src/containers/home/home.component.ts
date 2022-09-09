@@ -3,6 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
+import { db } from '../../helpers/database';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/macro';
 
@@ -11,7 +12,6 @@ import styles from './home.styles';
 import template from './home.template';
 
 import { logEvent } from '../../helpers/firebase';
-import { initDB } from '../../helpers/utils';
 import {
   homeIcon,
   breviaryIcon,
@@ -68,8 +68,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   };
 
   private async _setupSearch() {
-    const db = await initDB();
-
     const [songs, prayers, ancillas] = await Promise.all([
       db.getAll('songs'),
       db.getAll('prayers'),

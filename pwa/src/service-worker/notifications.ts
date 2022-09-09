@@ -1,4 +1,4 @@
-import { get } from '../helpers/keyval';
+import { get } from './keyval';
 import type { Localized, SupportedLocale } from '../helpers/localize';
 import { localizeHref } from '../helpers/localization';
 
@@ -50,23 +50,8 @@ self.addEventListener('push', (event) => {
         icon: '/images/icons/android-chrome-512x512.png',
         badge: '/images/icons/badge.png',
         vibrate: [
-          300,
-          300,
-          300,
-          300,
-          300,
-          1000,
-          600,
-          600,
-          600,
-          600,
-          600,
-          1000,
-          300,
-          300,
-          300,
-          300,
-          300,
+          300, 300, 300, 300, 300, 1000, 600, 600, 600, 600, 600, 1000, 300,
+          300, 300, 300, 300,
         ],
         body,
         lang,

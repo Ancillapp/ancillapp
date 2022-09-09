@@ -19,7 +19,7 @@ module.exports = {
     },
   ],
   rules: {
-    'no-console': 'error',
+    'no-console': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
   },
 };

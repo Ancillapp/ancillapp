@@ -6,7 +6,7 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import * as googleAnalytics from 'workbox-google-analytics';
 import type { PrecacheEntry } from 'workbox-precaching/_types';
 
-import { set } from '../helpers/keyval';
+import { set } from './keyval';
 import { version } from '../../../CHANGELOG.md';
 
 type ClientType = 'window' | 'worker' | 'sharedworker' | 'all';
@@ -45,11 +45,9 @@ self.addEventListener('install', (event) => {
 });
 
 if (process.env.BROWSER_ENV === 'development') {
-  /* eslint-disable no-console */
   console.groupCollapsed('Workbox precache manifest');
   self.__WB_MANIFEST.forEach((entry) => console.info(entry));
   console.groupEnd();
-  /* eslint-enable no-console */
 } else {
   setCacheNameDetails({
     prefix: 'ancillapp',

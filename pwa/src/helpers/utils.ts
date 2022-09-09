@@ -1,5 +1,3 @@
-import { openDB, deleteDB, DBSchema } from 'idb';
-
 export const urlBase64ToUint8Array = (base64String: string) => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
@@ -37,75 +35,9 @@ export const importIIFE = (src: string) => {
   return scriptPromise;
 };
 
-export interface AncillappDataDBSchema extends DBSchema {
-  settings: {
-    key: string;
-    value: string | number | boolean | Date | null | undefined;
-  };
-  songs: {
-    key: string;
-    value: {
-      number: string;
-      title: string;
-      content: string;
-    };
-  };
-  prayers: {
-    key: string;
-    value: {
-      slug: string;
-      title: {
-        it?: string;
-        en?: string;
-        pt?: string;
-        de?: string;
-        la?: string;
-      };
-      content: {
-        it?: string;
-        en?: string;
-        pt?: string;
-        de?: string;
-        la?: string;
-      };
-    };
-  };
-  ancillas: {
-    key: string;
-    value: {
-      code: string;
-      name: {
-        it: string;
-        en: string;
-        pt: string;
-        de: string;
-      };
-      link: string;
-      thumbnail: string;
-    };
-  };
-}
-
-export const initDB = () =>
-  openDB<AncillappDataDBSchema>('ancillapp', 1, {
-    upgrade(db) {
-      deleteDB('keyval-store');
-      db.createObjectStore('settings');
-      db.createObjectStore('songs', {
-        keyPath: 'number',
-      });
-      db.createObjectStore('prayers', {
-        keyPath: 'slug',
-      });
-      db.createObjectStore('ancillas', {
-        keyPath: 'code',
-      });
-    },
-  });
-
 export const debounce = <
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  F extends (...args: any) => Promise<any> = (...args: any) => Promise<any>
+  F extends (...args: any) => Promise<any> = (...args: any) => Promise<any>,
 >(
   fn: F,
   delay: number,

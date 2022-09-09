@@ -1,6 +1,14 @@
-import { initDB } from './utils';
+import { db } from './database';
+import {
+  AncillappDataDBSchema,
+  ProxyDBBatchOperation,
+  ProxyObjectStore,
+} from '../service-worker/database';
 
-type Entity = 'songs' | 'prayers' | 'ancillas';
+type Entity = keyof Pick<
+  AncillappDataDBSchema,
+  'songs' | 'prayers' | 'ancillas'
+>;
 
 export interface APIResponse<T> {
   loading: boolean;
@@ -11,53 +19,68 @@ export interface APIResponse<T> {
 
 const supportedEntities: Entity[] = ['songs', 'prayers', 'ancillas'];
 
-const entityToIdFieldMap: { [key in Entity]: string } = {
-  songs: 'number',
-  prayers: 'slug',
-  ancillas: 'code',
+const entityToIdFieldsMap: {
+  [key in Entity]: (keyof AncillappDataDBSchema[key]['value'])[];
+} = {
+  songs: ['language', 'category', 'number'],
+  prayers: ['slug'],
+  ancillas: ['code'],
 };
 
-const entityToDetailFieldMap: { [key in Entity]?: string } = {
+const entityToDetailFieldMap: {
+  [key in Entity]?: keyof AncillappDataDBSchema[key]['value'];
+} = {
   songs: 'content',
   prayers: 'content',
 };
 
-const dbPromise = initDB();
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const updateLocalDBSummaryData = async <T extends any[]>(
+const updateLocalDBSummaryData = async <
+  T extends Entity,
+  U extends AncillappDataDBSchema[T]['value'][],
+>(
   request: RequestInfo,
-  entity: Entity,
-  cachedData: T,
-): Promise<T> => {
-  const db = await dbPromise;
-
-  const idField = entityToIdFieldMap[entity];
+  entity: T,
+  cachedData: U,
+): Promise<U> => {
+  const idFields = entityToIdFieldsMap[entity];
 
   const response = await fetch(request);
 
-  const parsedResponse: T = await response.json();
+  const parsedResponse: U = await response.json();
 
   const newData = parsedResponse.map((data) => {
-    const oldData = cachedData.find(
-      ({ [idField]: id }) => id === data[idField],
+    const oldData = cachedData.find((item) =>
+      idFields.every((idField) => item[idField] === data[idField]),
     );
 
     return { ...oldData, ...data };
-  }) as T;
+  }) as U;
 
   const deletedData = cachedData.filter((data) =>
-    newData.every(({ [idField]: id }) => id !== data[idField]),
-  );
+    newData.every(
+      (item) => !idFields.every((idField) => item[idField] === data[idField]),
+    ),
+  ) as U;
 
-  const transaction = db.transaction(entity, 'readwrite');
-
-  const objectStore = transaction.objectStore(entity);
-
-  newData.forEach((data) => objectStore.put(data));
-  deletedData.forEach(({ id }) => objectStore.delete(id));
-
-  await transaction.done;
+  db.batch(entity, 'readwrite', { durability: 'strict' }, [
+    ...newData.map<ProxyDBBatchOperation<keyof ProxyObjectStore>>((data) => ({
+      objectStore: entity,
+      method: 'put',
+      args: [data],
+    })),
+    ...deletedData.map<ProxyDBBatchOperation<keyof ProxyObjectStore>>(
+      (item) => ({
+        objectStore: entity,
+        method: 'delete',
+        args: [
+          idFields.map((idField) => item[idField]) as unknown as Parameters<
+            ProxyObjectStore['delete']
+          >[0],
+        ],
+      }),
+    ),
+  ]);
 
   return newData;
 };
@@ -67,8 +90,6 @@ const updateLocalDBDetailData = async <T extends Record<string, unknown>>(
   entity: Entity,
   cachedData?: T,
 ): Promise<T> => {
-  const db = await dbPromise;
-
   const response = await fetch(request);
 
   const parsedResponse = await response.json();
@@ -112,7 +133,7 @@ export async function* cacheAndNetwork<T>(
   try {
     yield { loading: true, refreshing: false };
 
-    const [db, request] = await Promise.all([dbPromise, requestInfo]);
+    const request = await requestInfo;
 
     const match = (typeof request === 'string' ? request : request.url).match(
       /\/api\/([a-z]+)[/?]?(.*)/,
@@ -167,7 +188,11 @@ export async function* cacheAndNetwork<T>(
       return;
     }
 
-    const cachedData = await db.get(entity, id);
+    const normalizedId = (id.includes('/') ? id.split('/') : id) as
+      | string
+      | [string, string, string];
+
+    const cachedData = await db.get(entity, normalizedId);
 
     const localDBDetailDataUpdatePromise = updateLocalDBDetailData(
       request,
