@@ -128,6 +128,7 @@ export default function template(this: SongsList) {
             >
               <option value="it">${this.localize(t`italian`)}</option>
               <option value="de">${this.localize(t`german`)}</option>
+              <option value="pt">${this.localize(t`portuguese`)}</option>
             </outlined-select>
           </li>
         </ul>

@@ -81,7 +81,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   }
 
   private async _prepareSongs() {
-    const supportedSongsLanguages = ['it', 'de'];
+    const supportedSongsLanguages = ['it', 'de', 'pt'];
     const [songsDownloadPreference, songsLanguage, locale] = await Promise.all([
       get<string>('songsDownloadPreference'),
       get<string>('songsLanguage'),
