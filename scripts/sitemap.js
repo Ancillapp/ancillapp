@@ -68,10 +68,7 @@ const breviaryTranslations = {
 };
 
 const run = async () => {
-  const client = await new mongodb.MongoClient(uri, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  }).connect();
+  const client = await new mongodb.MongoClient(uri).connect();
 
   const db = client.db('Main');
 
@@ -83,6 +80,8 @@ const run = async () => {
         {
           projection: {
             _id: 0,
+            language: 1,
+            category: 1,
             number: 1,
           },
         },
@@ -175,43 +174,31 @@ const run = async () => {
     '/pt/informacoes',
 
     // Songs details
-    ...songs.reduce(
-      (songsUrls, { number }) => [
-        ...songsUrls,
-        `/it/canti/${number}`,
-        `/en/songs/${number}`,
-        `/de/lieder/${number}`,
-        `/pt/cancoes/${number}`,
-      ],
-      [],
-    ),
+    ...songs.flatMap(({ language, category, number }) => [
+      `/it/canti/${language}/${category}/${number}`,
+      `/en/songs/${language}/${category}/${number}`,
+      `/de/lieder/${language}/${category}/${number}`,
+      `/pt/cancoes/${language}/${category}/${number}`,
+    ]),
 
     // Prayers details
-    ...prayers.reduce(
-      (prayersUrls, { slug }) => [
-        ...prayersUrls,
-        `/it/preghiere/${slug}`,
-        `/en/prayers/${slug}`,
-        `/de/gebete/${slug}`,
-        `/pt/oracoes/${slug}`,
-      ],
-      [],
-    ),
+    ...prayers.flatMap(({ slug }) => [
+      `/it/preghiere/${slug}`,
+      `/en/prayers/${slug}`,
+      `/de/gebete/${slug}`,
+      `/pt/oracoes/${slug}`,
+    ]),
 
     // Ancillas details
-    ...ancillas.reduce(
-      (ancillasUrls, { code }) => [
-        ...ancillasUrls,
-        `/it/ancilla-domini/${code}`,
-        `/en/ancilla-domini/${code}`,
-        `/de/ancilla-domini/${code}`,
-        `/pt/ancilla-domini/${code}`,
-      ],
-      [],
-    ),
+    ...ancillas.flatMap(({ code }) => [
+      `/it/ancilla-domini/${code}`,
+      `/en/ancilla-domini/${code}`,
+      `/de/ancilla-domini/${code}`,
+      `/pt/ancilla-domini/${code}`,
+    ]),
 
     // Breviary details
-    ...[...Array(32)].flatMap((_, index) => {
+    ...Array.from({ length: 32 }).flatMap((_, index) => {
       const date = addDays(midday, index - 2)
         .toISOString()
         .slice(0, 10);
