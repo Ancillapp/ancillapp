@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { SongViewer } from './song-viewer.component';
-import { compile } from '../../helpers/directives';
+import { renderSong } from '../../helpers/directives';
 import { arrowBack, search } from '../../components/icons';
 import { t } from '@lingui/macro';
 
@@ -37,7 +37,7 @@ export default function template(this: SongViewer) {
           </div>
         `
       : html`
-          <section>${compile(this._songStatus.data.content)}</section>
+          <section>${renderSong(this._songStatus.data.content)}</section>
 
           <share-fab
             title="${this._songStatus.data.number}. ${this._songStatus.data

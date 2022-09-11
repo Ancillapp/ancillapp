@@ -80,6 +80,7 @@ __metadata:
     babel-loader: ^8.2.5
     babel-plugin-macros: ^3.1.0
     babel-plugin-template-html-minifier: ^4.1.0
+    chordsheetjs: ^7.6.0
     copy-webpack-plugin: ^11.0.0
     core-js: ^3.25.0
     cross-env: ^7.0.3
@@ -6854,6 +6855,15 @@ __metadata:
     fsevents:
       optional: true
   checksum: b49fcde40176ba007ff361b198a2d35df60d9bb2a5aab228279eb810feae9294a6b4649ab15981304447afe1e6ffbf4788ad5db77235dc770ab777c6e771980c
+  languageName: node
+  linkType: hard
+
+"chordsheetjs@npm:^7.6.0":
+  version: 7.6.0
+  resolution: "chordsheetjs@npm:7.6.0"
+  dependencies:
+    lodash.get: ^4.4.2
+  checksum: ba78a22bd0bceb6fd251213205b29537966661e6fa943af22f22087a764709ba4835742ece990c69b78ad7b7f6728d4c561efe7f03afaa3a99d29224ed631a43
   languageName: node
   linkType: hard
 

@@ -1,6 +1,6 @@
 import { html, nothing } from 'lit';
 import { PrayerViewer } from './prayer-viewer.component';
-import { compile } from '../../helpers/directives';
+import { renderPrayer } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
 import { t } from '@lingui/macro';
 import { Prayer } from '../../models/prayer';
@@ -64,7 +64,7 @@ export default function template(this: PrayerViewer) {
             class="${this._prayerLanguages.length > 1 ? 'multilanguage' : ''}"
           >
             ${this._selectedPrayerLanguage in this._prayerStatus.data.content
-              ? compile(
+              ? renderPrayer(
                   this._prayerStatus.data.content[
                     this._selectedPrayerLanguage
                   ]!,
