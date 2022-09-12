@@ -27,12 +27,6 @@ const config: Configuration = merge(baseConfig, {
         },
       }),
     ],
-    splitChunks: {
-      chunks: 'all',
-      maxInitialRequests: 30,
-      maxAsyncRequests: 30,
-      maxSize: 100000,
-    },
   },
   plugins: [
     new HtmlPlugin({
