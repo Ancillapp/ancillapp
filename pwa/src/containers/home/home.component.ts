@@ -22,10 +22,10 @@ import {
   settingsIcon,
   infoIcon,
 } from '../../components/icons';
+import { renderToString } from '../../helpers/utils';
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
 
 import * as HomeWorker from './home.worker';
-import { renderToString } from '../../helpers/utils';
 
 const { configureSearch, search } =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
