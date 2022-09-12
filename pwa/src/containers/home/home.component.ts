@@ -3,7 +3,6 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
-import { db } from '../../helpers/database';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/macro';
 
