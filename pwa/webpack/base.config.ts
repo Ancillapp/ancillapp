@@ -58,13 +58,11 @@ const config: Configuration = {
           '@lingui/loader',
         ],
       },
-      // TODO: re-add workerize-loader as soon as it gets support for Webpack 5
-      // See: https://github.com/developit/workerize-loader/issues/77
-      // {
-      //   test: /\.worker\.[tj]s$/,
-      //   exclude: /node_modules/,
-      //   use: 'workerize-loader',
-      // },
+      {
+        test: /\.worker\.[tj]s$/,
+        exclude: /node_modules/,
+        use: 'workerize-loader',
+      },
       {
         test: /\.[tj]s$/,
         exclude:

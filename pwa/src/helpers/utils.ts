@@ -1,3 +1,5 @@
+import type { TemplateResult } from 'lit';
+
 export const urlBase64ToUint8Array = (base64String: string) => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
@@ -58,4 +60,12 @@ export const debounce = <
         delay,
       );
     })) as F;
+};
+
+export const renderToString = ({ strings, values }: TemplateResult): string => {
+  const v = ([...values, ''] as (string | TemplateResult)[]).map(
+    (e: string | TemplateResult) =>
+      typeof e === 'object' ? renderToString(e) : e,
+  );
+  return strings.reduce((acc, s, i) => acc + s + v[i], '');
 };

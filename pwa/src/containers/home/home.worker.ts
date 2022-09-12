@@ -26,9 +26,9 @@ export const search = async (term: string): Promise<SearchItem[]> => {
     return [];
   }
 
-  const searchResults = _fuse.search(term);
+  const searchResults = _fuse.search(term, { limit: 10 });
 
-  return searchResults.slice(0, 20).map(({ item, matches = [] }) =>
+  return searchResults.map(({ item, matches = [] }) =>
     matches.reduce((keyVal, { key, indices }) => {
       if (!key || !indices) {
         return keyVal;

@@ -25,15 +25,11 @@ import {
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
 
 import * as HomeWorker from './home.worker';
+import { renderToString } from '../../helpers/utils';
 
-// TODO: convert this module back to a worker as soon as workerize-loader gets support for Webpack 5
-// See: https://github.com/developit/workerize-loader/issues/77
-const { configureSearch, search } = HomeWorker;
-
-// const {
-//   configureSearch,
-//   search,
-// } = new (HomeWorker as any)() as typeof HomeWorker;
+const { configureSearch, search } =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new (HomeWorker as any)() as typeof HomeWorker;
 
 @customElement('home-page')
 export class HomePage extends localize(withTopAppBar(PageViewElement)) {
@@ -109,7 +105,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`home`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${homeIcon}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            homeIcon,
+          )}</div>`,
         },
         description: this.localize(t`homeDescription`),
         link: this.localizeHref('home'),
@@ -118,7 +116,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`breviary`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${breviaryIcon}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            breviaryIcon,
+          )}</div>`,
         },
         description: this.localize(t`breviaryDescription`),
         link: this.localizeHref('breviary'),
@@ -127,7 +127,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`songs`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${songsIcon}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            songsIcon,
+          )}</div>`,
         },
         description: this.localize(t`songsDescription`),
         link: this.localizeHref('songs'),
@@ -136,7 +138,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`prayers`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${prayersIcon}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            prayersIcon,
+          )}</div>`,
         },
         description: this.localize(t`prayersDescription`),
         link: this.localizeHref('prayers'),
@@ -145,7 +149,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`ancillas`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${ancillasIcon}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            ancillasIcon,
+          )}</div>`,
         },
         description: this.localize(t`ancillasDescription`),
         link: this.localizeHref('ancillas'),
@@ -154,7 +160,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`holyMass`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${holyMassIcon}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            holyMassIcon,
+          )}</div>`,
         },
         description: this.localize(t`holyMassDescription`),
         link: this.localizeHref('holy-mass'),
@@ -163,7 +171,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`login`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${user}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            user,
+          )}</div>`,
         },
         description: this.localize(t`loginDescription`),
         link: this.localizeHref('login'),
@@ -172,7 +182,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`settings`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${settingsIcon}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            settingsIcon,
+          )}</div>`,
         },
         description: this.localize(t`settingsDescription`),
         link: this.localizeHref('settings'),
@@ -181,7 +193,9 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         title: this.localize(t`info`),
         preview: {
           type: 'html',
-          content: `<div class="search-result-preview">${infoIcon}</div>`,
+          content: `<div class="search-result-preview">${renderToString(
+            infoIcon,
+          )}</div>`,
         },
         description: this.localize(t`infoDescription`),
         link: this.localizeHref('info'),
