@@ -66,6 +66,20 @@ export class Shell extends localize(authorize(LitElement)) {
     );
 
     this._setupWakeLockSentinel();
+    this._registerServiceWorker();
+  }
+
+  private async _registerServiceWorker() {
+    // Load and register pre-caching Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () =>
+        navigator.serviceWorker
+          .register('sw.js', {
+            scope: '/',
+          })
+          .catch(console.warn),
+      );
+    }
   }
 
   private async _setupWakeLockSentinel() {
