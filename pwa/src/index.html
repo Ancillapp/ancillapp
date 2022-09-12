@@ -247,6 +247,15 @@
         }
       }
     </style>
+    <script>
+      // Load and register pre-caching Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () =>
+          navigator.serviceWorker.register('sw.js', {
+            scope: '/',
+          }).catch(console.warn));
+      }
+    </script>
   </head>
   <body data-theme="system">
     <ancillapp-shell>
