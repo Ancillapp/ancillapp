@@ -87,6 +87,9 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
         this._abcSections.forEach((section) => {
           renderAbc(section, section.dataset.content!, {
             responsive: 'resize',
+            dragColor: 'var(--ancillapp-primary-text-color)',
+            selectionColor: 'var(--ancillapp-primary-text-color)',
+            foregroundColor: 'var(--ancillapp-primary-text-color)',
           });
         });
       }
