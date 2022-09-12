@@ -33,6 +33,23 @@ export const renderPrayer = (rawString: string) =>
       .join(''),
   );
 
+interface SongUltimateGuitarSection {
+  type: 'ug';
+  content: Song;
+}
+
+interface SongABCSection {
+  type: 'abc';
+  content: string;
+}
+
+interface SongRawSection {
+  type: 'raw';
+  content: string;
+}
+
+type SongSection = SongUltimateGuitarSection | SongABCSection | SongRawSection;
+
 const songsParser = new UltimateGuitarParser();
 const songsFormatter = new HtmlDivFormatter();
 const songsTemplate = document.createElement('template');
@@ -50,53 +67,83 @@ const getParagraphClass = (type: string): string => {
   return '';
 };
 
-const parseSong = (rawString: string): Song | string => {
-  try {
-    const song = songsParser.parse(rawString);
-    return song;
-  } catch {
-    return rawString;
-  }
+const parseSections = (rawString: string): SongSection[] => {
+  const sections = rawString.split('```').filter(Boolean);
+  return sections.map((section) => {
+    if (section.startsWith('abc')) {
+      return {
+        type: 'abc',
+        content: section.slice(3),
+      };
+    }
+    try {
+      const parsedSong = songsParser.parse(section);
+      return {
+        type: 'ug',
+        content: parsedSong,
+      };
+    } catch {
+      return {
+        type: 'raw',
+        content: section,
+      };
+    }
+  });
 };
 
 const formatSong = (rawString: string, enableChords = false): string => {
-  const parsedSong = parseSong(rawString);
-  if (typeof parsedSong === 'string') {
-    return parsedSong;
-  }
-  const formatted: string = songsFormatter.format(parsedSong);
-  songsTemplate.innerHTML = formatted.trim();
-  const element = songsTemplate.content.firstChild as HTMLDivElement;
-  const paragraphs = Array.from(element.querySelectorAll('.paragraph'));
-  paragraphs.forEach((paragraph) => {
-    const comment = paragraph.querySelector<HTMLDivElement>('.comment');
-    if (comment) {
-      comment.innerHTML = `<strong>${comment.innerHTML}</strong>`;
-    }
-    const initialParagraphLyrics = paragraph.querySelector(
-      '.row > .column > .lyrics',
-    );
-    const paragraphType = initialParagraphLyrics?.textContent?.match(
-      /^(?:rit|refrain|bridge|finale|fin|ende|\d+)[:.]?/gi,
-    )?.[0];
-    if (paragraphType) {
-      initialParagraphLyrics.innerHTML =
-        initialParagraphLyrics.innerHTML.replace(
-          paragraphType,
-          `<strong>${paragraphType}</strong>`,
-        );
-    }
-    const paragraphClass = getParagraphClass(
-      paragraphType || comment?.innerText.trim() || '',
-    );
-    if (paragraphClass) {
-      paragraph.classList.add(paragraphClass);
+  const parsedSections = parseSections(rawString);
+
+  const formattedSections = parsedSections.map((section) => {
+    switch (section.type) {
+      case 'ug': {
+        const formattedSong: string = songsFormatter.format(section.content);
+        songsTemplate.innerHTML = formattedSong.trim();
+        const element = songsTemplate.content.firstChild as HTMLDivElement;
+        element.classList.add('ug');
+        const paragraphs = Array.from(element.querySelectorAll('.paragraph'));
+        paragraphs.forEach((paragraph) => {
+          const comment = paragraph.querySelector<HTMLDivElement>('.comment');
+          if (comment) {
+            comment.innerHTML = `<strong>${comment.innerHTML}</strong>`;
+          }
+          const initialParagraphLyrics = paragraph.querySelector(
+            '.row > .column > .lyrics',
+          );
+          const paragraphType = initialParagraphLyrics?.textContent?.match(
+            /^(?:rit|refrain|bridge|finale|fin|ende|\d+)[:.]?/gi,
+          )?.[0];
+          if (paragraphType) {
+            initialParagraphLyrics.innerHTML =
+              initialParagraphLyrics.innerHTML.replace(
+                paragraphType,
+                `<strong>${paragraphType}</strong>`,
+              );
+          }
+          const paragraphClass = getParagraphClass(
+            paragraphType || comment?.innerText.trim() || '',
+          );
+          if (paragraphClass) {
+            paragraph.classList.add(paragraphClass);
+          }
+        });
+        if (!enableChords) {
+          element.classList.add('without-chords');
+        }
+        return element.outerHTML;
+      }
+      case 'abc': {
+        return `<div class="abc" data-content="${section.content.replace(
+          /"/g,
+          '&quot;',
+        )}"></div>`;
+      }
+      default: {
+        return `<div class="raw">${section.content}</div>`;
+      }
     }
   });
-  if (!enableChords) {
-    element.classList.add('without-chords');
-  }
-  return element.outerHTML;
+  return formattedSections.join('');
 };
 
 export const renderSong = (rawString: string) =>

@@ -1,6 +1,7 @@
 import { PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, queryAll } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
+import { renderAbc } from 'abcjs';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { navigateTo } from '../../helpers/router';
@@ -33,49 +34,61 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
     refreshing: false,
   };
 
+  @queryAll('.abc')
+  private _abcSections!: NodeListOf<HTMLDivElement>;
+
   private _previousPageTitle?: string;
 
   protected async updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
-    if (this.active && changedProperties.has('song') && this.song) {
-      if (!_songsStatusesCache.has(this.song)) {
-        for await (const status of cacheAndNetwork<Song>(
-          `${config.apiUrl}/songs/${this.song}`,
-        )) {
-          this._songStatus = status;
+    if (this.active) {
+      if (changedProperties.has('song') && this.song) {
+        if (!_songsStatusesCache.has(this.song)) {
+          for await (const status of cacheAndNetwork<Song>(
+            `${config.apiUrl}/songs/${this.song}`,
+          )) {
+            this._songStatus = status;
 
-          if (status.data) {
-            _songsStatusesCache.set(this.song, status);
+            if (status.data) {
+              _songsStatusesCache.set(this.song, status);
 
-            const pageTitle = `Ancillapp - ${this.localize(t`songs`)} - ${
-              status.data.number
-            }. ${status.data.title}`;
+              const pageTitle = `Ancillapp - ${this.localize(t`songs`)} - ${
+                status.data.number
+              }. ${status.data.title}`;
 
-            if (pageTitle === this._previousPageTitle) {
-              return;
+              if (pageTitle === this._previousPageTitle) {
+                return;
+              }
+
+              this._previousPageTitle = pageTitle;
+
+              const {
+                data: { title },
+              } = status;
+
+              updateMetadata({
+                title: pageTitle,
+                description: this.localize(t`songDescription ${title}`),
+              });
+
+              logEvent('page_view', {
+                page_title: pageTitle,
+                page_location: window.location.href,
+                page_path: window.location.pathname,
+              });
             }
-
-            this._previousPageTitle = pageTitle;
-
-            const {
-              data: { title },
-            } = status;
-
-            updateMetadata({
-              title: pageTitle,
-              description: this.localize(t`songDescription ${title}`),
-            });
-
-            logEvent('page_view', {
-              page_title: pageTitle,
-              page_location: window.location.href,
-              page_path: window.location.pathname,
-            });
           }
+        } else {
+          this._songStatus = _songsStatusesCache.get(this.song)!;
         }
-      } else {
-        this._songStatus = _songsStatusesCache.get(this.song)!;
+      }
+      if (changedProperties.has('_songStatus')) {
+        this._abcSections.forEach((section) => {
+          renderAbc(section, section.dataset.content!, {
+            responsive: 'resize',
+          });
+        });
       }
     }
   }
