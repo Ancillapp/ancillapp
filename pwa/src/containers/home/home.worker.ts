@@ -14,11 +14,15 @@ export interface SearchItem {
 let _fuse: Fuse<SearchItem>;
 
 export const configureSearch = async (configuration: SearchItem[]) => {
-  _fuse = new Fuse(configuration, {
-    keys: ['keywords', 'title', 'description'],
-    includeMatches: true,
-    ignoreLocation: true,
-  });
+  if (_fuse) {
+    _fuse.setCollection(configuration);
+  } else {
+    _fuse = new Fuse(configuration, {
+      keys: ['keywords', 'title', 'description'],
+      includeMatches: true,
+      ignoreLocation: true,
+    });
+  }
 };
 
 export const search = async (term: string): Promise<SearchItem[]> => {
