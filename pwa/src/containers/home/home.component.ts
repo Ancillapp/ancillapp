@@ -68,6 +68,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   };
 
   private async _setupSearch() {
+    const { db } = await import('../../helpers/database');
     const [songs, prayers, ancillas] = await Promise.all([
       db.getAll('songs'),
       db.getAll('prayers'),
