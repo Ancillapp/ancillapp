@@ -68,7 +68,7 @@ const config: Configuration = merge(baseConfig, {
         minifyJS: true,
       },
       inject: 'head',
-      scriptLoading: 'defer',
+      scriptLoading: 'module',
       template: path.resolve(__dirname, '../src/index.html'),
     }),
     new InjectManifestPlugin({

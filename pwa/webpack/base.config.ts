@@ -25,6 +25,14 @@ const config: Configuration = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     globalObject: 'self',
+    libraryTarget: 'module',
+    module: true,
+    library: {
+      type: 'module',
+    },
+  },
+  experiments: {
+    outputModule: true,
   },
   resolve: {
     alias: {
