@@ -1,7 +1,6 @@
 import { PropertyValues } from 'lit';
 import { customElement, property, queryAll } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
-import { renderAbc } from 'abcjs';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { navigateTo } from '../../helpers/router';
@@ -16,6 +15,8 @@ import template from './song-viewer.template';
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 import { Song } from '../../models/song';
+
+const abcjsPromise = import('abcjs');
 
 const _songsStatusesCache = new Map<string, APIResponse<Song>>();
 
@@ -84,6 +85,7 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
         }
       }
       if (changedProperties.has('_songStatus')) {
+        const { renderAbc } = await abcjsPromise;
         this._abcSections.forEach((section) => {
           renderAbc(section, section.dataset.content!, {
             responsive: 'resize',

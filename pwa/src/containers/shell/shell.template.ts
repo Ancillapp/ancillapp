@@ -17,12 +17,12 @@ import {
 import { t } from '@lingui/macro';
 
 import '@material/mwc-drawer';
-import '@material/mwc-icon-button';
-import '@material/mwc-list/mwc-list';
-import '@material/mwc-list/mwc-list-item';
 import '../../components/top-app-bar/top-app-bar.component';
 
 // Asynchronous imports
+import('@material/mwc-icon-button');
+import('@material/mwc-list/mwc-list');
+import('@material/mwc-list/mwc-list-item');
 import('@material/mwc-snackbar');
 import('../update-checker/update-checker.component');
 
