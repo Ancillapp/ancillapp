@@ -30,6 +30,14 @@
 
   .row {
     display: flex;
+    // If there isn't enough space for the entire row to be shown,
+    // make sure the text wraps properly
+    flex-wrap: wrap;
+  }
+
+  .lyrics {
+    // Some lyrics columns might be longer than the screen, so we need to enable wrapping
+    white-space: wrap;
   }
 
   .chord:after,
