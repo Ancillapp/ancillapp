@@ -1,15 +1,19 @@
 import { PropertyValues } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/macro';
+import { Song } from '../../models/song';
+import { Prayer } from '../../models/prayer';
+import { Ancilla } from '../../models/ancilla';
 
 import sharedStyles from '../../shared.styles';
 import styles from './home.styles';
 import template from './home.template';
 
+import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 import {
   homeIcon,
@@ -26,6 +30,7 @@ import { renderToString } from '../../helpers/utils';
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
 
 import * as HomeWorker from './home.worker';
+import { cacheAndNetwork } from '../../helpers/cache-and-network';
 
 const { configureSearch, search } =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -52,10 +57,33 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   @query('#search-input')
   private _searchInput?: HTMLInputElement;
 
+  @state()
+  private _songs: Song[] = [];
+
+  @state()
+  private _prayers: Prayer[] = [];
+
+  @state()
+  private _ancillas: Ancilla[] = [];
+
   constructor() {
     super();
 
+    this._loadSearchData('songs', '_songs');
+    this._loadSearchData('prayers', '_prayers');
+    this._loadSearchData('ancillas', '_ancillas');
     this._setupSearch();
+  }
+
+  private async _loadSearchData(path: string, field: string) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    for await (const status of cacheAndNetwork<any>(
+      `${config.apiUrl}/${path}`,
+    )) {
+      if (status.data) {
+        this[field as keyof this] = status.data;
+      }
+    }
   }
 
   private _handleDocumentClick = () => {
@@ -63,13 +91,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   };
 
   private async _setupSearch() {
-    const { db } = await import('../../helpers/database');
-    const [songs, prayers, ancillas] = await Promise.all([
-      db.getAll('songs'),
-      db.getAll('prayers'),
-      db.getAll('ancillas'),
-    ]);
-
     const today = new Date();
 
     const yesterday = new Date(today);
@@ -234,44 +255,55 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
           keywords,
         })),
       ),
-      ...songs.map<HomeWorker.SearchItem>(({ number, title, content }) => ({
-        title,
-        preview: {
-          type: 'text',
-          content: number.endsWith('bis') ? `${number.slice(0, -3)}b` : number,
-        },
-        description: content,
-        link: this.localizeHref('songs', number),
-        keywords: number,
-      })),
-      ...prayers.map<HomeWorker.SearchItem>(
-        ({
-          slug,
-          title: { [this.locale]: localizedTitle, la: latinTitle },
-          content,
-        }) => ({
-          title: localizedTitle || latinTitle!,
+      ...this._songs.map<HomeWorker.SearchItem>(
+        ({ language, category, number, title, content }) => ({
+          title,
           preview: {
             type: 'text',
-            content: (localizedTitle || latinTitle)![0]!,
+            content: number.endsWith('bis')
+              ? `${number.slice(0, -3)}b`
+              : number,
           },
-          description: content?.it || content?.la,
-          link: this.localizeHref('prayers', slug),
-          keywords: slug,
+          description: content,
+          link: this.localizeHref('songs', language, category, number),
+          keywords: number,
         }),
       ),
-      ...ancillas.map<HomeWorker.SearchItem>(({ code, name, thumbnail }) => ({
-        title: 'Ancilla Domini',
-        description: name[this.locale],
-        preview: {
-          type: 'html',
-          content: `<img class="search-result-preview" src="${thumbnail}" alt="Ancilla Domini - ${
-            name[this.locale]
-          }">`,
-        },
-        link: this.localizeHref('ancillas', code),
-        keywords: code,
-      })),
+      ...this._prayers
+        .filter(
+          ({ title: { [this.locale]: localizedTitle, la: latinTitle } }) =>
+            Boolean(localizedTitle || latinTitle),
+        )
+        .map<HomeWorker.SearchItem>(
+          ({
+            slug,
+            title: { [this.locale]: localizedTitle, la: latinTitle },
+            content,
+          }) => ({
+            title: localizedTitle || latinTitle!,
+            preview: {
+              type: 'text',
+              content: (localizedTitle || latinTitle)![0]!,
+            },
+            description: content?.it || content?.la,
+            link: this.localizeHref('prayers', slug),
+            keywords: slug,
+          }),
+        ),
+      ...this._ancillas.map<HomeWorker.SearchItem>(
+        ({ code, name, thumbnail }) => ({
+          title: 'Ancilla Domini',
+          description: name[this.locale],
+          preview: {
+            type: 'html',
+            content: `<img class="search-result-preview" src="${thumbnail}" alt="Ancilla Domini - ${
+              name[this.locale]
+            }">`,
+          },
+          link: this.localizeHref('ancillas', code),
+          keywords: code,
+        }),
+      ),
     ]);
   }
 
@@ -301,6 +333,14 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     ) {
       this._searchInput.focus();
       this._searchInput.setSelectionRange(-1, -1);
+    }
+
+    if (
+      changedProperties.has('_songs') ||
+      changedProperties.has('_prayers') ||
+      changedProperties.has('_ancillas')
+    ) {
+      this._setupSearch().then(() => this._updateSearchResults());
     }
 
     if (changedProperties.has('active') && this.active) {
