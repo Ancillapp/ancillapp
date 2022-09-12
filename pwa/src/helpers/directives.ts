@@ -55,7 +55,7 @@ const songsFormatter = new HtmlDivFormatter();
 const songsTemplate = document.createElement('template');
 
 const getParagraphClass = (type: string): string => {
-  if (/^(?:rit|refrain)[:.]?$/i.test(type)) {
+  if (/^(?:rit|ritornello|chorus|ref|refrain)[:.]?$/i.test(type)) {
     return 'chorus';
   }
   if (/^bridge[:.]?$/i.test(type)) {
@@ -111,7 +111,7 @@ const formatSong = (rawString: string, enableChords = false): string => {
             '.row > .column > .lyrics',
           );
           const paragraphType = initialParagraphLyrics?.textContent?.match(
-            /^(?:rit|refrain|bridge|finale|fin|ende|\d+)[:.]?/gi,
+            /^(?:rit|ritornello|chorus|ref|refrain|bridge|finale|fin|ende|\d+)[:.]?/gi,
           )?.[0];
           if (paragraphType) {
             initialParagraphLyrics.innerHTML =
