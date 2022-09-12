@@ -5,7 +5,6 @@ import { get, set } from '../../helpers/keyval';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../../containers/page-view-element';
-import Fuse from 'fuse.js';
 import HyperList, { HyperListConfig } from 'hyperlist';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
 import { t } from '@lingui/macro';
@@ -20,13 +19,17 @@ import { SongSummary } from '../../models/song';
 
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
 
+import * as SongsListWorker from './songs-list.worker';
+
+const { configureSearch, search } =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new (SongsListWorker as any)() as typeof SongsListWorker;
+
 @customElement('songs-list')
 export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
-
-  private _fuse?: Fuse<SongSummary>;
 
   private _hyperlist?: HyperList;
 
@@ -107,27 +110,20 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
       this._songsStatus = status;
 
       if (status.data) {
-        this._refreshSongs();
+        await this._refreshSongs();
       }
     }
   }
 
-  private _refreshSongs() {
+  private async _refreshSongs() {
     const songs = (this._songsStatus.data || []).filter(
       ({ language }) => language === this._selectedLanguage,
     );
 
-    if (!this._fuse) {
-      this._fuse = new Fuse(songs, {
-        keys: ['number', 'title', 'content'],
-        ignoreLocation: true,
-      });
-    } else {
-      this._fuse.setCollection(songs);
-    }
+    await configureSearch(songs);
 
     this._displayedSongs = this._searchTerm
-      ? this._fuse.search(this._searchTerm).map(({ item }) => item)
+      ? await search(this._searchTerm)
       : songs;
 
     this._renderSongs();
@@ -171,7 +167,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
           `;
           anchor.addEventListener(
             'click',
-            ({ altKey, ctrlKey, metaKey, shiftKey }) => {
+            async ({ altKey, ctrlKey, metaKey, shiftKey }) => {
               if (altKey || ctrlKey || metaKey || shiftKey) {
                 return;
               }
@@ -179,7 +175,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
               this._searchInput!.value = '';
               this._searchTerm = '';
               this._stopSearching();
-              this._refreshSongs();
+              await this._refreshSongs();
             },
           );
 
@@ -284,7 +280,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     }
   }
 
-  protected _handleSearchKeyDown(event: KeyboardEvent) {
+  protected async _handleSearchKeyDown(event: KeyboardEvent) {
     if (event.code === 'Escape' || event.code === 'Enter') {
       event.preventDefault();
 
@@ -292,7 +288,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
         (event.target as HTMLInputElement).value = '';
         this._searchTerm = '';
         this._stopSearching();
-        this._refreshSongs();
+        await this._refreshSongs();
       }
 
       const firstSong = this._songsContainer!.querySelector<HTMLAnchorElement>(
@@ -307,7 +303,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     }
   }
 
-  protected _handleSearch({ target }: InputEvent) {
+  protected async _handleSearch({ target }: InputEvent) {
     this._searchTerm = (target as HTMLInputElement).value;
     history.replaceState(
       {},
@@ -318,7 +314,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     );
 
     this._songsContainer!.scrollTo(0, 0);
-    this._refreshSongs();
+    await this._refreshSongs();
   }
 
   protected async _handleKeyboardTypeSwitch() {
@@ -334,7 +330,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     await set('songsLanguage', newLanguage);
 
     this._selectedLanguage = newLanguage;
-    this._refreshSongs();
+    await this._refreshSongs();
     this._filtersDialogOpen = false;
   }
 
