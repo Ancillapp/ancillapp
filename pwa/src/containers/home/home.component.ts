@@ -21,7 +21,6 @@ import {
   songsIcon,
   prayersIcon,
   ancillasIcon,
-  holyMassIcon,
   user,
   settingsIcon,
   infoIcon,
@@ -176,17 +175,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         },
         description: this.localize(t`ancillasDescription`),
         link: this.localizeHref('ancillas'),
-      },
-      {
-        title: this.localize(t`holyMass`),
-        preview: {
-          type: 'html',
-          content: `<div class="search-result-preview">${renderToString(
-            holyMassIcon,
-          )}</div>`,
-        },
-        description: this.localize(t`holyMassDescription`),
-        link: this.localizeHref('holy-mass'),
       },
       {
         title: this.localize(t`login`),

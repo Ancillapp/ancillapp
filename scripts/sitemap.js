@@ -149,12 +149,6 @@ const run = async () => {
     '/de/ancilla-domini',
     '/pt/ancilla-domini',
 
-    // Holy Mass
-    '/it/santa-messa',
-    '/en/holy-mass',
-    '/de/heilige-messe',
-    '/pt/santa-messa',
-
     // Login
     '/it/accesso',
     '/en/login',

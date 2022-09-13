@@ -6,7 +6,6 @@ import {
   breviaryIcon,
   prayersIcon,
   songsIcon,
-  holyMassIcon,
   menu,
   arrowBack,
 } from '../../components/icons';
@@ -115,12 +114,6 @@ export default function template(this: HomePage) {
           <a href="${this.localizeHref('ancillas', 'latest')}">
             <span>${this.localize(t`readLatestAncilla`)}</span>
             ${ancillasIcon}
-          </a>
-        </li>
-        <li>
-          <a href="${this.localizeHref('holy-mass')}">
-            <span>${this.localize(t`bookHolyMassSeat`)}</span>
-            ${holyMassIcon}
           </a>
         </li>
       </ul>

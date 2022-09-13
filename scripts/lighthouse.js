@@ -43,10 +43,6 @@ const configs = [
     title: 'Ancilla',
   },
   {
-    url: '/it/santa-messa',
-    title: 'Holy Mass',
-  },
-  {
     url: '/it/accesso',
     title: 'Login',
   },

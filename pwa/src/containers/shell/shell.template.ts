@@ -6,7 +6,6 @@ import {
   songsIcon,
   prayersIcon,
   ancillasIcon,
-  holyMassIcon,
   settingsIcon,
   infoIcon,
   menu,
@@ -43,7 +42,6 @@ const topNavPages: [string, SVGTemplateResult][] = [
   ['songs', songsIcon],
   ['prayers', prayersIcon],
   ['ancillas', ancillasIcon],
-  ['holy-mass', holyMassIcon],
 ];
 const bottomNavPages: [string, SVGTemplateResult][] = [
   ['settings', settingsIcon],
