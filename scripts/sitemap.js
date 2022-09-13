@@ -190,29 +190,6 @@ const run = async () => {
       `/de/ancilla-domini/${code}`,
       `/pt/ancilla-domini/${code}`,
     ]),
-
-    // Breviary details
-    ...Array.from({ length: 32 }).flatMap((_, index) => {
-      const date = addDays(midday, index - 2)
-        .toISOString()
-        .slice(0, 10);
-
-      return [
-        'invitatory',
-        'matins',
-        'lauds',
-        'terce',
-        'sext',
-        'none',
-        'vespers',
-        'compline',
-      ].flatMap((prayer) => [
-        `/it/breviario/${breviaryTranslations[prayer].it}/${date}`,
-        `/en/breviary/${breviaryTranslations[prayer].en}/${date}`,
-        `/de/brevier/${breviaryTranslations[prayer].de}/${date}`,
-        `/pt/breviario/${breviaryTranslations[prayer].pt}/${date}`,
-      ]);
-    }),
   ];
 
   const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.reduce(

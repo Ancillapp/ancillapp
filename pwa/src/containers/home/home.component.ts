@@ -209,40 +209,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`infoDescription`),
         link: this.localizeHref('info'),
       },
-      ...[
-        'invitatory',
-        'matins',
-        'lauds',
-        'terce',
-        'sext',
-        'none',
-        'vespers',
-        'compline',
-      ].flatMap<HomeWorker.SearchItem>((prayer) =>
-        dates.map(({ date, keywords }) => ({
-          title: `${
-            prayersTranslations[prayer as keyof typeof prayersTranslations]
-          } - ${Intl.DateTimeFormat(this.locale, {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          }).format(date)}`,
-          preview: {
-            type: 'text',
-            content:
-              prayersTranslations[
-                prayer as keyof typeof prayersTranslations
-              ][0],
-          },
-          description: this.localize(t`breviaryDescription`),
-          link: this.localizeHref(
-            'breviary',
-            prayer,
-            date.toISOString().slice(0, 10),
-          ),
-          keywords,
-        })),
-      ),
       ...this._songs.map<HomeWorker.SearchItem>(
         ({ language, category, number, title, content }) => ({
           title,

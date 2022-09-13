@@ -15,10 +15,6 @@ const configs = [
     title: 'Breviary index',
   },
   {
-    url: `/it/breviario/invitatory/${new Date().toISOString().slice(0, 10)}`,
-    title: 'Breviary page',
-  },
-  {
     url: '/it/canti',
     title: 'Songs',
   },
