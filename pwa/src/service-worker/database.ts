@@ -1,243 +1,82 @@
-import {
-  openDB,
-  DBSchema,
-  IDBPDatabase,
-  deleteDB,
-  IDBPObjectStore,
-  StoreNames,
-} from 'idb';
-import type { SongCategory, SongLanguage } from '../models/song';
+import type { DBRequestEvent, ProxyDB } from '../helpers/database';
 
-export interface AncillappDataDBSchema extends DBSchema {
-  settings: {
-    key: string;
-    value: string | number | boolean | Date | null | undefined;
-  };
-  songs: {
-    key: [string, string, string];
-    value: {
-      language: SongLanguage;
-      category: SongCategory;
-      number: string;
-      title: string;
-      content: string;
-    };
-    indexes: {
-      byLanguage: string;
-      byCategory: string;
-      byNumber: string;
-      byLanguageAndCategory: [string, string];
-      byLanguageAndNumber: [string, string];
-      byCategoryAndNumber: [string, string];
-    };
-  };
-  prayers: {
-    key: string;
-    value: {
-      slug: string;
-      title: {
-        it?: string;
-        en?: string;
-        pt?: string;
-        de?: string;
-        la?: string;
-      };
-      content: {
-        it?: string;
-        en?: string;
-        pt?: string;
-        de?: string;
-        la?: string;
-      };
-    };
-  };
-  ancillas: {
-    key: string;
-    value: {
-      code: string;
-      name: {
-        it: string;
-        en: string;
-        pt: string;
-        de: string;
-      };
-      link: string;
-      thumbnail: string;
-    };
-  };
-}
+const channel = new BroadcastChannel('db-channel');
 
-export type AncillappDataDB = IDBPDatabase<AncillappDataDBSchema>;
+const queues: Record<
+  string,
+  {
+    resolve: (value: unknown) => void;
+    reject: (reason?: unknown) => void;
+  }[]
+> = {};
 
-let dbPromise: Promise<AncillappDataDB>;
-
-export const init = () => {
-  if (!dbPromise) {
-    deleteDB('ancillapp').catch(() => {
-      // Try to delete the old DB, ignore errors if something goes wrong
+const setupEventListener = async () => {
+  channel.addEventListener('message', (event) => {
+    if (event.data.action !== 'database') {
+      return;
+    }
+    if (process.env.BROWSER_ENV !== 'production') {
+      console.groupCollapsed('DB response received from browser');
+      const result =
+        event.data.status === 'fulfilled'
+          ? event.data.value
+          : event.data.reason;
+      console.info(
+        `${event.data.method}(${event.data.args
+          .map((arg: unknown) => JSON.stringify(arg))
+          .join(', ')}) => ${JSON.stringify(result)} (${event.data.status})`,
+      );
+      console.groupEnd();
+    }
+    const requestId = `${event.data.method}-${event.data.args.join()}`;
+    queues[requestId].forEach(({ resolve, reject }) => {
+      if (event.data.status === 'fulfilled') {
+        resolve(event.data.value);
+      } else {
+        reject(new Error(event.data.reason));
+      }
     });
-    dbPromise = openDB<AncillappDataDBSchema>('ancillapp-data', 1, {
-      upgrade(db) {
-        db.createObjectStore('settings');
-
-        const songsStore = db.createObjectStore('songs', {
-          keyPath: ['language', 'category', 'number'],
-        });
-        songsStore.createIndex('byLanguage', 'language');
-        songsStore.createIndex('byCategory', 'category');
-        songsStore.createIndex('byNumber', 'number');
-        songsStore.createIndex('byLanguageAndCategory', [
-          'language',
-          'category',
-        ]);
-        songsStore.createIndex('byLanguageAndNumber', ['language', 'number']);
-        songsStore.createIndex('byCategoryAndNumber', ['category', 'number']);
-
-        db.createObjectStore('prayers', {
-          keyPath: 'slug',
-        });
-
-        db.createObjectStore('ancillas', {
-          keyPath: 'code',
-        });
-      },
-    });
-  }
-  return dbPromise;
+    queues[requestId] = [];
+  });
 };
 
-export interface DBRequestEvent<T extends keyof ProxyDB = keyof ProxyDB> {
-  action: 'database';
-  method: T;
-  args: Parameters<ProxyDB[T]>;
-}
-
-export type AncillappDataObjectStore = IDBPObjectStore<
-  AncillappDataDBSchema,
-  StoreNames<AncillappDataDBSchema>[],
-  StoreNames<AncillappDataDBSchema>,
-  'readwrite'
->;
-
-export type ProxyObjectStore = Pick<
-  AncillappDataObjectStore,
-  | 'add'
-  | 'clear'
-  | 'count'
-  | 'delete'
-  | 'get'
-  | 'getAll'
-  | 'getAllKeys'
-  | 'getKey'
-  | 'put'
->;
-
-export interface ProxyDBBatchOperation<
-  T extends keyof ProxyObjectStore = keyof ProxyObjectStore,
-> {
-  objectStore: StoreNames<AncillappDataDBSchema>;
-  method: T;
-  args: Parameters<ProxyObjectStore[T]>;
-}
-
-export interface ProxyDB
-  extends Pick<
-    AncillappDataDB,
-    // Allowed DB methods through the proxy
-    | 'add'
-    | 'clear'
-    | 'count'
-    | 'countFromIndex'
-    | 'delete'
-    | 'get'
-    | 'getFromIndex'
-    | 'getAll'
-    | 'getAllFromIndex'
-    | 'getAllKeys'
-    | 'getAllKeysFromIndex'
-    | 'getKey'
-    | 'getKeyFromIndex'
-    | 'put'
-  > {
-  batch(
-    // We need this double type because TypeScript is buggy
-    // when multiple signatures exist for the same function
-    entities:
-      | Parameters<AncillappDataDB['transaction']>[0]
-      | Parameters<AncillappDataDB['transaction']>[0][0],
-    mode: Parameters<AncillappDataDB['transaction']>[1],
-    options: Parameters<AncillappDataDB['transaction']>[2],
-    operations: ProxyDBBatchOperation[],
-  ): Promise<void>;
-}
-
-export const handleRequest = async (event: MessageEvent<DBRequestEvent>) => {
-  if (process.env.BROWSER_ENV !== 'production') {
-    console.groupCollapsed('DB request received from browser');
-    console.info(
-      `${event.data.method}(${event.data.args
-        .map((arg) => JSON.stringify(arg))
-        .join(', ')})`,
-    );
-    console.groupEnd();
-  }
-
-  const db = await init();
-  switch (event.data.method) {
-    case 'batch': {
-      const [entities, mode, options, operations] = event.data
-        .args as Parameters<ProxyDB['batch']>;
-      // We need this cast to any for the same reason above
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const transaction = db.transaction(entities as any, mode, options);
-
-      const objectStores: Record<string, ProxyObjectStore> = {};
-
-      operations.forEach(({ objectStore, method, args }) => {
-        if (!objectStores[objectStore]) {
-          objectStores[objectStore] = transaction.objectStore(
-            objectStore,
-          ) as ProxyObjectStore;
-        }
-        // TODO: discover what's wrong with this type 🛟
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (objectStores[objectStore][method] as any)(...args);
-      });
-
-      try {
-        await transaction.done;
-        event.source!.postMessage({
-          ...event.data,
-          status: 'fulfilled',
-        });
-      } catch (reason) {
-        event.source!.postMessage({
-          ...event.data,
-          status: 'rejected',
-          reason,
-        });
-      }
-
-      break;
+const waitForRequestResponse = (request: DBRequestEvent, timeout: number) =>
+  new Promise((resolve, reject) => {
+    const requestId = `${request.method}-${request.args.join()}`;
+    if (!queues[requestId]) {
+      queues[requestId] = [];
     }
-    default: {
-      try {
-        // TODO: same as above 🛟
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const value = await (db as any)[event.data.method](...event.data.args);
-        event.source!.postMessage({
-          ...event.data,
-          status: 'fulfilled',
-          value,
-        });
-      } catch (reason) {
-        event.source!.postMessage({
-          ...event.data,
-          status: 'rejected',
-          reason,
-        });
-      }
-      break;
-    }
-  }
+    const arrayLength = queues[requestId].push({
+      resolve,
+      reject,
+    });
+    setTimeout(() => {
+      reject(new Error('Timeout'));
+      queues[requestId].splice(arrayLength - 1, 1);
+    }, timeout);
+  });
+
+const sendRequest = async <T extends keyof ProxyDB = keyof ProxyDB>(
+  method: T,
+  ...args: Parameters<ProxyDB[T]>
+) => {
+  const request: DBRequestEvent = {
+    action: 'database',
+    method,
+    args,
+  };
+  const eventPromise = waitForRequestResponse(request, 10000);
+  channel.postMessage(request);
+  return eventPromise;
 };
+
+setupEventListener();
+export const db = new Proxy({} as ProxyDB, {
+  get:
+    (_, method) =>
+    (...args: unknown[]) =>
+      sendRequest(
+        method as keyof ProxyDB,
+        ...(args as Parameters<ProxyDB[keyof ProxyDB]>),
+      ),
+});

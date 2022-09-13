@@ -1,9 +1,5 @@
-import { db } from './database';
-import {
-  AncillappDataDBSchema,
-  ProxyDBBatchOperation,
-  ProxyObjectStore,
-} from '../service-worker/database';
+import { init as initDB } from './database';
+import { AncillappDataDBSchema } from './database';
 
 type Entity = keyof Pick<
   AncillappDataDBSchema,
@@ -34,6 +30,8 @@ const entityToDetailFieldMap: {
   prayers: 'content',
 };
 
+const dbPromise = initDB();
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const updateLocalDBSummaryData = async <
   T extends Entity,
@@ -43,6 +41,8 @@ const updateLocalDBSummaryData = async <
   entity: T,
   cachedData: U,
 ): Promise<U> => {
+  const db = await dbPromise;
+
   const idFields = entityToIdFieldsMap[entity];
 
   const response = await fetch(request);
@@ -63,24 +63,20 @@ const updateLocalDBSummaryData = async <
     ),
   ) as U;
 
-  db.batch(entity, 'readwrite', { durability: 'strict' }, [
-    ...newData.map<ProxyDBBatchOperation<keyof ProxyObjectStore>>((data) => ({
-      objectStore: entity,
-      method: 'put',
-      args: [data],
-    })),
-    ...deletedData.map<ProxyDBBatchOperation<keyof ProxyObjectStore>>(
-      (item) => ({
-        objectStore: entity,
-        method: 'delete',
-        args: [
-          idFields.map((idField) => item[idField]) as unknown as Parameters<
-            ProxyObjectStore['delete']
-          >[0],
-        ],
-      }),
+  const transaction = db.transaction(entity, 'readwrite');
+
+  const objectStore = transaction.objectStore(entity);
+
+  newData.forEach((data) => objectStore.put(data));
+  deletedData.forEach((data) =>
+    objectStore.delete(
+      idFields.map(
+        (idField) => data[idField],
+      ) as unknown as AncillappDataDBSchema[T]['key'],
     ),
-  ]);
+  );
+
+  await transaction.done;
 
   return newData;
 };
@@ -90,6 +86,8 @@ const updateLocalDBDetailData = async <T extends Record<string, unknown>>(
   entity: Entity,
   cachedData?: T,
 ): Promise<T> => {
+  const db = await dbPromise;
+
   const response = await fetch(request);
 
   const parsedResponse = await response.json();
@@ -133,7 +131,7 @@ export async function* cacheAndNetwork<T>(
   try {
     yield { loading: true, refreshing: false };
 
-    const request = await requestInfo;
+    const [db, request] = await Promise.all([dbPromise, requestInfo]);
 
     const match = (typeof request === 'string' ? request : request.url).match(
       /\/api\/([a-z]+)[/?]?(.*)/,

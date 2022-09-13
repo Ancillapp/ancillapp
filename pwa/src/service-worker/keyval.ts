@@ -1,18 +1,18 @@
-import { init } from './database';
-import type { AncillappDataDBSchema } from '../service-worker/database';
+import { db } from './database';
+import type { AncillappDataDBSchema } from '../helpers/database';
 
-export const get = async <T extends AncillappDataDBSchema['settings']['value']>(
+export const get = <T extends AncillappDataDBSchema['settings']['value']>(
   key: AncillappDataDBSchema['settings']['key'],
-) => (await init()).get('settings', key) as Promise<T>;
+) => db.get('settings', key) as Promise<T>;
 
-export const set = async (
+export const set = (
   key: AncillappDataDBSchema['settings']['key'],
   val: AncillappDataDBSchema['settings']['value'],
-) => (await init()).put('settings', val, key);
+) => db.put('settings', val, key);
 
-export const remove = async (key: AncillappDataDBSchema['settings']['key']) =>
-  (await init()).delete('settings', key);
+export const remove = (key: AncillappDataDBSchema['settings']['key']) =>
+  db.delete('settings', key);
 
-export const clear = async () => (await init()).clear('settings');
+export const clear = () => db.clear('settings');
 
-export const keys = async () => (await init()).getAllKeys('settings');
+export const keys = () => db.getAllKeys('settings');
