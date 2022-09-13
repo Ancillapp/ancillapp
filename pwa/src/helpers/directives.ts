@@ -61,7 +61,7 @@ const getParagraphClass = (type: string): string => {
   if (/^bridge[:.]?$/i.test(type)) {
     return 'bridge';
   }
-  if (/^(?:finale|fin|ende)[:.]?$/i.test(type)) {
+  if (/^(?:finale|fin|fim|ende)[:.]?$/i.test(type)) {
     return 'ending';
   }
   return '';
@@ -111,7 +111,7 @@ const formatSong = (rawString: string, enableChords = false): string => {
             '.row > .column > .lyrics',
           );
           const paragraphType = initialParagraphLyrics?.textContent?.match(
-            /^(?:rit|ritornello|chorus|ref|refrain|bridge|finale|fin|ende|\d+)[:.]?/gi,
+            /^(?:rit|ritornello|chorus|ref|refrain|bridge|finale|fin|fim|ende|\d+)[:.]?/gi,
           )?.[0];
           if (paragraphType) {
             initialParagraphLyrics.innerHTML =
