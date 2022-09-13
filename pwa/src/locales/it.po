@@ -597,7 +597,7 @@ msgstr "Sfoglia il librone dei canti usato della Fraternità Francescana di Beta
 
 #: src/containers/songs-list/songs-list.template.ts:85
 msgid "songsDownload"
-msgstr "Vuoi scaricare tutte le canzoni ora in modo da poterle consultare anche quando sei offline?"
+msgstr "Vuoi scaricare tutti i canti ora in modo da poterli consultare anche quando sei offline?"
 
 #: src/containers/ancillas-list/ancillas-list.template.ts:45
 #: src/containers/prayers-list/prayers-list.template.ts:48
