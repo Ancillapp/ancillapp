@@ -4,7 +4,7 @@ import HtmlPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { InjectManifest as InjectManifestPlugin } from 'workbox-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer-brotli';
-import { Configuration, Module } from 'webpack';
+import { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import baseConfig from './base.config';
 
@@ -35,22 +35,7 @@ const config: Configuration = merge(baseConfig, {
       chunks: 'all',
       maxInitialRequests: Infinity,
       maxAsyncRequests: Infinity,
-      minSize: 0,
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name(module: Module) {
-            // get the name. E.g. node_modules/packageName/not/this/part.js
-            // or node_modules/packageName
-            const packageName = module.context!.match(
-              /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-            )![1];
-
-            // npm package names are URL-safe, but some servers don't like @ symbols
-            return `npm.${packageName.replace('@', '')}`;
-          },
-        },
-      },
+      maxSize: 100000,
     },
   },
   plugins: [
