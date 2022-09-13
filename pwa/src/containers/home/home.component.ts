@@ -26,7 +26,6 @@ import {
   infoIcon,
 } from '../../components/icons';
 import { renderToString } from '../../helpers/utils';
-import { prayersTranslations } from '../breviary-index/breviary-index.template';
 
 import * as HomeWorker from './home.worker';
 import { cacheAndNetwork } from '../../helpers/cache-and-network';
@@ -100,25 +99,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
 
     const dayAfterTomorrow = new Date(tomorrow);
     dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 1);
-
-    const dates = [
-      {
-        date: today,
-        keywords: this.localize(t`today`),
-      },
-      {
-        date: tomorrow,
-        keywords: this.localize(t`tomorrow`),
-      },
-      {
-        date: dayAfterTomorrow,
-        keywords: this.localize(t`dayAfterTomorrow`),
-      },
-      {
-        date: yesterday,
-        keywords: this.localize(t`yesterday`),
-      },
-    ];
 
     await configureSearch([
       {
