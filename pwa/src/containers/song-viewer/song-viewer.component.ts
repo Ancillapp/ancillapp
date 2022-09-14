@@ -27,7 +27,13 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
   protected render = template;
 
   @property({ type: String })
-  public song?: string;
+  public language?: string;
+
+  @property({ type: String })
+  public category?: string;
+
+  @property({ type: String })
+  public number?: string;
 
   @property({ type: Object })
   protected _songStatus: APIResponse<Song> = {
@@ -44,15 +50,23 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
     super.updated(changedProperties);
 
     if (this.active) {
-      if (changedProperties.has('song') && this.song) {
-        if (!_songsStatusesCache.has(this.song)) {
+      if (
+        (changedProperties.has('language') ||
+          changedProperties.has('category') ||
+          changedProperties.has('number')) &&
+        this.language &&
+        this.category &&
+        this.number
+      ) {
+        const songId = [this.language, this.category, this.number].join('/');
+        if (!_songsStatusesCache.has(songId)) {
           for await (const status of cacheAndNetwork<Song>(
-            `${config.apiUrl}/songs/${this.song}`,
+            `${config.apiUrl}/songs/${songId}`,
           )) {
             this._songStatus = status;
 
             if (status.data) {
-              _songsStatusesCache.set(this.song, status);
+              _songsStatusesCache.set(songId, status);
 
               const pageTitle = `Ancillapp - ${this.localize(t`songs`)} - ${
                 status.data.number
@@ -81,7 +95,7 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
             }
           }
         } else {
-          this._songStatus = _songsStatusesCache.get(this.song)!;
+          this._songStatus = _songsStatusesCache.get(songId)!;
         }
       }
       if (changedProperties.has('_songStatus')) {

@@ -6,7 +6,9 @@ import {
   IDBPObjectStore,
   StoreNames,
 } from 'idb';
-import type { SongCategory, SongLanguage } from '../models/song';
+import type { Magazine } from '../models/magazine';
+import type { Prayer } from '../models/prayer';
+import type { Song } from '../models/song';
 
 const channel = new BroadcastChannel('db-channel');
 
@@ -16,56 +18,24 @@ export interface AncillappDataDBSchema extends DBSchema {
     value: string | number | boolean | Date | null | undefined;
   };
   songs: {
-    key: [string, string, string];
-    value: {
-      language: SongLanguage;
-      category: SongCategory;
-      number: string;
-      title: string;
-      content: string;
-    };
+    key: [Song['language'], Song['category'], Song['number']];
+    value: Song;
     indexes: {
-      byLanguage: string;
-      byCategory: string;
-      byNumber: string;
-      byLanguageAndCategory: [string, string];
-      byLanguageAndNumber: [string, string];
-      byCategoryAndNumber: [string, string];
+      byLanguage: Song['language'];
+      byCategory: Song['category'];
+      byNumber: Song['number'];
+      byLanguageAndCategory: [Song['language'], Song['category']];
+      byLanguageAndNumber: [Song['language'], Song['number']];
+      byCategoryAndNumber: [Song['category'], Song['number']];
     };
   };
   prayers: {
-    key: string;
-    value: {
-      slug: string;
-      title: {
-        it?: string;
-        en?: string;
-        pt?: string;
-        de?: string;
-        la?: string;
-      };
-      content: {
-        it?: string;
-        en?: string;
-        pt?: string;
-        de?: string;
-        la?: string;
-      };
-    };
+    key: Prayer['slug'];
+    value: Prayer;
   };
-  ancillas: {
-    key: string;
-    value: {
-      code: string;
-      name: {
-        it: string;
-        en: string;
-        pt: string;
-        de: string;
-      };
-      link: string;
-      thumbnail: string;
-    };
+  magazines: {
+    key: [Magazine['type'], Magazine['code']];
+    value: Magazine;
   };
 }
 
@@ -99,8 +69,8 @@ export const init = () => {
           keyPath: 'slug',
         });
 
-        db.createObjectStore('ancillas', {
-          keyPath: 'code',
+        db.createObjectStore('magazines', {
+          keyPath: ['type', 'code'],
         });
       },
     });

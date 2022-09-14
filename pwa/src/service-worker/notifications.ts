@@ -73,7 +73,7 @@ self.addEventListener('notificationclick', (event) => {
     case 'dismiss':
       break;
     case 'latest-ancilla':
-      event.waitUntil(openOrFocus('ancillas', 'latest'));
+      event.waitUntil(openOrFocus('ancilla-domini', 'latest'));
       break;
     default:
       event.waitUntil(openOrFocus());

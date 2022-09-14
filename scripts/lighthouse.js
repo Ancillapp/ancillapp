@@ -31,12 +31,16 @@ const configs = [
     title: 'Prayer',
   },
   {
-    url: '/it/ancilla-domini',
-    title: 'Ancillas',
+    url: '/it/riviste',
+    title: 'Magazines',
   },
   {
-    url: '/it/ancilla-domini/AD4_2019',
-    title: 'Ancilla',
+    url: '/it/riviste/ancilla-domini/AD4_2019',
+    title: 'Ancilla Domini',
+  },
+  {
+    url: '/it/riviste/sempreconnessi/AD4_2019',
+    title: '#sempreconnessi',
   },
   {
     url: '/it/accesso',

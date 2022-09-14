@@ -7,7 +7,7 @@ import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/macro';
 import { Song } from '../../models/song';
 import { Prayer } from '../../models/prayer';
-import { Ancilla } from '../../models/ancilla';
+import { Magazine, MagazineType } from '../../models/magazine';
 
 import sharedStyles from '../../shared.styles';
 import styles from './home.styles';
@@ -20,7 +20,7 @@ import {
   breviaryIcon,
   songsIcon,
   prayersIcon,
-  ancillasIcon,
+  magazinesIcon,
   user,
   settingsIcon,
   infoIcon,
@@ -62,14 +62,14 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   private _prayers: Prayer[] = [];
 
   @state()
-  private _ancillas: Ancilla[] = [];
+  private _magazines: Magazine[] = [];
 
   constructor() {
     super();
 
     this._loadSearchData('songs', '_songs');
     this._loadSearchData('prayers', '_prayers');
-    this._loadSearchData('ancillas', '_ancillas');
+    this._loadSearchData('magazines', '_magazines');
     this._setupSearch();
   }
 
@@ -146,15 +146,15 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         link: this.localizeHref('prayers'),
       },
       {
-        title: this.localize(t`ancillas`),
+        title: this.localize(t`magazines`),
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            ancillasIcon,
+            magazinesIcon,
           )}</div>`,
         },
-        description: this.localize(t`ancillasDescription`),
-        link: this.localizeHref('ancillas'),
+        description: this.localize(t`magazinesDescription`),
+        link: this.localizeHref('magazines'),
       },
       {
         title: this.localize(t`login`),
@@ -224,19 +224,23 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
             keywords: slug,
           }),
         ),
-      ...this._ancillas.map<HomeWorker.SearchItem>(
-        ({ code, name, thumbnail }) => ({
-          title: 'Ancilla Domini',
-          description: name[this.locale],
-          preview: {
-            type: 'html',
-            content: `<img class="search-result-preview" src="${thumbnail}" alt="Ancilla Domini - ${
-              name[this.locale]
-            }">`,
-          },
-          link: this.localizeHref('ancillas', code),
-          keywords: code,
-        }),
+      ...this._magazines.map<HomeWorker.SearchItem>(
+        ({ type, code, name, thumbnail }) => {
+          const magazineName =
+            type === MagazineType.ANCILLA_DOMINI
+              ? 'Ancilla Domini'
+              : '#sempreconnessi';
+          return {
+            title: magazineName,
+            description: name,
+            preview: {
+              type: 'html',
+              content: `<img class="search-result-preview" src="${thumbnail}" alt="${magazineName} - ${name}">`,
+            },
+            link: this.localizeHref('magazines', type, code),
+            keywords: code,
+          };
+        },
       ),
     ]);
   }
@@ -272,7 +276,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     if (
       changedProperties.has('_songs') ||
       changedProperties.has('_prayers') ||
-      changedProperties.has('_ancillas')
+      changedProperties.has('_magazines')
     ) {
       this._setupSearch().then(() => this._updateSearchResults());
     }

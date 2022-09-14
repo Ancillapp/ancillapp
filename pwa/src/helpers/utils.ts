@@ -69,3 +69,15 @@ export const renderToString = ({ strings, values }: TemplateResult): string => {
   );
   return strings.reduce((acc, s, i) => acc + s + v[i], '');
 };
+
+export const toLocalTimeZone = (date: Date) => {
+  const todayInCurrentTimeZone = new Date();
+
+  const localTimeZoneDate = new Date(date);
+  localTimeZoneDate.setHours(
+    localTimeZoneDate.getHours() +
+      todayInCurrentTimeZone.getTimezoneOffset() / 60,
+  );
+
+  return localTimeZoneDate;
+};

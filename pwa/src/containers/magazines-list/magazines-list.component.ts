@@ -1,5 +1,5 @@
 import { PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
@@ -8,17 +8,17 @@ import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/macro';
 
 import sharedStyles from '../../shared.styles';
-import styles from './ancillas-list.styles';
-import template from './ancillas-list.template';
+import styles from './magazines-list.styles';
+import template from './magazines-list.template';
 import { urlBase64ToUint8Array } from '../../helpers/utils';
 import { APIResponse, cacheAndNetwork } from '../../helpers/cache-and-network';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
-import { Ancilla } from '../../models/ancilla';
+import { Magazine, MagazineType } from '../../models/magazine';
 
-@customElement('ancillas-list')
-export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
+@customElement('magazines-list')
+export class MagazinesList extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -27,13 +27,19 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
   protected _needUserNotificationsPermission?: boolean;
 
   @property({ type: Object })
-  protected _ancillasStatus: APIResponse<Ancilla[]> = {
+  protected _magazinesStatus: APIResponse<Magazine[]> = {
     loading: true,
     refreshing: false,
   };
 
-  @property({ type: Array })
-  protected _displayedAncillas: Ancilla[] = [];
+  @state()
+  protected _magazines: Magazine[] = [];
+
+  @state()
+  protected _displayedMagazines: Magazine[] = [];
+
+  @property({ type: String })
+  public type?: MagazineType;
 
   constructor() {
     super();
@@ -47,17 +53,17 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
       }
     });
 
-    this._prepareAncillas();
+    this._prepareMagazines();
   }
 
-  private async _prepareAncillas() {
-    for await (const status of cacheAndNetwork<Ancilla[]>(
-      `${config.apiUrl}/ancillas`,
+  private async _prepareMagazines() {
+    for await (const status of cacheAndNetwork<Magazine[]>(
+      `${config.apiUrl}/magazines`,
     )) {
-      this._ancillasStatus = status;
+      this._magazinesStatus = status;
 
       if (status.data) {
-        this._displayedAncillas = status.data;
+        this._magazines = status.data;
       }
     }
   }
@@ -65,19 +71,37 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
-    if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localize(t`ancillas`)}`;
+    if (
+      (changedProperties.has('type') || changedProperties.has('_magazines')) &&
+      this.active &&
+      this.type &&
+      this._magazines
+    ) {
+      this._displayedMagazines = this._magazines
+        .filter(({ type }) => type === this.type)
+        .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
-      updateMetadata({
-        title: pageTitle,
-        description: this.localize(t`ancillasDescription`),
-      });
+      if (changedProperties.has('active')) {
+        const magazineType =
+          this.type === MagazineType.ANCILLA_DOMINI
+            ? 'Ancilla Domini'
+            : '#sempreconnessi';
 
-      logEvent('page_view', {
-        page_title: pageTitle,
-        page_location: window.location.href,
-        page_path: window.location.pathname,
-      });
+        const pageTitle = `Ancillapp - ${this.localize(
+          t`magazines`,
+        )} - ${magazineType}`;
+
+        updateMetadata({
+          title: pageTitle,
+          description: this.localize(t`magazinesDescription ${magazineType}`),
+        });
+
+        logEvent('page_view', {
+          page_title: pageTitle,
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+        });
+      }
     }
   }
 
@@ -126,6 +150,6 @@ export class AncillasList extends localize(withTopAppBar(PageViewElement)) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'ancillas-list': AncillasList;
+    'magazines-list': MagazinesList;
   }
 }

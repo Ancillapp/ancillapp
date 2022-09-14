@@ -2,7 +2,7 @@ import { html, nothing } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import {
-  ancillasIcon,
+  magazinesIcon,
   breviaryIcon,
   prayersIcon,
   songsIcon,
@@ -111,9 +111,19 @@ export default function template(this: HomePage) {
           </a>
         </li>
         <li>
-          <a href="${this.localizeHref('ancillas', 'latest')}">
+          <a
+            href="${this.localizeHref('magazines', 'ancilla-domini', 'latest')}"
+          >
             <span>${this.localize(t`readLatestAncilla`)}</span>
-            ${ancillasIcon}
+            ${magazinesIcon}
+          </a>
+        </li>
+        <li>
+          <a
+            href="${this.localizeHref('magazines', 'sempreconnessi', 'latest')}"
+          >
+            <span>${this.localize(t`readLatestSempreConnessi`)}</span>
+            ${magazinesIcon}
           </a>
         </li>
       </ul>

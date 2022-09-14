@@ -15,6 +15,7 @@ import config from '../../config/default.json';
 import { get, set } from '../../helpers/keyval';
 import { logEvent } from '../../helpers/firebase';
 import { Fraternity, HolyMassBooking } from '../../models/holy-mass';
+import { toLocalTimeZone } from '../../helpers/utils';
 import { sendEmailVerification } from 'firebase/auth';
 
 @customElement('holy-mass-page')
@@ -131,7 +132,7 @@ export class HolyMassPage extends localize(
         .then((holyMasses: HolyMassBooking[]) =>
           holyMasses.filter(
             ({ date: dateString }) =>
-              this._toLocalTimeZone(new Date(dateString)) > twoHoursAgo,
+              toLocalTimeZone(new Date(dateString)) > twoHoursAgo,
           ),
         );
     }
@@ -367,7 +368,7 @@ export class HolyMassPage extends localize(
 
     return allTimes.filter((time) => {
       const datetime = new Date(this._formatDateTime(this._selectedDate, time));
-      const currentTimeZoneDatetime = this._toLocalTimeZone(datetime);
+      const currentTimeZoneDatetime = toLocalTimeZone(datetime);
 
       return now < currentTimeZoneDatetime;
     });
@@ -382,16 +383,6 @@ export class HolyMassPage extends localize(
       encodedDateTime.match(/(\d{4}-\d{2}-\d{2})T0*([\d]+:[\d]+)/) || [];
 
     return { date, time };
-  }
-
-  protected _toLocalTimeZone(date: Date) {
-    const todayInCurrentTimeZone = new Date();
-
-    date.setHours(
-      date.getHours() + todayInCurrentTimeZone.getTimezoneOffset() / 60,
-    );
-
-    return date;
   }
 }
 

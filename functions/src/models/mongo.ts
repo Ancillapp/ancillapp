@@ -1,13 +1,27 @@
 import type { ObjectId } from 'mongodb';
 
-export interface Ancilla {
+export enum MagazineType {
+  ANCILLA_DOMINI = 'ancilla-domini',
+  SEMPRECONNESSI = 'sempreconnessi',
+}
+
+export enum MagazineLanguage {
+  ITALIAN = 'it',
+  GERMAN = 'de',
+}
+
+export enum MagazineFrequency {
+  BIMONTHLY = 'bimonthly',
+  QUARTERLY = 'quarterly',
+  SPECIAL = 'special',
+}
+
+export interface Magazine {
+  type: MagazineType;
   code: string;
-  name: {
-    en: string;
-    it: string;
-    de: string;
-    pt: string;
-  };
+  language: MagazineLanguage;
+  frequency: MagazineFrequency;
+  name: string;
   date: Date;
 }
 

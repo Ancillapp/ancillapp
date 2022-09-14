@@ -72,7 +72,7 @@ const run = async () => {
 
   const db = client.db('Main');
 
-  const [songs, prayers, ancillas] = await Promise.all([
+  const [songs, prayers, magazines] = await Promise.all([
     db
       .collection('songs')
       .find(
@@ -100,12 +100,13 @@ const run = async () => {
       )
       .toArray(),
     db
-      .collection('ancillas')
+      .collection('magazines')
       .find(
         {},
         {
           projection: {
             _id: 0,
+            type: 1,
             code: 1,
           },
         },
@@ -143,11 +144,23 @@ const run = async () => {
     '/de/gebete',
     '/pt/oracoes',
 
-    // Ancillas list
-    '/it/ancilla-domini',
-    '/en/ancilla-domini',
-    '/de/ancilla-domini',
-    '/pt/ancilla-domini',
+    // Magazines index
+    '/it/riviste',
+    '/en/magazines',
+    '/de/zeitschriften',
+    '/pt/revistas',
+
+    // Ancilla Domini list
+    '/it/riviste/ancilla-domini',
+    '/en/magazines/ancilla-domini',
+    '/de/zeitschriften/ancilla-domini',
+    '/pt/revistas/ancilla-domini',
+
+    // #sempreconnessi list
+    '/it/riviste/sempreconnessi',
+    '/en/magazines/sempreconnessi',
+    '/de/zeitschriften/sempreconnessi',
+    '/pt/revistas/sempreconnessi',
 
     // Login
     '/it/accesso',
@@ -183,12 +196,12 @@ const run = async () => {
       `/pt/oracoes/${slug}`,
     ]),
 
-    // Ancillas details
-    ...ancillas.flatMap(({ code }) => [
-      `/it/ancilla-domini/${code}`,
-      `/en/ancilla-domini/${code}`,
-      `/de/ancilla-domini/${code}`,
-      `/pt/ancilla-domini/${code}`,
+    // Magazines details
+    ...magazines.flatMap(({ type, code }) => [
+      `/it/riviste/${type}/${code}`,
+      `/en/magazines/${type}/${code}`,
+      `/de/zeitschriften/${type}/${code}`,
+      `/pt/revistas/${type}/${code}`,
     ]),
   ];
 

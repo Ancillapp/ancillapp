@@ -13,34 +13,18 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/containers/holy-mass/holy-mass.template.ts:149
+#: src/containers/holy-mass/holy-mass.template.ts:150
 msgid "actions"
 msgstr "Actions"
 
-#: src/containers/ancilla-viewer/ancilla-viewer.component.ts:63
-msgid "ancillaDescription {name}"
-msgstr "Browse the Ancilla Domini \"{name}\" of the Franciscan Fraternity of Bethany."
-
-#: src/containers/ancilla-viewer/ancilla-viewer.component.ts:59
-#: src/containers/ancillas-list/ancillas-list.component.ts:69
-#: src/containers/ancillas-list/ancillas-list.template.ts:23
-#: src/containers/home/home.component.ts:169
-#: src/containers/shell/shell.template.ts:33
-msgid "ancillas"
-msgstr "Ancilla Domini"
-
-#: src/containers/ancillas-list/ancillas-list.component.ts:73
-#: src/containers/home/home.component.ts:176
-msgid "ancillasDescription"
-msgstr "Browse the Ancilla Dominis of the Franciscan Fraternity of Bethany."
-
-#: src/containers/holy-mass/holy-mass.template.ts:115
+#: src/containers/holy-mass/holy-mass.template.ts:116
 msgid "availableSeats"
 msgstr "Available seats"
 
-#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:15
 #: src/containers/breviary-viewer/breviary-viewer.template.ts:21
 #: src/containers/home/home.template.ts:50
+#: src/containers/magazine-viewer/magazine-viewer.template.ts:23
+#: src/containers/magazines-list/magazines-list.template.ts:57
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:25
 #: src/containers/song-viewer/song-viewer.template.ts:15
 #: src/containers/songs-list/songs-list.template.ts:33
@@ -51,19 +35,15 @@ msgstr "Back"
 msgid "backToLogin"
 msgstr "Go back to login"
 
-#: src/containers/holy-mass/holy-mass.template.ts:128
+#: src/containers/holy-mass/holy-mass.template.ts:129
 msgid "book"
 msgstr "Book"
 
-#: src/containers/home/home.template.ts:122
-#~ msgid "bookHolyMassSeat"
-#~ msgstr "Book a seat for the Holy Mass"
-
-#: src/containers/holy-mass/holy-mass.template.ts:138
+#: src/containers/holy-mass/holy-mass.template.ts:139
 msgid "bookedSeats"
 msgstr "Booked seats"
 
-#: src/containers/holy-mass/holy-mass.template.ts:226
+#: src/containers/holy-mass/holy-mass.template.ts:227
 msgid "bookingCancellationConfirmation {0} {1} {2}"
 msgstr ""
 
@@ -72,7 +52,7 @@ msgstr ""
 #: src/containers/breviary-placeholder/breviary-placeholder.component.ts:30
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:32
 #: src/containers/breviary-viewer/breviary-viewer.component.ts:139
-#: src/containers/home/home.component.ts:136
+#: src/containers/home/home.component.ts:116
 #: src/containers/shell/shell.template.ts:30
 msgid "breviary"
 msgstr "Breviary"
@@ -90,8 +70,7 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.component.ts:56
 #: src/containers/breviary-placeholder/breviary-placeholder.component.ts:34
-#: src/containers/home/home.component.ts:143
-#: src/containers/home/home.component.ts:237
+#: src/containers/home/home.component.ts:123
 msgid "breviaryDescription"
 msgstr "Pray the Liturgy of the Hours with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
@@ -108,21 +87,21 @@ msgid "brotherlyLifePillarTitle"
 msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:39
-#: src/containers/holy-mass/holy-mass.template.ts:90
+#: src/containers/holy-mass/holy-mass.template.ts:91
 msgid "cancel"
 msgstr "Cancel"
 
-#: src/containers/holy-mass/holy-mass.template.ts:202
-#: src/containers/holy-mass/holy-mass.template.ts:256
+#: src/containers/holy-mass/holy-mass.template.ts:203
+#: src/containers/holy-mass/holy-mass.template.ts:257
 msgid "cancelBooking"
 msgstr "Cancel booking"
 
-#: src/containers/holy-mass/holy-mass.template.ts:272
+#: src/containers/holy-mass/holy-mass.template.ts:273
 #: src/containers/login/login.template.ts:55
 msgid "checkYourInbox"
 msgstr "Done! Check your inbox."
 
-#: src/containers/holy-mass/holy-mass.template.ts:253
+#: src/containers/holy-mass/holy-mass.template.ts:254
 #: src/containers/songs-list/songs-list.template.ts:137
 #: src/containers/update-checker/update-checker.template.ts:75
 msgid "close"
@@ -130,6 +109,7 @@ msgstr "Close"
 
 #: src/containers/breviary-index/breviary-index.template.ts:18
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:18
+#: src/containers/magazines-index/magazines-index.template.ts:17
 msgid "compline"
 msgstr "Compline"
 
@@ -142,20 +122,16 @@ msgid "dark"
 msgstr "Dark"
 
 #: src/containers/breviary-index/breviary-index.template.ts:37
-#: src/containers/holy-mass/holy-mass.template.ts:86
-#: src/containers/holy-mass/holy-mass.template.ts:146
+#: src/containers/holy-mass/holy-mass.template.ts:87
+#: src/containers/holy-mass/holy-mass.template.ts:147
 msgid "date"
 msgstr "Date"
 
-#: src/containers/home/home.component.ts:115
-msgid "dayAfterTomorrow"
-msgstr "the day after tomorrow"
-
-#: src/containers/holy-mass/holy-mass.template.ts:121
+#: src/containers/holy-mass/holy-mass.template.ts:122
 msgid "dayAlreadyBooked"
 msgstr "You've already booked some seats for this day."
 
-#: src/containers/ancillas-list/ancillas-list.template.ts:33
+#: src/containers/magazines-list/magazines-list.template.ts:71
 #: src/containers/prayers-list/prayers-list.template.ts:34
 #: src/containers/songs-list/songs-list.template.ts:90
 msgid "dontAskAnymore"
@@ -209,8 +185,8 @@ msgstr ""
 msgid "franciscanSpiritualityTitle"
 msgstr ""
 
-#: src/containers/holy-mass/holy-mass.template.ts:50
-#: src/containers/holy-mass/holy-mass.template.ts:145
+#: src/containers/holy-mass/holy-mass.template.ts:51
+#: src/containers/holy-mass/holy-mass.template.ts:146
 msgid "fraternity"
 msgstr "Fraternity"
 
@@ -219,29 +195,29 @@ msgstr "Fraternity"
 msgid "german"
 msgstr "German"
 
-#: src/containers/holy-mass/holy-mass.template.ts:285
+#: src/containers/holy-mass/holy-mass.template.ts:286
 msgid "goToLogin"
 msgstr "Go to login page"
 
-#: src/containers/holy-mass/holy-mass.component.ts:103
-#: src/containers/holy-mass/holy-mass.template.ts:29
+#: src/containers/holy-mass/holy-mass.component.ts:104
+#: src/containers/holy-mass/holy-mass.template.ts:30
 #: src/containers/shell/shell.template.ts:34
 msgid "holyMass"
 msgstr "Holy Mass"
 
-#: src/containers/holy-mass/holy-mass.component.ts:107
+#: src/containers/holy-mass/holy-mass.component.ts:108
 msgid "holyMassDescription"
 msgstr "Book a place for the Holy Mass in one of the homes of the Franciscan Fraternity of Bethany."
 
-#: src/containers/home/home.component.ts:125
-#: src/containers/home/home.component.ts:335
+#: src/containers/home/home.component.ts:105
+#: src/containers/home/home.component.ts:285
 #: src/containers/home/home.template.ts:82
 #: src/containers/shell/shell.template.ts:29
 msgid "home"
 msgstr "Home"
 
-#: src/containers/home/home.component.ts:132
-#: src/containers/home/home.component.ts:339
+#: src/containers/home/home.component.ts:112
+#: src/containers/home/home.component.ts:289
 msgid "homeDescription"
 msgstr "Pray the daily prayers, sing the songs, and read the Ancilla Dominis of the Franciscan Fraternity of Bethany."
 
@@ -257,14 +233,14 @@ msgstr ""
 msgid "ignore"
 msgstr "Ignore"
 
-#: src/containers/home/home.component.ts:202
+#: src/containers/home/home.component.ts:182
 #: src/containers/info/info.component.ts:25
 #: src/containers/info/info.template.ts:27
 #: src/containers/shell/shell.template.ts:36
 msgid "info"
 msgstr "Info"
 
-#: src/containers/home/home.component.ts:209
+#: src/containers/home/home.component.ts:189
 #: src/containers/info/info.component.ts:29
 msgid "infoDescription"
 msgstr "Find out more about Ancillapp and the Franciscan Fraternity of Bethany."
@@ -275,6 +251,7 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:11
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:11
+#: src/containers/magazines-index/magazines-index.template.ts:10
 msgid "invitatory"
 msgstr "Invitatory"
 
@@ -302,6 +279,7 @@ msgstr "Latin"
 
 #: src/containers/breviary-index/breviary-index.template.ts:13
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:13
+#: src/containers/magazines-index/magazines-index.template.ts:12
 msgid "lauds"
 msgstr "Lauds"
 
@@ -313,14 +291,14 @@ msgstr "Pray the Lauds of the day {date} with the optional memories remembered b
 msgid "light"
 msgstr "Light"
 
-#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:24
 #: src/containers/breviary-index/breviary-index.template.ts:45
+#: src/containers/magazine-viewer/magazine-viewer.template.ts:30
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:32
 #: src/containers/song-viewer/song-viewer.template.ts:22
 msgid "loading"
 msgstr "Loading…"
 
-#: src/containers/home/home.component.ts:180
+#: src/containers/home/home.component.ts:160
 #: src/containers/login/login.component.ts:75
 #: src/containers/login/login.template.ts:29
 #: src/containers/login/login.template.ts:70
@@ -328,7 +306,7 @@ msgstr "Loading…"
 msgid "login"
 msgstr "Login"
 
-#: src/containers/home/home.component.ts:187
+#: src/containers/home/home.component.ts:167
 #: src/containers/login/login.component.ts:79
 msgid "loginDescription"
 msgstr "Log in to take advantage of the booking service for the Holy Masses of the Franciscan Fraternity of Bethany."
@@ -337,13 +315,39 @@ msgstr "Log in to take advantage of the booking service for the Holy Masses of t
 msgid "loginOrRegister"
 msgstr "Login or register"
 
-#: src/containers/holy-mass/holy-mass.template.ts:282
+#: src/containers/holy-mass/holy-mass.template.ts:283
 msgid "loginToBook"
 msgstr ""
 
 #: src/containers/shell/shell.template.ts:123
 msgid "logout"
 msgstr "Logout"
+
+#: src/containers/magazine-viewer/magazine-viewer.component.ts:78
+msgid "magazineDescription {name} {magazineType}"
+msgstr "Browse the volume {name} of the {magazineType} Franciscan Fraternity of Bethany."
+
+#: src/containers/magazines-list/magazines-list.template.ts:39
+msgid "magazineSpecial {date}"
+msgstr ""
+
+#: src/containers/home/home.component.ts:149
+#: src/containers/magazine-viewer/magazine-viewer.component.ts:72
+#: src/containers/magazines-index/magazines-index.component.ts:25
+#: src/containers/magazines-index/magazines-index.template.ts:31
+#: src/containers/magazines-list/magazines-list.component.ts:91
+#: src/containers/shell/shell.template.ts:33
+msgid "magazines"
+msgstr "Magazines"
+
+#: src/containers/home/home.component.ts:156
+#: src/containers/magazines-index/magazines-index.component.ts:29
+msgid "magazinesDescription"
+msgstr "Browse the magazines of the Franciscan Fraternity of Bethany."
+
+#: src/containers/magazines-list/magazines-list.component.ts:96
+msgid "magazinesDescription {magazineType}"
+msgstr "Browse the {magazineType} volumes of the Franciscan Fraternity of Bethany."
 
 #: src/containers/info/info.template.ts:36
 msgid "marianSpiritualityDescription"
@@ -355,6 +359,7 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:12
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:12
+#: src/containers/magazines-index/magazines-index.template.ts:11
 msgid "matins"
 msgstr "Matins"
 
@@ -362,13 +367,13 @@ msgstr "Matins"
 msgid "matinsDescription {date}"
 msgstr "Pray the Matins of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
-#: src/containers/ancillas-list/ancillas-list.template.ts:19
 #: src/containers/breviary-index/breviary-index.template.ts:28
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:28
-#: src/containers/holy-mass/holy-mass.template.ts:25
+#: src/containers/holy-mass/holy-mass.template.ts:26
 #: src/containers/home/home.template.ts:78
 #: src/containers/info/info.template.ts:23
 #: src/containers/login/login.template.ts:25
+#: src/containers/magazines-index/magazines-index.template.ts:27
 #: src/containers/prayers-list/prayers-list.template.ts:21
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:82
@@ -388,26 +393,26 @@ msgstr ""
 msgid "moreInfoWebsite {websiteUrl}"
 msgstr ""
 
-#: src/containers/ancillas-list/ancillas-list.template.ts:29
-msgid "newAncillaNotification"
-msgstr "Do you want to receive a notification every time a new Ancilla Domini is published?"
+#: src/containers/magazines-list/magazines-list.template.ts:67
+msgid "newMagazineNotification {magazineType}"
+msgstr "Do you want to receive a notification every time a new {magazineType} is published?"
 
-#: src/containers/holy-mass/holy-mass.template.ts:123
+#: src/containers/holy-mass/holy-mass.template.ts:124
 msgid "noHolyMassesAvailable"
 msgstr "No Holy Masses available for this day."
 
-#: src/containers/ancillas-list/ancillas-list.template.ts:60
 #: src/containers/home/home.template.ts:87
+#: src/containers/magazines-list/magazines-list.template.ts:98
 #: src/containers/prayers-list/prayers-list.template.ts:62
 #: src/containers/songs-list/songs-list.component.ts:192
 msgid "noResults"
 msgstr "No results"
 
-#: src/containers/holy-mass/holy-mass.template.ts:217
+#: src/containers/holy-mass/holy-mass.template.ts:218
 msgid "noSeatsBooked"
 msgstr "You haven't booked any seats yet."
 
-#: src/containers/ancillas-list/ancillas-list.template.ts:39
+#: src/containers/magazines-list/magazines-list.template.ts:77
 #: src/containers/prayers-list/prayers-list.template.ts:41
 #: src/containers/songs-list/songs-list.template.ts:97
 msgid "noThanks"
@@ -415,6 +420,7 @@ msgstr "No, thanks"
 
 #: src/containers/breviary-index/breviary-index.template.ts:16
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:16
+#: src/containers/magazines-index/magazines-index.template.ts:15
 msgid "none"
 msgstr "None"
 
@@ -451,7 +457,7 @@ msgstr ""
 msgid "prayerPillarTitle"
 msgstr ""
 
-#: src/containers/home/home.component.ts:158
+#: src/containers/home/home.component.ts:138
 #: src/containers/prayer-viewer/prayer-viewer.component.ts:67
 #: src/containers/prayers-list/prayers-list.component.ts:86
 #: src/containers/prayers-list/prayers-list.template.ts:25
@@ -459,7 +465,7 @@ msgstr ""
 msgid "prayers"
 msgstr "Prayers"
 
-#: src/containers/home/home.component.ts:165
+#: src/containers/home/home.component.ts:145
 #: src/containers/prayers-list/prayers-list.component.ts:90
 msgid "prayersDescription"
 msgstr "Pray the daily prayers prayed by the Franciscan Fraternity of Bethany."
@@ -468,11 +474,15 @@ msgstr "Pray the daily prayers prayed by the Franciscan Fraternity of Bethany."
 msgid "prayersDownload"
 msgstr "Do you want to download all the prayers to be able to consult them offline?"
 
-#: src/containers/home/home.template.ts:115
+#: src/containers/home/home.template.ts:117
 msgid "readLatestAncilla"
 msgstr "Read the latest Ancilla Domini"
 
-#: src/containers/holy-mass/holy-mass.template.ts:277
+#: src/containers/home/home.template.ts:125
+msgid "readLatestSempreConnessi"
+msgstr ""
+
+#: src/containers/holy-mass/holy-mass.template.ts:278
 msgid "resendVerificationEmail"
 msgstr ""
 
@@ -493,13 +503,13 @@ msgstr "Search"
 msgid "searchInAncillapp"
 msgstr "Search in Ancillapp"
 
-#: src/containers/holy-mass/holy-mass.template.ts:68
-#: src/containers/holy-mass/holy-mass.template.ts:148
+#: src/containers/holy-mass/holy-mass.template.ts:69
+#: src/containers/holy-mass/holy-mass.template.ts:149
 msgid "seats"
 msgstr "Seats"
 
 #: src/containers/breviary-index/breviary-index.template.ts:38
-#: src/containers/holy-mass/holy-mass.template.ts:89
+#: src/containers/holy-mass/holy-mass.template.ts:90
 msgid "set"
 msgstr "Set"
 
@@ -507,20 +517,21 @@ msgstr "Set"
 msgid "setFilters"
 msgstr "Set filters"
 
-#: src/containers/home/home.component.ts:191
+#: src/containers/home/home.component.ts:171
 #: src/containers/settings/settings.component.ts:50
 #: src/containers/settings/settings.template.ts:24
 #: src/containers/shell/shell.template.ts:35
 msgid "settings"
 msgstr "Settings"
 
-#: src/containers/home/home.component.ts:198
+#: src/containers/home/home.component.ts:178
 #: src/containers/settings/settings.component.ts:54
 msgid "settingsDescription"
 msgstr "Customize Ancillapp by changing its theme or its language."
 
 #: src/containers/breviary-index/breviary-index.template.ts:15
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:15
+#: src/containers/magazines-index/magazines-index.template.ts:14
 msgid "sext"
 msgstr "Sext"
 
@@ -533,9 +544,9 @@ msgstr "Pray the Sext of the day {date} with the optional memories remembered by
 msgid "share"
 msgstr "Share"
 
-#: src/containers/ancilla-viewer/ancilla-viewer.template.ts:46
-msgid "shareAncillaText"
-msgstr "Take a look at this Ancilla Domini!"
+#: src/containers/magazine-viewer/magazine-viewer.template.ts:52
+msgid "shareMagazineText {magazineType}"
+msgstr ""
 
 #: src/containers/song-viewer/song-viewer.template.ts:45
 msgid "shareSongText"
@@ -549,19 +560,19 @@ msgstr "Show changelog"
 msgid "singFraternitySongs"
 msgstr "Sing the Fraternity songs"
 
-#: src/containers/song-viewer/song-viewer.component.ts:73
+#: src/containers/song-viewer/song-viewer.component.ts:87
 msgid "songDescription {title}"
 msgstr "Sing the song \"{title}\" as it is sung by the Franciscan Fraternity of Bethany."
 
-#: src/containers/home/home.component.ts:147
+#: src/containers/home/home.component.ts:127
 #: src/containers/shell/shell.template.ts:31
-#: src/containers/song-viewer/song-viewer.component.ts:57
+#: src/containers/song-viewer/song-viewer.component.ts:71
 #: src/containers/songs-list/songs-list.component.ts:268
 #: src/containers/songs-list/songs-list.template.ts:67
 msgid "songs"
 msgstr "Songs"
 
-#: src/containers/home/home.component.ts:154
+#: src/containers/home/home.component.ts:134
 #: src/containers/songs-list/songs-list.component.ts:272
 msgid "songsDescription"
 msgstr "Browse the songs booklet used by the Franciscan Fraternity of Bethany."
@@ -570,7 +581,7 @@ msgstr "Browse the songs booklet used by the Franciscan Fraternity of Bethany."
 msgid "songsDownload"
 msgstr "Do you want to download all the songs to be able to consult them offline?"
 
-#: src/containers/ancillas-list/ancillas-list.template.ts:45
+#: src/containers/magazines-list/magazines-list.template.ts:83
 #: src/containers/prayers-list/prayers-list.template.ts:48
 #: src/containers/songs-list/songs-list.template.ts:104
 msgid "sure"
@@ -588,7 +599,7 @@ msgstr "Switch to numeric keyboard"
 msgid "switchToTextKeyboard"
 msgstr "Switch to text keyboard"
 
-#: src/containers/ancillas-list/ancillas-list.template.ts:88
+#: src/containers/magazines-list/magazines-list.template.ts:137
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:79
 #: src/containers/prayers-list/prayers-list.template.ts:84
 #: src/containers/song-viewer/song-viewer.template.ts:53
@@ -602,6 +613,7 @@ msgstr "System"
 
 #: src/containers/breviary-index/breviary-index.template.ts:14
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:14
+#: src/containers/magazines-index/magazines-index.template.ts:13
 msgid "terce"
 msgstr "Terce"
 
@@ -613,24 +625,16 @@ msgstr "Pray the Terce of the day {date} with the optional memories remembered b
 msgid "theme"
 msgstr "Theme"
 
-#: src/containers/holy-mass/holy-mass.template.ts:98
-#: src/containers/holy-mass/holy-mass.template.ts:147
+#: src/containers/holy-mass/holy-mass.template.ts:99
+#: src/containers/holy-mass/holy-mass.template.ts:148
 msgid "time"
 msgstr "Time"
 
-#: src/containers/home/home.component.ts:107
-msgid "today"
-msgstr "today"
-
-#: src/containers/home/home.component.ts:111
-msgid "tomorrow"
-msgstr "tomorrow"
-
-#: src/containers/holy-mass/holy-mass.component.ts:333
+#: src/containers/holy-mass/holy-mass.component.ts:334
 msgid "tooManyVerificationRequests"
 msgstr ""
 
-#: src/containers/holy-mass/holy-mass.component.ts:334
+#: src/containers/holy-mass/holy-mass.component.ts:335
 #: src/containers/login/login.component.ts:142
 msgid "unexpectedError"
 msgstr ""
@@ -643,12 +647,13 @@ msgstr "Update available!"
 msgid "updateNow"
 msgstr "Update now"
 
-#: src/containers/holy-mass/holy-mass.template.ts:268
+#: src/containers/holy-mass/holy-mass.template.ts:269
 msgid "verifyEmailToBook"
 msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:17
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:17
+#: src/containers/magazines-index/magazines-index.template.ts:16
 msgid "vespers"
 msgstr "Vespers"
 
@@ -663,7 +668,3 @@ msgstr "View full changelog"
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr ""
-
-#: src/containers/home/home.component.ts:119
-msgid "yesterday"
-msgstr "yesterday"

@@ -1,0 +1,65 @@
+:host {
+  padding: 1.5rem;
+  flex-direction: column;
+}
+
+.magazine-loading-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10.625rem;
+  height: 15rem;
+  margin: auto;
+}
+
+.magazines-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.magazine {
+  margin: 1rem;
+  max-width: 11.625rem;
+
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+
+  figure {
+    width: 100%;
+    margin: 0;
+  }
+
+  img {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
+      0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
+      0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
+    width: 10.625rem;
+    height: 15rem;
+    margin: auto;
+    object-fit: cover;
+    display: block;
+    will-change: transform;
+    transition: 0.3s transform;
+
+    &:hover,
+    &:active {
+      transform: scale(1.025);
+    }
+  }
+
+  figcaption {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+
+    > .subtitle {
+      font-size: 0.75rem;
+      color: var(--ancillapp-secondary-text-color);
+    }
+  }
+}

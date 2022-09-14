@@ -3,7 +3,7 @@ import { AncillappDataDBSchema } from './database';
 
 type Entity = keyof Pick<
   AncillappDataDBSchema,
-  'songs' | 'prayers' | 'ancillas'
+  'songs' | 'prayers' | 'magazines'
 >;
 
 export interface APIResponse<T> {
@@ -13,14 +13,14 @@ export interface APIResponse<T> {
   error?: Error;
 }
 
-const supportedEntities: Entity[] = ['songs', 'prayers', 'ancillas'];
+const supportedEntities: Entity[] = ['songs', 'prayers', 'magazines'];
 
 const entityToIdFieldsMap: {
   [key in Entity]: (keyof AncillappDataDBSchema[key]['value'])[];
 } = {
   songs: ['language', 'category', 'number'],
   prayers: ['slug'],
-  ancillas: ['code'],
+  magazines: ['type', 'code'],
 };
 
 const entityToDetailFieldMap: {
@@ -81,7 +81,7 @@ const updateLocalDBSummaryData = async <
   return newData;
 };
 
-const updateLocalDBDetailData = async <T extends Record<string, unknown>>(
+const updateLocalDBDetailData = async <T>(
   request: RequestInfo,
   entity: Entity,
   cachedData?: T,
@@ -178,7 +178,7 @@ export async function* cacheAndNetwork<T>(
           refreshing: false,
           error: fetchError as TypeError,
           ...(cachedData.length > 0 && {
-            data: formatCachedResponse(entity, cachedData) as unknown as T,
+            data: formatCachedResponse(entity, cachedData) as T,
           }),
         };
       }
@@ -186,9 +186,9 @@ export async function* cacheAndNetwork<T>(
       return;
     }
 
-    const normalizedId = (id.includes('/') ? id.split('/') : id) as
-      | string
-      | [string, string, string];
+    const normalizedId = (
+      id.includes('/') ? id.split('/') : id
+    ) as AncillappDataDBSchema[Entity]['key'];
 
     const cachedData = await db.get(entity, normalizedId);
 
@@ -206,12 +206,12 @@ export async function* cacheAndNetwork<T>(
       yield {
         loading: false,
         refreshing: true,
-        data: cachedData as unknown as T,
+        data: cachedData as T,
       };
     }
 
     try {
-      const data = (await localDBDetailDataUpdatePromise) as unknown as T;
+      const data = (await localDBDetailDataUpdatePromise) as T;
 
       yield {
         loading: false,

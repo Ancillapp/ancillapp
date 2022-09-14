@@ -4,6 +4,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { HolyMassPage } from './holy-mass.component';
 import { load } from '../../helpers/directives';
 import { remove, menu } from '../../components/icons';
+import { toLocalTimeZone } from '../../helpers/utils';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-button';
@@ -160,7 +161,7 @@ export default function template(this: HolyMassPage) {
                                     seats,
                                   } = booking;
 
-                                  const date = this._toLocalTimeZone(
+                                  const date = toLocalTimeZone(
                                     new Date(dateString),
                                   );
 
@@ -232,7 +233,7 @@ export default function template(this: HolyMassPage) {
                           month: '2-digit',
                           year: 'numeric',
                         }).format(
-                          this._toLocalTimeZone(
+                          toLocalTimeZone(
                             new Date(this._bookingToCancel?.date),
                           ),
                         )
@@ -242,7 +243,7 @@ export default function template(this: HolyMassPage) {
                           hour: 'numeric',
                           minute: 'numeric',
                         }).format(
-                          this._toLocalTimeZone(
+                          toLocalTimeZone(
                             new Date(this._bookingToCancel?.date),
                           ),
                         )

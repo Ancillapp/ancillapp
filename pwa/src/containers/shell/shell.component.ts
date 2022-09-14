@@ -27,8 +27,8 @@ export class Shell extends localize(authorize(LitElement)) {
   @property({ type: String })
   protected _page = 'home';
 
-  @property({ type: String })
-  protected _subroute = '';
+  @property({ type: Array })
+  protected _subroute: string[] = [];
 
   @property({ type: Boolean })
   protected _drawerOpened = false;
@@ -200,37 +200,43 @@ export class Shell extends localize(authorize(LitElement)) {
       pageId = 'home';
     }
 
+    const subrouteParts = subroute
+      .split('/')
+      .filter((part) => Boolean(part.trim()));
+
     switch (pageId) {
       case 'home':
         import('../home/home.component');
         break;
       case 'breviary':
         import('../breviary-placeholder/breviary-placeholder.component');
-        // if (subroute) {
+        // if (subrouteParts.length > 0) {
         //   import('../breviary-viewer/breviary-viewer.component');
         // } else {
         //   import('../breviary-index/breviary-index.component');
         // }
         break;
       case 'songs':
-        if (subroute) {
+        if (subrouteParts.length > 0) {
           import('../song-viewer/song-viewer.component');
         } else {
           import('../songs-list/songs-list.component');
         }
         break;
       case 'prayers':
-        if (subroute) {
+        if (subrouteParts.length > 0) {
           import('../prayer-viewer/prayer-viewer.component');
         } else {
           import('../prayers-list/prayers-list.component');
         }
         break;
-      case 'ancillas':
-        if (subroute) {
-          import('../ancilla-viewer/ancilla-viewer.component');
+      case 'magazines':
+        if (subrouteParts.length > 1) {
+          import('../magazine-viewer/magazine-viewer.component');
+        } else if (subrouteParts.length > 0) {
+          import('../magazines-list/magazines-list.component');
         } else {
-          import('../ancillas-list/ancillas-list.component');
+          import('../magazines-index/magazines-index.component');
         }
         break;
       case 'holy-mass':
@@ -248,7 +254,7 @@ export class Shell extends localize(authorize(LitElement)) {
     }
 
     this._page = pageId;
-    this._subroute = subroute;
+    this._subroute = subrouteParts;
   }
 
   protected _updateDrawerOpenState(opened: boolean) {

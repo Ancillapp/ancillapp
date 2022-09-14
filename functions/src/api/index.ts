@@ -5,8 +5,8 @@ import cors from 'cors';
 
 import { ssr } from './middlewares/ssr';
 
-import { getAncillas } from './handlers/ancillas/list';
-import { getAncilla } from './handlers/ancillas/detail';
+import { getMagazines } from './handlers/magazines/list';
+import { getMagazine } from './handlers/magazines/detail';
 import { getPrayers } from './handlers/prayers/list';
 import { getPrayer } from './handlers/prayers/detail';
 import { getSongs } from './handlers/songs/list';
@@ -25,8 +25,8 @@ app.use(cors());
 
 app.use(ssr);
 
-app.get('/api/ancillas', getAncillas);
-app.get('/api/ancillas/:code', getAncilla);
+app.get('/api/magazines', getMagazines);
+app.get('/api/magazines/:type/:code', getMagazine);
 app.get('/api/prayers', getPrayers);
 app.get('/api/prayers/:slug', getPrayer);
 app.get('/api/songs', getSongs);

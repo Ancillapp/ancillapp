@@ -67,11 +67,23 @@ export const localizedPages: Record<string, Record<SupportedLocale, string>> = {
     de: 'gebete',
     pt: 'oracoes',
   },
-  ancillas: {
+  magazines: {
+    it: 'riviste',
+    en: 'magazines',
+    de: 'zeitschriften',
+    pt: 'revistas',
+  },
+  'ancilla-domini': {
     it: 'ancilla-domini',
     en: 'ancilla-domini',
     de: 'ancilla-domini',
     pt: 'ancilla-domini',
+  },
+  sempreconnessi: {
+    it: 'sempreconnessi',
+    en: 'sempreconnessi',
+    de: 'sempreconnessi',
+    pt: 'sempreconnessi',
   },
   'holy-mass': {
     it: 'santa-messa',

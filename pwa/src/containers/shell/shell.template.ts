@@ -5,7 +5,7 @@ import {
   breviaryIcon,
   songsIcon,
   prayersIcon,
-  ancillasIcon,
+  magazinesIcon,
   settingsIcon,
   infoIcon,
   menu,
@@ -30,7 +30,7 @@ const pagesTranslations = {
   breviary: t`breviary`,
   songs: t`songs`,
   prayers: t`prayers`,
-  ancillas: t`ancillas`,
+  magazines: t`magazines`,
   holyMass: t`holyMass`,
   settings: t`settings`,
   info: t`info`,
@@ -41,7 +41,7 @@ const topNavPages: [string, SVGTemplateResult][] = [
   ['breviary', breviaryIcon],
   ['songs', songsIcon],
   ['prayers', prayersIcon],
-  ['ancillas', ancillasIcon],
+  ['magazines', magazinesIcon],
 ];
 const bottomNavPages: [string, SVGTemplateResult][] = [
   ['settings', settingsIcon],
@@ -51,7 +51,7 @@ const bottomNavPages: [string, SVGTemplateResult][] = [
 /*
   <breviary-index
     class="page padded"
-    ?active="${this._page === 'breviary' && !this._subroute}"
+    ?active="${this._page === 'breviary' && this._subroute.length < 1}"
     ?drawer-open="${this._narrow}"
     ?show-menu-button="${!this._narrow}"
     @menutoggle="${() =>
@@ -59,7 +59,7 @@ const bottomNavPages: [string, SVGTemplateResult][] = [
   ></breviary-index>
   <breviary-viewer
     class="page padded"
-    ?active="${this._page === 'breviary' && this._subroute}"
+    ?active="${this._page === 'breviary' && this._subroute.length > 0}"
     ?drawer-open="${this._narrow}"
     ?show-menu-button="${!this._narrow}"
     query="${this._subroute}"
@@ -169,7 +169,7 @@ export default function template(this: Shell) {
           ></home-page>
           <breviary-placeholder
             class="page padded"
-            ?active="${this._page === 'breviary' && !this._subroute}"
+            ?active="${this._page === 'breviary' && this._subroute.length < 1}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
             @menutoggle="${() =>
@@ -177,7 +177,7 @@ export default function template(this: Shell) {
           ></breviary-placeholder>
           <songs-list
             class="page"
-            ?active="${this._page === 'songs' && !this._subroute}"
+            ?active="${this._page === 'songs' && this._subroute.length < 1}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
             @menutoggle="${() =>
@@ -185,14 +185,16 @@ export default function template(this: Shell) {
           ></songs-list>
           <song-viewer
             class="page"
-            ?active="${this._page === 'songs' && this._subroute}"
+            ?active="${this._page === 'songs' && this._subroute.length === 3}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
-            song="${this._subroute}"
+            language="${this._subroute?.[0]}"
+            category="${this._subroute?.[1]}"
+            number="${this._subroute?.[2]}"
           ></song-viewer>
           <prayers-list
             class="page"
-            ?active="${this._page === 'prayers' && !this._subroute}"
+            ?active="${this._page === 'prayers' && this._subroute.length < 1}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
             @menutoggle="${() =>
@@ -200,26 +202,35 @@ export default function template(this: Shell) {
           ></prayers-list>
           <prayer-viewer
             class="page"
-            ?active="${this._page === 'prayers' && this._subroute}"
+            ?active="${this._page === 'prayers' && this._subroute.length > 0}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
-            prayer="${this._subroute}"
+            prayer="${this._subroute?.[0]}"
           ></prayer-viewer>
-          <ancillas-list
+          <magazines-index
             class="page"
-            ?active="${this._page === 'ancillas' && !this._subroute}"
+            ?active="${this._page === 'magazines' && this._subroute.length < 1}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
             @menutoggle="${() =>
               this._updateDrawerOpenState(!this._drawerOpened)}"
-          ></ancillas-list>
-          <ancilla-viewer
+          ></magazines-index>
+          <magazines-list
             class="page"
-            ?active="${this._page === 'ancillas' && this._subroute}"
+            ?active="${this._page === 'magazines' &&
+            this._subroute.length === 1}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
-            ancilla="${this._subroute}"
-          ></ancilla-viewer>
+            type="${this._subroute?.[0]}"
+          ></magazines-list>
+          <magazine-viewer
+            class="page"
+            ?active="${this._page === 'magazines' && this._subroute.length > 1}"
+            ?drawer-open="${this._narrow}"
+            ?show-menu-button="${!this._narrow}"
+            type="${this._subroute?.[0]}"
+            code="${this._subroute?.[1]}"
+          ></magazine-viewer>
           <holy-mass-page
             class="page"
             ?active="${this._page === 'holy-mass'}"
