@@ -24,7 +24,7 @@ msgstr "Available seats"
 #: src/containers/breviary-viewer/breviary-viewer.template.ts:21
 #: src/containers/home/home.template.ts:50
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:23
-#: src/containers/magazines-list/magazines-list.template.ts:57
+#: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:25
 #: src/containers/song-viewer/song-viewer.template.ts:15
 #: src/containers/songs-list/songs-list.template.ts:33
@@ -109,7 +109,7 @@ msgstr "Close"
 
 #: src/containers/breviary-index/breviary-index.template.ts:18
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:18
-#: src/containers/magazines-index/magazines-index.template.ts:17
+#: src/containers/magazines-index/magazines-index.template.ts:20
 msgid "compline"
 msgstr "Compline"
 
@@ -131,7 +131,7 @@ msgstr "Date"
 msgid "dayAlreadyBooked"
 msgstr "You've already booked some seats for this day."
 
-#: src/containers/magazines-list/magazines-list.template.ts:71
+#: src/containers/magazines-list/magazines-list.template.ts:81
 #: src/containers/prayers-list/prayers-list.template.ts:34
 #: src/containers/songs-list/songs-list.template.ts:90
 msgid "dontAskAnymore"
@@ -251,7 +251,7 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:11
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:11
-#: src/containers/magazines-index/magazines-index.template.ts:10
+#: src/containers/magazines-index/magazines-index.template.ts:13
 msgid "invitatory"
 msgstr "Invitatory"
 
@@ -279,7 +279,7 @@ msgstr "Latin"
 
 #: src/containers/breviary-index/breviary-index.template.ts:13
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:13
-#: src/containers/magazines-index/magazines-index.template.ts:12
+#: src/containers/magazines-index/magazines-index.template.ts:15
 msgid "lauds"
 msgstr "Lauds"
 
@@ -327,21 +327,21 @@ msgstr "Logout"
 msgid "magazineDescription {name} {magazineType}"
 msgstr "Browse the volume {name} of the {magazineType} Franciscan Fraternity of Bethany."
 
-#: src/containers/magazines-list/magazines-list.template.ts:39
+#: src/containers/magazines-list/magazines-list.template.ts:49
 msgid "magazineSpecial {date}"
 msgstr ""
 
 #: src/containers/home/home.component.ts:149
 #: src/containers/magazine-viewer/magazine-viewer.component.ts:72
-#: src/containers/magazines-index/magazines-index.component.ts:25
-#: src/containers/magazines-index/magazines-index.template.ts:31
+#: src/containers/magazines-index/magazines-index.component.ts:70
+#: src/containers/magazines-index/magazines-index.template.ts:34
 #: src/containers/magazines-list/magazines-list.component.ts:91
 #: src/containers/shell/shell.template.ts:33
 msgid "magazines"
 msgstr "Magazines"
 
 #: src/containers/home/home.component.ts:156
-#: src/containers/magazines-index/magazines-index.component.ts:29
+#: src/containers/magazines-index/magazines-index.component.ts:74
 msgid "magazinesDescription"
 msgstr "Browse the magazines of the Franciscan Fraternity of Bethany."
 
@@ -359,7 +359,7 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:12
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:12
-#: src/containers/magazines-index/magazines-index.template.ts:11
+#: src/containers/magazines-index/magazines-index.template.ts:14
 msgid "matins"
 msgstr "Matins"
 
@@ -373,7 +373,7 @@ msgstr "Pray the Matins of the day {date} with the optional memories remembered 
 #: src/containers/home/home.template.ts:78
 #: src/containers/info/info.template.ts:23
 #: src/containers/login/login.template.ts:25
-#: src/containers/magazines-index/magazines-index.template.ts:27
+#: src/containers/magazines-index/magazines-index.template.ts:30
 #: src/containers/prayers-list/prayers-list.template.ts:21
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:82
@@ -393,7 +393,7 @@ msgstr ""
 msgid "moreInfoWebsite {websiteUrl}"
 msgstr ""
 
-#: src/containers/magazines-list/magazines-list.template.ts:67
+#: src/containers/magazines-list/magazines-list.template.ts:77
 msgid "newMagazineNotification {magazineType}"
 msgstr "Do you want to receive a notification every time a new {magazineType} is published?"
 
@@ -402,7 +402,7 @@ msgid "noHolyMassesAvailable"
 msgstr "No Holy Masses available for this day."
 
 #: src/containers/home/home.template.ts:87
-#: src/containers/magazines-list/magazines-list.template.ts:98
+#: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:62
 #: src/containers/songs-list/songs-list.component.ts:192
 msgid "noResults"
@@ -412,7 +412,7 @@ msgstr "No results"
 msgid "noSeatsBooked"
 msgstr "You haven't booked any seats yet."
 
-#: src/containers/magazines-list/magazines-list.template.ts:77
+#: src/containers/magazines-list/magazines-list.template.ts:87
 #: src/containers/prayers-list/prayers-list.template.ts:41
 #: src/containers/songs-list/songs-list.template.ts:97
 msgid "noThanks"
@@ -420,7 +420,7 @@ msgstr "No, thanks"
 
 #: src/containers/breviary-index/breviary-index.template.ts:16
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:16
-#: src/containers/magazines-index/magazines-index.template.ts:15
+#: src/containers/magazines-index/magazines-index.template.ts:18
 msgid "none"
 msgstr "None"
 
@@ -531,7 +531,7 @@ msgstr "Customize Ancillapp by changing its theme or its language."
 
 #: src/containers/breviary-index/breviary-index.template.ts:15
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:15
-#: src/containers/magazines-index/magazines-index.template.ts:14
+#: src/containers/magazines-index/magazines-index.template.ts:17
 msgid "sext"
 msgstr "Sext"
 
@@ -581,7 +581,7 @@ msgstr "Browse the songs booklet used by the Franciscan Fraternity of Bethany."
 msgid "songsDownload"
 msgstr "Do you want to download all the songs to be able to consult them offline?"
 
-#: src/containers/magazines-list/magazines-list.template.ts:83
+#: src/containers/magazines-list/magazines-list.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:48
 #: src/containers/songs-list/songs-list.template.ts:104
 msgid "sure"
@@ -599,7 +599,7 @@ msgstr "Switch to numeric keyboard"
 msgid "switchToTextKeyboard"
 msgstr "Switch to text keyboard"
 
-#: src/containers/magazines-list/magazines-list.template.ts:137
+#: src/containers/magazines-list/magazines-list.template.ts:159
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:79
 #: src/containers/prayers-list/prayers-list.template.ts:84
 #: src/containers/song-viewer/song-viewer.template.ts:53
@@ -613,7 +613,7 @@ msgstr "System"
 
 #: src/containers/breviary-index/breviary-index.template.ts:14
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:14
-#: src/containers/magazines-index/magazines-index.template.ts:13
+#: src/containers/magazines-index/magazines-index.template.ts:16
 msgid "terce"
 msgstr "Terce"
 
@@ -653,7 +653,7 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.template.ts:17
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:17
-#: src/containers/magazines-index/magazines-index.template.ts:16
+#: src/containers/magazines-index/magazines-index.template.ts:19
 msgid "vespers"
 msgstr "Vespers"
 

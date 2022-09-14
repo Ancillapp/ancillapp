@@ -24,7 +24,7 @@ msgstr "Posti disponibili"
 #: src/containers/breviary-viewer/breviary-viewer.template.ts:21
 #: src/containers/home/home.template.ts:50
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:23
-#: src/containers/magazines-list/magazines-list.template.ts:57
+#: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:25
 #: src/containers/song-viewer/song-viewer.template.ts:15
 #: src/containers/songs-list/songs-list.template.ts:33
@@ -109,7 +109,7 @@ msgstr "Chiudi"
 
 #: src/containers/breviary-index/breviary-index.template.ts:18
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:18
-#: src/containers/magazines-index/magazines-index.template.ts:17
+#: src/containers/magazines-index/magazines-index.template.ts:20
 msgid "compline"
 msgstr "Compieta"
 
@@ -131,7 +131,7 @@ msgstr "Data"
 msgid "dayAlreadyBooked"
 msgstr "Hai già prenotato dei posti per questo giorno."
 
-#: src/containers/magazines-list/magazines-list.template.ts:71
+#: src/containers/magazines-list/magazines-list.template.ts:81
 #: src/containers/prayers-list/prayers-list.template.ts:34
 #: src/containers/songs-list/songs-list.template.ts:90
 msgid "dontAskAnymore"
@@ -273,7 +273,7 @@ msgstr "L'email inserita non è valida."
 
 #: src/containers/breviary-index/breviary-index.template.ts:11
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:11
-#: src/containers/magazines-index/magazines-index.template.ts:10
+#: src/containers/magazines-index/magazines-index.template.ts:13
 msgid "invitatory"
 msgstr "Invitatorio"
 
@@ -301,7 +301,7 @@ msgstr "Latino"
 
 #: src/containers/breviary-index/breviary-index.template.ts:13
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:13
-#: src/containers/magazines-index/magazines-index.template.ts:12
+#: src/containers/magazines-index/magazines-index.template.ts:15
 msgid "lauds"
 msgstr "Lodi"
 
@@ -349,21 +349,21 @@ msgstr "Esci"
 msgid "magazineDescription {name} {magazineType}"
 msgstr "Sfoglia il volume {name} della rivista {magazineType} della Fraternità Francescana di Betania."
 
-#: src/containers/magazines-list/magazines-list.template.ts:39
+#: src/containers/magazines-list/magazines-list.template.ts:49
 msgid "magazineSpecial {date}"
 msgstr "Speciale {date}"
 
 #: src/containers/home/home.component.ts:149
 #: src/containers/magazine-viewer/magazine-viewer.component.ts:72
-#: src/containers/magazines-index/magazines-index.component.ts:25
-#: src/containers/magazines-index/magazines-index.template.ts:31
+#: src/containers/magazines-index/magazines-index.component.ts:70
+#: src/containers/magazines-index/magazines-index.template.ts:34
 #: src/containers/magazines-list/magazines-list.component.ts:91
 #: src/containers/shell/shell.template.ts:33
 msgid "magazines"
 msgstr "Riviste"
 
 #: src/containers/home/home.component.ts:156
-#: src/containers/magazines-index/magazines-index.component.ts:29
+#: src/containers/magazines-index/magazines-index.component.ts:74
 msgid "magazinesDescription"
 msgstr "Sfoglia le riviste della Fraternità Francescana di Betania."
 
@@ -381,7 +381,7 @@ msgstr "Spiritualità Mariana"
 
 #: src/containers/breviary-index/breviary-index.template.ts:12
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:12
-#: src/containers/magazines-index/magazines-index.template.ts:11
+#: src/containers/magazines-index/magazines-index.template.ts:14
 msgid "matins"
 msgstr "Ufficio delle Letture"
 
@@ -395,7 +395,7 @@ msgstr "Prega l'Ufficio delle Letture del giorno {date} con le memorie facoltati
 #: src/containers/home/home.template.ts:78
 #: src/containers/info/info.template.ts:23
 #: src/containers/login/login.template.ts:25
-#: src/containers/magazines-index/magazines-index.template.ts:27
+#: src/containers/magazines-index/magazines-index.template.ts:30
 #: src/containers/prayers-list/prayers-list.template.ts:21
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:82
@@ -415,7 +415,7 @@ msgstr "Per favore, specifica una password."
 msgid "moreInfoWebsite {websiteUrl}"
 msgstr "Per ulteriori informazioni, visita il sito {websiteUrl}"
 
-#: src/containers/magazines-list/magazines-list.template.ts:67
+#: src/containers/magazines-list/magazines-list.template.ts:77
 msgid "newMagazineNotification {magazineType}"
 msgstr "Vuoi ricevere una notifica ogni volta che viene pubblicato un nuovo volume di {magazineType}?"
 
@@ -424,7 +424,7 @@ msgid "noHolyMassesAvailable"
 msgstr "Nessuna Santa Messa disponibile per questo giorno."
 
 #: src/containers/home/home.template.ts:87
-#: src/containers/magazines-list/magazines-list.template.ts:98
+#: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:62
 #: src/containers/songs-list/songs-list.component.ts:192
 msgid "noResults"
@@ -434,7 +434,7 @@ msgstr "Nessun risultato"
 msgid "noSeatsBooked"
 msgstr "Non hai ancora prenotato nessun posto."
 
-#: src/containers/magazines-list/magazines-list.template.ts:77
+#: src/containers/magazines-list/magazines-list.template.ts:87
 #: src/containers/prayers-list/prayers-list.template.ts:41
 #: src/containers/songs-list/songs-list.template.ts:97
 msgid "noThanks"
@@ -442,7 +442,7 @@ msgstr "No, grazie"
 
 #: src/containers/breviary-index/breviary-index.template.ts:16
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:16
-#: src/containers/magazines-index/magazines-index.template.ts:15
+#: src/containers/magazines-index/magazines-index.template.ts:18
 msgid "none"
 msgstr "Ora Nona"
 
@@ -560,7 +560,7 @@ msgstr "Personalizza Ancillapp modificandone il tema o la lingua."
 
 #: src/containers/breviary-index/breviary-index.template.ts:15
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:15
-#: src/containers/magazines-index/magazines-index.template.ts:14
+#: src/containers/magazines-index/magazines-index.template.ts:17
 msgid "sext"
 msgstr "Ora Sesta"
 
@@ -610,7 +610,7 @@ msgstr "Sfoglia il librone dei canti usato della Fraternità Francescana di Beta
 msgid "songsDownload"
 msgstr "Vuoi scaricare tutti i canti ora in modo da poterli consultare anche quando sei offline?"
 
-#: src/containers/magazines-list/magazines-list.template.ts:83
+#: src/containers/magazines-list/magazines-list.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:48
 #: src/containers/songs-list/songs-list.template.ts:104
 msgid "sure"
@@ -628,7 +628,7 @@ msgstr "Passa alla tastiera numerica"
 msgid "switchToTextKeyboard"
 msgstr "Passa alla tastiera testuale"
 
-#: src/containers/magazines-list/magazines-list.template.ts:137
+#: src/containers/magazines-list/magazines-list.template.ts:159
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:79
 #: src/containers/prayers-list/prayers-list.template.ts:84
 #: src/containers/song-viewer/song-viewer.template.ts:53
@@ -642,7 +642,7 @@ msgstr "Sistema"
 
 #: src/containers/breviary-index/breviary-index.template.ts:14
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:14
-#: src/containers/magazines-index/magazines-index.template.ts:13
+#: src/containers/magazines-index/magazines-index.template.ts:16
 msgid "terce"
 msgstr "Ora Terza"
 
@@ -682,7 +682,7 @@ msgstr "Per favore, verifica la tua email per usufruire del servizio di prenotaz
 
 #: src/containers/breviary-index/breviary-index.template.ts:17
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:17
-#: src/containers/magazines-index/magazines-index.template.ts:16
+#: src/containers/magazines-index/magazines-index.template.ts:19
 msgid "vespers"
 msgstr "Vespri"
 
