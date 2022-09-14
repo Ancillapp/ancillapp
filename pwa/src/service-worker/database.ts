@@ -29,7 +29,7 @@ const setupEventListener = async () => {
       console.groupEnd();
     }
     const requestId = `${event.data.method}-${event.data.args.join()}`;
-    queues[requestId]?.forEach(({ resolve, reject }) => {
+    queues[requestId]?.forEach?.(({ resolve, reject }) => {
       if (event.data.status === 'fulfilled') {
         resolve(event.data.value);
       } else {
