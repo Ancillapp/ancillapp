@@ -117,7 +117,7 @@ msgstr "Compieta"
 msgid "complineDescription {date}"
 msgstr "Prega la Compieta del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
-#: src/containers/settings/settings.template.ts:40
+#: src/containers/settings/settings.template.ts:38
 msgid "dark"
 msgstr "Scuro"
 
@@ -286,11 +286,11 @@ msgstr "Prega l'Invitatorio del giorno {date} con le memorie facoltative ricorda
 msgid "italian"
 msgstr "Italiano"
 
-#: src/containers/settings/settings.template.ts:61
+#: src/containers/settings/settings.template.ts:59
 msgid "keepScreenActive"
 msgstr "Mantieni lo schermo attivo"
 
-#: src/containers/settings/settings.template.ts:45
+#: src/containers/settings/settings.template.ts:43
 #: src/containers/songs-list/songs-list.template.ts:123
 msgid "language"
 msgstr "Lingua"
@@ -309,7 +309,7 @@ msgstr "Lodi"
 msgid "laudsDescription {date}"
 msgstr "Prega le Lodi del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
-#: src/containers/settings/settings.template.ts:39
+#: src/containers/settings/settings.template.ts:37
 msgid "light"
 msgstr "Chiaro"
 
@@ -351,7 +351,7 @@ msgstr "Sfoglia il volume {name} della rivista {magazineType} della Fraternità 
 
 #: src/containers/magazines-list/magazines-list.template.ts:49
 msgid "magazineSpecial {date}"
-msgstr "Speciale {date}"
+msgstr "Edizione speciale del {date}"
 
 #: src/containers/home/home.component.ts:149
 #: src/containers/magazine-viewer/magazine-viewer.component.ts:72
@@ -581,7 +581,7 @@ msgstr "Dai un'occhiata a questo volume di {magazineType}!"
 msgid "shareSongText"
 msgstr "Dai un'occhiata a questo canto!"
 
-#: src/containers/settings/settings.template.ts:75
+#: src/containers/settings/settings.template.ts:73
 msgid "showChangelog"
 msgstr "Mostra changelog"
 
@@ -636,7 +636,7 @@ msgstr "Passa alla tastiera testuale"
 msgid "syncInProgress"
 msgstr "Sincronizzazione in corso…"
 
-#: src/containers/settings/settings.template.ts:37
+#: src/containers/settings/settings.template.ts:36
 msgid "system"
 msgstr "Sistema"
 

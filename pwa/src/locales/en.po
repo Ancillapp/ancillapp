@@ -117,7 +117,7 @@ msgstr "Compline"
 msgid "complineDescription {date}"
 msgstr "Pray the Compline of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
-#: src/containers/settings/settings.template.ts:40
+#: src/containers/settings/settings.template.ts:38
 msgid "dark"
 msgstr "Dark"
 
@@ -264,11 +264,11 @@ msgstr "Pray the Invitatory of the day {date} with the optional memories remembe
 msgid "italian"
 msgstr "Italian"
 
-#: src/containers/settings/settings.template.ts:61
+#: src/containers/settings/settings.template.ts:59
 msgid "keepScreenActive"
 msgstr "Keep the screen active"
 
-#: src/containers/settings/settings.template.ts:45
+#: src/containers/settings/settings.template.ts:43
 #: src/containers/songs-list/songs-list.template.ts:123
 msgid "language"
 msgstr "Language"
@@ -287,7 +287,7 @@ msgstr "Lauds"
 msgid "laudsDescription {date}"
 msgstr "Pray the Lauds of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
-#: src/containers/settings/settings.template.ts:39
+#: src/containers/settings/settings.template.ts:37
 msgid "light"
 msgstr "Light"
 
@@ -329,7 +329,7 @@ msgstr "Browse the volume {name} of the {magazineType} Franciscan Fraternity of 
 
 #: src/containers/magazines-list/magazines-list.template.ts:49
 msgid "magazineSpecial {date}"
-msgstr ""
+msgstr "Special issue of {date}"
 
 #: src/containers/home/home.component.ts:149
 #: src/containers/magazine-viewer/magazine-viewer.component.ts:72
@@ -552,7 +552,7 @@ msgstr ""
 msgid "shareSongText"
 msgstr "Take a look at this song!"
 
-#: src/containers/settings/settings.template.ts:75
+#: src/containers/settings/settings.template.ts:73
 msgid "showChangelog"
 msgstr "Show changelog"
 
@@ -607,7 +607,7 @@ msgstr "Switch to text keyboard"
 msgid "syncInProgress"
 msgstr "Sync in progress…"
 
-#: src/containers/settings/settings.template.ts:37
+#: src/containers/settings/settings.template.ts:36
 msgid "system"
 msgstr "System"
 

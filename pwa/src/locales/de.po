@@ -76,7 +76,7 @@ msgstr ""
 
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:36
 msgid "breviaryUnavailable"
-msgstr ""
+msgstr "Stundengebet nicht verfügbar"
 
 #: src/containers/info/info.template.ts:60
 msgid "brotherlyLifePillarDescription"
@@ -117,7 +117,7 @@ msgstr "Komplet"
 msgid "complineDescription {date}"
 msgstr ""
 
-#: src/containers/settings/settings.template.ts:40
+#: src/containers/settings/settings.template.ts:38
 msgid "dark"
 msgstr "Dunkel"
 
@@ -264,11 +264,11 @@ msgstr ""
 msgid "italian"
 msgstr "Italienisch"
 
-#: src/containers/settings/settings.template.ts:61
+#: src/containers/settings/settings.template.ts:59
 msgid "keepScreenActive"
 msgstr ""
 
-#: src/containers/settings/settings.template.ts:45
+#: src/containers/settings/settings.template.ts:43
 #: src/containers/songs-list/songs-list.template.ts:123
 msgid "language"
 msgstr "Sprache"
@@ -287,7 +287,7 @@ msgstr "Laudes"
 msgid "laudsDescription {date}"
 msgstr ""
 
-#: src/containers/settings/settings.template.ts:39
+#: src/containers/settings/settings.template.ts:37
 msgid "light"
 msgstr "Licht"
 
@@ -329,7 +329,7 @@ msgstr ""
 
 #: src/containers/magazines-list/magazines-list.template.ts:49
 msgid "magazineSpecial {date}"
-msgstr ""
+msgstr "Sonderausgabe vom {date}"
 
 #: src/containers/home/home.component.ts:149
 #: src/containers/magazine-viewer/magazine-viewer.component.ts:72
@@ -343,11 +343,11 @@ msgstr "Zeitschriften"
 #: src/containers/home/home.component.ts:156
 #: src/containers/magazines-index/magazines-index.component.ts:74
 msgid "magazinesDescription"
-msgstr ""
+msgstr "Blättern Sie in den Zeitschriften der Franziskanischen Bruderschaft von Bethanien."
 
 #: src/containers/magazines-list/magazines-list.component.ts:96
 msgid "magazinesDescription {magazineType}"
-msgstr ""
+msgstr "Blättern Sie in den Zeitschriften {magazineType} der Franziskanischen Bruderschaft von Bethanien."
 
 #: src/containers/info/info.template.ts:36
 msgid "marianSpiritualityDescription"
@@ -552,7 +552,7 @@ msgstr "Schauen Sie sich dieses {magazineType} an!"
 msgid "shareSongText"
 msgstr "Schauen Sie sich dieses lied an!"
 
-#: src/containers/settings/settings.template.ts:75
+#: src/containers/settings/settings.template.ts:73
 msgid "showChangelog"
 msgstr ""
 
@@ -607,7 +607,7 @@ msgstr ""
 msgid "syncInProgress"
 msgstr "Synchronisierung läuft…"
 
-#: src/containers/settings/settings.template.ts:37
+#: src/containers/settings/settings.template.ts:36
 msgid "system"
 msgstr "System"
 

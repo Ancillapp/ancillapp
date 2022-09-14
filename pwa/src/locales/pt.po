@@ -76,7 +76,7 @@ msgstr "Rezar a Liturgia das Horas com as memórias opcionais recordadas pela Fr
 
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:36
 msgid "breviaryUnavailable"
-msgstr ""
+msgstr "Liturgia das Horas não disponível"
 
 #: src/containers/info/info.template.ts:60
 msgid "brotherlyLifePillarDescription"
@@ -117,9 +117,9 @@ msgstr "Completas"
 msgid "complineDescription {date}"
 msgstr "Rezar Completas o dia {date} com o memorial opcional lembrado pela Fraternidade Franciscana de Betânia."
 
-#: src/containers/settings/settings.template.ts:40
+#: src/containers/settings/settings.template.ts:38
 msgid "dark"
-msgstr "Scuro"
+msgstr "Sombrio"
 
 #: src/containers/breviary-index/breviary-index.template.ts:37
 #: src/containers/holy-mass/holy-mass.template.ts:87
@@ -143,7 +143,7 @@ msgstr "Não mostrar mais"
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:17
 msgid "english"
-msgstr ""
+msgstr "Inglês"
 
 #: src/containers/info/info.template.ts:33
 msgid "ffbInfoDescription"
@@ -286,18 +286,18 @@ msgstr "Reze o Invitatório do dia {date} com as memórias opcionais lembradas p
 msgid "italian"
 msgstr "Italiano"
 
-#: src/containers/settings/settings.template.ts:61
+#: src/containers/settings/settings.template.ts:59
 msgid "keepScreenActive"
 msgstr "Mantenha a tela ativa"
 
-#: src/containers/settings/settings.template.ts:45
+#: src/containers/settings/settings.template.ts:43
 #: src/containers/songs-list/songs-list.template.ts:123
 msgid "language"
 msgstr "Linguagem"
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:15
 msgid "latin"
-msgstr ""
+msgstr "Latim"
 
 #: src/containers/breviary-index/breviary-index.template.ts:13
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:13
@@ -309,9 +309,9 @@ msgstr "Laudes"
 msgid "laudsDescription {date}"
 msgstr "Rezem Laudes do dia {date} com o memorial opcional convocado pela Fraternidade Franciscana de Betânia."
 
-#: src/containers/settings/settings.template.ts:39
+#: src/containers/settings/settings.template.ts:37
 msgid "light"
-msgstr "Chiaro"
+msgstr "Claro"
 
 #: src/containers/breviary-index/breviary-index.template.ts:45
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:30
@@ -351,7 +351,7 @@ msgstr "Navegue a {magazineType} {name} da Fraternidade Franciscana de Betânia.
 
 #: src/containers/magazines-list/magazines-list.template.ts:49
 msgid "magazineSpecial {date}"
-msgstr ""
+msgstr "Edição especial de {date}"
 
 #: src/containers/home/home.component.ts:149
 #: src/containers/magazine-viewer/magazine-viewer.component.ts:72
@@ -365,11 +365,11 @@ msgstr "Revistas"
 #: src/containers/home/home.component.ts:156
 #: src/containers/magazines-index/magazines-index.component.ts:74
 msgid "magazinesDescription"
-msgstr ""
+msgstr "Navegue pelas revistas da Fraternidade Franciscana de Betânia."
 
 #: src/containers/magazines-list/magazines-list.component.ts:96
 msgid "magazinesDescription {magazineType}"
-msgstr "Navegue através da {magazineType} da Fraternidade Franciscana de Betânia."
+msgstr "Navegue pelas revistas {magazineType} da Fraternidade Franciscana de Betânia."
 
 #: src/containers/info/info.template.ts:36
 msgid "marianSpiritualityDescription"
@@ -461,7 +461,7 @@ msgstr "Os três pilares do carisma"
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:18
 #: src/containers/songs-list/songs-list.template.ts:131
 msgid "portuguese"
-msgstr ""
+msgstr "Português"
 
 #: src/containers/home/home.template.ts:109
 msgid "prayDailyPrayers"
@@ -509,7 +509,7 @@ msgstr "Leia o último Ancilla Domini"
 
 #: src/containers/home/home.template.ts:125
 msgid "readLatestSempreConnessi"
-msgstr ""
+msgstr "Leia o último #sempreconnessi"
 
 #: src/containers/holy-mass/holy-mass.template.ts:278
 msgid "resendVerificationEmail"
@@ -581,7 +581,7 @@ msgstr "Dê uma olhada nesta {magazineType}!"
 msgid "shareSongText"
 msgstr "Dê uma olhada neste canção!"
 
-#: src/containers/settings/settings.template.ts:75
+#: src/containers/settings/settings.template.ts:73
 msgid "showChangelog"
 msgstr "Mostrar changelog"
 
@@ -636,7 +636,7 @@ msgstr "Mudar para teclado de texto"
 msgid "syncInProgress"
 msgstr "Sincronização em andamento..."
 
-#: src/containers/settings/settings.template.ts:37
+#: src/containers/settings/settings.template.ts:36
 msgid "system"
 msgstr "Sistema"
 
