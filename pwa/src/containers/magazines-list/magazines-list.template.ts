@@ -2,7 +2,11 @@ import { html, nothing } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { MagazinesList } from './magazines-list.component';
 import { arrowBack } from '../../components/icons';
-import { MagazineFrequency, MagazineType } from '../../models/magazine';
+import {
+  MagazineFrequency,
+  MagazineLanguage,
+  MagazineType,
+} from '../../models/magazine';
 import { toLocalTimeZone } from '../../helpers/utils';
 import { t } from '@lingui/macro';
 
@@ -15,6 +19,12 @@ const frequencyToMonthsNumber: Record<MagazineFrequency, number> = {
   [MagazineFrequency.BIMONTHLY]: 2,
   [MagazineFrequency.QUARTERLY]: 3,
   [MagazineFrequency.SPECIAL]: 0,
+};
+
+const magazineLanguageToFlag: Record<MagazineLanguage, string> = {
+  [MagazineLanguage.ITALIAN]: '🇮🇹',
+  [MagazineLanguage.GERMAN]: '🇩🇪',
+  [MagazineLanguage.PORTUGUESE]: '🇧🇷',
 };
 
 const computeIntervalEnd = (frequency: MagazineFrequency, from: Date) => {
@@ -100,7 +110,15 @@ export default function template(this: MagazinesList) {
             ${repeat(
               this._displayedMagazines,
               ({ code }) => `${this.type}/${code}`,
-              ({ type, code, name, frequency, date, thumbnail }) => html`
+              ({
+                type,
+                language,
+                code,
+                name,
+                frequency,
+                date,
+                thumbnail,
+              }) => html`
                 <a
                   href="${this.localizeHref('magazines', type, code)}"
                   title="${magazineType} - ${name}"
@@ -115,7 +133,11 @@ export default function template(this: MagazinesList) {
                       loading="lazy"
                     />
                     <figcaption>
-                      <div class="title">${name}</div>
+                      <div class="title">
+                        ${language === this.locale
+                          ? ''
+                          : `${magazineLanguageToFlag[language]} `}${name}
+                      </div>
                       <div class="subtitle">
                         ${getMagazineDateDescription(
                           frequency,

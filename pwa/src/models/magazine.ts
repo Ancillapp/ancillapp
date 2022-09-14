@@ -6,6 +6,7 @@ export enum MagazineType {
 export enum MagazineLanguage {
   ITALIAN = 'it',
   GERMAN = 'de',
+  PORTUGUESE = 'pt',
 }
 
 export enum MagazineFrequency {
