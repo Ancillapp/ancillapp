@@ -27,7 +27,7 @@ msgstr "Posti disponibili"
 #: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:25
 #: src/containers/song-viewer/song-viewer.template.ts:15
-#: src/containers/songs-list/songs-list.template.ts:33
+#: src/containers/songs-list/songs-list.template.ts:34
 msgid "back"
 msgstr "Indietro"
 
@@ -96,13 +96,17 @@ msgstr "Annulla"
 msgid "cancelBooking"
 msgstr "Elimina prenotazione"
 
+#: src/containers/songs-list/songs-list.template.ts:142
+msgid "category"
+msgstr "Categoria"
+
 #: src/containers/holy-mass/holy-mass.template.ts:273
 #: src/containers/login/login.template.ts:55
 msgid "checkYourInbox"
 msgstr "Fatto! Controlla la tua casella di posta."
 
 #: src/containers/holy-mass/holy-mass.template.ts:254
-#: src/containers/songs-list/songs-list.template.ts:137
+#: src/containers/songs-list/songs-list.template.ts:241
 #: src/containers/update-checker/update-checker.template.ts:75
 msgid "close"
 msgstr "Chiudi"
@@ -133,7 +137,7 @@ msgstr "Hai già prenotato dei posti per questo giorno."
 
 #: src/containers/magazines-list/magazines-list.template.ts:81
 #: src/containers/prayers-list/prayers-list.template.ts:34
-#: src/containers/songs-list/songs-list.template.ts:90
+#: src/containers/songs-list/songs-list.template.ts:91
 msgid "dontAskAnymore"
 msgstr "Non chiedermelo più"
 
@@ -154,6 +158,10 @@ msgstr ""
 #: src/containers/info/info.template.ts:32
 msgid "ffbInfoTitle"
 msgstr "Fraternità Francescana di Betania"
+
+#: src/containers/songs-list/songs-list.template.ts:246
+msgid "filters"
+msgstr "Filtri"
 
 #: src/containers/login/login.template.ts:85
 msgid "forgotPassword"
@@ -203,7 +211,7 @@ msgid "fraternity"
 msgstr "Fraternità"
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:16
-#: src/containers/songs-list/songs-list.template.ts:130
+#: src/containers/songs-list/songs-list.template.ts:134
 msgid "german"
 msgstr "Tedesco"
 
@@ -282,7 +290,7 @@ msgid "invitatoryDescription {date}"
 msgstr "Prega l'Invitatorio del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:14
-#: src/containers/songs-list/songs-list.template.ts:129
+#: src/containers/songs-list/songs-list.template.ts:131
 msgid "italian"
 msgstr "Italiano"
 
@@ -291,7 +299,7 @@ msgid "keepScreenActive"
 msgstr "Mantieni lo schermo attivo"
 
 #: src/containers/settings/settings.template.ts:43
-#: src/containers/songs-list/songs-list.template.ts:123
+#: src/containers/songs-list/songs-list.template.ts:124
 msgid "language"
 msgstr "Lingua"
 
@@ -399,7 +407,7 @@ msgstr "Prega l'Ufficio delle Letture del giorno {date} con le memorie facoltati
 #: src/containers/prayers-list/prayers-list.template.ts:21
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:82
-#: src/containers/songs-list/songs-list.template.ts:54
+#: src/containers/songs-list/songs-list.template.ts:55
 msgid "menu"
 msgstr "Menù"
 
@@ -426,7 +434,7 @@ msgstr "Nessuna Santa Messa disponibile per questo giorno."
 #: src/containers/home/home.template.ts:87
 #: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:62
-#: src/containers/songs-list/songs-list.component.ts:192
+#: src/containers/songs-list/songs-list.component.ts:205
 msgid "noResults"
 msgstr "Nessun risultato"
 
@@ -436,7 +444,7 @@ msgstr "Non hai ancora prenotato nessun posto."
 
 #: src/containers/magazines-list/magazines-list.template.ts:87
 #: src/containers/prayers-list/prayers-list.template.ts:41
-#: src/containers/songs-list/songs-list.template.ts:97
+#: src/containers/songs-list/songs-list.template.ts:98
 msgid "noThanks"
 msgstr "No, grazie"
 
@@ -459,7 +467,7 @@ msgid "pillarsTitle"
 msgstr "I tre pilastri del carisma"
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:18
-#: src/containers/songs-list/songs-list.template.ts:131
+#: src/containers/songs-list/songs-list.template.ts:137
 msgid "portuguese"
 msgstr "Portoghese"
 
@@ -520,9 +528,9 @@ msgid "resetPassword"
 msgstr "Reimposta password"
 
 #: src/containers/song-viewer/song-viewer.template.ts:27
-#: src/containers/songs-list/songs-list.template.ts:61
-#: src/containers/songs-list/songs-list.template.ts:73
-#: src/containers/songs-list/songs-list.template.ts:80
+#: src/containers/songs-list/songs-list.template.ts:62
+#: src/containers/songs-list/songs-list.template.ts:74
+#: src/containers/songs-list/songs-list.template.ts:81
 msgid "search"
 msgstr "Cerca"
 
@@ -542,7 +550,7 @@ msgstr "Posti"
 msgid "set"
 msgstr "Imposta"
 
-#: src/containers/songs-list/songs-list.template.ts:116
+#: src/containers/songs-list/songs-list.template.ts:117
 msgid "setFilters"
 msgstr "Imposta filtri"
 
@@ -569,7 +577,6 @@ msgid "sextDescription {date}"
 msgstr "Prega l'Ora Sesta del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
 #: src/components/share-fab/share-fab.template.ts:11
-#: src/containers/songs-list/songs-list.template.ts:142
 msgid "share"
 msgstr "Condividi"
 
@@ -589,6 +596,122 @@ msgstr "Mostra changelog"
 msgid "singFraternitySongs"
 msgstr "Canta i canti della Fraternità"
 
+#: src/containers/songs-list/songs-list.template.ts:228
+msgid "songCategoryAdvent"
+msgstr "Avvento"
+
+#: src/containers/songs-list/songs-list.template.ts:171
+msgid "songCategoryAmen"
+msgstr "Amen"
+
+#: src/containers/songs-list/songs-list.template.ts:168
+msgid "songCategoryAnamnesis"
+msgstr "Anamnesi"
+
+#: src/containers/songs-list/songs-list.template.ts:222
+msgid "songCategoryAnimation"
+msgstr "Animazione"
+
+#: src/containers/songs-list/songs-list.template.ts:204
+msgid "songCategoryBenedictus"
+msgstr "Benedictus"
+
+#: src/containers/songs-list/songs-list.template.ts:180
+msgid "songCategoryCanonsAndRefrains"
+msgstr "Canoni e Ritornelli"
+
+#: src/containers/songs-list/songs-list.template.ts:210
+msgid "songCategoryCanticles"
+msgstr "Cantici"
+
+#: src/containers/songs-list/songs-list.template.ts:231
+msgid "songCategoryChristmas"
+msgstr "Natale"
+
+#: src/containers/songs-list/songs-list.template.ts:159
+msgid "songCategoryCreed"
+msgstr "Credo"
+
+#: src/containers/songs-list/songs-list.template.ts:189
+msgid "songCategoryEntrance"
+msgstr "Ingresso"
+
+#: src/containers/songs-list/songs-list.template.ts:198
+msgid "songCategoryEucharist"
+msgstr "Comunione"
+
+#: src/containers/songs-list/songs-list.template.ts:183
+msgid "songCategoryFranciscans"
+msgstr "Francescani"
+
+#: src/containers/songs-list/songs-list.template.ts:153
+msgid "songCategoryGlory"
+msgstr "Gloria"
+
+#: src/containers/songs-list/songs-list.template.ts:225
+msgid "songCategoryGregorians"
+msgstr "Gregoriani"
+
+#: src/containers/songs-list/songs-list.template.ts:156
+msgid "songCategoryHallelujah"
+msgstr "Alleluia"
+
+#: src/containers/songs-list/songs-list.template.ts:165
+msgid "songCategoryHoly"
+msgstr "Santo"
+
+#: src/containers/songs-list/songs-list.template.ts:192
+msgid "songCategoryHolySpirit"
+msgstr "Spirito Santo"
+
+#: src/containers/songs-list/songs-list.template.ts:213
+msgid "songCategoryHymns"
+msgstr "Inni"
+
+#: src/containers/songs-list/songs-list.template.ts:150
+msgid "songCategoryKyrie"
+msgstr "Kyrie"
+
+#: src/containers/songs-list/songs-list.template.ts:177
+msgid "songCategoryLambOfGod"
+msgstr "Agnello di Dio"
+
+#: src/containers/songs-list/songs-list.template.ts:234
+msgid "songCategoryLent"
+msgstr "Quaresima"
+
+#: src/containers/songs-list/songs-list.template.ts:207
+msgid "songCategoryMagnificat"
+msgstr "Magnificat"
+
+#: src/containers/songs-list/songs-list.template.ts:219
+msgid "songCategoryMarians"
+msgstr "Mariani"
+
+#: src/containers/songs-list/songs-list.template.ts:162
+msgid "songCategoryOffertory"
+msgstr "Offertorio"
+
+#: src/containers/songs-list/songs-list.template.ts:201
+msgid "songCategoryOtherSongs"
+msgstr "Altri Canti"
+
+#: src/containers/songs-list/songs-list.template.ts:174
+msgid "songCategoryOurFather"
+msgstr "Padre Nostro"
+
+#: src/containers/songs-list/songs-list.template.ts:186
+msgid "songCategoryPraiseAndFarewell"
+msgstr "Lode e Congedo"
+
+#: src/containers/songs-list/songs-list.template.ts:216
+msgid "songCategorySimplePrayer"
+msgstr "Preghiera Semplice"
+
+#: src/containers/songs-list/songs-list.template.ts:195
+msgid "songCategoryWorship"
+msgstr "Lode"
+
 #: src/containers/song-viewer/song-viewer.component.ts:87
 msgid "songDescription {title}"
 msgstr "Canta il canto \"{title}\" come viene cantato dalla Fraternità Francescana di Betania."
@@ -596,23 +719,23 @@ msgstr "Canta il canto \"{title}\" come viene cantato dalla Fraternità Francesc
 #: src/containers/home/home.component.ts:127
 #: src/containers/shell/shell.template.ts:31
 #: src/containers/song-viewer/song-viewer.component.ts:71
-#: src/containers/songs-list/songs-list.component.ts:268
-#: src/containers/songs-list/songs-list.template.ts:67
+#: src/containers/songs-list/songs-list.component.ts:281
+#: src/containers/songs-list/songs-list.template.ts:68
 msgid "songs"
 msgstr "Canti"
 
 #: src/containers/home/home.component.ts:134
-#: src/containers/songs-list/songs-list.component.ts:272
+#: src/containers/songs-list/songs-list.component.ts:285
 msgid "songsDescription"
 msgstr "Sfoglia il librone dei canti usato della Fraternità Francescana di Betania."
 
-#: src/containers/songs-list/songs-list.template.ts:85
+#: src/containers/songs-list/songs-list.template.ts:86
 msgid "songsDownload"
 msgstr "Vuoi scaricare tutti i canti ora in modo da poterli consultare anche quando sei offline?"
 
 #: src/containers/magazines-list/magazines-list.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:48
-#: src/containers/songs-list/songs-list.template.ts:104
+#: src/containers/songs-list/songs-list.template.ts:105
 msgid "sure"
 msgstr "Certo!"
 
@@ -620,11 +743,11 @@ msgstr "Certo!"
 msgid "switchAlternative"
 msgstr "Cambia alternativa"
 
-#: src/containers/songs-list/songs-list.template.ts:43
+#: src/containers/songs-list/songs-list.template.ts:44
 msgid "switchToNumericKeyboard"
 msgstr "Passa alla tastiera numerica"
 
-#: src/containers/songs-list/songs-list.template.ts:42
+#: src/containers/songs-list/songs-list.template.ts:43
 msgid "switchToTextKeyboard"
 msgstr "Passa alla tastiera testuale"
 
@@ -632,7 +755,7 @@ msgstr "Passa alla tastiera testuale"
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:79
 #: src/containers/prayers-list/prayers-list.template.ts:84
 #: src/containers/song-viewer/song-viewer.template.ts:53
-#: src/containers/songs-list/songs-list.template.ts:151
+#: src/containers/songs-list/songs-list.template.ts:255
 msgid "syncInProgress"
 msgstr "Sincronizzazione in corso…"
 

@@ -1,5 +1,5 @@
 import { PropertyValues } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, query, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { get, set } from '../../helpers/keyval';
 import { localize, SupportedLocale } from '../../helpers/localize';
@@ -15,7 +15,7 @@ import template from './songs-list.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
-import { SongSummary } from '../../models/song';
+import { SongCategory, SongLanguage, SongSummary } from '../../models/song';
 
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
 
@@ -39,31 +39,34 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   private _songsPerRow = 1;
 
-  @property({ type: Object })
+  @state()
   protected _songsStatus: APIResponse<SongSummary[]> = {
     loading: true,
     refreshing: false,
   };
 
-  @property({ type: String })
-  protected _selectedLanguage = 'it';
+  @state()
+  protected _selectedLanguage = SongLanguage.ITALIAN;
 
-  @property({ type: String })
+  @state()
+  protected _selectedCategory?: string;
+
+  @state()
   protected _searchTerm = '';
 
-  @property({ type: Boolean })
+  @state()
   protected _needSongsDownloadPermission = false;
 
-  @property({ type: Boolean })
+  @state()
   protected _downloadingSongs = false;
 
-  @property({ type: Boolean })
+  @state()
   protected _searching = false;
 
-  @property({ type: Boolean })
+  @state()
   protected _filtersDialogOpen = false;
 
-  @property({ type: Boolean })
+  @state()
   protected _numericOnly = false;
 
   @query('.songs-container')
@@ -84,12 +87,15 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   }
 
   private async _prepareSongs() {
-    const supportedSongsLanguages = ['it', 'de', 'pt'];
-    const [songsDownloadPreference, songsLanguage, locale] = await Promise.all([
-      get<string>('songsDownloadPreference'),
-      get<string>('songsLanguage'),
-      get<SupportedLocale>('locale'),
-    ]);
+    const supportedSongsLanguages = Object.values(SongLanguage);
+    const supportedSongsCategories = Object.values(SongCategory);
+    const [songsDownloadPreference, songsLanguage, songsCategory, locale] =
+      await Promise.all([
+        get<string>('songsDownloadPreference'),
+        get<SongLanguage>('songsLanguage'),
+        get<SongCategory>('songsCategory'),
+        get<SupportedLocale>('locale'),
+      ]);
 
     if (!songsDownloadPreference || songsDownloadPreference === 'no') {
       this._needSongsDownloadPermission = true;
@@ -98,9 +104,14 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
     this._selectedLanguage =
       songsLanguage && supportedSongsLanguages.includes(songsLanguage)
         ? songsLanguage
-        : locale && supportedSongsLanguages.includes(locale)
-        ? locale
-        : 'it';
+        : locale && supportedSongsLanguages.includes(locale as SongLanguage)
+        ? (locale as SongLanguage)
+        : SongLanguage.ITALIAN;
+
+    this._selectedCategory =
+      songsCategory && supportedSongsCategories.includes(songsCategory)
+        ? songsCategory
+        : undefined;
 
     for await (const status of cacheAndNetwork<SongSummary[]>(
       `${config.apiUrl}/songs${
@@ -117,7 +128,9 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   private async _refreshSongs() {
     const songs = (this._songsStatus.data || []).filter(
-      ({ language }) => language === this._selectedLanguage,
+      ({ language, category }) =>
+        language === this._selectedLanguage &&
+        (!this._selectedCategory || category === this._selectedCategory),
     );
 
     await configureSearch(songs);
@@ -329,9 +342,17 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
     await set('songsLanguage', newLanguage);
 
-    this._selectedLanguage = newLanguage;
+    this._selectedLanguage = newLanguage as SongLanguage;
     await this._refreshSongs();
-    this._filtersDialogOpen = false;
+  }
+
+  protected async _handleCategoryFilter({ target }: CustomEvent<null>) {
+    const newCategory = (target as OutlinedSelect).value;
+
+    await set('songsCategory', newCategory);
+
+    this._selectedCategory = newCategory;
+    await this._refreshSongs();
   }
 
   protected async _updateSongsDownloadPermission(

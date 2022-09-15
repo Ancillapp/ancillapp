@@ -9,6 +9,7 @@ import {
   filter,
 } from '../../components/icons';
 import { t } from '@lingui/macro';
+import { SongCategory, SongLanguage } from '../../models/song';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
@@ -126,9 +127,112 @@ export default function template(this: SongsList) {
               @change=${this._handleLanguageFilter}
               value="${this._selectedLanguage}"
             >
-              <option value="it">${this.localize(t`italian`)}</option>
-              <option value="de">${this.localize(t`german`)}</option>
-              <option value="pt">${this.localize(t`portuguese`)}</option>
+              <option value="${SongLanguage.ITALIAN}">
+                ${this.localize(t`italian`)}
+              </option>
+              <option value="${SongLanguage.GERMAN}">
+                ${this.localize(t`german`)}
+              </option>
+              <option value="${SongLanguage.PORTUGUESE}">
+                ${this.localize(t`portuguese`)}
+              </option>
+            </outlined-select>
+          </li>
+          <li>
+            <label for="category">${this.localize(t`category`)}</label>
+            <outlined-select
+              id="category"
+              @change=${this._handleCategoryFilter}
+              value="${this._selectedCategory}"
+            >
+              <option value="">-</option>
+              <option value="${SongCategory.KYRIE}">
+                ${this.localize(t`songCategoryKyrie`)}
+              </option>
+              <option value="${SongCategory.GLORY}">
+                ${this.localize(t`songCategoryGlory`)}
+              </option>
+              <option value="${SongCategory.HALLELUJAH}">
+                ${this.localize(t`songCategoryHallelujah`)}
+              </option>
+              <option value="${SongCategory.CREED}">
+                ${this.localize(t`songCategoryCreed`)}
+              </option>
+              <option value="${SongCategory.OFFERTORY}">
+                ${this.localize(t`songCategoryOffertory`)}
+              </option>
+              <option value="${SongCategory.HOLY}">
+                ${this.localize(t`songCategoryHoly`)}
+              </option>
+              <option value="${SongCategory.ANAMNESIS}">
+                ${this.localize(t`songCategoryAnamnesis`)}
+              </option>
+              <option value="${SongCategory.AMEN}">
+                ${this.localize(t`songCategoryAmen`)}
+              </option>
+              <option value="${SongCategory.OUR_FATHER}">
+                ${this.localize(t`songCategoryOurFather`)}
+              </option>
+              <option value="${SongCategory.LAMB_OF_GOD}">
+                ${this.localize(t`songCategoryLambOfGod`)}
+              </option>
+              <option value="${SongCategory.CANONS_AND_REFRAINS}">
+                ${this.localize(t`songCategoryCanonsAndRefrains`)}
+              </option>
+              <option value="${SongCategory.FRANCISCANS}">
+                ${this.localize(t`songCategoryFranciscans`)}
+              </option>
+              <option value="${SongCategory.PRAISE_AND_FAREWELL}">
+                ${this.localize(t`songCategoryPraiseAndFarewell`)}
+              </option>
+              <option value="${SongCategory.ENTRANCE}">
+                ${this.localize(t`songCategoryEntrance`)}
+              </option>
+              <option value="${SongCategory.HOLY_SPIRIT}">
+                ${this.localize(t`songCategoryHolySpirit`)}
+              </option>
+              <option value="${SongCategory.WORSHIP}">
+                ${this.localize(t`songCategoryWorship`)}
+              </option>
+              <option value="${SongCategory.EUCHARIST}">
+                ${this.localize(t`songCategoryEucharist`)}
+              </option>
+              <option value="${SongCategory.OTHER_SONGS}">
+                ${this.localize(t`songCategoryOtherSongs`)}
+              </option>
+              <option value="${SongCategory.BENEDICTUS}">
+                ${this.localize(t`songCategoryBenedictus`)}
+              </option>
+              <option value="${SongCategory.MAGNIFICAT}">
+                ${this.localize(t`songCategoryMagnificat`)}
+              </option>
+              <option value="${SongCategory.CANTICLES}">
+                ${this.localize(t`songCategoryCanticles`)}
+              </option>
+              <option value="${SongCategory.HYMNS}">
+                ${this.localize(t`songCategoryHymns`)}
+              </option>
+              <option value="${SongCategory.SIMPLE_PRAYER}">
+                ${this.localize(t`songCategorySimplePrayer`)}
+              </option>
+              <option value="${SongCategory.MARIANS}">
+                ${this.localize(t`songCategoryMarians`)}
+              </option>
+              <option value="${SongCategory.ANIMATION}">
+                ${this.localize(t`songCategoryAnimation`)}
+              </option>
+              <option value="${SongCategory.GREGORIANS}">
+                ${this.localize(t`songCategoryGregorians`)}
+              </option>
+              <option value="${SongCategory.ADVENT}">
+                ${this.localize(t`songCategoryAdvent`)}
+              </option>
+              <option value="${SongCategory.CHRISTMAS}">
+                ${this.localize(t`songCategoryChristmas`)}
+              </option>
+              <option value="${SongCategory.LENT}">
+                ${this.localize(t`songCategoryLent`)}
+              </option>
             </outlined-select>
           </li>
         </ul>
@@ -139,7 +243,7 @@ export default function template(this: SongsList) {
     </mwc-dialog>
 
     <autosized-fab
-      label="${this.localize(t`share`)}"
+      label="${this.localize(t`filters`)}"
       @click="${() => (this._filtersDialogOpen = true)}"
     >
       ${filter}

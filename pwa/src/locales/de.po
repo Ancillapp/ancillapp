@@ -27,7 +27,7 @@ msgstr ""
 #: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:25
 #: src/containers/song-viewer/song-viewer.template.ts:15
-#: src/containers/songs-list/songs-list.template.ts:33
+#: src/containers/songs-list/songs-list.template.ts:34
 msgid "back"
 msgstr ""
 
@@ -96,13 +96,17 @@ msgstr "Stornieren"
 msgid "cancelBooking"
 msgstr ""
 
+#: src/containers/songs-list/songs-list.template.ts:142
+msgid "category"
+msgstr ""
+
 #: src/containers/holy-mass/holy-mass.template.ts:273
 #: src/containers/login/login.template.ts:55
 msgid "checkYourInbox"
 msgstr ""
 
 #: src/containers/holy-mass/holy-mass.template.ts:254
-#: src/containers/songs-list/songs-list.template.ts:137
+#: src/containers/songs-list/songs-list.template.ts:241
 #: src/containers/update-checker/update-checker.template.ts:75
 msgid "close"
 msgstr "Schließen"
@@ -133,7 +137,7 @@ msgstr ""
 
 #: src/containers/magazines-list/magazines-list.template.ts:81
 #: src/containers/prayers-list/prayers-list.template.ts:34
-#: src/containers/songs-list/songs-list.template.ts:90
+#: src/containers/songs-list/songs-list.template.ts:91
 msgid "dontAskAnymore"
 msgstr "Frag nicht mehr"
 
@@ -151,6 +155,10 @@ msgstr ""
 
 #: src/containers/info/info.template.ts:32
 msgid "ffbInfoTitle"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:246
+msgid "filters"
 msgstr ""
 
 #: src/containers/login/login.template.ts:85
@@ -191,7 +199,7 @@ msgid "fraternity"
 msgstr ""
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:16
-#: src/containers/songs-list/songs-list.template.ts:130
+#: src/containers/songs-list/songs-list.template.ts:134
 msgid "german"
 msgstr "Deutsch"
 
@@ -260,7 +268,7 @@ msgid "invitatoryDescription {date}"
 msgstr ""
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:14
-#: src/containers/songs-list/songs-list.template.ts:129
+#: src/containers/songs-list/songs-list.template.ts:131
 msgid "italian"
 msgstr "Italienisch"
 
@@ -269,7 +277,7 @@ msgid "keepScreenActive"
 msgstr ""
 
 #: src/containers/settings/settings.template.ts:43
-#: src/containers/songs-list/songs-list.template.ts:123
+#: src/containers/songs-list/songs-list.template.ts:124
 msgid "language"
 msgstr "Sprache"
 
@@ -377,7 +385,7 @@ msgstr ""
 #: src/containers/prayers-list/prayers-list.template.ts:21
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:82
-#: src/containers/songs-list/songs-list.template.ts:54
+#: src/containers/songs-list/songs-list.template.ts:55
 msgid "menu"
 msgstr ""
 
@@ -404,7 +412,7 @@ msgstr ""
 #: src/containers/home/home.template.ts:87
 #: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:62
-#: src/containers/songs-list/songs-list.component.ts:192
+#: src/containers/songs-list/songs-list.component.ts:205
 msgid "noResults"
 msgstr "Keine Ergebnisse"
 
@@ -414,7 +422,7 @@ msgstr ""
 
 #: src/containers/magazines-list/magazines-list.template.ts:87
 #: src/containers/prayers-list/prayers-list.template.ts:41
-#: src/containers/songs-list/songs-list.template.ts:97
+#: src/containers/songs-list/songs-list.template.ts:98
 msgid "noThanks"
 msgstr "Nein, danke"
 
@@ -437,7 +445,7 @@ msgid "pillarsTitle"
 msgstr ""
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:18
-#: src/containers/songs-list/songs-list.template.ts:131
+#: src/containers/songs-list/songs-list.template.ts:137
 msgid "portuguese"
 msgstr "Portugiesisch"
 
@@ -491,9 +499,9 @@ msgid "resetPassword"
 msgstr ""
 
 #: src/containers/song-viewer/song-viewer.template.ts:27
-#: src/containers/songs-list/songs-list.template.ts:61
-#: src/containers/songs-list/songs-list.template.ts:73
-#: src/containers/songs-list/songs-list.template.ts:80
+#: src/containers/songs-list/songs-list.template.ts:62
+#: src/containers/songs-list/songs-list.template.ts:74
+#: src/containers/songs-list/songs-list.template.ts:81
 msgid "search"
 msgstr "Suche"
 
@@ -513,7 +521,7 @@ msgstr ""
 msgid "set"
 msgstr "Einstellen"
 
-#: src/containers/songs-list/songs-list.template.ts:116
+#: src/containers/songs-list/songs-list.template.ts:117
 msgid "setFilters"
 msgstr "Filter einstellen"
 
@@ -540,7 +548,6 @@ msgid "sextDescription {date}"
 msgstr ""
 
 #: src/components/share-fab/share-fab.template.ts:11
-#: src/containers/songs-list/songs-list.template.ts:142
 msgid "share"
 msgstr "Teilen"
 
@@ -560,6 +567,122 @@ msgstr ""
 msgid "singFraternitySongs"
 msgstr "Singe die Gemeinschaftslieder"
 
+#: src/containers/songs-list/songs-list.template.ts:228
+msgid "songCategoryAdvent"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:171
+msgid "songCategoryAmen"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:168
+msgid "songCategoryAnamnesis"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:222
+msgid "songCategoryAnimation"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:204
+msgid "songCategoryBenedictus"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:180
+msgid "songCategoryCanonsAndRefrains"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:210
+msgid "songCategoryCanticles"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:231
+msgid "songCategoryChristmas"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:159
+msgid "songCategoryCreed"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:189
+msgid "songCategoryEntrance"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:198
+msgid "songCategoryEucharist"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:183
+msgid "songCategoryFranciscans"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:153
+msgid "songCategoryGlory"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:225
+msgid "songCategoryGregorians"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:156
+msgid "songCategoryHallelujah"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:165
+msgid "songCategoryHoly"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:192
+msgid "songCategoryHolySpirit"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:213
+msgid "songCategoryHymns"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:150
+msgid "songCategoryKyrie"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:177
+msgid "songCategoryLambOfGod"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:234
+msgid "songCategoryLent"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:207
+msgid "songCategoryMagnificat"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:219
+msgid "songCategoryMarians"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:162
+msgid "songCategoryOffertory"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:201
+msgid "songCategoryOtherSongs"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:174
+msgid "songCategoryOurFather"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:186
+msgid "songCategoryPraiseAndFarewell"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:216
+msgid "songCategorySimplePrayer"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:195
+msgid "songCategoryWorship"
+msgstr ""
+
 #: src/containers/song-viewer/song-viewer.component.ts:87
 msgid "songDescription {title}"
 msgstr ""
@@ -567,23 +690,23 @@ msgstr ""
 #: src/containers/home/home.component.ts:127
 #: src/containers/shell/shell.template.ts:31
 #: src/containers/song-viewer/song-viewer.component.ts:71
-#: src/containers/songs-list/songs-list.component.ts:268
-#: src/containers/songs-list/songs-list.template.ts:67
+#: src/containers/songs-list/songs-list.component.ts:281
+#: src/containers/songs-list/songs-list.template.ts:68
 msgid "songs"
 msgstr "Lieder"
 
 #: src/containers/home/home.component.ts:134
-#: src/containers/songs-list/songs-list.component.ts:272
+#: src/containers/songs-list/songs-list.component.ts:285
 msgid "songsDescription"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:85
+#: src/containers/songs-list/songs-list.template.ts:86
 msgid "songsDownload"
 msgstr "Möchten Sie jetzt alle lieder herunterladen, damit Sie sie auch dann abrufen können, wenn Sie offline sind?"
 
 #: src/containers/magazines-list/magazines-list.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:48
-#: src/containers/songs-list/songs-list.template.ts:104
+#: src/containers/songs-list/songs-list.template.ts:105
 msgid "sure"
 msgstr "Sicher!"
 
@@ -591,11 +714,11 @@ msgstr "Sicher!"
 msgid "switchAlternative"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:43
+#: src/containers/songs-list/songs-list.template.ts:44
 msgid "switchToNumericKeyboard"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:42
+#: src/containers/songs-list/songs-list.template.ts:43
 msgid "switchToTextKeyboard"
 msgstr ""
 
@@ -603,7 +726,7 @@ msgstr ""
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:79
 #: src/containers/prayers-list/prayers-list.template.ts:84
 #: src/containers/song-viewer/song-viewer.template.ts:53
-#: src/containers/songs-list/songs-list.template.ts:151
+#: src/containers/songs-list/songs-list.template.ts:255
 msgid "syncInProgress"
 msgstr "Synchronisierung läuft…"
 
