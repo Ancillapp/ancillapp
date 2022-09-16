@@ -111,7 +111,7 @@ const formatSong = (rawString: string, enableChords = false): string => {
             '.row > .column > .lyrics',
           );
           const paragraphType = initialParagraphLyrics?.textContent?.match(
-            /^(?:rit|ritornello|chorus|ref|refrain|bridge|finale|fin|fim|ende|\d+)[:.]?/gi,
+            /^(?:rit|ritornello|chorus|ref|refrain|bridge|finale|fin|fim|ende|\d+)[:.]?\s/gi,
           )?.[0];
           if (paragraphType) {
             initialParagraphLyrics.innerHTML =
