@@ -1,21 +1,25 @@
 import Fuse from 'fuse.js';
-import type { Song, SongSummary } from '../../models/song';
+import type { Song } from '../../models/song';
 
-let _fuse: Fuse<Song | SongSummary>;
+export interface ExtendedSong extends Song {
+  formattedNumber: string;
+}
 
-export const configureSearch = async (songs: (Song | SongSummary)[]) => {
+let _fuse: Fuse<ExtendedSong>;
+
+export const configureSearch = async (songs: ExtendedSong[]) => {
   if (_fuse) {
     _fuse.setCollection(songs);
   } else {
     _fuse = new Fuse(songs, {
-      keys: ['number', 'title', 'content'],
+      keys: ['formattedNumber', 'title', 'content'],
       includeMatches: true,
       ignoreLocation: true,
     });
   }
 };
 
-export const search = async (term: string): Promise<(Song | SongSummary)[]> => {
+export const search = async (term: string): Promise<ExtendedSong[]> => {
   if (!_fuse) {
     return [];
   }

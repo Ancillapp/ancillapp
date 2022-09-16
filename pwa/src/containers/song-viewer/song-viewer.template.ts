@@ -7,6 +7,7 @@ import { t } from '@lingui/macro';
 import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/share-fab/share-fab.component';
+import { songCategoryToPrefixMap } from '../../helpers/songs';
 
 export default function template(this: SongViewer) {
   return html`
@@ -18,7 +19,11 @@ export default function template(this: SongViewer) {
       </a>
       <div slot="title">
         ${this._songStatus.data
-          ? `${this._songStatus.data.number}. ${this._songStatus.data.title}`
+          ? `${
+              songCategoryToPrefixMap[this._songStatus.data.language]?.[
+                this._songStatus.data.category
+              ] || ''
+            }${this._songStatus.data.number}. ${this._songStatus.data.title}`
           : this.localize(t`loading`)}
       </div>
       <mwc-icon-button

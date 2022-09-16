@@ -20,6 +20,11 @@ import { SongCategory, SongLanguage, SongSummary } from '../../models/song';
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
 
 import * as SongsListWorker from './songs-list.worker';
+import {
+  songCategoriesArray,
+  songCategoryToPrefixMap,
+  songLanguagesArray,
+} from '../../helpers/songs';
 
 const { configureSearch, search } =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,7 +38,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   private _hyperlist?: HyperList;
 
-  private _displayedSongs: SongSummary[] = [];
+  private _displayedSongs: SongsListWorker.ExtendedSong[] = [];
 
   private _desktopLayout = false;
 
@@ -127,11 +132,47 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   }
 
   private async _refreshSongs() {
-    const songs = (this._songsStatus.data || []).filter(
-      ({ language, category }) =>
-        language === this._selectedLanguage &&
-        (!this._selectedCategory || category === this._selectedCategory),
-    );
+    const songs = (this._songsStatus.data || [])
+      .filter(
+        ({ language, category }) =>
+          language === this._selectedLanguage &&
+          (!this._selectedCategory || category === this._selectedCategory),
+      )
+      .sort((a, b) => {
+        if (a.language !== b.language) {
+          return (
+            songLanguagesArray.indexOf(a.language) -
+            songLanguagesArray.indexOf(b.language)
+          );
+        }
+
+        // If the song language is italian, make sure the categories get properly sorted
+        // Note that we already checked for language equality, so the two songs are in the same language.
+        // For this reason, we don't need to check also for b.language
+        if (a.language === SongLanguage.ITALIAN) {
+          const categoriesDiff =
+            songCategoriesArray.indexOf(a.category) -
+            songCategoriesArray.indexOf(b.category);
+          if (categoriesDiff !== 0) {
+            return categoriesDiff;
+          }
+        }
+
+        const normalizedNumberA = a.number.replace('bis', '').padStart(5, '0');
+        const normalizedNumberB = b.number.replace('bis', '').padStart(5, '0');
+
+        if (normalizedNumberA.startsWith(normalizedNumberB)) {
+          return normalizedNumberA.endsWith('bis') ? -1 : 1;
+        }
+
+        return normalizedNumberA.localeCompare(normalizedNumberB);
+      })
+      .map((song) => ({
+        ...song,
+        formattedNumber: `${
+          songCategoryToPrefixMap[song.language]?.[song.category] || ''
+        }${song.number}`,
+      })) as SongsListWorker.ExtendedSong[];
 
     await configureSearch(songs);
 
@@ -143,7 +184,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
   }
 
   private _getHyperListConfig(
-    displayedSongs: SongSummary[],
+    displayedSongs: SongsListWorker.ExtendedSong[],
     desktopLayout: boolean,
     songsPerRow: number,
   ): HyperListConfig {
@@ -165,35 +206,46 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
             .join(' ');
         }
 
-        songs.forEach(({ language, category, number, title }) => {
-          const anchor = document.createElement('a');
-          anchor.href = this.localizeHref('songs', language, category, number);
-          anchor.className = 'song';
-          anchor.innerHTML = `
+        songs.forEach(
+          ({ language, category, formattedNumber, number, title }) => {
+            const anchor = document.createElement('a');
+            anchor.href = this.localizeHref(
+              'songs',
+              language,
+              category,
+              number,
+            );
+            anchor.className = 'song';
+            anchor.innerHTML = `
             <div class="book">
               <div class="number">
-                ${number.endsWith('bis') ? `${number.slice(0, -3)}b` : number}
+                ${
+                  formattedNumber.endsWith('bis')
+                    ? `${formattedNumber.slice(0, -3)}b`
+                    : formattedNumber
+                }
               </div>
               <div class="title">${title}</div>
             </div>
             <div class="title">${title}</div>
           `;
-          anchor.addEventListener(
-            'click',
-            async ({ altKey, ctrlKey, metaKey, shiftKey }) => {
-              if (altKey || ctrlKey || metaKey || shiftKey) {
-                return;
-              }
+            anchor.addEventListener(
+              'click',
+              async ({ altKey, ctrlKey, metaKey, shiftKey }) => {
+                if (altKey || ctrlKey || metaKey || shiftKey) {
+                  return;
+                }
 
-              this._searchInput!.value = '';
-              this._searchTerm = '';
-              this._stopSearching();
-              await this._refreshSongs();
-            },
-          );
+                this._searchInput!.value = '';
+                this._searchTerm = '';
+                this._stopSearching();
+                await this._refreshSongs();
+              },
+            );
 
-          container.appendChild(anchor);
-        });
+            container.appendChild(anchor);
+          },
+        );
 
         return container;
       },
