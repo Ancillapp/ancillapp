@@ -20,3 +20,10 @@ p {
 section.multilanguage {
   margin-top: 48px;
 }
+
+mwc-tab-bar {
+  --mdc-tab-text-label-color-default: var(
+    --ancillapp-secondary-text-on-accent-color
+  );
+  --mdc-theme-primary: var(--ancillapp-primary-text-on-accent-color);
+}
