@@ -121,7 +121,7 @@ const formatSong = (rawString: string, enableChords = false): string => {
               );
           }
           const paragraphClass = getParagraphClass(
-            paragraphType || comment?.innerText.trim() || '',
+            paragraphType?.trim() || comment?.innerText.trim() || '',
           );
           if (paragraphClass) {
             paragraph.classList.add(paragraphClass);
