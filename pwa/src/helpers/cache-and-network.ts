@@ -201,7 +201,9 @@ export async function* cacheAndNetwork<T>(
     if (
       cachedData &&
       (!entityToDetailFieldMap[entity] ||
-        entityToDetailFieldMap[entity]! in cachedData)
+        !cachedData?.[
+          entityToDetailFieldMap[entity] as keyof typeof cachedData
+        ])
     ) {
       yield {
         loading: false,
@@ -223,11 +225,7 @@ export async function* cacheAndNetwork<T>(
         loading: false,
         refreshing: false,
         error: fetchError as TypeError,
-        ...(cachedData &&
-          (!entityToDetailFieldMap[entity] ||
-            entityToDetailFieldMap[entity]! in cachedData) && {
-            data: cachedData as unknown as T,
-          }),
+        data: cachedData as T,
       };
     }
   } catch (error) {
