@@ -21,7 +21,6 @@ import type { OutlinedSelect } from '../../components/outlined-select/outlined-s
 
 import * as SongsListWorker from './songs-list.worker';
 import {
-  songCategoriesArray,
   songCategoryToPrefixMap,
   songLanguagesArray,
 } from '../../helpers/songs';
@@ -150,9 +149,10 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
         // Note that we already checked for language equality, so the two songs are in the same language.
         // For this reason, we don't need to check also for b.language
         if (a.language === SongLanguage.ITALIAN) {
-          const categoriesDiff =
-            songCategoriesArray.indexOf(a.category) -
-            songCategoriesArray.indexOf(b.category);
+          /* eslint-disable @typescript-eslint/no-non-null-assertion */
+          const categoriesDiff = songCategoryToPrefixMap[a.language]![
+            a.category
+          ]!.localeCompare(songCategoryToPrefixMap[b.language]![b.category]!);
           if (categoriesDiff !== 0) {
             return categoriesDiff;
           }
