@@ -25,8 +25,8 @@ msgstr ""
 #: src/containers/home/home.template.ts:50
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:23
 #: src/containers/magazines-list/magazines-list.template.ts:67
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:25
-#: src/containers/song-viewer/song-viewer.template.ts:15
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:27
+#: src/containers/song-viewer/song-viewer.template.ts:16
 #: src/containers/songs-list/songs-list.template.ts:34
 msgid "back"
 msgstr ""
@@ -145,7 +145,7 @@ msgstr "Frag nicht mehr"
 msgid "dontShowAnymore"
 msgstr ""
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:17
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:19
 msgid "english"
 msgstr "Englisch"
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "fraternity"
 msgstr ""
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:16
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:18
 #: src/containers/songs-list/songs-list.template.ts:134
 msgid "german"
 msgstr "Deutsch"
@@ -267,7 +267,7 @@ msgstr "Invitatorium"
 msgid "invitatoryDescription {date}"
 msgstr ""
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:14
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:16
 #: src/containers/songs-list/songs-list.template.ts:131
 msgid "italian"
 msgstr "Italienisch"
@@ -281,7 +281,7 @@ msgstr ""
 msgid "language"
 msgstr "Sprache"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:15
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:17
 msgid "latin"
 msgstr "Latein"
 
@@ -301,8 +301,8 @@ msgstr "Licht"
 
 #: src/containers/breviary-index/breviary-index.template.ts:45
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:30
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:32
-#: src/containers/song-viewer/song-viewer.template.ts:22
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:34
+#: src/containers/song-viewer/song-viewer.template.ts:27
 msgid "loading"
 msgstr "Wird geladen…"
 
@@ -412,7 +412,7 @@ msgstr ""
 #: src/containers/home/home.template.ts:87
 #: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:62
-#: src/containers/songs-list/songs-list.component.ts:205
+#: src/containers/songs-list/songs-list.component.ts:257
 msgid "noResults"
 msgstr "Keine Ergebnisse"
 
@@ -444,7 +444,7 @@ msgstr "Frieden und Gutes!"
 msgid "pillarsTitle"
 msgstr ""
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:18
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:20
 #: src/containers/songs-list/songs-list.template.ts:137
 msgid "portuguese"
 msgstr "Portugiesisch"
@@ -466,7 +466,7 @@ msgid "prayerPillarTitle"
 msgstr ""
 
 #: src/containers/home/home.component.ts:138
-#: src/containers/prayer-viewer/prayer-viewer.component.ts:67
+#: src/containers/prayer-viewer/prayer-viewer.component.ts:68
 #: src/containers/prayers-list/prayers-list.component.ts:86
 #: src/containers/prayers-list/prayers-list.template.ts:25
 #: src/containers/shell/shell.template.ts:32
@@ -482,13 +482,9 @@ msgstr ""
 msgid "prayersDownload"
 msgstr "Möchten Sie jetzt alle gebete herunterladen, damit Sie sie auch dann abrufen können, wenn Sie offline sind?"
 
-#: src/containers/home/home.template.ts:117
-msgid "readLatestAncilla"
-msgstr "Lesen Sie das neueste Ancilla Domini"
-
-#: src/containers/home/home.template.ts:125
-msgid "readLatestSempreConnessi"
-msgstr ""
+#: src/containers/home/home.template.ts:115
+msgid "readFraternityMagazines"
+msgstr "Lesen der Zeitschriften der Bruderschaft"
 
 #: src/containers/holy-mass/holy-mass.template.ts:278
 msgid "resendVerificationEmail"
@@ -498,7 +494,7 @@ msgstr ""
 msgid "resetPassword"
 msgstr ""
 
-#: src/containers/song-viewer/song-viewer.template.ts:27
+#: src/containers/song-viewer/song-viewer.template.ts:32
 #: src/containers/songs-list/songs-list.template.ts:62
 #: src/containers/songs-list/songs-list.template.ts:74
 #: src/containers/songs-list/songs-list.template.ts:81
@@ -555,7 +551,7 @@ msgstr "Teilen"
 msgid "shareMagazineText {magazineType}"
 msgstr "Schauen Sie sich dieses {magazineType} an!"
 
-#: src/containers/song-viewer/song-viewer.template.ts:45
+#: src/containers/song-viewer/song-viewer.template.ts:50
 msgid "shareSongText"
 msgstr "Schauen Sie sich dieses lied an!"
 
@@ -683,20 +679,20 @@ msgstr ""
 msgid "songCategoryWorship"
 msgstr ""
 
-#: src/containers/song-viewer/song-viewer.component.ts:87
+#: src/containers/song-viewer/song-viewer.component.ts:90
 msgid "songDescription {title}"
 msgstr ""
 
 #: src/containers/home/home.component.ts:127
 #: src/containers/shell/shell.template.ts:31
-#: src/containers/song-viewer/song-viewer.component.ts:71
-#: src/containers/songs-list/songs-list.component.ts:281
+#: src/containers/song-viewer/song-viewer.component.ts:72
+#: src/containers/songs-list/songs-list.component.ts:333
 #: src/containers/songs-list/songs-list.template.ts:68
 msgid "songs"
 msgstr "Lieder"
 
 #: src/containers/home/home.component.ts:134
-#: src/containers/songs-list/songs-list.component.ts:285
+#: src/containers/songs-list/songs-list.component.ts:337
 msgid "songsDescription"
 msgstr ""
 
@@ -723,9 +719,9 @@ msgid "switchToTextKeyboard"
 msgstr ""
 
 #: src/containers/magazines-list/magazines-list.template.ts:159
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:79
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:84
-#: src/containers/song-viewer/song-viewer.template.ts:53
+#: src/containers/song-viewer/song-viewer.template.ts:58
 #: src/containers/songs-list/songs-list.template.ts:255
 msgid "syncInProgress"
 msgstr "Synchronisierung läuft…"

@@ -111,18 +111,8 @@ export default function template(this: HomePage) {
           </a>
         </li>
         <li>
-          <a
-            href="${this.localizeHref('magazines', 'ancilla-domini', 'latest')}"
-          >
-            <span>${this.localize(t`readLatestAncilla`)}</span>
-            ${magazinesIcon}
-          </a>
-        </li>
-        <li>
-          <a
-            href="${this.localizeHref('magazines', 'sempreconnessi', 'latest')}"
-          >
-            <span>${this.localize(t`readLatestSempreConnessi`)}</span>
+          <a href="${this.localizeHref('magazines')}">
+            <span>${this.localize(t`readFraternityMagazines`)}</span>
             ${magazinesIcon}
           </a>
         </li>

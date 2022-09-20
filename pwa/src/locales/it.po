@@ -25,8 +25,8 @@ msgstr "Posti disponibili"
 #: src/containers/home/home.template.ts:50
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:23
 #: src/containers/magazines-list/magazines-list.template.ts:67
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:25
-#: src/containers/song-viewer/song-viewer.template.ts:15
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:27
+#: src/containers/song-viewer/song-viewer.template.ts:16
 #: src/containers/songs-list/songs-list.template.ts:34
 msgid "back"
 msgstr "Indietro"
@@ -145,7 +145,7 @@ msgstr "Non chiedermelo più"
 msgid "dontShowAnymore"
 msgstr "Non mostrare più"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:17
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:19
 msgid "english"
 msgstr "Inglese"
 
@@ -210,7 +210,7 @@ msgstr "Spiritualità Francescana"
 msgid "fraternity"
 msgstr "Fraternità"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:16
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:18
 #: src/containers/songs-list/songs-list.template.ts:134
 msgid "german"
 msgstr "Tedesco"
@@ -289,7 +289,7 @@ msgstr "Invitatorio"
 msgid "invitatoryDescription {date}"
 msgstr "Prega l'Invitatorio del giorno {date} con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:14
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:16
 #: src/containers/songs-list/songs-list.template.ts:131
 msgid "italian"
 msgstr "Italiano"
@@ -303,7 +303,7 @@ msgstr "Mantieni lo schermo attivo"
 msgid "language"
 msgstr "Lingua"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:15
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:17
 msgid "latin"
 msgstr "Latino"
 
@@ -323,8 +323,8 @@ msgstr "Chiaro"
 
 #: src/containers/breviary-index/breviary-index.template.ts:45
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:30
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:32
-#: src/containers/song-viewer/song-viewer.template.ts:22
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:34
+#: src/containers/song-viewer/song-viewer.template.ts:27
 msgid "loading"
 msgstr "Caricamento…"
 
@@ -434,7 +434,7 @@ msgstr "Nessuna Santa Messa disponibile per questo giorno."
 #: src/containers/home/home.template.ts:87
 #: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:62
-#: src/containers/songs-list/songs-list.component.ts:205
+#: src/containers/songs-list/songs-list.component.ts:257
 msgid "noResults"
 msgstr "Nessun risultato"
 
@@ -466,7 +466,7 @@ msgstr "Pace e Bene!"
 msgid "pillarsTitle"
 msgstr "I tre pilastri del carisma"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:18
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:20
 #: src/containers/songs-list/songs-list.template.ts:137
 msgid "portuguese"
 msgstr "Portoghese"
@@ -495,7 +495,7 @@ msgid "prayerPillarTitle"
 msgstr "La preghiera"
 
 #: src/containers/home/home.component.ts:138
-#: src/containers/prayer-viewer/prayer-viewer.component.ts:67
+#: src/containers/prayer-viewer/prayer-viewer.component.ts:68
 #: src/containers/prayers-list/prayers-list.component.ts:86
 #: src/containers/prayers-list/prayers-list.template.ts:25
 #: src/containers/shell/shell.template.ts:32
@@ -511,13 +511,9 @@ msgstr "Prega le preghiere giornaliere pregate dalla Fraternità Francescana di 
 msgid "prayersDownload"
 msgstr "Vuoi scaricare tutte le preghiere ora in modo da poterle consultare anche quando sei offline?"
 
-#: src/containers/home/home.template.ts:117
-msgid "readLatestAncilla"
-msgstr "Sfoglia l'ultimo Ancilla Domini"
-
-#: src/containers/home/home.template.ts:125
-msgid "readLatestSempreConnessi"
-msgstr "Sfoglia l'ultimo #sempreconnessi"
+#: src/containers/home/home.template.ts:115
+msgid "readFraternityMagazines"
+msgstr "Sfoglia le riviste della Fraternità"
 
 #: src/containers/holy-mass/holy-mass.template.ts:278
 msgid "resendVerificationEmail"
@@ -527,7 +523,7 @@ msgstr "Reinvia email di verifica"
 msgid "resetPassword"
 msgstr "Reimposta password"
 
-#: src/containers/song-viewer/song-viewer.template.ts:27
+#: src/containers/song-viewer/song-viewer.template.ts:32
 #: src/containers/songs-list/songs-list.template.ts:62
 #: src/containers/songs-list/songs-list.template.ts:74
 #: src/containers/songs-list/songs-list.template.ts:81
@@ -584,7 +580,7 @@ msgstr "Condividi"
 msgid "shareMagazineText {magazineType}"
 msgstr "Dai un'occhiata a questo volume di {magazineType}!"
 
-#: src/containers/song-viewer/song-viewer.template.ts:45
+#: src/containers/song-viewer/song-viewer.template.ts:50
 msgid "shareSongText"
 msgstr "Dai un'occhiata a questo canto!"
 
@@ -712,20 +708,20 @@ msgstr "Preghiera Semplice"
 msgid "songCategoryWorship"
 msgstr "Lode"
 
-#: src/containers/song-viewer/song-viewer.component.ts:87
+#: src/containers/song-viewer/song-viewer.component.ts:90
 msgid "songDescription {title}"
 msgstr "Canta il canto \"{title}\" come viene cantato dalla Fraternità Francescana di Betania."
 
 #: src/containers/home/home.component.ts:127
 #: src/containers/shell/shell.template.ts:31
-#: src/containers/song-viewer/song-viewer.component.ts:71
-#: src/containers/songs-list/songs-list.component.ts:281
+#: src/containers/song-viewer/song-viewer.component.ts:72
+#: src/containers/songs-list/songs-list.component.ts:333
 #: src/containers/songs-list/songs-list.template.ts:68
 msgid "songs"
 msgstr "Canti"
 
 #: src/containers/home/home.component.ts:134
-#: src/containers/songs-list/songs-list.component.ts:285
+#: src/containers/songs-list/songs-list.component.ts:337
 msgid "songsDescription"
 msgstr "Sfoglia il librone dei canti usato della Fraternità Francescana di Betania."
 
@@ -752,9 +748,9 @@ msgid "switchToTextKeyboard"
 msgstr "Passa alla tastiera testuale"
 
 #: src/containers/magazines-list/magazines-list.template.ts:159
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:79
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:84
-#: src/containers/song-viewer/song-viewer.template.ts:53
+#: src/containers/song-viewer/song-viewer.template.ts:58
 #: src/containers/songs-list/songs-list.template.ts:255
 msgid "syncInProgress"
 msgstr "Sincronizzazione in corso…"
