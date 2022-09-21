@@ -7,6 +7,7 @@
 - Aggiunto il supporto per la nuova versione del librone dei canti Italiano
 - Aggiunto il supporto per gli accordi e gli spartiti all'interno dei canti
   (nota: gli accordi e gli spartiti verranno aggiunti ai vari canti nel tempo)
+- Aggiunta la rivista #sempreconnessi
 - Rimossa la possibilità di prenotare posti per la Santa Messa
 - Vari fix di bug e miglioramento delle performance
 

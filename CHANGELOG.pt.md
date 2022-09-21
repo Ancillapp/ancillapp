@@ -7,6 +7,7 @@
 - Adicionado suporte para a nova versão do songbook italiano
 - Adicionado suporte para acordes e partituras dentro das canções
   (nota: os acordes e as partituras serão adicionados às várias canções ao longo do tempo)
+- Adicionada a revista #sempreconnessi
 - Removida a possibilidade de reservar assentos para a Santa Missa
 - Várias correções de bugs e melhorias de performance
 

@@ -7,6 +7,7 @@
 - Unterstützung für die neue Version des italienischen Liederbuchs hinzugefügt
 - Unterstützung für Akkorde und Noten innerhalb von Songs hinzugefügt
   (Hinweis: Akkorde und Noten werden im Laufe der Zeit zu den verschiedenen Liedern hinzugefügt)
+- Ergänzung des Magazins #sempreconnessi
 - Die Möglichkeit, Plätze für die Heilige Messe zu reservieren, wurde abgeschafft
 - Verschiedene Fehlerbehebungen und Leistungsverbesserungen
 

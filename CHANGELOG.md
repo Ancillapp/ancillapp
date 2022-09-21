@@ -7,6 +7,7 @@
 - Added support for the new version of the Italian songbook
 - Added support for chords and music sheets in songs
   (note that chords and music sheets will be added to all the songs over time)
+- Added the #sempreconnessi magazine
 - Removed the possibility to book seats for the Holy Mass
 - Various bug fixes and performance improvements
 
