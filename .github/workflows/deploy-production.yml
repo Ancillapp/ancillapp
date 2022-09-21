@@ -29,7 +29,7 @@ jobs:
       - name: Deploy
         run: |
           echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 --decode > firebase-service-account.json
-          yarn firebase deploy --debug --project ffb-ancillapp --config firebase.production.json --token "$FIREBASE_TOKEN" --only hosting:ffb-ancillapp,functions:pwa
+          yarn firebase deploy --project ffb-ancillapp --config firebase.production.json --only hosting:ffb-ancillapp,functions:pwa
         env:
           FIREBASE_SERVICE_ACCOUNT_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64_PRODUCTION }}
           GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
