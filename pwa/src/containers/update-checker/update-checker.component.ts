@@ -30,6 +30,8 @@ export class UpdateChecker extends localize(LitElement) {
   @property({ type: Boolean })
   protected _dontShowChangelog = false;
 
+  private _hasCanceledUpdate = false;
+
   private _newSw?: ServiceWorker = undefined;
 
   constructor() {
@@ -66,7 +68,7 @@ export class UpdateChecker extends localize(LitElement) {
   }
 
   protected async _checkForUpdates() {
-    if (!navigator.serviceWorker.controller) {
+    if (!navigator.serviceWorker.controller || this._hasCanceledUpdate) {
       return;
     }
     const registration = await navigator.serviceWorker.getRegistration('/');
@@ -124,6 +126,7 @@ export class UpdateChecker extends localize(LitElement) {
 
   protected _cancelUpdate() {
     this._updateNotificationShown = false;
+    this._hasCanceledUpdate = true;
 
     logEvent('cancel_update');
   }
