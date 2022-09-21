@@ -1,4 +1,5 @@
 import { html, nothing } from 'lit';
+import { when } from 'lit/directives/when.js';
 import { PrayerViewer } from './prayer-viewer.component';
 import { renderPrayer } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
@@ -9,6 +10,7 @@ import '@material/mwc-snackbar';
 import '@material/mwc-tab-bar';
 import '@material/mwc-tab';
 import '../../components/top-app-bar/top-app-bar.component';
+import('../../components/error-box/error-box.component');
 
 const languagesTranslationMap: Record<keyof Prayer['title'], string> = {
   it: t`italian`,
@@ -53,25 +55,37 @@ export default function template(this: PrayerViewer) {
         : html`${nothing}`}
     </top-app-bar>
 
-    ${this._prayerStatus.loading || !this._prayerStatus.data
-      ? html`
-          <div class="loading-container">
-            <loading-spinner></loading-spinner>
-          </div>
-        `
-      : html`
-          <section
-            class="${this._prayerLanguages.length > 1 ? 'multilanguage' : ''}"
-          >
-            ${this._selectedPrayerLanguage in this._prayerStatus.data.content
-              ? renderPrayer(
-                  this._prayerStatus.data.content[
-                    this._selectedPrayerLanguage
-                  ]!,
-                )
-              : html`${nothing}`}
-          </section>
-        `}
+    ${when(
+      this._prayerStatus.loading ||
+        (this._prayerStatus.refreshing && !this._prayerStatus.data?.content),
+      () => html`
+        <div class="loading-container">
+          <loading-spinner></loading-spinner>
+        </div>
+      `,
+    )}
+    ${when(
+      this._prayerStatus.error && !this._prayerStatus.data?.content,
+      () => html`
+        <div class="error-container">
+          <error-box .error="${this._prayerStatus.error}"></error-box>
+        </div>
+      `,
+    )}
+    ${when(
+      this._prayerStatus.data?.content,
+      () => html`
+        <section
+          class="${this._prayerLanguages.length > 1 ? 'multilanguage' : ''}"
+        >
+          ${this._selectedPrayerLanguage in this._prayerStatus.data!.content
+            ? renderPrayer(
+                this._prayerStatus.data!.content[this._selectedPrayerLanguage]!,
+              )
+            : nothing}
+        </section>
+      `,
+    )}
 
     <mwc-snackbar
       leading

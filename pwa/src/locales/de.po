@@ -436,6 +436,10 @@ msgstr "Non"
 msgid "noneDescription {date}"
 msgstr ""
 
+#: src/components/error-box/error-box.template.ts:14
+msgid "offlineError"
+msgstr "Ups! Sieht aus, als ob Sie offline sind. Stellen Sie eine Internetverbindung her und versuchen Sie es erneut."
+
 #: src/containers/home/home.template.ts:93
 msgid "peaceAndGood"
 msgstr "Frieden und Gutes!"
@@ -753,10 +757,15 @@ msgstr ""
 msgid "tooManyVerificationRequests"
 msgstr ""
 
+#: src/components/error-box/error-box.template.ts:20
+msgid "tryAgain"
+msgstr "Erneut versuchen"
+
+#: src/components/error-box/error-box.template.ts:15
 #: src/containers/holy-mass/holy-mass.component.ts:335
 #: src/containers/login/login.component.ts:142
 msgid "unexpectedError"
-msgstr ""
+msgstr "Es ist ein unerwarteter Fehler aufgetreten, bitte versuchen Sie es später noch einmal."
 
 #: src/containers/update-checker/update-checker.template.ts:20
 msgid "updateAvailable"

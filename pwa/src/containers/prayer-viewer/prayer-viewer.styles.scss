@@ -10,7 +10,8 @@ p {
   margin: 1.25rem 0;
 }
 
-.loading-container {
+.loading-container,
+.error-container {
   flex: 1;
   display: flex;
   align-items: center;

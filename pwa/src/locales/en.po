@@ -436,6 +436,10 @@ msgstr "None"
 msgid "noneDescription {date}"
 msgstr "Pray the None of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
+#: src/components/error-box/error-box.template.ts:14
+msgid "offlineError"
+msgstr "Oops! Looks like you're offline. Connect to the internet and try again."
+
 #: src/containers/home/home.template.ts:93
 msgid "peaceAndGood"
 msgstr "Peace and Good!"
@@ -753,10 +757,15 @@ msgstr "Time"
 msgid "tooManyVerificationRequests"
 msgstr ""
 
+#: src/components/error-box/error-box.template.ts:20
+msgid "tryAgain"
+msgstr "Try again"
+
+#: src/components/error-box/error-box.template.ts:15
 #: src/containers/holy-mass/holy-mass.component.ts:335
 #: src/containers/login/login.component.ts:142
 msgid "unexpectedError"
-msgstr ""
+msgstr "An unexpected error occurred, please try again later."
 
 #: src/containers/update-checker/update-checker.template.ts:20
 msgid "updateAvailable"

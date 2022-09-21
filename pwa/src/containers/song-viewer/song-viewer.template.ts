@@ -1,13 +1,15 @@
 import { html } from 'lit';
+import { when } from 'lit/directives/when.js';
 import { SongViewer } from './song-viewer.component';
 import { renderSong } from '../../helpers/directives';
 import { arrowBack, search } from '../../components/icons';
+import { songCategoryToPrefixMap } from '../../helpers/songs';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/share-fab/share-fab.component';
-import { songCategoryToPrefixMap } from '../../helpers/songs';
+import('../../components/error-box/error-box.component');
 
 export default function template(this: SongViewer) {
   return html`
@@ -35,22 +37,36 @@ export default function template(this: SongViewer) {
       </mwc-icon-button>
     </top-app-bar>
 
-    ${this._songStatus.loading || !this._songStatus.data
-      ? html`
-          <div class="loading-container">
-            <loading-spinner></loading-spinner>
-          </div>
-        `
-      : html`
-          <section>${renderSong(this._songStatus.data.content)}</section>
+    ${when(
+      this._songStatus.loading ||
+        (this._songStatus.refreshing && !this._songStatus.data?.content),
+      () => html`
+        <div class="loading-container">
+          <loading-spinner></loading-spinner>
+        </div>
+      `,
+    )}
+    ${when(
+      this._songStatus.error && !this._songStatus.data?.content,
+      () => html`
+        <div class="error-container">
+          <error-box .error="${this._songStatus.error}"></error-box>
+        </div>
+      `,
+    )}
+    ${when(
+      this._songStatus.data?.content,
+      () => html`
+        <section>${renderSong(this._songStatus.data!.content)}</section>
 
-          <share-fab
-            title="${this._songStatus.data.number}. ${this._songStatus.data
-              .title}"
-            text="${this.localize(t`shareSongText`)}"
-            url="${window.location.href}"
-          ></share-fab>
-        `}
+        <share-fab
+          title="${this._songStatus.data!.number}. ${this._songStatus.data!
+            .title}"
+          text="${this.localize(t`shareSongText`)}"
+          url="${window.location.href}"
+        ></share-fab>
+      `,
+    )}
 
     <mwc-snackbar
       leading

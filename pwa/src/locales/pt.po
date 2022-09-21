@@ -458,6 +458,10 @@ msgstr "Hora Nona"
 msgid "noneDescription {date}"
 msgstr "Rezem Hora Nona das Leituras do dia {date} com o memorial opcional convocado pela Fraternidade Franciscana de Betânia."
 
+#: src/components/error-box/error-box.template.ts:14
+msgid "offlineError"
+msgstr "Oops! Parece que você está offline. Conecte-se à Internet e tente novamente."
+
 #: src/containers/home/home.template.ts:93
 msgid "peaceAndGood"
 msgstr "Paz e Bem!"
@@ -782,6 +786,11 @@ msgstr "Hora"
 msgid "tooManyVerificationRequests"
 msgstr "Você fez muitos pedidos de verificação por e-mail, por favor tente novamente mais tarde."
 
+#: src/components/error-box/error-box.template.ts:20
+msgid "tryAgain"
+msgstr "Tente novamente"
+
+#: src/components/error-box/error-box.template.ts:15
 #: src/containers/holy-mass/holy-mass.component.ts:335
 #: src/containers/login/login.component.ts:142
 msgid "unexpectedError"
