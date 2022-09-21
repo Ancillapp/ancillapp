@@ -26,7 +26,7 @@ msgstr "Posti disponibili"
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:23
 #: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:27
-#: src/containers/song-viewer/song-viewer.template.ts:16
+#: src/containers/song-viewer/song-viewer.template.ts:18
 #: src/containers/songs-list/songs-list.template.ts:34
 msgid "back"
 msgstr "Indietro"
@@ -54,6 +54,7 @@ msgstr "Sicuro di voler eliminare la tua prenotazione per la Messa della Fratern
 #: src/containers/breviary-viewer/breviary-viewer.component.ts:139
 #: src/containers/home/home.component.ts:116
 #: src/containers/shell/shell.template.ts:30
+#: src/site.webmanifest:27
 msgid "breviary"
 msgstr "Breviario"
 
@@ -71,6 +72,7 @@ msgstr ""
 #: src/containers/breviary-index/breviary-index.component.ts:56
 #: src/containers/breviary-placeholder/breviary-placeholder.component.ts:34
 #: src/containers/home/home.component.ts:123
+#: src/site.webmanifest:28
 msgid "breviaryDescription"
 msgstr "Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
@@ -238,7 +240,8 @@ msgstr "Home"
 
 #: src/containers/home/home.component.ts:112
 #: src/containers/home/home.component.ts:289
-msgid "homeDescription"
+#: src/site.webmanifest:4
+msgid "appDescription"
 msgstr "Prega le preghiere giornaliere, canta i canti, e sfoglia gli Ancilla Domini della Fraternità Francescana di Betania."
 
 #: src/containers/info/info.template.ts:57
@@ -324,7 +327,7 @@ msgstr "Chiaro"
 #: src/containers/breviary-index/breviary-index.template.ts:45
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:30
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:34
-#: src/containers/song-viewer/song-viewer.template.ts:27
+#: src/containers/song-viewer/song-viewer.template.ts:29
 msgid "loading"
 msgstr "Caricamento…"
 
@@ -499,7 +502,7 @@ msgid "prayerPillarTitle"
 msgstr "La preghiera"
 
 #: src/containers/home/home.component.ts:138
-#: src/containers/prayer-viewer/prayer-viewer.component.ts:68
+#: src/containers/prayer-viewer/prayer-viewer.component.ts:67
 #: src/containers/prayers-list/prayers-list.component.ts:86
 #: src/containers/prayers-list/prayers-list.template.ts:25
 #: src/containers/shell/shell.template.ts:32
@@ -527,7 +530,7 @@ msgstr "Reinvia email di verifica"
 msgid "resetPassword"
 msgstr "Reimposta password"
 
-#: src/containers/song-viewer/song-viewer.template.ts:32
+#: src/containers/song-viewer/song-viewer.template.ts:34
 #: src/containers/songs-list/songs-list.template.ts:62
 #: src/containers/songs-list/songs-list.template.ts:74
 #: src/containers/songs-list/songs-list.template.ts:81
@@ -584,7 +587,7 @@ msgstr "Condividi"
 msgid "shareMagazineText {magazineType}"
 msgstr "Dai un'occhiata a questo volume di {magazineType}!"
 
-#: src/containers/song-viewer/song-viewer.template.ts:50
+#: src/containers/song-viewer/song-viewer.template.ts:65
 msgid "shareSongText"
 msgstr "Dai un'occhiata a questo canto!"
 
@@ -754,7 +757,7 @@ msgstr "Passa alla tastiera testuale"
 #: src/containers/magazines-list/magazines-list.template.ts:159
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:84
-#: src/containers/song-viewer/song-viewer.template.ts:58
+#: src/containers/song-viewer/song-viewer.template.ts:74
 #: src/containers/songs-list/songs-list.template.ts:255
 msgid "syncInProgress"
 msgstr "Sincronizzazione in corso…"
@@ -825,3 +828,39 @@ msgstr "Visualizza changelog completo"
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr "La password inserita è errata."
+
+#: src/site.webmanifest:2
+msgid "appName"
+msgstr "Ancillapp"
+
+#: src/site.webmanifest:3
+msgid "appShortName"
+msgstr "Ancillapp"
+
+#: src/site.webmanifest:26
+msgid "liturgyOfTheHours"
+msgstr "Liturgia delle Ore"
+
+#: src/site.webmanifest:59
+msgid "screenshot1Description"
+msgstr "Ancillapp - Applicazione completa!"
+
+#: src/site.webmanifest:66
+msgid "screenshot2Description"
+msgstr "Ancillapp - Menu"
+
+#: src/site.webmanifest:73
+msgid "screenshot3Description"
+msgstr "Canta e Prega con la Fraternità!"
+
+#: src/site.webmanifest:80
+msgid "screenshot4Description"
+msgstr "Tema scuro disponibile!"
+
+#: src/site.webmanifest:87
+msgid "screenshot5Description"
+msgstr "Leggi le riviste ufficiali!"
+
+#: src/site.webmanifest:94
+msgid "screenshot6Description"
+msgstr "...o scaricale!"

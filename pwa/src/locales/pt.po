@@ -26,7 +26,7 @@ msgstr "Lugares disponíveis"
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:23
 #: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:27
-#: src/containers/song-viewer/song-viewer.template.ts:16
+#: src/containers/song-viewer/song-viewer.template.ts:18
 #: src/containers/songs-list/songs-list.template.ts:34
 msgid "back"
 msgstr "Voltar"
@@ -123,7 +123,7 @@ msgstr "Rezar Completas o dia {date} com o memorial opcional lembrado pela Frate
 
 #: src/containers/settings/settings.template.ts:38
 msgid "dark"
-msgstr "Sombrio"
+msgstr "Escuro"
 
 #: src/containers/breviary-index/breviary-index.template.ts:37
 #: src/containers/holy-mass/holy-mass.template.ts:87
@@ -238,7 +238,7 @@ msgstr "Home"
 
 #: src/containers/home/home.component.ts:112
 #: src/containers/home/home.component.ts:289
-msgid "homeDescription"
+msgid "appDescription"
 msgstr "Rezar as orações diárias, cantar as canções e folhear através da Ancilla Domini da Fraternidade Franciscana de Betânia."
 
 #: src/containers/info/info.template.ts:57
@@ -324,7 +324,7 @@ msgstr "Claro"
 #: src/containers/breviary-index/breviary-index.template.ts:45
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:30
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:34
-#: src/containers/song-viewer/song-viewer.template.ts:27
+#: src/containers/song-viewer/song-viewer.template.ts:29
 msgid "loading"
 msgstr "Carregando..."
 
@@ -499,7 +499,7 @@ msgid "prayerPillarTitle"
 msgstr "A oração"
 
 #: src/containers/home/home.component.ts:138
-#: src/containers/prayer-viewer/prayer-viewer.component.ts:68
+#: src/containers/prayer-viewer/prayer-viewer.component.ts:67
 #: src/containers/prayers-list/prayers-list.component.ts:86
 #: src/containers/prayers-list/prayers-list.template.ts:25
 #: src/containers/shell/shell.template.ts:32
@@ -527,7 +527,7 @@ msgstr "Reenviar e-mail de verificação"
 msgid "resetPassword"
 msgstr "Redefinição de senha"
 
-#: src/containers/song-viewer/song-viewer.template.ts:32
+#: src/containers/song-viewer/song-viewer.template.ts:34
 #: src/containers/songs-list/songs-list.template.ts:62
 #: src/containers/songs-list/songs-list.template.ts:74
 #: src/containers/songs-list/songs-list.template.ts:81
@@ -584,7 +584,7 @@ msgstr "Compartilhe"
 msgid "shareMagazineText {magazineType}"
 msgstr "Dê uma olhada nesta {magazineType}!"
 
-#: src/containers/song-viewer/song-viewer.template.ts:50
+#: src/containers/song-viewer/song-viewer.template.ts:65
 msgid "shareSongText"
 msgstr "Dê uma olhada neste canção!"
 
@@ -754,7 +754,7 @@ msgstr "Mudar para teclado de texto"
 #: src/containers/magazines-list/magazines-list.template.ts:159
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:84
-#: src/containers/song-viewer/song-viewer.template.ts:58
+#: src/containers/song-viewer/song-viewer.template.ts:74
 #: src/containers/songs-list/songs-list.template.ts:255
 msgid "syncInProgress"
 msgstr "Sincronização em andamento..."
@@ -825,3 +825,39 @@ msgstr "Mostrar o changelog completo"
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr "A senha digitada está incorreta."
+
+#: src/site.webmanifest:2
+msgid "appName"
+msgstr "Ancillapp"
+
+#: src/site.webmanifest:3
+msgid "appShortName"
+msgstr "Ancillapp"
+
+#: src/site.webmanifest:26
+msgid "liturgyOfTheHours"
+msgstr "Liturgia das Horas"
+
+#: src/site.webmanifest:59
+msgid "screenshot1Description"
+msgstr "Ancillapp - Aplicativo completo!"
+
+#: src/site.webmanifest:66
+msgid "screenshot2Description"
+msgstr "Ancillapp - Menu"
+
+#: src/site.webmanifest:73
+msgid "screenshot3Description"
+msgstr "Canta e Reze com a Fraternitade!"
+
+#: src/site.webmanifest:80
+msgid "screenshot4Description"
+msgstr "Tema escuro disponível!"
+
+#: src/site.webmanifest:87
+msgid "screenshot5Description"
+msgstr "Leia as revistas oficiais!"
+
+#: src/site.webmanifest:94
+msgid "screenshot6Description"
+msgstr "...ou baixa-las!"

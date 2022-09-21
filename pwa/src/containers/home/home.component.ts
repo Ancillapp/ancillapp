@@ -109,7 +109,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
             homeIcon,
           )}</div>`,
         },
-        description: this.localize(t`homeDescription`),
+        description: this.localize(t`appDescription`),
         link: this.localizeHref('home'),
       },
       {
@@ -286,7 +286,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
 
       updateMetadata({
         title: pageTitle,
-        description: this.localize(t`homeDescription`),
+        description: this.localize(t`appDescription`),
       });
 
       logEvent('page_view', {

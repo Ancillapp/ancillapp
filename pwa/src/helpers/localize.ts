@@ -82,6 +82,10 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
       }
 
       document.documentElement.lang = locale;
+      // Set Firebase localization cookies that allow serving localized files
+      // with the overridden language instead of user's default one
+      document.cookie = `firebase-country-override=${locale}`;
+      document.cookie = `firebase-language-override=${locale}`;
 
       if (!window.location.pathname.startsWith(`/${locale}`)) {
         const [, , page = 'home', ...subroutes] =

@@ -8,6 +8,8 @@ import {
   EnvironmentPlugin,
   NormalModuleReplacementPlugin,
 } from 'webpack';
+import { defaultLocale, localesData } from './helpers';
+import { localizeHref } from '../src/helpers/localization';
 
 const index = process.argv.indexOf('--env');
 
@@ -140,6 +142,41 @@ const config: Configuration = {
             ignore: ['**/.DS_Store'],
           },
         },
+        // Localized Web App manifests
+        ...localesData.map(([locale, localeData]) => ({
+          from: path.resolve(__dirname, '../src/site.webmanifest'),
+          // Default locale should still go in the root of the dist folder
+          to:
+            locale === defaultLocale
+              ? 'site.webmanifest'
+              : `localized-files/${locale}/site.webmanifest`,
+          // Support a light subset of Handlebars template language
+          transform: (content: Buffer) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const helpers: Record<string, (...params: any[]) => string> = {
+              t: (key: string) => localeData[key] || '',
+              localizeHref: (page: string, ...subroutes: string[]) =>
+                localizeHref(locale, page, ...subroutes),
+            };
+            const vars: Record<string, string> = {
+              locale,
+            };
+            const contentStr = content.toString('utf8');
+            return contentStr.replace(
+              /{{(.+?)}}/g,
+              (_, templateContent: string) => {
+                const [helperOrVar, ...rawParams] =
+                  templateContent.split(/\s+/);
+                const parsedParams = rawParams.map((param) =>
+                  param.replace(/(^['"]|["']$)/g, ''),
+                );
+                return parsedParams.length > 0
+                  ? helpers[helperOrVar](...parsedParams)
+                  : vars[helperOrVar];
+              },
+            );
+          },
+        })),
       ],
     }),
     new MiniCssExtractPlugin({

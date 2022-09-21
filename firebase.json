@@ -6,6 +6,9 @@
     "site": "ancillapp-staging",
     "public": "pwa/dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "i18n": {
+      "root": "/localized-files"
+    },
     "rewrites": [
       {
         "source": "/api/**",
