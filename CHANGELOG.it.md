@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.0 (21/09/2022)
+
+- Aggiunto il pieno supporto per la lingua Portoghese
+- Aggiunto il supporto per le categorie alle canzoni
+- Aggiunto il supporto per la nuova versione del librone dei canti Italiano
+- Aggiunto il supporto per gli accordi e gli spartiti all'interno dei canti
+  (nota: gli accordi e gli spartiti verranno aggiunti ai vari canti nel tempo)
+- Rimossa la possibilità di prenotare posti per la Santa Messa
+- Vari fix di bug e miglioramento delle performance
+
 ## 1.7.0 (26/01/2021)
 
 - Aggiunta la possibilità di visualizzare le preghiere in lingue diverse

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.0 (09/21/2022)
+
+- Added full support for Portuguese language
+- Added support for songs categories
+- Added support for the new version of the Italian songbook
+- Added support for chords and music sheets in songs
+  (note that chords and music sheets will be added to all the songs over time)
+- Removed the possibility to book seats for the Holy Mass
+- Various bug fixes and performance improvements
+
 ## 1.7.0 (01/26/2021)
 
 - Added option to view prayers in different languages
