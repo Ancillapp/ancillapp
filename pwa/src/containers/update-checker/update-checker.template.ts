@@ -54,7 +54,7 @@ export default function template(this: UpdateChecker) {
             </ul>
             <a
               id="full-changelog-link"
-              href="https://github.com/Ancillapp/ancillapp/blob/master/CHANGELOG${this
+              href="https://github.com/Ancillapp/ancillapp/blob/main/CHANGELOG${this
                 .locale === 'en'
                 ? ''
                 : '.it'}.md"
