@@ -41,7 +41,7 @@ export default function template(this: UpdateChecker) {
           month: '2-digit',
           year: 'numeric',
         },
-      ).format(new Date(changelog[this.locale].date))}"
+      ).format(new Date(changelog.en.date))}"
       hideActions
       ?open="${this._changelogAvailable}"
     >
