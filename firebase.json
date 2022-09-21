@@ -37,7 +37,7 @@
           },
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "private, no-store"
           }
         ]
       },
@@ -59,7 +59,7 @@
           },
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "private, no-store"
           }
         ]
       }
