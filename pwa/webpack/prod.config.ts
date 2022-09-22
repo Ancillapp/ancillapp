@@ -59,13 +59,7 @@ const config: Configuration = merge(baseConfig, {
     new InjectManifestPlugin({
       swSrc: path.resolve(__dirname, '../src/service-worker/index.ts'),
       swDest: './sw.js',
-      exclude: [
-        /images\/icons/,
-        /images\/screenshots/,
-        /\.LICENSE$/,
-        /\.map$/,
-        /(?:^|\/)\..+$/,
-      ],
+      exclude: [/images\/icons/, /\.LICENSE$/, /\.map$/, /(?:^|\/)\..+$/],
     }),
     ...(process.env.ANALYZE_BUNDLE ? [new BundleAnalyzerPlugin()] : []),
   ],
