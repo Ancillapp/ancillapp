@@ -5,13 +5,13 @@
   "categories": ["lifestyle"],
   "icons": [
     {
-      "src": "./images/icons/android-chrome-192x192.png",
+      "src": "./android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "./images/icons/android-chrome-512x512.png",
+      "src": "./android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
@@ -27,67 +27,61 @@
       "short_name": "{{t 'breviary'}}",
       "description": "{{t 'breviaryDescription'}}",
       "url": "{{localizeHref 'breviary'}}",
-      "icons": [
-        { "src": "./images/icons/shortcuts/breviary.png", "sizes": "192x192" }
-      ]
+      "icons": [{ "src": "./shortcuts/breviary.png", "sizes": "192x192" }]
     },
     {
       "name": "{{t 'songs'}}",
       "short_name": "{{t 'songs'}}",
       "description": "{{t 'songsDescription'}}",
       "url": "{{localizeHref 'songs'}}",
-      "icons": [
-        { "src": "./images/icons/shortcuts/songs.png", "sizes": "192x192" }
-      ]
+      "icons": [{ "src": "./shortcuts/songs.png", "sizes": "192x192" }]
     },
     {
       "name": "{{t 'prayers'}}",
       "short_name": "{{t 'prayers'}}",
       "description": "{{t 'prayersDescription'}}",
       "url": "{{localizeHref 'prayers'}}",
-      "icons": [
-        { "src": "./images/icons/shortcuts/prayers.png", "sizes": "192x192" }
-      ]
+      "icons": [{ "src": "./shortcuts/prayers.png", "sizes": "192x192" }]
     }
   ],
   "screenshots": [
     {
-      "src": "./images/screenshots/200-{{locale}}-1.png",
+      "src": "./screenshots/200-{{locale}}-1.png",
       "sizes": "1520x3040",
       "type": "image/png",
       "platform": "narrow",
       "label": "{{t 'screenshot1Description'}}"
     },
     {
-      "src": "./images/screenshots/200-{{locale}}-2.png",
+      "src": "./screenshots/200-{{locale}}-2.png",
       "sizes": "1520x3040",
       "type": "image/png",
       "platform": "narrow",
       "label": "{{t 'screenshot2Description'}}"
     },
     {
-      "src": "./images/screenshots/200-{{locale}}-3.png",
+      "src": "./screenshots/200-{{locale}}-3.png",
       "sizes": "1520x3040",
       "type": "image/png",
       "platform": "narrow",
       "label": "{{t 'screenshot3Description'}}"
     },
     {
-      "src": "./images/screenshots/200-{{locale}}-4.png",
+      "src": "./screenshots/200-{{locale}}-4.png",
       "sizes": "1520x3040",
       "type": "image/png",
       "platform": "narrow",
       "label": "{{t 'screenshot4Description'}}"
     },
     {
-      "src": "./images/screenshots/200-{{locale}}-5.png",
+      "src": "./screenshots/200-{{locale}}-5.png",
       "sizes": "1520x3040",
       "type": "image/png",
       "platform": "narrow",
       "label": "{{t 'screenshot5Description'}}"
     },
     {
-      "src": "./images/screenshots/200-{{locale}}-6.png",
+      "src": "./screenshots/200-{{locale}}-6.png",
       "sizes": "1520x3040",
       "type": "image/png",
       "platform": "narrow",
