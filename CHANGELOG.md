@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0 (2022-09-22)
+
+- Added link to changelog on app version click
+  in the Informations page
+
 ## 2.0.0 (2022-09-21)
 
 - Added full support for Portuguese language

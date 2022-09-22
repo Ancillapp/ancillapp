@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0 (22/09/2022)
+
+- Adicionado link para o changelog ao clicar na
+  versão do aplicativo na página Informações
+
 ## 2.0.0 (21/09/2022)
 
 - Adicionado suporte total para a língua portuguesa
