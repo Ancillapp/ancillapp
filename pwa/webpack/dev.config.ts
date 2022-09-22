@@ -41,7 +41,15 @@ const config: Configuration = merge(baseConfig, {
     new InjectManifestPlugin({
       swSrc: path.resolve(__dirname, '../src/service-worker/index.ts'),
       swDest: './sw.js',
-      exclude: [/images\/icons/, /\.LICENSE$/, /\.map$/, /(?:^|\/)\..+$/],
+      exclude: [
+        /sitemap\.xml$/,
+        /images\/icons/,
+        /site\.webmanifest$/,
+        /localized-files/,
+        /\.LICENSE$/,
+        /\.map$/,
+        /(?:^|\/)\..+$/,
+      ],
     }),
   ],
 });

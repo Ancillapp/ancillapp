@@ -60,8 +60,10 @@ const config: Configuration = merge(baseConfig, {
       swSrc: path.resolve(__dirname, '../src/service-worker/index.ts'),
       swDest: './sw.js',
       exclude: [
+        /sitemap\.xml$/,
         /images\/icons/,
-        /images\/screenshots/,
+        /site\.webmanifest$/,
+        /localized-files/,
         /\.LICENSE$/,
         /\.map$/,
         /(?:^|\/)\..+$/,
