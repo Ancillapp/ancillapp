@@ -40,9 +40,7 @@ import './communication';
 
 clientsClaim();
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(set('appVersion', version));
-});
+self.addEventListener('install', () => set('appVersion', version));
 
 if (process.env.BROWSER_ENV === 'development') {
   console.groupCollapsed('Workbox precache manifest');
