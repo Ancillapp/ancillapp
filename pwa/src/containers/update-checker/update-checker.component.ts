@@ -99,9 +99,6 @@ export class UpdateChecker extends localize(LitElement) {
     registration.addEventListener('updatefound', () =>
       this._trackInstallation(registration.installing!),
     );
-    navigator.serviceWorker.addEventListener('controllerchange', () =>
-      window.location.reload(),
-    );
   }
 
   protected _trackInstallation(sw: ServiceWorker) {
@@ -142,6 +139,14 @@ export class UpdateChecker extends localize(LitElement) {
       set('changelogAvailable', true),
     ]);
 
+    navigator.serviceWorker.addEventListener(
+      'controllerchange',
+      () => window.location.reload(),
+      { once: true },
+    );
+    // Give up to 5 seconds to the app to update
+    // If the SW does not take control, reload the page anyway
+    setTimeout(() => window.location.reload(), 5000);
     this._newSw.postMessage({ action: 'update' });
   }
 }
