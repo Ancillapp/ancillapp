@@ -2,7 +2,6 @@ import {
   openDB,
   DBSchema,
   IDBPDatabase,
-  deleteDB,
   IDBPObjectStore,
   StoreNames,
 } from 'idb';
@@ -45,9 +44,6 @@ let dbPromise: Promise<AncillappDataDB>;
 
 export const init = () => {
   if (!dbPromise) {
-    deleteDB('ancillapp').catch(() => {
-      // Try to delete the old DB, ignore errors if something goes wrong
-    });
     dbPromise = openDB<AncillappDataDBSchema>('ancillapp-data', 1, {
       upgrade(db) {
         db.createObjectStore('settings');
