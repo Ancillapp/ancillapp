@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0 (22/09/2022)
+
+- Aggiunto link al changelog al click della versione
+  dell'app nella pagina delle Informazioni
+
 ## 2.0.0 (21/09/2022)
 
 - Aggiunto il pieno supporto per la lingua Portoghese

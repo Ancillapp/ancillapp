@@ -4,6 +4,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
 
+    <script>
+      // Clear web app data if we are still running the old version
+      indexedDB.databases()
+        .then(dbs => {
+          if (dbs.some(db => db.name === 'ancillapp')) {
+            localStorage.clear();
+            sessionStorage.clear();
+            document.cookie.split(';').forEach(c => {
+              document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+            });
+
+            const promisesArray = [caches.keys().then(keys => keys.map(key => caches.delete(key))).catch(() => {})];
+            dbs.forEach(db => promisesArray.push(new Promise((resolve, reject) => {
+              const request = indexedDB.deleteDatabase(db.name);
+              request.onsuccess = resolve;
+              request.onerror = resolve;
+            })));
+
+            if ('serviceWorker' in navigator) {
+              promisesArray.push(
+                navigator.serviceWorker.getRegistrations()
+                  .then(registrations =>
+                    registrations.map(registration => registration.unregister().catch(() => {})),
+                  )
+                  .catch(() => {}),
+              );
+            }
+
+            return promisesArray.catch(() => {}).then(() => window.location.reload());;
+          }
+        })
+        .catch(() => {})
+        .then(() => {
+          // Load and register pre-caching Service Worker
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () =>
+              navigator.serviceWorker.register('sw.js', {
+                scope: '/',
+              })
+              .catch(console.warn),
+            );
+          }
+        });
+    </script>
+
     <!-- Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
@@ -248,50 +293,6 @@
         }
       }
     </style>
-    <script>
-      // Clear web app data if we are still running the old version
-      indexedDB.databases()
-        .then(dbs => {
-          if (dbs.some(db => db.name === 'ancillapp')) {
-            localStorage.clear();
-            sessionStorage.clear();
-            document.cookie.split(';').forEach(c => {
-              document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
-            });
-
-            const promisesArray = [caches.keys().then(keys => keys.map(key => caches.delete(key))).catch(() => {})];
-            dbs.forEach(db => promisesArray.push(new Promise((resolve, reject) => {
-              const request = indexedDB.deleteDatabase(db.name);
-              request.onsuccess = resolve;
-              request.onerror = resolve;
-            })));
-
-            if ('serviceWorker' in navigator) {
-              promisesArray.push(
-                navigator.serviceWorker.getRegistrations()
-                  .then(registrations =>
-                    registrations.map(registration => registration.unregister().catch(() => {})),
-                  )
-                  .catch(() => {}),
-              );
-            }
-
-            return promisesArray.catch(() => {}).then(() => window.location.reload());;
-          }
-        })
-        .catch(() => {})
-        .then(() => {
-          // Load and register pre-caching Service Worker
-          if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () =>
-              navigator.serviceWorker.register('sw.js', {
-                scope: '/',
-              })
-              .catch(console.warn),
-            );
-          }
-        });
-    </script>
   </head>
   <body data-theme="system">
     <ancillapp-shell>

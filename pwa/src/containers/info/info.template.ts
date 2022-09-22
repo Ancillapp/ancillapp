@@ -9,7 +9,7 @@ import '../../components/top-app-bar/top-app-bar.component';
 
 export default function template(this: InfoPage) {
   const websiteUrl = `
-    <a href="https://www.ffbetania.net/${this.locale}">
+    <a rel="external nofollow" href="https://www.ffbetania.net/${this.locale}">
       ffbetania.net
     </a>
   `;
@@ -25,7 +25,18 @@ export default function template(this: InfoPage) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">${this.localize(t`info`)}</div>
-      <small slot="trailingIcon">v${currentAppVersion}</small>
+      <small slot="trailingIcon">
+        <a
+          href="https://github.com/Ancillapp/ancillapp/blob/main/CHANGELOG${this
+            .locale === 'en'
+            ? ''
+            : `.${this.locale}`}.md"
+          rel="external nofollow"
+          target="ancillapp-changelog"
+        >
+          v${currentAppVersion}
+        </a>
+      </small>
     </top-app-bar>
 
     <section>
