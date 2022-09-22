@@ -148,8 +148,8 @@ const config: Configuration = {
           // Default locale should still go in the root of the dist folder
           to:
             locale === defaultLocale
-              ? 'images/icons/site.webmanifest'
-              : `localized-files/${locale}/images/icons/site.webmanifest`,
+              ? 'site.webmanifest'
+              : `localized-files/${locale}/site.webmanifest`,
           // Support a light subset of Handlebars template language
           transform: (content: Buffer) => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
