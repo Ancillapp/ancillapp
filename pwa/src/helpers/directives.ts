@@ -91,8 +91,19 @@ const parseSections = (rawString: string): SongSection[] => {
   });
 };
 
+const htmlCharactersEscapeMap: Record<string, string> = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;',
+};
+
+const escapeString = (str: string) =>
+  str.replace(/[&<>"']/g, (match) => htmlCharactersEscapeMap[match]);
+
 const formatSong = (rawString: string, enableChords = false): string => {
-  const parsedSections = parseSections(rawString);
+  const parsedSections = parseSections(escapeString(rawString));
 
   const formattedSections = parsedSections.map((section) => {
     switch (section.type) {
