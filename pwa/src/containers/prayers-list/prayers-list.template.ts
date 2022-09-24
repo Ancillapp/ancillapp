@@ -97,7 +97,7 @@ export default function template(this: PrayersList) {
         `
       : html`
           <div class="prayers-container">
-            ${this._prayersStatus.data.length < 1
+            ${this._displayedPrayers.length < 1
               ? html`<p>${this.localize(t`noResults`)}</p>`
               : html`${nothing}`}
             ${repeat(
