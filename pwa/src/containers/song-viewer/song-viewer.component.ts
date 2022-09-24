@@ -15,7 +15,7 @@ import template from './song-viewer.template';
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 import { Song } from '../../models/song';
-import { songCategoryToPrefixMap } from '../../helpers/songs';
+import { getFormattedSongNumber } from '../../helpers/songs';
 
 const abcjsPromise = import('abcjs');
 
@@ -69,11 +69,11 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
             if (status.data) {
               _songsStatusesCache.set(songId, status);
 
-              const pageTitle = `Ancillapp - ${this.localize(t`songs`)} - ${
-                songCategoryToPrefixMap[status.data.language]?.[
-                  status.data.category
-                ] || ''
-              }${status.data.number}. ${status.data.title}`;
+              const pageTitle = `Ancillapp - ${this.localize(
+                t`songs`,
+              )} - ${getFormattedSongNumber(status.data)}. ${
+                status.data.title
+              }`;
 
               if (pageTitle === this._previousPageTitle) {
                 return;

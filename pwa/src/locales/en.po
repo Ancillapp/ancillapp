@@ -17,6 +17,19 @@ msgstr ""
 msgid "actions"
 msgstr "Actions"
 
+#: src/containers/home/home.component.ts:112
+#: src/containers/home/home.component.ts:289
+msgid "appDescription"
+msgstr "Pray the daily prayers, sing the songs, and read the Ancilla Dominis of the Franciscan Fraternity of Bethany."
+
+#: src/site.webmanifest:2
+msgid "appName"
+msgstr "Ancillapp"
+
+#: src/site.webmanifest:3
+msgid "appShortName"
+msgstr "Ancillapp"
+
 #: src/containers/holy-mass/holy-mass.template.ts:116
 msgid "availableSeats"
 msgstr "Available seats"
@@ -27,7 +40,7 @@ msgstr "Available seats"
 #: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:27
 #: src/containers/song-viewer/song-viewer.template.ts:18
-#: src/containers/songs-list/songs-list.template.ts:34
+#: src/containers/songs-list/songs-list.template.ts:43
 msgid "back"
 msgstr "Back"
 
@@ -78,11 +91,11 @@ msgstr "Pray the Liturgy of the Hours with the optional memories remembered by t
 msgid "breviaryUnavailable"
 msgstr "Liturgy of the Hours unavailable"
 
-#: src/containers/info/info.template.ts:60
+#: src/containers/info/info.template.ts:71
 msgid "brotherlyLifePillarDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:59
+#: src/containers/info/info.template.ts:70
 msgid "brotherlyLifePillarTitle"
 msgstr ""
 
@@ -96,9 +109,9 @@ msgstr "Cancel"
 msgid "cancelBooking"
 msgstr "Cancel booking"
 
-#: src/containers/songs-list/songs-list.template.ts:142
+#: src/containers/songs-list/songs-list.template.ts:151
 msgid "category"
-msgstr ""
+msgstr "Category"
 
 #: src/containers/holy-mass/holy-mass.template.ts:273
 #: src/containers/login/login.template.ts:55
@@ -106,7 +119,7 @@ msgid "checkYourInbox"
 msgstr "Done! Check your inbox."
 
 #: src/containers/holy-mass/holy-mass.template.ts:254
-#: src/containers/songs-list/songs-list.template.ts:241
+#: src/containers/songs-list/songs-list.template.ts:279
 #: src/containers/update-checker/update-checker.template.ts:75
 msgid "close"
 msgstr "Close"
@@ -137,7 +150,7 @@ msgstr "You've already booked some seats for this day."
 
 #: src/containers/magazines-list/magazines-list.template.ts:81
 #: src/containers/prayers-list/prayers-list.template.ts:34
-#: src/containers/songs-list/songs-list.template.ts:91
+#: src/containers/songs-list/songs-list.template.ts:100
 msgid "dontAskAnymore"
 msgstr "Don't ask anymore"
 
@@ -149,47 +162,47 @@ msgstr "Don't show anymore"
 msgid "english"
 msgstr "English"
 
-#: src/containers/info/info.template.ts:33
+#: src/containers/info/info.template.ts:44
 msgid "ffbInfoDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:32
+#: src/containers/info/info.template.ts:43
 msgid "ffbInfoTitle"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:246
+#: src/containers/songs-list/songs-list.template.ts:284
 msgid "filters"
-msgstr ""
+msgstr "Filters"
 
 #: src/containers/login/login.template.ts:85
 msgid "forgotPassword"
 msgstr "Forgot your password?"
 
-#: src/containers/info/info.template.ts:49
+#: src/containers/info/info.template.ts:60
 msgid "foundationDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:44
+#: src/containers/info/info.template.ts:55
 msgid "foundationPhrase"
 msgstr ""
 
-#: src/containers/info/info.template.ts:46
+#: src/containers/info/info.template.ts:57
 msgid "foundationPhraseAuthor"
 msgstr ""
 
-#: src/containers/info/info.template.ts:41
+#: src/containers/info/info.template.ts:52
 msgid "founderAndFoundationTitle"
 msgstr ""
 
-#: src/containers/info/info.template.ts:42
+#: src/containers/info/info.template.ts:53
 msgid "founderDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:39
+#: src/containers/info/info.template.ts:50
 msgid "franciscanSpiritualityDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:38
+#: src/containers/info/info.template.ts:49
 msgid "franciscanSpiritualityTitle"
 msgstr ""
 
@@ -199,7 +212,7 @@ msgid "fraternity"
 msgstr "Fraternity"
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:18
-#: src/containers/songs-list/songs-list.template.ts:134
+#: src/containers/songs-list/songs-list.template.ts:143
 msgid "german"
 msgstr "German"
 
@@ -224,16 +237,11 @@ msgstr "Book a place for the Holy Mass in one of the homes of the Franciscan Fra
 msgid "home"
 msgstr "Home"
 
-#: src/containers/home/home.component.ts:112
-#: src/containers/home/home.component.ts:289
-msgid "appDescription"
-msgstr "Pray the daily prayers, sing the songs, and read the Ancilla Dominis of the Franciscan Fraternity of Bethany."
-
-#: src/containers/info/info.template.ts:57
+#: src/containers/info/info.template.ts:68
 msgid "hospitalityPillarDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:56
+#: src/containers/info/info.template.ts:67
 msgid "hospitalityPillarTitle"
 msgstr ""
 
@@ -268,7 +276,7 @@ msgid "invitatoryDescription {date}"
 msgstr "Pray the Invitatory of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:16
-#: src/containers/songs-list/songs-list.template.ts:131
+#: src/containers/songs-list/songs-list.template.ts:140
 msgid "italian"
 msgstr "Italian"
 
@@ -277,7 +285,7 @@ msgid "keepScreenActive"
 msgstr "Keep the screen active"
 
 #: src/containers/settings/settings.template.ts:43
-#: src/containers/songs-list/songs-list.template.ts:124
+#: src/containers/songs-list/songs-list.template.ts:133
 msgid "language"
 msgstr "Language"
 
@@ -299,10 +307,14 @@ msgstr "Pray the Lauds of the day {date} with the optional memories remembered b
 msgid "light"
 msgstr "Light"
 
+#: src/site.webmanifest:26
+msgid "liturgyOfTheHours"
+msgstr "Liturgy of the Hours"
+
 #: src/containers/breviary-index/breviary-index.template.ts:45
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:30
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:34
-#: src/containers/song-viewer/song-viewer.template.ts:29
+#: src/containers/song-viewer/song-viewer.template.ts:27
 msgid "loading"
 msgstr "Loading…"
 
@@ -357,11 +369,11 @@ msgstr "Browse the magazines of the Franciscan Fraternity of Bethany."
 msgid "magazinesDescription {magazineType}"
 msgstr "Browse the {magazineType} volumes of the Franciscan Fraternity of Bethany."
 
-#: src/containers/info/info.template.ts:36
+#: src/containers/info/info.template.ts:47
 msgid "marianSpiritualityDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:35
+#: src/containers/info/info.template.ts:46
 msgid "marianSpiritualityTitle"
 msgstr ""
 
@@ -385,7 +397,7 @@ msgstr "Pray the Matins of the day {date} with the optional memories remembered 
 #: src/containers/prayers-list/prayers-list.template.ts:21
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:82
-#: src/containers/songs-list/songs-list.template.ts:55
+#: src/containers/songs-list/songs-list.template.ts:64
 msgid "menu"
 msgstr "Menu"
 
@@ -397,7 +409,7 @@ msgstr ""
 msgid "missingPassword"
 msgstr ""
 
-#: src/containers/info/info.template.ts:62
+#: src/containers/info/info.template.ts:73
 msgid "moreInfoWebsite {websiteUrl}"
 msgstr ""
 
@@ -412,7 +424,7 @@ msgstr "No Holy Masses available for this day."
 #: src/containers/home/home.template.ts:87
 #: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:62
-#: src/containers/songs-list/songs-list.component.ts:257
+#: src/containers/songs-list/songs-list.component.ts:276
 msgid "noResults"
 msgstr "No results"
 
@@ -422,7 +434,7 @@ msgstr "You haven't booked any seats yet."
 
 #: src/containers/magazines-list/magazines-list.template.ts:87
 #: src/containers/prayers-list/prayers-list.template.ts:41
-#: src/containers/songs-list/songs-list.template.ts:98
+#: src/containers/songs-list/songs-list.template.ts:107
 msgid "noThanks"
 msgstr "No, thanks"
 
@@ -444,12 +456,12 @@ msgstr "Oops! Looks like you're offline. Connect to the internet and try again."
 msgid "peaceAndGood"
 msgstr "Peace and Good!"
 
-#: src/containers/info/info.template.ts:51
+#: src/containers/info/info.template.ts:62
 msgid "pillarsTitle"
 msgstr ""
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:20
-#: src/containers/songs-list/songs-list.template.ts:137
+#: src/containers/songs-list/songs-list.template.ts:146
 msgid "portuguese"
 msgstr "Portuguese"
 
@@ -461,11 +473,11 @@ msgstr "Pray the daily prayers"
 msgid "prayLiturgy"
 msgstr "Pray the Liturgy of the Hours"
 
-#: src/containers/info/info.template.ts:54
+#: src/containers/info/info.template.ts:65
 msgid "prayerPillarDescription"
 msgstr ""
 
-#: src/containers/info/info.template.ts:53
+#: src/containers/info/info.template.ts:64
 msgid "prayerPillarTitle"
 msgstr ""
 
@@ -498,10 +510,34 @@ msgstr ""
 msgid "resetPassword"
 msgstr "Reset password"
 
-#: src/containers/song-viewer/song-viewer.template.ts:34
-#: src/containers/songs-list/songs-list.template.ts:62
-#: src/containers/songs-list/songs-list.template.ts:74
-#: src/containers/songs-list/songs-list.template.ts:81
+#: src/site.webmanifest:59
+msgid "screenshot1Description"
+msgstr "Ancillapp - Complete application!"
+
+#: src/site.webmanifest:66
+msgid "screenshot2Description"
+msgstr "Ancillapp - Menu"
+
+#: src/site.webmanifest:73
+msgid "screenshot3Description"
+msgstr "Sing and Pray with the Fraternity!"
+
+#: src/site.webmanifest:80
+msgid "screenshot4Description"
+msgstr "Dark theme available!"
+
+#: src/site.webmanifest:87
+msgid "screenshot5Description"
+msgstr "Read the official magazines!"
+
+#: src/site.webmanifest:94
+msgid "screenshot6Description"
+msgstr "...or download them!"
+
+#: src/containers/song-viewer/song-viewer.template.ts:32
+#: src/containers/songs-list/songs-list.template.ts:71
+#: src/containers/songs-list/songs-list.template.ts:83
+#: src/containers/songs-list/songs-list.template.ts:90
 msgid "search"
 msgstr "Search"
 
@@ -521,7 +557,7 @@ msgstr "Seats"
 msgid "set"
 msgstr "Set"
 
-#: src/containers/songs-list/songs-list.template.ts:117
+#: src/containers/songs-list/songs-list.template.ts:126
 msgid "setFilters"
 msgstr "Set filters"
 
@@ -555,7 +591,7 @@ msgstr "Share"
 msgid "shareMagazineText {magazineType}"
 msgstr ""
 
-#: src/containers/song-viewer/song-viewer.template.ts:65
+#: src/containers/song-viewer/song-viewer.template.ts:63
 msgid "shareSongText"
 msgstr "Take a look at this song!"
 
@@ -567,119 +603,119 @@ msgstr "Show changelog"
 msgid "singFraternitySongs"
 msgstr "Sing the Fraternity songs"
 
-#: src/containers/songs-list/songs-list.template.ts:228
+#: src/containers/songs-list/songs-list.template.ts:233
 msgid "songCategoryAdvent"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:171
+#: src/containers/songs-list/songs-list.template.ts:185
 msgid "songCategoryAmen"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:168
+#: src/containers/songs-list/songs-list.template.ts:182
 msgid "songCategoryAnamnesis"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:222
+#: src/containers/songs-list/songs-list.template.ts:228
 msgid "songCategoryAnimation"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:204
+#: src/containers/songs-list/songs-list.template.ts:266
 msgid "songCategoryBenedictus"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:180
+#: src/containers/songs-list/songs-list.template.ts:258
 msgid "songCategoryCanonsAndRefrains"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:210
+#: src/containers/songs-list/songs-list.template.ts:272
 msgid "songCategoryCanticles"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:231
+#: src/containers/songs-list/songs-list.template.ts:238
 msgid "songCategoryChristmas"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:159
+#: src/containers/songs-list/songs-list.template.ts:173
 msgid "songCategoryCreed"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:189
+#: src/containers/songs-list/songs-list.template.ts:205
 msgid "songCategoryEntrance"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:198
+#: src/containers/songs-list/songs-list.template.ts:214
 msgid "songCategoryEucharist"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:183
+#: src/containers/songs-list/songs-list.template.ts:199
 msgid "songCategoryFranciscans"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:153
+#: src/containers/songs-list/songs-list.template.ts:167
 msgid "songCategoryGlory"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:225
+#: src/containers/songs-list/songs-list.template.ts:253
 msgid "songCategoryGregorians"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:156
+#: src/containers/songs-list/songs-list.template.ts:170
 msgid "songCategoryHallelujah"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:165
+#: src/containers/songs-list/songs-list.template.ts:179
 msgid "songCategoryHoly"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:192
+#: src/containers/songs-list/songs-list.template.ts:208
 msgid "songCategoryHolySpirit"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:213
+#: src/containers/songs-list/songs-list.template.ts:248
 msgid "songCategoryHymns"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:150
+#: src/containers/songs-list/songs-list.template.ts:164
 msgid "songCategoryKyrie"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:177
+#: src/containers/songs-list/songs-list.template.ts:191
 msgid "songCategoryLambOfGod"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:234
+#: src/containers/songs-list/songs-list.template.ts:243
 msgid "songCategoryLent"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:207
+#: src/containers/songs-list/songs-list.template.ts:269
 msgid "songCategoryMagnificat"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:219
+#: src/containers/songs-list/songs-list.template.ts:220
 msgid "songCategoryMarians"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:162
+#: src/containers/songs-list/songs-list.template.ts:176
 msgid "songCategoryOffertory"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:201
+#: src/containers/songs-list/songs-list.template.ts:223
 msgid "songCategoryOtherSongs"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:174
+#: src/containers/songs-list/songs-list.template.ts:188
 msgid "songCategoryOurFather"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:186
+#: src/containers/songs-list/songs-list.template.ts:202
 msgid "songCategoryPraiseAndFarewell"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:216
+#: src/containers/songs-list/songs-list.template.ts:217
 msgid "songCategorySimplePrayer"
 msgstr ""
 
-#: src/containers/songs-list/songs-list.template.ts:195
+#: src/containers/songs-list/songs-list.template.ts:211
 msgid "songCategoryWorship"
 msgstr ""
 
@@ -687,26 +723,38 @@ msgstr ""
 msgid "songDescription {title}"
 msgstr "Sing the song \"{title}\" as it is sung by the Franciscan Fraternity of Bethany."
 
+#: src/containers/songs-list/songs-list.template.ts:263
+msgid "songMacroCategoryLiturgyOfTheHours"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:161
+msgid "songMacroCategoryOrdinariumMissae"
+msgstr ""
+
+#: src/containers/songs-list/songs-list.template.ts:196
+msgid "songMacroCategorySongs"
+msgstr ""
+
 #: src/containers/home/home.component.ts:127
 #: src/containers/shell/shell.template.ts:31
-#: src/containers/song-viewer/song-viewer.component.ts:72
-#: src/containers/songs-list/songs-list.component.ts:333
-#: src/containers/songs-list/songs-list.template.ts:68
+#: src/containers/song-viewer/song-viewer.component.ts:73
+#: src/containers/songs-list/songs-list.component.ts:352
+#: src/containers/songs-list/songs-list.template.ts:77
 msgid "songs"
 msgstr "Songs"
 
 #: src/containers/home/home.component.ts:134
-#: src/containers/songs-list/songs-list.component.ts:337
+#: src/containers/songs-list/songs-list.component.ts:356
 msgid "songsDescription"
 msgstr "Browse the songs booklet used by the Franciscan Fraternity of Bethany."
 
-#: src/containers/songs-list/songs-list.template.ts:86
+#: src/containers/songs-list/songs-list.template.ts:95
 msgid "songsDownload"
 msgstr "Do you want to download all the songs to be able to consult them offline?"
 
 #: src/containers/magazines-list/magazines-list.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:48
-#: src/containers/songs-list/songs-list.template.ts:105
+#: src/containers/songs-list/songs-list.template.ts:114
 msgid "sure"
 msgstr "Sure!"
 
@@ -714,19 +762,19 @@ msgstr "Sure!"
 msgid "switchAlternative"
 msgstr "Switch alternative"
 
-#: src/containers/songs-list/songs-list.template.ts:44
+#: src/containers/songs-list/songs-list.template.ts:53
 msgid "switchToNumericKeyboard"
 msgstr "Switch to numeric keyboard"
 
-#: src/containers/songs-list/songs-list.template.ts:43
+#: src/containers/songs-list/songs-list.template.ts:52
 msgid "switchToTextKeyboard"
 msgstr "Switch to text keyboard"
 
 #: src/containers/magazines-list/magazines-list.template.ts:159
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:84
-#: src/containers/song-viewer/song-viewer.template.ts:74
-#: src/containers/songs-list/songs-list.template.ts:255
+#: src/containers/song-viewer/song-viewer.template.ts:72
+#: src/containers/songs-list/songs-list.template.ts:293
 msgid "syncInProgress"
 msgstr "Sync in progress…"
 
@@ -796,39 +844,3 @@ msgstr "View full changelog"
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr ""
-
-#: src/site.webmanifest:2
-msgid "appName"
-msgstr "Ancillapp"
-
-#: src/site.webmanifest:3
-msgid "appShortName"
-msgstr "Ancillapp"
-
-#: src/site.webmanifest:26
-msgid "liturgyOfTheHours"
-msgstr "Liturgy of the Hours"
-
-#: src/site.webmanifest:59
-msgid "screenshot1Description"
-msgstr "Ancillapp - Complete application!"
-
-#: src/site.webmanifest:66
-msgid "screenshot2Description"
-msgstr "Ancillapp - Menu"
-
-#: src/site.webmanifest:73
-msgid "screenshot3Description"
-msgstr "Sing and Pray with the Fraternity!"
-
-#: src/site.webmanifest:80
-msgid "screenshot4Description"
-msgstr "Dark theme available!"
-
-#: src/site.webmanifest:87
-msgid "screenshot5Description"
-msgstr "Read the official magazines!"
-
-#: src/site.webmanifest:94
-msgid "screenshot6Description"
-msgstr "...or download them!"

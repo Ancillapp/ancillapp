@@ -90,6 +90,19 @@ export enum SongLanguage {
   PORTUGUESE = 'pt',
 }
 
+export enum SongMacroCategory {
+  ORDINARIUM_MISSAE = 'A',
+  CANONS_AND_REFRAINS = 'R',
+  SONGS = 'C',
+  LITURGY_OF_THE_HOURS = 'X',
+  HYMNS = 'N',
+  ANIMATION = 'E',
+  GREGORIANS = 'O',
+  ADVENT = 'F',
+  CHRISTMAS = 'I',
+  LENT = 'L',
+}
+
 export enum SongCategory {
   KYRIE = 'kyrie',
   GLORY = 'glory',

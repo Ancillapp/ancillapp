@@ -3,6 +3,7 @@ import {
   Song,
   SongCategory,
   SongLanguage,
+  SongMacroCategory,
   SongSummary,
 } from '../../../models/mongo';
 
@@ -13,39 +14,39 @@ export interface GetSongsQueryParams {
 }
 
 const songLanguagesArray = Object.values(SongLanguage);
-const songCategoryToPrefixMap: Partial<
-  Record<SongLanguage, Partial<Record<SongCategory, string>>>
+const songCategoryToMacroCategoryMap: Partial<
+  Record<SongLanguage, Partial<Record<SongCategory, SongMacroCategory>>>
 > = {
   [SongLanguage.ITALIAN]: {
-    [SongCategory.KYRIE]: 'A',
-    [SongCategory.GLORY]: 'A',
-    [SongCategory.HALLELUJAH]: 'A',
-    [SongCategory.CREED]: 'A',
-    [SongCategory.OFFERTORY]: 'A',
-    [SongCategory.HOLY]: 'A',
-    [SongCategory.ANAMNESIS]: 'A',
-    [SongCategory.AMEN]: 'A',
-    [SongCategory.OUR_FATHER]: 'A',
-    [SongCategory.LAMB_OF_GOD]: 'A',
-    [SongCategory.CANONS_AND_REFRAINS]: 'R',
-    [SongCategory.FRANCISCANS]: 'C',
-    [SongCategory.PRAISE_AND_FAREWELL]: 'C',
-    [SongCategory.ENTRANCE]: 'C',
-    [SongCategory.HOLY_SPIRIT]: 'C',
-    [SongCategory.WORSHIP]: 'C',
-    [SongCategory.EUCHARIST]: 'C',
-    [SongCategory.OTHER_SONGS]: 'C',
-    [SongCategory.BENEDICTUS]: 'X',
-    [SongCategory.MAGNIFICAT]: 'X',
-    [SongCategory.CANTICLES]: 'X',
-    [SongCategory.HYMNS]: 'N',
-    [SongCategory.SIMPLE_PRAYER]: 'C',
-    [SongCategory.MARIANS]: 'C',
-    [SongCategory.ANIMATION]: 'E',
-    [SongCategory.GREGORIANS]: 'O',
-    [SongCategory.ADVENT]: 'F',
-    [SongCategory.CHRISTMAS]: 'I',
-    [SongCategory.LENT]: 'L',
+    [SongCategory.KYRIE]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.GLORY]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.HALLELUJAH]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.CREED]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.OFFERTORY]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.HOLY]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.ANAMNESIS]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.AMEN]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.OUR_FATHER]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.LAMB_OF_GOD]: SongMacroCategory.ORDINARIUM_MISSAE,
+    [SongCategory.CANONS_AND_REFRAINS]: SongMacroCategory.CANONS_AND_REFRAINS,
+    [SongCategory.FRANCISCANS]: SongMacroCategory.SONGS,
+    [SongCategory.PRAISE_AND_FAREWELL]: SongMacroCategory.SONGS,
+    [SongCategory.ENTRANCE]: SongMacroCategory.SONGS,
+    [SongCategory.HOLY_SPIRIT]: SongMacroCategory.SONGS,
+    [SongCategory.WORSHIP]: SongMacroCategory.SONGS,
+    [SongCategory.EUCHARIST]: SongMacroCategory.SONGS,
+    [SongCategory.OTHER_SONGS]: SongMacroCategory.SONGS,
+    [SongCategory.BENEDICTUS]: SongMacroCategory.LITURGY_OF_THE_HOURS,
+    [SongCategory.MAGNIFICAT]: SongMacroCategory.LITURGY_OF_THE_HOURS,
+    [SongCategory.CANTICLES]: SongMacroCategory.LITURGY_OF_THE_HOURS,
+    [SongCategory.HYMNS]: SongMacroCategory.HYMNS,
+    [SongCategory.SIMPLE_PRAYER]: SongMacroCategory.SONGS,
+    [SongCategory.MARIANS]: SongMacroCategory.SONGS,
+    [SongCategory.ANIMATION]: SongMacroCategory.ANIMATION,
+    [SongCategory.GREGORIANS]: SongMacroCategory.GREGORIANS,
+    [SongCategory.ADVENT]: SongMacroCategory.ADVENT,
+    [SongCategory.CHRISTMAS]: SongMacroCategory.CHRISTMAS,
+    [SongCategory.LENT]: SongMacroCategory.LENT,
   },
 };
 
@@ -95,9 +96,11 @@ export const getSongs: RequestHandler<
     // For this reason, we don't need to check also for b.language
     if (a.language === SongLanguage.ITALIAN) {
       /* eslint-disable @typescript-eslint/no-non-null-assertion */
-      const categoriesDiff = songCategoryToPrefixMap[a.language]![
+      const categoriesDiff = songCategoryToMacroCategoryMap[a.language]![
         a.category
-      ]!.localeCompare(songCategoryToPrefixMap[b.language]![b.category]!);
+      ]!.localeCompare(
+        songCategoryToMacroCategoryMap[b.language]![b.category]!,
+      );
       /* eslint-enable @typescript-eslint/no-non-null-assertion */
       if (categoriesDiff !== 0) {
         return categoriesDiff;

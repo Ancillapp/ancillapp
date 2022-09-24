@@ -15,15 +15,23 @@ import template from './songs-list.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
-import { SongCategory, SongLanguage, SongSummary } from '../../models/song';
+import {
+  SongCategory,
+  SongLanguage,
+  SongMacroCategory,
+  SongSummary,
+} from '../../models/song';
+import {
+  getFormattedSongNumber,
+  songCategoryToMacroCategoryMap,
+  songLanguagesArray,
+  songMacroCategoriesArray,
+  songMacroCategoryToCategoriesMap,
+} from '../../helpers/songs';
 
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
 
 import * as SongsListWorker from './songs-list.worker';
-import {
-  songCategoryToPrefixMap,
-  songLanguagesArray,
-} from '../../helpers/songs';
 
 const { configureSearch, search } =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -132,11 +140,25 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   private async _refreshSongs() {
     const songs = (this._songsStatus.data || [])
-      .filter(
-        ({ language, category }) =>
-          language === this._selectedLanguage &&
-          (!this._selectedCategory || category === this._selectedCategory),
-      )
+      .filter(({ language, category }) => {
+        if (language !== this._selectedLanguage) {
+          return false;
+        }
+
+        if (!this._selectedCategory) {
+          return true;
+        }
+
+        return songMacroCategoriesArray.includes(
+          this._selectedCategory as SongMacroCategory,
+        )
+          ? // Filter by macro-category: include all categories belonging to that macro-category
+            songMacroCategoryToCategoriesMap[
+              this._selectedCategory as SongMacroCategory
+            ].includes(category)
+          : // Filter by category: only include songs belonging specifically to that category
+            category === this._selectedCategory;
+      })
       .sort((a, b) => {
         if (a.language !== b.language) {
           return (
@@ -149,10 +171,9 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
         // Note that we already checked for language equality, so the two songs are in the same language.
         // For this reason, we don't need to check also for b.language
         if (a.language === SongLanguage.ITALIAN) {
-          /* eslint-disable @typescript-eslint/no-non-null-assertion */
-          const categoriesDiff = songCategoryToPrefixMap[a.language]![
+          const categoriesDiff = songCategoryToMacroCategoryMap[
             a.category
-          ]!.localeCompare(songCategoryToPrefixMap[b.language]![b.category]!);
+          ].localeCompare(songCategoryToMacroCategoryMap[b.category]);
           if (categoriesDiff !== 0) {
             return categoriesDiff;
           }
@@ -169,9 +190,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
       })
       .map((song) => ({
         ...song,
-        formattedNumber: `${
-          songCategoryToPrefixMap[song.language]?.[song.category] || ''
-        }${song.number}`,
+        formattedNumber: getFormattedSongNumber(song),
       })) as SongsListWorker.ExtendedSong[];
 
     await configureSearch(songs);

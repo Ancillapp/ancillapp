@@ -9,7 +9,11 @@ import {
   filter,
 } from '../../components/icons';
 import { t } from '@lingui/macro';
-import { SongCategory, SongLanguage } from '../../models/song';
+import {
+  SongCategory,
+  SongLanguage,
+  SongMacroCategory,
+} from '../../models/song';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
@@ -19,6 +23,11 @@ import '../../components/unobtrusive-notification/unobtrusive-notification.compo
 import '../../components/loading-button/loading-button.component';
 import '../../components/autosized-fab/autosized-fab.component';
 import '../../components/outlined-select/outlined-select.component';
+
+const indentOption = (option: string, width = 1) =>
+  ' '.repeat(width * 6) + option;
+
+const optionSeparator = html`<option disabled>━━━━━━━━━━━━━━━━</option>`;
 
 export default function template(this: SongsList) {
   return html`
@@ -146,92 +155,121 @@ export default function template(this: SongsList) {
               value="${this._selectedCategory}"
             >
               <option value="">-</option>
+              ${optionSeparator}
+              <option value="${SongMacroCategory.ORDINARIUM_MISSAE}">
+                ${SongMacroCategory.ORDINARIUM_MISSAE} -
+                ${this.localize(t`songMacroCategoryOrdinariumMissae`)}
+              </option>
               <option value="${SongCategory.KYRIE}">
-                ${this.localize(t`songCategoryKyrie`)}
+                ${indentOption(this.localize(t`songCategoryKyrie`))}
               </option>
               <option value="${SongCategory.GLORY}">
-                ${this.localize(t`songCategoryGlory`)}
+                ${indentOption(this.localize(t`songCategoryGlory`))}
               </option>
               <option value="${SongCategory.HALLELUJAH}">
-                ${this.localize(t`songCategoryHallelujah`)}
+                ${indentOption(this.localize(t`songCategoryHallelujah`))}
               </option>
               <option value="${SongCategory.CREED}">
-                ${this.localize(t`songCategoryCreed`)}
+                ${indentOption(this.localize(t`songCategoryCreed`))}
               </option>
               <option value="${SongCategory.OFFERTORY}">
-                ${this.localize(t`songCategoryOffertory`)}
+                ${indentOption(this.localize(t`songCategoryOffertory`))}
               </option>
               <option value="${SongCategory.HOLY}">
-                ${this.localize(t`songCategoryHoly`)}
+                ${indentOption(this.localize(t`songCategoryHoly`))}
               </option>
               <option value="${SongCategory.ANAMNESIS}">
-                ${this.localize(t`songCategoryAnamnesis`)}
+                ${indentOption(this.localize(t`songCategoryAnamnesis`))}
               </option>
               <option value="${SongCategory.AMEN}">
-                ${this.localize(t`songCategoryAmen`)}
+                ${indentOption(this.localize(t`songCategoryAmen`))}
               </option>
               <option value="${SongCategory.OUR_FATHER}">
-                ${this.localize(t`songCategoryOurFather`)}
+                ${indentOption(this.localize(t`songCategoryOurFather`))}
               </option>
               <option value="${SongCategory.LAMB_OF_GOD}">
-                ${this.localize(t`songCategoryLambOfGod`)}
+                ${indentOption(this.localize(t`songCategoryLambOfGod`))}
               </option>
-              <option value="${SongCategory.CANONS_AND_REFRAINS}">
-                ${this.localize(t`songCategoryCanonsAndRefrains`)}
+              ${optionSeparator}
+              <option value="${SongMacroCategory.SONGS}">
+                ${SongMacroCategory.SONGS} -
+                ${this.localize(t`songMacroCategorySongs`)}
               </option>
               <option value="${SongCategory.FRANCISCANS}">
-                ${this.localize(t`songCategoryFranciscans`)}
+                ${indentOption(this.localize(t`songCategoryFranciscans`))}
               </option>
               <option value="${SongCategory.PRAISE_AND_FAREWELL}">
-                ${this.localize(t`songCategoryPraiseAndFarewell`)}
+                ${indentOption(this.localize(t`songCategoryPraiseAndFarewell`))}
               </option>
               <option value="${SongCategory.ENTRANCE}">
-                ${this.localize(t`songCategoryEntrance`)}
+                ${indentOption(this.localize(t`songCategoryEntrance`))}
               </option>
               <option value="${SongCategory.HOLY_SPIRIT}">
-                ${this.localize(t`songCategoryHolySpirit`)}
+                ${indentOption(this.localize(t`songCategoryHolySpirit`))}
               </option>
               <option value="${SongCategory.WORSHIP}">
-                ${this.localize(t`songCategoryWorship`)}
+                ${indentOption(this.localize(t`songCategoryWorship`))}
               </option>
               <option value="${SongCategory.EUCHARIST}">
-                ${this.localize(t`songCategoryEucharist`)}
-              </option>
-              <option value="${SongCategory.OTHER_SONGS}">
-                ${this.localize(t`songCategoryOtherSongs`)}
-              </option>
-              <option value="${SongCategory.BENEDICTUS}">
-                ${this.localize(t`songCategoryBenedictus`)}
-              </option>
-              <option value="${SongCategory.MAGNIFICAT}">
-                ${this.localize(t`songCategoryMagnificat`)}
-              </option>
-              <option value="${SongCategory.CANTICLES}">
-                ${this.localize(t`songCategoryCanticles`)}
-              </option>
-              <option value="${SongCategory.HYMNS}">
-                ${this.localize(t`songCategoryHymns`)}
+                ${indentOption(this.localize(t`songCategoryEucharist`))}
               </option>
               <option value="${SongCategory.SIMPLE_PRAYER}">
-                ${this.localize(t`songCategorySimplePrayer`)}
+                ${indentOption(this.localize(t`songCategorySimplePrayer`))}
               </option>
               <option value="${SongCategory.MARIANS}">
-                ${this.localize(t`songCategoryMarians`)}
+                ${indentOption(this.localize(t`songCategoryMarians`))}
               </option>
+              <option value="${SongCategory.OTHER_SONGS}">
+                ${indentOption(this.localize(t`songCategoryOtherSongs`))}
+              </option>
+              ${optionSeparator}
               <option value="${SongCategory.ANIMATION}">
+                ${SongMacroCategory.ANIMATION} -
                 ${this.localize(t`songCategoryAnimation`)}
               </option>
-              <option value="${SongCategory.GREGORIANS}">
-                ${this.localize(t`songCategoryGregorians`)}
-              </option>
+              ${optionSeparator}
               <option value="${SongCategory.ADVENT}">
+                ${SongMacroCategory.ADVENT} -
                 ${this.localize(t`songCategoryAdvent`)}
               </option>
+              ${optionSeparator}
               <option value="${SongCategory.CHRISTMAS}">
+                ${SongMacroCategory.CHRISTMAS} -
                 ${this.localize(t`songCategoryChristmas`)}
               </option>
+              ${optionSeparator}
               <option value="${SongCategory.LENT}">
+                ${SongMacroCategory.LENT} -
                 ${this.localize(t`songCategoryLent`)}
+              </option>
+              ${optionSeparator}
+              <option value="${SongCategory.HYMNS}">
+                ${SongMacroCategory.HYMNS} -
+                ${this.localize(t`songCategoryHymns`)}
+              </option>
+              ${optionSeparator}
+              <option value="${SongCategory.GREGORIANS}">
+                ${SongMacroCategory.GREGORIANS} -
+                ${this.localize(t`songCategoryGregorians`)}
+              </option>
+              ${optionSeparator}
+              <option value="${SongCategory.CANONS_AND_REFRAINS}">
+                ${SongMacroCategory.CANONS_AND_REFRAINS} -
+                ${this.localize(t`songCategoryCanonsAndRefrains`)}
+              </option>
+              ${optionSeparator}
+              <option value="${SongMacroCategory.LITURGY_OF_THE_HOURS}">
+                ${SongMacroCategory.LITURGY_OF_THE_HOURS} -
+                ${this.localize(t`songMacroCategoryLiturgyOfTheHours`)}
+              </option>
+              <option value="${SongCategory.BENEDICTUS}">
+                ${indentOption(this.localize(t`songCategoryBenedictus`))}
+              </option>
+              <option value="${SongCategory.MAGNIFICAT}">
+                ${indentOption(this.localize(t`songCategoryMagnificat`))}
+              </option>
+              <option value="${SongCategory.CANTICLES}">
+                ${indentOption(this.localize(t`songCategoryCanticles`))}
               </option>
             </outlined-select>
           </li>

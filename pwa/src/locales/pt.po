@@ -17,6 +17,19 @@ msgstr ""
 msgid "actions"
 msgstr "Ações"
 
+#: src/containers/home/home.component.ts:112
+#: src/containers/home/home.component.ts:289
+msgid "appDescription"
+msgstr "Rezar as orações diárias, cantar as canções e folhear através da Ancilla Domini da Fraternidade Franciscana de Betânia."
+
+#: src/site.webmanifest:2
+msgid "appName"
+msgstr "Ancillapp"
+
+#: src/site.webmanifest:3
+msgid "appShortName"
+msgstr "Ancillapp"
+
 #: src/containers/holy-mass/holy-mass.template.ts:116
 msgid "availableSeats"
 msgstr "Lugares disponíveis"
@@ -27,7 +40,7 @@ msgstr "Lugares disponíveis"
 #: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:27
 #: src/containers/song-viewer/song-viewer.template.ts:18
-#: src/containers/songs-list/songs-list.template.ts:34
+#: src/containers/songs-list/songs-list.template.ts:43
 msgid "back"
 msgstr "Voltar"
 
@@ -78,11 +91,11 @@ msgstr "Rezar a Liturgia das Horas com as memórias opcionais recordadas pela Fr
 msgid "breviaryUnavailable"
 msgstr "Liturgia das Horas não disponível"
 
-#: src/containers/info/info.template.ts:60
+#: src/containers/info/info.template.ts:71
 msgid "brotherlyLifePillarDescription"
 msgstr "É dada uma atenção especial à vida fraterna. A evangélica Betânia era o lar de Marta, Maria e Lázaro: duas irmãs e um irmão que desfrutavam da presença de Jesus de Nazaré e de sua amizade viviam em um ambiente familiar. Nossa Betânia é o lar de irmãos e irmãs que compartilham a mesma vida, invocando a presença de Cristo todos os dias. A vida fraterna é a primeira esfera de acolhida, que deve acontecer antes de tudo em direção ao irmão e à irmã que o Senhor colocou ao nosso lado. É o campo de prova da coerência da vida cristã, é o âmbito certo para realizar o amor de Deus e um espelho para ver as próprias misérias e exercer todas as virtudes. Portanto, \"irmão\" e \"irmã\" não são simplesmente um título, mas o que realmente somos e o que somos chamados a realizar entre nós, entre o povo e para a Igreja. O testemunho de vida fraterna torna-se nosso primeiro meio de evangelização. Foi o próprio Cristo que disse: \"Por isto todos saberão que sois meus discípulos, se tiverdes amor uns pelos outros\" (João 13:35)."
 
-#: src/containers/info/info.template.ts:59
+#: src/containers/info/info.template.ts:70
 msgid "brotherlyLifePillarTitle"
 msgstr "A vida fraterna"
 
@@ -96,7 +109,7 @@ msgstr "Cancelar"
 msgid "cancelBooking"
 msgstr "Eliminar reserva"
 
-#: src/containers/songs-list/songs-list.template.ts:142
+#: src/containers/songs-list/songs-list.template.ts:151
 msgid "category"
 msgstr "Categoria"
 
@@ -106,7 +119,7 @@ msgid "checkYourInbox"
 msgstr "Feito! Verifique sua caixa de correio."
 
 #: src/containers/holy-mass/holy-mass.template.ts:254
-#: src/containers/songs-list/songs-list.template.ts:241
+#: src/containers/songs-list/songs-list.template.ts:279
 #: src/containers/update-checker/update-checker.template.ts:75
 msgid "close"
 msgstr "Fechar"
@@ -137,7 +150,7 @@ msgstr "Você já reservou lugares para este dia."
 
 #: src/containers/magazines-list/magazines-list.template.ts:81
 #: src/containers/prayers-list/prayers-list.template.ts:34
-#: src/containers/songs-list/songs-list.template.ts:91
+#: src/containers/songs-list/songs-list.template.ts:100
 msgid "dontAskAnymore"
 msgstr "Não me pergunte mais"
 
@@ -149,17 +162,17 @@ msgstr "Não mostrar mais"
 msgid "english"
 msgstr "Inglês"
 
-#: src/containers/info/info.template.ts:33
+#: src/containers/info/info.template.ts:44
 msgid "ffbInfoDescription"
 msgstr ""
 "A **Fraternidade Franciscana de Betânia** é um Instituto de Vida Consagrada de direito diocesano composto de irmãos, tanto clérigos como leigos, e irmãs que se consagram a Deus através de votos públicos de castidade, pobreza e obediência.\n"
 "O carisma da Fraternidade se exprime em **prazer** e **vinda**, elementos característicos da Betânia evangélica, vividos em um contexto profundo de **vida fraterna**. A Virgem Maria, que viveu a oração e o acolhimento em perfeita harmonia, é o modelo que procuramos."
 
-#: src/containers/info/info.template.ts:32
+#: src/containers/info/info.template.ts:43
 msgid "ffbInfoTitle"
 msgstr "Fraternidade Franciscana de Betânia"
 
-#: src/containers/songs-list/songs-list.template.ts:246
+#: src/containers/songs-list/songs-list.template.ts:284
 msgid "filters"
 msgstr "Filtros"
 
@@ -167,7 +180,7 @@ msgstr "Filtros"
 msgid "forgotPassword"
 msgstr "Esqueceu a senha?"
 
-#: src/containers/info/info.template.ts:49
+#: src/containers/info/info.template.ts:60
 msgid "foundationDescription"
 msgstr ""
 "Em seu último encontro com São Pio, em julho de 1968, este lhe comunicou o desejo do Senhor de que ele se colocasse no caminho para se tornar padre. Assim, em 18 de março de 1973, o Pe. Pancrazio foi ordenado sacerdote em Loreto.\n"
@@ -178,30 +191,30 @@ msgstr ""
 "\n"
 "P. Pancrazio foi Superior Geral por dois mandatos: de 1999 a 2005, e de 2005 a 2011. A partir de 2011, ele continuou a viver na fraternidade Terlizzi, transmitindo o espírito e o carisma da Betânia evangélica a cada irmão e irmã. O Pe. Pancrazio N. Gaudioso faleceu em 3 de janeiro de 2016."
 
-#: src/containers/info/info.template.ts:44
+#: src/containers/info/info.template.ts:55
 msgid "foundationPhrase"
 msgstr "Não seja tão dedicado à atividade de Martha que esqueça o silêncio de Maria. Que a Virgem Mãe, que tão bem concilia um e outro escritório, seja para você um doce modelo e inspiração."
 
-#: src/containers/info/info.template.ts:46
+#: src/containers/info/info.template.ts:57
 msgid "foundationPhraseAuthor"
 msgstr "p. Pio Capuchinho"
 
-#: src/containers/info/info.template.ts:41
+#: src/containers/info/info.template.ts:52
 msgid "founderAndFoundationTitle"
 msgstr "Nosso Fundador e Fundação"
 
-#: src/containers/info/info.template.ts:42
+#: src/containers/info/info.template.ts:53
 msgid "founderDescription"
 msgstr ""
 "**Nicola Gaudioso**, em religião **Pai Pancrazio**, nascido em Bari em 15 de novembro de 1926, o mais novo de seis filhos, entrou na família dos Frades Capuchinhos Menores de Apúlia aos treze anos de idade, em 10 de dezembro de 1939, tomou o hábito religioso como irmão leigo em 13 de maio de 1942 e emitiu os votos temporários em 19 de junho de 1943 em Alessanno (LE). Em 23 de novembro de 1947 ele fez sua profissão perpétua na Casa Santa de Loreto, onde havia chegado no ano anterior para servir o Santuário.\n"
 "\n"
 "A partir de 1950, tornou-se filho espiritual de São Pio de Pietrelcina que, seguindo seu pedido preciso, em 1959 escreveu-lhe em sua própria mão um programa de vida no verso de uma pequena imagem que iluminou sua vida espiritual e se tornou uma profecia do carisma da futura Fraternidade Franciscana de Betânia (FFB):"
 
-#: src/containers/info/info.template.ts:39
+#: src/containers/info/info.template.ts:50
 msgid "franciscanSpiritualityDescription"
 msgstr "**S. Francisco de Assis**, por inspiração divina, imitando a vida de Cristo e de seus discípulos, deu origem a uma forma de vida evangélica que ele chamou de fraternidade. É por isso que ele é para nós um mestre incomparável da comunhão fraterna. Francisco tem a concepção do irmão como um presente de Deus, independentemente das características humanas. Cada irmão é um dom a ser acolhido, uma provocação de Deus para crescer no amor, na gratuidade que só flui de um coração humilde. E para nós é também um modelo de simplicidade, que é o caminho privilegiado para a unificação do homem com Deus, a fonte de toda comunhão fraterna e a medicina contra toda divisão. A beleza da vida simples e a riqueza da vida fraterna, que se traduz no mais alto grau em atenção caridosa ao irmão menor, são a preciosa herança da tradição franciscana. De Francisco também tiramos a alegria evangélica, ou aquela alegria perfeita querido companheiro do Seráfico Pai que se torna o testemunho luminoso da adesão ao Evangelho."
 
-#: src/containers/info/info.template.ts:38
+#: src/containers/info/info.template.ts:49
 msgid "franciscanSpiritualityTitle"
 msgstr "Espiritualidade Franciscana"
 
@@ -211,7 +224,7 @@ msgid "fraternity"
 msgstr "Fraternidade"
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:18
-#: src/containers/songs-list/songs-list.template.ts:134
+#: src/containers/songs-list/songs-list.template.ts:143
 msgid "german"
 msgstr "Alemão"
 
@@ -236,12 +249,7 @@ msgstr "Reservar um lugar para a Santa Missa em uma das casas da Fraternidade Fr
 msgid "home"
 msgstr "Home"
 
-#: src/containers/home/home.component.ts:112
-#: src/containers/home/home.component.ts:289
-msgid "appDescription"
-msgstr "Rezar as orações diárias, cantar as canções e folhear através da Ancilla Domini da Fraternidade Franciscana de Betânia."
-
-#: src/containers/info/info.template.ts:57
+#: src/containers/info/info.template.ts:68
 msgid "hospitalityPillarDescription"
 msgstr ""
 "Cristo é por excelência o testemunho de um Deus acolhedor, e é por isso que o acolhimento é uma forma indispensável de ser para o cristão. Jesus em Betânia é acolhido como Senhor e Mestre, como amigo e como irmão. Naquela casa, Ele se dá e ao mesmo tempo aceita sem reservas o dom dos outros (cf. Lc 10,38-42; Jo 11,1-44; 12,1-3). Compartilhando os diferentes momentos de nossos dias, aqueles que vêm às nossas casas podem encontrar na oração, nos sacramentos e na vida fraterna, um encontro verdadeiro e vivificante com Jesus.\n"
@@ -255,7 +263,7 @@ msgstr ""
 "- a **famílias**, comunidades de vida e de amor fundadas no sacramento do Matrimônio, que desejam redescobrir a beleza e a grandeza desta vocação;\n"
 "- para **jovens** desorientados; para aqueles que sentem a necessidade de se retirar espiritualmente do frenesi da vida cotidiana para permanecer por um tempo em silêncio, especialmente aos pés de Jesus."
 
-#: src/containers/info/info.template.ts:56
+#: src/containers/info/info.template.ts:67
 msgid "hospitalityPillarTitle"
 msgstr "A hospitalidade"
 
@@ -290,7 +298,7 @@ msgid "invitatoryDescription {date}"
 msgstr "Reze o Invitatório do dia {date} com as memórias opcionais lembradas pela Fraternidade Franciscana de Betânia."
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:16
-#: src/containers/songs-list/songs-list.template.ts:131
+#: src/containers/songs-list/songs-list.template.ts:140
 msgid "italian"
 msgstr "Italiano"
 
@@ -299,7 +307,7 @@ msgid "keepScreenActive"
 msgstr "Mantenha a tela ativa"
 
 #: src/containers/settings/settings.template.ts:43
-#: src/containers/songs-list/songs-list.template.ts:124
+#: src/containers/songs-list/songs-list.template.ts:133
 msgid "language"
 msgstr "Linguagem"
 
@@ -321,10 +329,14 @@ msgstr "Rezem Laudes do dia {date} com o memorial opcional convocado pela Frater
 msgid "light"
 msgstr "Claro"
 
+#: src/site.webmanifest:26
+msgid "liturgyOfTheHours"
+msgstr "Liturgia das Horas"
+
 #: src/containers/breviary-index/breviary-index.template.ts:45
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:30
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:34
-#: src/containers/song-viewer/song-viewer.template.ts:29
+#: src/containers/song-viewer/song-viewer.template.ts:27
 msgid "loading"
 msgstr "Carregando..."
 
@@ -379,11 +391,11 @@ msgstr "Navegue pelas revistas da Fraternidade Franciscana de Betânia."
 msgid "magazinesDescription {magazineType}"
 msgstr "Navegue pelas revistas {magazineType} da Fraternidade Franciscana de Betânia."
 
-#: src/containers/info/info.template.ts:36
+#: src/containers/info/info.template.ts:47
 msgid "marianSpiritualityDescription"
 msgstr "**Maria**, **Anchion do Senhor** é o modelo sublime da vida consagrada e é também a porta que nos introduz no mistério de Cristo. A espiritualidade de nossa Fraternidade é inspirada pelo mistério incomensurável da Encarnação, através do qual o plano salvífico de Deus é realizado através do fiat de Maria. Maria de Nazaré nos ensina como conciliar o fazer de Marta e o silêncio de Maria, mostrando-nos que não são dois ofícios deslocados no tempo ou separados, mas dois ofícios que se resolvem na unidade da vida de uma pessoa: acolher Jesus como Deus em minha vida. A Virgem Maria, ao acolher Deus em seu seio acolheu todos os homens, de fato, a acolhida de Deus em Jesus Cristo foi a condição para poder acolher todos os outros. Maria de Nazaré nos ensina que Betânia não é portanto um símbolo de acolhimento genérico, mas é o mistério do acolhimento da pessoa de Jesus Cristo, e dentro do acolhimento dEle todas as outras formas de acolhimento são justificadas, motivadas, sustentadas e nutridas."
 
-#: src/containers/info/info.template.ts:35
+#: src/containers/info/info.template.ts:46
 msgid "marianSpiritualityTitle"
 msgstr "Espiritualidade Mariana"
 
@@ -407,7 +419,7 @@ msgstr "Rezem Ofício das Leituras do dia {date} com o memorial opcional convoca
 #: src/containers/prayers-list/prayers-list.template.ts:21
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:82
-#: src/containers/songs-list/songs-list.template.ts:55
+#: src/containers/songs-list/songs-list.template.ts:64
 msgid "menu"
 msgstr "Menu"
 
@@ -419,7 +431,7 @@ msgstr "Especifique um endereço de e-mail."
 msgid "missingPassword"
 msgstr "Especifique uma senha."
 
-#: src/containers/info/info.template.ts:62
+#: src/containers/info/info.template.ts:73
 msgid "moreInfoWebsite {websiteUrl}"
 msgstr "Para mais informações, visite {websiteUrl}"
 
@@ -434,7 +446,7 @@ msgstr "Não há Santa Missa disponível para este dia."
 #: src/containers/home/home.template.ts:87
 #: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:62
-#: src/containers/songs-list/songs-list.component.ts:257
+#: src/containers/songs-list/songs-list.component.ts:276
 msgid "noResults"
 msgstr "Sem resultados"
 
@@ -444,7 +456,7 @@ msgstr "Você ainda não reservou nenhum assento."
 
 #: src/containers/magazines-list/magazines-list.template.ts:87
 #: src/containers/prayers-list/prayers-list.template.ts:41
-#: src/containers/songs-list/songs-list.template.ts:98
+#: src/containers/songs-list/songs-list.template.ts:107
 msgid "noThanks"
 msgstr "Não, obrigado"
 
@@ -466,12 +478,12 @@ msgstr "Oops! Parece que você está offline. Conecte-se à Internet e tente nov
 msgid "peaceAndGood"
 msgstr "Paz e Bem!"
 
-#: src/containers/info/info.template.ts:51
+#: src/containers/info/info.template.ts:62
 msgid "pillarsTitle"
 msgstr "Os três pilares do carisma"
 
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:20
-#: src/containers/songs-list/songs-list.template.ts:137
+#: src/containers/songs-list/songs-list.template.ts:146
 msgid "portuguese"
 msgstr "Português"
 
@@ -483,7 +495,7 @@ msgstr "Reze as orações diárias"
 msgid "prayLiturgy"
 msgstr "Reze a Liturgia das Horas"
 
-#: src/containers/info/info.template.ts:54
+#: src/containers/info/info.template.ts:65
 msgid "prayerPillarDescription"
 msgstr ""
 "É o primeiro pilar de nosso carisma porque precede os outros e, em certo sentido, os gera. A oração é invocar a presença de Cristo entre nós, uma presença que constrói a fraternidade; é a intimidade de cada um com Jesus Cristo, é o alimento indispensável para manter vivo o fogo do verdadeiro amor que nos torna capazes de uma autêntica vida fraterna e de um verdadeiro acolhimento. Nosso Instituto tem um tempo amplo para a oração comunitária que inclui um pouco de todas as formas de oração cristã.\n"
@@ -494,7 +506,7 @@ msgstr ""
 "- O **Santo Rosário** expressa nossa devoção especial à Virgem Mãe de Deus e une a meditação sobre os mistérios da vida de Cristo e da Igreja com a oração do coração;\n"
 "- A **A adoração eucarística**, a meditação sobre a **Palavra de Deus** e a **Logio Espontâneo** são outras formas presentes em nossa vida de oração."
 
-#: src/containers/info/info.template.ts:53
+#: src/containers/info/info.template.ts:64
 msgid "prayerPillarTitle"
 msgstr "A oração"
 
@@ -527,10 +539,34 @@ msgstr "Reenviar e-mail de verificação"
 msgid "resetPassword"
 msgstr "Redefinição de senha"
 
-#: src/containers/song-viewer/song-viewer.template.ts:34
-#: src/containers/songs-list/songs-list.template.ts:62
-#: src/containers/songs-list/songs-list.template.ts:74
-#: src/containers/songs-list/songs-list.template.ts:81
+#: src/site.webmanifest:59
+msgid "screenshot1Description"
+msgstr "Ancillapp - Aplicativo completo!"
+
+#: src/site.webmanifest:66
+msgid "screenshot2Description"
+msgstr "Ancillapp - Menu"
+
+#: src/site.webmanifest:73
+msgid "screenshot3Description"
+msgstr "Canta e Reze com a Fraternitade!"
+
+#: src/site.webmanifest:80
+msgid "screenshot4Description"
+msgstr "Tema escuro disponível!"
+
+#: src/site.webmanifest:87
+msgid "screenshot5Description"
+msgstr "Leia as revistas oficiais!"
+
+#: src/site.webmanifest:94
+msgid "screenshot6Description"
+msgstr "...ou baixa-las!"
+
+#: src/containers/song-viewer/song-viewer.template.ts:32
+#: src/containers/songs-list/songs-list.template.ts:71
+#: src/containers/songs-list/songs-list.template.ts:83
+#: src/containers/songs-list/songs-list.template.ts:90
 msgid "search"
 msgstr "Busca"
 
@@ -550,7 +586,7 @@ msgstr "Lugares"
 msgid "set"
 msgstr "Set"
 
-#: src/containers/songs-list/songs-list.template.ts:117
+#: src/containers/songs-list/songs-list.template.ts:126
 msgid "setFilters"
 msgstr "Filtros set"
 
@@ -584,7 +620,7 @@ msgstr "Compartilhe"
 msgid "shareMagazineText {magazineType}"
 msgstr "Dê uma olhada nesta {magazineType}!"
 
-#: src/containers/song-viewer/song-viewer.template.ts:65
+#: src/containers/song-viewer/song-viewer.template.ts:63
 msgid "shareSongText"
 msgstr "Dê uma olhada neste canção!"
 
@@ -596,119 +632,119 @@ msgstr "Mostrar changelog"
 msgid "singFraternitySongs"
 msgstr "Cante as canções da Fraternidade"
 
-#: src/containers/songs-list/songs-list.template.ts:228
+#: src/containers/songs-list/songs-list.template.ts:233
 msgid "songCategoryAdvent"
 msgstr "Advento"
 
-#: src/containers/songs-list/songs-list.template.ts:171
+#: src/containers/songs-list/songs-list.template.ts:185
 msgid "songCategoryAmen"
 msgstr "Amém"
 
-#: src/containers/songs-list/songs-list.template.ts:168
+#: src/containers/songs-list/songs-list.template.ts:182
 msgid "songCategoryAnamnesis"
 msgstr "Anamnese"
 
-#: src/containers/songs-list/songs-list.template.ts:222
+#: src/containers/songs-list/songs-list.template.ts:228
 msgid "songCategoryAnimation"
 msgstr "Animação"
 
-#: src/containers/songs-list/songs-list.template.ts:204
+#: src/containers/songs-list/songs-list.template.ts:266
 msgid "songCategoryBenedictus"
 msgstr "Benedictus"
 
-#: src/containers/songs-list/songs-list.template.ts:180
+#: src/containers/songs-list/songs-list.template.ts:258
 msgid "songCategoryCanonsAndRefrains"
-msgstr "Canções e Refrões"
+msgstr "Cânones e Refrões"
 
-#: src/containers/songs-list/songs-list.template.ts:210
+#: src/containers/songs-list/songs-list.template.ts:272
 msgid "songCategoryCanticles"
 msgstr "Cânticos"
 
-#: src/containers/songs-list/songs-list.template.ts:231
+#: src/containers/songs-list/songs-list.template.ts:238
 msgid "songCategoryChristmas"
 msgstr "Natal"
 
-#: src/containers/songs-list/songs-list.template.ts:159
+#: src/containers/songs-list/songs-list.template.ts:173
 msgid "songCategoryCreed"
 msgstr "Creio"
 
-#: src/containers/songs-list/songs-list.template.ts:189
+#: src/containers/songs-list/songs-list.template.ts:205
 msgid "songCategoryEntrance"
 msgstr "Entrada"
 
-#: src/containers/songs-list/songs-list.template.ts:198
+#: src/containers/songs-list/songs-list.template.ts:214
 msgid "songCategoryEucharist"
 msgstr "Comunhão"
 
-#: src/containers/songs-list/songs-list.template.ts:183
+#: src/containers/songs-list/songs-list.template.ts:199
 msgid "songCategoryFranciscans"
 msgstr "Franciscanos"
 
-#: src/containers/songs-list/songs-list.template.ts:153
+#: src/containers/songs-list/songs-list.template.ts:167
 msgid "songCategoryGlory"
 msgstr "Glória"
 
-#: src/containers/songs-list/songs-list.template.ts:225
+#: src/containers/songs-list/songs-list.template.ts:253
 msgid "songCategoryGregorians"
 msgstr "Gregorianos"
 
-#: src/containers/songs-list/songs-list.template.ts:156
+#: src/containers/songs-list/songs-list.template.ts:170
 msgid "songCategoryHallelujah"
 msgstr "Aleluia"
 
-#: src/containers/songs-list/songs-list.template.ts:165
+#: src/containers/songs-list/songs-list.template.ts:179
 msgid "songCategoryHoly"
 msgstr "Santo"
 
-#: src/containers/songs-list/songs-list.template.ts:192
+#: src/containers/songs-list/songs-list.template.ts:208
 msgid "songCategoryHolySpirit"
 msgstr "Espírito Santo"
 
-#: src/containers/songs-list/songs-list.template.ts:213
+#: src/containers/songs-list/songs-list.template.ts:248
 msgid "songCategoryHymns"
 msgstr "Hinos"
 
-#: src/containers/songs-list/songs-list.template.ts:150
+#: src/containers/songs-list/songs-list.template.ts:164
 msgid "songCategoryKyrie"
 msgstr "Kyrie"
 
-#: src/containers/songs-list/songs-list.template.ts:177
+#: src/containers/songs-list/songs-list.template.ts:191
 msgid "songCategoryLambOfGod"
 msgstr "Cordeiro de Deus"
 
-#: src/containers/songs-list/songs-list.template.ts:234
+#: src/containers/songs-list/songs-list.template.ts:243
 msgid "songCategoryLent"
 msgstr "Quaresma"
 
-#: src/containers/songs-list/songs-list.template.ts:207
+#: src/containers/songs-list/songs-list.template.ts:269
 msgid "songCategoryMagnificat"
 msgstr "Magnificat"
 
-#: src/containers/songs-list/songs-list.template.ts:219
+#: src/containers/songs-list/songs-list.template.ts:220
 msgid "songCategoryMarians"
 msgstr "Marianos"
 
-#: src/containers/songs-list/songs-list.template.ts:162
+#: src/containers/songs-list/songs-list.template.ts:176
 msgid "songCategoryOffertory"
 msgstr "Oferta"
 
-#: src/containers/songs-list/songs-list.template.ts:201
+#: src/containers/songs-list/songs-list.template.ts:223
 msgid "songCategoryOtherSongs"
 msgstr "Outras Canções"
 
-#: src/containers/songs-list/songs-list.template.ts:174
+#: src/containers/songs-list/songs-list.template.ts:188
 msgid "songCategoryOurFather"
 msgstr "Pai Nosso"
 
-#: src/containers/songs-list/songs-list.template.ts:186
+#: src/containers/songs-list/songs-list.template.ts:202
 msgid "songCategoryPraiseAndFarewell"
 msgstr "Louvor e Licença"
 
-#: src/containers/songs-list/songs-list.template.ts:216
+#: src/containers/songs-list/songs-list.template.ts:217
 msgid "songCategorySimplePrayer"
 msgstr "Oração Simples"
 
-#: src/containers/songs-list/songs-list.template.ts:195
+#: src/containers/songs-list/songs-list.template.ts:211
 msgid "songCategoryWorship"
 msgstr "Louvor"
 
@@ -716,26 +752,38 @@ msgstr "Louvor"
 msgid "songDescription {title}"
 msgstr "Cantem a canção \"{title}\" como cantada pela Fraternidade Franciscana de Betânia."
 
+#: src/containers/songs-list/songs-list.template.ts:263
+msgid "songMacroCategoryLiturgyOfTheHours"
+msgstr "Liturgia das Horas"
+
+#: src/containers/songs-list/songs-list.template.ts:161
+msgid "songMacroCategoryOrdinariumMissae"
+msgstr "Ordinário da Missa"
+
+#: src/containers/songs-list/songs-list.template.ts:196
+msgid "songMacroCategorySongs"
+msgstr "Canções"
+
 #: src/containers/home/home.component.ts:127
 #: src/containers/shell/shell.template.ts:31
-#: src/containers/song-viewer/song-viewer.component.ts:72
-#: src/containers/songs-list/songs-list.component.ts:333
-#: src/containers/songs-list/songs-list.template.ts:68
+#: src/containers/song-viewer/song-viewer.component.ts:73
+#: src/containers/songs-list/songs-list.component.ts:352
+#: src/containers/songs-list/songs-list.template.ts:77
 msgid "songs"
 msgstr "Canções"
 
 #: src/containers/home/home.component.ts:134
-#: src/containers/songs-list/songs-list.component.ts:337
+#: src/containers/songs-list/songs-list.component.ts:356
 msgid "songsDescription"
 msgstr "Navegue pelo hinário utilizado pela Fraternidade Franciscana de Betânia."
 
-#: src/containers/songs-list/songs-list.template.ts:86
+#: src/containers/songs-list/songs-list.template.ts:95
 msgid "songsDownload"
 msgstr "Você quer baixar todas as canções agora para que possa consultá-las mesmo quando estiver offline?"
 
 #: src/containers/magazines-list/magazines-list.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:48
-#: src/containers/songs-list/songs-list.template.ts:105
+#: src/containers/songs-list/songs-list.template.ts:114
 msgid "sure"
 msgstr "Certo!"
 
@@ -743,19 +791,19 @@ msgstr "Certo!"
 msgid "switchAlternative"
 msgstr "Trocar a alternativa"
 
-#: src/containers/songs-list/songs-list.template.ts:44
+#: src/containers/songs-list/songs-list.template.ts:53
 msgid "switchToNumericKeyboard"
 msgstr "Mudar para teclado numérico"
 
-#: src/containers/songs-list/songs-list.template.ts:43
+#: src/containers/songs-list/songs-list.template.ts:52
 msgid "switchToTextKeyboard"
 msgstr "Mudar para teclado de texto"
 
 #: src/containers/magazines-list/magazines-list.template.ts:159
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:84
-#: src/containers/song-viewer/song-viewer.template.ts:74
-#: src/containers/songs-list/songs-list.template.ts:255
+#: src/containers/song-viewer/song-viewer.template.ts:72
+#: src/containers/songs-list/songs-list.template.ts:293
 msgid "syncInProgress"
 msgstr "Sincronização em andamento..."
 
@@ -825,39 +873,3 @@ msgstr "Mostrar o changelog completo"
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr "A senha digitada está incorreta."
-
-#: src/site.webmanifest:2
-msgid "appName"
-msgstr "Ancillapp"
-
-#: src/site.webmanifest:3
-msgid "appShortName"
-msgstr "Ancillapp"
-
-#: src/site.webmanifest:26
-msgid "liturgyOfTheHours"
-msgstr "Liturgia das Horas"
-
-#: src/site.webmanifest:59
-msgid "screenshot1Description"
-msgstr "Ancillapp - Aplicativo completo!"
-
-#: src/site.webmanifest:66
-msgid "screenshot2Description"
-msgstr "Ancillapp - Menu"
-
-#: src/site.webmanifest:73
-msgid "screenshot3Description"
-msgstr "Canta e Reze com a Fraternitade!"
-
-#: src/site.webmanifest:80
-msgid "screenshot4Description"
-msgstr "Tema escuro disponível!"
-
-#: src/site.webmanifest:87
-msgid "screenshot5Description"
-msgstr "Leia as revistas oficiais!"
-
-#: src/site.webmanifest:94
-msgid "screenshot6Description"
-msgstr "...ou baixa-las!"
