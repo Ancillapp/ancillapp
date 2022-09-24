@@ -1,5 +1,5 @@
 import { PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
@@ -13,11 +13,10 @@ import template from './prayer-viewer.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
-import { Prayer } from '../../models/prayer';
+import { Prayer, PrayerLanguage } from '../../models/prayer';
+import { getUserLanguagesPriorityArray } from '../../helpers/prayers';
 
 const _prayersStatusesCache = new Map<string, APIResponse<Prayer>>();
-
-const _languagesOrder = ['it', 'la', 'de', 'pt', 'en'];
 
 @customElement('prayer-viewer')
 export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
@@ -28,17 +27,22 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
   @property({ type: String })
   public prayer?: string;
 
-  @property({ type: Object })
+  @state()
   protected _prayerStatus: APIResponse<Prayer> = {
     loading: true,
     refreshing: false,
   };
 
-  @property({ type: String })
-  protected _selectedPrayerLanguage: keyof Prayer['title'] = 'it';
+  @state()
+  protected _selectedPrayerLanguage: PrayerLanguage = PrayerLanguage.ITALIAN;
 
-  @property({ type: Array })
-  protected _prayerLanguages: (keyof Prayer['title'])[] = [];
+  @state()
+  protected _prayerLanguages: PrayerLanguage[] = [];
+
+  @state()
+  protected _userLanguagesPriorityArray = getUserLanguagesPriorityArray(
+    this.locale as PrayerLanguage,
+  );
 
   private _previousPageTitle?: string;
 
@@ -46,6 +50,7 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
     super.updated(changedProperties);
 
     if (this.active && changedProperties.has('prayer') && this.prayer) {
+      this._prayerLanguages = [];
       if (!_prayersStatusesCache.has(this.prayer)) {
         for await (const status of cacheAndNetwork<Prayer>(
           `${config.apiUrl}/prayers/${this.prayer}`,
@@ -57,9 +62,7 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
 
             this._setupLanguageTabs();
 
-            const prayerDefaultLanguage = this._getDefaultPrayerLanguage(
-              status.data,
-            );
+            const prayerDefaultLanguage = this._userLanguagesPriorityArray[0];
 
             const title = status.data.title[prayerDefaultLanguage];
 
@@ -93,43 +96,18 @@ export class PrayerViewer extends localize(withTopAppBar(PageViewElement)) {
   }
 
   private _setupLanguageTabs() {
-    const prayerDefaultLanguage = this._getDefaultPrayerLanguage(
-      this._prayerStatus.data!,
-    );
+    const prayerDefaultLanguage = this._userLanguagesPriorityArray[0];
 
     this._selectedPrayerLanguage = prayerDefaultLanguage;
     this._prayerLanguages = Object.entries(this._prayerStatus.data?.title || {})
-      .filter(([, title]) => title)
       .sort(
         ([language1], [language2]) =>
-          _languagesOrder.indexOf(language1) -
-          _languagesOrder.indexOf(language2),
+          this._userLanguagesPriorityArray.indexOf(
+            language1 as PrayerLanguage,
+          ) -
+          this._userLanguagesPriorityArray.indexOf(language2 as PrayerLanguage),
       )
-      .map(([language]) => language) as (keyof Prayer['title'])[];
-  }
-
-  private _getDefaultPrayerLanguage(prayer: Prayer) {
-    if (prayer.title[this.locale]) {
-      return this.locale;
-    }
-
-    if (prayer.title.la) {
-      return 'la';
-    }
-
-    if (prayer.title.it) {
-      return 'it';
-    }
-
-    if (prayer.title.de) {
-      return 'de';
-    }
-
-    if (prayer.title.pt) {
-      return 'pt';
-    }
-
-    return 'en';
+      .map(([language]) => language) as PrayerLanguage[];
   }
 }
 

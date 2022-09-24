@@ -29,8 +29,7 @@ export default function template(this: PrayerViewer) {
         </mwc-icon-button>
       </a>
       <div slot="title">
-        ${this._prayerStatus.data?.title[this.locale] ||
-        this._prayerStatus.data?.title.la ||
+        ${this._prayerStatus.data?.title[this._selectedPrayerLanguage] ||
         this.localize(t`loading`)}
       </div>
       ${this._prayerLanguages.length > 1

@@ -2,7 +2,7 @@ import { html, nothing } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { PrayersList } from './prayers-list.component';
-import { menu } from '../../components/icons';
+import { menu, search, arrowBack } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '@material/mwc-button';
@@ -10,19 +10,58 @@ import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/unobtrusive-notification/unobtrusive-notification.component';
 import '../../components/loading-button/loading-button.component';
+import '../../components/autosized-fab/autosized-fab.component';
+import { getPrayerDisplayedTitle } from '../../helpers/prayers';
 
 export default function template(this: PrayersList) {
   return html`
-    <top-app-bar ?drawer-open="${this.drawerOpen}">
-      <mwc-icon-button
-        slot="leadingIcon"
-        ?hidden="${!this.showMenuButton}"
-        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
-        label="${this.localize(t`menu`)}"
-      >
-        ${menu}
-      </mwc-icon-button>
-      <div slot="title">${this.localize(t`prayers`)}</div>
+    <top-app-bar
+      class="${this._searching ? 'search-mode' : ''}"
+      ?drawer-open="${this.drawerOpen}"
+    >
+      ${this._searching
+        ? html`
+            <mwc-icon-button
+              slot="leadingIcon"
+              @click="${this._stopSearching}"
+              label="${this.localize(t`back`)}"
+            >
+              ${arrowBack}
+            </mwc-icon-button>
+          `
+        : html`
+            <mwc-icon-button
+              slot="leadingIcon"
+              ?hidden="${!this.showMenuButton}"
+              @click="${() =>
+                this.dispatchEvent(new CustomEvent('menutoggle'))}"
+              label="${this.localize(t`menu`)}"
+            >
+              ${menu}
+            </mwc-icon-button>
+            <mwc-icon-button
+              slot="trailingIcon"
+              @click="${this._startSearching}"
+              label="${this.localize(t`search`)}"
+            >
+              ${search}
+            </mwc-icon-button>
+          `}
+      <div slot="title" ?hidden="${this._searching}">
+        ${this.localize(t`prayers`)}
+      </div>
+      <input
+        id="search-input"
+        type="search"
+        slot="title"
+        placeholder="${this.localize(t`search`)}"
+        ?hidden="${!this._searching}"
+        @keydown="${this._handleSearchKeyDown}"
+        @input="${this._handleSearch}"
+        value="${this._searchTerm}"
+        autofocus
+        aria-label="${this.localize(t`search`)}"
+      />
     </top-app-bar>
 
     <unobtrusive-notification ?hidden="${!this._needPrayersDownloadPermission}">
@@ -64,14 +103,19 @@ export default function template(this: PrayersList) {
             ${repeat(
               this._displayedPrayers,
               ({ slug }) => slug,
-              ({
-                slug,
-                title: { [this.locale]: localizedTitle, la: latinTitle },
-                image,
-              }) => html`
-                <a href="${this.localizeHref('prayers', slug)}" class="prayer">
-                  <div class="image">${unsafeHTML(image)}</div>
-                  <div class="title">${localizedTitle || latinTitle}</div>
+              (prayer) => html`
+                <a
+                  href="${this.localizeHref('prayers', prayer.slug)}"
+                  class="prayer"
+                  @click="${this._handlePrayerClick}"
+                >
+                  <div class="image">${unsafeHTML(prayer.image)}</div>
+                  <div class="title">
+                    ${getPrayerDisplayedTitle(
+                      prayer,
+                      this._userLanguagesPriorityArray,
+                    )}
+                  </div>
                 </a>
               `,
             )}

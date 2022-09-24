@@ -1,5 +1,5 @@
 import { PropertyValues } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, query, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
@@ -14,7 +14,17 @@ import template from './prayers-list.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
-import { PrayerSummary } from '../../models/prayer';
+import { PrayerLanguage, PrayerSummary } from '../../models/prayer';
+
+import * as PrayersListWorker from './prayers-list.worker';
+import {
+  getPrayerDisplayedTitle,
+  getUserLanguagesPriorityArray,
+} from '../../helpers/prayers';
+
+const { configureSearch, search } =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new (PrayersListWorker as any)() as typeof PrayersListWorker;
 
 @customElement('prayers-list')
 export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
@@ -22,23 +32,40 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
 
   protected render = template;
 
-  @property({ type: Object })
+  @state()
   protected _prayersStatus: APIResponse<PrayerSummary[]> = {
     loading: true,
     refreshing: false,
   };
 
-  @property({ type: Boolean })
+  @state()
   protected _needPrayersDownloadPermission?: boolean;
 
-  @property({ type: Boolean })
+  @state()
   protected _downloadingPrayers?: boolean;
 
-  @property({ type: String })
+  @state()
   protected _selectedLanguage = 'it';
 
-  @property({ type: Array })
-  protected _displayedPrayers: PrayerSummary[] = [];
+  @state()
+  protected _searchTerm = '';
+
+  @state()
+  protected _searching = false;
+
+  @state()
+  protected _displayedPrayers: PrayersListWorker.ExtendedPrayer[] = [];
+
+  @state()
+  protected _userLanguagesPriorityArray = getUserLanguagesPriorityArray(
+    this.locale as PrayerLanguage,
+  );
+
+  @query('#search-input')
+  private _searchInput?: HTMLInputElement;
+
+  @query('.prayers-container')
+  private _prayersContainer?: HTMLDivElement;
 
   constructor() {
     super();
@@ -63,24 +90,50 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
       this._prayersStatus = status;
 
       if (status.data) {
-        this._displayedPrayers = status.data
-          .filter(({ title }) => title[this.locale] || title.la)
-          .sort(
-            (
-              { title: { [this.locale]: localizedTitleA, la: latinTitleA } },
-              { title: { [this.locale]: localizedTitleB, la: latinTitleB } },
-            ) =>
-              (localizedTitleA || latinTitleA!) <
-              (localizedTitleB || latinTitleB!)
-                ? -1
-                : 1,
-          );
+        this._refreshPrayers();
       }
     }
   }
 
+  private async _refreshPrayers() {
+    const prayers = (this._prayersStatus.data || [])
+      .map(
+        (prayer) =>
+          ({
+            ...prayer,
+            displayedTitle: getPrayerDisplayedTitle(
+              prayer,
+              this._userLanguagesPriorityArray,
+            ),
+          } as PrayersListWorker.ExtendedPrayer),
+      )
+      .sort((a, b) => a.displayedTitle.localeCompare(b.displayedTitle));
+
+    await configureSearch(prayers);
+
+    this._displayedPrayers = this._searchTerm
+      ? await search(this._searchTerm)
+      : prayers;
+  }
+
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
+
+    const searchParam = new URLSearchParams(window.location.search).get(
+      'search',
+    );
+
+    this._searching = searchParam !== null;
+    this._searchTerm = searchParam || '';
+
+    if (
+      changedProperties.has('_searching') &&
+      this._searching &&
+      this._searchInput
+    ) {
+      this._searchInput.focus();
+      this._searchInput.setSelectionRange(-1, -1);
+    }
 
     if (changedProperties.has('active') && this.active) {
       const pageTitle = `Ancillapp - ${this.localize(t`prayers`)}`;
@@ -96,6 +149,44 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
         page_path: window.location.pathname,
       });
     }
+  }
+
+  protected async _handleSearchKeyDown(event: KeyboardEvent) {
+    if (event.code === 'Escape' || event.code === 'Enter') {
+      event.preventDefault();
+
+      if (event.code === 'Escape') {
+        (event.target as HTMLInputElement).value = '';
+        this._searchTerm = '';
+        this._stopSearching();
+        await this._refreshPrayers();
+      }
+
+      const firstPrayer =
+        this._prayersContainer!.querySelector<HTMLAnchorElement>(
+          '.songs-batch-container > a',
+        );
+
+      if (!firstPrayer) {
+        return;
+      }
+
+      firstPrayer.focus();
+    }
+  }
+
+  protected async _handleSearch({ target }: InputEvent) {
+    this._searchTerm = (target as HTMLInputElement).value;
+    history.replaceState(
+      {},
+      '',
+      `${window.location.pathname}?search${
+        this._searchTerm ? `=${this._searchTerm}` : ''
+      }`,
+    );
+
+    this._prayersContainer!.scrollTo(0, 0);
+    await this._refreshPrayers();
   }
 
   protected async _updatePrayersDownloadPermission(
@@ -127,6 +218,32 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
     }
 
     this._downloadingPrayers = false;
+  }
+
+  protected async _handlePrayerClick({
+    altKey,
+    ctrlKey,
+    metaKey,
+    shiftKey,
+  }: MouseEvent) {
+    if (altKey || ctrlKey || metaKey || shiftKey) {
+      return;
+    }
+
+    this._searchInput!.value = '';
+    this._searchTerm = '';
+    this._stopSearching();
+    await this._refreshPrayers();
+  }
+
+  protected _startSearching() {
+    this._searching = true;
+    history.replaceState({}, '', `${window.location.pathname}?search`);
+  }
+
+  protected _stopSearching() {
+    this._searching = false;
+    history.replaceState({}, '', window.location.pathname);
   }
 }
 
