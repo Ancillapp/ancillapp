@@ -119,7 +119,7 @@ msgid "checkYourInbox"
 msgstr "Feito! Verifique sua caixa de correio."
 
 #: src/containers/holy-mass/holy-mass.template.ts:254
-#: src/containers/songs-list/songs-list.template.ts:279
+#: src/containers/songs-list/songs-list.template.ts:282
 #: src/containers/update-checker/update-checker.template.ts:75
 msgid "close"
 msgstr "Fechar"
@@ -172,7 +172,7 @@ msgstr ""
 msgid "ffbInfoTitle"
 msgstr "Fraternidade Franciscana de Betânia"
 
-#: src/containers/songs-list/songs-list.template.ts:284
+#: src/containers/songs-list/songs-list.template.ts:287
 msgid "filters"
 msgstr "Filtros"
 
@@ -648,7 +648,7 @@ msgstr "Anamnese"
 msgid "songCategoryAnimation"
 msgstr "Animação"
 
-#: src/containers/songs-list/songs-list.template.ts:266
+#: src/containers/songs-list/songs-list.template.ts:269
 msgid "songCategoryBenedictus"
 msgstr "Benedictus"
 
@@ -656,7 +656,7 @@ msgstr "Benedictus"
 msgid "songCategoryCanonsAndRefrains"
 msgstr "Cânones e Refrões"
 
-#: src/containers/songs-list/songs-list.template.ts:272
+#: src/containers/songs-list/songs-list.template.ts:275
 msgid "songCategoryCanticles"
 msgstr "Cânticos"
 
@@ -716,7 +716,7 @@ msgstr "Cordeiro de Deus"
 msgid "songCategoryLent"
 msgstr "Quaresma"
 
-#: src/containers/songs-list/songs-list.template.ts:269
+#: src/containers/songs-list/songs-list.template.ts:272
 msgid "songCategoryMagnificat"
 msgstr "Magnificat"
 
@@ -743,6 +743,10 @@ msgstr "Louvor e Licença"
 #: src/containers/songs-list/songs-list.template.ts:217
 msgid "songCategorySimplePrayer"
 msgstr "Oração Simples"
+
+#: src/containers/songs-list/songs-list.template.ts:266
+msgid "songCategoryVeniCreator"
+msgstr "Veni Creator"
 
 #: src/containers/songs-list/songs-list.template.ts:211
 msgid "songCategoryWorship"
@@ -803,7 +807,7 @@ msgstr "Mudar para teclado de texto"
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:93
 #: src/containers/prayers-list/prayers-list.template.ts:84
 #: src/containers/song-viewer/song-viewer.template.ts:72
-#: src/containers/songs-list/songs-list.template.ts:293
+#: src/containers/songs-list/songs-list.template.ts:296
 msgid "syncInProgress"
 msgstr "Sincronização em andamento..."
 

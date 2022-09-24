@@ -33,6 +33,7 @@ export const songCategoryToMacroCategoryMap: Record<
   [SongCategory.WORSHIP]: SongMacroCategory.SONGS,
   [SongCategory.EUCHARIST]: SongMacroCategory.SONGS,
   [SongCategory.OTHER_SONGS]: SongMacroCategory.SONGS,
+  [SongCategory.VENI_CREATOR]: SongMacroCategory.LITURGY_OF_THE_HOURS,
   [SongCategory.BENEDICTUS]: SongMacroCategory.LITURGY_OF_THE_HOURS,
   [SongCategory.MAGNIFICAT]: SongMacroCategory.LITURGY_OF_THE_HOURS,
   [SongCategory.CANTICLES]: SongMacroCategory.LITURGY_OF_THE_HOURS,

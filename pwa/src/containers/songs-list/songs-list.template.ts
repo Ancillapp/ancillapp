@@ -262,6 +262,9 @@ export default function template(this: SongsList) {
                 ${SongMacroCategory.LITURGY_OF_THE_HOURS} -
                 ${this.localize(t`songMacroCategoryLiturgyOfTheHours`)}
               </option>
+              <option value="${SongCategory.VENI_CREATOR}">
+                ${indentOption(this.localize(t`songCategoryVeniCreator`))}
+              </option>
               <option value="${SongCategory.BENEDICTUS}">
                 ${indentOption(this.localize(t`songCategoryBenedictus`))}
               </option>
