@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.2.0 (25/09/2022)
+
+- Adicionada a possibilidade de filtrar canções também por macrocategoria
+- Adicionado suporte para a categoria de canções Veni Creator
+- Agora detecção automática do idioma padrão das orações é mais preciso
+- As orações são agora ordenadas alfabeticamente de acordo com sua tradução
+  e acrescentou a possibilidade de filtrá-los através pesquisa
+- Dentro da exibição de uma oração, é agora possível
+  compartilhar facilmente um link direto com outros usuários
+
 ## 2.1.0 (22/09/2022)
 
 - Adicionado link para o changelog ao clicar na

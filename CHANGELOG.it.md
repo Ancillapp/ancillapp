@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.2.0 (25/09/2022)
+
+- Aggiunta la possibilità di filtrare i canti anche per macrocategoria
+  (ossia per la lettera che precede il numero del canto)
+- Aggiunto il supporto per la categoria di canti Veni Creator
+- Ora l'individuazione automatica della lingua di default delle preghiere
+  è più accurata
+- Le preghiere sono ora ordinate per ordine alfabetico in base al loro
+  titolo tradotto ed è stata aggiunta la possibilità di filtrarle tramite
+  ricerca
+- All'interno della visualizzazione di una preghiera è ora possibile
+  condividere in modo semplice con altri utenti un link diretto ad essa
+
 ## 2.1.0 (22/09/2022)
 
 - Aggiunto link al changelog al click della versione

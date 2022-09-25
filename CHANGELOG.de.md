@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.2.0 (25/09/2022)
+
+- Es wurde die Möglichkeit hinzugefügt, Lieder auch nach Makrokategorien zu filtern
+- Unterstützung für die Songkategorie Veni Creator hinzugefügt
+- Die automatische Erkennung der Standardsprache der Gebete ist jetzt
+  ist genauer
+- Die Gebete sind jetzt alphabetisch nach ihrer Übersetzung sortiert
+  Titel übersetzt und die Möglichkeit hinzugefügt, sie nach
+  Suche
+- Innerhalb der Anzeige eines Gebets ist es nun möglich
+  einen direkten Link dazu mit anderen Nutzern teilen
+
 ## 2.1.0 (22/09/2022)
 
 - Link zur changelog hinzugefügt, wenn man auf der

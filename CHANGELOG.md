@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.2.0 (2022-09-25)
+
+- Added the ability to also filter songs by macrocategory
+- Added support for the Veni Creator category of songs
+- Now automatic detection of the default language of prayers
+  is more accurate
+- Prayers are now sorted alphabetically by their
+  translated title and the ability to filter them by
+  search was added
+- Within the view of a prayer, it is now possible to
+  easily share a direct link to it with other users
+
 ## 2.1.0 (2022-09-22)
 
 - Added link to changelog on app version click
