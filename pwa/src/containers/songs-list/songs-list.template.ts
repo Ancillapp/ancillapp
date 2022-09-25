@@ -27,7 +27,7 @@ import '../../components/outlined-select/outlined-select.component';
 const indentOption = (option: string, width = 1) =>
   ' '.repeat(width * 6) + option;
 
-const optionSeparator = html`<option disabled>━━━━━━━━━━━━━━━━</option>`;
+const optionSeparator = html`<option disabled>━━━━━━━━━━</option>`;
 
 export default function template(this: SongsList) {
   return html`
