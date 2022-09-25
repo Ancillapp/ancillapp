@@ -19,7 +19,7 @@ const configs = [
     title: 'Songs',
   },
   {
-    url: '/it/canti/IT1',
+    url: '/it/canti/it/kyrie/1',
     title: 'Song',
   },
   {
@@ -35,11 +35,11 @@ const configs = [
     title: 'Magazines',
   },
   {
-    url: '/it/riviste/ancilla-domini/AD4_2019',
+    url: '/it/riviste/ancilla-domini/AD4-2019',
     title: 'Ancilla Domini',
   },
   {
-    url: '/it/riviste/sempreconnessi/AD4_2019',
+    url: '/it/riviste/sempreconnessi/SC4-2022',
     title: '#sempreconnessi',
   },
   {
