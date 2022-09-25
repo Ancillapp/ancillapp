@@ -38,7 +38,8 @@ msgstr "Available seats"
 #: src/containers/home/home.template.ts:50
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:23
 #: src/containers/magazines-list/magazines-list.template.ts:67
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:27
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:28
+#: src/containers/prayers-list/prayers-list.template.ts:27
 #: src/containers/song-viewer/song-viewer.template.ts:18
 #: src/containers/songs-list/songs-list.template.ts:43
 msgid "back"
@@ -149,7 +150,7 @@ msgid "dayAlreadyBooked"
 msgstr "You've already booked some seats for this day."
 
 #: src/containers/magazines-list/magazines-list.template.ts:81
-#: src/containers/prayers-list/prayers-list.template.ts:34
+#: src/containers/prayers-list/prayers-list.template.ts:73
 #: src/containers/songs-list/songs-list.template.ts:100
 msgid "dontAskAnymore"
 msgstr "Don't ask anymore"
@@ -158,7 +159,7 @@ msgstr "Don't ask anymore"
 msgid "dontShowAnymore"
 msgstr "Don't show anymore"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:19
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:20
 msgid "english"
 msgstr "English"
 
@@ -211,7 +212,7 @@ msgstr ""
 msgid "fraternity"
 msgstr "Fraternity"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:18
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:19
 #: src/containers/songs-list/songs-list.template.ts:143
 msgid "german"
 msgstr "German"
@@ -275,7 +276,7 @@ msgstr "Invitatory"
 msgid "invitatoryDescription {date}"
 msgstr "Pray the Invitatory of the day {date} with the optional memories remembered by the Franciscan Fraternity of Bethany."
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:16
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:17
 #: src/containers/songs-list/songs-list.template.ts:140
 msgid "italian"
 msgstr "Italian"
@@ -289,7 +290,7 @@ msgstr "Keep the screen active"
 msgid "language"
 msgstr "Language"
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:17
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:18
 msgid "latin"
 msgstr "Latin"
 
@@ -394,7 +395,7 @@ msgstr "Pray the Matins of the day {date} with the optional memories remembered 
 #: src/containers/info/info.template.ts:23
 #: src/containers/login/login.template.ts:25
 #: src/containers/magazines-index/magazines-index.template.ts:30
-#: src/containers/prayers-list/prayers-list.template.ts:21
+#: src/containers/prayers-list/prayers-list.template.ts:38
 #: src/containers/settings/settings.template.ts:20
 #: src/containers/shell/shell.template.ts:82
 #: src/containers/songs-list/songs-list.template.ts:64
@@ -423,7 +424,7 @@ msgstr "No Holy Masses available for this day."
 
 #: src/containers/home/home.template.ts:87
 #: src/containers/magazines-list/magazines-list.template.ts:108
-#: src/containers/prayers-list/prayers-list.template.ts:62
+#: src/containers/prayers-list/prayers-list.template.ts:101
 #: src/containers/songs-list/songs-list.component.ts:276
 msgid "noResults"
 msgstr "No results"
@@ -433,7 +434,7 @@ msgid "noSeatsBooked"
 msgstr "You haven't booked any seats yet."
 
 #: src/containers/magazines-list/magazines-list.template.ts:87
-#: src/containers/prayers-list/prayers-list.template.ts:41
+#: src/containers/prayers-list/prayers-list.template.ts:80
 #: src/containers/songs-list/songs-list.template.ts:107
 msgid "noThanks"
 msgstr "No, thanks"
@@ -460,7 +461,7 @@ msgstr "Peace and Good!"
 msgid "pillarsTitle"
 msgstr ""
 
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:20
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:21
 #: src/containers/songs-list/songs-list.template.ts:146
 msgid "portuguese"
 msgstr "Portuguese"
@@ -482,19 +483,19 @@ msgid "prayerPillarTitle"
 msgstr ""
 
 #: src/containers/home/home.component.ts:138
-#: src/containers/prayer-viewer/prayer-viewer.component.ts:67
-#: src/containers/prayers-list/prayers-list.component.ts:86
-#: src/containers/prayers-list/prayers-list.template.ts:25
+#: src/containers/prayer-viewer/prayer-viewer.component.ts:70
+#: src/containers/prayers-list/prayers-list.component.ts:139
+#: src/containers/prayers-list/prayers-list.template.ts:51
 #: src/containers/shell/shell.template.ts:32
 msgid "prayers"
 msgstr "Prayers"
 
 #: src/containers/home/home.component.ts:145
-#: src/containers/prayers-list/prayers-list.component.ts:90
+#: src/containers/prayers-list/prayers-list.component.ts:143
 msgid "prayersDescription"
 msgstr "Pray the daily prayers prayed by the Franciscan Fraternity of Bethany."
 
-#: src/containers/prayers-list/prayers-list.template.ts:29
+#: src/containers/prayers-list/prayers-list.template.ts:68
 msgid "prayersDownload"
 msgstr "Do you want to download all the prayers to be able to consult them offline?"
 
@@ -534,6 +535,9 @@ msgstr "Read the official magazines!"
 msgid "screenshot6Description"
 msgstr "...or download them!"
 
+#: src/containers/prayers-list/prayers-list.template.ts:45
+#: src/containers/prayers-list/prayers-list.template.ts:57
+#: src/containers/prayers-list/prayers-list.template.ts:63
 #: src/containers/song-viewer/song-viewer.template.ts:32
 #: src/containers/songs-list/songs-list.template.ts:71
 #: src/containers/songs-list/songs-list.template.ts:83
@@ -589,7 +593,11 @@ msgstr "Share"
 
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:52
 msgid "shareMagazineText {magazineType}"
-msgstr ""
+msgstr "Take a look at this {magazineType}!"
+
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:92
+msgid "sharePrayerText"
+msgstr "Take a look at this prayer!"
 
 #: src/containers/song-viewer/song-viewer.template.ts:63
 msgid "shareSongText"
@@ -757,7 +765,7 @@ msgid "songsDownload"
 msgstr "Do you want to download all the songs to be able to consult them offline?"
 
 #: src/containers/magazines-list/magazines-list.template.ts:93
-#: src/containers/prayers-list/prayers-list.template.ts:48
+#: src/containers/prayers-list/prayers-list.template.ts:87
 #: src/containers/songs-list/songs-list.template.ts:114
 msgid "sure"
 msgstr "Sure!"
@@ -775,8 +783,8 @@ msgid "switchToTextKeyboard"
 msgstr "Switch to text keyboard"
 
 #: src/containers/magazines-list/magazines-list.template.ts:159
-#: src/containers/prayer-viewer/prayer-viewer.template.ts:93
-#: src/containers/prayers-list/prayers-list.template.ts:84
+#: src/containers/prayer-viewer/prayer-viewer.template.ts:101
+#: src/containers/prayers-list/prayers-list.template.ts:128
 #: src/containers/song-viewer/song-viewer.template.ts:72
 #: src/containers/songs-list/songs-list.template.ts:296
 msgid "syncInProgress"

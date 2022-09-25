@@ -10,6 +10,7 @@ import '@material/mwc-snackbar';
 import '@material/mwc-tab-bar';
 import '@material/mwc-tab';
 import '../../components/top-app-bar/top-app-bar.component';
+import '../../components/share-fab/share-fab.component';
 import('../../components/error-box/error-box.component');
 
 const languagesTranslationMap: Record<keyof Prayer['title'], string> = {
@@ -83,6 +84,14 @@ export default function template(this: PrayerViewer) {
               )
             : nothing}
         </section>
+
+        <share-fab
+          title="${this._prayerStatus.data?.title[
+            this._selectedPrayerLanguage
+          ]}"
+          text="${this.localize(t`sharePrayerText`)}"
+          url="${window.location.href}"
+        ></share-fab>
       `,
     )}
 
