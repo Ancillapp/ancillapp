@@ -108,7 +108,11 @@ export const getSongs: RequestHandler<
       }
     }
 
-    return a.number - b.number;
+    // TODO: replace this with just a.number - b.number when migration is completed
+    return a.number
+      .toString()
+      .padStart(5, '0')
+      .localeCompare(b.number.toString().padStart(5, '0'));
   });
 
   res.json(sortedSongs);

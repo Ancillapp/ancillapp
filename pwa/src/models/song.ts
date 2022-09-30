@@ -53,7 +53,8 @@ export enum SongCategory {
 export interface Song {
   language: SongLanguage;
   category: SongCategory;
-  number: number;
+  // TODO: replace this with just number: number when migration is completed
+  number: string | number;
   title: string;
   content: string;
 }
