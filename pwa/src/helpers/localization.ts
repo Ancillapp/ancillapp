@@ -120,7 +120,7 @@ export const localizedPages: Record<string, Record<SupportedLocale, string>> = {
 export const localizeHref = (
   locale: SupportedLocale,
   page = 'home',
-  ...subroutes: string[]
+  ...subroutes: (string | number)[]
 ) => {
   const localizedPage = localizedPages[page]?.[locale];
   const subroute =

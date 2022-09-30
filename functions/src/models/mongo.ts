@@ -139,7 +139,7 @@ export enum SongCategory {
 export interface Song {
   language: SongLanguage;
   category: SongCategory;
-  number: string;
+  number: number;
   title: string;
   content: string;
 }

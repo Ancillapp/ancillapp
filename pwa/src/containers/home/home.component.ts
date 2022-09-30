@@ -194,13 +194,11 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
           title,
           preview: {
             type: 'text',
-            content: number.endsWith('bis')
-              ? `${number.slice(0, -3)}b`
-              : number,
+            content: number.toString(),
           },
           description: content,
           link: this.localizeHref('songs', language, category, number),
-          keywords: number,
+          keywords: number.toString(),
         }),
       ),
       ...this._prayers

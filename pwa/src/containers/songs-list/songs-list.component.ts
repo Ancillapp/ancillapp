@@ -179,14 +179,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
           }
         }
 
-        const normalizedNumberA = a.number.replace('bis', '').padStart(5, '0');
-        const normalizedNumberB = b.number.replace('bis', '').padStart(5, '0');
-
-        if (normalizedNumberA.startsWith(normalizedNumberB)) {
-          return normalizedNumberA.endsWith('bis') ? -1 : 1;
-        }
-
-        return normalizedNumberA.localeCompare(normalizedNumberB);
+        return a.number - b.number;
       })
       .map((song) => ({
         ...song,
@@ -238,11 +231,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
             anchor.innerHTML = `
             <div class="book">
               <div class="number">
-                ${
-                  formattedNumber.endsWith('bis')
-                    ? `${formattedNumber.slice(0, -3)}b`
-                    : formattedNumber
-                }
+                ${formattedNumber}
               </div>
               <div class="title">${title}</div>
             </div>

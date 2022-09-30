@@ -135,7 +135,7 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
         : i18n._(id);
     }
 
-    public localizeHref(page?: string, ...subroutes: string[]) {
+    public localizeHref(page?: string, ...subroutes: (string | number)[]) {
       return localizeHref(
         (this.locale || defaultLocale) as SupportedLocale,
         page,

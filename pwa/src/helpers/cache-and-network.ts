@@ -102,29 +102,6 @@ const updateLocalDBDetailData = async <T>(
   return newData;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const formatCachedResponse = <T extends any[]>(
-  entity: Entity,
-  cachedData: T,
-) => {
-  if (entity === 'songs') {
-    return cachedData.sort(
-      ({ number: a }: T[number], { number: b }: T[number]) => {
-        const normalizedA = a.replace('bis', '').padStart(4, 0);
-        const normalizedB = b.replace('bis', '').padStart(4, 0);
-
-        if (normalizedA === normalizedB) {
-          return b.endsWith('bis') ? -1 : 1;
-        }
-
-        return normalizedA < normalizedB ? -1 : 1;
-      },
-    );
-  }
-
-  return cachedData;
-};
-
 export async function* cacheAndNetwork<T>(
   requestInfo: RequestInfo | Promise<RequestInfo>,
 ): AsyncGenerator<APIResponse<T>> {
@@ -160,12 +137,12 @@ export async function* cacheAndNetwork<T>(
         yield {
           loading: false,
           refreshing: true,
-          data: formatCachedResponse(entity, cachedData) as unknown as T,
+          data: cachedData as T,
         };
       }
 
       try {
-        const data = (await localDBSummaryDataUpdatePromise) as unknown as T;
+        const data = (await localDBSummaryDataUpdatePromise) as T;
 
         yield {
           loading: false,
@@ -178,7 +155,7 @@ export async function* cacheAndNetwork<T>(
           refreshing: false,
           error: fetchError as TypeError,
           ...(cachedData.length > 0 && {
-            data: formatCachedResponse(entity, cachedData) as T,
+            data: cachedData as T,
           }),
         };
       }
