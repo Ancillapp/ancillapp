@@ -1,5 +1,6 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { dateConverter } from '../../helpers/converters';
 
 import sharedStyles from '../../shared.styles';
 import styles from './date-input.styles';
@@ -14,17 +15,8 @@ export class DateInput extends LitElement {
   @property({ type: String, reflect: true })
   public label = '';
 
-  @property({ type: String, reflect: true, attribute: 'set-label' })
-  public setLabel = 'Set';
-
-  @property({ type: String, reflect: true, attribute: 'cancel-label' })
-  public cancelLabel = 'Cancel';
-
-  @property({ type: String, reflect: true })
-  public locale = 'it';
-
-  @property({ type: String, reflect: true })
-  public value?: string;
+  @property({ converter: dateConverter, reflect: true })
+  public value: Date | null = null;
 
   @property({ type: String, reflect: true })
   public min = '1900-01-01';
@@ -32,14 +24,16 @@ export class DateInput extends LitElement {
   @property({ type: String, reflect: true })
   public max = '2100-12-31';
 
-  protected _handleDateChange({ detail: { value } }: CustomEvent<any>) {
-    if (!value || value === this.value) {
+  protected _handleDateChange({ detail }: CustomEvent<string>) {
+    const detailAsDate = new Date(detail);
+
+    if (detailAsDate === this.value) {
       return;
     }
 
-    this.value = value;
+    this.value = detailAsDate;
 
-    this.dispatchEvent(new CustomEvent('change', { detail: value }));
+    this.dispatchEvent(new CustomEvent('change', { detail: detailAsDate }));
   }
 }
 

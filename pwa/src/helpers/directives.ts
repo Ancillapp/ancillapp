@@ -12,9 +12,11 @@ export const load = <T>(
 ) =>
   until(
     promise.then(onSuccess).catch(onFailure),
-    html`<div class="loading-container">
-      <loading-spinner></loading-spinner>
-    </div>`,
+    html`
+      <div class="loading-container">
+        <loading-spinner></loading-spinner>
+      </div>
+    `,
   );
 
 export const renderPrayer = (rawString: string) =>

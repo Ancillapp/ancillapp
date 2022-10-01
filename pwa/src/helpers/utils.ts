@@ -39,7 +39,7 @@ export const importIIFE = (src: string) => {
 
 export const debounce = <
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  F extends (...args: any) => Promise<any> = (...args: any) => Promise<any>,
+  F extends (...args: any) => any = (...args: any) => any,
 >(
   fn: F,
   delay: number,
@@ -52,13 +52,14 @@ export const debounce = <
         window.clearTimeout(timer);
       }
 
-      timer = window.setTimeout(
-        () =>
-          fn(...args)
-            .then(resolve)
-            .catch(reject),
-        delay,
-      );
+      timer = window.setTimeout(async () => {
+        try {
+          const result = await fn(...args);
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      }, delay);
     })) as F;
 };
 

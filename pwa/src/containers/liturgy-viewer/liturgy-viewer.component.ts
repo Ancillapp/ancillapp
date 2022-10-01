@@ -9,11 +9,16 @@ import { PageViewElement } from '../page-view-element';
 import sharedStyles from '../../shared.styles';
 import styles from './liturgy-viewer.styles';
 import template from './liturgy-viewer.template';
+
 import '@material/mwc-icon-button';
+import '../../components/date-input/date-input.component';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 import { GetLiturgyResult } from '../../models/holy-mass';
+import { requiredDateConverter } from '../../helpers/converters';
+import { debounce, toLocalTimeZone } from '../../helpers/utils';
+import { navigateTo } from '../../helpers/router';
 
 const _prayersPromisesCache = new Map<string, Promise<GetLiturgyResult>>();
 
@@ -23,13 +28,7 @@ export class LiturgyViewer extends localize(withTopAppBar(PageViewElement)) {
 
   protected render = template;
 
-  @property({
-    converter: {
-      fromAttribute: (value) => (value ? new Date(value) : new Date()),
-      toAttribute: (value: Date | null) =>
-        value ? value.toISOString().slice(0, 10) : value,
-    },
-  })
+  @property({ converter: requiredDateConverter })
   public day!: Date;
 
   @state()
@@ -40,7 +39,11 @@ export class LiturgyViewer extends localize(withTopAppBar(PageViewElement)) {
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
-    if (changedProperties.has('active') && this.active && this.day) {
+    if (
+      (changedProperties.has('active') || changedProperties.has('day')) &&
+      this.active &&
+      this.day
+    ) {
       const stringDay = this.day.toISOString().slice(0, 10);
       const cacheId = `${stringDay}-${this.locale}`;
       if (!_prayersPromisesCache.has(cacheId)) {
@@ -54,7 +57,7 @@ export class LiturgyViewer extends localize(withTopAppBar(PageViewElement)) {
 
       this._breviaryPromise = _prayersPromisesCache.get(cacheId)!;
 
-      const day = this.day.toLocaleDateString(this.locale, {
+      const day = toLocalTimeZone(this.day).toLocaleDateString(this.locale, {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
@@ -79,6 +82,28 @@ export class LiturgyViewer extends localize(withTopAppBar(PageViewElement)) {
       });
     }
   }
+
+  protected _handleDayChange = debounce(({ detail }: CustomEvent<Date>) => {
+    const newYear = detail.getUTCFullYear();
+    const newMonth = detail.getUTCMonth();
+    const newDay = detail.getUTCDate();
+    const now = toLocalTimeZone(new Date());
+
+    navigateTo(
+      now.getUTCFullYear() === newYear &&
+        now.getUTCMonth() === newMonth &&
+        now.getUTCDate() === newDay
+        ? this.localizeHref('holy-mass')
+        : [
+            this.localizeHref('holy-mass'),
+            newYear,
+            (newMonth + 1).toString().padStart(2, '0'),
+            newDay.toString().padStart(2, '0'),
+          ].join('/'),
+    );
+
+    this.day = detail;
+  }, 1000);
 }
 
 declare global {

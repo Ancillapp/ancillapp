@@ -23,23 +23,16 @@ strong {
   color: var(--ancillapp-accent-color);
 }
 
-.alternative {
-  display: none;
-
-  &.active {
-    display: block;
-  }
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .loading-container {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 75vh;
+}
+
+date-input {
+  display: block;
+  max-width: 180px;
+  margin: 0 auto;
 }
