@@ -237,7 +237,7 @@ msgstr "Ir para a página de login"
 #: src/containers/holy-mass/holy-mass.template.ts:30
 #: src/containers/shell/shell.template.ts:34
 msgid "holyMass"
-msgstr "Santa Messa"
+msgstr "Santa Missa"
 
 #: src/containers/holy-mass/holy-mass.component.ts:108
 msgid "holyMassDescription"
