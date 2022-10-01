@@ -24,6 +24,7 @@ import {
   user,
   settingsIcon,
   infoIcon,
+  holyMassIcon,
 } from '../../components/icons';
 import { renderToString } from '../../helpers/utils';
 
@@ -144,6 +145,17 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         },
         description: this.localize(t`prayersDescription`),
         link: this.localizeHref('prayers'),
+      },
+      {
+        title: this.localize(t`holyMass`),
+        preview: {
+          type: 'html',
+          content: `<div class="search-result-preview">${renderToString(
+            holyMassIcon,
+          )}</div>`,
+        },
+        description: this.localize(t`readLiturgyOfTheDay`),
+        link: this.localizeHref('holy-mass'),
       },
       {
         title: this.localize(t`magazines`),

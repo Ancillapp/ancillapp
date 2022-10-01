@@ -240,7 +240,7 @@ export class Shell extends localize(authorize(LitElement)) {
         }
         break;
       case 'holy-mass':
-        import('../holy-mass/holy-mass.component');
+        import('../liturgy-viewer/liturgy-viewer.component');
         break;
       case 'login':
         import('../login/login.component');

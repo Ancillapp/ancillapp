@@ -1,22 +1,16 @@
-export interface Fraternity {
-  id: string;
-  location: string;
-  masses: {
-    sunday?: string[];
-    monday?: string[];
-    tuesday?: string[];
-    wednesday?: string[];
-    thursday?: string[];
-    friday?: string[];
-    saturday?: string[];
-    default?: string[];
-    overrides?: Record<string, string[]>;
-  };
+export enum LiturgyLanguage {
+  ITALIAN = 'it',
+  GERMAN = 'de',
+  PORTUGUESE = 'pt',
+  ENGLISH = 'en',
 }
 
-export interface HolyMassBooking {
-  id: string;
-  fraternity: Fraternity;
-  date: string;
-  seats: number;
+export interface LiturgySection {
+  title?: string;
+  subtitle?: string;
+  sections?: string[] | LiturgySection[];
+}
+
+export interface GetLiturgyResult {
+  sections: LiturgySection[];
 }

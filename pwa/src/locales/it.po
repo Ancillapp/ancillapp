@@ -18,7 +18,7 @@ msgid "actions"
 msgstr "Azioni"
 
 #: src/containers/home/home.component.ts:112
-#: src/containers/home/home.component.ts:289
+#: src/containers/home/home.component.ts:287
 msgid "appDescription"
 msgstr "Prega le preghiere giornaliere, canta i canti, e sfoglia gli Ancilla Domini della Fraternità Francescana di Betania."
 
@@ -35,7 +35,7 @@ msgid "availableSeats"
 msgstr "Posti disponibili"
 
 #: src/containers/breviary-viewer/breviary-viewer.template.ts:21
-#: src/containers/home/home.template.ts:50
+#: src/containers/home/home.template.ts:51
 #: src/containers/magazine-viewer/magazine-viewer.template.ts:23
 #: src/containers/magazines-list/magazines-list.template.ts:67
 #: src/containers/prayer-viewer/prayer-viewer.template.ts:28
@@ -67,7 +67,7 @@ msgstr "Sicuro di voler eliminare la tua prenotazione per la Messa della Fratern
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:32
 #: src/containers/breviary-viewer/breviary-viewer.component.ts:139
 #: src/containers/home/home.component.ts:116
-#: src/containers/shell/shell.template.ts:30
+#: src/containers/shell/shell.template.ts:31
 msgid "breviary"
 msgstr "Breviario"
 
@@ -101,7 +101,6 @@ msgid "brotherlyLifePillarTitle"
 msgstr "La vita fraterna"
 
 #: src/containers/breviary-index/breviary-index.template.ts:39
-#: src/containers/holy-mass/holy-mass.template.ts:91
 msgid "cancel"
 msgstr "Annulla"
 
@@ -114,12 +113,10 @@ msgstr "Elimina prenotazione"
 msgid "category"
 msgstr "Categoria"
 
-#: src/containers/holy-mass/holy-mass.template.ts:273
 #: src/containers/login/login.template.ts:55
 msgid "checkYourInbox"
 msgstr "Fatto! Controlla la tua casella di posta."
 
-#: src/containers/holy-mass/holy-mass.template.ts:254
 #: src/containers/songs-list/songs-list.template.ts:282
 #: src/containers/update-checker/update-checker.template.ts:75
 msgid "close"
@@ -140,8 +137,6 @@ msgid "dark"
 msgstr "Scuro"
 
 #: src/containers/breviary-index/breviary-index.template.ts:37
-#: src/containers/holy-mass/holy-mass.template.ts:87
-#: src/containers/holy-mass/holy-mass.template.ts:147
 msgid "date"
 msgstr "Data"
 
@@ -233,9 +228,7 @@ msgstr "Tedesco"
 msgid "goToLogin"
 msgstr "Vai alla pagina di login"
 
-#: src/containers/holy-mass/holy-mass.component.ts:104
-#: src/containers/holy-mass/holy-mass.template.ts:30
-#: src/containers/shell/shell.template.ts:34
+#: src/containers/shell/shell.template.ts:35
 msgid "holyMass"
 msgstr "Santa Messa"
 
@@ -244,9 +237,9 @@ msgid "holyMassDescription"
 msgstr "Prenota un posto per la Santa Messa in una delle case della Fraternità Francescana di Betania."
 
 #: src/containers/home/home.component.ts:105
-#: src/containers/home/home.component.ts:285
-#: src/containers/home/home.template.ts:82
-#: src/containers/shell/shell.template.ts:29
+#: src/containers/home/home.component.ts:283
+#: src/containers/home/home.template.ts:83
+#: src/containers/shell/shell.template.ts:30
 msgid "home"
 msgstr "Home"
 
@@ -275,7 +268,7 @@ msgstr "Ignora"
 #: src/containers/home/home.component.ts:182
 #: src/containers/info/info.component.ts:25
 #: src/containers/info/info.template.ts:27
-#: src/containers/shell/shell.template.ts:36
+#: src/containers/shell/shell.template.ts:37
 msgid "info"
 msgstr "Informazioni"
 
@@ -330,6 +323,15 @@ msgstr "Prega le Lodi del giorno {date} con le memorie facoltative ricordate dal
 msgid "light"
 msgstr "Chiaro"
 
+#: src/containers/liturgy-viewer/liturgy-viewer.component.ts:64
+#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:23
+msgid "liturgyOfTheDay"
+msgstr "Liturgia del Giorno"
+
+#: src/containers/liturgy-viewer/liturgy-viewer.component.ts:66
+msgid "liturgyOfTheDayDescription {day}"
+msgstr "Leggi le Letture e il Vangelo del giorno {day} con il commento di Papa Francesco."
+
 #: src/site.webmanifest:26
 msgid "liturgyOfTheHours"
 msgstr "Liturgia delle Ore"
@@ -345,7 +347,7 @@ msgstr "Caricamento…"
 #: src/containers/login/login.component.ts:75
 #: src/containers/login/login.template.ts:29
 #: src/containers/login/login.template.ts:70
-#: src/containers/shell/shell.template.ts:134
+#: src/containers/shell/shell.template.ts:136
 msgid "login"
 msgstr "Accedi"
 
@@ -362,7 +364,7 @@ msgstr "Accedi o registrati"
 msgid "loginToBook"
 msgstr "Per favore, effettua il login per usufruire del servizio di prenotazione della Santa Messa."
 
-#: src/containers/shell/shell.template.ts:123
+#: src/containers/shell/shell.template.ts:125
 msgid "logout"
 msgstr "Esci"
 
@@ -379,7 +381,7 @@ msgstr "Edizione speciale del {date}"
 #: src/containers/magazines-index/magazines-index.component.ts:70
 #: src/containers/magazines-index/magazines-index.template.ts:34
 #: src/containers/magazines-list/magazines-list.component.ts:91
-#: src/containers/shell/shell.template.ts:33
+#: src/containers/shell/shell.template.ts:34
 msgid "magazines"
 msgstr "Riviste"
 
@@ -412,14 +414,14 @@ msgstr "Prega l'Ufficio delle Letture del giorno {date} con le memorie facoltati
 
 #: src/containers/breviary-index/breviary-index.template.ts:28
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:28
-#: src/containers/holy-mass/holy-mass.template.ts:26
-#: src/containers/home/home.template.ts:78
+#: src/containers/home/home.template.ts:79
 #: src/containers/info/info.template.ts:23
+#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:18
 #: src/containers/login/login.template.ts:25
 #: src/containers/magazines-index/magazines-index.template.ts:30
 #: src/containers/prayers-list/prayers-list.template.ts:38
 #: src/containers/settings/settings.template.ts:20
-#: src/containers/shell/shell.template.ts:82
+#: src/containers/shell/shell.template.ts:84
 #: src/containers/songs-list/songs-list.template.ts:64
 msgid "menu"
 msgstr "Menù"
@@ -444,10 +446,10 @@ msgstr "Vuoi ricevere una notifica ogni volta che viene pubblicato un nuovo volu
 msgid "noHolyMassesAvailable"
 msgstr "Nessuna Santa Messa disponibile per questo giorno."
 
-#: src/containers/home/home.template.ts:87
+#: src/containers/home/home.template.ts:88
 #: src/containers/magazines-list/magazines-list.template.ts:108
 #: src/containers/prayers-list/prayers-list.template.ts:101
-#: src/containers/songs-list/songs-list.component.ts:276
+#: src/containers/songs-list/songs-list.component.ts:269
 msgid "noResults"
 msgstr "Nessun risultato"
 
@@ -475,7 +477,7 @@ msgstr "Prega l'Ora Nona del giorno {date} con le memorie facoltative ricordate 
 msgid "offlineError"
 msgstr "Oops! Sembra che tu sia offline. Connettiti a internet e riprova."
 
-#: src/containers/home/home.template.ts:93
+#: src/containers/home/home.template.ts:94
 msgid "peaceAndGood"
 msgstr "Pace e Bene!"
 
@@ -488,11 +490,11 @@ msgstr "I tre pilastri del carisma"
 msgid "portuguese"
 msgstr "Portoghese"
 
-#: src/containers/home/home.template.ts:109
+#: src/containers/home/home.template.ts:110
 msgid "prayDailyPrayers"
 msgstr "Prega le preghiere giornaliere"
 
-#: src/containers/home/home.template.ts:97
+#: src/containers/home/home.template.ts:98
 msgid "prayLiturgy"
 msgstr "Prega la Liturgia delle Ore"
 
@@ -515,7 +517,7 @@ msgstr "La preghiera"
 #: src/containers/prayer-viewer/prayer-viewer.component.ts:70
 #: src/containers/prayers-list/prayers-list.component.ts:139
 #: src/containers/prayers-list/prayers-list.template.ts:51
-#: src/containers/shell/shell.template.ts:32
+#: src/containers/shell/shell.template.ts:33
 msgid "prayers"
 msgstr "Preghiere"
 
@@ -528,9 +530,13 @@ msgstr "Prega le preghiere giornaliere pregate dalla Fraternità Francescana di 
 msgid "prayersDownload"
 msgstr "Vuoi scaricare tutte le preghiere ora in modo da poterle consultare anche quando sei offline?"
 
-#: src/containers/home/home.template.ts:115
+#: src/containers/home/home.template.ts:122
 msgid "readFraternityMagazines"
 msgstr "Sfoglia le riviste della Fraternità"
+
+#: src/containers/home/home.template.ts:116
+msgid "readLiturgyOfTheDay"
+msgstr "Leggi la Liturgia del Giorno"
 
 #: src/containers/holy-mass/holy-mass.template.ts:278
 msgid "resendVerificationEmail"
@@ -574,9 +580,9 @@ msgstr "...o scaricale!"
 msgid "search"
 msgstr "Cerca"
 
-#: src/containers/home/home.template.ts:58
-#: src/containers/home/home.template.ts:63
-#: src/containers/home/home.template.ts:68
+#: src/containers/home/home.template.ts:59
+#: src/containers/home/home.template.ts:64
+#: src/containers/home/home.template.ts:69
 msgid "searchInAncillapp"
 msgstr "Cerca in Ancillapp"
 
@@ -586,7 +592,6 @@ msgid "seats"
 msgstr "Posti"
 
 #: src/containers/breviary-index/breviary-index.template.ts:38
-#: src/containers/holy-mass/holy-mass.template.ts:90
 msgid "set"
 msgstr "Imposta"
 
@@ -597,7 +602,7 @@ msgstr "Imposta filtri"
 #: src/containers/home/home.component.ts:171
 #: src/containers/settings/settings.component.ts:50
 #: src/containers/settings/settings.template.ts:24
-#: src/containers/shell/shell.template.ts:35
+#: src/containers/shell/shell.template.ts:36
 msgid "settings"
 msgstr "Impostazioni"
 
@@ -636,7 +641,7 @@ msgstr "Dai un'occhiata a questo canto!"
 msgid "showChangelog"
 msgstr "Mostra changelog"
 
-#: src/containers/home/home.template.ts:103
+#: src/containers/home/home.template.ts:104
 msgid "singFraternitySongs"
 msgstr "Canta i canti della Fraternità"
 
@@ -777,15 +782,15 @@ msgid "songMacroCategorySongs"
 msgstr "Canti"
 
 #: src/containers/home/home.component.ts:127
-#: src/containers/shell/shell.template.ts:31
+#: src/containers/shell/shell.template.ts:32
 #: src/containers/song-viewer/song-viewer.component.ts:73
-#: src/containers/songs-list/songs-list.component.ts:352
+#: src/containers/songs-list/songs-list.component.ts:345
 #: src/containers/songs-list/songs-list.template.ts:77
 msgid "songs"
 msgstr "Canti"
 
 #: src/containers/home/home.component.ts:134
-#: src/containers/songs-list/songs-list.component.ts:356
+#: src/containers/songs-list/songs-list.component.ts:349
 msgid "songsDescription"
 msgstr "Sfoglia il librone dei canti usato della Fraternità Francescana di Betania."
 
@@ -851,7 +856,6 @@ msgid "tryAgain"
 msgstr "Riprova"
 
 #: src/components/error-box/error-box.template.ts:15
-#: src/containers/holy-mass/holy-mass.component.ts:335
 #: src/containers/login/login.component.ts:142
 msgid "unexpectedError"
 msgstr "Si è verificato un errore non previsto, riprova più tardi."

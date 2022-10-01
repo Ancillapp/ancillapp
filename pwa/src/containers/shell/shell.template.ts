@@ -12,6 +12,7 @@ import {
   tau,
   logout,
   user,
+  holyMassIcon,
 } from '../../components/icons';
 import { t } from '@lingui/macro';
 
@@ -41,6 +42,7 @@ const topNavPages: [string, SVGTemplateResult][] = [
   ['breviary', breviaryIcon],
   ['songs', songsIcon],
   ['prayers', prayersIcon],
+  ['holy-mass', holyMassIcon],
   ['magazines', magazinesIcon],
 ];
 const bottomNavPages: [string, SVGTemplateResult][] = [
@@ -231,14 +233,15 @@ export default function template(this: Shell) {
             type="${this._subroute?.[0]}"
             code="${this._subroute?.[1]}"
           ></magazine-viewer>
-          <holy-mass-page
-            class="page"
+          <liturgy-viewer
+            class="page padded"
             ?active="${this._page === 'holy-mass'}"
             ?drawer-open="${this._narrow}"
             ?show-menu-button="${!this._narrow}"
+            day="${this._subroute?.join('-')}"
             @menutoggle="${() =>
               this._updateDrawerOpenState(!this._drawerOpened)}"
-          ></holy-mass-page>
+          ></liturgy-viewer>
           <login-page
             class="page"
             ?active="${this._page === 'login'}"

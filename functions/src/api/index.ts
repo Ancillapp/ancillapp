@@ -18,6 +18,7 @@ import { getHolyMasses } from './handlers/holy-mass/list';
 import { bookHolyMass } from './handlers/holy-mass/book';
 import { cancelHolyMassBooking } from './handlers/holy-mass/cancel-booking';
 import { getHolyMassesSeats } from './handlers/holy-mass/seats';
+import { getLiturgy } from './handlers/holy-mass/liturgy';
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.get(
   '/api/fraternities/:fraternityId/holy-masses/:date/seats',
   getHolyMassesSeats,
 );
+app.get('/api/holy-masses/liturgy', getLiturgy);
 // app.get('*', (req, res, next) => {
 //   if (req.path !== '/index.html' && req.path.includes('.')) {
 //     return next();

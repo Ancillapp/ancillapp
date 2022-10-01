@@ -18,6 +18,7 @@
     "firebase-admin": "^11.0.1",
     "firebase-functions": "^3.23.0",
     "gs": "https://github.com/sina-masnadi/node-gs/tarball/master",
+    "jsdom": "^20.0.0",
     "mongodb": "^4.9.1",
     "node-fetch": "^2.6.7",
     "rendertron-middleware": "^0.1.5",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/child-process-promise": "^2.2.2",
     "@types/cors": "^2.8.12",
+    "@types/jsdom": "^20.0.0",
     "@types/node": "^18.7.15",
     "@types/node-fetch": "^2.6.2",
     "@types/sanitize-html": "^2.6.2",

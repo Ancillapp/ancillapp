@@ -8,6 +8,7 @@ import {
   songsIcon,
   menu,
   arrowBack,
+  holyMassIcon,
 } from '../../components/icons';
 import { HomePage } from './home.component';
 import { t } from '@lingui/macro';
@@ -108,6 +109,12 @@ export default function template(this: HomePage) {
           <a href="${this.localizeHref('prayers')}">
             <span>${this.localize(t`prayDailyPrayers`)}</span>
             ${prayersIcon}
+          </a>
+        </li>
+        <li>
+          <a href="${this.localizeHref('holy-mass')}">
+            <span>${this.localize(t`readLiturgyOfTheDay`)}</span>
+            ${holyMassIcon}
           </a>
         </li>
         <li>
