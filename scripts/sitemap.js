@@ -196,6 +196,23 @@ const run = async () => {
       `/pt/oracoes/${slug}`,
     ]),
 
+    // Holy Mass Liturgy
+    ...Array.from({ length: 15 }).flatMap((_, index) => {
+      const date = addDays(midday, index - 7);
+      const dateString = [
+        date.getFullYear(),
+        (date.getMonth() + 1).toString().padStart(2, '0'),
+        date.getDate().toString().padStart(2, '0'),
+      ].join('/');
+
+      return [
+        `/it/santa-messa/${dateString}`,
+        `/en/holy-mass/${dateString}`,
+        `/de/heilige-messe/${dateString}`,
+        `/pt/santa-missa/${dateString}`,
+      ];
+    }),
+
     // Magazines details
     ...magazines.flatMap(({ type, code }) => [
       `/it/riviste/${type}/${code}`,
