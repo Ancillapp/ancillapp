@@ -22,38 +22,23 @@ const liturgicalColorToHexMap: Record<LiturgyColor, string> = {
   [LiturgyColor.BLACK]: '#000',
 };
 
-const getTopAppBarTextColor = (
-  liturgicalColor: LiturgyColor | undefined,
-): string | undefined => {
-  if (!liturgicalColor) {
-    return;
-  }
-
-  return liturgicalColor === LiturgyColor.ROSE ||
-    liturgicalColor === LiturgyColor.WHITE
-    ? '#000'
-    : '#fff';
-};
-
-const getTopAppBarBackgroundColor = (
+const getLiturgicalColorBackgroundStyle = (
   liturgicalColor: LiturgyColor | undefined,
 ): string | undefined =>
-  liturgicalColor ? liturgicalColorToHexMap[liturgicalColor] : undefined;
+  liturgicalColor
+    ? [
+        'border-color: var(--ancillapp-divider-color);',
+        `background: ${liturgicalColorToHexMap[liturgicalColor]};`,
+      ].join('')
+    : '';
 
 export default function template(this: LiturgyViewer) {
-  const liturgicalTextColorPromise = this._liturgyPromise.then(({ color }) =>
-    getTopAppBarTextColor(color),
-  );
-  const liturgicalBackgroundColorPromise = this._liturgyPromise.then(
-    ({ color }) => getTopAppBarBackgroundColor(color),
+  const liturgicalBackgroundStylePromise = this._liturgyPromise.then(
+    ({ color }) => getLiturgicalColorBackgroundStyle(color),
   );
 
   return html`
-    <top-app-bar
-      ?drawer-open="${this.drawerOpen}"
-      text-color="${until(liturgicalTextColorPromise, undefined)}"
-      background-color="${until(liturgicalBackgroundColorPromise, undefined)}"
-    >
+    <top-app-bar ?drawer-open="${this.drawerOpen}">
       <mwc-icon-button
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
@@ -70,6 +55,10 @@ export default function template(this: LiturgyViewer) {
           year: 'numeric',
         })}
       </div>
+      <div
+        class="liturgical-color"
+        style="${until(liturgicalBackgroundStylePromise, undefined)}"
+      ></div>
     </top-app-bar>
 
     <date-input
