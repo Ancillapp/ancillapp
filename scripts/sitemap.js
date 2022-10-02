@@ -70,7 +70,7 @@ const breviaryTranslations = {
 const run = async () => {
   const client = await new mongodb.MongoClient(uri).connect();
 
-  const db = client.db('Main');
+  const db = client.db('Production');
 
   const [songs, prayers, magazines] = await Promise.all([
     db
