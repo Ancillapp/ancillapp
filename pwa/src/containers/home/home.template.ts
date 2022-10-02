@@ -10,6 +10,7 @@ import {
   arrowBack,
   holyMassIcon,
 } from '../../components/icons';
+import { formatDateToUrl } from '../../helpers/utils';
 import { HomePage } from './home.component';
 import { t } from '@lingui/macro';
 
@@ -112,7 +113,11 @@ export default function template(this: HomePage) {
           </a>
         </li>
         <li>
-          <a href="${this.localizeHref('holy-mass')}">
+          <a
+            href="${this.localizeHref('holy-mass')}/${formatDateToUrl(
+              new Date(),
+            )}"
+          >
             <span>${this.localize(t`readLiturgyOfTheDay`)}</span>
             ${holyMassIcon}
           </a>

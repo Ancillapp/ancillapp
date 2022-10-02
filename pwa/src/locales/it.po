@@ -17,8 +17,8 @@ msgstr ""
 msgid "actions"
 msgstr "Azioni"
 
-#: src/containers/home/home.component.ts:112
-#: src/containers/home/home.component.ts:287
+#: src/containers/home/home.component.ts:129
+#: src/containers/home/home.component.ts:343
 msgid "appDescription"
 msgstr "Prega le preghiere giornaliere, canta i canti, e sfoglia gli Ancilla Domini della Fraternità Francescana di Betania."
 
@@ -66,7 +66,7 @@ msgstr "Sicuro di voler eliminare la tua prenotazione per la Messa della Fratern
 #: src/containers/breviary-placeholder/breviary-placeholder.component.ts:30
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:32
 #: src/containers/breviary-viewer/breviary-viewer.component.ts:139
-#: src/containers/home/home.component.ts:116
+#: src/containers/home/home.component.ts:133
 #: src/containers/shell/shell.template.ts:31
 msgid "breviary"
 msgstr "Breviario"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: src/containers/breviary-index/breviary-index.component.ts:56
 #: src/containers/breviary-placeholder/breviary-placeholder.component.ts:34
-#: src/containers/home/home.component.ts:123
+#: src/containers/home/home.component.ts:140
 msgid "breviaryDescription"
 msgstr "Prega la Liturgia delle Ore con le memorie facoltative ricordate dalla Fraternità Francescana di Betania."
 
@@ -101,6 +101,7 @@ msgid "brotherlyLifePillarTitle"
 msgstr "La vita fraterna"
 
 #: src/containers/breviary-index/breviary-index.template.ts:39
+#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:37
 msgid "cancel"
 msgstr "Annulla"
 
@@ -137,6 +138,7 @@ msgid "dark"
 msgstr "Scuro"
 
 #: src/containers/breviary-index/breviary-index.template.ts:37
+#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:35
 msgid "date"
 msgstr "Data"
 
@@ -236,8 +238,20 @@ msgstr "Santa Messa"
 msgid "holyMassDescription"
 msgstr "Prenota un posto per la Santa Messa in una delle case della Fraternità Francescana di Betania."
 
-#: src/containers/home/home.component.ts:105
-#: src/containers/home/home.component.ts:283
+#: src/containers/home/home.component.ts:166
+msgid "holyMassToday"
+msgstr "Santa Messa di Oggi"
+
+#: src/containers/home/home.component.ts:179
+msgid "holyMassTomorrow"
+msgstr "Santa Messa di Domani"
+
+#: src/containers/home/home.component.ts:192
+msgid "holyMassYesterday"
+msgstr "Santa Messa di Ieri"
+
+#: src/containers/home/home.component.ts:122
+#: src/containers/home/home.component.ts:339
 #: src/containers/home/home.template.ts:83
 #: src/containers/shell/shell.template.ts:30
 msgid "home"
@@ -265,14 +279,14 @@ msgstr "L'accoglienza"
 msgid "ignore"
 msgstr "Ignora"
 
-#: src/containers/home/home.component.ts:182
+#: src/containers/home/home.component.ts:238
 #: src/containers/info/info.component.ts:25
 #: src/containers/info/info.template.ts:27
 #: src/containers/shell/shell.template.ts:37
 msgid "info"
 msgstr "Informazioni"
 
-#: src/containers/home/home.component.ts:189
+#: src/containers/home/home.component.ts:245
 #: src/containers/info/info.component.ts:29
 msgid "infoDescription"
 msgstr "Scopri di più su Ancillapp e sulla Fraternità Francescana di Betania."
@@ -323,12 +337,12 @@ msgstr "Prega le Lodi del giorno {date} con le memorie facoltative ricordate dal
 msgid "light"
 msgstr "Chiaro"
 
-#: src/containers/liturgy-viewer/liturgy-viewer.component.ts:64
-#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:23
+#: src/containers/liturgy-viewer/liturgy-viewer.component.ts:67
+#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:24
 msgid "liturgyOfTheDay"
 msgstr "Liturgia del Giorno"
 
-#: src/containers/liturgy-viewer/liturgy-viewer.component.ts:66
+#: src/containers/liturgy-viewer/liturgy-viewer.component.ts:70
 msgid "liturgyOfTheDayDescription {day}"
 msgstr "Leggi le Letture e il Vangelo del giorno {day} con il commento di Papa Francesco."
 
@@ -343,7 +357,7 @@ msgstr "Liturgia delle Ore"
 msgid "loading"
 msgstr "Caricamento…"
 
-#: src/containers/home/home.component.ts:160
+#: src/containers/home/home.component.ts:216
 #: src/containers/login/login.component.ts:75
 #: src/containers/login/login.template.ts:29
 #: src/containers/login/login.template.ts:70
@@ -351,7 +365,7 @@ msgstr "Caricamento…"
 msgid "login"
 msgstr "Accedi"
 
-#: src/containers/home/home.component.ts:167
+#: src/containers/home/home.component.ts:223
 #: src/containers/login/login.component.ts:79
 msgid "loginDescription"
 msgstr "Effettua il login per usufruire del servizio di prenotazione delle Sante Messe della Fraternità Francescana di Betania."
@@ -376,7 +390,7 @@ msgstr "Sfoglia il volume {name} della rivista {magazineType} della Fraternità 
 msgid "magazineSpecial {date}"
 msgstr "Edizione speciale del {date}"
 
-#: src/containers/home/home.component.ts:149
+#: src/containers/home/home.component.ts:205
 #: src/containers/magazine-viewer/magazine-viewer.component.ts:72
 #: src/containers/magazines-index/magazines-index.component.ts:70
 #: src/containers/magazines-index/magazines-index.template.ts:34
@@ -385,7 +399,7 @@ msgstr "Edizione speciale del {date}"
 msgid "magazines"
 msgstr "Riviste"
 
-#: src/containers/home/home.component.ts:156
+#: src/containers/home/home.component.ts:212
 #: src/containers/magazines-index/magazines-index.component.ts:74
 msgid "magazinesDescription"
 msgstr "Sfoglia le riviste della Fraternità Francescana di Betania."
@@ -416,7 +430,7 @@ msgstr "Prega l'Ufficio delle Letture del giorno {date} con le memorie facoltati
 #: src/containers/breviary-placeholder/breviary-placeholder.template.ts:28
 #: src/containers/home/home.template.ts:79
 #: src/containers/info/info.template.ts:23
-#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:18
+#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:19
 #: src/containers/login/login.template.ts:25
 #: src/containers/magazines-index/magazines-index.template.ts:30
 #: src/containers/prayers-list/prayers-list.template.ts:38
@@ -513,7 +527,7 @@ msgstr ""
 msgid "prayerPillarTitle"
 msgstr "La preghiera"
 
-#: src/containers/home/home.component.ts:138
+#: src/containers/home/home.component.ts:155
 #: src/containers/prayer-viewer/prayer-viewer.component.ts:70
 #: src/containers/prayers-list/prayers-list.component.ts:139
 #: src/containers/prayers-list/prayers-list.template.ts:51
@@ -521,7 +535,7 @@ msgstr "La preghiera"
 msgid "prayers"
 msgstr "Preghiere"
 
-#: src/containers/home/home.component.ts:145
+#: src/containers/home/home.component.ts:162
 #: src/containers/prayers-list/prayers-list.component.ts:143
 msgid "prayersDescription"
 msgstr "Prega le preghiere giornaliere pregate dalla Fraternità Francescana di Betania."
@@ -537,6 +551,10 @@ msgstr "Sfoglia le riviste della Fraternità"
 #: src/containers/home/home.template.ts:116
 msgid "readLiturgyOfTheDay"
 msgstr "Leggi la Liturgia del Giorno"
+
+#: src/containers/home/home.component.ts:54
+msgid "readLiturgyOfTheDay {day}"
+msgstr "Leggi la Liturgia del Giorno {day}"
 
 #: src/containers/holy-mass/holy-mass.template.ts:278
 msgid "resendVerificationEmail"
@@ -592,6 +610,7 @@ msgid "seats"
 msgstr "Posti"
 
 #: src/containers/breviary-index/breviary-index.template.ts:38
+#: src/containers/liturgy-viewer/liturgy-viewer.template.ts:36
 msgid "set"
 msgstr "Imposta"
 
@@ -599,14 +618,14 @@ msgstr "Imposta"
 msgid "setFilters"
 msgstr "Imposta filtri"
 
-#: src/containers/home/home.component.ts:171
+#: src/containers/home/home.component.ts:227
 #: src/containers/settings/settings.component.ts:50
 #: src/containers/settings/settings.template.ts:24
 #: src/containers/shell/shell.template.ts:36
 msgid "settings"
 msgstr "Impostazioni"
 
-#: src/containers/home/home.component.ts:178
+#: src/containers/home/home.component.ts:234
 #: src/containers/settings/settings.component.ts:54
 msgid "settingsDescription"
 msgstr "Personalizza Ancillapp modificandone il tema o la lingua."
@@ -781,7 +800,7 @@ msgstr "Ordinarium Missæ"
 msgid "songMacroCategorySongs"
 msgstr "Canti"
 
-#: src/containers/home/home.component.ts:127
+#: src/containers/home/home.component.ts:144
 #: src/containers/shell/shell.template.ts:32
 #: src/containers/song-viewer/song-viewer.component.ts:73
 #: src/containers/songs-list/songs-list.component.ts:345
@@ -789,7 +808,7 @@ msgstr "Canti"
 msgid "songs"
 msgstr "Canti"
 
-#: src/containers/home/home.component.ts:134
+#: src/containers/home/home.component.ts:151
 #: src/containers/songs-list/songs-list.component.ts:349
 msgid "songsDescription"
 msgstr "Sfoglia il librone dei canti usato della Fraternità Francescana di Betania."

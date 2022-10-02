@@ -44,7 +44,7 @@ export class LiturgyViewer extends localize(withTopAppBar(PageViewElement)) {
       this.active &&
       this.day
     ) {
-      const stringDay = this.day.toISOString().slice(0, 10);
+      const stringDay = toLocalTimeZone(this.day).toISOString().slice(0, 10);
       const cacheId = `${stringDay}-${this.locale}`;
       if (!_prayersPromisesCache.has(cacheId)) {
         _prayersPromisesCache.set(
@@ -84,15 +84,15 @@ export class LiturgyViewer extends localize(withTopAppBar(PageViewElement)) {
   }
 
   protected _handleDayChange = debounce(({ detail }: CustomEvent<Date>) => {
-    const newYear = detail.getUTCFullYear();
-    const newMonth = detail.getUTCMonth();
-    const newDay = detail.getUTCDate();
-    const now = toLocalTimeZone(new Date());
+    const newYear = detail.getFullYear();
+    const newMonth = detail.getMonth();
+    const newDay = detail.getDate();
+    const now = new Date();
 
     navigateTo(
-      now.getUTCFullYear() === newYear &&
-        now.getUTCMonth() === newMonth &&
-        now.getUTCDate() === newDay
+      now.getFullYear() === newYear &&
+        now.getMonth() === newMonth &&
+        now.getDate() === newDay
         ? this.localizeHref('holy-mass')
         : [
             this.localizeHref('holy-mass'),

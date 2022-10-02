@@ -26,7 +26,7 @@ import {
   infoIcon,
   holyMassIcon,
 } from '../../components/icons';
-import { renderToString } from '../../helpers/utils';
+import { formatDateToUrl, renderToString } from '../../helpers/utils';
 
 import * as HomeWorker from './home.worker';
 import { cacheAndNetwork } from '../../helpers/cache-and-network';
@@ -34,13 +34,6 @@ import { cacheAndNetwork } from '../../helpers/cache-and-network';
 const { configureSearch, search } =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   new (HomeWorker as any)() as typeof HomeWorker;
-
-const formatDate = (date: Date) =>
-  [
-    date.getFullYear(),
-    (date.getMonth() + 1).toString().padStart(2, '0'),
-    date.getDate().toString().padStart(2, '0'),
-  ].join('/');
 
 const getLocalizedHolyMassDescriptor = (
   locale: SupportedLocale,
@@ -173,7 +166,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(
           getLocalizedHolyMassDescriptor(this.locale, today),
         ),
-        link: `${this.localizeHref('holy-mass')}/${formatDate(today)}`,
+        link: `${this.localizeHref('holy-mass')}/${formatDateToUrl(today)}`,
       },
       {
         title: this.localize(t`holyMassTomorrow`),
@@ -186,7 +179,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(
           getLocalizedHolyMassDescriptor(this.locale, tomorrow),
         ),
-        link: `${this.localizeHref('holy-mass')}/${formatDate(tomorrow)}`,
+        link: `${this.localizeHref('holy-mass')}/${formatDateToUrl(tomorrow)}`,
       },
       {
         title: this.localize(t`holyMassYesterday`),
@@ -199,7 +192,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(
           getLocalizedHolyMassDescriptor(this.locale, yesterday),
         ),
-        link: `${this.localizeHref('holy-mass')}/${formatDate(yesterday)}`,
+        link: `${this.localizeHref('holy-mass')}/${formatDateToUrl(yesterday)}`,
       },
       {
         title: this.localize(t`magazines`),

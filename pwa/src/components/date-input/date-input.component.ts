@@ -1,6 +1,7 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { dateConverter } from '../../helpers/converters';
+import { toLocalTimeZone } from '../../helpers/utils';
 
 import sharedStyles from '../../shared.styles';
 import styles from './date-input.styles';
@@ -25,7 +26,7 @@ export class DateInput extends LitElement {
   public max = '2100-12-31';
 
   protected _handleDateChange({ detail }: CustomEvent<string>) {
-    const detailAsDate = new Date(detail);
+    const detailAsDate = toLocalTimeZone(new Date(detail));
 
     if (detailAsDate === this.value) {
       return;
