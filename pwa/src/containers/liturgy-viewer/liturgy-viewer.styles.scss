@@ -1,3 +1,7 @@
+:host {
+  flex-direction: column;
+}
+
 h3 {
   font-family: var(--ancillapp-display-font);
   border-bottom: 1px solid var(--ancillapp-disabled-text-color);
@@ -23,16 +27,20 @@ strong {
   color: var(--ancillapp-accent-color);
 }
 
-.loading-container {
+.loading-container,
+.error-container {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 75vh;
 }
 
 date-input {
   display: block;
-  max-width: 180px;
+  width: 100%;
+  max-width: 240px;
   margin: 0 auto;
+  padding: 1rem;
+  background: var(--ancillapp-card-color);
+  margin-bottom: 1.5rem;
 }

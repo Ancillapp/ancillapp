@@ -11,6 +11,7 @@ import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
+import('../../components/error-box/error-box.component');
 
 const liturgicalColorToHexMap: Record<LiturgyColor, string> = {
   [LiturgyColor.GREEN]: '#080',
@@ -71,17 +72,18 @@ export default function template(this: LiturgyViewer) {
       </div>
     </top-app-bar>
 
-    <section>
-      <date-input
-        label="${this.localize(t`date`)}"
-        set-label="${this.localize(t`set`)}"
-        cancel-label="${this.localize(t`cancel`)}"
-        value="${this.day}"
-        @change="${this._handleDayChange}"
-      ></date-input>
-      ${load(
-        this._liturgyPromise,
-        (content) => html`
+    <date-input
+      label="${this.localize(t`date`)}"
+      set-label="${this.localize(t`set`)}"
+      cancel-label="${this.localize(t`cancel`)}"
+      value="${this.day}"
+      @change="${this._handleDayChange}"
+    ></date-input>
+
+    ${load(
+      this._liturgyPromise,
+      (content) => html`
+        <section>
           ${map(
             content.sections,
             (section) => html`
@@ -103,9 +105,13 @@ export default function template(this: LiturgyViewer) {
               )}
             `,
           )}
-        `,
-        (error) => html`${error.message}`,
-      )}
-    </section>
+        </section>
+      `,
+      (error) => html`
+        <div class="error-container">
+          <error-box .error="${error}"></error-box>
+        </div>
+      `,
+    )}
   `;
 }
