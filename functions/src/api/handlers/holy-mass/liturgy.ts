@@ -3,6 +3,7 @@ import { JSDOM } from 'jsdom';
 import sanitizeHtml from 'sanitize-html';
 import { validateDate } from '../../../helpers/validators';
 import { scrapeLiturgy as scrapePTLiturgy } from './liturgy-scrapers/pt';
+import { scrapeLiturgy as scrapeITLiturgy } from './liturgy-scrapers/it';
 import {
   GetLiturgyResult,
   LiturgyLanguage,
@@ -53,6 +54,9 @@ export const getLiturgy: RequestHandler<
   switch (language) {
     case LiturgyLanguage.PORTUGUESE:
       res.json(await scrapePTLiturgy(parsedDate));
+      return;
+    case LiturgyLanguage.ITALIAN:
+      res.json(await scrapeITLiturgy(parsedDate));
       return;
   }
 

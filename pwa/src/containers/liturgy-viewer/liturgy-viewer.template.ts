@@ -6,7 +6,7 @@ import { toLocalTimeZone } from '../../helpers/utils';
 import { LiturgyColor } from '../../models/holy-mass';
 
 import { LiturgyViewer } from './liturgy-viewer.component';
-import { load } from '../../helpers/directives';
+import { load, renderWithNewlines } from '../../helpers/directives';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
@@ -87,21 +87,17 @@ export default function template(this: LiturgyViewer) {
           ${map(
             content.sections,
             (section) => html`
-              ${when(section.title, () => html`<h3>${section.title}</h3>`)}
+              ${when(
+                section.title,
+                () => html`<h3>${renderWithNewlines(section.title!)}</h3>`,
+              )}
               ${when(
                 section.subtitle,
-                () => html`<h4>${section.subtitle}</h4>`,
+                () => html`<h4>${renderWithNewlines(section.subtitle!)}</h4>`,
               )}
               ${map(
                 (section.sections || []) as string[],
-                (paragraph) =>
-                  html`<p>
-                    ${map(
-                      paragraph.split('\n'),
-                      (row, index) =>
-                        html`${index === 0 ? '' : html`<br />`}${row.trim()}`,
-                    )}
-                  </p>`,
+                (paragraph) => html` <p>${renderWithNewlines(paragraph)}</p> `,
               )}
             `,
           )}

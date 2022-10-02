@@ -1,5 +1,6 @@
 import { TemplateResult, html, nothing } from 'lit';
 import { until } from 'lit/directives/until.js';
+import { map } from 'lit/directives/map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { UltimateGuitarParser, HtmlDivFormatter, Song } from 'chordsheetjs';
 
@@ -17,6 +18,12 @@ export const load = <T>(
         <loading-spinner></loading-spinner>
       </div>
     `,
+  );
+
+export const renderWithNewlines = (rawString: string) =>
+  map(
+    rawString.split('\n'),
+    (row, index) => html`${index === 0 ? '' : html`<br />`}${row.trim()}`,
   );
 
 export const renderPrayer = (rawString: string) =>
