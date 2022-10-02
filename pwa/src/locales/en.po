@@ -322,7 +322,7 @@ msgstr "Liturgy of the Day"
 
 #: src/containers/liturgy-viewer/liturgy-viewer.component.ts:70
 msgid "liturgyOfTheDayDescription {day}"
-msgstr "Read the readings from Scripture and the Gospel for the day {day} together with a meditation by Pope Francis."
+msgstr "Read the readings from Scripture and the Gospel for the day {day}."
 
 #: src/site.webmanifest:26
 msgid "liturgyOfTheHours"
