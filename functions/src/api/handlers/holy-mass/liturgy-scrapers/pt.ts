@@ -1,8 +1,17 @@
 import { JSDOM } from 'jsdom';
-import type { GetLiturgyResult } from '../liturgy';
+import { GetLiturgyResult, LiturgyColor } from './models';
 import { dropHtml } from './helpers';
 
 const API_URL = 'https://sagradaliturgia.com.br/liturgia_diaria.php?date=';
+
+const stringToLiturgyColorMap: Record<string, LiturgyColor> = {
+  verde: LiturgyColor.GREEN,
+  roxo: LiturgyColor.VIOLET,
+  rosa: LiturgyColor.ROSE,
+  branco: LiturgyColor.WHITE,
+  vermelho: LiturgyColor.RED,
+  preto: LiturgyColor.BLACK,
+};
 
 export const scrapeLiturgy = async (date: Date): Promise<GetLiturgyResult> => {
   const response = await fetch(
@@ -25,7 +34,9 @@ export const scrapeLiturgy = async (date: Date): Promise<GetLiturgyResult> => {
   const [, , ...sections] = body?.innerHTML?.split('<b>') || [];
 
   return {
-    color: liturgicalColor,
+    color: liturgicalColor
+      ? stringToLiturgyColorMap[liturgicalColor]
+      : undefined,
     sections: sections.map((section) => {
       const [title, content] = section.split('</b>');
       return {

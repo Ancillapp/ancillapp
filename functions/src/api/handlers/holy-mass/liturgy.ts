@@ -3,30 +3,17 @@ import { JSDOM } from 'jsdom';
 import sanitizeHtml from 'sanitize-html';
 import { validateDate } from '../../../helpers/validators';
 import { scrapeLiturgy as scrapePTLiturgy } from './liturgy-scrapers/pt';
+import {
+  GetLiturgyResult,
+  LiturgyLanguage,
+  LiturgySection,
+} from './liturgy-scrapers/models';
 
 import type { RequestHandler } from 'express';
-
-export enum LiturgyLanguage {
-  ITALIAN = 'it',
-  GERMAN = 'de',
-  PORTUGUESE = 'pt',
-  ENGLISH = 'en',
-}
-
-export interface LiturgySection {
-  title?: string;
-  subtitle?: string;
-  sections?: string[] | LiturgySection[];
-}
 
 export interface GetLiturgyQueryParams {
   language: LiturgyLanguage;
   date: string;
-}
-
-export interface GetLiturgyResult {
-  color?: string;
-  sections: LiturgySection[];
 }
 
 const apiBaseUrl = 'https://www.vaticannews.va';
@@ -66,7 +53,7 @@ export const getLiturgy: RequestHandler<
   switch (language) {
     case LiturgyLanguage.PORTUGUESE:
       res.json(await scrapePTLiturgy(parsedDate));
-      break;
+      return;
   }
 
   const response = await fetch(
