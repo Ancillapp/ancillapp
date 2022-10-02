@@ -16,7 +16,9 @@ const stringToLiturgyColorMap: Record<string, LiturgyColor> = {
 
 export const scrapeLiturgy = async (date: Date): Promise<GetLiturgyResult> => {
   const response = await fetch(
-    `${API_URL}${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+    `${API_URL}${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`,
   );
   const rawHtml = await response.text();
 
