@@ -1,5 +1,5 @@
 import { LitElement, PropertyValues } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 
 import styles from './top-app-bar.styles';
 import template from './top-app-bar.template';
@@ -13,13 +13,19 @@ export class TopAppBar extends LitElement {
   @query('header')
   private _header?: HTMLHeadingElement;
 
-  @property({ type: Number })
+  @property({ type: String, attribute: 'text-color', reflect: true })
+  textColor?: string;
+
+  @property({ type: String, attribute: 'background-color', reflect: true })
+  backgroundColor?: string;
+
+  @state()
   protected _scrollFromTop = 0;
 
-  @property({ type: Boolean })
+  @state()
   protected _scrolled = false;
 
-  @property({ type: Object })
+  @state()
   get scrollTarget() {
     return (
       this._scrollTarget ||

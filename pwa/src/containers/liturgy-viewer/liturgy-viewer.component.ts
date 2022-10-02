@@ -32,7 +32,7 @@ export class LiturgyViewer extends localize(withTopAppBar(PageViewElement)) {
   public day!: Date;
 
   @state()
-  protected _breviaryPromise: Promise<GetLiturgyResult> = new Promise(
+  protected _liturgyPromise: Promise<GetLiturgyResult> = new Promise(
     () => undefined,
   );
 
@@ -55,7 +55,7 @@ export class LiturgyViewer extends localize(withTopAppBar(PageViewElement)) {
         );
       }
 
-      this._breviaryPromise = _prayersPromisesCache.get(cacheId)!;
+      this._liturgyPromise = _prayersPromisesCache.get(cacheId)!;
 
       const day = toLocalTimeZone(this.day).toLocaleDateString(this.locale, {
         day: '2-digit',

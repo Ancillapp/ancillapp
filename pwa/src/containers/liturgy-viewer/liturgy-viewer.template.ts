@@ -1,17 +1,58 @@
 import { html } from 'lit';
 import { map } from 'lit/directives/map.js';
 import { when } from 'lit/directives/when.js';
+import { until } from 'lit/directives/until.js';
+import { toLocalTimeZone } from '../../helpers/utils';
+import { LiturgyColor } from '../../models/holy-mass';
+
 import { LiturgyViewer } from './liturgy-viewer.component';
 import { load } from '../../helpers/directives';
 import { menu } from '../../components/icons';
-import { toLocalTimeZone } from '../../helpers/utils';
 import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 
+const liturgicalColorToHexMap: Record<LiturgyColor, string> = {
+  [LiturgyColor.GREEN]: '#080',
+  [LiturgyColor.VIOLET]: '#7f00ff',
+  [LiturgyColor.ROSE]: '#fbcce7',
+  [LiturgyColor.WHITE]: '#fff',
+  [LiturgyColor.RED]: '#a00',
+  [LiturgyColor.BLACK]: '#000',
+};
+
+const getTopAppBarTextColor = (
+  liturgicalColor: LiturgyColor | undefined,
+): string | undefined => {
+  if (!liturgicalColor) {
+    return;
+  }
+
+  return liturgicalColor === LiturgyColor.ROSE ||
+    liturgicalColor === LiturgyColor.WHITE
+    ? '#000'
+    : '#fff';
+};
+
+const getTopAppBarBackgroundColor = (
+  liturgicalColor: LiturgyColor | undefined,
+): string | undefined =>
+  liturgicalColor ? liturgicalColorToHexMap[liturgicalColor] : undefined;
+
 export default function template(this: LiturgyViewer) {
+  const liturgicalTextColorPromise = this._liturgyPromise.then(({ color }) =>
+    getTopAppBarTextColor(color),
+  );
+  const liturgicalBackgroundColorPromise = this._liturgyPromise.then(
+    ({ color }) => getTopAppBarBackgroundColor(color),
+  );
+
   return html`
-    <top-app-bar ?drawer-open="${this.drawerOpen}">
+    <top-app-bar
+      ?drawer-open="${this.drawerOpen}"
+      text-color="${until(liturgicalTextColorPromise, undefined)}"
+      background-color="${until(liturgicalBackgroundColorPromise, undefined)}"
+    >
       <mwc-icon-button
         slot="leadingIcon"
         ?hidden="${!this.showMenuButton}"
@@ -39,7 +80,7 @@ export default function template(this: LiturgyViewer) {
         @change="${this._handleDayChange}"
       ></date-input>
       ${load(
-        this._breviaryPromise,
+        this._liturgyPromise,
         (content) => html`
           ${map(
             content.sections,
