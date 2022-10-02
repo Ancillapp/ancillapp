@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 import { GetLiturgyResult, LiturgyColor } from './models';
 import { dropHtml } from './helpers';
