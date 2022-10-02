@@ -12,5 +12,6 @@ export interface LiturgySection {
 }
 
 export interface GetLiturgyResult {
+  color?: string;
   sections: LiturgySection[];
 }

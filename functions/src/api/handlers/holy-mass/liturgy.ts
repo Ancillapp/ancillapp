@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 import sanitizeHtml from 'sanitize-html';
 import { validateDate } from '../../../helpers/validators';
+import { scrapeLiturgy as scrapePTLiturgy } from './liturgy-scrapers/pt';
 
 import type { RequestHandler } from 'express';
 
@@ -24,6 +25,7 @@ export interface GetLiturgyQueryParams {
 }
 
 export interface GetLiturgyResult {
+  color?: string;
   sections: LiturgySection[];
 }
 
@@ -61,6 +63,12 @@ export const getLiturgy: RequestHandler<
 
   const parsedDate = new Date(date);
 
+  switch (language) {
+    case LiturgyLanguage.PORTUGUESE:
+      res.json(await scrapePTLiturgy(parsedDate));
+      break;
+  }
+
   const response = await fetch(
     `${apiBaseUrl}/${localizedUrlsMap[language]}/${formatDate(
       parsedDate,
@@ -77,7 +85,6 @@ export const getLiturgy: RequestHandler<
   const sections: LiturgySection[] = rawSections.map((section) => {
     const title = section?.querySelector('.section__head')?.textContent?.trim();
 
-    // const subsections: LiturgySection[] = [];
     const rawSubsections = Array.from(
       section.querySelectorAll('.section__wrapper > .section__content > p'),
     );
