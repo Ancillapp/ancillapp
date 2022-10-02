@@ -30,10 +30,12 @@ export const scrapeLiturgy = async (date: Date): Promise<GetLiturgyResult> => {
   const liturgicalColorLink = body
     ?.querySelector('center:first-child img')
     ?.getAttribute('src');
-  const liturgicalColor = liturgicalColorLink?.slice(
-    liturgicalColorLink.lastIndexOf('/') + 1,
-    liturgicalColorLink.lastIndexOf('.'),
-  );
+  const liturgicalColor = liturgicalColorLink
+    ?.slice(
+      liturgicalColorLink.lastIndexOf('/') + 1,
+      liturgicalColorLink.lastIndexOf('.'),
+    )
+    .toLowerCase();
   const [, content] = body?.innerHTML.split('<hr>') || [];
   const [, ...sections] = content?.split('<b>') || [];
 
