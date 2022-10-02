@@ -32,7 +32,8 @@ export const scrapeLiturgy = async (date: Date): Promise<GetLiturgyResult> => {
     liturgicalColorLink.lastIndexOf('/') + 1,
     liturgicalColorLink.lastIndexOf('.'),
   );
-  const [, , ...sections] = body?.innerHTML?.split('<b>') || [];
+  const [, content] = body?.innerHTML.split('<hr>') || [];
+  const [, ...sections] = content?.split('<b>') || [];
 
   return {
     color: liturgicalColor
