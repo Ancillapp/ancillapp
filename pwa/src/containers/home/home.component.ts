@@ -1,7 +1,7 @@
 import { PropertyValues } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
-import { localize } from '../../helpers/localize';
+import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/macro';
@@ -34,6 +34,25 @@ import { cacheAndNetwork } from '../../helpers/cache-and-network';
 const { configureSearch, search } =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   new (HomeWorker as any)() as typeof HomeWorker;
+
+const formatDate = (date: Date) =>
+  [
+    date.getFullYear(),
+    (date.getMonth() + 1).toString().padStart(2, '0'),
+    date.getDate().toString().padStart(2, '0'),
+  ].join('/');
+
+const getLocalizedHolyMassDescriptor = (
+  locale: SupportedLocale,
+  date: Date,
+) => {
+  const day = date.toLocaleDateString(locale, {
+    day: 'numeric',
+    month: '2-digit',
+    year: 'numeric',
+  });
+  return t`readLiturgyOfTheDay ${day}`;
+};
 
 @customElement('home-page')
 export class HomePage extends localize(withTopAppBar(PageViewElement)) {
@@ -98,9 +117,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    const dayAfterTomorrow = new Date(tomorrow);
-    dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 1);
-
     await configureSearch([
       {
         title: this.localize(t`home`),
@@ -147,15 +163,43 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         link: this.localizeHref('prayers'),
       },
       {
-        title: this.localize(t`holyMass`),
+        title: this.localize(t`holyMassToday`),
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
             holyMassIcon,
           )}</div>`,
         },
-        description: this.localize(t`readLiturgyOfTheDay`),
-        link: this.localizeHref('holy-mass'),
+        description: this.localize(
+          getLocalizedHolyMassDescriptor(this.locale, today),
+        ),
+        link: `${this.localizeHref('holy-mass')}/${formatDate(today)}`,
+      },
+      {
+        title: this.localize(t`holyMassTomorrow`),
+        preview: {
+          type: 'html',
+          content: `<div class="search-result-preview">${renderToString(
+            holyMassIcon,
+          )}</div>`,
+        },
+        description: this.localize(
+          getLocalizedHolyMassDescriptor(this.locale, tomorrow),
+        ),
+        link: `${this.localizeHref('holy-mass')}/${formatDate(tomorrow)}`,
+      },
+      {
+        title: this.localize(t`holyMassYesterday`),
+        preview: {
+          type: 'html',
+          content: `<div class="search-result-preview">${renderToString(
+            holyMassIcon,
+          )}</div>`,
+        },
+        description: this.localize(
+          getLocalizedHolyMassDescriptor(this.locale, yesterday),
+        ),
+        link: `${this.localizeHref('holy-mass')}/${formatDate(yesterday)}`,
       },
       {
         title: this.localize(t`magazines`),
