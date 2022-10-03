@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getAnalytics, logEvent as firebaseLogEvent } from 'firebase/analytics';
+import { get } from '../keyval';
 
 import config from '../../config/default.json';
 
@@ -37,11 +38,14 @@ export const logEvent = async (
     return;
   }
 
+  const appVersion = await get<string>('appVersion').catch(() => undefined);
+
   return firebaseLogEvent(
     analytics,
     eventName,
     {
       ...eventParams,
+      appVersion,
       offline: false,
     },
     options,
