@@ -6,6 +6,8 @@ const {
   env: { MONGODB_URI: uri },
 } = process;
 
+const defaultLocale = 'it';
+
 const [, , host = 'https://ancill.app'] = process.argv;
 
 const addDays = (date, days) => {
@@ -116,117 +118,158 @@ const run = async () => {
 
   await client.close();
 
-  const midday = new Date();
-  midday.setHours(12, 0, 0, 0);
+  const now = new Date();
 
   const urls = [
     // Home
-    '/it',
-    '/en',
-    '/de',
-    '/pt',
+    {
+      it: '/it',
+      en: '/en',
+      de: '/de',
+      pt: '/pt',
+    },
 
     // Breviary
-    '/it/breviario',
-    '/en/breviary',
-    '/de/brevier',
-    '/pt/breviario',
+    {
+      it: '/it/breviario',
+      en: '/en/breviary',
+      de: '/de/brevier',
+      pt: '/pt/breviario',
+    },
 
     // Songs list
-    '/it/canti',
-    '/en/songs',
-    '/de/lieder',
-    '/pt/cancoes',
+    {
+      it: '/it/canti',
+      en: '/en/songs',
+      de: '/de/lieder',
+      pt: '/pt/cancoes',
+    },
 
     // Prayers list
-    '/it/preghiere',
-    '/en/prayers',
-    '/de/gebete',
-    '/pt/oracoes',
+    {
+      it: '/it/preghiere',
+      en: '/en/prayers',
+      de: '/de/gebete',
+      pt: '/pt/oracoes',
+    },
 
     // Magazines index
-    '/it/riviste',
-    '/en/magazines',
-    '/de/zeitschriften',
-    '/pt/revistas',
+    {
+      it: '/it/riviste',
+      en: '/en/magazines',
+      de: '/de/zeitschriften',
+      pt: '/pt/revistas',
+    },
 
     // Ancilla Domini list
-    '/it/riviste/ancilla-domini',
-    '/en/magazines/ancilla-domini',
-    '/de/zeitschriften/ancilla-domini',
-    '/pt/revistas/ancilla-domini',
+    {
+      it: '/it/riviste/ancilla-domini',
+      en: '/en/magazines/ancilla-domini',
+      de: '/de/zeitschriften/ancilla-domini',
+      pt: '/pt/revistas/ancilla-domini',
+    },
 
     // #sempreconnessi list
-    '/it/riviste/sempreconnessi',
-    '/en/magazines/sempreconnessi',
-    '/de/zeitschriften/sempreconnessi',
-    '/pt/revistas/sempreconnessi',
+    {
+      it: '/it/riviste/sempreconnessi',
+      en: '/en/magazines/sempreconnessi',
+      de: '/de/zeitschriften/sempreconnessi',
+      pt: '/pt/revistas/sempreconnessi',
+    },
 
     // Login
-    '/it/accesso',
-    '/en/login',
-    '/de/anmeldung',
-    '/pt/conecte-se',
+    {
+      it: '/it/accesso',
+      en: '/en/login',
+      de: '/de/anmeldung',
+      pt: '/pt/conecte-se',
+    },
 
     // Settings
-    '/it/impostazioni',
-    '/en/settings',
-    '/de/einstellungen',
-    '/pt/configuracoes',
+    {
+      it: '/it/impostazioni',
+      en: '/en/settings',
+      de: '/de/einstellungen',
+      pt: '/pt/configuracoes',
+    },
 
     // Info
-    '/it/informazioni',
-    '/en/info',
-    '/de/informationen',
-    '/pt/informacoes',
+    {
+      it: '/it/informazioni',
+      en: '/en/info',
+      de: '/de/informationen',
+      pt: '/pt/informacoes',
+    },
 
     // Songs details
-    ...songs.flatMap(({ language, category, number }) => [
-      `/it/canti/${language}/${category}/${number}`,
-      `/en/songs/${language}/${category}/${number}`,
-      `/de/lieder/${language}/${category}/${number}`,
-      `/pt/cancoes/${language}/${category}/${number}`,
-    ]),
+    ...songs.map(({ language, category, number }) => ({
+      it: `/it/canti/${language}/${category}/${number}`,
+      en: `/en/songs/${language}/${category}/${number}`,
+      de: `/de/lieder/${language}/${category}/${number}`,
+      pt: `/pt/cancoes/${language}/${category}/${number}`,
+    })),
 
     // Prayers details
-    ...prayers.flatMap(({ slug }) => [
-      `/it/preghiere/${slug}`,
-      `/en/prayers/${slug}`,
-      `/de/gebete/${slug}`,
-      `/pt/oracoes/${slug}`,
-    ]),
+    ...prayers.map(({ slug }) => ({
+      it: `/it/preghiere/${slug}`,
+      en: `/en/prayers/${slug}`,
+      de: `/de/gebete/${slug}`,
+      pt: `/pt/oracoes/${slug}`,
+    })),
 
     // Holy Mass Liturgy
-    ...Array.from({ length: 15 }).flatMap((_, index) => {
-      const date = addDays(midday, index - 7);
+    ...Array.from({ length: 15 }).map((_, index) => {
+      const date = addDays(now, index - 7);
       const dateString = [
         date.getFullYear(),
         (date.getMonth() + 1).toString().padStart(2, '0'),
         date.getDate().toString().padStart(2, '0'),
       ].join('/');
 
-      return [
-        `/it/santa-messa/${dateString}`,
-        `/en/holy-mass/${dateString}`,
-        `/de/heilige-messe/${dateString}`,
-        `/pt/santa-missa/${dateString}`,
-      ];
+      return {
+        it: `/it/santa-messa/${dateString}`,
+        en: `/en/holy-mass/${dateString}`,
+        de: `/de/heilige-messe/${dateString}`,
+        pt: `/pt/santa-missa/${dateString}`,
+      };
     }),
 
     // Magazines details
-    ...magazines.flatMap(({ type, code }) => [
-      `/it/riviste/${type}/${code}`,
-      `/en/magazines/${type}/${code}`,
-      `/de/zeitschriften/${type}/${code}`,
-      `/pt/revistas/${type}/${code}`,
-    ]),
+    ...magazines.map(({ type, code }) => ({
+      it: `/it/riviste/${type}/${code}`,
+      en: `/en/magazines/${type}/${code}`,
+      de: `/de/zeitschriften/${type}/${code}`,
+      pt: `/pt/revistas/${type}/${code}`,
+    })),
   ];
 
-  const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.reduce(
-    (urlsString, url) =>
-      `${urlsString}<url><loc>${host}${url}</loc><changefreq>weekly</changefreq></url>`,
-    '',
-  )}</urlset>`;
+  const sitemap = `
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+      ${urls
+        .map(
+          (localizedPages) => `
+            <url>
+              <loc>${host}${localizedPages[defaultLocale]}</loc>
+              <xhtml:link rel="alternate" hreflang="x-default" href="${host}${
+            localizedPages[defaultLocale]
+          }" />
+              ${Object.entries(localizedPages)
+                .map(
+                  ([lang, path]) =>
+                    `<xhtml:link rel="alternate" hreflang="${lang}" href="${host}${path}" />`,
+                )
+                .join('')}
+              <changefreq>weekly</changefreq>
+              <lastmod>${now.toISOString()}</lastmod>
+            </url>
+          `,
+        )
+        .join('')}
+    </urlset>
+  `
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/>\s+</g, '><');
 
   const sitemapPath = path.resolve(__dirname, '../pwa/src/assets/sitemap.xml');
 
