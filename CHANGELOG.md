@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0 (2022-10-08)
+
+- Added experimental support for the Liturgy of the Day
+
 ## 2.2.0 (2022-09-25)
 
 - Added the ability to also filter songs by macrocategory

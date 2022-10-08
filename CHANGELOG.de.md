@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0 (08/10/2022)
+
+- Experimentelle unterstützung für die Liturgie des Tages hinzugefügt
+
 ## 2.2.0 (25/09/2022)
 
 - Es wurde die Möglichkeit hinzugefügt, Lieder auch nach Makrokategorien zu filtern

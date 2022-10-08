@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0 (08/10/2022)
+
+- Adicionado suporte experimental para a Liturgia do Dia
+
 ## 2.2.0 (25/09/2022)
 
 - Adicionada a possibilidade de filtrar canções também por macrocategoria
