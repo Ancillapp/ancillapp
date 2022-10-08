@@ -36,16 +36,12 @@ ul {
       font-size: 1rem;
       margin-right: 1rem;
       color: var(--ancillapp-primary-text-color);
-    }
 
-    svg {
-      width: 2rem;
-      height: 2rem;
-      will-change: transform;
-      transition: 0.3s transform;
-      flex: 0 0 auto;
-      fill: var(--ancillapp-accent-color);
-      will-change: transform;
+      > svg {
+        fill: currentColor;
+        width: 1rem;
+        height: 1rem;
+      }
     }
 
     a {
@@ -54,6 +50,16 @@ ul {
       align-items: center;
       width: 100%;
       height: 100%;
+
+      > svg {
+        width: 2rem;
+        height: 2rem;
+        will-change: transform;
+        transition: 0.3s transform;
+        flex: 0 0 auto;
+        fill: var(--ancillapp-accent-color);
+        will-change: transform;
+      }
     }
 
     &:hover,
@@ -65,10 +71,10 @@ ul {
 
       a {
         text-decoration: none;
-      }
 
-      svg {
-        transform: rotateZ(15deg);
+        > svg {
+          transform: rotateZ(15deg);
+        }
       }
     }
   }
@@ -81,7 +87,7 @@ search-top-bar > mwc-icon-button {
 .search-results {
   width: 100%;
 
-  > p  {
+  > p {
     text-align: center;
   }
 

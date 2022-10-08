@@ -13,6 +13,7 @@ import {
   logout,
   user,
   holyMassIcon,
+  beta,
 } from '../../components/icons';
 import { t } from '@lingui/macro';
 
@@ -108,6 +109,7 @@ export default function template(this: Shell) {
                       ) as keyof typeof pagesTranslations
                     ],
                   )}
+                  ${page === 'holy-mass' ? beta : nothing}
                 </mwc-list-item>
                 ${page === 'home'
                   ? html`<li divider role="separator"></li>`

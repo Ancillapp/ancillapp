@@ -9,6 +9,7 @@ import {
   menu,
   arrowBack,
   holyMassIcon,
+  beta,
 } from '../../components/icons';
 import { formatDateToUrl } from '../../helpers/utils';
 import { HomePage } from './home.component';
@@ -118,7 +119,7 @@ export default function template(this: HomePage) {
               new Date(),
             )}"
           >
-            <span>${this.localize(t`readLiturgyOfTheDay`)}</span>
+            <span>${this.localize(t`readLiturgyOfTheDay`)}${beta}</span>
             ${holyMassIcon}
           </a>
         </li>

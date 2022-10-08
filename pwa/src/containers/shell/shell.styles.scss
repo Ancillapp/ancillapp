@@ -93,7 +93,7 @@ mwc-list-item {
   color: var(--mdc-theme-on-surface);
   font-size: 14px;
 
-  svg {
+  [slot='graphic'] svg {
     fill: var(--mdc-theme-text-disabled-on-background);
   }
 
@@ -101,9 +101,15 @@ mwc-list-item {
     color: var(--ancillapp-activated-list-color);
     font-weight: bold;
 
-    svg {
+    [slot='graphic'] svg {
       fill: var(--ancillapp-activated-list-color);
     }
+  }
+
+  > svg {
+    fill: currentColor;
+    width: 1rem;
+    height: 1rem;
   }
 }
 
