@@ -1,16 +1,13 @@
-import fetch from 'node-fetch';
-import { JSDOM } from 'jsdom';
-import sanitizeHtml from 'sanitize-html';
 import { validateDate } from '../../../helpers/validators';
 import { mongoDb } from '../../../helpers/mongo';
 import {
   Liturgy,
   LiturgyContent,
   LiturgyLanguage,
-  LiturgySection,
 } from '../../../models/mongo';
 import { scrapeLiturgy as scrapePTLiturgy } from './liturgy-scrapers/pt';
 import { scrapeLiturgy as scrapeITLiturgy } from './liturgy-scrapers/it';
+import { scrapeLiturgy as scrapeLiturgyFallback } from './liturgy-scrapers/default';
 
 import type { RequestHandler } from 'express';
 
@@ -19,21 +16,17 @@ export interface GetLiturgyQueryParams {
   language: LiturgyLanguage;
 }
 
-const apiBaseUrl = 'https://www.vaticannews.va';
-
-const localizedUrlsMap: Record<LiturgyLanguage, string> = {
-  [LiturgyLanguage.ITALIAN]: 'it/vangelo-del-giorno-e-parola-del-giorno',
-  [LiturgyLanguage.GERMAN]: 'de/tagesevangelium-und-tagesliturgie',
-  [LiturgyLanguage.PORTUGUESE]: 'pt/palavra-do-dia',
-  [LiturgyLanguage.ENGLISH]: 'en/word-of-the-day',
+const liturgyLanguageToScraperMap: Record<
+  LiturgyLanguage,
+  (date: Date) => Promise<LiturgyContent>
+> = {
+  [LiturgyLanguage.ITALIAN]: scrapeITLiturgy,
+  [LiturgyLanguage.PORTUGUESE]: scrapePTLiturgy,
+  [LiturgyLanguage.GERMAN]: (date) =>
+    scrapeLiturgyFallback(date, LiturgyLanguage.GERMAN),
+  [LiturgyLanguage.ENGLISH]: (date) =>
+    scrapeLiturgyFallback(date, LiturgyLanguage.ENGLISH),
 };
-
-const formatDate = (date: Date) =>
-  [
-    date.getFullYear(),
-    (date.getMonth() + 1).toString().padStart(2, '0'),
-    date.getDate().toString().padStart(2, '0'),
-  ].join('/');
 
 export const getLiturgy: RequestHandler<
   void,
@@ -66,68 +59,13 @@ export const getLiturgy: RequestHandler<
     return;
   }
 
-  switch (language) {
-    case LiturgyLanguage.PORTUGUESE: {
-      const content = await scrapePTLiturgy(parsedDate);
-      await holyMassesCollection.insertOne({
-        date: parsedDate,
-        language,
-        content,
-        createdAt: new Date(),
-      });
-      res.json(content);
-      return;
-    }
-    case LiturgyLanguage.ITALIAN: {
-      const content = await scrapeITLiturgy(parsedDate);
-      await holyMassesCollection.insertOne({
-        date: parsedDate,
-        language,
-        content,
-        createdAt: new Date(),
-      });
-      res.json(content);
-      return;
-    }
-  }
-
-  const response = await fetch(
-    `${apiBaseUrl}/${localizedUrlsMap[language]}/${formatDate(
-      parsedDate,
-    )}.html`,
-  );
-  const rawHtml = await response.text();
-
-  const { window } = new JSDOM(rawHtml);
-  const { document } = window;
-
-  const rawSections = Array.from(
-    document.querySelectorAll('main.content section.section--isStatic'),
-  );
-  const sections: LiturgySection[] = rawSections.map((section) => {
-    const title = section?.querySelector('.section__head')?.textContent?.trim();
-
-    const rawSubsections = Array.from(
-      section.querySelectorAll('.section__wrapper > .section__content > p'),
-    );
-
-    const subsections = rawSubsections
-      .flatMap((rawSubsection) => {
-        const brFreeSection =
-          rawSubsection.innerHTML?.replace(/\s*<br>\s*/g, '\n') || '';
-        return sanitizeHtml(brFreeSection, {
-          allowedTags: [],
-        }).trim();
-      })
-      .filter(Boolean);
-
-    return {
-      title,
-      sections: subsections,
-    };
+  const scrape = liturgyLanguageToScraperMap[language];
+  const content = await scrape(parsedDate);
+  await holyMassesCollection.insertOne({
+    date: parsedDate,
+    language,
+    content,
+    createdAt: new Date(),
   });
-
-  res.json({
-    sections,
-  });
+  res.json(content);
 };
