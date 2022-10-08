@@ -18,7 +18,14 @@ export const getSong: RequestHandler<GetSongParams, Song> = async (
   const songsCollection = db.collection<Song>('songs');
 
   const song = await songsCollection.findOne(
-    { language, category, number },
+    {
+      language,
+      category,
+      // TODO: replace this with just Number(number) when migration is completed
+      number: {
+        $in: [number, parseInt(number.toString(), 10)],
+      },
+    },
     {
       projection: {
         _id: 0,
