@@ -2,12 +2,6 @@
   flex-direction: column;
 }
 
-[slot='title'] > svg {
-  fill: currentColor;
-  width: 1rem;
-  height: 1rem;
-}
-
 h3 {
   font-family: var(--ancillapp-display-font);
   border-bottom: 1px solid var(--ancillapp-disabled-text-color);

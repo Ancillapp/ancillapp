@@ -7,7 +7,7 @@ import { LiturgyColor } from '../../models/holy-mass';
 
 import { LiturgyViewer } from './liturgy-viewer.component';
 import { load, renderWithNewlines } from '../../helpers/directives';
-import { beta, menu } from '../../components/icons';
+import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
@@ -48,7 +48,7 @@ export default function template(this: LiturgyViewer) {
         ${menu}
       </mwc-icon-button>
       <div slot="title">
-        ${this.localize(t`liturgyOfTheDay`)}${beta} -
+        ${this.localize(t`liturgyOfTheDay`)} -
         ${toLocalTimeZone(this.day).toLocaleDateString(this.locale, {
           day: '2-digit',
           month: '2-digit',
