@@ -2,19 +2,21 @@ import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 import sanitizeHtml from 'sanitize-html';
 import { validateDate } from '../../../helpers/validators';
-import { scrapeLiturgy as scrapePTLiturgy } from './liturgy-scrapers/pt';
-import { scrapeLiturgy as scrapeITLiturgy } from './liturgy-scrapers/it';
+import { mongoDb } from '../../../helpers/mongo';
 import {
-  GetLiturgyResult,
+  Liturgy,
+  LiturgyContent,
   LiturgyLanguage,
   LiturgySection,
-} from './liturgy-scrapers/models';
+} from '../../../models/mongo';
+import { scrapeLiturgy as scrapePTLiturgy } from './liturgy-scrapers/pt';
+import { scrapeLiturgy as scrapeITLiturgy } from './liturgy-scrapers/it';
 
 import type { RequestHandler } from 'express';
 
 export interface GetLiturgyQueryParams {
-  language: LiturgyLanguage;
   date: string;
+  language: LiturgyLanguage;
 }
 
 const apiBaseUrl = 'https://www.vaticannews.va';
@@ -35,7 +37,7 @@ const formatDate = (date: Date) =>
 
 export const getLiturgy: RequestHandler<
   void,
-  GetLiturgyResult,
+  LiturgyContent,
   void,
   GetLiturgyQueryParams
 > = async ({ query: { language, date } }, res) => {
@@ -51,13 +53,42 @@ export const getLiturgy: RequestHandler<
 
   const parsedDate = new Date(date);
 
+  const db = await mongoDb;
+  const holyMassesCollection = db.collection<Liturgy>('holyMasses');
+
+  const cachedHolyMass = await holyMassesCollection.findOne({
+    date: parsedDate,
+    language,
+  });
+
+  if (cachedHolyMass) {
+    res.json(cachedHolyMass.content);
+    return;
+  }
+
   switch (language) {
-    case LiturgyLanguage.PORTUGUESE:
-      res.json(await scrapePTLiturgy(parsedDate));
+    case LiturgyLanguage.PORTUGUESE: {
+      const content = await scrapePTLiturgy(parsedDate);
+      await holyMassesCollection.insertOne({
+        date: parsedDate,
+        language,
+        content,
+        createdAt: new Date(),
+      });
+      res.json(content);
       return;
-    case LiturgyLanguage.ITALIAN:
-      res.json(await scrapeITLiturgy(parsedDate));
+    }
+    case LiturgyLanguage.ITALIAN: {
+      const content = await scrapeITLiturgy(parsedDate);
+      await holyMassesCollection.insertOne({
+        date: parsedDate,
+        language,
+        content,
+        createdAt: new Date(),
+      });
+      res.json(content);
       return;
+    }
   }
 
   const response = await fetch(

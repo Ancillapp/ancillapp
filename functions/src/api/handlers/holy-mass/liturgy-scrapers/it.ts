@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
-import { GetLiturgyResult, LiturgyColor } from './models';
+import { LiturgyColor, LiturgyContent } from '../../../../models/mongo';
 import { dropHtml } from './helpers';
 
 const API_URL =
@@ -15,7 +15,7 @@ const stringToLiturgyColorMap: Record<string, LiturgyColor> = {
   nero: LiturgyColor.BLACK,
 };
 
-export const scrapeLiturgy = async (date: Date): Promise<GetLiturgyResult> => {
+export const scrapeLiturgy = async (date: Date): Promise<LiturgyContent> => {
   const response = await fetch(
     `${API_URL}${date.getFullYear()}${(date.getMonth() + 1)
       .toString()
