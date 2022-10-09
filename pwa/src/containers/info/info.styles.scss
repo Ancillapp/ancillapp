@@ -3,3 +3,7 @@
     padding: 1.5rem;
   }
 }
+
+top-app-bar [slot='trailingIcon'] a {
+  color: var(--ancillapp-top-app-bar-color);
+}
