@@ -47,9 +47,17 @@ export const scrapeLiturgy = async (date: Date): Promise<LiturgyContent> => {
     }
 
     const rawContent = Array.from(section.querySelectorAll(':scope > *'));
-    const subsections = rawContent
-      .map((rawParagraph) => dropHtml(rawParagraph.innerHTML))
-      .filter(Boolean);
+    const subsections =
+      rawContent.some(
+        (rawParagraph) => rawParagraph.tagName.toLowerCase() === 'br',
+      ) &&
+      rawContent.every(
+        (rawParagraph) => rawParagraph.tagName.toLowerCase() !== 'p',
+      )
+        ? [dropHtml(section.innerHTML)]
+        : rawContent
+            .map((rawParagraph) => dropHtml(rawParagraph.innerHTML))
+            .filter(Boolean);
 
     return {
       title,
