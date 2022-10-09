@@ -86,7 +86,17 @@ export default function template(this: LiturgyViewer) {
               )}
               ${map(
                 (section.sections || []) as string[],
-                (paragraph) => html` <p>${renderWithNewlines(paragraph)}</p> `,
+                (paragraph) =>
+                  html`
+                    <p>
+                      ${renderWithNewlines(
+                        paragraph.replace(
+                          /(\d+)([a-z])(?![a-z]\s+\d)/gi,
+                          '<sup>$1</sup>$2',
+                        ),
+                      )}
+                    </p>
+                  `,
               )}
             `,
           )}

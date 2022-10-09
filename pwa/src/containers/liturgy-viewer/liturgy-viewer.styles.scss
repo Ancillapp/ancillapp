@@ -27,6 +27,11 @@ strong {
   color: var(--ancillapp-accent-color);
 }
 
+sup {
+  font-size: 0.8rem;
+  color: var(--ancillapp-accent-color);
+}
+
 .loading-container,
 .error-container {
   flex: 1;
