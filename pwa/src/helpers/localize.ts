@@ -118,9 +118,10 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
       i18n.activate(locale);
 
       await Promise.all([
-        ...localizedComponents.map((localizedComponent) =>
-          localizedComponent.requestUpdate(),
-        ),
+        ...localizedComponents.map(async (localizedComponent) => {
+          localizedComponent.requestUpdate();
+          await localizedComponent.updateComplete;
+        }),
         set('locale', locale),
       ]);
     }
