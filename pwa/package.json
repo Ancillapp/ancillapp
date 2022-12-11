@@ -33,7 +33,7 @@
     "lit": "^2.3.1",
     "make-plural": "^7.1.0",
     "pwa-helpers": "^0.9.1",
-    "share-menu": "5.0.0-rc.3",
+    "share-menu": "5.0.0-rc.4",
     "workbox-cacheable-response": "^6.5.4",
     "workbox-core": "^6.5.4",
     "workbox-google-analytics": "^6.5.4",
