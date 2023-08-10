@@ -41,14 +41,12 @@ export default function template(this: PrayerViewer) {
               )}"
             >
               ${this._prayerLanguages.map(
-                (language) =>
-                  html`
-                    <mwc-tab
-                      label="${languagesTranslationMap[language]}"
-                      @click="${() =>
-                        (this._selectedPrayerLanguage = language)}"
-                    ></mwc-tab>
-                  `,
+                (language) => html`
+                  <mwc-tab
+                    label="${languagesTranslationMap[language]}"
+                    @click="${() => (this._selectedPrayerLanguage = language)}"
+                  ></mwc-tab>
+                `,
               )}
             </mwc-tab-bar>
           `

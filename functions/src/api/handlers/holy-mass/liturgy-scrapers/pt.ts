@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 import { LiturgyColor, LiturgyContent } from '../../../../models/mongo';
 import { dropHtml } from './helpers';

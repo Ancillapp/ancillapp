@@ -1,6 +1,5 @@
 {
   "packages": ["functions", "pwa"],
   "npmClient": "yarn",
-  "version": "2.3.0",
-  "useWorkspaces": true
+  "version": "2.3.0"
 }

@@ -1,4 +1,4 @@
-import type { SupportedLocale } from './localize';
+import type { SupportedLocale } from './localize.js';
 
 export const localizedPages: Record<string, Record<SupportedLocale, string>> = {
   breviary: {

@@ -7,17 +7,6 @@ import { t } from '@lingui/macro';
 import '../../components/top-app-bar/top-app-bar.component';
 // import '../../components/date-input/date-input.component';
 
-export const prayersTranslations = {
-  invitatory: t`invitatory`,
-  matins: t`matins`,
-  lauds: t`lauds`,
-  terce: t`terce`,
-  sext: t`sext`,
-  none: t`none`,
-  vespers: t`vespers`,
-  compline: t`compline`,
-};
-
 export default function template(this: BreviaryPlaceholder) {
   return html`
     <top-app-bar ?drawer-open="${this.drawerOpen}">

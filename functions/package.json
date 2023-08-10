@@ -14,28 +14,26 @@
   "dependencies": {
     "child-process-promise": "^2.2.1",
     "cors": "^2.8.5",
-    "express": "^4.18.1",
-    "firebase-admin": "^11.0.1",
-    "firebase-functions": "^3.23.0",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.10.1",
+    "firebase-functions": "^4.4.1",
     "gs": "https://github.com/sina-masnadi/node-gs/tarball/master",
-    "jsdom": "^20.0.0",
-    "mongodb": "^4.9.1",
-    "node-fetch": "^2.6.7",
+    "jsdom": "^22.1.0",
+    "mongodb": "^5.7.0",
     "rendertron-middleware": "^0.1.5",
-    "sanitize-html": "^2.7.1",
-    "web-push": "^3.5.0"
+    "sanitize-html": "^2.11.0",
+    "web-push": "^3.6.4"
   },
   "devDependencies": {
     "@types/child-process-promise": "^2.2.2",
-    "@types/cors": "^2.8.12",
-    "@types/jsdom": "^20.0.0",
-    "@types/node": "^18.7.15",
-    "@types/node-fetch": "^2.6.2",
-    "@types/sanitize-html": "^2.6.2",
+    "@types/cors": "^2.8.13",
+    "@types/jsdom": "^21.1.1",
+    "@types/node": "^20.4.9",
+    "@types/sanitize-html": "^2.9.0",
     "@types/web-push": "^3.3.2",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
-    "typescript": "^4.8.2"
+    "typescript": "^5.1.6"
   },
   "packageManager": "yarn@3.2.3"
 }

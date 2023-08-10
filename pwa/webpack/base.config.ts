@@ -1,13 +1,9 @@
 /// <reference types="../typings" />
-import path from 'path';
+import path from 'node:path';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ForkTsCheckerPlugin from 'fork-ts-checker-webpack-plugin';
-import {
-  Configuration,
-  EnvironmentPlugin,
-  NormalModuleReplacementPlugin,
-} from 'webpack';
+import webpack from 'webpack';
 import { defaultLocale, localesData } from './helpers';
 import { localizeHref } from '../src/helpers/localization';
 
@@ -20,7 +16,7 @@ const browserEnv =
     ? fallbackBrowserEnv
     : process.argv[index + 1] || fallbackBrowserEnv;
 
-const config: Configuration = {
+const config: webpack.Configuration = {
   cache: true,
   context: path.resolve(__dirname, '../src'),
   entry: path.resolve(__dirname, '../src/index'),
@@ -119,11 +115,11 @@ const config: Configuration = {
     ],
   },
   plugins: [
-    new EnvironmentPlugin({
+    new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
       BROWSER_ENV: browserEnv,
     }),
-    new NormalModuleReplacementPlugin(
+    new webpack.NormalModuleReplacementPlugin(
       /config\/default(?:\.json)?$/,
       (resource) => {
         resource.request = resource.request.replace(

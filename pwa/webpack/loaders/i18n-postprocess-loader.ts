@@ -81,7 +81,9 @@ export default function (this: any, content: string | Buffer, sourceMap: any) {
 
   const callback = this.async();
 
-  const source = content.toString();
+  const source = content
+    .toString()
+    .replace('export const messages=', 'module.exports=');
 
   const script = new Script(source);
 
@@ -91,9 +93,10 @@ export default function (this: any, content: string | Buffer, sourceMap: any) {
   script.runInNewContext(sandbox);
 
   Promise.all(
-    Object.entries<string>(sandbox.module.exports.messages).map(
-      async ([key, value]) => [key, await mapMessage(key, value)],
-    ),
+    Object.entries<string>(sandbox.module.exports).map(async ([key, value]) => [
+      key,
+      await mapMessage(key, value),
+    ]),
   )
     .then((mappedMessagesKeyVal) => {
       const mappedMessages = (
@@ -106,9 +109,9 @@ export default function (this: any, content: string | Buffer, sourceMap: any) {
         {},
       );
 
-      const newSource = `/*eslint-disable*/module.exports={messages:${JSON.stringify(
+      const newSource = `/*eslint-disable*/export const messages=${JSON.stringify(
         mappedMessages,
-      )}}`;
+      )}`;
 
       callback(null, newSource, sourceMap);
     })

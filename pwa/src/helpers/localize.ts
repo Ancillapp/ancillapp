@@ -1,9 +1,7 @@
 import type { LitElement, PropertyValues } from 'lit';
 import { get, set } from './keyval';
 import { localizedPages, localizeHref } from './localization';
-import { i18n, MessageDescriptor } from '@lingui/core';
-import type { MessageOptions } from '@lingui/core/cjs/i18n';
-import { it, en, de, pt } from 'make-plural/plurals';
+import { i18n, MessageDescriptor, MessageOptions } from '@lingui/core';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T> = new (...args: any[]) => T;
@@ -11,13 +9,6 @@ type Constructor<T> = new (...args: any[]) => T;
 export type SupportedLocale = 'it' | 'en' | 'de' | 'pt';
 
 export type Localized<T> = { [key in SupportedLocale]: T };
-
-i18n.loadLocaleData({
-  it: { plurals: it },
-  en: { plurals: en },
-  de: { plurals: de },
-  pt: { plurals: pt },
-});
 
 export const supportedLocales: readonly SupportedLocale[] = [
   'it',
@@ -108,7 +99,7 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
         localesPromisesMap.set(
           locale,
           import(`../locales/${locale}.po`)
-            .then(({ default: { messages } }) => messages)
+            .then(({ messages }) => messages)
             .then((localeData) => i18n.load(locale, localeData)),
         );
       }

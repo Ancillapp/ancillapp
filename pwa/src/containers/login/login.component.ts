@@ -108,10 +108,10 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
       this._email = '';
       this._password = '';
       this._error = '';
-    } catch ({ code: signInErrorCode }) {
-      let error = signInErrorCode;
+    } catch (signInError) {
+      let err = (signInError as { code: string }).code;
 
-      if (error === 'auth/user-not-found') {
+      if (err === 'auth/user-not-found') {
         try {
           await createUserWithEmailAndPassword(
             auth,
@@ -126,12 +126,12 @@ export class LoginPage extends localize(withTopAppBar(PageViewElement)) {
           this._email = '';
           this._password = '';
           this._error = '';
-        } catch ({ code: signUpErrorCode }) {
-          error = signUpErrorCode;
+        } catch (signUpError) {
+          err = (signUpError as { code: string }).code;
         }
       }
 
-      switch (error) {
+      switch (err) {
         case 'auth/invalid-email':
           this._error = this.localize(t`invalidEmail`);
           break;

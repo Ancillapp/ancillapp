@@ -3,22 +3,11 @@ import { until } from 'lit/directives/until.js';
 import { MagazinesIndex } from './magazines-index.component';
 import { menu } from '../../components/icons';
 import { t } from '@lingui/macro';
+import { MagazineType } from '../../models/magazine';
 
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/date-input/date-input.component';
 import '../../components/loading-spinner/loading-spinner.component';
-import { MagazineType } from '../../models/magazine';
-
-export const prayersTranslations = {
-  invitatory: t`invitatory`,
-  matins: t`matins`,
-  lauds: t`lauds`,
-  terce: t`terce`,
-  sext: t`sext`,
-  none: t`none`,
-  vespers: t`vespers`,
-  compline: t`compline`,
-};
 
 export default function template(this: MagazinesIndex) {
   return html`

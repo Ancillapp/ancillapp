@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 const {
   env: { CLOUDFLARE_API_TOKEN: token, CLOUDFLARE_ZONE_ID: zoneId },
 } = process;

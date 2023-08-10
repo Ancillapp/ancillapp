@@ -1,10 +1,11 @@
+/// <reference types="../typings" />
+import path from 'node:path';
 import HtmlPlugin from 'html-webpack-plugin';
-import path from 'path';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import { merge } from 'webpack-merge';
-import baseConfig from './base.config';
 import { InjectManifest as InjectManifestPlugin } from 'workbox-webpack-plugin';
+import baseConfig from './base.config';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;

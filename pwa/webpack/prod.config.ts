@@ -1,14 +1,15 @@
 /// <reference types="../typings" />
-import path from 'path';
+import path from 'node:path';
 import HtmlPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { InjectManifest as InjectManifestPlugin } from 'workbox-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer-brotli';
-import { Configuration } from 'webpack';
+import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import baseConfig from './base.config';
+import type { WebpackPluginInstance } from 'webpack';
 
-const config: Configuration = merge(baseConfig, {
+const config: webpack.Configuration = merge(baseConfig, {
   mode: 'production',
   devtool: 'source-map',
   output: {
@@ -69,7 +70,9 @@ const config: Configuration = merge(baseConfig, {
         /(?:^|\/)\..+$/,
       ],
     }),
-    ...(process.env.ANALYZE_BUNDLE ? [new BundleAnalyzerPlugin()] : []),
+    ...(process.env.ANALYZE_BUNDLE
+      ? [new BundleAnalyzerPlugin() as unknown as WebpackPluginInstance]
+      : []),
   ],
 });
 
