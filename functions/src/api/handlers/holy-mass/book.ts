@@ -106,7 +106,7 @@ export const bookHolyMass: RequestHandler = async (
     { returnDocument: 'after' },
   );
 
-  if (!updatedHolyMass?.value?._id) {
+  if (!updatedHolyMass?._id) {
     res.status(400).json({ code: 'ALREADY_BOOKED' });
     return;
   }

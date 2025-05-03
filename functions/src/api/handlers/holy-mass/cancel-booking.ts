@@ -35,12 +35,12 @@ export const cancelHolyMassBooking: RequestHandler = async (
     },
   );
 
-  if (!holyMassUpdateResult.value) {
+  if (!holyMassUpdateResult) {
     res.status(404).json({ code: 'HOLY_MASS_NOT_FOUND' });
     return;
   }
 
-  const { bookingId } = holyMassUpdateResult.value.participants.find(
+  const { bookingId } = holyMassUpdateResult.participants.find(
     (participant) => userId === participant.userId && !participant.deleted,
   )!;
 
