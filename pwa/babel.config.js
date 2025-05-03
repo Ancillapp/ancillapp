@@ -15,7 +15,7 @@ module.exports = {
     '@babel/typescript',
   ],
   plugins: [
-    'macros',
+    '@lingui/babel-plugin-lingui-macro',
     [
       'template-html-minifier',
       {

@@ -8,7 +8,7 @@ import {
   MagazineType,
 } from '../../models/magazine';
 import { toLocalTimeZone } from '../../helpers/utils';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';

@@ -4,7 +4,7 @@ import { updateMetadata } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Song } from '../../models/song';
 import { Prayer } from '../../models/prayer';
 import { Magazine, MagazineType } from '../../models/magazine';

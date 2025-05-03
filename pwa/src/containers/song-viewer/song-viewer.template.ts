@@ -4,7 +4,7 @@ import { SongViewer } from './song-viewer.component';
 import { renderSong } from '../../helpers/directives';
 import { arrowBack, search } from '../../components/icons';
 import { getFormattedSongNumber } from '../../helpers/songs';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '@material/mwc-snackbar';
 import '../../components/top-app-bar/top-app-bar.component';

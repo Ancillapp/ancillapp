@@ -7,7 +7,7 @@ import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../../containers/page-view-element';
 import HyperList, { HyperListConfig } from 'hyperlist';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './songs-list.styles';

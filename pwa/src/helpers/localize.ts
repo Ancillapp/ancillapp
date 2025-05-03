@@ -17,6 +17,8 @@ export const supportedLocales: readonly SupportedLocale[] = [
   'pt',
 ];
 export const defaultLocale: SupportedLocale = 'it';
+i18n.activate(defaultLocale);
+let initialLocaleLoaded = false;
 
 const localesPromisesMap = new Map<SupportedLocale, Promise<void>>();
 const localizedComponents: LitElement[] = [];
@@ -68,10 +70,11 @@ export const localize = <E extends Constructor<LitElement>>(BaseElement: E) =>
     }
 
     public async setLocale(locale: SupportedLocale) {
-      if (locale === i18n.locale) {
+      if (locale === i18n.locale && initialLocaleLoaded) {
         return;
       }
 
+      initialLocaleLoaded = true;
       document.documentElement.lang = locale;
       // Set Firebase localization cookies that allow serving localized files
       // with the overridden language instead of user's default one

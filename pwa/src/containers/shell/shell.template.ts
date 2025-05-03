@@ -14,7 +14,7 @@ import {
   user,
   holyMassIcon,
 } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '@material/mwc-drawer';
 import '@material/mwc-icon-button';

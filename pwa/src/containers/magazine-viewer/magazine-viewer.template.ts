@@ -4,7 +4,7 @@ import { MagazineViewer } from './magazine-viewer.component';
 import { load } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
 import { MagazineType } from '../../models/magazine';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/share-fab/share-fab.component';
@@ -34,25 +34,24 @@ export default function template(this: MagazineViewer) {
 
     ${load(
       this._magazinePromise,
-      ({ link, name }) =>
-        html`
-          <iframe
-            src="${this.active
-              ? `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(
-                  link,
-                )}`
-              : ''}"
-            referrerpolicy="no-referrer"
-            allow="fullscreen"
-            title="Ancilla Domini - ${name}"
-          ></iframe>
+      ({ link, name }) => html`
+        <iframe
+          src="${this.active
+            ? `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(
+                link,
+              )}`
+            : ''}"
+          referrerpolicy="no-referrer"
+          allow="fullscreen"
+          title="Ancilla Domini - ${name}"
+        ></iframe>
 
-          <share-fab
-            title="Ancilla Domini - ${name}"
-            text="${this.localize(t`shareMagazineText ${magazineType}`)}"
-            url="${window.location.href}"
-          ></share-fab>
-        `,
+        <share-fab
+          title="Ancilla Domini - ${name}"
+          text="${this.localize(t`shareMagazineText ${magazineType}`)}"
+          url="${window.location.href}"
+        ></share-fab>
+      `,
       (error) => html`${error.message}`,
     )}
   `;

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { choose } from 'lit/directives/choose.js';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { ErrorBox } from './error-box.component';
 
 import '@material/mwc-button';

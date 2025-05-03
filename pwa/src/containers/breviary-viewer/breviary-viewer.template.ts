@@ -7,7 +7,7 @@ import {
 import { load } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
 import { prayersTranslations } from '../breviary-index/breviary-index.template';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 

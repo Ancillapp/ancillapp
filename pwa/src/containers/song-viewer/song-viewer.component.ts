@@ -6,7 +6,7 @@ import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { navigateTo } from '../../helpers/router';
 import { PageViewElement } from '../page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './song-viewer.styles';

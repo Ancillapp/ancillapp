@@ -1,7 +1,7 @@
 import { html, nothing } from 'lit';
 import { SettingsPage } from './settings.component';
 import { menu } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '@material/mwc-checkbox';
 import '@material/mwc-formfield';

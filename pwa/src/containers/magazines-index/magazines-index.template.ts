@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { until } from 'lit/directives/until.js';
 import { MagazinesIndex } from './magazines-index.component';
 import { menu } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { MagazineType } from '../../models/magazine';
 
 import '../../components/top-app-bar/top-app-bar.component';

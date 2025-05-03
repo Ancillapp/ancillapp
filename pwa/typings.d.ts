@@ -34,9 +34,6 @@ declare module 'hyperlist' {
   }
 }
 
-declare module 'remark-html';
-declare module 'remark-breaks';
-
 declare module '*.po' {
   import type { CompiledMessage } from '@lingui/core/cjs/i18n';
 

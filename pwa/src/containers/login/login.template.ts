@@ -1,7 +1,7 @@
 import { html, nothing } from 'lit';
 import { LoginPage } from './login.component';
 import { menu } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '../../components/outlined-input/outlined-input.component';
 import '../../components/top-app-bar/top-app-bar.component';

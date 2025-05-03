@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { ShareFAB } from './share-fab.component';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { share } from '../icons';
 
 import '../autosized-fab/autosized-fab.component';

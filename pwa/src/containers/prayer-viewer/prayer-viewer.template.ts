@@ -3,7 +3,7 @@ import { when } from 'lit/directives/when.js';
 import { PrayerViewer } from './prayer-viewer.component';
 import { renderPrayer } from '../../helpers/directives';
 import { arrowBack } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { Prayer } from '../../models/prayer';
 
 import '@material/mwc-snackbar';

@@ -1,17 +1,10 @@
-import remark from 'remark';
+import { remark } from 'remark';
+import gfm from 'remark-gfm';
 import html from 'remark-html';
 import breaks from 'remark-breaks';
 import { Script } from 'vm';
 
-const parser = remark()
-  .data('settings', {
-    commonmark: true,
-    footnotes: true,
-    pedantic: true,
-    gfm: true,
-  })
-  .use(html)
-  .use(breaks);
+const parser = remark().use(gfm).use(html).use(breaks);
 
 const markdownPoweredTranslations = [
   'ffbInfoDescription',
@@ -35,9 +28,9 @@ const mapMessage = async (
   }
 
   if (typeof value === 'string') {
-    const { contents } = await parser.process(value);
+    const vfile = await parser.process(value);
 
-    return contents.toString();
+    return vfile.value.toString();
   }
 
   if (!Array.isArray(value)) {
@@ -50,9 +43,9 @@ const mapMessage = async (
     )
     .join('');
 
-  const { contents } = await parser.process(tempString);
+  const vfile = await parser.process(tempString);
 
-  const contentsString = contents.toString();
+  const contentsString = vfile.value.toString();
 
   const regex = /\$\$(\d+)\$\$/g;
   let match;
@@ -63,14 +56,14 @@ const mapMessage = async (
     const { 0: stringMatch, 1: arrIndex, index } = match;
 
     newArr.push(
-      contents.slice(prevStartIndex, index),
+      contentsString.slice(prevStartIndex, index),
       value[parseInt(arrIndex, 10)],
     );
 
     prevStartIndex = index + stringMatch.length;
   }
 
-  newArr.push(contents.slice(prevStartIndex));
+  newArr.push(contentsString.slice(prevStartIndex));
 
   return newArr.filter((str) => str !== '') as (string | string[])[];
 };

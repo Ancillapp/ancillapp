@@ -8,7 +8,7 @@ import {
   notes,
   filter,
 } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import {
   SongCategory,
   SongLanguage,

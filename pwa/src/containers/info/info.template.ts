@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { InfoPage } from './info.component';
 import { menu } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { version as currentAppVersion } from '../../../../CHANGELOG.md';
 
 import '../../components/top-app-bar/top-app-bar.component';

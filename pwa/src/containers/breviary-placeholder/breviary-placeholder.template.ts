@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { BreviaryPlaceholder } from './breviary-placeholder.component';
 import { menu } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 // import '../../components/date-input/date-input.component';

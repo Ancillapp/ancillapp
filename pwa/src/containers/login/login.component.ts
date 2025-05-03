@@ -17,7 +17,7 @@ import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { logEvent, auth } from '../../helpers/firebase';
 
 import { PageViewElement } from '../page-view-element';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './login.styles';

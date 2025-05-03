@@ -8,7 +8,7 @@ import { LiturgyColor } from '../../models/holy-mass';
 import { LiturgyViewer } from './liturgy-viewer.component';
 import { load, renderWithNewlines } from '../../helpers/directives';
 import { menu } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 import('../../components/error-box/error-box.component');
@@ -86,17 +86,16 @@ export default function template(this: LiturgyViewer) {
               )}
               ${map(
                 (section.sections || []) as string[],
-                (paragraph) =>
-                  html`
-                    <p>
-                      ${renderWithNewlines(
-                        paragraph.replace(
-                          /(\d+)([a-z])(?![a-z]\s+\d)/gi,
-                          '<sup>$1</sup>$2',
-                        ),
-                      )}
-                    </p>
-                  `,
+                (paragraph) => html`
+                  <p>
+                    ${renderWithNewlines(
+                      paragraph.replace(
+                        /(\d+)([a-z])(?![a-z]\s+\d)/gi,
+                        '<sup>$1</sup>$2',
+                      ),
+                    )}
+                  </p>
+                `,
               )}
             `,
           )}

@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { until } from 'lit/directives/until.js';
 import { BreviaryIndex } from './breviary-index.component';
 import { menu } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '../../components/top-app-bar/top-app-bar.component';
 import '../../components/date-input/date-input.component';

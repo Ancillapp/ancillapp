@@ -6,7 +6,7 @@ import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './prayers-list.styles';
@@ -105,7 +105,7 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
               prayer,
               this._userLanguagesPriorityArray,
             ),
-          } as PrayersListWorker.ExtendedPrayer),
+          }) as PrayersListWorker.ExtendedPrayer,
       )
       .sort((a, b) => a.displayedTitle.localeCompare(b.displayedTitle));
 

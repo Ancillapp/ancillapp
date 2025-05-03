@@ -1,7 +1,7 @@
 import { PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';

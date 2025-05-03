@@ -12,7 +12,7 @@ import {
 } from '../../components/icons';
 import { formatDateToUrl } from '../../helpers/utils';
 import { HomePage } from './home.component';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '../../components/search-top-bar/search-top-bar.component';
 

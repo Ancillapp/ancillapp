@@ -5,7 +5,7 @@ import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { refresh } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import sharedStyles from '../../shared.styles';
 import styles from './breviary-viewer.styles';

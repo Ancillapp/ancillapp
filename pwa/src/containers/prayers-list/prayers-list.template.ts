@@ -3,7 +3,7 @@ import { repeat } from 'lit/directives/repeat.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { PrayersList } from './prayers-list.component';
 import { menu, search, arrowBack } from '../../components/icons';
-import { t } from '@lingui/macro';
+import { t } from '@lingui/core/macro';
 
 import '@material/mwc-button';
 import '@material/mwc-snackbar';
