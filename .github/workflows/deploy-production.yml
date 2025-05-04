@@ -29,9 +29,11 @@ jobs:
       - name: Deploy
         run: |
           echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 --decode > firebase-service-account.json
+          echo "$FIREBASE_FUNCTIONS_DOTENV_BASE64" | base64 --decode > functions/.env.ffb-ancillapp
           yarn firebase deploy --project ffb-ancillapp --config firebase.production.json --only hosting:ffb-ancillapp,functions:pwa
         env:
           FIREBASE_SERVICE_ACCOUNT_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64_PRODUCTION }}
+          FIREBASE_FUNCTIONS_DOTENV_BASE64: ${{ secrets.FIREBASE_FUNCTIONS_DOTENV_BASE64_PRODUCTION }}
           GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
       - name: Purge cache, audit, and report
         run: |
