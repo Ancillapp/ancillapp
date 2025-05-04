@@ -1,8 +1,8 @@
-import * as functions from 'firebase-functions';
+import { onRequest } from 'firebase-functions/v2/https';
 import { mongoDb } from '../../../helpers/mongo';
 import { sendNotification } from '../../../helpers/notifications';
 
-export const subscribeForNotifications = functions.https.onRequest(
+export const subscribeForNotifications = onRequest(
   async ({ method, body }, res) => {
     if (method !== 'POST') {
       res.status(405).send();

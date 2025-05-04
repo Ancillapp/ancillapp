@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import { onRequest } from 'firebase-functions/v2/https';
 import express from 'express';
 import cors from 'cors';
 // import path from 'path';
@@ -58,4 +58,4 @@ app.get('/api/holy-masses/liturgy', getLiturgy);
 //   res.sendFile(path.resolve(__dirname, 'index.html'));
 // });
 
-export const api = functions.https.onRequest(app);
+export const api = onRequest(app);

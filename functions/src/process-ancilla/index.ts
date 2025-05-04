@@ -1,4 +1,5 @@
-import * as functions from 'firebase-functions';
+import { onObjectFinalized } from 'firebase-functions/v2/storage';
+import { defineString } from 'firebase-functions/params';
 import os from 'os';
 import path from 'path';
 import gs from 'gs';
@@ -17,22 +18,21 @@ const execGs = (gsInstance: any) =>
     }),
   );
 
-const bucketName = functions.config().ancillas.bucket;
+const bucketName = defineString('ANCILLAS_BUCKET');
 
-export const processAncilla = functions
-  .runWith({
+export const processAncilla = onObjectFinalized(
+  {
+    bucket: bucketName,
     timeoutSeconds: 120,
-    memory: '512MB',
-  })
-  .storage.bucket(bucketName)
-  .object()
-  .onFinalize(async (object) => {
+    memory: '512MiB',
+  },
+  async ({ data: object }) => {
     if (!object.name || !/^raw\/.+\.pdf$/.test(object.name)) {
       console.info('Uploaded file is not an Ancilla Domini, ignoring it.');
       return;
     }
 
-    const bucket = firebase.storage().bucket(bucketName);
+    const bucket = firebase.storage().bucket(bucketName.value());
     const ancillaName = path.basename(object.name, '.pdf');
     const tmpFileIn = path.resolve(os.tmpdir(), `${ancillaName}_raw.pdf`);
     const tmpFileOut = path.resolve(os.tmpdir(), `${ancillaName}.pdf`);
@@ -143,4 +143,5 @@ export const processAncilla = functions
     await fs.unlink(tmpFileIn);
 
     console.info('Done!');
-  });
+  },
+);

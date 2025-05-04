@@ -1,11 +1,15 @@
-import * as functions from 'firebase-functions';
-import { MongoClient, ObjectId } from 'mongodb';
+import { defineString } from 'firebase-functions/params';
+import { Db, MongoClient, ObjectId } from 'mongodb';
+import { onInit } from 'firebase-functions/v2/core';
 
-const uri = functions.config().mongodb.uri;
-const db = functions.config().mongodb.name;
+const uri = defineString('MONGODB_URI');
+const db = defineString('MONGODB_NAME');
 
 export { ObjectId };
 
-export const mongoDb = new MongoClient(uri)
-  .connect()
-  .then((client) => client.db(db));
+export let mongoDb: Promise<Db>;
+onInit(() => {
+  mongoDb = new MongoClient(uri.value())
+    .connect()
+    .then((client) => client.db(db.value()));
+});
