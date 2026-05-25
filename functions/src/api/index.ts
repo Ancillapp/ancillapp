@@ -3,8 +3,6 @@ import express from 'express';
 import cors from 'cors';
 // import path from 'path';
 
-import { ssr } from './middlewares/ssr';
-
 import { getMagazines } from './handlers/magazines/list';
 import { getMagazine } from './handlers/magazines/detail';
 import { getPrayers } from './handlers/prayers/list';
@@ -23,8 +21,6 @@ import { getLiturgy } from './handlers/holy-mass/liturgy';
 const app = express();
 
 app.use(cors());
-
-app.use(ssr);
 
 app.get('/api/magazines', getMagazines);
 app.get('/api/magazines/:type/:code', getMagazine);

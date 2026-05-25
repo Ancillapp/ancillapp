@@ -6,12 +6,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "lerna run start --stream",
-    "build": "lerna run build --stream",
-    "start:pwa": "yarn workspace @ancillapp/pwa start",
-    "build:pwa": "yarn workspace @ancillapp/pwa run build",
-    "start:functions": "yarn workspace @ancillapp/functions start",
-    "build:functions": "yarn workspace @ancillapp/functions run build",
+    "start": "bun run --workspaces start",
+    "build": "bun run --workspaces build",
+    "start:pwa": "bun --filter @ancillapp/pwa start",
+    "build:pwa": "bun --filter @ancillapp/pwa run build",
+    "start:functions": "bun --filter @ancillapp/functions start",
+    "build:functions": "bun --filter @ancillapp/functions run build",
     "build:sitemap": "node scripts/sitemap"
   },
   "devDependencies": {
@@ -20,7 +20,6 @@
     "eslint-config-prettier": "^10.1.2",
     "firebase-tools": "^14.2.2",
     "globals": "^16.0.0",
-    "lerna": "^8.2.2",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.1"
@@ -29,5 +28,5 @@
     "functions",
     "pwa"
   ],
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "bun@1.3.14"
 }

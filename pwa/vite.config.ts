@@ -163,7 +163,7 @@ export default defineConfig(({ mode }) => ({
     // --- Development: TypeScript type checking ---
     checker({ typescript: true }),
 
-    // --- Optional bundle visualizer (ANALYZE_BUNDLE=1 yarn build) ---
+    // --- Optional bundle visualizer (ANALYZE_BUNDLE=1 bun run build) ---
     ...(process.env.ANALYZE_BUNDLE
       ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
         [visualizer({ open: true, gzipSize: true, brotliSize: true }) as any]

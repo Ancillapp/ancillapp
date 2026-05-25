@@ -1,5 +1,0 @@
-{
-  "packages": ["functions", "pwa"],
-  "npmClient": "yarn",
-  "version": "2.3.0"
-}

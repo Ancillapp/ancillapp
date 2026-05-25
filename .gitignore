@@ -10,10 +10,4 @@ functions/lib/
 sitemap.xml
 .firebase*
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
 .swc/

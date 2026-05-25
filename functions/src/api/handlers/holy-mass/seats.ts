@@ -3,10 +3,10 @@ import type { Fraternity, HolyMass } from '../../../models/mongo';
 
 import type { RequestHandler } from 'express';
 
-export const getHolyMassesSeats: RequestHandler = async (
-  { params: { fraternityId, date } },
-  res,
-) => {
+export const getHolyMassesSeats: RequestHandler<{
+  fraternityId: string;
+  date: string;
+}> = async ({ params: { fraternityId, date } }, res) => {
   const db = await mongoDb;
   const holyMassesCollection = db.collection<HolyMass>('holyMasses');
 
@@ -17,8 +17,10 @@ export const getHolyMassesSeats: RequestHandler = async (
 
   const takenSeats =
     holyMass?.participants.reduce(
-      (sum: number, { seats, deleted }: { seats: number; deleted?: boolean }) =>
-        deleted ? sum : sum + seats,
+      (
+        sum: number,
+        { seats, deleted }: { seats: number; deleted?: boolean },
+      ) => (deleted ? sum : sum + seats),
       0,
     ) || 0;
 

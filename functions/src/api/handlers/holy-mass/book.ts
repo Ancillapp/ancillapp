@@ -3,10 +3,10 @@ import { Fraternity, HolyMass } from '../../../models/mongo';
 
 import type { RequestHandler } from 'express';
 
-export const bookHolyMass: RequestHandler = async (
-  { body, params: { fraternityId, date } },
-  res,
-) => {
+export const bookHolyMass: RequestHandler<{
+  fraternityId: string;
+  date: string;
+}> = async ({ body, params: { fraternityId, date } }, res) => {
   const seats = body?.seats ?? 1;
 
   if (typeof seats !== 'number' || seats < 1 || seats > 5) {

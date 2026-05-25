@@ -3,10 +3,10 @@ import { HolyMass } from '../../../models/mongo';
 
 import type { RequestHandler } from 'express';
 
-export const cancelHolyMassBooking: RequestHandler = async (
-  { params: { fraternityId, date } },
-  res,
-) => {
+export const cancelHolyMassBooking: RequestHandler<{
+  fraternityId: string;
+  date: string;
+}> = async ({ params: { fraternityId, date } }, res) => {
   const { uid: userId } = res.locals.user;
 
   const db = await mongoDb;

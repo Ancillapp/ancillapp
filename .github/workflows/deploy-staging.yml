@@ -11,17 +11,15 @@ jobs:
         uses: actions/checkout@v6
         with:
           submodules: true
-      - name: Use Node.js 24
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Install deps
-        run: yarn install --immutable
+        run: bun install
       - name: Build
         run: |
-          yarn build:functions
-          yarn build:sitemap
-          yarn build:pwa --mode staging
+          bun run build:functions
+          bun run build:sitemap
+          bun run build:pwa --mode staging
         env:
           NODE_ENV: staging
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
@@ -29,7 +27,7 @@ jobs:
         run: |
           echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 --decode > firebase-service-account.json
           echo "$FIREBASE_FUNCTIONS_DOTENV_BASE64" | base64 --decode > functions/.env.ancillapp-staging
-          yarn firebase deploy --project ancillapp-staging --config firebase.json --only hosting:ancillapp-staging,functions:pwa
+          bun run firebase deploy --project ancillapp-staging --config firebase.json --only hosting:ancillapp-staging,functions:pwa
         env:
           FIREBASE_SERVICE_ACCOUNT_BASE64: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64_STAGING }}
           FIREBASE_FUNCTIONS_DOTENV_BASE64: ${{ secrets.FIREBASE_FUNCTIONS_DOTENV_BASE64_STAGING }}
