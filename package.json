@@ -9,9 +9,9 @@
     "start": "bun run --workspaces start",
     "build": "bun run --workspaces build",
     "start:pwa": "bun --filter @ancillapp/pwa start",
-    "build:pwa": "bun --filter @ancillapp/pwa run build",
+    "build:pwa": "bun --filter @ancillapp/pwa build",
     "start:functions": "bun --filter @ancillapp/functions start",
-    "build:functions": "bun --filter @ancillapp/functions run build",
+    "build:functions": "bun --filter @ancillapp/functions build",
     "build:sitemap": "node scripts/sitemap"
   },
   "devDependencies": {
