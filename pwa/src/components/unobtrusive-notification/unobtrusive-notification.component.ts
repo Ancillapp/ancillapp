@@ -1,8 +1,8 @@
 import { LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import sharedStyles from '../../shared.styles';
-import styles from './unobtrusive-notification.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './unobtrusive-notification.styles.scss';
 import template from './unobtrusive-notification.template';
 
 @customElement('unobtrusive-notification')

@@ -1,6 +1,7 @@
 import { PropertyValues } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
+import { setupWorkerClient } from '@easy-worker/core';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
@@ -9,8 +10,8 @@ import { Song } from '../../models/song';
 import { Prayer } from '../../models/prayer';
 import { Magazine, MagazineType } from '../../models/magazine';
 
-import sharedStyles from '../../shared.styles';
-import styles from './home.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './home.styles.scss';
 import template from './home.template';
 
 import config from '../../config/default.json';
@@ -28,12 +29,13 @@ import {
 } from '../../components/icons';
 import { formatDateToUrl, renderToString } from '../../helpers/utils';
 
-import * as HomeWorker from './home.worker';
+import type { HomeWorker, SearchItem } from './home.worker';
 import { cacheAndNetwork } from '../../helpers/cache-and-network';
 
-const { configureSearch, search } =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  new (HomeWorker as any)() as typeof HomeWorker;
+const worker = new Worker(new URL('./home.worker.ts', import.meta.url), {
+  type: 'module',
+});
+const workerClient = setupWorkerClient<HomeWorker>(worker);
 
 const getLocalizedHolyMassDescriptor = (
   locale: SupportedLocale,
@@ -54,7 +56,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   protected render = template;
 
   @property({ type: Array })
-  protected _searchResults: HomeWorker.SearchItem[] = [];
+  protected _searchResults: SearchItem[] = [];
 
   @property({ type: Boolean })
   protected _searching = false;
@@ -110,7 +112,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    await configureSearch([
+    await workerClient.configureSearch([
       {
         title: this.localize(t`home`),
         preview: {
@@ -238,7 +240,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         description: this.localize(t`infoDescription`),
         link: this.localizeHref('info'),
       },
-      ...this._songs.map<HomeWorker.SearchItem>(
+      ...this._songs.map<SearchItem>(
         ({ language, category, number, title, content }) => ({
           title,
           preview: {
@@ -255,7 +257,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
           ({ title: { [this.locale]: localizedTitle, la: latinTitle } }) =>
             Boolean(localizedTitle || latinTitle),
         )
-        .map<HomeWorker.SearchItem>(
+        .map<SearchItem>(
           ({
             slug,
             title: { [this.locale]: localizedTitle, la: latinTitle },
@@ -271,24 +273,22 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
             keywords: slug,
           }),
         ),
-      ...this._magazines.map<HomeWorker.SearchItem>(
-        ({ type, code, name, thumbnail }) => {
-          const magazineName =
-            type === MagazineType.ANCILLA_DOMINI
-              ? 'Ancilla Domini'
-              : '#sempreconnessi';
-          return {
-            title: magazineName,
-            description: name,
-            preview: {
-              type: 'html',
-              content: `<img class="search-result-preview" src="${thumbnail}" alt="${magazineName} - ${name}">`,
-            },
-            link: this.localizeHref('magazines', type, code),
-            keywords: code,
-          };
-        },
-      ),
+      ...this._magazines.map<SearchItem>(({ type, code, name, thumbnail }) => {
+        const magazineName =
+          type === MagazineType.ANCILLA_DOMINI
+            ? 'Ancilla Domini'
+            : '#sempreconnessi';
+        return {
+          title: magazineName,
+          description: name,
+          preview: {
+            type: 'html',
+            content: `<img class="search-result-preview" src="${thumbnail}" alt="${magazineName} - ${name}">`,
+          },
+          link: this.localizeHref('magazines', type, code),
+          keywords: code,
+        };
+      }),
     ]);
   }
 
@@ -350,7 +350,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
       return;
     }
 
-    this._searchResults = await search(this._searchTerm);
+    this._searchResults = await workerClient.search(this._searchTerm);
   }
 
   protected _handleSearchKeyDown(

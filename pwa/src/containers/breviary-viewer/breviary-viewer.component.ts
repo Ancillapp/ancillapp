@@ -7,8 +7,8 @@ import { PageViewElement } from '../page-view-element';
 import { refresh } from '../../components/icons';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './breviary-viewer.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './breviary-viewer.styles.scss';
 import template from './breviary-viewer.template';
 import '@material/mwc-icon-button';
 

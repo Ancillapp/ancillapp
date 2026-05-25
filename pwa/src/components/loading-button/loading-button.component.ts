@@ -1,8 +1,8 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import sharedStyles from '../../shared.styles';
-import styles from './loading-button.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './loading-button.styles.scss';
 import template from './loading-button.template';
 
 @customElement('loading-button')

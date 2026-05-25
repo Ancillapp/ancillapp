@@ -19,8 +19,8 @@ import { logEvent, auth } from '../../helpers/firebase';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './login.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './login.styles.scss';
 import template from './login.template';
 
 @customElement('login-page')

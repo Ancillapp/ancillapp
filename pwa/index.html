@@ -40,7 +40,8 @@
           // Load and register pre-caching Service Worker
           if ('serviceWorker' in navigator) {
             window.addEventListener('load', () =>
-              navigator.serviceWorker.register('sw.js', {
+              navigator.serviceWorker.register('<%- swPath %>', {
+                type: '<%- swType %>',
                 scope: '/',
               })
               .catch(console.warn),
@@ -293,6 +294,8 @@
         }
       }
     </style>
+
+    <script type="module" src="/src/index.ts"></script>
   </head>
   <body data-theme="system">
     <ancillapp-shell>

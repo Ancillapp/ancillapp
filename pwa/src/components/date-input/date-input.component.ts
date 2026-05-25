@@ -3,8 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { dateConverter } from '../../helpers/converters';
 import { toLocalTimeZone } from '../../helpers/utils';
 
-import sharedStyles from '../../shared.styles';
-import styles from './date-input.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './date-input.styles.scss';
 import template from './date-input.template';
 
 @customElement('date-input')

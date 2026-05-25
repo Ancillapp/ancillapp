@@ -1,8 +1,6 @@
-declare module 'webpack-bundle-analyzer-brotli' {
-  export * from 'webpack-bundle-analyzer';
-}
+/// <reference types="vite/types/importMeta.d.ts" />
 
-declare module '*.styles' {
+declare module '*.styles.scss' {
   import type { CSSResult } from 'lit';
 
   const content: CSSResult;

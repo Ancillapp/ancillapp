@@ -1,3 +1,4 @@
+import { setupWorkerServer } from '@easy-worker/core';
 import Fuse from 'fuse.js';
 import type { Song } from '../../models/song';
 
@@ -5,9 +6,16 @@ export interface ExtendedSong extends Song {
   formattedNumber: string;
 }
 
+export interface SongsListWorker {
+  configureSearch(songs: ExtendedSong[]): Promise<void>;
+  search(term: string): Promise<ExtendedSong[]>;
+}
+
 let _fuse: Fuse<ExtendedSong>;
 
-export const configureSearch = async (songs: ExtendedSong[]) => {
+export const configureSearch: SongsListWorker['configureSearch'] = async (
+  songs,
+) => {
   if (_fuse) {
     _fuse.setCollection(songs);
   } else {
@@ -19,7 +27,9 @@ export const configureSearch = async (songs: ExtendedSong[]) => {
   }
 };
 
-export const search = async (term: string): Promise<ExtendedSong[]> => {
+export const search: SongsListWorker['search'] = async (
+  term,
+): Promise<ExtendedSong[]> => {
   if (!_fuse) {
     return [];
   }
@@ -57,3 +67,8 @@ export const search = async (term: string): Promise<ExtendedSong[]> => {
     }, item),
   );
 };
+
+setupWorkerServer({
+  configureSearch,
+  search,
+});

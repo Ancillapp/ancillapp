@@ -18,7 +18,7 @@ export const logEvent = async (
   eventParams?: Parameters<typeof firebaseLogEvent>[2],
   options?: Parameters<typeof firebaseLogEvent>[3],
 ) => {
-  if (process.env.BROWSER_ENV !== 'production') {
+  if (import.meta.env.MODE !== 'production') {
     console.groupCollapsed('Analytics event');
     console.info(`Name: ${eventName}`);
 

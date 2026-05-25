@@ -42,7 +42,7 @@ clientsClaim();
 
 self.addEventListener('install', () => set('appVersion', version));
 
-if (process.env.BROWSER_ENV === 'development') {
+if (import.meta.env.MODE === 'development') {
   console.groupCollapsed('Workbox precache manifest');
   self.__WB_MANIFEST.forEach((entry) => console.info(entry));
   console.groupEnd();

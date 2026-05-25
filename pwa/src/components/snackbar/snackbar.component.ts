@@ -1,7 +1,7 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import styles from './snackbar.styles';
+import styles from './snackbar.styles.scss';
 import template from './snackbar.template';
 
 @customElement('snack-bar')

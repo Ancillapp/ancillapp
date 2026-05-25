@@ -6,8 +6,8 @@ import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 
-import sharedStyles from '../../shared.styles';
-import styles from './liturgy-viewer.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './liturgy-viewer.styles.scss';
 import template from './liturgy-viewer.template';
 
 import '@material/mwc-icon-button';

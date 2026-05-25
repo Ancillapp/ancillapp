@@ -9,8 +9,8 @@ import { get, set } from '../../helpers/keyval';
 import { installRouter } from '../../helpers/router';
 import { auth } from '../../helpers/firebase';
 
-import sharedStyles from '../../shared.styles';
-import styles from './shell.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './shell.styles.scss';
 import template from './shell.template';
 
 import type { Drawer } from '@material/mwc-drawer';
@@ -48,7 +48,7 @@ export class Shell extends localize(authorize(LitElement)) {
   private _drawer!: Drawer;
 
   @queryAll('.page')
-  private _pages: { scrollTarget: HTMLElement }[] = [];
+  declare private _pages: { scrollTarget: HTMLElement }[];
 
   constructor() {
     super();

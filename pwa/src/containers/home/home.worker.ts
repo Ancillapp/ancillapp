@@ -1,3 +1,4 @@
+import { setupWorkerServer } from '@easy-worker/core';
 import Fuse from 'fuse.js';
 
 export interface SearchItem {
@@ -11,9 +12,16 @@ export interface SearchItem {
   keywords?: string;
 }
 
+export interface HomeWorker {
+  configureSearch(configuration: SearchItem[]): Promise<void>;
+  search(term: string): Promise<SearchItem[]>;
+}
+
 let _fuse: Fuse<SearchItem>;
 
-export const configureSearch = async (configuration: SearchItem[]) => {
+export const configureSearch: HomeWorker['configureSearch'] = async (
+  configuration,
+) => {
   if (_fuse) {
     _fuse.setCollection(configuration);
   } else {
@@ -25,7 +33,7 @@ export const configureSearch = async (configuration: SearchItem[]) => {
   }
 };
 
-export const search = async (term: string): Promise<SearchItem[]> => {
+export const search: HomeWorker['search'] = async (term) => {
   if (!_fuse) {
     return [];
   }
@@ -63,3 +71,8 @@ export const search = async (term: string): Promise<SearchItem[]> => {
     }, item),
   );
 };
+
+setupWorkerServer<HomeWorker>({
+  configureSearch,
+  search,
+});

@@ -7,8 +7,8 @@ import { PageViewElement } from '../page-view-element';
 import { get, set } from '../../helpers/keyval';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './settings.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './settings.styles.scss';
 import template from './settings.template';
 
 import { logEvent } from '../../helpers/firebase';

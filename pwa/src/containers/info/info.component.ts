@@ -6,8 +6,8 @@ import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './info.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './info.styles.scss';
 import template from './info.template';
 
 import { logEvent } from '../../helpers/firebase';

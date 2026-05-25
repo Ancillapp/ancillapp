@@ -14,7 +14,7 @@ import {
   user,
   holyMassIcon,
 } from '../../components/icons';
-import { t } from '@lingui/core/macro';
+import { t, msg } from '@lingui/core/macro';
 
 import '@material/mwc-drawer';
 import '@material/mwc-icon-button';
@@ -27,14 +27,14 @@ import('@material/mwc-snackbar');
 import('../update-checker/update-checker.component');
 
 const pagesTranslations = {
-  home: t`home`,
-  breviary: t`breviary`,
-  songs: t`songs`,
-  prayers: t`prayers`,
-  magazines: t`magazines`,
-  holyMass: t`holyMass`,
-  settings: t`settings`,
-  info: t`info`,
+  home: msg`home`,
+  breviary: msg`breviary`,
+  songs: msg`songs`,
+  prayers: msg`prayers`,
+  magazines: msg`magazines`,
+  holyMass: msg`holyMass`,
+  settings: msg`settings`,
+  info: msg`info`,
 };
 
 const topNavPages: [string, SVGTemplateResult][] = [

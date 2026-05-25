@@ -5,11 +5,14 @@ import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { navigateTo } from '../../helpers/router';
 import { PageViewElement } from '../page-view-element';
-import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
+import {
+  cacheAndNetwork,
+  type APIResponse,
+} from '../../helpers/cache-and-network';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './song-viewer.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './song-viewer.styles.scss';
 import template from './song-viewer.template';
 
 import config from '../../config/default.json';

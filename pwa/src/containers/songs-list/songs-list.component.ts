@@ -1,16 +1,20 @@
 import { PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
+import { setupWorkerClient } from '@easy-worker/core';
 import { get, set } from '../../helpers/keyval';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../../containers/page-view-element';
 import HyperList, { HyperListConfig } from 'hyperlist';
-import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
+import {
+  cacheAndNetwork,
+  type APIResponse,
+} from '../../helpers/cache-and-network';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './songs-list.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './songs-list.styles.scss';
 import template from './songs-list.template';
 
 import config from '../../config/default.json';
@@ -31,11 +35,12 @@ import {
 
 import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
 
-import * as SongsListWorker from './songs-list.worker';
+import type { SongsListWorker, ExtendedSong } from './songs-list.worker';
 
-const { configureSearch, search } =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  new (SongsListWorker as any)() as typeof SongsListWorker;
+const worker = new Worker(new URL('./songs-list.worker.ts', import.meta.url), {
+  type: 'module',
+});
+const workerClient = setupWorkerClient<SongsListWorker>(worker);
 
 @customElement('songs-list')
 export class SongsList extends localize(withTopAppBar(PageViewElement)) {
@@ -45,7 +50,7 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
 
   private _hyperlist?: HyperList;
 
-  private _displayedSongs: SongsListWorker.ExtendedSong[] = [];
+  private _displayedSongs: ExtendedSong[] = [];
 
   private _desktopLayout = false;
 
@@ -117,8 +122,8 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
       songsLanguage && supportedSongsLanguages.includes(songsLanguage)
         ? songsLanguage
         : locale && supportedSongsLanguages.includes(locale as SongLanguage)
-        ? (locale as SongLanguage)
-        : SongLanguage.ITALIAN;
+          ? (locale as SongLanguage)
+          : SongLanguage.ITALIAN;
 
     this._selectedCategory =
       songsCategory && supportedSongsCategories.includes(songsCategory)
@@ -188,19 +193,19 @@ export class SongsList extends localize(withTopAppBar(PageViewElement)) {
       .map((song) => ({
         ...song,
         formattedNumber: getFormattedSongNumber(song),
-      })) as SongsListWorker.ExtendedSong[];
+      })) as ExtendedSong[];
 
-    await configureSearch(songs);
+    await workerClient.configureSearch(songs);
 
     this._displayedSongs = this._searchTerm
-      ? await search(this._searchTerm)
+      ? await workerClient.search(this._searchTerm)
       : songs;
 
     this._renderSongs();
   }
 
   private _getHyperListConfig(
-    displayedSongs: SongsListWorker.ExtendedSong[],
+    displayedSongs: ExtendedSong[],
     desktopLayout: boolean,
     songsPerRow: number,
   ): HyperListConfig {

@@ -18,9 +18,12 @@ jobs:
       - name: Install deps
         run: yarn install --immutable
       - name: Build
-        run: yarn build
+        run: |
+          yarn build:functions
+          yarn build:sitemap
+          yarn build:pwa --mode staging
         env:
-          BROWSER_ENV: staging
+          NODE_ENV: staging
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
         run: |

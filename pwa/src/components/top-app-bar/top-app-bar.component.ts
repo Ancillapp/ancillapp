@@ -1,7 +1,7 @@
 import { LitElement, PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 
-import styles from './top-app-bar.styles';
+import styles from './top-app-bar.styles.scss';
 import template from './top-app-bar.template';
 
 @customElement('top-app-bar')

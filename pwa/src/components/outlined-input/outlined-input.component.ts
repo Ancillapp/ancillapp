@@ -1,7 +1,7 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import styles from './outlined-input.styles';
+import styles from './outlined-input.styles.scss';
 import template from './outlined-input.template';
 
 @customElement('outlined-input')

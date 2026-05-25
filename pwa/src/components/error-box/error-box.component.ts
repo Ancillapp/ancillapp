@@ -2,7 +2,7 @@ import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { localize } from '../../helpers/localize';
 
-import sharedStyles from '../../shared.styles';
+import sharedStyles from '../../shared.styles.scss';
 import template from './error-box.template';
 
 @customElement('error-box')

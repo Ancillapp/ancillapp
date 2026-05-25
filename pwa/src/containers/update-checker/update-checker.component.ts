@@ -4,8 +4,8 @@ import { localize } from '../../helpers/localize';
 import { get, set } from '../../helpers/keyval';
 import { version as currentAppVersion } from '../../../../CHANGELOG.md';
 
-import sharedStyles from '../../shared.styles';
-import styles from './update-checker.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './update-checker.styles.scss';
 import template from './update-checker.template';
 
 import type { Checkbox } from '@material/mwc-checkbox';

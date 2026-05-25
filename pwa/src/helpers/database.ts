@@ -140,7 +140,7 @@ export interface ProxyDB
 }
 
 const handleRequest = async (event: MessageEvent<DBRequestEvent>) => {
-  if (process.env.BROWSER_ENV !== 'production') {
+  if (import.meta.env.MODE !== 'production') {
     console.groupCollapsed('DB request received from SW');
     console.info(
       `${event.data.method}(${event.data.args

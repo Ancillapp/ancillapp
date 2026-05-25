@@ -7,11 +7,14 @@ import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './magazines-list.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './magazines-list.styles.scss';
 import template from './magazines-list.template';
 import { urlBase64ToUint8Array } from '../../helpers/utils';
-import { APIResponse, cacheAndNetwork } from '../../helpers/cache-and-network';
+import {
+  cacheAndNetwork,
+  type APIResponse,
+} from '../../helpers/cache-and-network';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';

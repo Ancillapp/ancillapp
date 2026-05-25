@@ -3,7 +3,10 @@
   "compilerOptions": {
     "noEmit": true,
     "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": false,
     "lib": ["esnext", "dom", "dom.iterable", "webworker"]
   },
-  "include": ["src", "webpack", "typings.d.ts"]
+  "include": ["src", "vite-plugins", "typings.d.ts", "vite.config.ts"]
 }

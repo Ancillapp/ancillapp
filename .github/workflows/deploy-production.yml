@@ -19,12 +19,11 @@ jobs:
         run: yarn install --immutable
       - name: Build
         run: |
-          # Generate the sitemap
+          yarn build:functions
           yarn build:sitemap
-          # Build the PWA and the functions
-          yarn build
+          yarn build:pwa --mode production
         env:
-          BROWSER_ENV: production
+          NODE_ENV: production
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
         run: |

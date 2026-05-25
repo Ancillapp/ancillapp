@@ -1,8 +1,14 @@
+import { setupWorkerServer } from '@easy-worker/core';
 import Fuse from 'fuse.js';
 import { Prayer, PrayerLanguage } from '../../models/prayer';
 
 export interface ExtendedPrayer extends Prayer {
   displayedTitle: string;
+}
+
+export interface PrayersListWorker {
+  configureSearch(prayers: ExtendedPrayer[]): Promise<void>;
+  search(term: string): Promise<ExtendedPrayer[]>;
 }
 
 let _fuse: Fuse<ExtendedPrayer>;
@@ -12,7 +18,9 @@ const localizedSearchKeys = Object.values(PrayerLanguage).flatMap((lang) => [
   `content.${lang}`,
 ]);
 
-export const configureSearch = async (songs: ExtendedPrayer[]) => {
+export const configureSearch: PrayersListWorker['configureSearch'] = async (
+  songs,
+) => {
   if (_fuse) {
     _fuse.setCollection(songs);
   } else {
@@ -24,7 +32,7 @@ export const configureSearch = async (songs: ExtendedPrayer[]) => {
   }
 };
 
-export const search = async (term: string): Promise<ExtendedPrayer[]> => {
+export const search: PrayersListWorker['search'] = async (term) => {
   if (!_fuse) {
     return [];
   }
@@ -67,3 +75,8 @@ export const search = async (term: string): Promise<ExtendedPrayer[]> => {
     }, item),
   );
 };
+
+setupWorkerServer<PrayersListWorker>({
+  configureSearch,
+  search,
+});

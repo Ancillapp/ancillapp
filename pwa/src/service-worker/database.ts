@@ -15,7 +15,7 @@ const setupEventListener = async () => {
     if (event.data.action !== 'database') {
       return;
     }
-    if (process.env.BROWSER_ENV !== 'production') {
+    if (import.meta.env.MODE !== 'production') {
       console.groupCollapsed('DB response received from browser');
       const result =
         event.data.status === 'fulfilled'

@@ -1,30 +1,36 @@
 import { PropertyValues } from 'lit';
 import { customElement, query, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
+import { setupWorkerClient } from '@easy-worker/core';
 import { get, set } from '../../helpers/keyval';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
-import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
+import {
+  cacheAndNetwork,
+  type APIResponse,
+} from '../../helpers/cache-and-network';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './prayers-list.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './prayers-list.styles.scss';
 import template from './prayers-list.template';
 
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 import { PrayerLanguage, PrayerSummary } from '../../models/prayer';
 
-import * as PrayersListWorker from './prayers-list.worker';
+import type { PrayersListWorker, ExtendedPrayer } from './prayers-list.worker';
 import {
   getPrayerDisplayedTitle,
   getUserLanguagesPriorityArray,
 } from '../../helpers/prayers';
 
-const { configureSearch, search } =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  new (PrayersListWorker as any)() as typeof PrayersListWorker;
+const worker = new Worker(
+  new URL('./prayers-list.worker.ts', import.meta.url),
+  { type: 'module' },
+);
+const workerClient = setupWorkerClient<PrayersListWorker>(worker);
 
 @customElement('prayers-list')
 export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
@@ -54,7 +60,7 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
   protected _searching = false;
 
   @state()
-  protected _displayedPrayers: PrayersListWorker.ExtendedPrayer[] = [];
+  protected _displayedPrayers: ExtendedPrayer[] = [];
 
   @state()
   protected _userLanguagesPriorityArray = getUserLanguagesPriorityArray(
@@ -105,14 +111,14 @@ export class PrayersList extends localize(withTopAppBar(PageViewElement)) {
               prayer,
               this._userLanguagesPriorityArray,
             ),
-          }) as PrayersListWorker.ExtendedPrayer,
+          }) as ExtendedPrayer,
       )
       .sort((a, b) => a.displayedTitle.localeCompare(b.displayedTitle));
 
-    await configureSearch(prayers);
+    await workerClient.configureSearch(prayers);
 
     this._displayedPrayers = this._searchTerm
-      ? await search(this._searchTerm)
+      ? await workerClient.search(this._searchTerm)
       : prayers;
   }
 

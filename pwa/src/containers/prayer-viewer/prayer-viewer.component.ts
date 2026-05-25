@@ -4,11 +4,14 @@ import { updateMetadata } from 'pwa-helpers';
 import { localize } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
-import { cacheAndNetwork, APIResponse } from '../../helpers/cache-and-network';
+import {
+  cacheAndNetwork,
+  type APIResponse,
+} from '../../helpers/cache-and-network';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './prayer-viewer.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './prayer-viewer.styles.scss';
 import template from './prayer-viewer.template';
 
 import config from '../../config/default.json';

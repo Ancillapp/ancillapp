@@ -1,7 +1,7 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import styles from './loading-spinner.styles';
+import styles from './loading-spinner.styles.scss';
 import template from './loading-spinner.template';
 
 @customElement('loading-spinner')

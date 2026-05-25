@@ -2,8 +2,8 @@ import { LitElement } from 'lit';
 import { customElement, query, property } from 'lit/decorators.js';
 import { localize } from '../../helpers/localize';
 
-import sharedStyles from '../../shared.styles';
-import styles from './share-fab.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './share-fab.styles.scss';
 import template from './share-fab.template';
 import { importIIFE } from '../../helpers/utils';
 

@@ -1,7 +1,7 @@
 import { LitElement, PropertyValues } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 
-import styles from './outlined-select.styles';
+import styles from './outlined-select.styles.scss';
 import template from './outlined-select.template';
 
 @customElement('outlined-select')

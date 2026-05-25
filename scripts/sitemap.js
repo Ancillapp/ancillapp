@@ -251,8 +251,8 @@ const run = async () => {
             <url>
               <loc>${host}${localizedPages[defaultLocale]}</loc>
               <xhtml:link rel="alternate" hreflang="x-default" href="${host}${
-            localizedPages[defaultLocale]
-          }" />
+                localizedPages[defaultLocale]
+              }" />
               ${Object.entries(localizedPages)
                 .map(
                   ([lang, path]) =>
@@ -271,7 +271,7 @@ const run = async () => {
     .replace(/\s+/g, ' ')
     .replace(/>\s+</g, '><');
 
-  const sitemapPath = path.resolve(__dirname, '../pwa/src/assets/sitemap.xml');
+  const sitemapPath = path.resolve(__dirname, '../pwa/public/sitemap.xml');
 
   await fs.writeFile(sitemapPath, sitemap);
 };

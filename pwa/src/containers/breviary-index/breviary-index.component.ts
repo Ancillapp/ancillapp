@@ -7,8 +7,8 @@ import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './breviary-index.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './breviary-index.styles.scss';
 import template from './breviary-index.template';
 
 import config from '../../config/default.json';

@@ -1,8 +1,8 @@
 import { LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import sharedStyles from '../../shared.styles';
-import styles from './autosized-fab.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './autosized-fab.styles.scss';
 import template from './autosized-fab.template';
 
 import { installMediaQueryWatcher } from 'pwa-helpers';

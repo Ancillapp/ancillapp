@@ -7,8 +7,8 @@ import { Magazine, MagazineType } from '../../models/magazine';
 import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/core/macro';
 
-import sharedStyles from '../../shared.styles';
-import styles from './magazines-index.styles';
+import sharedStyles from '../../shared.styles.scss';
+import styles from './magazines-index.styles.scss';
 import template from './magazines-index.template';
 
 import config from '../../config/default.json';
