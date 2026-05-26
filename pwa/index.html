@@ -5,49 +5,16 @@
     <meta name="viewport" content="width=device-width">
 
     <script>
-      // Clear web app data if we are still running the old version
-      indexedDB.databases()
-        .then(dbs => {
-          if (dbs.some(db => db.name === 'ancillapp')) {
-            localStorage.clear();
-            sessionStorage.clear();
-            document.cookie.split(';').forEach(c => {
-              document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
-            });
-
-            const promisesArray = [caches.keys().then(keys => keys.map(key => caches.delete(key))).catch(() => {})];
-            dbs.forEach(db => promisesArray.push(new Promise((resolve, reject) => {
-              const request = indexedDB.deleteDatabase(db.name);
-              request.onsuccess = resolve;
-              request.onerror = resolve;
-            })));
-
-            if ('serviceWorker' in navigator) {
-              promisesArray.push(
-                navigator.serviceWorker.getRegistrations()
-                  .then(registrations =>
-                    registrations.map(registration => registration.unregister().catch(() => {})),
-                  )
-                  .catch(() => {}),
-              );
-            }
-
-            return promisesArray.catch(() => {}).then(() => window.location.reload());;
-          }
-        })
-        .catch(() => {})
-        .then(() => {
-          // Load and register pre-caching Service Worker
-          if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () =>
-              navigator.serviceWorker.register('<%- swPath %>', {
-                type: '<%- swType %>',
-                scope: '/',
-              })
-              .catch(console.warn),
-            );
-          }
-        });
+      // Load and register pre-caching Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () =>
+          navigator.serviceWorker.register('<%- swPath %>', {
+            type: '<%- swType %>',
+            scope: '/',
+          })
+          .catch(console.warn),
+        );
+      }
     </script>
 
     <!-- Icons -->
