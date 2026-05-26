@@ -19,7 +19,6 @@ export class SearchTopBar extends LitElement {
   @property({ type: String, reflect: true })
   public placeholder = '';
 
-  @property({ type: Object })
   get scrollTarget() {
     return (
       this._scrollTarget ||
@@ -28,14 +27,13 @@ export class SearchTopBar extends LitElement {
     );
   }
 
+  @property({ type: Object })
   set scrollTarget(value) {
     this.unregisterScrollListener();
-    const old = this.scrollTarget;
     this._scrollTarget = value;
     this._scrollFromTop = 0;
     this._ticking = false;
     this._latestPos = value.scrollTop;
-    this.requestUpdate('scrollTarget', old);
     this.registerScrollListener();
   }
 

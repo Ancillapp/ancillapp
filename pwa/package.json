@@ -31,7 +31,7 @@
     "fuse.js": "^7.1.0",
     "hyperlist": "https://github.com/tbranyen/hyperlist/tarball/master",
     "idb": "^8.0.2",
-    "lit": "^2.8.0",
+    "lit": "^3.3.3",
     "pwa-helpers": "^0.9.1",
     "share-menu": "5.1.0",
     "workbox-cacheable-response": "^7.3.0",

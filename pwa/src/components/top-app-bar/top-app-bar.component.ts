@@ -19,7 +19,6 @@ export class TopAppBar extends LitElement {
   @state()
   protected _scrolled = false;
 
-  @state()
   get scrollTarget() {
     return (
       this._scrollTarget ||
@@ -28,15 +27,14 @@ export class TopAppBar extends LitElement {
     );
   }
 
+  @state()
   set scrollTarget(value) {
     this.unregisterScrollListener();
-    const old = this.scrollTarget;
     this._scrollTarget = value;
     this._scrollFromTop = 0;
     this._scrolled = false;
     this._ticking = false;
     this._latestPos = value.scrollTop;
-    this.requestUpdate('scrollTarget', old);
     this.registerScrollListener();
   }
 
