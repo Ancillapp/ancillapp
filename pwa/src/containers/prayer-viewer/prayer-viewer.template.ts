@@ -74,7 +74,9 @@ export default function template(this: PrayerViewer) {
       this._prayerStatus.data?.content,
       () => html`
         <section
-          class="${this._prayerLanguages.length > 1 ? 'multilanguage' : ''}"
+          class="card ${this._prayerLanguages.length > 1
+            ? 'multilanguage'
+            : ''}"
         >
           ${this._selectedPrayerLanguage in this._prayerStatus.data!.content
             ? renderPrayer(

@@ -55,7 +55,9 @@ export default function template(this: SongViewer) {
     ${when(
       this._songStatus.data?.content,
       () => html`
-        <section>${renderSong(this._songStatus.data!.content)}</section>
+        <section class="card">
+          ${renderSong(this._songStatus.data!.content)}
+        </section>
 
         <share-fab
           title="${this._songStatus.data!.number}. ${this._songStatus.data!
