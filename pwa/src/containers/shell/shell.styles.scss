@@ -5,6 +5,42 @@
   height: 100%;
 }
 
+mdui-navigation-rail-item::part(label) {
+  text-align: center;
+}
+
+.navigation-drawer-header {
+  font-family: var(--ancillapp-display-font);
+  font-size: 20.8px;
+  color: var(--ancillapp-primary-text-color);
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  height: var(--ancillapp-top-bar-height);
+  padding-left: 26px;
+
+  @media (min-width: 600px) {
+    // TODO: discover why this line is needed
+    transform: translateY(-4px);
+    padding-left: 7.5px;
+  }
+
+  > mwc-icon-button {
+    margin-right: 16px;
+  }
+
+  > svg {
+    height: 30px;
+    padding-bottom: 6px;
+    fill: currentColor;
+    margin-right: 16px;
+  }
+
+  span {
+    padding-top: 6px;
+  }
+}
+
 :host([drawer-shrinked]) {
   @media (min-width: 600px) {
     mwc-drawer {
@@ -107,14 +143,11 @@ mwc-list-item {
   }
 }
 
-li[divider] {
-  border-bottom-color: var(--ancillapp-divider-color);
-}
-
 main {
   width: 100%;
   min-height: 100%;
+  overflow-y: auto;
   padding-top: var(--ancillapp-top-bar-height);
-  background: var(--ancillapp-background-color);
+  background: rgb(var(--mdui-color-background));
   display: flex;
 }

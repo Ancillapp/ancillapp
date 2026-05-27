@@ -178,6 +178,10 @@ msgstr "Filtros"
 msgid "forgotPassword"
 msgstr "Esqueceu a senha?"
 
+#: src/containers/home/home.template.ts
+msgid "forToday"
+msgstr "Para hoje"
+
 #: src/containers/info/info.template.ts:60
 msgid "foundationDescription"
 msgstr ""

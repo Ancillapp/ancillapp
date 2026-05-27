@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { SongViewer } from './song-viewer.component';
 import { renderSong } from '../../helpers/directives';
-import { arrowBack, search } from '../../components/icons';
+import { arrowBack, searchIcon } from '../../components/icons';
 import { getFormattedSongNumber } from '../../helpers/songs';
 import { t } from '@lingui/core/macro';
 
@@ -31,7 +31,7 @@ export default function template(this: SongViewer) {
         @click="${this._goToSearchPage}"
         label="${this.localize(t`search`)}"
       >
-        ${search}
+        ${searchIcon}
       </mwc-icon-button>
     </top-app-bar>
 

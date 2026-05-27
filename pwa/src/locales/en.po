@@ -176,6 +176,10 @@ msgstr "Filters"
 msgid "forgotPassword"
 msgstr "Forgot your password?"
 
+#: src/containers/home/home.template.ts
+msgid "forToday"
+msgstr "For today"
+
 #: src/containers/info/info.template.ts:60
 msgid "foundationDescription"
 msgstr ""

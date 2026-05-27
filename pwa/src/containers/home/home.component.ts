@@ -67,9 +67,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
   @query('.search-results')
   private _searchResultsContainer?: HTMLDivElement;
 
-  @query('#search-input')
-  private _searchInput?: HTMLInputElement;
-
   @state()
   private _songs: Song[] = [];
 
@@ -78,6 +75,16 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
 
   @state()
   private _magazines: Magazine[] = [];
+
+  get _todaySubtitle(): string {
+    const today = new Date();
+    return today.toLocaleDateString(this.locale, {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  }
 
   constructor() {
     super();
@@ -311,16 +318,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
     }
 
     if (
-      this.showMenuButton &&
-      changedProperties.has('_searching') &&
-      this._searching &&
-      this._searchInput
-    ) {
-      this._searchInput.focus();
-      this._searchInput.setSelectionRange(-1, -1);
-    }
-
-    if (
       changedProperties.has('_songs') ||
       changedProperties.has('_prayers') ||
       changedProperties.has('_magazines')
@@ -393,15 +390,16 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
 
   protected _handleSearch(value: string) {
     this._searchTerm = value;
+    this._searching = Boolean(value);
     history.replaceState(
       {},
       '',
-      `${window.location.pathname}?search${
-        this._searchTerm ? `=${this._searchTerm}` : ''
-      }`,
+      value
+        ? `${window.location.pathname}?search=${value}`
+        : window.location.pathname,
     );
 
-    this._searchResultsContainer!.scrollTo(0, 0);
+    this._searchResultsContainer?.scrollTo(0, 0);
     this._updateSearchResults();
   }
 
@@ -432,7 +430,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
       return;
     }
 
-    this._searchInput!.value = '';
     this._searchTerm = '';
     this._stopSearching();
     this._updateSearchResults();

@@ -63,7 +63,14 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
 
   protected async _handleThemeChange({ target }: CustomEvent<null>) {
     const newTheme = (target as OutlinedSelect).value;
+    const mduiTheme = {
+      system: 'auto',
+      light: 'light',
+      dark: 'dark',
+      oled: 'dark',
+    }[newTheme];
     document.body.dataset.theme = newTheme;
+    document.documentElement.className = `mdui-theme-${mduiTheme}`;
     await set('theme', newTheme);
   }
 

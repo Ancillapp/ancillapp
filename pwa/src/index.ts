@@ -30,8 +30,16 @@ const getPreferredLocale = async () => {
 // Start importing the preferred user locale
 getPreferredLocale().then((locale) => import(`./locales/${locale}.po`));
 // Set the correct theme
-get<string>('theme').then(
-  (storedTheme) => (document.body.dataset.theme = storedTheme || 'system'),
-);
+get<string>('theme').then((storedTheme) => {
+  const themeToApply = storedTheme || 'system';
+  const mduiTheme = {
+    system: 'auto',
+    light: 'light',
+    dark: 'dark',
+    oled: 'dark',
+  }[themeToApply];
+  document.body.dataset.theme = themeToApply;
+  document.documentElement.className = `mdui-theme-${mduiTheme}`;
+});
 // Load the app shell
 import('./containers/shell/shell.component');

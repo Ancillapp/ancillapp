@@ -53,6 +53,8 @@
     <link rel="preload" href="/fonts/xfuu0WDhWW_fOEoY8l_VPNZfB7jPM68YCVc0feEFPiUCl08.woff2" as="font" type="font/woff2" crossorigin>
 
     <style>
+      @import 'mdui/mdui.css';
+
       @font-face {
         font-family: 'Vesper Libre';
         font-style: normal;
@@ -87,6 +89,84 @@
 
       *, *::before, *::after {
         box-sizing: border-box;
+      }
+
+      /* Needed by MDUI */
+      :root {
+        --mdui-color-primary-light: 0, 100, 145;
+        --mdui-color-on-primary-light: 255, 255, 255;
+        --mdui-color-primary-container-light: 201, 230, 255;
+        --mdui-color-on-primary-container-light: 0, 30, 47;
+        --mdui-color-secondary-light: 79, 96, 110;
+        --mdui-color-on-secondary-light: 255, 255, 255;
+        --mdui-color-secondary-container-light: 211, 229, 245;
+        --mdui-color-on-secondary-container-light: 12, 29, 41;
+        --mdui-color-tertiary-light: 100, 89, 124;
+        --mdui-color-on-tertiary-light: 255, 255, 255;
+        --mdui-color-tertiary-container-light: 234, 221, 255;
+        --mdui-color-on-tertiary-container-light: 32, 22, 53;
+        --mdui-color-error-light: 186, 26, 26;
+        --mdui-color-on-error-light: 255, 255, 255;
+        --mdui-color-error-container-light: 255, 218, 214;
+        --mdui-color-on-error-container-light: 65, 0, 2;
+        --mdui-color-background-light: 252, 252, 255;
+        --mdui-color-on-background-light: 25, 28, 30;
+        --mdui-color-surface-light: 252, 252, 255;
+        --mdui-color-on-surface-light: 25, 28, 30;
+        --mdui-color-surface-variant-light: 221, 227, 234;
+        --mdui-color-on-surface-variant-light: 65, 71, 77;
+        --mdui-color-outline-light: 113, 120, 126;
+        --mdui-color-outline-variant-light: 193, 199, 206;
+        --mdui-color-shadow-light: 0, 0, 0;
+        --mdui-color-scrim-light: 0, 0, 0;
+        --mdui-color-inverse-surface-light: 46, 49, 51;
+        --mdui-color-inverse-on-surface-light: 240, 240, 243;
+        --mdui-color-inverse-primary-light: 137, 206, 255;
+        --mdui-color-surface-dim-light: 217, 218, 221;
+        --mdui-color-surface-bright-light: 249, 249, 252;
+        --mdui-color-surface-container-lowest-light: 255, 255, 255;
+        --mdui-color-surface-container-low-light: 243, 243, 246;
+        --mdui-color-surface-container-light: 237, 238, 240;
+        --mdui-color-surface-container-high-light: 231, 232, 235;
+        --mdui-color-surface-container-highest-light: 226, 226, 229;
+        --mdui-color-surface-tint-color-light: 0, 100, 145;
+        --mdui-color-primary-dark: 137, 206, 255;
+        --mdui-color-on-primary-dark: 0, 52, 77;
+        --mdui-color-primary-container-dark: 0, 76, 110;
+        --mdui-color-on-primary-container-dark: 201, 230, 255;
+        --mdui-color-secondary-dark: 183, 201, 217;
+        --mdui-color-on-secondary-dark: 33, 50, 63;
+        --mdui-color-secondary-container-dark: 56, 73, 86;
+        --mdui-color-on-secondary-container-dark: 211, 229, 245;
+        --mdui-color-tertiary-dark: 206, 192, 232;
+        --mdui-color-on-tertiary-dark: 53, 43, 75;
+        --mdui-color-tertiary-container-dark: 76, 65, 99;
+        --mdui-color-on-tertiary-container-dark: 234, 221, 255;
+        --mdui-color-error-dark: 255, 180, 171;
+        --mdui-color-on-error-dark: 105, 0, 5;
+        --mdui-color-error-container-dark: 147, 0, 10;
+        --mdui-color-on-error-container-dark: 255, 180, 171;
+        --mdui-color-background-dark: 25, 28, 30;
+        --mdui-color-on-background-dark: 226, 226, 229;
+        --mdui-color-surface-dark: 25, 28, 30;
+        --mdui-color-on-surface-dark: 226, 226, 229;
+        --mdui-color-surface-variant-dark: 65, 71, 77;
+        --mdui-color-on-surface-variant-dark: 193, 199, 206;
+        --mdui-color-outline-dark: 139, 145, 152;
+        --mdui-color-outline-variant-dark: 65, 71, 77;
+        --mdui-color-shadow-dark: 0, 0, 0;
+        --mdui-color-scrim-dark: 0, 0, 0;
+        --mdui-color-inverse-surface-dark: 226, 226, 229;
+        --mdui-color-inverse-on-surface-dark: 46, 49, 51;
+        --mdui-color-inverse-primary-dark: 0, 100, 145;
+        --mdui-color-surface-dim-dark: 17, 20, 22;
+        --mdui-color-surface-bright-dark: 55, 57, 60;
+        --mdui-color-surface-container-lowest-dark: 12, 14, 17;
+        --mdui-color-surface-container-low-dark: 25, 28, 30;
+        --mdui-color-surface-container-dark: 30, 32, 34;
+        --mdui-color-surface-container-high-dark: 40, 42, 44;
+        --mdui-color-surface-container-highest-dark: 51, 53, 55;
+        --mdui-color-surface-tint-color-dark: 137, 206, 255;
       }
 
       html, body {

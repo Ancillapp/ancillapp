@@ -211,6 +211,10 @@ msgstr "Filtri"
 msgid "forgotPassword"
 msgstr "Password dimenticata?"
 
+#: src/containers/home/home.template.ts
+msgid "forToday"
+msgstr "Per oggi"
+
 #. js-lingui-generated-id
 #: src/containers/info/info.template.ts:60
 msgid "foundationDescription"

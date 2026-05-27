@@ -89,3 +89,6 @@ export const formatDateToUrl = (date: Date) =>
     (date.getMonth() + 1).toString().padStart(2, '0'),
     date.getDate().toString().padStart(2, '0'),
   ].join('/');
+
+export const toCamelCase = (str: string) =>
+  str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());

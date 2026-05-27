@@ -34,18 +34,16 @@ export class Shell extends localize(authorize(LitElement)) {
   protected _drawerOpened = false;
 
   @property({ type: Boolean })
-  protected _narrow = false;
-
-  @property({ type: Boolean })
-  protected _verificationEmailSent = new URLSearchParams(
-    window.location.search,
-  ).has('registered');
+  protected _wide = false;
 
   @property({ type: Object })
   protected _wakeLockSentinel: WakeLockSentinel | null = null;
 
   @query('mwc-drawer')
   private _drawer!: Drawer;
+
+  @query('#app-content')
+  protected _appContent!: HTMLElement;
 
   @queryAll('.page')
   declare private _pages: { scrollTarget: HTMLElement }[];
@@ -62,7 +60,7 @@ export class Shell extends localize(authorize(LitElement)) {
 
     installMediaQueryWatcher(
       '(min-width: 48rem)',
-      (matches) => (this._narrow = matches),
+      (matches) => (this._wide = matches),
     );
 
     this._setupWakeLockSentinel();
@@ -111,37 +109,9 @@ export class Shell extends localize(authorize(LitElement)) {
   }
 
   protected firstUpdated(changedProperties: PropertyValues) {
-    super.updated(changedProperties);
+    super.firstUpdated(changedProperties);
 
     installRouter((location) => this._locationChanged(location));
-
-    // TODO: discover why we need this instead of just using
-    // @MDCDrawer:closed="${() => (this._drawerOpened = false)}"
-    // in the template
-    this._drawer.addEventListener(
-      'MDCDrawer:closed',
-      () => (this._drawerOpened = false),
-    );
-
-    const slotChangeListener = () => {
-      const drawerContent =
-        this._drawer.shadowRoot!.querySelector<HTMLDivElement>(
-          '.mdc-drawer-app-content',
-        );
-
-      if (!drawerContent) {
-        return;
-      }
-
-      this._drawer.shadowRoot!.removeEventListener(
-        'slotchange',
-        slotChangeListener,
-      );
-
-      this._pages.forEach((page) => (page.scrollTarget = drawerContent));
-    };
-
-    this._drawer.shadowRoot!.addEventListener('slotchange', slotChangeListener);
   }
 
   protected _observeForThemeChanges() {
@@ -185,7 +155,7 @@ export class Shell extends localize(authorize(LitElement)) {
     this._loadPage(locale as SupportedLocale, page, subroutes.join('/'));
 
     // Close the drawer - in case the *path* change came from a link in the drawer.
-    if (!this._narrow) {
+    if (!this._wide) {
       this._updateDrawerOpenState(false);
     }
   }

@@ -2,7 +2,7 @@ import { html, nothing } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { PrayersList } from './prayers-list.component';
-import { menu, search, arrowBack } from '../../components/icons';
+import { menu, searchIcon, arrowBack } from '../../components/icons';
 import { t } from '@lingui/core/macro';
 
 import '@material/mwc-button';
@@ -44,7 +44,7 @@ export default function template(this: PrayersList) {
               @click="${this._startSearching}"
               label="${this.localize(t`search`)}"
             >
-              ${search}
+              ${searchIcon}
             </mwc-icon-button>
           `}
       <div slot="title" ?hidden="${this._searching}">

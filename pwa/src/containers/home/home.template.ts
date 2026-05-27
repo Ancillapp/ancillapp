@@ -6,15 +6,16 @@ import {
   breviaryIcon,
   prayersIcon,
   songsIcon,
-  menu,
-  arrowBack,
   holyMassIcon,
-} from '../../components/icons';
+  tau,
+} from '../../components/icons.js';
 import { formatDateToUrl } from '../../helpers/utils';
 import { HomePage } from './home.component';
 import { t } from '@lingui/core/macro';
 
-import '../../components/search-top-bar/search-top-bar.component';
+import 'mdui/components/card.js';
+import 'mdui/components/text-field.js';
+import '../../components/ancillapp-icon.component.js';
 
 export default function template(this: HomePage) {
   const searchResults = repeat(
@@ -27,108 +28,120 @@ export default function template(this: HomePage) {
         @click="${this._handleSearchResultClick}"
       >
         ${preview.type === 'text'
-          ? html` <div class="search-result-preview">${preview.content}</div> `
+          ? html`<div class="search-result-preview">${preview.content}</div>`
           : html`${unsafeHTML(preview.content)}`}
         <div class="search-result-content">
           <h4>${unsafeHTML(title)}</h4>
-          ${description
-            ? html`<h5>${unsafeHTML(description)}</h5>`
-            : html`${nothing}`}
+          ${description ? html`<h5>${unsafeHTML(description)}</h5>` : nothing}
         </div>
       </a>
     `,
   );
 
   return html`
-    <top-app-bar
-      class="search-mode ${this.showMenuButton && this._searching
-        ? ''
-        : 'hidden'}"
-      ?drawer-open="${this.drawerOpen}"
-    >
-      <mwc-icon-button
-        slot="leadingIcon"
-        @click="${this._stopSearching}"
-        label="${this.localize(t`back`)}"
-      >
-        ${arrowBack}
-      </mwc-icon-button>
-      <input
-        id="search-input"
-        type="search"
-        slot="title"
-        placeholder="${this.localize(t`searchInAncillapp`)}"
-        @keydown="${this._handleSearchKeyDown}"
-        @input="${this._handleMobileSearch}"
-        value="${this._searchTerm}"
-        autofocus
-        aria-label="${this.localize(t`searchInAncillapp`)}"
-      />
-    </top-app-bar>
-    <search-top-bar
-      ?drawer-open="${this.drawerOpen}"
+    <div class="app-header">
+      ${tau}
+      <span>Ancillapp</span>
+    </div>
+
+    <div class="hero">
+      <div class="hero-content">
+        <h1>${this.localize(t`peaceAndGood`)}</h1>
+        <p class="hero-subtitle">${this._todaySubtitle}</p>
+      </div>
+      <div class="hero-watermark" aria-hidden="true">${tau}</div>
+    </div>
+
+    <mdui-text-field
+      class="search-field"
+      type="search"
+      variant="filled"
       placeholder="${this.localize(t`searchInAncillapp`)}"
-      @search="${this._handleDesktopSearch}"
-      @searchclick="${this._startSearching}"
-      @searchkeydown="${this._handleSearchKeyDown}"
-      class="${this.showMenuButton && this._searching ? 'hidden' : ''}"
+      icon="search"
+      .value="${this._searchTerm}"
+      @input="${this._handleMobileSearch}"
+      @keydown="${this._handleSearchKeyDown}"
+      aria-label="${this.localize(t`searchInAncillapp`)}"
     >
-      <mwc-icon-button
-        slot="leadingIcon"
-        ?hidden="${!this.showMenuButton}"
-        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
-        label="${this.localize(t`menu`)}"
-      >
-        ${menu}
-      </mwc-icon-button>
-      <div slot="title">${this.localize(t`home`)}</div>
-    </search-top-bar>
+      <ancillapp-icon name="searchIcon" slot="icon"></ancillapp-icon>
+    </mdui-text-field>
 
     <div class="search-results" ?hidden="${!this._searching}">
       ${this._searchTerm && this._searchResults.length < 1
         ? html`<p>${this.localize(t`noResults`)}</p>`
-        : html`${nothing}`}
+        : nothing}
       ${searchResults}
     </div>
 
-    <section ?hidden="${this.showMenuButton && this._searching}">
-      <h2>${this.localize(t`peaceAndGood`)}</h2>
-      <ul>
-        <li>
-          <a href="${this.localizeHref('breviary')}">
-            <span>${this.localize(t`prayLiturgy`)}</span>
-            ${breviaryIcon}
-          </a>
-        </li>
-        <li>
-          <a href="${this.localizeHref('songs')}">
-            <span>${this.localize(t`singFraternitySongs`)}</span>
-            ${songsIcon}
-          </a>
-        </li>
-        <li>
-          <a href="${this.localizeHref('prayers')}">
-            <span>${this.localize(t`prayDailyPrayers`)}</span>
-            ${prayersIcon}
-          </a>
-        </li>
-        <li>
-          <a
-            href="${this.localizeHref('holy-mass')}/${formatDateToUrl(
-              new Date(),
-            )}"
-          >
-            <span>${this.localize(t`readLiturgyOfTheDay`)}</span>
-            ${holyMassIcon}
-          </a>
-        </li>
-        <li>
-          <a href="${this.localizeHref('magazines')}">
-            <span>${this.localize(t`readFraternityMagazines`)}</span>
-            ${magazinesIcon}
-          </a>
-        </li>
-      </ul>
+    <section ?hidden="${this._searching}">
+      <h2 class="section-label">${this.localize(t`forToday`)}</h2>
+      <div class="nav-grid">
+        <!-- TODO -->
+        <!-- <mdui-card
+          clickable
+          href="${this.localizeHref('breviary')}"
+          class="nav-card card-breviary"
+        >
+          <div class="nav-card-inner">
+            <span class="nav-card-label">${this.localize(t`prayLiturgy`)}</span>
+            <div class="nav-card-icon">${breviaryIcon}</div>
+          </div>
+        </mdui-card> -->
+
+        <mdui-card
+          clickable
+          href="${this.localizeHref('songs')}"
+          class="nav-card card-songs"
+        >
+          <div class="nav-card-inner">
+            <span class="nav-card-label"
+              >${this.localize(t`singFraternitySongs`)}</span
+            >
+            <div class="nav-card-icon">${songsIcon}</div>
+          </div>
+        </mdui-card>
+
+        <mdui-card
+          clickable
+          href="${this.localizeHref('prayers')}"
+          class="nav-card card-prayers"
+        >
+          <div class="nav-card-inner">
+            <span class="nav-card-label"
+              >${this.localize(t`prayDailyPrayers`)}</span
+            >
+            <div class="nav-card-icon">${prayersIcon}</div>
+          </div>
+        </mdui-card>
+
+        <mdui-card
+          clickable
+          href="${this.localizeHref('holy-mass')}/${formatDateToUrl(
+            new Date(),
+          )}"
+          class="nav-card card-holy-mass"
+        >
+          <div class="nav-card-inner">
+            <span class="nav-card-label"
+              >${this.localize(t`readLiturgyOfTheDay`)}</span
+            >
+            <div class="nav-card-icon">${holyMassIcon}</div>
+          </div>
+        </mdui-card>
+
+        <mdui-card
+          clickable
+          href="${this.localizeHref('magazines')}"
+          class="nav-card card-magazines"
+        >
+          <div class="nav-card-inner">
+            <span class="nav-card-label"
+              >${this.localize(t`readFraternityMagazines`)}</span
+            >
+            <div class="nav-card-icon">${magazinesIcon}</div>
+          </div>
+        </mdui-card>
+      </div>
     </section>
   `;
 }
