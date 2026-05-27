@@ -8,11 +8,13 @@ import {
   songsIcon,
   holyMassIcon,
   tau,
+  menu,
 } from '../../components/icons.js';
 import { formatDateToUrl } from '../../helpers/utils';
 import { HomePage } from './home.component';
 import { t } from '@lingui/core/macro';
 
+import 'mdui/components/button-icon.js';
 import 'mdui/components/card.js';
 import 'mdui/components/text-field.js';
 import '../../components/ancillapp-icon.component.js';
@@ -40,6 +42,14 @@ export default function template(this: HomePage) {
 
   return html`
     <div class="app-header">
+      ${this.showMenuButton
+        ? html`<mdui-button-icon
+            class="menu-button"
+            aria-label="${this.localize(t`menu`)}"
+            @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+            >${menu}</mdui-button-icon
+          >`
+        : nothing}
       ${tau}
       <span>Ancillapp</span>
     </div>

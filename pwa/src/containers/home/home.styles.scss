@@ -18,6 +18,12 @@
   padding-inline: 0.125rem;
   flex-shrink: 0;
 
+  .menu-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: rgb(var(--mdui-color-on-surface));
+  }
+
   svg {
     height: 1.875rem;
     fill: rgb(var(--mdui-color-on-surface));

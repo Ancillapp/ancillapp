@@ -10,6 +10,8 @@ import 'mdui/components/navigation-rail-item.js';
 import 'mdui/components/navigation-bar.js';
 import 'mdui/components/navigation-bar-item.js';
 import 'mdui/components/navigation-drawer.js';
+import 'mdui/components/list.js';
+import 'mdui/components/list-item.js';
 import 'mdui/components/fab.js';
 import 'mdui/components/button-icon.js';
 import '../../components/ancillapp-icon.component.js';
@@ -91,13 +93,64 @@ export default function template(this: Shell) {
             @open="${() => this._updateDrawerOpenState(true)}"
             @close="${() => this._updateDrawerOpenState(false)}"
           >
-            <span class="navigation-drawer-header">
-              ${tau}
-              <span>Ancillapp</span>
-            </span>
-            <mdui-button-icon aria-label="${this.localize(t`close`)}">
-              <ancillapp-icon name="searchIcon"></ancillapp-icon>
-            </mdui-button-icon>
+            <div class="navigation-drawer-header">
+              <span class="navigation-drawer-title">
+                ${tau}
+                <span>Ancillapp</span>
+              </span>
+              <mdui-button-icon
+                aria-label="${this.localize(t`close`)}"
+                @click="${() => this._updateDrawerOpenState(false)}"
+              >
+                <ancillapp-icon name="close"></ancillapp-icon>
+              </mdui-button-icon>
+            </div>
+            <div class="navigation-drawer-content">
+              <mdui-list>
+                ${topNavPages.map(
+                  (page) => html`
+                    <mdui-list-item
+                      rounded
+                      href="${this.localizeHref(page)}"
+                      ?active="${this._page === page}"
+                      @click="${() => this._updateDrawerOpenState(false)}"
+                    >
+                      <ancillapp-icon
+                        name="${toCamelCase(page)}Icon"
+                        slot="icon"
+                      ></ancillapp-icon>
+                      ${this.localize(
+                        pagesTranslations[
+                          toCamelCase(page) as keyof typeof pagesTranslations
+                        ],
+                      )}
+                    </mdui-list-item>
+                  `,
+                )}
+              </mdui-list>
+              <mdui-list>
+                ${bottomNavPages.map(
+                  (page) => html`
+                    <mdui-list-item
+                      rounded
+                      href="${this.localizeHref(page)}"
+                      ?active="${this._page === page}"
+                      @click="${() => this._updateDrawerOpenState(false)}"
+                    >
+                      <ancillapp-icon
+                        name="${toCamelCase(page)}Icon"
+                        slot="icon"
+                      ></ancillapp-icon>
+                      ${this.localize(
+                        pagesTranslations[
+                          toCamelCase(page) as keyof typeof pagesTranslations
+                        ],
+                      )}
+                    </mdui-list-item>
+                  `,
+                )}
+              </mdui-list>
+            </div>
           </mdui-navigation-drawer>
 
           <mdui-navigation-bar
