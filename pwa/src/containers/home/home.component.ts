@@ -17,16 +17,16 @@ import template from './home.template';
 import config from '../../config/default.json';
 import { logEvent } from '../../helpers/firebase';
 import {
-  homeIcon,
-  breviaryIcon,
-  songsIcon,
-  prayersIcon,
-  magazinesIcon,
+  home,
+  breviary,
+  songs,
+  prayers,
+  magazines,
   user,
-  settingsIcon,
-  infoIcon,
-  holyMassIcon,
-} from '../../components/icons';
+  settings,
+  info,
+  holyMass,
+} from '../../components/icons.js';
 import { formatDateToUrl, renderToString } from '../../helpers/utils';
 
 import type { HomeWorker, SearchItem } from './home.worker';
@@ -125,7 +125,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            homeIcon,
+            home,
           )}</div>`,
         },
         description: this.localize(t`appDescription`),
@@ -136,7 +136,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            breviaryIcon,
+            breviary,
           )}</div>`,
         },
         description: this.localize(t`breviaryDescription`),
@@ -147,7 +147,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            songsIcon,
+            songs,
           )}</div>`,
         },
         description: this.localize(t`songsDescription`),
@@ -158,7 +158,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            prayersIcon,
+            prayers,
           )}</div>`,
         },
         description: this.localize(t`prayersDescription`),
@@ -169,7 +169,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            holyMassIcon,
+            holyMass,
           )}</div>`,
         },
         description: this.localize(
@@ -182,7 +182,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            holyMassIcon,
+            holyMass,
           )}</div>`,
         },
         description: this.localize(
@@ -195,7 +195,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            holyMassIcon,
+            holyMass,
           )}</div>`,
         },
         description: this.localize(
@@ -208,7 +208,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            magazinesIcon,
+            magazines,
           )}</div>`,
         },
         description: this.localize(t`magazinesDescription`),
@@ -230,7 +230,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            settingsIcon,
+            settings,
           )}</div>`,
         },
         description: this.localize(t`settingsDescription`),
@@ -241,7 +241,7 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
         preview: {
           type: 'html',
           content: `<div class="search-result-preview">${renderToString(
-            infoIcon,
+            info,
           )}</div>`,
         },
         description: this.localize(t`infoDescription`),

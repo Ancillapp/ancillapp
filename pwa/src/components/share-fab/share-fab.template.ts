@@ -1,7 +1,6 @@
 import { html } from 'lit';
 import { ShareFAB } from './share-fab.component';
 import { t } from '@lingui/core/macro';
-import { share } from '../icons';
 
 import '../autosized-fab/autosized-fab.component';
 
@@ -9,9 +8,9 @@ export default function template(this: ShareFAB) {
   return html`
     <autosized-fab
       label="${this.localize(t`share`)}"
+      icon="share"
       @click="${this._handleShare}"
     >
-      ${share}
     </autosized-fab>
 
     <share-menu>

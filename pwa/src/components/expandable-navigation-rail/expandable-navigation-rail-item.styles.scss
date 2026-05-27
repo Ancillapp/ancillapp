@@ -1,0 +1,65 @@
+.label {
+  text-align: center;
+  white-space: nowrap;
+}
+
+:host([expanded]:not([expanded='false' i])) {
+  .container {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 3.5rem;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+    border-radius: var(--mdui-shape-corner-full);
+
+    &:not(.initial) {
+      transition: background-color var(--mdui-motion-duration-short4)
+        var(--mdui-motion-easing-standard);
+    }
+  }
+
+  .indicator {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: transparent;
+  }
+
+  .label {
+    flex: 1;
+    height: auto;
+    margin: 0;
+    padding-left: 0.75rem;
+    line-height: var(--mdui-typescale-label-large-line-height);
+    font-size: var(--mdui-typescale-label-large-size);
+    letter-spacing: var(--mdui-typescale-label-large-tracking);
+    font-weight: var(--mdui-typescale-label-large-weight);
+  }
+
+  mdui-ripple {
+    width: 100%;
+    height: 3.5rem;
+  }
+}
+
+:host([expanded]:not([expanded='false' i])[active]) {
+  --mdui-comp-ripple-state-layer-color: var(
+    --mdui-color-on-secondary-container
+  );
+
+  .container {
+    background-color: rgb(var(--mdui-color-secondary-container));
+  }
+
+  .indicator {
+    width: auto;
+    background-color: transparent;
+    height: 1.5rem;
+  }
+
+  .label {
+    color: rgb(var(--mdui-color-on-secondary-container));
+  }
+}

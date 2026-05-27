@@ -5,8 +5,6 @@ import { tau } from '../../components/icons.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { toCamelCase } from '../../helpers/utils';
 
-import 'mdui/components/navigation-rail.js';
-import 'mdui/components/navigation-rail-item.js';
 import 'mdui/components/navigation-bar.js';
 import 'mdui/components/navigation-bar-item.js';
 import 'mdui/components/navigation-drawer.js';
@@ -15,6 +13,8 @@ import 'mdui/components/list-item.js';
 import 'mdui/components/fab.js';
 import 'mdui/components/button-icon.js';
 import '../../components/ancillapp-icon.component.js';
+import '../../components/expandable-navigation-rail/expandable-navigation-rail.component.js';
+import '../../components/expandable-navigation-rail/expandable-navigation-rail-item.component.js';
 import '../../components/top-app-bar/top-app-bar.component.js';
 
 // Asynchronous imports
@@ -22,6 +22,7 @@ import('../update-checker/update-checker.component');
 
 const pagesTranslations = {
   home: msg`home`,
+  search: msg`search`,
   breviary: msg`breviary`,
   songs: msg`songs`,
   prayers: msg`prayers`,
@@ -41,47 +42,60 @@ const topNavPages: string[] = [
 ];
 const bottomNavPages: string[] = ['settings', 'info'];
 
-const navbarPages: string[] = ['home', 'search', 'settings', 'info'];
+const navbarPages: string[] = ['home', 'search', 'songs', 'prayers'];
 
 export default function template(this: Shell) {
   return html`
     ${this._wide
       ? html`
-          <!-- contained -->
-          <mdui-navigation-rail value="${this._page}">
-            <mdui-button-icon
-              slot="top"
-              aria-label="${this.localize(t`menu`)}"
-              @click="${() => this._updateDrawerOpenState(!this._drawerOpened)}"
-            >
-              <ancillapp-icon name="menu"></ancillapp-icon>
-            </mdui-button-icon>
-            <mdui-fab lowered slot="top">
-              <ancillapp-icon name="searchIcon" slot="icon"></ancillapp-icon>
-            </mdui-fab>
+          <expandable-navigation-rail
+            value="${this._page}"
+            ?expanded="${this._drawerOpened}"
+            contained
+          >
+            <div class="navigation-rail-top" slot="top">
+              <mdui-button-icon
+                aria-label="${this.localize(t`menu`)}"
+                @click="${() =>
+                  this._updateDrawerOpenState(!this._drawerOpened)}"
+              >
+                <ancillapp-icon
+                  name="${this._drawerOpened ? 'menuOpen' : 'menu'}"
+                ></ancillapp-icon>
+              </mdui-button-icon>
+              <mdui-fab lowered ?extended="${this._drawerOpened}">
+                <ancillapp-icon name="search" slot="icon"></ancillapp-icon>
+                ${this.localize(t`search`)}
+              </mdui-fab>
+            </div>
             ${[...topNavPages, ...bottomNavPages].map(
               (page) => html`
-                <mdui-navigation-rail-item
+                <expandable-navigation-rail-item
                   href="${this.localizeHref(page)}"
                   value="${page}"
                   ?active="${this._page === page}"
                   slot="${ifDefined(
                     topNavPages.includes(page) ? undefined : 'bottom',
                   )}"
+                  ?expanded="${this._drawerOpened}"
                 >
                   <ancillapp-icon
-                    name="${toCamelCase(page)}Icon"
+                    name="${toCamelCase(page)}"
                     slot="icon"
+                  ></ancillapp-icon>
+                  <ancillapp-icon
+                    name="${toCamelCase(page)}Active"
+                    slot="active-icon"
                   ></ancillapp-icon>
                   ${this.localize(
                     pagesTranslations[
                       toCamelCase(page) as keyof typeof pagesTranslations
                     ],
                   )}
-                </mdui-navigation-rail-item>
+                </expandable-navigation-rail-item>
               `,
             )}
-          </mdui-navigation-rail>
+          </expandable-navigation-rail>
         `
       : html`
           <mdui-navigation-drawer
@@ -116,7 +130,9 @@ export default function template(this: Shell) {
                       @click="${() => this._updateDrawerOpenState(false)}"
                     >
                       <ancillapp-icon
-                        name="${toCamelCase(page)}Icon"
+                        name="${this._page === page
+                          ? `${toCamelCase(page)}Active`
+                          : toCamelCase(page)}"
                         slot="icon"
                       ></ancillapp-icon>
                       ${this.localize(
@@ -138,7 +154,9 @@ export default function template(this: Shell) {
                       @click="${() => this._updateDrawerOpenState(false)}"
                     >
                       <ancillapp-icon
-                        name="${toCamelCase(page)}Icon"
+                        name="${this._page === page
+                          ? `${toCamelCase(page)}Active`
+                          : toCamelCase(page)}"
                         slot="icon"
                       ></ancillapp-icon>
                       ${this.localize(
@@ -156,8 +174,10 @@ export default function template(this: Shell) {
           <mdui-navigation-bar
             scroll-behavior="hide"
             scroll-threshold="30"
-            .scrollTarget="${this._appContent}"
+            .scrollTarget="${this._navbarScrollTarget || this._appContent}"
             value="${this._page}"
+            @show="${() => this._updateNavbarOffset(true)}"
+            @hide="${() => this._updateNavbarOffset(false)}"
           >
             ${navbarPages.map(
               (page) => html`
@@ -167,8 +187,12 @@ export default function template(this: Shell) {
                   ?active="${this._page === page}"
                 >
                   <ancillapp-icon
-                    name="${toCamelCase(page)}Icon"
+                    name="${toCamelCase(page)}"
                     slot="icon"
+                  ></ancillapp-icon>
+                  <ancillapp-icon
+                    name="${toCamelCase(page)}Active"
+                    slot="active-icon"
                   ></ancillapp-icon>
                   ${this.localize(
                     pagesTranslations[

@@ -2,11 +2,11 @@ import { html, nothing } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import {
-  magazinesIcon,
-  breviaryIcon,
-  prayersIcon,
-  songsIcon,
-  holyMassIcon,
+  magazines,
+  breviary,
+  prayers,
+  songs,
+  holyMass,
   tau,
   menu,
 } from '../../components/icons.js';
@@ -73,7 +73,7 @@ export default function template(this: HomePage) {
       @keydown="${this._handleSearchKeyDown}"
       aria-label="${this.localize(t`searchInAncillapp`)}"
     >
-      <ancillapp-icon name="searchIcon" slot="icon"></ancillapp-icon>
+      <ancillapp-icon name="search" slot="icon"></ancillapp-icon>
     </mdui-text-field>
 
     <div class="search-results" ?hidden="${!this._searching}">
@@ -94,7 +94,7 @@ export default function template(this: HomePage) {
         >
           <div class="nav-card-inner">
             <span class="nav-card-label">${this.localize(t`prayLiturgy`)}</span>
-            <div class="nav-card-icon">${breviaryIcon}</div>
+            <div class="nav-card-icon">${breviary}</div>
           </div>
         </mdui-card> -->
 
@@ -107,7 +107,7 @@ export default function template(this: HomePage) {
             <span class="nav-card-label"
               >${this.localize(t`singFraternitySongs`)}</span
             >
-            <div class="nav-card-icon">${songsIcon}</div>
+            <div class="nav-card-icon">${songs}</div>
           </div>
         </mdui-card>
 
@@ -120,7 +120,7 @@ export default function template(this: HomePage) {
             <span class="nav-card-label"
               >${this.localize(t`prayDailyPrayers`)}</span
             >
-            <div class="nav-card-icon">${prayersIcon}</div>
+            <div class="nav-card-icon">${prayers}</div>
           </div>
         </mdui-card>
 
@@ -135,7 +135,7 @@ export default function template(this: HomePage) {
             <span class="nav-card-label"
               >${this.localize(t`readLiturgyOfTheDay`)}</span
             >
-            <div class="nav-card-icon">${holyMassIcon}</div>
+            <div class="nav-card-icon">${holyMass}</div>
           </div>
         </mdui-card>
 
@@ -148,7 +148,7 @@ export default function template(this: HomePage) {
             <span class="nav-card-label"
               >${this.localize(t`readFraternityMagazines`)}</span
             >
-            <div class="nav-card-icon">${magazinesIcon}</div>
+            <div class="nav-card-icon">${magazines}</div>
           </div>
         </mdui-card>
       </div>

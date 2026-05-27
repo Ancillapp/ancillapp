@@ -169,8 +169,8 @@ msgid "ffbInfoTitle"
 msgstr ""
 
 #: src/containers/songs-list/songs-list.template.ts:287
-msgid "filters"
-msgstr ""
+msgid "filter"
+msgstr "Filter"
 
 #: src/containers/login/login.template.ts:85
 msgid "forgotPassword"

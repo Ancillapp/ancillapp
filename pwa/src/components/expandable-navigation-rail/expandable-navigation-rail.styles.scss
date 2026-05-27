@@ -1,0 +1,13 @@
+::slotted([slot='bottom']),
+::slotted([slot='top']),
+::slotted(expandable-navigation-rail-item) {
+  margin-top: 0.375rem;
+  margin-bottom: 0.375rem;
+}
+
+:host([expanded]:not([expanded='false' i])) {
+  width: 13.75rem;
+  align-items: stretch;
+  transition: width var(--mdui-motion-duration-short4)
+    var(--mdui-motion-easing-standard);
+}

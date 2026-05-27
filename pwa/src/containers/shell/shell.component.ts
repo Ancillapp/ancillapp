@@ -1,5 +1,11 @@
 import { LitElement, PropertyValues } from 'lit';
-import { customElement, property, query, queryAll } from 'lit/decorators.js';
+import {
+  customElement,
+  property,
+  query,
+  queryAll,
+  state,
+} from 'lit/decorators.js';
 import { installMediaQueryWatcher } from 'pwa-helpers';
 import { signOut } from 'firebase/auth';
 import { localize, SupportedLocale } from '../../helpers/localize';
@@ -35,6 +41,9 @@ export class Shell extends localize(authorize(LitElement)) {
 
   @property({ type: Boolean })
   protected _wide = false;
+
+  @state()
+  protected _navbarScrollTarget: HTMLElement | null = null;
 
   @property({ type: Object })
   protected _wakeLockSentinel: WakeLockSentinel | null = null;
@@ -100,6 +109,21 @@ export class Shell extends localize(authorize(LitElement)) {
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
+    if (changedProperties.has('_page')) {
+      this._navbarScrollTarget = null;
+    }
+
+    if (changedProperties.has('_wide')) {
+      this._updateNavbarOffset(!this._wide);
+    }
+
+    if (
+      changedProperties.has('_wide') ||
+      changedProperties.has('_drawerOpened')
+    ) {
+      this._updateRailWidth();
+    }
+
     if (changedProperties.has('user')) {
       if (this.user && this._page === 'login') {
         window.history.replaceState({}, '', '/');
@@ -112,6 +136,38 @@ export class Shell extends localize(authorize(LitElement)) {
     super.firstUpdated(changedProperties);
 
     installRouter((location) => this._locationChanged(location));
+
+    this._appContent.addEventListener('scrolltargetchange', (e: Event) => {
+      this._navbarScrollTarget = (e as CustomEvent<HTMLElement>).detail;
+    });
+
+    // Initialize nav bar offset (nav bar is visible on mobile by default)
+    this._updateNavbarOffset(!this._wide);
+    this._updateRailWidth();
+
+    window.addEventListener('resize', () => {
+      this._updateNavbarOffset(!this._wide);
+      this._updateRailWidth();
+    });
+  }
+
+  protected _updateRailWidth() {
+    let width: string;
+    if (!this._wide) {
+      width = '0rem';
+    } else if (this._drawerOpened) {
+      width = '13.75rem';
+    } else {
+      width = '5rem';
+    }
+    this.style.setProperty('--ancillapp-rail-width', width);
+  }
+
+  protected _updateNavbarOffset(navbarVisible: boolean) {
+    this.style.setProperty(
+      '--ancillapp-nav-bar-offset',
+      navbarVisible ? '5rem' : '0rem',
+    );
   }
 
   protected _observeForThemeChanges() {

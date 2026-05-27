@@ -7,7 +7,7 @@ header {
   position: fixed;
   top: 0;
   right: 0;
-  width: 100%;
+  width: calc(100% - var(--ancillapp-rail-width, 0rem));
   background: var(--ancillapp-top-app-bar-background);
   color: var(--ancillapp-top-app-bar-color);
   z-index: 4;
@@ -15,6 +15,7 @@ header {
   flex-direction: column;
   will-change: transform, box-shadow, background-color;
   transition:
+    width var(--mdui-motion-duration-short4) var(--mdui-motion-easing-standard),
     box-shadow 0.2s linear,
     background-color 0.2s linear;
   box-shadow: none;
@@ -25,10 +26,6 @@ header {
       0 4px 5px 0 rgba(0, 0, 0, 0.14),
       0 1px 10px 0 rgba(0, 0, 0, 0.12);
   }
-}
-
-:host([drawer-open]) header {
-  width: calc(100% - var(--mdc-drawer-width));
 }
 
 .row {

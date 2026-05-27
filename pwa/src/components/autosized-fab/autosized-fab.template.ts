@@ -1,19 +1,22 @@
-import { html } from 'lit';
+import { html, nothing } from 'lit';
 import { AutosizedFAB } from './autosized-fab.component';
 
-import '@material/mwc-fab';
+import 'mdui/components/fab.js';
+import '../ancillapp-icon.component.js';
 
 export default function template(this: AutosizedFAB) {
   return html`
-    <mwc-fab
-      ?mini="${this._mini}"
+    <mdui-fab
+      size="normal"
       ?disabled="${this.disabled}"
-      ?extended="${this.extended}"
-      label="${this.label || this.icon}"
+      ?extended="${!this._scrolling}"
     >
-      <div slot="icon">
-        <slot></slot>
-      </div>
-    </mwc-fab>
+      ${this.icon
+        ? html`
+            <ancillapp-icon name="${this.icon}" slot="icon"></ancillapp-icon>
+          `
+        : nothing}
+      ${this.label || nothing}
+    </mdui-fab>
   `;
 }

@@ -171,8 +171,8 @@ msgid "ffbInfoTitle"
 msgstr "Fraternidade Franciscana de Betânia"
 
 #: src/containers/songs-list/songs-list.template.ts:287
-msgid "filters"
-msgstr "Filtros"
+msgid "filter"
+msgstr "Filtrar"
 
 #: src/containers/login/login.template.ts:85
 msgid "forgotPassword"

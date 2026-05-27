@@ -203,8 +203,8 @@ msgstr "Fraternità Francescana di Betania"
 
 #. js-lingui-generated-id
 #: src/containers/songs-list/songs-list.template.ts:287
-msgid "filters"
-msgstr "Filtri"
+msgid "filter"
+msgstr "Filtra"
 
 #. js-lingui-generated-id
 #: src/containers/login/login.template.ts:85

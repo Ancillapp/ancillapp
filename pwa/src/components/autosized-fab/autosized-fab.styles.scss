@@ -1,8 +1,10 @@
 :host {
   position: fixed;
-  bottom: 20px;
+  bottom: calc(1.25rem + var(--ancillapp-nav-bar-offset, 0rem));
   right: 20px;
   z-index: 9;
+  transition: bottom var(--mdui-motion-duration-long2, 0.45s)
+    var(--mdui-motion-easing-emphasized, cubic-bezier(0.2, 0, 0, 1));
 }
 
 div[slot='icon'] {
