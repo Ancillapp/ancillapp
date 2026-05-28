@@ -17,14 +17,14 @@ section {
     ::slotted(mwc-button),
     ::slotted(loading-button),
     ::slotted(mdui-button) {
-      --mdc-theme-primary: var(--ancillapp-secondary-text-color);
+      --mdc-theme-primary: rgb(var(--mdui-color-on-surface-variant));
       --mdui-color-primary: var(--mdui-color-on-primary-container);
     }
 
     ::slotted(mwc-button:last-child),
     ::slotted(loading-button:last-child),
     ::slotted(mdui-button:last-child) {
-      --mdc-theme-primary: var(--ancillapp-accent-color);
+      --mdc-theme-primary: rgb(var(--mdui-color-tertiary));
       --mdui-color-primary: var(--mdui-color-on-primary-container);
       font-weight: 700;
     }

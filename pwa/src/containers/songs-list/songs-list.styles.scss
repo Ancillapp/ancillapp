@@ -46,7 +46,7 @@ unobtrusive-notification {
   margin: 0.5rem 1rem;
   display: flex;
   align-items: center;
-  border-bottom: 0.07rem solid var(--ancillapp-divider-color);
+  border-bottom: 0.07rem solid rgb(var(--mdui-color-outline-variant));
   will-change: transform;
   transition: 0.3s transform;
 
@@ -59,9 +59,10 @@ unobtrusive-notification {
   > .book {
     width: 4rem;
     height: 6rem;
-    background: var(--ancillapp-card-color);
+    background: rgb(var(--mdui-color-surface-container));
     border-radius: 0.5rem;
-    box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
+    box-shadow:
+      0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
       0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
       0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -73,7 +74,7 @@ unobtrusive-notification {
       font-size: 1.5rem;
       font-weight: 700;
       font-family: var(--ancillapp-display-font);
-      color: var(--ancillapp-primary-text-color);
+      color: rgb(var(--mdui-color-on-surface));
     }
 
     > .title {
@@ -85,7 +86,7 @@ unobtrusive-notification {
     margin: 0 2rem;
     font-size: 1.25rem;
     font-family: var(--ancillapp-display-font);
-    color: var(--ancillapp-accent-color);
+    color: rgb(var(--mdui-color-tertiary));
   }
 
   @media (min-width: 28.75rem) {
@@ -111,7 +112,7 @@ unobtrusive-notification {
         font-size: 1rem;
         height: 5rem;
         font-family: var(--ancillapp-display-font);
-        color: var(--ancillapp-accent-color);
+        color: rgb(var(--mdui-color-tertiary));
       }
     }
 

@@ -109,9 +109,9 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
         this._abcSections.forEach((section) => {
           renderAbc(section, section.dataset.content!, {
             responsive: 'resize',
-            dragColor: 'var(--ancillapp-primary-text-color)',
-            selectionColor: 'var(--ancillapp-primary-text-color)',
-            foregroundColor: 'var(--ancillapp-primary-text-color)',
+            dragColor: 'rgb(var(--mdui-color-on-surface))',
+            selectionColor: 'rgb(var(--mdui-color-on-surface))',
+            foregroundColor: 'rgb(var(--mdui-color-on-surface))',
           });
         });
       }

@@ -28,12 +28,12 @@
 }
 
 blockquote {
-  border: 0.02rem solid var(--ancillapp-divider-color);
-  border-left: 0.2rem solid var(--ancillapp-primary-color);
+  border: 0.02rem solid rgb(var(--mdui-color-outline-variant));
+  border-left: 0.2rem solid rgb(var(--mdui-color-primary));
   margin: 0.25rem 0 0.75rem 0;
   padding: 1rem 2rem;
   text-align: justify;
-  background: var(--ancillapp-background-color);
+  background: rgb(var(--mdui-color-background));
   border-radius: 0 0.5rem 0.5rem 0;
 
   > footer {
@@ -45,7 +45,7 @@ blockquote {
 h2 {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--ancillapp-primary-text-color);
+  color: rgb(var(--mdui-color-on-surface));
   margin: 1.2rem 0 0.6rem 0;
   font-family: var(--ancillapp-display-font);
 }
@@ -64,12 +64,12 @@ hr {
   border: 0;
   padding: 0.025rem;
   margin: 0.5rem;
-  background-color: var(--ancillapp-divider-color);
+  background-color: rgb(var(--mdui-color-outline-variant));
 }
 
 a {
   text-decoration: none;
-  color: var(--ancillapp-accent-color);
+  color: rgb(var(--mdui-color-tertiary));
 
   &:hover,
   &:active {
@@ -97,7 +97,7 @@ table {
 
 td,
 th {
-  border: 0.05rem solid var(--ancillapp-divider-color);
+  border: 0.05rem solid rgb(var(--mdui-color-outline-variant));
 }
 
 th {
@@ -142,17 +142,17 @@ form > * {
 }
 
 mwc-dialog {
-  --mdc-dialog-heading-ink-color: var(--ancillapp-primary-text-color);
-  --mdc-dialog-content-ink-color: var(--ancillapp-primary-text-color);
-  --mdc-dialog-scroll-divider-color: var(--ancillapp-divider-color);
+  --mdc-dialog-heading-ink-color: rgb(var(--mdui-color-on-surface));
+  --mdc-dialog-content-ink-color: rgb(var(--mdui-color-on-surface));
+  --mdc-dialog-scroll-divider-color: rgb(var(--mdui-color-outline-variant));
 
   mwc-button,
   loading-button {
-    --mdc-theme-primary: var(--ancillapp-secondary-text-color);
+    --mdc-theme-primary: rgb(var(--mdui-color-on-surface-variant));
 
     &:last-child,
     &:last-child {
-      --mdc-theme-primary: var(--ancillapp-accent-color);
+      --mdc-theme-primary: rgb(var(--mdui-color-tertiary));
     }
   }
 }
@@ -192,17 +192,17 @@ top-app-bar {
 
   &.search-mode {
     --ancillapp-top-app-bar-background: var(--ancillapp-search-bar-color);
-    --ancillapp-top-app-bar-color: var(--ancillapp-primary-text-color);
+    --ancillapp-top-app-bar-color: rgb(var(--mdui-color-on-surface));
   }
 }
 
 section.card {
   padding: 1rem 1.5rem;
-  background: var(--ancillapp-card-color);
+  background: rgb(var(--mdui-color-surface-container));
   width: 100%;
   max-width: 40rem;
   margin: 0 auto;
-  color: var(--ancillapp-primary-text-color);
+  color: rgb(var(--mdui-color-on-surface));
   box-shadow:
     0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
     0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),

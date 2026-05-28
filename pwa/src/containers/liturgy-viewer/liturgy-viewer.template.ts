@@ -27,7 +27,7 @@ const getLiturgicalColorBackgroundStyle = (
 ): string | undefined =>
   liturgicalColor
     ? [
-        'border-color: var(--ancillapp-divider-color);',
+        'border-color: rgb(var(--mdui-color-outline-variant));',
         `background: ${liturgicalColorToHexMap[liturgicalColor]};`,
       ].join('')
     : '';

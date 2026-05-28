@@ -23,9 +23,10 @@ unobtrusive-notification {
 .prayer {
   width: 20rem;
   height: 8rem;
-  background: var(--ancillapp-card-color);
+  background: rgb(var(--mdui-color-surface-container));
   border-radius: 0.5rem;
-  box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
+  box-shadow:
+    0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
     0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
     0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
   margin: 0.5rem;
@@ -43,7 +44,7 @@ unobtrusive-notification {
   > .image {
     // TODO: remove this when images get added
     display: none;
-    fill: var(--ancillapp-divider-color);
+    fill: rgb(var(--mdui-color-outline-variant));
     position: absolute;
     top: -1rem;
     left: -1rem;

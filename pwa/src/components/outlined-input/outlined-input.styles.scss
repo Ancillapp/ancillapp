@@ -12,17 +12,17 @@ div {
 
   &:hover {
     input {
-      border-color: var(--ancillapp-primary-text-color);
+      border-color: rgb(var(--mdui-color-on-surface));
     }
   }
 
   &.active {
     label {
-      color: var(--ancillapp-primary-color);
+      color: rgb(var(--mdui-color-primary));
     }
 
     input {
-      border-color: var(--ancillapp-primary-color);
+      border-color: rgb(var(--mdui-color-primary));
     }
   }
 }
@@ -34,9 +34,9 @@ label {
   left: 12px;
   background: var(
     --ancillapp-input-label-background-background,
-    var(--ancillapp-card-color)
+    rgb(var(--mdui-color-surface-container))
   );
-  color: var(--ancillapp-secondary-text-color);
+  color: rgb(var(--mdui-color-on-surface-variant));
   padding: 0 4px;
 }
 
@@ -45,8 +45,8 @@ input {
   appearance: none;
   outline: none;
   background: transparent;
-  color: var(--ancillapp-primary-text-color);
-  border: 1px solid var(--ancillapp-disabled-text-color);
+  color: rgb(var(--mdui-color-on-surface));
+  border: 1px solid rgb(var(--mdui-color-outline));
   border-radius: 4px;
   font-family: var(--ancillapp-text-font);
   font-size: 0.875rem;

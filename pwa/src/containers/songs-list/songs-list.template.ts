@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { SongsList } from './songs-list.component';
 import {
   menu,
-  searchIcon,
+  search,
   arrowBack,
   dialpad,
   notes,
@@ -70,7 +70,7 @@ export default function template(this: SongsList) {
               @click="${this._startSearching}"
               label="${this.localize(t`search`)}"
             >
-              ${searchIcon}
+              ${search}
             </mwc-icon-button>
           `}
       <div slot="title" ?hidden="${this._searching}">

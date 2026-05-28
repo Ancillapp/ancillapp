@@ -34,7 +34,7 @@
 .navigation-drawer-header {
   font-family: var(--ancillapp-display-font);
   font-size: 20.8px;
-  color: var(--ancillapp-primary-text-color);
+  color: rgb(var(--mdui-color-on-surface));
   width: 100%;
   height: var(--ancillapp-top-bar-height);
   padding-left: 26px;
@@ -117,7 +117,7 @@ mwc-drawer {
 
   [slot='title'] {
     font-size: 20.8px;
-    color: var(--ancillapp-primary-text-color);
+    color: rgb(var(--mdui-color-on-surface));
     display: inline-flex;
     align-items: center;
     width: 100%;
@@ -149,7 +149,7 @@ mwc-drawer {
 
   [slot='appContent'] {
     height: 100%;
-    --mdc-theme-surface: var(--ancillapp-card-color);
+    --mdc-theme-surface: rgb(var(--mdui-color-surface-container));
   }
 }
 
@@ -166,11 +166,11 @@ mwc-list-item {
   margin-right: 10px;
   border-radius: 0 25px 25px 0;
   padding-left: 19.5px;
-  color: var(--mdc-theme-on-surface);
+  color: rgb(var(--mdui-color-on-surface));
   font-size: 14px;
 
   svg {
-    fill: var(--mdc-theme-text-disabled-on-background);
+    fill: rgb(var(--mdui-color-outline));
   }
 
   &[activated] {

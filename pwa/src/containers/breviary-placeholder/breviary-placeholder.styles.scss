@@ -5,8 +5,8 @@
 
 h2 {
   font-family: var(--ancillapp-display-font);
-  border-top: 1px solid var(--ancillapp-disabled-text-color);
-  border-bottom: 1px solid var(--ancillapp-disabled-text-color);
+  border-top: 1px solid rgb(var(--mdui-color-outline));
+  border-bottom: 1px solid rgb(var(--mdui-color-outline));
   font-size: 1.25rem;
   padding: 0.5rem 0;
 }

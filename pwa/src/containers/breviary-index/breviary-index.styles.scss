@@ -12,8 +12,8 @@ outlined-input {
 
 h2 {
   font-family: var(--ancillapp-display-font);
-  border-top: 1px solid var(--ancillapp-disabled-text-color);
-  border-bottom: 1px solid var(--ancillapp-disabled-text-color);
+  border-top: 1px solid rgb(var(--mdui-color-outline));
+  border-bottom: 1px solid rgb(var(--mdui-color-outline));
   font-size: 1.25rem;
   padding: 0.5rem 0;
 }
@@ -31,12 +31,15 @@ ul {
 
   li {
     list-style: none;
-    background: var(--ancillapp-background-color);
-    box-shadow: 0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
+    background: rgb(var(--mdui-color-background));
+    box-shadow:
+      0 0.06rem 0.065rem 0 rgba(0, 0, 0, 0.14),
       0 0.003rem 0.15rem 0 rgba(0, 0, 0, 0.12),
       0 0.09rem 0.0035rem -0.065rem rgba(0, 0, 0, 0.2);
     will-change: box-shadow, transform;
-    transition: 0.3s box-shadow, 0.3s transform;
+    transition:
+      0.3s box-shadow,
+      0.3s transform;
     width: 14rem;
     margin: 0.5rem;
     border-radius: 0.5rem;
@@ -45,7 +48,7 @@ ul {
     span {
       flex: 1 1 auto;
       font-size: 1rem;
-      color: var(--ancillapp-primary-text-color);
+      color: rgb(var(--mdui-color-on-surface));
     }
 
     a {
@@ -59,7 +62,8 @@ ul {
     &:hover,
     &:active {
       transform: translateY(-0.2rem);
-      box-shadow: 0 0.24rem 0.26rem 0 rgba(0, 0, 0, 0.14),
+      box-shadow:
+        0 0.24rem 0.26rem 0 rgba(0, 0, 0, 0.14),
         0 0.012rem 0.6rem 0 rgba(0, 0, 0, 0.12),
         0 0.36rem 0.014rem -0.26rem rgba(0, 0, 0, 0.2);
 

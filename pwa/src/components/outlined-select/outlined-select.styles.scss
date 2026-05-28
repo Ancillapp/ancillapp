@@ -12,8 +12,8 @@ select {
   appearance: none;
   outline: none;
   background: transparent;
-  color: var(--ancillapp-primary-text-color);
-  border: 1px solid var(--ancillapp-disabled-text-color);
+  color: rgb(var(--mdui-color-on-surface));
+  border: 1px solid rgb(var(--mdui-color-outline));
   border-radius: 4px;
   font-family: var(--ancillapp-text-font);
   font-size: 0.875rem;
@@ -27,19 +27,19 @@ select {
     right: 0.25rem;
     width: 1.5rem;
     height: 100%;
-    fill: var(--ancillapp-disabled-text-color);
+    fill: rgb(var(--mdui-color-outline));
     pointer-events: none;
   }
 
   &:hover {
-    border-color: var(--ancillapp-primary-text-color);
+    border-color: rgb(var(--mdui-color-on-surface));
   }
 
   &.active {
-    border-color: var(--ancillapp-primary-color);
+    border-color: rgb(var(--mdui-color-primary));
 
     & + svg {
-      fill: var(--ancillapp-primary-color);
+      fill: rgb(var(--mdui-color-primary));
     }
   }
 }

@@ -1,13 +1,13 @@
 h2 {
   font-family: var(--ancillapp-display-font);
-  border-bottom: 1px solid var(--ancillapp-disabled-text-color);
+  border-bottom: 1px solid rgb(var(--mdui-color-outline));
   font-size: 1.25rem;
   padding-bottom: 0.5rem;
 }
 
 h3 {
   font-family: var(--ancillapp-display-font);
-  color: var(--ancillapp-accent-color);
+  color: rgb(var(--mdui-color-tertiary));
 }
 
 small {
@@ -20,7 +20,7 @@ small {
 
 strong {
   font-weight: normal;
-  color: var(--ancillapp-accent-color);
+  color: rgb(var(--mdui-color-tertiary));
 }
 
 .alternative {

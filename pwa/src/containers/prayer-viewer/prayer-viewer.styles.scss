@@ -23,8 +23,8 @@ section.multilanguage {
 }
 
 mwc-tab-bar {
-  --mdc-tab-text-label-color-default: var(
-    --ancillapp-secondary-text-on-accent-color
+  --mdc-tab-text-label-color-default: rgb(
+    var(--mdui-color-on-tertiary-container)
   );
-  --mdc-theme-primary: var(--ancillapp-primary-text-on-accent-color);
+  --mdc-theme-primary: rgb(var(--mdui-color-on-tertiary));
 }
