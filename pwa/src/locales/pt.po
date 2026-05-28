@@ -602,6 +602,9 @@ msgstr "...ou baixa-las!"
 msgid "search"
 msgstr "Busca"
 
+msgid "searchDescription"
+msgstr "Pesquise músicas, orações, revistas e muito mais no Ancillapp."
+
 #: src/containers/home/home.template.ts:59
 #: src/containers/home/home.template.ts:64
 #: src/containers/home/home.template.ts:69

@@ -12,10 +12,12 @@ import 'mdui/components/list.js';
 import 'mdui/components/list-item.js';
 import 'mdui/components/fab.js';
 import 'mdui/components/button-icon.js';
+import 'mdui/components/dialog.js';
 import '../../components/ancillapp-icon.component.js';
 import '../../components/expandable-navigation-rail/expandable-navigation-rail.component.js';
 import '../../components/expandable-navigation-rail/expandable-navigation-rail-item.component.js';
 import '../../components/top-app-bar/top-app-bar.component.js';
+import '../search/search-content.component.js';
 
 // Asynchronous imports
 import('../update-checker/update-checker.component');
@@ -63,7 +65,13 @@ export default function template(this: Shell) {
                   name="${this._drawerOpened ? 'menuOpen' : 'menu'}"
                 ></ancillapp-icon>
               </mdui-button-icon>
-              <mdui-fab lowered ?extended="${this._drawerOpened}">
+              <mdui-fab
+                lowered
+                ?extended="${this._drawerOpened}"
+                @click="${() => {
+                  this._searchDialogOpened = true;
+                }}"
+              >
                 <ancillapp-icon name="search" slot="icon"></ancillapp-icon>
                 ${this.localize(t`search`)}
               </mdui-fab>
@@ -96,6 +104,24 @@ export default function template(this: Shell) {
               `,
             )}
           </expandable-navigation-rail>
+
+          <mdui-dialog
+            close-on-overlay-click
+            close-on-esc
+            class="search-dialog"
+            ?open="${this._searchDialogOpened}"
+            @close="${() => {
+              this._searchDialogOpened = false;
+              history.replaceState({}, '', window.location.pathname);
+            }}"
+            @open="${() => this._onSearchDialogOpen()}"
+          >
+            <search-content
+              @resultclick="${() => {
+                this._searchDialogOpened = false;
+              }}"
+            ></search-content>
+          </mdui-dialog>
         `
       : html`
           <mdui-navigation-drawer
@@ -213,6 +239,13 @@ export default function template(this: Shell) {
         ?show-menu-button="${!this._wide}"
         @menutoggle="${() => this._updateDrawerOpenState(!this._drawerOpened)}"
       ></home-page>
+      <search-page
+        class="page"
+        ?active="${this._page === 'search'}"
+        ?drawer-open="${this._wide}"
+        ?show-menu-button="${!this._wide}"
+        @menutoggle="${() => this._updateDrawerOpenState(!this._drawerOpened)}"
+      ></search-page>
       <breviary-placeholder
         class="page padded"
         ?active="${this._page === 'breviary' && this._subroute.length < 1}"

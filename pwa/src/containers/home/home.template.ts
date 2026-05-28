@@ -1,12 +1,10 @@
 import { html, nothing } from 'lit';
-import { repeat } from 'lit/directives/repeat.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import {
-  magazines,
+  magazinesActive,
   breviary,
-  prayers,
-  songs,
-  holyMass,
+  prayersActive,
+  songsActive,
+  holyMassActive,
   tau,
   menu,
 } from '../../components/icons.js';
@@ -16,30 +14,8 @@ import { t } from '@lingui/core/macro';
 
 import 'mdui/components/button-icon.js';
 import 'mdui/components/card.js';
-import 'mdui/components/text-field.js';
-import '../../components/ancillapp-icon.component.js';
 
 export default function template(this: HomePage) {
-  const searchResults = repeat(
-    this._searchResults,
-    ({ title }) => title,
-    ({ link, preview, title, description }) => html`
-      <a
-        href="${link}"
-        class="search-result"
-        @click="${this._handleSearchResultClick}"
-      >
-        ${preview.type === 'text'
-          ? html`<div class="search-result-preview">${preview.content}</div>`
-          : html`${unsafeHTML(preview.content)}`}
-        <div class="search-result-content">
-          <h4>${unsafeHTML(title)}</h4>
-          ${description ? html`<h5>${unsafeHTML(description)}</h5>` : nothing}
-        </div>
-      </a>
-    `,
-  );
-
   return html`
     <div class="app-header">
       ${this.showMenuButton
@@ -62,28 +38,7 @@ export default function template(this: HomePage) {
       <div class="hero-watermark" aria-hidden="true">${tau}</div>
     </div>
 
-    <mdui-text-field
-      class="search-field"
-      type="search"
-      variant="filled"
-      placeholder="${this.localize(t`searchInAncillapp`)}"
-      icon="search"
-      .value="${this._searchTerm}"
-      @input="${this._handleMobileSearch}"
-      @keydown="${this._handleSearchKeyDown}"
-      aria-label="${this.localize(t`searchInAncillapp`)}"
-    >
-      <ancillapp-icon name="search" slot="icon"></ancillapp-icon>
-    </mdui-text-field>
-
-    <div class="search-results" ?hidden="${!this._searching}">
-      ${this._searchTerm && this._searchResults.length < 1
-        ? html`<p>${this.localize(t`noResults`)}</p>`
-        : nothing}
-      ${searchResults}
-    </div>
-
-    <section ?hidden="${this._searching}">
+    <section>
       <h2 class="section-label">${this.localize(t`forToday`)}</h2>
       <div class="nav-grid">
         <!-- TODO -->
@@ -107,7 +62,7 @@ export default function template(this: HomePage) {
             <span class="nav-card-label"
               >${this.localize(t`singFraternitySongs`)}</span
             >
-            <div class="nav-card-icon">${songs}</div>
+            <div class="nav-card-icon">${songsActive}</div>
           </div>
         </mdui-card>
 
@@ -120,7 +75,7 @@ export default function template(this: HomePage) {
             <span class="nav-card-label"
               >${this.localize(t`prayDailyPrayers`)}</span
             >
-            <div class="nav-card-icon">${prayers}</div>
+            <div class="nav-card-icon">${prayersActive}</div>
           </div>
         </mdui-card>
 
@@ -135,7 +90,7 @@ export default function template(this: HomePage) {
             <span class="nav-card-label"
               >${this.localize(t`readLiturgyOfTheDay`)}</span
             >
-            <div class="nav-card-icon">${holyMass}</div>
+            <div class="nav-card-icon">${holyMassActive}</div>
           </div>
         </mdui-card>
 
@@ -148,7 +103,7 @@ export default function template(this: HomePage) {
             <span class="nav-card-label"
               >${this.localize(t`readFraternityMagazines`)}</span
             >
-            <div class="nav-card-icon">${magazines}</div>
+            <div class="nav-card-icon">${magazinesActive}</div>
           </div>
         </mdui-card>
       </div>

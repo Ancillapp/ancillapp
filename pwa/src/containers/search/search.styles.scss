@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+search-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  box-sizing: border-box;
+}

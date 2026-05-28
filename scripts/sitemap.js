@@ -129,6 +129,14 @@ const run = async () => {
       pt: '/pt',
     },
 
+    // Search
+    {
+      it: '/it/cerca',
+      en: '/en/search',
+      de: '/de/suche',
+      pt: '/pt/pesquisa',
+    },
+
     // Breviary
     {
       it: '/it/breviario',

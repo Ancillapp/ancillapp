@@ -718,6 +718,9 @@ msgstr "...o scaricale!"
 msgid "search"
 msgstr "Cerca"
 
+msgid "searchDescription"
+msgstr "Cerca canti, preghiere, riviste e molto altro in Ancillapp."
+
 #. js-lingui-generated-id
 #: src/containers/home/home.template.ts:59
 #: src/containers/home/home.template.ts:64

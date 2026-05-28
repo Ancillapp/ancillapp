@@ -14,6 +14,12 @@
     width var(--mdui-motion-duration-short4) var(--mdui-motion-easing-standard);
 }
 
+.search-dialog {
+  search-content {
+    min-width: min(32rem, 80vw);
+  }
+}
+
 .navigation-rail-top {
   width: 100%;
   display: flex;

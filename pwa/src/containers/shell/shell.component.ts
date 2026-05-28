@@ -13,6 +13,7 @@ import { localizedPages } from '../../helpers/localization';
 import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
 import { installRouter } from '../../helpers/router';
+import type { SearchContent } from '../search/search-content.component';
 import { auth } from '../../helpers/firebase';
 
 import sharedStyles from '../../shared.styles.scss';
@@ -45,6 +46,9 @@ export class Shell extends localize(authorize(LitElement)) {
   @state()
   protected _navbarScrollTarget: HTMLElement | null = null;
 
+  @state()
+  protected _searchDialogOpened = false;
+
   @property({ type: Object })
   protected _wakeLockSentinel: WakeLockSentinel | null = null;
 
@@ -53,6 +57,9 @@ export class Shell extends localize(authorize(LitElement)) {
 
   @query('#app-content')
   protected _appContent!: HTMLElement;
+
+  @query('search-content')
+  protected _searchContent?: SearchContent;
 
   @queryAll('.page')
   declare private _pages: { scrollTarget: HTMLElement }[];
@@ -135,7 +142,7 @@ export class Shell extends localize(authorize(LitElement)) {
   protected firstUpdated(changedProperties: PropertyValues) {
     super.firstUpdated(changedProperties);
 
-    installRouter((location) => this._locationChanged(location));
+    installRouter((location, event) => this._locationChanged(location, event));
 
     this._appContent.addEventListener('scrolltargetchange', (e: Event) => {
       this._navbarScrollTarget = (e as CustomEvent<HTMLElement>).detail;
@@ -196,19 +203,31 @@ export class Shell extends localize(authorize(LitElement)) {
     );
   }
 
-  protected async _locationChanged(location: Location) {
+  protected async _locationChanged(location: Location, event?: Event | null) {
     const [, page = 'home', ...subroutes] = location.pathname
       .slice(1)
       .split('/');
+    const searchQuery = location.search;
     const locale = await this.getPreferredLocale();
 
     if (page === 'home') {
-      window.history.replaceState({}, '', this.localizeHref());
+      window.history.replaceState({}, '', this.localizeHref() + searchQuery);
     }
 
     await this.setLocale(locale as SupportedLocale);
 
     this._loadPage(locale as SupportedLocale, page, subroutes.join('/'));
+
+    // On initial page load, auto-open the search dialog on desktop when
+    // ?q= is present in the URL and we're not already on the search page.
+    if (
+      !event &&
+      new URLSearchParams(searchQuery).has('q') &&
+      this._wide &&
+      this._page !== 'search'
+    ) {
+      this._searchDialogOpened = true;
+    }
 
     // Close the drawer - in case the *path* change came from a link in the drawer.
     if (!this._wide) {
@@ -222,7 +241,11 @@ export class Shell extends localize(authorize(LitElement)) {
     )?.[0];
 
     if (!pageId || (pageId === 'login' && this.user)) {
-      window.history.replaceState({}, '', `/${locale}`);
+      window.history.replaceState(
+        {},
+        '',
+        `/${locale}${window.location.search}`,
+      );
       pageId = 'home';
     }
 
@@ -268,6 +291,9 @@ export class Shell extends localize(authorize(LitElement)) {
       case 'holy-mass':
         import('../liturgy-viewer/liturgy-viewer.component');
         break;
+      case 'search':
+        import('../search/search.component');
+        break;
       case 'login':
         import('../login/login.component');
         break;
@@ -287,6 +313,10 @@ export class Shell extends localize(authorize(LitElement)) {
     if (opened !== this._drawerOpened) {
       this._drawerOpened = opened;
     }
+  }
+
+  protected _onSearchDialogOpen() {
+    this.updateComplete.then(() => this._searchContent?.focusSearchField());
   }
 
   protected async _updateDrawerShrinkState(shrinked: boolean) {

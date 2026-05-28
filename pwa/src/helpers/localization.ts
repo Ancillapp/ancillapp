@@ -61,6 +61,12 @@ export const localizedPages: Record<string, Record<SupportedLocale, string>> = {
     de: 'lieder',
     pt: 'cancoes',
   },
+  search: {
+    it: 'cerca',
+    en: 'search',
+    de: 'suche',
+    pt: 'pesquisa',
+  },
   prayers: {
     it: 'preghiere',
     en: 'prayers',

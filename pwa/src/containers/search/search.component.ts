@@ -7,36 +7,26 @@ import { PageViewElement } from '../page-view-element';
 import { t } from '@lingui/core/macro';
 
 import sharedStyles from '../../shared.styles.scss';
-import styles from './home.styles.scss';
-import template from './home.template';
+import styles from './search.styles.scss';
+import template from './search.template';
 
 import { logEvent } from '../../helpers/firebase';
 
-@customElement('home-page')
-export class HomePage extends localize(withTopAppBar(PageViewElement)) {
+@customElement('search-page')
+export class SearchPage extends localize(withTopAppBar(PageViewElement)) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
-
-  get _todaySubtitle(): string {
-    const today = new Date();
-    return today.toLocaleDateString(this.locale, {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
-  }
 
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
 
     if (changedProperties.has('active') && this.active) {
-      const pageTitle = `Ancillapp - ${this.localize(t`home`)}`;
+      const pageTitle = `Ancillapp - ${this.localize(t`search`)}`;
 
       updateMetadata({
         title: pageTitle,
-        description: this.localize(t`appDescription`),
+        description: this.localize(t`searchDescription`),
       });
 
       logEvent('page_view', {
@@ -50,6 +40,6 @@ export class HomePage extends localize(withTopAppBar(PageViewElement)) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'home-page': HomePage;
+    'search-page': SearchPage;
   }
 }

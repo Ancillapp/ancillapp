@@ -573,6 +573,9 @@ msgstr ""
 msgid "search"
 msgstr "Suche"
 
+msgid "searchDescription"
+msgstr "Suche Lieder, Gebete, Zeitschriften und mehr in Ancillapp."
+
 #: src/containers/home/home.template.ts:59
 #: src/containers/home/home.template.ts:64
 #: src/containers/home/home.template.ts:69
