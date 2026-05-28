@@ -155,55 +155,56 @@ h1 {
   }
 }
 
-.card-breviary {
-  background: rgb(var(--mdui-color-primary-container));
-  color: rgb(var(--mdui-color-on-primary-container));
+// TODO
+// .card-breviary {
+//   background: rgb(var(--mdui-color-breviary-container));
+//   color: rgb(var(--mdui-color-on-breviary-container));
 
-  .nav-card-icon svg {
-    fill: rgb(var(--mdui-color-on-primary-container));
-  }
-}
+//   .nav-card-icon svg {
+//     fill: rgb(var(--mdui-color-on-breviary-container));
+//   }
+// }
 
 .card-songs {
-  background: rgb(var(--mdui-color-secondary-container));
-  color: rgb(var(--mdui-color-on-secondary-container));
+  background: rgb(var(--mdui-color-songs-container));
+  color: rgb(var(--mdui-color-on-songs-container));
 
   .nav-card-icon svg {
-    fill: rgb(var(--mdui-color-on-secondary-container));
+    fill: rgb(var(--mdui-color-on-songs-container));
   }
 }
 
 .card-prayers {
-  background: rgb(var(--mdui-color-error-container));
-  color: rgb(var(--mdui-color-on-error-container));
+  background: rgb(var(--mdui-color-prayers-container));
+  color: rgb(var(--mdui-color-on-prayers-container));
 
   .nav-card-icon {
-    background: rgba(var(--mdui-color-on-error-container), 0.1);
+    background: rgba(var(--mdui-color-on-prayers-container), 0.1);
   }
 
   .nav-card-icon svg {
-    fill: rgb(var(--mdui-color-on-error-container));
+    fill: rgb(var(--mdui-color-on-prayers-container));
   }
 }
 
 .card-holy-mass {
-  background: rgb(var(--mdui-color-tertiary-container));
-  color: rgb(var(--mdui-color-on-tertiary-container));
+  background: rgb(var(--mdui-color-holy-mass-container));
+  color: rgb(var(--mdui-color-on-holy-mass-container));
 
   .nav-card-icon svg {
-    fill: rgb(var(--mdui-color-on-tertiary-container));
+    fill: rgb(var(--mdui-color-on-holy-mass-container));
   }
 }
 
 .card-magazines {
-  background: rgb(var(--mdui-color-surface-container-highest));
-  color: rgb(var(--mdui-color-on-surface));
+  background: rgb(var(--mdui-color-magazines-container));
+  color: rgb(var(--mdui-color-on-magazines-container));
 
   .nav-card-icon {
-    background: rgba(var(--mdui-color-on-surface), 0.08);
+    background: rgba(var(--mdui-color-on-magazines-container), 0.08);
   }
 
   .nav-card-icon svg {
-    fill: rgb(var(--mdui-color-on-surface));
+    fill: rgb(var(--mdui-color-on-magazines-container));
   }
 }
