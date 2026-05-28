@@ -137,6 +137,14 @@ msgstr ""
 msgid "dark"
 msgstr "Dunkel"
 
+#: src/containers/settings/settings.template.ts:40
+msgid "darkHighContrast"
+msgstr "Dunkel (hoher Kontrast)"
+
+#: src/containers/settings/settings.template.ts:39
+msgid "lightHighContrast"
+msgstr "Hell (hoher Kontrast)"
+
 #: src/containers/breviary-index/breviary-index.template.ts:37
 #: src/containers/liturgy-viewer/liturgy-viewer.template.ts:35
 msgid "date"

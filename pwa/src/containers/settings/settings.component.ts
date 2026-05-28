@@ -67,7 +67,8 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
       system: 'auto',
       light: 'light',
       dark: 'dark',
-      oled: 'dark',
+      'light-hc': 'light',
+      'dark-hc': 'dark',
     }[newTheme];
     document.body.dataset.theme = newTheme;
     document.documentElement.className = `mdui-theme-${mduiTheme}`;

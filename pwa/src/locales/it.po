@@ -161,6 +161,14 @@ msgstr "Prega la Compieta del giorno {date} con le memorie facoltative ricordate
 msgid "dark"
 msgstr "Scuro"
 
+#: src/containers/settings/settings.template.ts:40
+msgid "darkHighContrast"
+msgstr "Scuro (alto contrasto)"
+
+#: src/containers/settings/settings.template.ts:39
+msgid "lightHighContrast"
+msgstr "Chiaro (alto contrasto)"
+
 #. js-lingui-generated-id
 #: src/containers/breviary-index/breviary-index.template.ts:37
 #: src/containers/liturgy-viewer/liturgy-viewer.template.ts:35

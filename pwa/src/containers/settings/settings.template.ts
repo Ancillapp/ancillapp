@@ -36,7 +36,12 @@ export default function template(this: SettingsPage) {
             <option value="system">${this.localize(t`system`)}</option>
             <option value="light">${this.localize(t`light`)}</option>
             <option value="dark">${this.localize(t`dark`)}</option>
-            <option value="oled">OLED</option>
+            <option value="light-hc">
+              ${this.localize(t`lightHighContrast`)}
+            </option>
+            <option value="dark-hc">
+              ${this.localize(t`darkHighContrast`)}
+            </option>
           </outlined-select>
         </li>
         <li>

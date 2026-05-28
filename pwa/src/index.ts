@@ -31,12 +31,15 @@ const getPreferredLocale = async () => {
 getPreferredLocale().then((locale) => import(`./locales/${locale}.po`));
 // Set the correct theme
 get<string>('theme').then((storedTheme) => {
-  const themeToApply = storedTheme || 'system';
+  const savedTheme = storedTheme || 'system';
+  // For backwards compatibility
+  const themeToApply = storedTheme === 'oled' ? 'dark-hc' : savedTheme;
   const mduiTheme = {
     system: 'auto',
     light: 'light',
     dark: 'dark',
-    oled: 'dark',
+    'light-hc': 'light',
+    'dark-hc': 'dark',
   }[themeToApply];
   document.body.dataset.theme = themeToApply;
   document.documentElement.className = `mdui-theme-${mduiTheme}`;

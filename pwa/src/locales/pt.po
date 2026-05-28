@@ -137,6 +137,14 @@ msgstr "Rezar Completas o dia {date} com o memorial opcional lembrado pela Frate
 msgid "dark"
 msgstr "Escuro"
 
+#: src/containers/settings/settings.template.ts:40
+msgid "darkHighContrast"
+msgstr "Escuro (alto contraste)"
+
+#: src/containers/settings/settings.template.ts:39
+msgid "lightHighContrast"
+msgstr "Claro (alto contraste)"
+
 #: src/containers/breviary-index/breviary-index.template.ts:37
 #: src/containers/liturgy-viewer/liturgy-viewer.template.ts:35
 msgid "date"
