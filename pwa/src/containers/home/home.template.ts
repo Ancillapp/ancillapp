@@ -1,4 +1,4 @@
-import { html, nothing } from 'lit';
+import { html } from 'lit';
 import {
   magazinesActive,
   breviary,
@@ -6,29 +6,35 @@ import {
   songsActive,
   holyMassActive,
   tau,
-  menu,
 } from '../../components/icons.js';
 import { formatDateToUrl } from '../../helpers/utils';
 import { HomePage } from './home.component';
 import { t } from '@lingui/core/macro';
 
+import 'mdui/components/top-app-bar/top-app-bar.js';
+import 'mdui/components/top-app-bar/top-app-bar-title.js';
 import 'mdui/components/button-icon.js';
 import 'mdui/components/card.js';
+import '../../components/ancillapp-icon.component.js';
 
 export default function template(this: HomePage) {
   return html`
-    <div class="app-header">
-      ${this.showMenuButton
-        ? html`<mdui-button-icon
-            class="menu-button"
-            aria-label="${this.localize(t`menu`)}"
-            @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
-            >${menu}</mdui-button-icon
-          >`
-        : nothing}
-      ${tau}
-      <span>Ancillapp</span>
-    </div>
+    <mdui-top-app-bar
+      scroll-behavior="hide"
+      .scrollTarget="${this.scrollTarget}"
+    >
+      <mdui-button-icon
+        ?hidden="${!this.showMenuButton}"
+        @click="${() => this.dispatchEvent(new CustomEvent('menutoggle'))}"
+        aria-label="${this.localize(t`menu`)}"
+      >
+        <ancillapp-icon name="menu"></ancillapp-icon>
+      </mdui-button-icon>
+      <mdui-top-app-bar-title>
+        <ancillapp-icon name="tau"></ancillapp-icon>
+        <span>Ancillapp</span>
+      </mdui-top-app-bar-title>
+    </mdui-top-app-bar>
 
     <div class="hero">
       <div class="hero-content">

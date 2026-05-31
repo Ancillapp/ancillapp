@@ -10,31 +10,13 @@
   margin-top: calc(-1 * var(--ancillapp-top-bar-height));
 }
 
-.app-header {
+mdui-top-app-bar-title {
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  height: var(--ancillapp-top-bar-height);
-  padding-inline: 0.125rem;
-  flex-shrink: 0;
 
-  .menu-button svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: rgb(var(--mdui-color-on-surface));
-  }
-
-  svg {
+  ancillapp-icon {
     height: 1.875rem;
-    fill: rgb(var(--mdui-color-on-surface));
-    margin-bottom: 0.75rem;
-  }
-
-  span {
-    font-family: var(--ancillapp-display-font);
-    font-size: 1.375rem;
-    font-weight: 500;
-    color: rgb(var(--mdui-color-on-surface));
   }
 }
 
