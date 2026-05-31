@@ -220,17 +220,6 @@ export class SearchContent extends localize(LitElement) {
         link: this.localizeHref('magazines'),
       },
       {
-        title: this.localize(t`login`),
-        preview: {
-          type: 'html',
-          content: `<div class="search-result-preview">${renderToString(
-            user,
-          )}</div>`,
-        },
-        description: this.localize(t`loginDescription`),
-        link: this.localizeHref('login'),
-      },
-      {
         title: this.localize(t`settings`),
         preview: {
           type: 'html',

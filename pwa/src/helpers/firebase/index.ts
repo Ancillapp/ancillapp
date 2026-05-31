@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
 import { getAnalytics, logEvent as firebaseLogEvent } from 'firebase/analytics';
 import { get } from '../keyval';
 
@@ -7,11 +6,7 @@ import config from '../../config/default.json';
 
 export const app = initializeApp(config.firebase);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const auth = getAuth(app as any);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const analytics = getAnalytics(app as any);
+export const analytics = getAnalytics(app);
 
 export const logEvent = async (
   eventName: Parameters<typeof firebaseLogEvent>[1],

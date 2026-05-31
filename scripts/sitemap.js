@@ -185,14 +185,6 @@ const run = async () => {
       pt: '/pt/revistas/sempreconnessi',
     },
 
-    // Login
-    {
-      it: '/it/accesso',
-      en: '/en/login',
-      de: '/de/anmeldung',
-      pt: '/pt/conecte-se',
-    },
-
     // Settings
     {
       it: '/it/impostazioni',

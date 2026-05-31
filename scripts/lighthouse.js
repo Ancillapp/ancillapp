@@ -51,10 +51,6 @@ const configs = [
     title: '#sempreconnessi',
   },
   {
-    url: '/it/accesso',
-    title: 'Login',
-  },
-  {
     url: '/it/impostazioni',
     title: 'Settings',
   },

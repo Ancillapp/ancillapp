@@ -97,12 +97,6 @@ export const localizedPages: Record<string, Record<SupportedLocale, string>> = {
     de: 'heilige-messe',
     pt: 'santa-missa',
   },
-  login: {
-    it: 'accesso',
-    en: 'login',
-    de: 'anmeldung',
-    pt: 'conecte-se',
-  },
   settings: {
     it: 'impostazioni',
     en: 'settings',

@@ -7,14 +7,11 @@ import {
   state,
 } from 'lit/decorators.js';
 import { installMediaQueryWatcher } from 'pwa-helpers';
-import { signOut } from 'firebase/auth';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { localizedPages } from '../../helpers/localization';
-import { authorize } from '../../helpers/authorize';
 import { get, set } from '../../helpers/keyval';
 import { installRouter } from '../../helpers/router';
 import type { SearchContent } from '../search/search-content.component';
-import { auth } from '../../helpers/firebase';
 
 import sharedStyles from '../../shared.styles.scss';
 import styles from './shell.styles.scss';
@@ -23,7 +20,7 @@ import template from './shell.template';
 import type { Drawer } from '@material/mwc-drawer';
 
 @customElement('ancillapp-shell')
-export class Shell extends localize(authorize(LitElement)) {
+export class Shell extends localize(LitElement) {
   public static styles = [sharedStyles, styles];
 
   protected render = template;
@@ -130,13 +127,6 @@ export class Shell extends localize(authorize(LitElement)) {
     ) {
       this._updateRailWidth();
     }
-
-    if (changedProperties.has('user')) {
-      if (this.user && this._page === 'login') {
-        window.history.replaceState({}, '', '/');
-        this._locationChanged(window.location);
-      }
-    }
   }
 
   protected firstUpdated(changedProperties: PropertyValues) {
@@ -240,7 +230,7 @@ export class Shell extends localize(authorize(LitElement)) {
       ([, { [locale]: localizedPageId }]) => page === localizedPageId,
     )?.[0];
 
-    if (!pageId || (pageId === 'login' && this.user)) {
+    if (!pageId) {
       window.history.replaceState(
         {},
         '',
@@ -294,9 +284,6 @@ export class Shell extends localize(authorize(LitElement)) {
       case 'search':
         import('../search/search.component');
         break;
-      case 'login':
-        import('../login/login.component');
-        break;
       case 'settings':
         import('../settings/settings.component');
         break;
@@ -324,10 +311,6 @@ export class Shell extends localize(authorize(LitElement)) {
       this.drawerShrinked = shrinked;
       await set('drawerShrinked', shrinked);
     }
-  }
-
-  protected async _logout() {
-    await signOut(auth);
   }
 }
 

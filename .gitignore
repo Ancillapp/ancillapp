@@ -11,3 +11,4 @@ sitemap.xml
 .firebase*
 .pnp.*
 .swc/
+pwa/stats.html
