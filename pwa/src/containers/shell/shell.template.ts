@@ -318,6 +318,7 @@ export default function template(this: Shell) {
         ?active="${this._page === 'settings'}"
         ?drawer-open="${this._wide}"
         ?show-menu-button="${!this._wide}"
+        .scrollTarget="${this._navbarScrollTarget || this._appContent}"
         @menutoggle="${() => this._updateDrawerOpenState(!this._drawerOpened)}"
         ?keep-screen-active="${!!this._wakeLockSentinel}"
         @keepscreenactivechange="${this._handleKeepScreenActiveChange}"

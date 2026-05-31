@@ -1,19 +1,19 @@
 import { PropertyValues } from 'lit';
-import { customElement, queryAll, property } from 'lit/decorators.js';
+import { customElement, property, queryAll, state } from 'lit/decorators.js';
 import { updateMetadata } from 'pwa-helpers';
 import { localize, SupportedLocale } from '../../helpers/localize';
 import { withTopAppBar } from '../../helpers/with-top-app-bar';
 import { PageViewElement } from '../page-view-element';
 import { get, set } from '../../helpers/keyval';
+import { init } from '../../helpers/database';
 import { t } from '@lingui/core/macro';
+import type { Switch } from 'mdui';
 
 import sharedStyles from '../../shared.styles.scss';
 import styles from './settings.styles.scss';
 import template from './settings.template';
 
 import { logEvent } from '../../helpers/firebase';
-
-import type { OutlinedSelect } from '../../components/outlined-select/outlined-select.component';
 
 @customElement('settings-page')
 export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
@@ -27,15 +27,70 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
   @property({ type: Boolean })
   public showChangelog = true;
 
-  @queryAll('outlined-select')
-  private _selects?: NodeList;
+  @state()
+  public textSize = 100;
+
+  @state()
+  public offlineContentSummary = '';
+
+  @state()
+  public clearingCache = false;
+
+  @state()
+  public currentTheme = 'system';
+
+  @queryAll('mdui-select')
+  private _selects?: NodeListOf<Element>;
 
   constructor() {
     super();
+    this.currentTheme = document.body.dataset.theme || 'system';
 
     get<boolean>('dontShowChangelog').then(
       (dontShowChangelog) => (this.showChangelog = !dontShowChangelog),
     );
+
+    get<number>('textSize').then((storedTextSize) => {
+      if (typeof storedTextSize === 'number') {
+        this.textSize = this._normalizeTextSize(storedTextSize);
+        this._applyTextSize(this.textSize);
+      }
+    });
+
+    this._refreshOfflineContentSummary();
+  }
+
+  protected get _resolvedThemeSegment(): 'system' | 'light' | 'dark' {
+    return this.currentTheme.endsWith('-hc')
+      ? (this.currentTheme.slice(0, -3) as 'system' | 'light' | 'dark')
+      : (this.currentTheme as 'system' | 'light' | 'dark');
+  }
+
+  protected get _highContrastEnabled() {
+    return this.currentTheme.endsWith('-hc');
+  }
+
+  protected _composeTheme(
+    baseTheme: 'system' | 'light' | 'dark',
+    highContrast: boolean,
+  ) {
+    return highContrast ? `${baseTheme}-hc` : baseTheme;
+  }
+
+  protected async _applyTheme(theme: string) {
+    const mduiTheme = {
+      system: 'auto',
+      light: 'light',
+      dark: 'dark',
+      'light-hc': 'light',
+      'dark-hc': 'dark',
+      'system-hc': 'auto',
+    }[theme];
+
+    document.body.dataset.theme = theme;
+    document.documentElement.className = `mdui-theme-${mduiTheme}`;
+    this.currentTheme = theme;
+    await set('theme', theme);
   }
 
   protected updated(changedProperties: PropertyValues) {
@@ -61,46 +116,122 @@ export class SettingsPage extends localize(withTopAppBar(PageViewElement)) {
     });
   }
 
-  protected async _handleThemeChange({ target }: CustomEvent<null>) {
-    const newTheme = (target as OutlinedSelect).value;
-    const mduiTheme = {
-      system: 'auto',
-      light: 'light',
-      dark: 'dark',
-      'light-hc': 'light',
-      'dark-hc': 'dark',
-    }[newTheme];
-    document.body.dataset.theme = newTheme;
-    document.documentElement.className = `mdui-theme-${mduiTheme}`;
-    await set('theme', newTheme);
+  protected async _handleThemeChange({ target }: Event) {
+    const selectedTheme = String(
+      (target as { value?: string }).value || this._resolvedThemeSegment,
+    ) as 'system' | 'light' | 'dark';
+
+    await this._applyTheme(
+      this._composeTheme(selectedTheme, this._highContrastEnabled),
+    );
   }
 
-  protected async _handleLanguageChange({ target }: CustomEvent<null>) {
-    const newLanguage = (target as OutlinedSelect).value as SupportedLocale;
+  protected async _handleHighContrastChange({ target }: Event) {
+    const highContrast = !!(target as Switch).checked;
+
+    await this._applyTheme(
+      this._composeTheme(this._resolvedThemeSegment, highContrast),
+    );
+  }
+
+  protected async _handleLanguageChange({ target }: Event) {
+    const newLanguage = String(
+      (target as { value?: string }).value || this.locale,
+    ) as SupportedLocale;
 
     await this.setLocale(newLanguage);
 
     this._updatePageMetadata();
+    this._refreshOfflineContentSummary();
 
     this._selects!.forEach((select) => {
       if (select !== target) {
-        (select as OutlinedSelect).requestUpdate();
+        (select as { requestUpdate?: () => void }).requestUpdate?.();
       }
     });
   }
 
-  protected async _handleKeepScreenActiveChange({ target }: MouseEvent) {
+  protected _normalizeTextSize(size: number) {
+    return Math.min(125, Math.max(75, Math.round(size / 5) * 5));
+  }
+
+  protected _applyTextSize(size: number) {
+    document.documentElement.style.fontSize = `${size}%`;
+  }
+
+  protected _handleTextSizeInput({ target }: Event) {
+    const size = this._normalizeTextSize(
+      Number((target as { value?: number }).value || this.textSize),
+    );
+
+    this.textSize = size;
+    this._applyTextSize(size);
+  }
+
+  protected async _handleTextSizeChange() {
+    await set('textSize', this.textSize);
+  }
+
+  protected async _refreshOfflineContentSummary() {
+    if (!('storage' in navigator) || !navigator.storage.estimate) {
+      this.offlineContentSummary = this.localize(
+        t`settingsStorageUsageUnavailable`,
+      );
+      return;
+    }
+
+    const estimate = await navigator.storage.estimate();
+    const usedMb = Math.max(0, Math.round((estimate.usage || 0) / 1024 / 1024));
+
+    this.offlineContentSummary = `${usedMb} ${this.localize(
+      t`settingsMbDownloadedSuffix`,
+    )}`;
+  }
+
+  protected async _handleKeepScreenActiveChange({ target }: Event) {
+    const checked = !!(target as Switch).checked;
+
     this.dispatchEvent(
       new CustomEvent('keepscreenactivechange', {
-        detail: (target as HTMLInputElement).checked,
+        detail: checked,
       }),
     );
   }
 
-  protected async _handleShowChangelogChange({ target }: MouseEvent) {
-    this.showChangelog = (target as HTMLInputElement).checked;
+  protected async _handleShowChangelogChange({ target }: Event) {
+    this.showChangelog = !!(target as Switch).checked;
 
     await set('dontShowChangelog', !this.showChangelog);
+  }
+
+  protected async _handleClearCacheClick() {
+    if (this.clearingCache) {
+      return;
+    }
+
+    this.clearingCache = true;
+
+    try {
+      const db = await init();
+      await Promise.all([
+        db.clear('songs'),
+        db.clear('prayers'),
+        db.clear('magazines'),
+      ]);
+
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+
+        await Promise.all(
+          cacheNames
+            .filter((cacheName) => cacheName.startsWith('ancillapp'))
+            .map((cacheName) => caches.delete(cacheName)),
+        );
+      }
+    } finally {
+      this.clearingCache = false;
+      await this._refreshOfflineContentSummary();
+    }
   }
 }
 

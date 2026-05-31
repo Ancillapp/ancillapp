@@ -923,3 +923,75 @@ msgstr "Mostrar o changelog completo"
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr "A senha digitada está incorreta."
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsAppearance"
+msgstr "Aparência"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsThemeDescription"
+msgstr "Define automaticamente com base no sistema"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsEnableHighContrast"
+msgstr "Ativar alto contraste"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsEnableHighContrastDescription"
+msgstr "Usa automaticamente uma paleta de alto contraste para o tema selecionado"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsTextSize"
+msgstr "Tamanho do texto"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsLanguageDescription"
+msgstr "Escolha o idioma usado em todo o app"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsTextSizeDescription"
+msgstr "Ajusta o tamanho de leitura usado em todo o app"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsReading"
+msgstr "Leitura"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsKeepScreenActiveDescription"
+msgstr "Impede o bloqueio da tela durante a leitura ou a oração"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsShowChangelogDescription"
+msgstr "Mostra as novidades após as atualizações do app"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsData"
+msgstr "Dados"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsOfflineContent"
+msgstr "Conteúdo offline"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsManage"
+msgstr "Gerenciar"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClearCache"
+msgstr "Limpar cache"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClearCacheDescription"
+msgstr "Remove dados temporários baixados"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClear"
+msgstr "Limpar"
+
+#: src/containers/settings/settings.component.ts
+msgid "settingsStorageUsageUnavailable"
+msgstr "Uso de armazenamento indisponível"
+
+#: src/containers/settings/settings.component.ts
+msgid "settingsMbDownloadedSuffix"
+msgstr "MB baixados"

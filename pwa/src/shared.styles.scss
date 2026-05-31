@@ -196,6 +196,12 @@ top-app-bar {
   }
 }
 
+mdui-top-app-bar {
+  left: var(--ancillapp-rail-width, 0rem);
+  right: 0;
+  box-sizing: border-box;
+}
+
 section.card {
   padding: 1rem 1.5rem;
   background: rgb(var(--mdui-color-surface-container));

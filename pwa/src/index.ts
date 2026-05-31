@@ -40,9 +40,20 @@ get<string>('theme').then((storedTheme) => {
     dark: 'dark',
     'light-hc': 'light',
     'dark-hc': 'dark',
+    'system-hc': 'auto',
   }[themeToApply];
   document.body.dataset.theme = themeToApply;
   document.documentElement.className = `mdui-theme-${mduiTheme}`;
+});
+
+get<number>('textSize').then((storedTextSize) => {
+  if (typeof storedTextSize === 'number') {
+    const normalizedTextSize = Math.min(
+      125,
+      Math.max(75, Math.round(storedTextSize / 5) * 5),
+    );
+    document.documentElement.style.fontSize = `${normalizedTextSize}%`;
+  }
 });
 // Load the app shell
 import('./containers/shell/shell.component');

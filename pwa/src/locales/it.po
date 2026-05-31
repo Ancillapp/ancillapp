@@ -1110,3 +1110,93 @@ msgstr "Visualizza changelog completo"
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr "La password inserita è errata."
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsAppearance"
+msgstr "Aspetto"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsThemeDescription"
+msgstr "Imposta automaticamente in base al sistema"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsEnableHighContrast"
+msgstr "Abilita alto contrasto"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsEnableHighContrastDescription"
+msgstr "Usa automaticamente una palette ad alto contrasto per il tema selezionato"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsTextSize"
+msgstr "Dimensione testo"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsLanguageDescription"
+msgstr "Scegli la lingua usata in tutta l'app"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsTextSizeDescription"
+msgstr "Regola la dimensione di lettura usata in tutta l'app"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsReading"
+msgstr "Lettura"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsKeepScreenActiveDescription"
+msgstr "Disattiva lo spegnimento durante la lettura o la preghiera"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsShowChangelogDescription"
+msgstr "Visualizza le novità dopo gli aggiornamenti dell'app"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsData"
+msgstr "Dati"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsOfflineContent"
+msgstr "Contenuti offline"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsManage"
+msgstr "Gestisci"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsClearCache"
+msgstr "Cancella cache"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsClearCacheDescription"
+msgstr "Rimuovi i dati temporanei scaricati"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.template.ts
+msgid "settingsClear"
+msgstr "Cancella"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.component.ts
+msgid "settingsStorageUsageUnavailable"
+msgstr "Utilizzo dello spazio non disponibile"
+
+#. js-lingui-generated-id
+#: src/containers/settings/settings.component.ts
+msgid "settingsMbDownloadedSuffix"
+msgstr "MB scaricati"

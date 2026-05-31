@@ -894,3 +894,75 @@ msgstr ""
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr ""
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsAppearance"
+msgstr "Darstellung"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsThemeDescription"
+msgstr "Wird automatisch basierend auf den Systemeinstellungen festgelegt"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsEnableHighContrast"
+msgstr "Hohen Kontrast aktivieren"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsEnableHighContrastDescription"
+msgstr "Verwendet automatisch eine kontrastreiche Farbpalette fur das ausgewahlte Thema"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsTextSize"
+msgstr "Textgrosse"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsLanguageDescription"
+msgstr "Wahlt die in der gesamten App verwendete Sprache aus"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsTextSizeDescription"
+msgstr "Passt die in der gesamten App verwendete Lesegrosse an"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsReading"
+msgstr "Lesen"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsKeepScreenActiveDescription"
+msgstr "Verhindert das Sperren des Bildschirms beim Lesen oder Beten"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsShowChangelogDescription"
+msgstr "Zeigt Neuigkeiten nach App-Updates an"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsData"
+msgstr "Daten"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsOfflineContent"
+msgstr "Offline-Inhalte"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsManage"
+msgstr "Verwalten"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClearCache"
+msgstr "Cache leeren"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClearCacheDescription"
+msgstr "Entfernt temporar heruntergeladene Daten"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClear"
+msgstr "Leeren"
+
+#: src/containers/settings/settings.component.ts
+msgid "settingsStorageUsageUnavailable"
+msgstr "Speichernutzung nicht verfugbar"
+
+#: src/containers/settings/settings.component.ts
+msgid "settingsMbDownloadedSuffix"
+msgstr "MB heruntergeladen"

@@ -894,3 +894,75 @@ msgstr "View full changelog"
 #: src/containers/login/login.component.ts:139
 msgid "wrongPassword"
 msgstr ""
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsAppearance"
+msgstr "Appearance"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsThemeDescription"
+msgstr "Set automatically based on system preference"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsEnableHighContrast"
+msgstr "Enable high contrast"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsEnableHighContrastDescription"
+msgstr "Automatically uses a high-contrast palette for the selected theme"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsTextSize"
+msgstr "Text size"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsLanguageDescription"
+msgstr "Choose the language used across the app"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsTextSizeDescription"
+msgstr "Adjust the reading size used throughout the app"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsReading"
+msgstr "Reading"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsKeepScreenActiveDescription"
+msgstr "Prevent screen lock while reading or praying"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsShowChangelogDescription"
+msgstr "Show what's new after app updates"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsData"
+msgstr "Data"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsOfflineContent"
+msgstr "Offline content"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsManage"
+msgstr "Manage"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClearCache"
+msgstr "Clear cache"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClearCacheDescription"
+msgstr "Remove temporary downloaded data"
+
+#: src/containers/settings/settings.template.ts
+msgid "settingsClear"
+msgstr "Clear"
+
+#: src/containers/settings/settings.component.ts
+msgid "settingsStorageUsageUnavailable"
+msgstr "Storage usage unavailable"
+
+#: src/containers/settings/settings.component.ts
+msgid "settingsMbDownloadedSuffix"
+msgstr "MB downloaded"

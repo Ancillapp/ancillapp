@@ -295,7 +295,8 @@
         --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
       }
 
-      body[data-theme='light-hc'] {
+      body[data-theme='light-hc'],
+      body[data-theme='system-hc'] {
         /* Light high-contrast MDUI overrides */
         --mdui-color-primary-light: 0, 47, 71;
         --mdui-color-primary-container-light: 0, 78, 114;
@@ -405,6 +406,72 @@
         --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
         --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);
         --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body[data-theme='system-hc'] {
+          /* Dark high-contrast MDUI overrides */
+          --mdui-color-primary-dark: 228, 242, 255;
+          --mdui-color-on-primary-dark: 0, 0, 0;
+          --mdui-color-primary-container-dark: 145, 201, 243;
+          --mdui-color-on-primary-container-dark: 0, 13, 23;
+          --mdui-color-secondary-dark: 228, 242, 255;
+          --mdui-color-on-secondary-dark: 0, 0, 0;
+          --mdui-color-secondary-container-dark: 145, 201, 243;
+          --mdui-color-on-secondary-container-dark: 0, 13, 23;
+          --mdui-color-tertiary-dark: 255, 236, 234;
+          --mdui-color-on-tertiary-dark: 0, 0, 0;
+          --mdui-color-tertiary-container-dark: 255, 174, 169;
+          --mdui-color-on-tertiary-container-dark: 34, 0, 2;
+          --mdui-color-error-dark: 255, 236, 233;
+          --mdui-color-on-error-dark: 0, 0, 0;
+          --mdui-color-error-container-dark: 255, 174, 164;
+          --mdui-color-on-error-container-dark: 34, 0, 1;
+          --mdui-color-on-surface-dark: 255, 255, 255;
+          --mdui-color-on-surface-variant-dark: 255, 255, 255;
+          --mdui-color-outline-dark: 235, 241, 248;
+          --mdui-color-outline-variant-dark: 189, 195, 202;
+          --mdui-color-inverse-on-surface-dark: 0, 0, 0;
+          --mdui-color-inverse-primary-dark: 0, 77, 112;
+          --mdui-color-surface-bright-dark: 76, 80, 85;
+          --mdui-color-surface-container-lowest-dark: 0, 0, 0;
+          --mdui-color-surface-container-low-dark: 28, 32, 36;
+          --mdui-color-surface-container-dark: 45, 49, 53;
+          --mdui-color-surface-container-high-dark: 56, 60, 64;
+          --mdui-color-surface-container-highest-dark: 67, 71, 75;
+          /* Custom color high-contrast overrides */
+          --mdui-color-songs: 255, 237, 215;
+          --mdui-color-on-songs: 0, 0, 0;
+          --mdui-color-songs-container: 236, 187, 106;
+          --mdui-color-on-songs-container: 19, 9, 0;
+          --mdui-color-prayers: 245, 237, 255;
+          --mdui-color-on-prayers: 0, 0, 0;
+          --mdui-color-prayers-container: 205, 184, 249;
+          --mdui-color-on-prayers-container: 16, 0, 50;
+          --mdui-color-breviary: 215, 252, 179;
+          --mdui-color-on-breviary: 0, 0, 0;
+          --mdui-color-breviary-container: 170, 205, 137;
+          --mdui-color-on-breviary-container: 4, 14, 0;
+          --mdui-color-holy-mass: 255, 236, 231;
+          --mdui-color-on-holy-mass: 0, 0, 0;
+          --mdui-color-holy-mass-container: 255, 175, 153;
+          --mdui-color-on-holy-mass-container: 30, 3, 0;
+          --mdui-color-magazines: 202, 248, 255;
+          --mdui-color-on-magazines: 0, 0, 0;
+          --mdui-color-magazines-container: 125, 207, 219;
+          --mdui-color-on-magazines-container: 0, 14, 16;
+          --ancillapp-top-app-bar-background: var(--ancillapp-card-color);
+          --ancillapp-activated-list-color: var(--ancillapp-primary-text-color);
+          --ancillapp-accent-color: #f00;
+          --ancillapp-background-color: #000;
+          --ancillapp-drawer-color: #000;
+          --ancillapp-card-color: #000;
+          --ancillapp-search-bar-color: #000;
+          --ancillapp-primary-text-color: #fff;
+          --ancillapp-secondary-text-color: rgba(255, 255, 255, 0.7);
+          --ancillapp-disabled-text-color: rgba(255, 255, 255, 0.5);
+          --ancillapp-divider-color: rgba(255, 255, 255, 0.12);
+        }
       }
 
       @media (prefers-color-scheme: dark) {
