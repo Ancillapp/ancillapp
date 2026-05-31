@@ -2,38 +2,44 @@ import { html } from 'lit';
 import { when } from 'lit/directives/when.js';
 import { SongViewer } from './song-viewer.component';
 import { renderSong } from '../../helpers/directives';
-import { arrowBack, search } from '../../components/icons';
 import { getFormattedSongNumber } from '../../helpers/songs';
 import { t } from '@lingui/core/macro';
 
 import '@material/mwc-snackbar';
-import '../../components/top-app-bar/top-app-bar.component';
+import 'mdui/components/top-app-bar/top-app-bar.js';
+import 'mdui/components/top-app-bar/top-app-bar-title.js';
+import 'mdui/components/button-icon.js';
+import 'mdui/components/card.js';
+import '../../components/ancillapp-icon.component.js';
 import '../../components/share-fab/share-fab.component';
 import('../../components/error-box/error-box.component');
 
 export default function template(this: SongViewer) {
   return html`
-    <top-app-bar ?drawer-open="${this.drawerOpen}">
-      <a href="${this.localizeHref('songs')}" slot="leadingIcon">
-        <mwc-icon-button label="${this.localize(t`back`)}">
-          ${arrowBack}
-        </mwc-icon-button>
-      </a>
-      <div slot="title">
+    <mdui-top-app-bar
+      scroll-behavior="hide"
+      .scrollTarget="${this.scrollTarget}"
+    >
+      <mdui-button-icon
+        @click="${this._goToSongsPage}"
+        aria-label="${this.localize(t`back`)}"
+      >
+        <ancillapp-icon name="arrowBack"></ancillapp-icon>
+      </mdui-button-icon>
+      <mdui-top-app-bar-title>
         ${this._songStatus.data
           ? `${getFormattedSongNumber(this._songStatus.data)}. ${
               this._songStatus.data.title
             }`
           : this.localize(t`loading`)}
-      </div>
-      <mwc-icon-button
-        slot="trailingIcon"
+      </mdui-top-app-bar-title>
+      <mdui-button-icon
         @click="${this._goToSearchPage}"
-        label="${this.localize(t`search`)}"
+        aria-label="${this.localize(t`search`)}"
       >
-        ${search}
-      </mwc-icon-button>
-    </top-app-bar>
+        <ancillapp-icon name="search"></ancillapp-icon>
+      </mdui-button-icon>
+    </mdui-top-app-bar>
 
     ${when(
       this._songStatus.loading ||
@@ -48,16 +54,14 @@ export default function template(this: SongViewer) {
       this._songStatus.error && !this._songStatus.data?.content,
       () => html`
         <div class="error-container">
-          <error-box .error="${this._songStatus.error}"></error-box>
+          <error-box .error="${this._songStatus.error!}"></error-box>
         </div>
       `,
     )}
     ${when(
       this._songStatus.data?.content,
       () => html`
-        <section class="card">
-          ${renderSong(this._songStatus.data!.content)}
-        </section>
+        <mdui-card>${renderSong(this._songStatus.data!.content)}</mdui-card>
 
         <share-fab
           title="${this._songStatus.data!.number}. ${this._songStatus.data!

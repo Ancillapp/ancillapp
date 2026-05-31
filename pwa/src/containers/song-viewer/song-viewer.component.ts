@@ -121,6 +121,10 @@ export class SongViewer extends localize(withTopAppBar(PageViewElement)) {
   protected _goToSearchPage() {
     navigateTo(`${this.localizeHref('songs')}?search`);
   }
+
+  protected _goToSongsPage() {
+    navigateTo(this.localizeHref('songs'));
+  }
 }
 
 declare global {

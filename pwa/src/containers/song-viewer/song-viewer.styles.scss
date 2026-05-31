@@ -1,13 +1,38 @@
 :host {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 1rem;
+
   @media (min-width: 28.75rem) {
-    padding: 1.5rem;
+    gap: 1.25rem;
+    padding: 1.5rem 1.75rem;
+  }
+}
+
+mdui-card {
+  display: block;
+  padding: 1rem 1.125rem;
+  color: rgb(var(--mdui-color-on-surface));
+  background: rgb(var(--mdui-color-surface-container));
+
+  // MDUI cards are overflow hidden by default
+  overflow: visible;
+
+  @media (min-width: 28.75rem) {
+    --shape-corner: var(--mdui-shape-corner-extra-large);
+    padding: 1.5rem 1.75rem;
   }
 }
 
 .chord-sheet {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   text-align: left;
-  margin: 1.25rem 0;
+  margin: 0;
 
   strong,
   .comment,
@@ -36,8 +61,8 @@
   }
 
   .lyrics {
-    // Some lyrics columns might be longer than the screen, so we need to enable wrapping
-    white-space: wrap;
+    // Some lyrics columns might be longer than the screen, so force text wrapping.
+    white-space: normal;
   }
 
   .chord:after,
@@ -61,6 +86,7 @@
 .loading-container,
 .error-container {
   flex: 1;
+  min-height: 40vh;
   display: flex;
   align-items: center;
   justify-content: center;

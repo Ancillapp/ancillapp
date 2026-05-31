@@ -237,6 +237,7 @@ export default function template(this: Shell) {
         ?active="${this._page === 'home'}"
         ?drawer-open="${this._wide}"
         ?show-menu-button="${!this._wide}"
+        .scrollTarget="${this._navbarScrollTarget || this._appContent}"
         @menutoggle="${() => this._updateDrawerOpenState(!this._drawerOpened)}"
       ></home-page>
       <search-page
@@ -268,6 +269,7 @@ export default function template(this: Shell) {
         language="${this._subroute?.[0]}"
         category="${this._subroute?.[1]}"
         number="${this._subroute?.[2]}"
+        .scrollTarget="${this._navbarScrollTarget || this._appContent}"
       ></song-viewer>
       <prayers-list
         class="page"

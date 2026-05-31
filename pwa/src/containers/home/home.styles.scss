@@ -6,8 +6,6 @@
   width: 100%;
   max-width: 52rem;
   margin-inline: auto;
-  // Pull up to offset main's padding-top reserved for fixed top-app-bars
-  margin-top: calc(-1 * var(--ancillapp-top-bar-height));
 }
 
 mdui-top-app-bar-title {
